@@ -4,21 +4,20 @@
 <!-- ======================================================================= -->
 ## Open/Closed Sections
 
-* Associating entities (notes, headings, subsections) with sections is similar
-  to writing to a binary stream. Such a stream is either open or closed.
-* A section is open, if it is still allowed to associate entities with it.
-* A section has ended (is closed), if that is no longer possible.
+A section is considered open, if it is still allowed to associate entities
+(notes, headings, subsections) with it. A section has ended (is closed), if
+that is no longer possible.
 
-when to open, when to close
+Similar to binary streams, certain resources (e.g. memory) are associated with a
+section. These must be allocated (locked) when a section is opened and released
+(freed, unlocked) when it is closed.
 
-* When entering/creating a section, each section is automatically opened.
-  This step can be seen to implicitly lock resources (e.g. allocate memory).
-* In order to allow freeing these resources, there needs to be a point for each
-  section at which locked resources can be released.
-* Ultimately, that point is reached for any section when the traversal of the
-  tree ends. But, at that point, certain sections might no longer be accessible.
-  As a result, resources allocated for sections that are no longer accessible
-  will remain locked (e.g. memory leaks).
+Once created, a new section object is automatically opened for associations. As
+this step will lock resources, there needs to be a point for each section at
+which locked resources can be released. Ultimately, that point is reached for
+any section when the tree traversal ends. But, at that point, certain sections
+might no longer be accessible. As a result, resources allocated for sections
+that are no longer accessible, will remain locked (e.g. memory leaks).
 
 <!-- ======================================================================= -->
 ## Implied headings
@@ -29,8 +28,8 @@ The following cases need to be distinguished:
    (i.e. `(section.heading == null)` is true).
 1. A section is still open, but no heading element was associated with it
    (i.e. `(section.heading == null)` is still true).
-2. The first heading element within an open section is reached.
-   After step F.1.1, `(section.heading != null)` is true.
+2. The first heading element within an open section was visited.
+   (i.e. `(section.heading != null)` is true - step F.1.1).
 3. A section is closed, but no heading element was associated with it
    (i.e. `(section.heading == null)` is still true).
    The algorithm will then associate a pseudo heading (aka. implied heading)
@@ -41,31 +40,33 @@ expression `(section.heading == null)` would be ambiguous: It would be true for
 a section that is open (1) and one that is closed (3). It would be impossible
 to determine if a section is still open for associations or not.
 
-1. `(section.heading == null)` is true for a section that is open,
-   but no heading was associated with it.
-2. `(section.heading != null)` is true for a section that has a heading element
-   (open or closed), or an implied heading (closed) associated with it.
+1. `(section.heading == null)` states that a section that is open and that no
+   heading was associated with it.
+2. `(section.heading != null)` states that a section has a heading (open or
+   closed), or an implied heading (closed) associated with it.
 
-While the tree is still being traversed, the expression `(section.heading != null)`
-does not allow to determine if a section is still open or not. During that time,
-this expression is ambiguous (with regards to that state).
+The expression `(section.heading != null)` therefore does not allow to determine
+if it is still open or not. During that time, this expression is ambiguous (with
+regards to a section's open-or-closed state).
 
-Once the tree traversal has finished, each section is associated with either a
-heading element, or an implied heading (`(section.heading != null)` is true for
-any section -- That is at least the intention behind the concept of implied
-headings). From that point on, this expression is no longer ambiguous because
-all sections are closed.
+Once the tree traversal is done, each section is either associated with a heading
+or an implied heading (`(section.heading != null)` is true for any section --
+That is at least the intention behind the concept of implied headings). From that
+point on, this expression is no longer ambiguous because all sections are closed.
 
-The expression `section.setImpliedHeading()` therfore implicitly states, that
-the corresponding section is closed. It is an error to associate an implied
-heading with a section that is still open and that has no heading (because a
-heading element could still follow). Overwriting an implied heading would also
-be an error, because it would mean to continue a section that has already been
-closed.
+The expression `section.setImpliedHeading()` implicitly states, that the
+corresponding section can be closed. It is an error to associate an implied
+heading with a section that is still open and that has no heading associated
+with it (because a heading element could still follow).
 
-Each heading element has a rank. The remaining questions are:
+Overwriting an implied heading would also be an error, because this would
+represent an attempt to continue a section that has already been closed. Once
+resources associated with a section are released, they can no longer be accessed
+(e.g. access violation).
+
+**TODO** - Each heading element has a rank. The remaining questions are:
 Is it necessary to associate a rank (highest or lowest) with an implied heading?
-Does the algorithm already (implicitly) associate a rank with an implied heading?
+Does the algorithm implicitly associate a rank with an implied heading?
 
 <!-- ======================================================================= -->
 ### Tag sequences
