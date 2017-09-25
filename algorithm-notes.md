@@ -5,19 +5,19 @@
 ## Open/Closed Sections
 
 A section is considered open, if it is still allowed to associate entities
-(notes, headings, subsections) with it. A section has ended (is closed), if
+(nodes, headings, subsections) with it. A section has ended (is closed), if
 that is no longer possible.
 
-Similar to binary streams, certain resources (e.g. memory) are associated with a
-section. These must be allocated (locked) when a section is opened and released
-(freed, unlocked) when it is closed.
+Similar to binary streams, certain resources (e.g. memory) are associated with
+a section. These must be allocated (locked) when a section is opened and
+released (freed, unlocked) when it is closed.
 
-Once created, a new section object is automatically opened for associations. As
-this step will lock resources, there needs to be a point for each section at
-which locked resources can be released. Ultimately, that point is reached for
-any section when the tree traversal ends. But, at that point, certain sections
-might no longer be accessible. As a result, resources allocated for sections
-that are no longer accessible, will remain locked (e.g. memory leaks).
+Once created, a new section object is automatically opened for associations.
+As this step will lock resources, there needs to be a point for each section at
+which its resources can be released. Ultimately, that point is reached for any
+section when the traversing the tree has ended. But, at that point, certain
+sections might no longer be accessible. As a result, resources allocated for
+sections that are no longer accessible, will remain locked (e.g. memory leaks).
 
 <!-- ======================================================================= -->
 ## Implied headings
@@ -64,15 +64,18 @@ represent an attempt to continue a section that has already been closed. Once
 resources associated with a section are released, they can no longer be accessed
 (e.g. access violation).
 
+<!-- ======================================================================= -->
+### What is the rank of an implied heading?
+
 **TODO** - Each heading element has a rank. The remaining questions are:
 Is it necessary to associate a rank (highest or lowest) with an implied heading?
 Does the algorithm implicitly associate a rank with an implied heading?
 
 <!-- ======================================================================= -->
-### Tag sequences
+## Tag sequences
 
-Walking over the nodes of a DOM tree in order to produce an outline can be seen
-as executing the following pseudocode fragment:
+Walking over the nodes of a DOM tree in order to produce an outline needs to
+execute the following pseudocode fragment:
 
 ```
 visitNode(node)
@@ -97,7 +100,7 @@ visitNode(node, sequence)
   sequence.append("/" + name)
 ```
 
-Executing that pseudocode with the following HTML fragment as input ...
+Executing that pseudocode with the following example HTML fragment as input ...
 
 ```
 Example 1 (E-1):
@@ -119,50 +122,51 @@ seq-0 := [body, #text, /#text, h1, #text, /#text, /h1, #text, /#text, h1, #text,
           /#text, /h1, #text, /#text, /body]
 ```
 
-Any tag in such a sequence is the result of the corresponding enter or exit
-event: start tag `name` represents an enter and end tag `/name` an exit event.
-Any tag sequence therefore corresponds with the structure of one or more,
-possibly even infinitely many, HTML fragments that have identical structure.
+Any tag in such a sequence corresponds with an enter or exit event: start tag
+`name` represents an enter and end tag `/name` an exit event. Any tag sequence
+corresponds with the structure of one or more, possibly infinitely many, HTML
+fragments that have identical structure.
 
 <!-- ======================================================================= -->
 ## Token sequences
 
-Each tag in a tag sequence corresponds with a single node. Replacements are
-therefore required in order to use such sequences as an analytical tool:
+Switching ones own point of view allows to make the following observation: Tag
+sequences can be seen to describe the sequence of events that will be triggered
+when processing a document that has a structure which corresponds with a given
+sequence.
 
+With regards to a document's outline, any node has one of the following two 
+characteristics: Entering and/or exiting a node either changes the current
+outline by creating and/or ending sections, or it has no such effect.
 
+When processing nodes that do not have an effect on the current outline, it does
+not matter if it is a single node, a subtree of such nodes, sequences of subtrees
+of such nodes, or no such node at all: The current outline will not change.
 
-be used to describe sequences of events that will happen when processing
-fragments whose structure matches a given token sequence.
+Replacing the tags of a tag sequence by tokens therefore allows to generalize
+tag sequences as token sequences:
 
+* Tokens in lower-case letters represent nodes that have an effect on
+  the current outline. Each of these corresponds with a single node.
+* Tokens in upper-case letters represent any number of nodes (single nodes,
+  whole subtrees, sequences of subtrees, or no such node at all) that have no
+  effect on the current outline. These kind of tokens are similar to variables
+  that represent content which has no effect on the current outline.
 
-
-of infinitely many HTML fragments. As such, each token
-sequence can represent infinitely tag sequences.
-
-Therefore, those tag sequences are referred to as token sequences, with
-each token representing the corresponding operation.
-
-
-from being a result of a 
-
-Unfortunately, such a sequence is difficult to follow because the tokens related
-to text nodes can not be distinguished from one another:
+The above tag sequence corresponds with the following token sequence:
 
 ```
+seq-0 := [body, #text, /#text, h1, #text, /#text, /h1, #text, /#text, h1, #text,
+          /#text, /h1, #text, /#text, /body]
+
 seq-0 := [body, A, /A, h1, B, /B, /h1, C, /C, h1, D, /D, /h1, E, /E, /body]
+
+seq-1 := [body, h1, B, /B, /h1, h1, D, /D, /h1, /body]
 ```
 
-* In general, text related tokens should be replaced by one that best reflects
-  the corresponding text node (e.g. `A` instead of `#text`).
-* To clearly distinguish these from element related tokens, element names should
-  be displayed using lower-case and text related nodes using upper-case letters.
-
-Strictly, tokens A through E, represent text nodes that are entered and immediately
-exited (they have no child nodes). These kind of nodes have no side effect in a
-given context. As such, these tokens can also be seen to represent enter or exit
-events related to any possible subtree that has the same characteristic (i.e. no
-side effect in a given context). - placeholder, variable, pattern, ...
+Note that `seq-0` also corresponds with `seq-1` (but not vice versa), because
+`seq-1` is a special case of `seq-0`. Both sequences are therefore not entirely
+equivalent.
 
 ```
 Example 2 (E-2):
@@ -177,11 +181,13 @@ Example 2 (E-2):
 </body>
 ```
 
-`seq-0` can also be seen to represent the HTML fragment E-2. Nodes A and C
-represent whitespace text nodes and node E the subsequence `div, F, /div`).
+Token sequence `seq-0` can also be seen to correspond with HTML fragment E-2
+(or vice versa). Tokens A and C correspond with whitespace text nodes and token
+E with the subsequence `div, F, /div`).
 
-Generalized: Any token sequence represents an infinite number of HTML fragments
-that all have similar, if not identical, semantics.
+In general, any token sequence corresponds with an infinite number of HTML
+fragments that all have similar, if not identical, structure. As such, token
+sequences can be used to describe common patterns of events.
 
 As a flat list of tokens, a token sequence obfuscates the hierarchical structure
 of an HTML fragment. Care must be taken to not ignore the structure of a fragment.
@@ -189,7 +195,7 @@ of an HTML fragment. Care must be taken to not ignore the structure of a fragmen
 <!-- ----------------------------------------------------------------------- -->
 ### Simplifications
 
-The following simplifications can be used:
+The following simplifications may be used:
 
 ```
 seq-0 := [body, A, /A, h1, B, /B, /h1, C, /C, h1, D, /D, /h1, E, /E, /body]
@@ -201,14 +207,15 @@ seq-2 := [body, A, h1, B, /h1, C, h1, D, /h1, E, /body]
 seq-3 := [body, A, h1:B, C, h1:D, E, /body]
 ```
 
-* Sequence `seq-0` can be simplified as seen in `seq-1`:
-  A token of the form `name/` represents the subsequence `A, /A`.
-* If tokens allow to clearly distinguish nodes that have no side effect from
-  those that do have some side effect in a given context (e.g. upper-case vs.
-  lower-case letters), the final slash character may even be dropped (`seq-2`):
-  A token of the form `A` may represent the subsequence `A, /A`.
-* Depending on a given context, it is even possible to further merge
-  subsequences like `h1, B, /h1` into a single token `h1:B` (`seq-3`).
+* A token of the form `name/` may be used to represent the subsequence
+  `name, /name` (i.e. nothing in between).
+* The final slash character `/` may be dropped, if it is clear that an un-slashed
+  token (i.e. `name` instead of `name/`) represents an enter *and* an exit event
+  at the same time.
+* Subsequences like `h1, B, /h1` may be merged into a single token `h1:B`.
+
+In general, tokens of the form `name:A` can be seen to represent all events
+related to processing a container element that has non-substantial inner content.
 
 ```
 seq-3 := [body, A, h1:B, C, h1:D, E, /body]
@@ -222,6 +229,10 @@ may be used to guide ones view to a node's relevant characteristics:
 * `SR` - some sectioning root element
 * `SC` - some sectioning content element
 * `HC` - some heading content element
+
+Note that any token representing content, that has no effect on the current
+outline, may correspond with content that contains inner sectioning root
+elements. These elements have, by definition, no effect on the current outline.
 
 <!-- ----------------------------------------------------------------------- -->
 ### Points of interest, Cursors
