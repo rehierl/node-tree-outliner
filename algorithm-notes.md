@@ -159,13 +159,13 @@ The above tag sequence corresponds with the following token sequence:
 seq-0 := [body, #text, /#text, h1, #text, /#text, /h1, #text, /#text, h1, #text,
           /#text, /h1, #text, /#text, /body]
 
-seq-0 := [body, A, /A, h1, B, /B, /h1, C, /C, h1, D, /D, /h1, E, /E, /body]
+seq-1 := [body, A, /A, h1, B, /B, /h1, C, /C, h1, D, /D, /h1, E, /E, /body]
 
-seq-1 := [body, h1, B, /B, /h1, h1, D, /D, /h1, /body]
+seq-2 := [body, h1, B, /B, /h1, h1, D, /D, /h1, /body]
 ```
 
-Note that `seq-0` also corresponds with `seq-1` (but not vice versa), because
-`seq-1` is a special case of `seq-0`. Both sequences are therefore not entirely
+Note that `seq-1` also corresponds with `seq-2` (but not vice versa), because
+`seq-2` is a special case of `seq-1`. Both sequences are therefore not entirely
 equivalent.
 
 ```
@@ -181,7 +181,7 @@ Example 2 (E-2):
 </body>
 ```
 
-Token sequence `seq-0` can also be seen to correspond with HTML fragment E-2
+Token sequence `seq-1` can also be seen to correspond with HTML fragment E-2
 (or vice versa). Tokens A and C correspond with whitespace text nodes and token
 E with the subsequence `div, F, /div`).
 
@@ -192,19 +192,21 @@ sequences can be used to describe common patterns of events.
 As a flat list of tokens, a token sequence obfuscates the hierarchical structure
 of an HTML fragment. Care must be taken to not ignore the structure of a fragment.
 
+The purpose of tag sequences is to limit ones view to content that matters.
+
 <!-- ----------------------------------------------------------------------- -->
 ### Simplifications
 
 The following simplifications may be used:
 
 ```
-seq-0 := [body, A, /A, h1, B, /B, /h1, C, /C, h1, D, /D, /h1, E, /E, /body]
+seq-1 := [body, A, /A, h1, B, /B, /h1, C, /C, h1, D, /D, /h1, E, /E, /body]
 
-seq-1 := [body, A/, h1, B/, /h1, C/, h1, D/, /h1, E/, /body]
+seq-2 := [body, A/, h1, B/, /h1, C/, h1, D/, /h1, E/, /body]
 
-seq-2 := [body, A, h1, B, /h1, C, h1, D, /h1, E, /body]
+seq-3 := [body, A, h1, B, /h1, C, h1, D, /h1, E, /body]
 
-seq-3 := [body, A, h1:B, C, h1:D, E, /body]
+seq-4 := [body, A, h1:B, C, h1:D, E, /body]
 ```
 
 * A token of the form `name/` may be used to represent the subsequence
@@ -218,9 +220,9 @@ In general, tokens of the form `name:A` can be seen to represent all events
 related to processing a container element that has non-substantial inner content.
 
 ```
-seq-3 := [body, A, h1:B, C, h1:D, E, /body]
+seq-4 := [body, A, h1:B, C, h1:D, E, /body]
 
-seq-4 := [SR, A, h1:B, C, h1:D, E, /SR]
+seq-5 := [SR, A, h1:B, C, h1:D, E, /SR]
 ```
 
 If the unique characteristics of a specific node is of no interest, constants
@@ -238,11 +240,14 @@ elements. These elements have, by definition, no effect on the current outline.
 ### Points of interest, Cursors
 
 ```
-seq-x := [body , A , /body]
+seq-x := [body, A, /body]
+                ^
+
+seq-x := [body, A, /body]
           ^        ^
 
-seq-x := [body , A , /body]
-          0        1
+seq-x := [body, A, /body]
+          1     2
 ```
 
 If a single point is of interest, a single `^` character may be used to point
@@ -251,8 +256,8 @@ most critical parts within a given sequence. If a following discussion needs to
 refer to multiple different points, numbers may be used clearly identify these.
 
 ```
-seq-x := [..., A, ...] = [..., A , /A, ...]
-               ^                 ^
+seq-x := [..., A, ...] = [..., A, /A, ...]
+               ^               ^
 ```
 
 All operations associated with a single token need to be seen as being grouped
@@ -265,9 +270,46 @@ to be split up into separate tokens.
 ### Past, present, future
 
 ```
-seq-0 := [body, A, /A, h1, B , /B, /h1, C, /C, h1, D, /D, /h1, E, /E, /body]
-                             ^
+seq-5 := [SR, A, h1:B, C, h1:D, E, /SR]
+                 ^
+
+seq-6 := [BEGIN, SR, A, h1:B, C, h1:D, E, /SR, END]
+          ^                                    ^
 ```
+
+A token is said to have been executed if, and only if, all of the events that
+are associated with that token have been executed. Executing a token must be
+seen as executing all events associated with it in a single step (i.e. executed
+as a single, atomic operation).
+
+Placing a cursor at a certain point of interest has the following meaning:
+
+* Any preceeding token was executed (past).
+* The token at the cursor's position is about to be executed (present).
+* None of the subsequent tokens has been executed (future).
+
+It is not allowed at any point within a sequence to make any assumptions with
+regards to subsequent/future tokens other than what is guaranteed by HTML or
+the tree traversal itself:
+
+* Each enter event corresponds with an exit event. This means that once a
+  node is entered, you are guaranteed to exit it at some point.
+* Unless guaranteed by HTML, you must not assume that, once you have entered
+  some node, another node with certain characteristics will be entered some
+  time after.
+
+If needed, the following two constants may be used to indicate the beginning
+and the end of processing a token sequence:
+
+* `BEGIN` may be used to mark the beginning. This constant can be seen to
+  correspond with operations needed to initialize a sequence's execution (i.e.
+  allocate certain resources). In short: The execution is about to begin.
+* `END` may be used to mark the end. This constant can be seen to correspond
+  with operations that are needed to finalize a sequence's execution (i.e.
+  release certain resources). In short: The execution is about to end.
+
+The `END` constant therefore has the additional meaning, that the last token was
+already executed (i.e. traversal of the subtree was completely executed).
 
 <!-- ======================================================================= -->
 ## Stack of open sections
