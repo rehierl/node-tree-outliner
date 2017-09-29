@@ -6,7 +6,7 @@
 
 A section is considered open, if it is still allowed to associate entities
 (nodes, a heading and subsections) with it. A section is closed (has ended), if
-that is no longer possible.
+that is no longer allowed.
 
 Similar to binary streams, certain resources (e.g. memory) will be associated
 with a section. These must be allocated (locked) when a section is opened and
@@ -24,20 +24,20 @@ locked (e.g. memory leaks).
 <!-- ======================================================================= -->
 ## Implied headings
 
-During tree traversal, the following statements can be made:
+During tree traversal, the following states can be observed:
 
 0. A section object is created and automatically opened for associations
    (i.e. `(section.heading == null)` is true).
-1. A section is still open, but no heading element was associated with it
+1. A section is still open, but no heading was associated with it
    (i.e. `(section.heading == null)` is still true).
 2. The first heading element within an open section was entered and associated
    with that section (i.e. `(section.heading != null)` is true - step F.1.1).
-3. A section has ended, but *a heading* element was associated with it
+3. A section has ended and *a heading* element was associated with it
    (i.e. `(section.heading != null)` remains to be true).
-4. A section has ended, but *no heading* element was associated with it
+4. A section has ended and *no heading* element was associated with it
    (i.e. `(section.heading == null)` remains to be true).
 
-The following statements can be made:
+From these states, the following statements can be derived:
 
 1. The expression `(section.heading == null)` is true for sections that
    have *no heading* and that are either *open or closed*.
@@ -63,19 +63,19 @@ This allows to make the following statements:
    have *a heading* (implied or not) and that are either *open or closed*.
 
 Therefore, if expression (1) (i.e. `section.hasNoHeading()`) evaluates to true,
-a heading can still be associated with the corresponding section. -- This is at
-least the intention behind associating implied headings with sections.
+a heading can still be associated with the corresponding section. --
+This is at least the intention behind the concept of implied headings.
 
 Obviously, it would be an error to associate an implied heading with an open
-section that has no heading (because a heading element could still follow). As a
-result, the expression `section.setImpliedHeading()` implicitly states, that the
-corresponding section has ended and that it can be closed.
+section that has no heading (because a heading element could still follow). As
+a result, the expression `section.setImpliedHeading()` implicitly states, that
+the corresponding section has no heading *and* that it has ended.
 
 Overwriting an implied heading would also be an error, because this would
 represent an attempt to continue a section that has already ended. Once a
-section ends, resources associated with it can be released. After that, those
-resources can no longer be accessed because any such attempt would inevitably
-trigger an access violation error.
+section ends, any resources associated with it can be released. After that,
+those resources can no longer be accessed because any such attempt would
+inevitably trigger an access violation error.
 
 **TODO** - Each heading element has a rank.
 Is it necessary to associate a rank (highest or lowest) with an implied heading?
