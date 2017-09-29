@@ -13,7 +13,7 @@
    if(outlineOwner != null)
 
 1.1. //- finalize the current outer section
-     if(currentSection.heading == null)
+     if(currentSection.hasNoHeading() == true)
        currentSection.setImpliedHeading()
 
 1.2. //- save the outer context
@@ -36,7 +36,7 @@
 
 ```
 1. //- finalize the element's last active inner section
-   if(currentSection.heading == null)
+   if(currentSection.hasNoHeading() == true)
      currentSection.setImpliedHeading()
 
 2. //- restore the element's outer context
@@ -83,7 +83,7 @@
 
 ```
 1. //- finalize the element's last active inner section
-   if(currentSection.heading == null)
+   if(currentSection.hasNoHeading() == true)
      currentSection.setImpliedHeading()
 
 2. //- restore the element's outer context (2)
@@ -100,7 +100,7 @@
 
 ```
 1. //- finalize the element's last active inner section
-   if(currentSection.heading == null)
+   if(currentSection.hasNoHeading() == true)
      currentSection.setImpliedHeading()
 
 2. //- Return from traversing the tree
@@ -110,7 +110,7 @@
 
 ```
 1. //- if the element is the first heading, then
-   if(currentSection.heading == null)
+   if(currentSection.hasNoHeading() == true)
 
 1.1. //- let that heading element be the heading of the currentSection
      currentSection.heading = currentElement
