@@ -203,7 +203,6 @@ event patterns.
 As a flat list of tokens, a token sequence obfuscates the hierarchical structure
 of an HTML fragment. Care must be taken to not ignore a fragment's structure.
 
-<!-- ----------------------------------------------------------------------- -->
 ### Simplifications
 
 The following simplifications may be used:
@@ -243,7 +242,6 @@ may be used to guide ones view to a node's relevant characteristics:
 * `SC` - some sectioning content element
 * `HC` - some heading content element
 
-<!-- ----------------------------------------------------------------------- -->
 ### Execution, inner and outer effect/view
 
 Any token that represents content which has no effect on the current outline may
@@ -259,7 +257,6 @@ sectioning content element.
 
 **TODO** - expand
 
-<!-- ----------------------------------------------------------------------- -->
 ### Points of interest, Cursors
 
 ```
@@ -280,7 +277,6 @@ seq-x := [body, A, /body]
 * If a following discussion needs to refer to multiple different points, numbers
   may be used clearly identify these.
 
-<!-- ----------------------------------------------------------------------- -->
 ### Past, present and future
 
 ```
@@ -335,7 +331,11 @@ was already executed (i.e. traversal of the subtree has already ended).
 ## HTML-4 heading elements
 
 In HTML-4, any heading element is defined to introduce (i.e. mark the beginning
-of) a new section:
+of) a new section.
+
+Note that there is no explicit definition which states when such a section ends.
+The only definitive statement that can be made right away is that: Any remaining
+open section ends with the body element.
 
 ```
 Example 3 (E-3):
@@ -347,13 +347,13 @@ Example 3 (E-3):
 </body>
 ```
 
-The table of contents (TOC) of this fragment can be displayed as follows:
+In general, E-3's table of contents (TOC) is as follows:
 
 ```
-1. B
+1. A
 ```
 
-Questions start to arise as soon as the above fragment is slightly modified:
+Questions start to arise as soon as example E-3 is slightly modified:
 
 ```
 Example 4 (E-4):
@@ -366,7 +366,7 @@ Example 4 (E-4):
 </body>
 ```
 
-There are two different possible ways to print the TOC of this fragment:
+There are two possible ways to print E-4's TOC:
 
 ```
 TOC-1:                          TOC-2:
@@ -376,22 +376,57 @@ TOC-1:                          TOC-2:
 2. B                               1.1. B
 ```
 
-Both TOCs are obviously not equivalent as they represent different structures.
-The consequence is that only one of these TOCs truly represents E-4's structure,
-the other one does not. So which of these is invalid?
+Both TOCs are obviously not equivalent because they represent different structures.
+As a result, only one of these TOCs truly represents E-4's structure, the other
+one does not. So which of these is invalid?
 
 ### Relationship between sections and nodes
 
-In general, any node within a document always belongs to or is located in some
-section, regardless if that section has a title or not. In addition to that, no
-node can have a direct relationship with two different sections at the same time.
-In short: Any node either has a direct relationship with a certain section (i.e.
-is associated with it) or it belongs to (or is located in) a different one.
+Any node within a document always belongs to (i.e. is located in) some section,
+regardless if that section has a title or not. In addition to that, no node can
+have a direct relationship with (i.e. is associated with) two different sections
+at the same time. In short: Any node either belongs to some section, or it is
+located in a different one.
 
-From a section's perspective: Any section always directly contains (i.e. is
+From a section's perspective: Any section is always directly contains (i.e. is
 associated with) no node at all, a single node or more than one (in theory even
-infinitely many) nodes. The direct relationship between sections and nodes can
-therefore be classified as a two-way and a one-to-many (i.e. 1:N) relationship.
+infinitely many) nodes.
+
+The direct relationship between sections and nodes can therefore be classified
+as a two-way one-to-many (i.e. 1:N) relationship.
+
+In order to simplify discussion, assume that any heading element can be uniquely
+identified by the heading's inner nodes. Likewise, any section introduced by a
+heading element can be identified by the inner nodes of the heading element that
+introduced said section.
+
+In example E-4, heading `B` is said to introduce section `B`. In addition to that,
+and because node `C` is located inside section `B`, node `C` is said to belong to
+section `B`. In short: Node `C` is associated with section `B`.
+
+### Relationship between sections
+
+```
+Example 5 (E-5):
+================
+
+<body>
+  <h1>A</h1>
+  B
+  <h2>C</h2>
+  D
+</body>
+```
+
+The general consensus to print E-5's TOC is as follows:
+
+```
+TOC-3:
+======
+
+1. A
+   1.1. C
+```
 
 As a result, any document can be broken up into sections that do not overlap
 with regards to this direct relationship between sections and nodes.
