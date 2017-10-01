@@ -1,6 +1,8 @@
 
 # Notes
 
+* [HTML-4, 7.5.5 Headings](https://www.w3.org/TR/html401/struct/global.html#h-7.5.5)
+
 <!-- ======================================================================= -->
 ## HTML-4 heading elements
 
@@ -98,10 +100,10 @@ Note that node `B` is located inside section `A` because there is nothing that
 introduces a new section in between heading `A` and node `B`. There is also
 nothing that indicates that section `A` ends before node `B` is reached.
 
-### Relationship between sections
+### Level of heading elements
 
 The definition that a heading element introduces a new section merely states that
-a document can be split into different sections. Without any further definition,
+a document can be split into different sections. Without any further clarification,
 all sections would have to be considered equal and there would have been no reason
 to define 6 different heading elements.
 
@@ -110,67 +112,89 @@ associated with it (`h1` is most important, `h6` is least important). As a
 consequence, all heading elements can be ordered with regards to that value:
 
 ```
-=> h1 > h2 > h3 > h4 > h5 > h6
-=> [h1, h2, h3, h4, h5, h6]
+=> h1 > h2 > h3 > h4 > h5 > h6 - (order of importance)
+=> [h1, h2, h3, h4, h5, h6]    - (ordered sequence)
 ```
 
-Defining an order for the set of heading elements is without a meaning, if there
-is no statement that clarifies the semantics behind that order (i.e. What exactly
-does it mean if a heading element is more important than another one?):
+The definition of an order for the set of heading elements has no meaning, if
+there is no statement that defines the semantics associated with that order:
+What are the semantics ...
 
+* if a subsequent heading is just as (i.e. equally) important?
+* if a less important heading follows a more important one?
+* if a more important heading follows a less important one?
 
+#### HTML-4 example fragment
 
-
+HTML-4 itself states that "Visual browsers usually render more important headings
+in larger fonts than less important ones.". This merely states that browsers
+visualize the level of a heading by associating a larger font with more important
+headings. The example that follows this statement is, on the other hand, quite
+revealing:
 
 ```
 Example:
 ========
-<body>
+<div class="section" id="X">
   <h1>A</h1>
   B
-  <h2>C</h2>
-  D
-</body>
+  <div class="subsection" id="Y">
+    <h2>C</h2>
+    D
+  </div>
+  E
+</div>
 ```
 
-The general consensus to print the TOC for this fragment is:
+(This fragment is a modified version of that example,
+i.e. modified to emphasize the example's relevant parts):
 
-```
-TOC:
-======
-1. A
-   1.1. C
-```
+Note that HTML-4 defines `div` elements to "offer a generic mechanism for adding
+structure to documents". The word "structure" in this context means that `div`
+elements allow to group nodes without introducing new sections.
 
-### Where does a section end?
+If that were not
+the case, authors would have no means to group nodes without changing a document's
+outline at the same time.
+
+The following observations can be made:
+
+**(1) Section C begins inside container Y**
+
+Section `C` exists because it is introduced by heading `C`, not by container `Y`.
+As a result, section `C` can not be associated with any node that begins before
+heading `C`, because no node can be associated with a section that still has to
+be introduced by its heading element.
+
+The very first node that could possibly be associated with section `C` is
+heading `C`. What effects that would have has yet to be determined ...
+
+Associating container `Y` with section `C` would mean that the definition of
+`div` containers and the definition of heading elements would be different at
+the same time and depending on certain circumstances:
+
+* The container would become the element that introduces a new section.
+* The heading would loose its characteristic to introduce new section.
+
+This would be difficult to implement, because in order to determine which case
+applies, one would have to first determine the current context (i.e. look ahead).
+
+In theory, the current context could even be impossible to determine because HTML
+allows to place any number of nodes in between the beginning of a `div` container
+and the first heading element, if any even exists.
+
+**(2) Node D is located inside section C**
+
+There nothing that introduces a new section in between heading `C` and node `D`.
+In addition to that, there is also nothing that indicates that section `C` ends
+before node `D`. As a direct consequence, node `D` is located inside section `C`
+and must be associated with said section.
+
+**(3) Section C is intended to end with container Y**
+
+**(4) Section C must end with container Y**
 
 ### Continue...
-
-```
-Example 5 (E-5):
-================
-
-<h1>A</h1>
-B
-<h2>C</h2>
-D
-```
-
-The partial TOC of the above fragment is:
-
-```
-TOC-3:
-======
-
-1. A
-   1.1. C
-```
-
-HTML-4 associates a level of importance with each heading with `h1` representing
-the most and `h6` the least important heading.
-
-However, any section of a document always has some relationship with all other
-sections of the same document.
 
 Between any two sections of the same document there
 exists a path that can be used to traverse from one section to another. 
@@ -214,7 +238,7 @@ and end tag defines the section's title. A heading element itself does not defin
 where its section ends. Better, but still not good enough.
 
 The situation starts to improve as soon as one takes a closer look at the example
-of the [HTML 4 spec](https://www.w3.org/TR/html401/struct/global.html#h-7.5.5):
+of the [HTML-4 fragment](https://www.w3.org/TR/html401/struct/global.html#h-7.5.5):
 
 ```
 Example 5 (E-5):
