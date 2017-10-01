@@ -129,8 +129,11 @@ What are the semantics ...
 HTML-4 itself states that "Visual browsers usually render more important headings
 in larger fonts than less important ones.". This merely states that browsers
 visualize the level of a heading by associating a larger font with more important
-headings. The example that follows this statement is, on the other hand, quite
-revealing:
+headings.
+
+Although example fragments should not be used to express any definitions
+themselves (they should only be used to clarify existing definitions), the
+example that follows the above statement is quite revealing:
 
 ```
 Example:
@@ -151,48 +154,54 @@ i.e. modified to emphasize the example's relevant parts):
 
 Note that HTML-4 defines `div` elements to "offer a generic mechanism for adding
 structure to documents". The word "structure" in this context means that `div`
-elements allow to group nodes without introducing new sections.
+elements allow to group nodes without introducing new sections. If that were not
+the true, authors would loose the ability to group nodes without changing a
+document's outline at the same time.
 
-If that were not
-the case, authors would have no means to group nodes without changing a document's
-outline at the same time.
-
-The following observations can be made:
+From the above fragment, the following observations can be made:
 
 **(1) Section C begins inside container Y**
 
 Section `C` exists because it is introduced by heading `C`, not by container `Y`.
 As a result, section `C` can not be associated with any node that begins before
-heading `C`, because no node can be associated with a section that still has to
-be introduced by its heading element.
+heading `C`, simply because no node can be associated with a section that still
+has to be introduced by its heading element.
 
-The very first node that could possibly be associated with section `C` is
-heading `C`. What effects that would have has yet to be determined ...
+The very first node that could possibly be associated with section `C` is heading
+element `C`. It has yet to be determined if associating a heading element with
+the section it introduces would make any sense at all ...
 
 Associating container `Y` with section `C` would mean that the definition of
-`div` containers and the definition of heading elements would be different at
-the same time and depending on certain circumstances:
+`div` containers and the definition of heading elements would have to change at
+the same time and depending on certain context:
 
-* The container would become the element that introduces a new section.
-* The heading would loose its characteristic to introduce new section.
+* The container element would gain the ability to introduce a new section.
+* The heading element would loose its ability to introduce a new section.
 
 This would be difficult to implement, because in order to determine which case
-applies, one would have to first determine the current context (i.e. look ahead).
+applies (default or modified definition), one would first have to look ahead in
+order to determine the current context. This context then decides which
+definition applies.
 
-In theory, the current context could even be impossible to determine because HTML
-allows to place any number of nodes in between the beginning of a `div` container
-and the first heading element, if any even exists.
+In theory, the current context could even be impossible to determine because
+HTML allows to place any number of unessential nodes (i.e. nodes that do not
+affect the current context in any way) in between the beginning of a `div`
+container and the first heading element (that is if such a heading element even
+exists).
 
 **(2) Node D is located inside section C**
 
-There nothing that introduces a new section in between heading `C` and node `D`.
-In addition to that, there is also nothing that indicates that section `C` ends
-before node `D`. As a direct consequence, node `D` is located inside section `C`
-and must be associated with said section.
+There is nothing that introduces a new section in between heading `C` and node
+`D`. If that were the case, node `D` would have to be associated with that new
+section.
 
-**(3) Section C is intended to end with container Y**
+There is also nothing that indicates that section `C` ends before node `D`. If
+that were the case, node `D` would have to be associated with some other
+pre-existing section (e.g. section `A`).
 
-**(4) Section C must end with container Y**
+As a consequence, node `D` is located inside section `C`.
+
+**(3) Section C ends with container Y**
 
 ### Continue...
 
