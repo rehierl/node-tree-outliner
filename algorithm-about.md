@@ -84,7 +84,7 @@ Does the algorithm implicitly associate a rank with an implied heading?
 <!-- ======================================================================= -->
 ## HTML-4 heading elements
 
-In HTML-4, any heading element is defined to introduce (i.e. mark the beginning
+In HTML-4, each heading element is defined to introduce (i.e. mark the beginning
 of) a new section.
 
 Note that there seems to exist no explicit definition which states when such a
@@ -139,8 +139,8 @@ fragment's structure, the other one does not. So which of these is invalid?
 
 ### Relationship between sections and nodes
 
-From a node's perspective: Any node within a document always belongs to (i.e. is
-located in) some section, regardless if that section has a title or not. In
+From a node's perspective: Any node within a document always belongs to (i.e.
+is located in) some section, regardless if that section has a title or not. In
 addition to that, no node can have a direct relationship with (i.e. is associated
 with) two different sections at the same time. In short: Any node either directly
 belongs to some section, or it belongs to a different one. Note that multiple
@@ -158,7 +158,8 @@ as a two-way one-to-many (i.e. 1:N) relationship.
 In order to simplify discussion, assume that any heading element can be uniquely
 identified by the heading's inner nodes. Likewise, assume that any section
 introduced by a heading element can be identified by the inner nodes of the
-heading element that introduced said section.
+heading element that introduced said section (because each heading element
+introduces exactly one section).
 
 ```
 Example:
@@ -179,6 +180,11 @@ nothing that indicates that section `A` ends before node `B` is reached.
 
 ### Relationship between sections
 
+The definition that a heading element introduces a new section merely states that
+a document can be split into different sections. Without any further definition,
+all sections would have to be considered equal and there would have been no reason
+to define 6 different heading elements:
+
 ```
 Example:
 ========
@@ -190,13 +196,22 @@ Example:
 </body>
 ```
 
-The general consensus to print the TOC for this fragment is as follows:
+The general consensus to print the TOC for this fragment is:
 
 ```
 TOC:
 ======
 1. A
    1.1. C
+```
+
+HTML-4 states that each heading element has a level value associated with it (`h1`
+is most important, `h6` is least important). As a result, the definition of such
+a value states that heading elements can be ordered with regards to that value:
+
+```
+=> [h1, h2, h3, h4, h5, h6]
+=> h1 > h2 > h3 > h4 > h5 > h6
 ```
 
 
