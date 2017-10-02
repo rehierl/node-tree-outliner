@@ -22,7 +22,7 @@ Example:
 </body>
 ```
 
-In general, the table of contents (TOC) of this fragment is as follows:
+The the consensus to print the table of contents (TOC) for this fragment is:
 
 ```
 TOC:
@@ -30,7 +30,8 @@ TOC:
 1. A
 ```
 
-Questions start to arise as soon as that fragment is slightly modified:
+As soon as the above fragment is even slightly modified, it becomes clear that
+this TOC can only be some generally accepted simplification:
 
 ```
 Example:
@@ -46,7 +47,7 @@ Obviously, node `A` must belong to some section, because that node can not be
 ignored. As a consequence, heading elements are not the only elements in HTML-4,
 that have the ability to introduce new sections.
 
-There are two possible ways to print a TOC for the modified fragment:
+There are two possible ways to print a TOC for this modified fragment:
 
 ```
 TOC-1:                          TOC-2:
@@ -64,9 +65,9 @@ fragment's structure, the other one does not. So which of these is invalid?
 From a node's perspective: Any node within a document always belongs to (i.e.
 is located in) some section, regardless if that section has a title or not. In
 addition to that, no node can have a direct relationship with (i.e. is associated
-with) two different sections at the same time. In short: Any node either directly
-belongs to some section, or it belongs to a different one. Note that different
-nodes may belong to the same section.
+with) two different sections at the same time. As a result, any node either
+directly belongs to some section, or it belongs to a different one. Note that
+different nodes may belong to the same section.
 
 From a section's perspective: Any section always directly contains (i.e. is
 associated with) no node at all, a single node or more than one (in theory even
@@ -79,9 +80,9 @@ as a two-way, one-to-many (i.e. 1:N) relationship.
 
 In order to simplify discussion, assume that any heading element can be uniquely
 identified by the heading's inner nodes. Likewise, assume that any section
-introduced by a heading element can be identified by the inner nodes of the
-heading element that introduced said section (because each heading element
-always introduces exactly one new section).
+introduced by a heading element can be identified by the inner nodes of its
+heading element (because each heading element always introduces exactly one new
+section).
 
 ```
 Example:
@@ -93,8 +94,8 @@ Example:
 ```
 
 In this example, heading `A` is said to introduce section `A`. In addition to
-that, and because node `B` is located inside section `A`, node `B` is said to
-belong to section `A`. In short: Node `B` is associated with section `A`.
+that, and because node `B` is located inside section `A`, node `B` therefore
+directly belongs to section `A` (i.e. is associated with it).
 
 Note that node `B` is located inside section `A` because there is nothing that
 introduces a new section in between heading `A` and node `B`. There is also
@@ -117,23 +118,23 @@ consequence, all heading elements can be ordered with regards to that value:
 ```
 
 The definition of an order for the set of heading elements has no meaning, if
-there is no statement that defines the semantics associated with that order:
-What are the semantics ...
+there is no statement that defines the semantics associated with that order. So
+what are the semantics ...
 
 * if a subsequent heading is just as (i.e. equally) important?
 * if a less important heading follows a more important one?
 * if a more important heading follows a less important one?
 
-#### HTML-4 example fragment
+### HTML-4 example fragment
 
 HTML-4 itself states that "Visual browsers usually render more important headings
 in larger fonts than less important ones.". This merely states that browsers
 visualize the level of a heading by associating a larger font with more important
 headings.
 
-Although example fragments should not be used to express any definitions
-themselves (they should only be used to clarify existing definitions), the
-example that follows the above statement is quite revealing:
+Example fragments should not be used to express any definitions themselves (they
+should only be used to clarify existing definitions). Still, the example of the
+HTML-4 specification that follows the above statement is quite revealing:
 
 ```
 Example:
@@ -155,39 +156,40 @@ i.e. modified to emphasize the example's relevant parts):
 Note that HTML-4 defines `div` elements to "offer a generic mechanism for adding
 structure to documents". The word "structure" in this context means that `div`
 elements allow to group nodes without introducing new sections. If that were not
-the true, authors would loose the ability to group nodes without changing a
+the true, then authors would loose the ability to group nodes without changing a
 document's outline at the same time.
 
-From the above fragment, the following observations can be made:
+From the above fragment, the following statements can be derived:
 
 **(1) Section C begins inside container Y**
 
 Section `C` exists because it is introduced by heading `C`, not by container `Y`.
 As a result, section `C` can not be associated with any node that begins before
-heading `C`, simply because no node can be associated with a section that still
-has to be introduced by its heading element.
+heading `C`.
 
 The very first node that could possibly be associated with section `C` is heading
-element `C`. It has yet to be determined if associating a heading element with
-the section it introduces would make any sense at all ...
+element `C`. Though, it has yet to be determined if associating a heading element
+with the section it introduces would even make sense ...
 
 Associating container `Y` with section `C` would mean that the definition of
 `div` containers and the definition of heading elements would have to change at
-the same time and depending on certain context:
+the same time and depending on certain conditions (i.e. depending on some context):
 
 * The container element would gain the ability to introduce a new section.
 * The heading element would loose its ability to introduce a new section.
 
 This would be difficult to implement, because in order to determine which case
-applies (default or modified definition), one would first have to look ahead in
-order to determine the current context. This context then decides which
-definition applies.
+applies (the default or the modified definitions), one would first have to look
+ahead in order to determine the current context.
 
 In theory, the current context could even be impossible to determine because
 HTML allows to place any number of unessential nodes (i.e. nodes that do not
 affect the current context in any way) in between the beginning of a `div`
 container and the first heading element (that is if such a heading element even
 exists).
+
+**Conclusion**: No node can be associated with a section that still has to be
+introduced by the section's heading element.
 
 **(2) Node D is located inside section C**
 
@@ -199,9 +201,38 @@ There is also nothing that indicates that section `C` ends before node `D`. If
 that were the case, node `D` would have to be associated with some other
 pre-existing section (e.g. section `A`).
 
-As a consequence, node `D` is located inside section `C`.
+As a consequence, node `D` is located inside section `C` and must be associated
+with said section.
 
 **(3) Section C ends with container Y**
+
+```
+Example:
+========
+<div class="section" id="X">
+  <h1>A</h1>
+  B
+  <div class="subsection" id="Y">
+    <h2>C</h2>
+    D
+  </div>
+  E
+</div>
+```
+
+It should be obvious, that the intention behind ending container `Y` just after
+node `D` is to state that section `C` ends with said container.
+
+Still, could node `E` theoretically also be associated with section `C`?
+
+So the answer to the initial question is:
+No, node `E` can not be associated with section `C`.
+
+**Conclusion**: No section can reach past its parent container element.
+
+**(4) Node E belongs to section A**
+
+asdf
 
 ### Continue...
 
