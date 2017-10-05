@@ -9,8 +9,8 @@
 In HTML-4, each heading element is defined to introduce (i.e. mark the beginning
 of) a new section.
 
-Note that there seems to exist no explicit definition which states when such a
-section ends. The only statement that can be made right away is that
+Note that there seems to exist no explicit definition which states when an
+introduced section ends. The only statement that can be made right away is that,
 **by default, any section ends with the body element.**
 
 ```
@@ -30,8 +30,8 @@ TOC:
 1. A
 ```
 
-A slight modification of the above fragment reveals that this TOC can only be a
-commonly accepted simplification:
+Even a slight modification of the above fragment reveals that the above TOC is
+merely a commonly accepted simplification:
 
 ```
 Example:
@@ -45,9 +45,10 @@ Example:
 
 Obviously, node `A` must belong to some section, because that node can not be
 ignored. As a consequence, and even in HTML-4, **heading elements are not the
-only elements that introduce new sections.**
+only elements that introduce new sections.** Note that the above TOC ignores
+the section introduced by the body element.
 
-There are two possible ways to print a TOC for this modified fragment:
+There are two possible ways to print a TOC for the modified fragment:
 
 ```
 TOC-1:                          TOC-2:
@@ -74,10 +75,10 @@ Example:
 
 **Heading X introduces section X**
 
-Assume that any heading element can be identified by the heading's inner nodes
-(or some other unique characteristic - e.g. the heading's `id`).
+Assume that any heading element can be identified by the heading's inner nodes,
+or some other unique characteristic (e.g. the heading's `id`).
 
-Heading `A` is said to introduce section `A`.
+Heading `A` is therefore said to introduce section `A`.
 
 The intention behind this definition is to identify a section by the heading
 element that introduced it. Note that each heading element always introduces a
@@ -86,44 +87,58 @@ single section (i.e. never more than one).
 A reference of the form "section `A`" therefore refers to the section introduced
 by the corresponding heading element.
 
+**Heading X of section Y**
+
+If a section `A` is introduced by heading element `A`, then that heading element
+is also said to be the heading element of that section.
+
 **Node X (is located inside | belongs to | is associated with) section Y**
 
 Node `B` is said to be located inside section `A` because there is nothing that
 introduces a new section in between heading `A` and node `B`. There is also
 nothing that indicates that section `A` ends before node `B` is reached.
 
-Node `B` is also said to belong to, or to be associated with, section `A`.
+If a node is located inside a section, then it is also said to belong to, or to
+be associated with, that section. In such a case, the node and its section are
+both said to have a direct relationship.
 
 Note that this definition is based upon the direct relationship between a node
 and its section (i.e. no subsections in between).
 
 **Section X (contains | is associated with) node Y**
 
-Section `A` contains, or is associated with, node `B`
-because node `B` is located inside of it.
+Section `A` contains node `B` because node `B` is located inside section `A`.
+
+If a node is located inside a section, then that section is said to contain, or
+to be associated with, that node.
+
+Note the direct relationship between the node and its section.
 
 **Parent container X of section Y**
 
 Except for the body element, any node within a document always has a parent
-element. In addition to that, this parent element is always a container element
-(because it contains nodes as its child nodes).
+element. A node's parent element is said to be the node's parent container
+element because it contains the node as one of its inner child nodes.
+
+Any heading element is the parent container to all its inner child nodes. The
+inner nodes of a heading element define the heading for the section it introduces.
 
 The parent container of the section introduced by the body element is the body
-element itself. Likewise, if element X introduces section Y as an inner section,
-then element X is said to be the section's parent container element.
+element itself. Likewise, if element `X` introduces section `Y` as an inner
+section, then element `X` is said to be the section's parent container element.
 
-The parent container of a section introduced by a heading element is the parent
-element of that heading. Likewise, if element X introduces section Y as a
-subsequent section (i.e. not inside of it), then the parent element of element
-X is said to be the section's parent container element.
+The parent container of a section introduced by heading element is the parent
+element of that heading. Likewise, if element `X` introduces section `Y` as a
+subsequent section (i.e. not inside of it), then element's parent container is
+said to be the section's parent container element.
 
 A section's parent container is said to contain its section as an inner section.
 
-Note that the element that introduced a section and the section's parent
-container element are not always identical (i.e. can be different elements).
+Note that the element that introduced a section and the section's parent container
+element are not always identical (i.e. these can be different elements).
 
-Note that this definition does not state that all inner section of such a
-container's also have to end inside of the container (i.e. a section might
+Note that this definition does not state that all inner sections of such a parent
+container also have to end inside of their container element (i.e. a section might
 contain nodes that are located outside of its parent container ...).
 
 **Section X (is located inside | belongs to | is associated with) container Y**
@@ -141,18 +156,18 @@ associations have different direction!
 
 From a node's perspective: Any node within a document always belongs to some
 section, regardless if that section has a title or not. In addition to that, no
-node can have a direct relationship with (i.e. is associated with) two different
-sections at the same time. As a result, any node either directly belongs to some
-section, or it belongs to a different one.
+node can have a direct relationship with two different sections at the same time.
+As a result, any node either directly belongs to some section, or it belongs to
+a different one.
 
 Note that multiple nodes may still belong to the same section.
 
 From a section's perspective: Any section always directly contains no node at
-all, a single node or more than one (in theory even infinitely many) nodes.
+all, a single node or more than one, in theory even infinitely many, nodes.
 
 Note that a section, that does not directly contain any nodes, does not have to
 be empty (i.e. a section that only contains subsections is not empty - e.g. the
-content of a body element may consist of subsections only - see below).
+content of a body element consist of subsections only - see below).
 
 The direct relationship between sections and nodes can therefore be classified
 as **a two-way, one-to-many (i.e. 1:N) relationship**.
@@ -160,11 +175,10 @@ as **a two-way, one-to-many (i.e. 1:N) relationship**.
 <!-- ####################################################################### -->
 ## Level of heading elements
 
-The definition that a heading element introduces a new section merely states
-that a document can be broken up into different sections.
-
-Without any further definition, all sections would have to be considered equal
-and there would have been no reason to define 6 different heading elements.
+The definition that a heading element introduces a new section implies that a
+document can be broken up into different sections. Without any further definition,
+all sections would have to be considered equal and there would have been no reason
+to define 6 different heading elements.
 
 HTML-4 therefore also states that each heading element has a level value
 associated with it (`h1` is most important, `h6` is least important). As a
@@ -176,21 +190,20 @@ value:
 => [h1, h2, h3, h4, h5, h6]    - (ordered sequence)
 ```
 
-The definition of an order for the set of heading elements has no meaning, if
-there is no statement that defines the semantics associated with that order,
-because that oder does not define what the semantics are, if ...
+The definition of an order for the set of heading elements has no meaning
+because that order alone does not define what the semantics are, if ...
 
 * a subsequent heading is just as (i.e. equally) important.
 * a less important heading follows a more important one.
 * a more important heading follows a less important one.
 
-Unfortunately, HTML-4 contains no such explicit definition.
+Unfortunately, HTML-4 does not explicitly define the intended semantics.
 
 <!-- ####################################################################### -->
 ## HTML-4 example fragment
 
 HTML-4 states that "Visual browsers usually render more important headings in
-larger fonts than less important ones.", which does not define any semantics,
+larger fonts than less important ones.". This does not define any semantics
 because a font size is merely a visual indication.
 
 Although example fragments should not be understood to express any definition
@@ -216,9 +229,8 @@ i.e. modified to emphasize the example's relevant parts):
 
 Note that HTML-4 defines `div` elements to "offer a generic mechanism for adding
 structure to documents". The word "structure" in this context means that `div`
-elements allow to group nodes without introducing new sections. If that were not
-true, then authors would have no means to group nodes at block level without
-changing a document's outline at the same time.
+elements allow to group nodes without introducing new sections (i.e. without
+changing a document's outline at the same time).
 
 From the above fragment, the following statements can be derived:
 
@@ -233,7 +245,7 @@ The very first node that could possibly be associated with section `C` is headin
 `C`. (Note that it has yet to be determined if associating a heading element with
 the section it introduces would even make any sense ...)
 
-What if container `Y` would have to be associated with section `C`?
+Could container `Y` still be associated with section `C`?
 
 This would mean that container `Y` would gain the characteristic to introduce a
 new section because that section would begin before heading `C`. At the same
@@ -242,16 +254,21 @@ introduce yet another section. The semantics of these elements would therefore
 depend on the context in which these elements are used (i.e. the semantics would
 have to change under certain conditions).
 
-As a result, an implementation would therefore always have to first determine the
-context of these elements in order to select the appropriate action (i.e. begin
-a new section or not). To achieve this, an implementation would have to look ahead
-in order to determine the actual semantics (i.e. if a `div` container begins, then
-read ahead until the first heading element, or the end of the container is reached).
+As a result, an implementation would always have to first determine the context
+of these elements in order to select the appropriate action (i.e. begin a new
+section or not). To achieve this, an implementation would always have to do a
+look-ahead (i.e. if a `div` container begins, then read ahead until the first
+heading element, or until the end of the container is reached).
 
 In theory, that could even be impossible to implement because HTML allows to
 place any number of unessential nodes (i.e. nodes that do not affect the current
 context in any way) in between the beginning of a `div` container and the first
 heading element.
+
+Note that redefining the `div` container element to always introduce a new
+section would also be ill advised, because authors would then have no means to
+group elements at block level without having to change a document's outline at
+the same time.
 
 Conclusion: **A node can not be associated with a section that still has to be
 introduced by some subsequent element.**
@@ -264,8 +281,8 @@ There is nothing that introduces a new section in between heading `C` and node
 section instead.
 
 There is also nothing that indicates that section `C` ends before node `D`. If
-that were the case, node `D` would have to be associated with some other
-pre-existing section (e.g. section `A`).
+that were the case, node `D` would have to be associated with some other section
+that was introduced before section `C` (e.g. section `A`).
 
 As a consequence, node `D` is located inside section `C` and must be associated
 with that section.
@@ -285,15 +302,76 @@ with that section.
 </div>
 ```
 
-It should be obvious, that the intention behind surrounding node `D` with
-container `Y` is to state that section `C` ends with said container.
+It should be obvious, that the intention behind wrapping node `D` up inside
+container `Y` is to state that section `C` ends with said container. In addition
+to that, the intention is to state that no node beyond that container belongs to
+section `C` (i.e. node `E` belongs to a different section).
 
-Still, could node `E` in theory also be associated with section `C`?
+Could node `E` still be associated with section `C`?
 
-???????????????????????????
+In general, any container element `X`, that has no effect in a given context,
+can be injected into a document to wrap up subsequent child nodes of some parent
+container element `A` (without changing the outline of a document):
 
-The answer to the initial question therefore is:
-No, node `E` must not be associated with section `C`, because ...
+```
+Example:                     (injected container)
+========                     ====================
+<A>                            <A>
+  A <B> C </B> D        =>       <X> A <B> C </B> D </X>
+</A>                           </A>
+```
+
+In contrary to that, such an injection is not allowed if container `X` would
+cross the boundaries of some other container `A` in any way (i.e. inwards or
+outwards):
+
+```
+Example (inwards)    (tag layer)        (dom layer)
+========             ===========        ===========
+-: A                 A               A
+X: B                 <X> B           <X>
+X: <C>        =>     <C>              B
+X:  D                  D </X>    =>    <C>
+-:  E                  E                 
+-: </C>              </C>                 <C>
+                                            E
+                                          </C>
+
+Example (outwards)   (tag layer)        (dom layer)
+========             ===========        ===========
+-: <A>                  <A>                <A>
+-:   B                    B                  B
+X:   C         =>         <X> C       =>     <X>
+-: </A>                 </A>                   C
+X: D                    D </X>                 D
+-: E                    E                    </X>
+-:                                        </A>
+-:                                        E
+```
+
+On the abstraction layer of tags:
+
+This would result in an invalid HTML document
+because any inner container must end before an outer container can.
+
+On the abstraction layer of a DOM tree:
+
+A DOM node can be seen to combine both
+tags of an element (start and end tag) into a single node. To such a parent node,
+any child node will be added (after entering the parent node) until that parent
+node ends.
+
+This means that if a
+container (as a section's visual representative element) would be injected in
+place of the first node associated with it, then all nodes of that section would
+have to become child nodes of the injected container. Saving that tree as an HTML
+document would therefore result in a document that has a different structure
+(i.e. the source document and the saved document are not equivalent).
+
+The answer to the initial question therefore is: No, node `E` must not be
+associated with section `C`, because it would mean that the tree of sections
+produced by the outline algorithm would be inconsistent with the document's
+structure.
 
 **Conclusion**: No section can reach past its parent container.
 
