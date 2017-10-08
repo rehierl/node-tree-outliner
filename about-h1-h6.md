@@ -22,8 +22,8 @@ Example:
 </body>
 ```
 
-Note - Upper case letters inside example fragments always represent groups of
-any number of passive nodes (i.e. passive content).
+Note - Upper case letters inside example fragments represent groups of any number
+of passive nodes (i.e. passive content).
 
 The the consensus to print the table of contents (TOC) for this fragment is:
 

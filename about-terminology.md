@@ -4,6 +4,20 @@
 This document is used to clarify important terms that are used throughout this
 repository.
 
+## Tree (data structure)
+
+* [en.wikipedia.org](https://en.wikipedia.org/wiki/Tree_(data_structure))
+
+## Outline
+
+The outline of a document represents the structure of a document expressed as a
+hierarchy (tree?) of sections.
+
+## Table of contents (TOC)
+
+The table of contents of a document represents the structure of a document
+expressed as a hierarchy (tree?) of headings.
+
 ## The body section
 
 

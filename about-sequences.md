@@ -2,32 +2,313 @@
 # Notes
 
 <!-- ======================================================================= -->
-## Tag sequences
+## Tree traversal
 
-Walking over the nodes of a DOM tree in order to produce an outline needs to
-execute the following pseudocode fragment:
+* [en.wikipedia.org, tree traversal](https://en.wikipedia.org/wiki/Tree_traversal)
+* [en.wikipedia.org, depth-first search (DFS)](https://en.wikipedia.org/wiki/Depth-first_search)
+
+In order to create an outline that accurately represents a document's structure,
+the document's DOM tree must be traversed by visiting each node. In general, the
+traversal of such a node tree can be classified depending on certain
+characteristics - such as:
+
+* When is a node visited in relation to its child nodes?
+  (e.g. depth-first search (DFS), breadth-first search (BFS))
+* In which order are the child nodes visited? (e.g. left-to-right (LTR),
+  first-to-last (FTL), right-to-left (RTL), last-to-first (LTF))
+
+### Depth-first search (DFS)
+
+The traversal of a tree is referred to as a depth-first (DFS) search, if all the
+nodes of a single branch are visited before the nodes any other branch.
+
+**FTL, DFS, Pre-order tree traversal**
 
 ```
-visitNode(node)
+traversePreOrder(node) begin
+  visitPreOrder(node)
+  child = node.firstChild
+  while(child != null) begin
+    traversePreOrder(child)
+    child = child.nextSibling
+  end
+end
+```
+
+**FTL, DFS, Post-order tree traversal**
+
+```
+traversePostOrder(node) begin
+  child = node.firstChild
+  while(child != null) begin
+    traversePostOrder(child)
+    child = child.nextSibling
+  end
+  visitPostOrder(node)
+end
+```
+
+**FTL, DFS, In-order**
+
+```
+traverseInOrderBin(node) begin
+  traverseTree(node.left)
+  traverseInOrderBin(node)
+  traverseTree(node.right)
+end
+```
+
+The in-order tree traversal of a binary tree does not conflict with a strict
+tree traversal as each node is visited exactly once.
+
+Traversing a non-binary tree, that allows more than two child nodes per node
+(the DOM tree is such a generic tree), via in-order tree traversal would have
+to re-visit a node multiple times:
+
+```
+traverseInOrder(node) begin
+  child = node.firstChild
+  while(child != null) begin
+    visitInOrderBefore(node)
+    traverseInOrder(child)
+    visitInOrderAfter(node)
+    child = child.nextSibling
+  end
+end
+```
+
+### Breadth-first (BFS) search
+
+A tree traversal is referred to as a breadth-first (BFS) search, if the nodes
+of a tree are visited one level at a time.
+
+**FTL, BFS**
+
+```
+//- visit the nodes in a given range of (relative) levels
+//- node.level in [1,+Infinity] returns a node's (absolute) level
+//- the root node of a tree has a level value of 1
+
+traverseBFS(root, min, max) begin
+  assert((min >= 1) && (max >= 1) && (min <= max))
+
+  queue = new Queue()
+  queue.enqueue(root)
+
+  while(not queue.isEmpty) begin
+    node = queue.dequeue()
+
+    //- the node's relative level
+    level = 1 + (node.level - root.level)
+
+    if(level in [min,max]) begin
+      visitBFS(node)
+    end
+
+    child = node.firstChild
+    while(child != null) begin
+      queue.enqueue(child)
+      child = child.nextSibling
+    end
+  end
+end
+```
+
+Executing `traverseTree(node, 1, 1)` (= **BFS-1**) will only visit the 1st level,
+which only contains the specified node. Executing `traverseTree(node, 2, 2)`
+(= **BFS-2**) will only visit the 2nd level, which only contains the direct child
+nodes of the specified node.
+
+### Tree Traversal
+
+The `visitPreOrder()` and the `visitPostOrder()` operations can be seen to mark
+the beginning and the end of processing a node. As such, these operations
+represent the node's enter and exit events.
+
+```
+traverseTree(node) begin
   onEnter(node)
   child = node.firstChild
-  while(child != null)
-    visitNode(child)
+  while(child != null) begin
+    traverseTree(child)
     child = child.nextSibling
+  end
   onExit(node)
+end
 ```
 
-With some modifications, this fragment can be used to create a tag sequence:
+In order to produce the outline for a document, the algorithm needs to execute
+certain operations depending on the node being entered or exited.
+
+<!-- ======================================================================= -->
+## Node sequences
+
+This tree traversal pseudocode fragment can be used to produce a sequence of
+nodes that contains the nodes of a document in the order in which these nodes
+are entered:
 
 ```
-visitNode(node, sequence)
+sequenceOf(root) begin
+  sequence = new Array()
+
+  onEnter(node) begin
+    sequence.add(node)
+  end
+
+  onExit(node) begin
+    return
+  end
+
+  traverseTree(node) begin
+    onEnter(node)
+    child = node.firstChild
+    while(child != null) begin
+      traverseTree(child)
+      child = child.nextSibling
+    end
+    onExit(node)
+  end
+
+  return sequence
+end
+```
+
+The sequence of nodes created this way will be referred to as **a document's
+sequence of nodes**, or simply as the document's **node sequence**.
+
+### Subsequent nodes
+
+```
+indexOf(sequence, node) begin
+  for(i in 0 to sequence.length-1) begin
+    if(sequence(i) == node) then
+      return i
+    end
+  end
+  throw error
+end
+
+//- return (indexOf(n2) - indexOf(n1))
+//- negative, if n2 appears before n1
+distanceBetween(sequence, n1, n2) begin
+  i = indexOf(sequence, n1)
+  j = indexOf(sequence, n2)
+  return (j - i)
+end
+
+isSubsequentTo(sequence, n1, n2) begin
+  return (distanceBetween(sequence, n1, n2) >= 1)
+end
+
+isDirectlySubsequentTo(sequence, n1, n2) begin
+  return (distanceBetween(sequence, n1, n2) == 1)
+end
+```
+
+With regards to some node sequence, `Y` is said to be (merely) **subsequent to**
+`X`, if `Y` appears after `Y` in that sequence. Node `Y` is said to be
+**directly subsequent to** `X`, if `Y` appears directly after `X`.
+
+Note - This relationship is not reflexive because node `X` can not appear after
+node `Y` and `Y` after `X` at the same time. It is therefore an error to state
+that two nodes are subsequent to each other. This relationship is however
+transitive, because if `Y` is subsequent to `X` and `Z` to `Y`, then `Z` is
+automatically also subsequent to `X`.
+
+Consequently, a node that is directly subsequent to another node is also
+subsequent to it. In contrary to that, a node that is subsequent to another node
+is not necessarily directly subsequent to it (because there could be any number
+of other nodes in between).
+
+The structural relationship between `X` and `Y` can not be determined if `Y` is
+subsequent to `X`. This term merely states that `Y` will entered after `X` was
+entered. In addition to that, it can also not be determined if `Y` will be
+exited before or after `X` is or was exited:
+
+Example (1): `Y` is next sibling to `X`: If `X` has child nodes, then `Y` is
+merely subsequent to `X`. If `X` has no child nodes, then `Y` is directly
+subsequent to `X`. In both cases, `Y` will be exited after `X` was exited.
+
+Example (2): `Y` is a child node of `X`: If `Y` is the first child node, then
+`Y` is directly subsequent to `X`, otherwise it is merely subsequent to it. In
+both cases, `Y` will be exited before `X` is exited.
+
+### Sequence of subsequent nodes
+
+```
+isSubsequent(root, sequence) begin
+  docSequence = sequenceOf(root)
+  return isSubsequent(docSequence, sequence)
+end
+
+isSubsequent(docSequence, sequence) begin
+  for(i in 0 to sequence.length-2) begin
+    n1 = sequence(i), n2 = sequence(i+1)
+    //- note - a transitive relationship
+    if(not isSubsequentTo(docSequence, n1, n2)) then
+      return false
+    end
+  end
+  return true
+end
+
+isDirectlySubsequent(root, sequence) begin
+  docSequence = sequenceOf(root)
+  return isDirectlySubsequent(docSequence, sequence)
+end
+
+isDirectlySubsequent(docSequence, sequence) begin
+  for(i in 0 to sequence.length-2) begin
+    n1 = sequence(i), n2 = sequence(i+1)
+    if(not isDirectlySubsequentTo(docSequence, n1, n2)) then
+      return false
+    end
+  end
+  return true
+end
+```
+
+A sequence of nodes is said to be a **sequence of subsequent nodes**, if any
+node within that sequence is subsequent to any of its predecessor nodes with
+regards to some node sequence. A sequence of nodes is said to be a **sequence
+of directly subsequent nodes**, if any node within that sequence is directly
+subsequent to its direct predecessor.
+
+Consequently, the node sequence of a document is a sequence of directly
+subsequent nodes. The same applies to all the subsequences of a node sequence.
+
+A **section** is a sequence of subsequent nodes.
+
+A section that has no subsections is even a sequence of directly subsequent nodes.
+Consequently, such a section is a subsequence of the document's node sequence.
+
+A section that has subsections is a sequence of directly subsequent nodes, if a
+section is considered to also contain all nodes within its subsections (in order
+of appearance).
+
+Note - This definition of the term "section" does not state anything about its
+first and last node. It merely states that a section is not just some arbitrary
+group of nodes, but a sequence of nodes which is ordered according to a document's
+tree traversal.
+
+<!-- ======================================================================= -->
+## Tag sequence
+
+The pseudocode fragment used to define the traversal of the DOM tree can be
+used to produce a sequence of tags:
+
+```
+sequence = new Array()
+
+onEnter(node) begin
   name = node.tagName.toLowerCase
-  sequence.append(name)
-  child = node.firstChild
-  while(child != null)
-    visitNode(child)
-    child = child.nextSibling
-  sequence.append("/" + name)
+  sequence.add(name)
+end
+
+onExit(node) begin
+  name = node.tagName.toLowerCase
+  sequence.add("/" + name)
+end
 ```
 
 Executing that pseudocode with the following example HTML fragment as input ...
@@ -58,7 +339,7 @@ therefore corresponds with the structure of one or more, possibly infinitely
 many, HTML fragments that have identical structure.
 
 <!-- ======================================================================= -->
-## Token sequences
+## Token sequence
 
 Switching ones own point of view allows to make the following observation: Tag
 sequences can be seen to describe the sequence of events that will be executed
