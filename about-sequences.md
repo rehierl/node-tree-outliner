@@ -35,9 +35,9 @@ traversePreOrder(node) begin
 end
 ```
 
-The `visitPreOrder()` operation marks the beginning of processing a node. It
-therefore can be seen to represent a node's enter event. As such it can be used
-to end preceeding outer sections and to create new inner sections.
+The `visitPreOrder()` operation marks the beginning of processing a node. It can
+therefore be seen to represent a node's enter event. As such it, can be used to
+end preceeding outer sections and to create new inner sections.
 
 **FTL, DFS, Post-order tree traversal**
 
@@ -52,9 +52,9 @@ traversePostOrder(node) begin
 end
 ```
 
-The `visitPostOrder()` operation marks the end of processing a node. It
-therefore can be seen to represent a node's exit event. As such it can be used
-to end inner sections and to create new or continue outer sections.
+The `visitPostOrder()` operation marks the end of processing a node. It can
+therefore be seen to represent a node's exit event. As such it can be used to
+end inner sections and to create new or continue preceeding outer sections.
 
 **FTL, DFS, In-order**
 
@@ -66,12 +66,10 @@ traverseInOrderBin(node) begin
 end
 ```
 
-The in-order tree traversal of a binary tree does not conflict with a strict
-tree traversal because each node is visited exactly once.
-
-Traversing a non-binary tree, that allows more than two child nodes per node
-(the DOM tree is such a non-binary generic tree), via in-order tree traversal
-would have to re-visit a node multiple times:
+The in-order tree traversal of a binary tree is a strict tree traversal because
+each node is visited exactly once. Traversing a non-binary tree, that allows more
+than two child nodes per node (the DOM tree is such a generic tree), via in-order
+tree traversal would have to re-visit a node multiple times:
 
 ```
 traverseInOrder(node) begin
@@ -84,6 +82,9 @@ traverseInOrder(node) begin
   end
 end
 ```
+
+It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`
+or even both are used. Both will be executed multiple times per node.
 
 ### Breadth-first (BFS) search
 
@@ -131,7 +132,7 @@ nodes of the specified node.
 
 The `visitPreOrder()` and the `visitPostOrder()` operations can be seen to mark
 the beginning and the end of processing some node. As such, these operations
-represent the enter and exit events said node.
+represent the enter and exit events of said node.
 
 ```
 traverseTree(node) begin
@@ -146,17 +147,16 @@ end
 ```
 
 In order to produce the outline for a document, the algorithm needs to execute
-certain operations depending on the node being entered or exited.
+certain operations depending on which node is being entered or exited.
 
 <!-- ======================================================================= -->
 ## Node sequences
 
-The tree traversal pseudocode fragment can be used to produce a sequence of
-nodes that contains the nodes of a document in the order in which these nodes
-are entered:
+The above tree traversal fragment can be used to produce a sequence of nodes that
+contains the nodes of a document in the order in which these nodes are entered:
 
 ```
-sequenceOf(root) begin
+nodeSequenceOf(root) begin
   sequence = new Array()
 
   onEnter(node) begin
@@ -182,7 +182,11 @@ end
 ```
 
 The sequence of nodes created this way is said to be **the document's sequence
-of nodes**, or simply the document's **node sequence**.
+of nodes**, or simply the document's **node sequence (NS)**. As such, a node
+sequence represents the path an algorithm will take when traversing the
+document's tree of nodes.
+
+A memory hook: The start tags of a HTML text file have the exact same order.
 
 ### Subsequent nodes
 
@@ -196,12 +200,13 @@ indexOf(sequence, node) begin
   throw error
 end
 
-//- return (indexOf(n2) - indexOf(n1))
-//- negative, if n2 appears before n1
+//- distanceBetween(n1, n2) := (indexOf(n2) - indexOf(n1))
+//- the result is negative, if n2 appears before n1
+
 distanceBetween(sequence, n1, n2) begin
-  i = indexOf(sequence, n1)
-  j = indexOf(sequence, n2)
-  return (j - i)
+  i1 = indexOf(sequence, n1)
+  i2 = indexOf(sequence, n2)
+  return (i2 - i1)
 end
 
 isSubsequentTo(sequence, n1, n2) begin
@@ -214,26 +219,27 @@ end
 ```
 
 With regards to some node sequence, `Y` is said to be (merely) **subsequent to**
-`X`, if `Y` appears after `Y` in that sequence. Node `Y` is said to be
+`X`, if `Y` appears after `X` in that sequence. Node `Y` is said to be
 **directly subsequent to** `X`, if `Y` appears directly after `X`.
 
 Consequently, a node that is directly subsequent to another node is also (merely)
-subsequent to it. In contrary to that, a node that is subsequent to another node
-is not necessarily directly subsequent to it (because there could be any number
-of other nodes in between).
+subsequent to it. In contrary to that, a node that is (merely) subsequent to
+another node is not necessarily directly subsequent to it (because there could
+be any number of other nodes in between).
 
 This relationship is not reflexive because node `X` can not appear after node `Y`
 and `Y` after `X` at the same time. It is therefore an error to state that two
 nodes are subsequent to each other.
 
 This relationship is however transitive, because if `Y` is subsequent to `X` and
-`Z` to `Y`, then `Z` is automatically also subsequent to `X`.
+`Z` to `Y`, then `Z` is automatically also subsequent to `X`
+(i.e. if `((X < Y) && (Y < Z))` then `(X < Z)`).
 
-The structural relationship between `X` and `Y` (i.e. where inside the DOM tree
-is `X` located in relationship to `Y`) can not be determined if `Y` is subsequent
-to `X`. This relationship merely states that `Y` will entered after `X` was
-entered. In addition to that, it can also not be determined if `Y` will be exited
-before or after `X` is or was exited:
+The structural relationship between `X` and `Y` (i.e. Where inside the DOM tree
+is `X` located in relation to `Y`?) can not be determined if `Y` is subsequent
+to `X`. This relationship merely states that `Y` will entered after `X`. In
+addition to that, it can also not be determined if `Y` will be exited before or
+after `X` is or was exited:
 
 Example (1): `Y` is next sibling to `X`: If `X` has child nodes, then `Y` is
 merely subsequent to `X`. If `X` has no child nodes, then `Y` is directly
@@ -268,7 +274,7 @@ end
 ```
 
 A sequence of nodes is said to be **a sequence of subsequent nodes**, if any
-node within that sequence is subsequent to any of its predecessor nodes.
+node within that sequence is subsequent to any of its predecessors.
 
 A sequence of nodes is said to be **a sequence of directly subsequent nodes**,
 if any node within that sequence is directly subsequent to its immediate
@@ -288,42 +294,58 @@ A **section** is a sequence of subsequent nodes.
 
 This definition of the term "section" does not state anything about a section's
 first and last nodes. It merely states that a section is not just some arbitrary
-sequence of nodes, but a sequence of nodes which is ordered according to its
-document's tree traversal.
+sequence of nodes, but that the order of its nodes corresponds with the document's
+node sequence.
 
 A section that has no subsections is a sequence of directly subsequent nodes.
 Consequently, such a section is a subsequence of the document's node sequence.
 
 A section that has subsections is a sequence of directly subsequent nodes, if it
-is considered to also contain all nodes within its subsections (in order of
-appearance).
+is considered to also contain all nodes within all of its subsections (in order
+of appearance).
 
-If the nodes of a section's subsections are not seen to be included, then a
-section is a sequence of sequences of directly subsequent nodes. A section from
-that perspective contains nodes that are directly subsequent and gaps that are
-filled by its subsections.
+A section is a sequence of sequences of directly subsequent nodes, if the nodes
+of its subsections are not considered to be included (i.e. `section := [sequence1,
+sequence2, ...]`). With that perspective, a section's subsections can be seen
+to fill the gaps in between the subsequences of a section.
 
 <!-- ======================================================================= -->
 ## Tag sequence
 
-The pseudocode fragment used to define the traversal of the DOM tree can be
-used to produce a sequence of tags:
+The above tree traversal fragment can also be used to produce a sequence of tags:
 
 ```
-sequence = new Array()
+tagSequenceOf(root) begin
+  sequence = new Array()
 
-onEnter(node) begin
-  name = node.tagName.toLowerCase
-  sequence.add(name)
-end
+  onEnter(node) begin
+    name = node.tagName.toLowerCase
+    sequence.add(name)
+  end
 
-onExit(node) begin
-  name = node.tagName.toLowerCase
-  sequence.add("/" + name)
+  onExit(node) begin
+    name = node.tagName.toLowerCase
+    sequence.add("/" + name)
+  end
+
+  traverseTree(node) begin
+    onEnter(node)
+    child = node.firstChild
+    while(child != null) begin
+      traverseTree(child)
+      child = child.nextSibling
+    end
+    onExit(node)
+  end
+
+  return sequence
 end
 ```
 
-Executing that pseudocode with the following example HTML fragment as input ...
+The sequence of tags created this way is said to be **the document's tag
+sequence (TS)**.
+
+Executing this pseudocode with the following example HTML fragment as input ...
 
 ```
 Example 1 (E-1):
