@@ -22,8 +22,8 @@ Example:
 </body>
 ```
 
-Note - Upper case letters inside example fragments represent groups of any number
-of passive nodes (i.e. passive content).
+Note - Upper case letters represent passive content;
+i.e. these nodes have no effect on a document's outline.
 
 The the consensus to print the table of contents (TOC) for this fragment is:
 
@@ -68,15 +68,15 @@ fragment's structure, the other one does not. So which of these is invalid?
 ## Relationship between sections and nodes
 
 *From a node's perspective:*
-Any node within a document always belongs to some section, regardless if that
-section has a title or not. In addition to that, no node can have a direct
-relationship with two different sections at the same time. Any node therefore
-either directly belongs to some section, or it belongs to a different one.
-(Multiple nodes may still belong to the same section.)
+Any node within a document belongs to some section, regardless if that section
+has a title or not. In addition to that, no node can have a direct relationship
+with two different sections at the same time. Any node therefore either directly
+belongs to some section, or it belongs to a different one. (Multiple nodes may
+still belong to the same section.)
 
 *From a section's perspective:*
-Any section always directly contains no node at all, a single node or more than
-one, in theory even infinitely many, nodes.
+Any section directly contains no node at all, a single node or more than one, in
+theory even infinitely many, nodes.
 
 Note - A section, that does not directly contain any nodes, does not have to be
 empty (i.e. a section that only contains subsections is not empty - e.g. the
@@ -95,24 +95,25 @@ Example:
 </body>
 ```
 
-Node `A` is said to belong to the section introduced by the body element.
+Node `A` is said to belong to the section introduced by the body element, i.e.
+**the body section**.
+
+Node `C` is said to belong to section `B` because the last section introduced
+before node `C` is reached is section `B`. There is also no indication that
+section `B` ends before node `C` is reached. If that were the case, node `C`
+would have to be associated with the body section.
 
 **TODO**
 It has yet to be determined if associating a heading element and its inner nodes
 (e.g. `h1` and `B`) with the section that the heading element introduces would
 even make any sense at all.
 
-Node `C` is said to belong to section `B` because the last section introduced
-before node `B` is reached is said section. There is also no indication that
-section `B` ends before node `C` is reached. If that were the case, node `B`
-would have to be associated with the section introduced by the body element.
-
 <!-- ####################################################################### -->
 ## Level of heading elements
 
-The definition that a heading element introduces a new section implies that a
-document can be broken up into different sections. Without any further definition,
-all sections would have to be considered equal and there would have been no reason
+That any heading element introduces a new section implies that a document can be
+broken up into multiple different sections. Without any further definition, all
+sections would have to be considered equal and there would have been no reason
 to define 6 different heading elements.
 
 HTML-4 therefore also states that each heading element has a level value
@@ -132,7 +133,8 @@ because this order by itself does not define what the semantics are, if ...
 * a less important heading follows a more important one.
 * a more important heading follows a less important one.
 
-Unfortunately, HTML-4 does not explicitly define the intended semantics.
+Unfortunately, HTML-4 does not explicitly define the semantics associated with
+a heading's level value:
 
 <!-- ####################################################################### -->
 ## HTML-4 example fragment
@@ -160,10 +162,9 @@ Example:
 ```
 
 (This fragment is a modified version of that example -
-i.e. modified to emphasize the example's relevant parts -
-Note that nodes A, B, C, D and E represent passive content)
+i.e. modified to emphasize the example's relevant parts)
 
-Note that HTML-4 defines `div` elements to "offer a generic mechanism for adding
+Note - HTML-4 defines `div` elements to "offer a generic mechanism for adding
 structure to documents". The word "structure" in this context means that `div`
 containers allow to group nodes without introducing new sections (i.e. they allow
 to group nodes without changing a document's outline at the same time). As such,

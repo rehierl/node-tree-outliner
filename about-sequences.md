@@ -8,19 +8,19 @@
 * [en.wikipedia.org, depth-first search (DFS)](https://en.wikipedia.org/wiki/Depth-first_search)
 
 In order to create an outline that accurately represents a document's structure,
-the document's DOM tree must be traversed by visiting each node. In general, the
-traversal of such a node tree can be classified depending on certain
+the document's DOM tree must be traversed by visiting each node. In general,
+the traversal of such a node tree can be classified depending on certain
 characteristics - such as:
 
-* When is a node visited in relation to its child nodes?
-  (e.g. depth-first search (DFS), breadth-first search (BFS))
-* In which order are the child nodes visited? (e.g. left-to-right (LTR),
-  first-to-last (FTL), right-to-left (RTL), last-to-first (LTF))
+* When is a node visited in relation to its child nodes? -
+  e.g. depth-first search (DFS), breadth-first search (BFS)
+* In which order are the child nodes visited? - e.g. left-to-right (LTR)
+  (aka. first-to-last (FTL)), right-to-left (RTL) (aka. last-to-first (LTF))
 
 ### Depth-first search (DFS)
 
-The traversal of a tree is referred to as a depth-first (DFS) search, if all the
-nodes of a single branch are visited before the nodes any other branch.
+The traversal of a tree is referred to as a depth-first (DFS) search, if all
+the nodes of a branch are visited before the nodes any other branch.
 
 **FTL, DFS, Pre-order tree traversal**
 
@@ -35,9 +35,8 @@ traversePreOrder(node) begin
 end
 ```
 
-The `visitPreOrder()` operation marks the beginning of processing a node. It can
-therefore be seen to represent a node's enter event. As such it, can be used to
-end preceeding outer sections and to create new inner sections.
+The `visitPreOrder()` operation marks the beginning of processing a node.
+It therefore represents a node's enter event.
 
 **FTL, DFS, Post-order tree traversal**
 
@@ -52,9 +51,8 @@ traversePostOrder(node) begin
 end
 ```
 
-The `visitPostOrder()` operation marks the end of processing a node. It can
-therefore be seen to represent a node's exit event. As such it can be used to
-end inner sections and to create new or continue preceeding outer sections.
+The `visitPostOrder()` operation marks the end of processing a node.
+It therefore represents a node's exit event.
 
 **FTL, DFS, In-order**
 
@@ -69,7 +67,7 @@ end
 The in-order tree traversal of a binary tree is a strict tree traversal because
 each node is visited exactly once. Traversing a non-binary tree, that allows more
 than two child nodes per node (the DOM tree is such a generic tree), via in-order
-tree traversal would have to re-visit a node multiple times:
+tree traversal would have to execute the visit operation multiple times per node:
 
 ```
 traverseInOrder(node) begin
@@ -84,7 +82,8 @@ end
 ```
 
 It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`
-or even both are used. Both will be executed multiple times per node.
+or even both are used. Both will be executed multiple times per node. An in-order
+tree traversal of a generic tree is therefore not a strict tree traversal.
 
 ### Breadth-first (BFS) search
 
@@ -125,14 +124,10 @@ end
 
 Executing `traverseTree(node, 1, 1)` (= **BFS-1**) will only visit the 1st level,
 which only contains the specified node. Executing `traverseTree(node, 2, 2)`
-(= **BFS-2**) will only visit the 2nd level, which only contains the direct child
-nodes of the specified node.
+(= **BFS-2**) will only visit the 2nd level, which only contains a node's child
+nodes.
 
 ### Tree Traversal
-
-The `visitPreOrder()` and the `visitPostOrder()` operations can be seen to mark
-the beginning and the end of processing some node. As such, these operations
-represent the enter and exit events of said node.
 
 ```
 traverseTree(node) begin
@@ -146,8 +141,23 @@ traverseTree(node) begin
 end
 ```
 
-In order to produce the outline for a document, the algorithm needs to execute
-certain operations depending on which node is being entered or exited.
+In order to create the outline for a document, an algorithm needs to execute
+certain actions depending on which node is being processed.
+
+When a node is entered, an algorithm has to:
+
+* end outer sections
+* associate the node being entered with a section
+* suspend an outer section
+* create and initialize a new inner section
+
+When a node is exited, an algorithm has to:
+
+* end inner sections
+* reactivate an outer section, or
+* create and initialize a new one
+
+Which of these actions need to be executed must be defined for each node type.
 
 <!-- ======================================================================= -->
 ## Node sequences
@@ -186,7 +196,7 @@ of nodes**, or simply the document's **node sequence (NS)**. As such, a node
 sequence represents the path an algorithm will take when traversing the
 document's tree of nodes.
 
-A memory hook: The start tags of a HTML text file have the exact same order.
+A memory hook: The start tags of an HTML file have the exact same order.
 
 ### Subsequent nodes
 
@@ -292,22 +302,21 @@ then portions of that sequence may still be directly subsequent).
 
 A **section** is a sequence of subsequent nodes.
 
-This definition of the term "section" does not state anything about a section's
-first and last nodes. It merely states that a section is not just some arbitrary
-sequence of nodes, but that the order of its nodes corresponds with the document's
-node sequence.
+This definition does not state anything about a section's first and last nodes.
+It merely states that a section is not some arbitrary sequence of nodes, because
+the order of its nodes corresponds with a document's node sequence.
 
 A section that has no subsections is a sequence of directly subsequent nodes.
-Consequently, such a section is a subsequence of the document's node sequence.
+Consequently, such a section is a subsequence of its document's node sequence.
 
 A section that has subsections is a sequence of directly subsequent nodes, if it
 is considered to also contain all nodes within all of its subsections (in order
 of appearance).
 
-A section is a sequence of sequences of directly subsequent nodes, if the nodes
-of its subsections are not considered to be included (i.e. `section := [sequence1,
+A section is a sequence of sequences of directly subsequent nodes, if no nodes
+of its subsections are considered to be included (i.e. `section := [sequence1,
 sequence2, ...]`). With that perspective, a section's subsections can be seen
-to fill the gaps in between the subsequences of a section.
+to fill the gaps in between the node sequences of a section.
 
 <!-- ======================================================================= -->
 ## Tag sequence

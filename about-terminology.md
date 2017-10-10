@@ -6,37 +6,61 @@ repository.
 
 ## Tree (data structure)
 
-* [en.wikipedia.org](https://en.wikipedia.org/wiki/Tree_(data_structure))
+* [en.wikipedia.org, Tree structure](https://en.wikipedia.org/wiki/Tree_structure)
+* [en.wikipedia.org, Tree (data structure)](https://en.wikipedia.org/wiki/Tree_%28data_structure%29)
+
+A tree structure represents a hierarchical structure in graphical from. A tree
+data structure is an abstract data type that represents a tree structure using
+nodes and edges.
+
+* Except for the root node, each node has a single parent node.
+* Except for the root node, each node has one or more ancestor nodes.
+* Each node within a tree has a level value associated with it:
+  `level := 1 + (number of ancestors)`.
+* A tree has no cycles.
 
 ## Outline
 
-The outline of a document represents the structure of a document expressed as a
-hierarchy (tree?) of sections.
+The outline of a document represents the structure of its document as
+a tree of sections.
 
 ## Table of contents (TOC)
 
-The table of contents of a document represents the structure of a document
-expressed as a hierarchy (tree?) of headings.
+A document's table of contents (TOC) represents the document's structure as
+a tree of headings.
 
-## The body section
+The table of contents of a document is generated from the document's outline.
 
+## Processing nodes/content
 
+Processing a node, that has no child nodes, means to execute all operations
+associated with entering and exiting that node.
+
+Processing a node that has descendant nodes means to process the node itself
+and any of its descendant nodes.
+
+Processing content means to process any of its directly subsequent nodes. The
+outline of a document is created by processing the document's content.
 
 ## Active/Passive nodes
 
 A node that has no effect on the outline of a document is said to be **passive**
-with regards to the process of creating a document's outline. Entering a passive
-node, processing all its child nodes and exiting such a node does not change the
-document's outline in any way.
+with regards to the process of creating a document's outline. Entering and exiting
+a passive node does not change the document's outline in any way. However, a
+passive node may contain active descendant nodes.
 
 An **active** node introduces a new section, ends existing ones, or has both
-of these characteristics. Processing an active node will therefore always change
-the document's outline in some way.
+of these characteristics. Entering and/or exiting an active node will therefore
+always change the document's outline in some way, even if that node only has
+passive descendant nodes.
 
 Note - Like any heading element, the body element is an active node because
 ultimately, any section has to end with the body element. Also, any document
 always has at least one section that ends with the document's body element
-because all nodes within a document must belong to some section.
+(because all nodes within a document always belong to some section).
+
+**TODO** -
+ends with parent container - a characteristic of a section, or an element?
 
 ## Active/Passive content
 
@@ -47,6 +71,11 @@ outline in any way.
 A group of nodes that contains at least one active node, is said to represent
 active content. Processing all nodes of active content will eventually change
 the document's outline.
+
+## The body section
+
+The section that is introduced by a document's body element is simply referred
+to as "the body section".
 
 ## Heading X introduces section X
 
