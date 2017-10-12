@@ -13,8 +13,13 @@ A tree structure represents a hierarchical structure in graphical from. A tree
 data structure is an abstract data type that represents a tree structure using
 nodes and edges.
 
-* Except for the root node, each node has a single parent node.
-* Except for the root node, each node has one or more ancestor nodes.
+* Except for the root node of a tree, each node has a single parent node.
+  Each of these may have their own parent node.
+* Each node may have any number of child nodes.
+  Each of these may have child nodes themselves.
+* Any parent node, that can be reached starting from a single node, is said to
+  be an ancestor of the initial node. Likewise, any node is a descendant to all
+  of its ancestor nodes.
 * Each node within a tree has a level value associated with it:
   `level := 1 + (number of ancestors)`.
 * A tree has no cycles.
@@ -24,12 +29,29 @@ nodes and edges.
 The outline of a document represents the structure of its document as
 a tree of sections.
 
+Except for an empty tree, any tree always has a single root section. An outline
+is therefore defined by the root section of its section tree.
+
+Consequently, any section within such a section tree represents an inner outline.
+The root section's subsections are said to represent the outline's first inner
+outlines, etc.
+
+Any ancestor section of an outline's root section is said to represent one of
+the outline's outer outlines. The root section's parent section is said to
+represent the outline's first outer outline, etc.
+
+**TODO** -
+define the tree of outlines
+
 ## Table of contents (TOC)
 
-A document's table of contents (TOC) represents the document's structure as
+A document's table of contents (TOC) represents the document's outline as
 a tree of headings.
 
-The table of contents of a document is generated from the document's outline.
+Each heading within such a tree represents its corresponding section.
+
+Note - A TOC does not have to include the headings of an outline, (i.e. inner
+outlines may be ignored).
 
 ## Processing nodes/content
 

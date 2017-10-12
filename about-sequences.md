@@ -81,9 +81,10 @@ traverseInOrder(node) begin
 end
 ```
 
-It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`
+It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`,
 or even both are used. Both will be executed multiple times per node. An in-order
-tree traversal of a generic tree is therefore not a strict tree traversal.
+tree traversal of a generic tree is therefore no traversal that corresponds with
+the strict definition of a tree traversal.
 
 ### Breadth-first (BFS) search
 
@@ -124,8 +125,8 @@ end
 
 Executing `traverseTree(node, 1, 1)` (= **BFS-1**) will only visit the 1st level,
 which only contains the specified node. Executing `traverseTree(node, 2, 2)`
-(= **BFS-2**) will only visit the 2nd level, which only contains a node's child
-nodes.
+(= **BFS-2**) will only visit the 2nd level, which only contains a node's
+immediate descendants (i.e. child nodes).
 
 ### Tree Traversal
 
@@ -192,9 +193,9 @@ end
 ```
 
 The sequence of nodes created this way is said to be **the document's sequence
-of nodes**, or simply the document's **node sequence (NS)**. As such, a node
-sequence represents the path an algorithm will take when traversing the
-document's tree of nodes.
+of nodes**, or simply the document's **node sequence**. As such, a node sequence
+represents the path an algorithm will take through a document when traversing
+its tree of nodes.
 
 A memory hook: The start tags of an HTML file have the exact same order.
 
@@ -228,28 +229,28 @@ isDirectlySubsequentTo(sequence, n1, n2) begin
 end
 ```
 
-With regards to some node sequence, `Y` is said to be (merely) **subsequent to**
+With regards to some node sequence, `Y` is said to be **(merely) subsequent to**
 `X`, if `Y` appears after `X` in that sequence. Node `Y` is said to be
 **directly subsequent to** `X`, if `Y` appears directly after `X`.
 
-Consequently, a node that is directly subsequent to another node is also (merely)
-subsequent to it. In contrary to that, a node that is (merely) subsequent to
-another node is not necessarily directly subsequent to it (because there could
-be any number of other nodes in between).
+Consequently, a node that is directly subsequent to another node is also
+subsequent to it. In contrary to that, a node that is subsequent to another
+node is not necessarily directly subsequent to it (because there could be any
+number of other nodes in between).
 
-This relationship is not reflexive because node `X` can not appear after node `Y`
-and `Y` after `X` at the same time. It is therefore an error to state that two
-nodes are subsequent to each other.
+This relationship is not reflexive because node `X` can not appear after node
+`Y` and `Y` after `X` at the same time. It is therefore an error to state that
+two nodes are subsequent to each other.
 
-This relationship is however transitive, because if `Y` is subsequent to `X` and
-`Z` to `Y`, then `Z` is automatically also subsequent to `X`
-(i.e. if `((X < Y) && (Y < Z))` then `(X < Z)`).
+This relationship is however transitive, because if `Y` is subsequent to `X`
+and `Z` to `Y`, then `Z` is automatically subsequent to `X`
+(i.e. if `((X < Y) && (Y < Z))`, then `(X < Z)`).
 
 The structural relationship between `X` and `Y` (i.e. Where inside the DOM tree
-is `X` located in relation to `Y`?) can not be determined if `Y` is subsequent
-to `X`. This relationship merely states that `Y` will entered after `X`. In
-addition to that, it can also not be determined if `Y` will be exited before or
-after `X` is or was exited:
+is `X` located in relation to `Y`?) can not be determined if `Y` is (directly)
+subsequent to `X`. This relationship merely states that `Y` will be entered after
+`X`. Consequently, it can also not be determined if `Y` will be exited before or
+after `X` is (or was) exited:
 
 Example (1): `Y` is next sibling to `X`: If `X` has child nodes, then `Y` is
 merely subsequent to `X`. If `X` has no child nodes, then `Y` is directly
@@ -283,19 +284,19 @@ isDirectlySubsequent(docSequence, sequence) begin
 end
 ```
 
-A sequence of nodes is said to be **a sequence of subsequent nodes**, if any
-node within that sequence is subsequent to any of its predecessors.
+A sequence of nodes is said to be **a sequence of (merely) subsequent nodes**,
+if any node within that sequence is subsequent to its predecessor.
 
 A sequence of nodes is said to be **a sequence of directly subsequent nodes**,
-if any node within that sequence is directly subsequent to its immediate
-predecessor.
+if any node within that sequence is directly subsequent to its predecessor.
 
 Consequently, the node sequence of a document is a sequence of directly
-subsequent nodes. The same applies to all the subsequences of a node sequence.
+subsequent nodes. The same obviously applies to all the subsequences of a node
+sequence.
 
-Also, any sequence of (merely) subsequent nodes may contain subsequences that
-are directly subsequent (i.e. if a sequences is itself not directly subsequent,
-then portions of that sequence may still be directly subsequent).
+Also, any sequence of subsequent nodes may contain subsequences that are directly
+subsequent (i.e. if a sequences is itself not directly subsequent, then portions
+of such a sequence may still be directly subsequent).
 
 <!-- ======================================================================= -->
 ## Section
@@ -303,20 +304,39 @@ then portions of that sequence may still be directly subsequent).
 A **section** is a sequence of subsequent nodes.
 
 This definition does not state anything about a section's first and last nodes.
-It merely states that a section is not some arbitrary sequence of nodes, because
-the order of its nodes corresponds with a document's node sequence.
+It merely states that a section is not some sequence of arbitrarily selected
+nodes. The order of the nodes associated with a section always corresponds with
+the document's node sequence.
+
+explain ...
 
 A section that has no subsections is a sequence of directly subsequent nodes.
 Consequently, such a section is a subsequence of its document's node sequence.
 
-A section that has subsections is a sequence of directly subsequent nodes, if it
-is considered to also contain all nodes within all of its subsections (in order
-of appearance).
+*From the perspective of subsequences:*
+A section that has subsections is a sequence of directly subsequent nodes, if
+it is considered to also contain all nodes within all of its subsections.
 
-A section is a sequence of sequences of directly subsequent nodes, if no nodes
-of its subsections are considered to be included (i.e. `section := [sequence1,
-sequence2, ...]`). With that perspective, a section's subsections can be seen
-to fill the gaps in between the node sequences of a section.
+*From the perspective of objects directly connected with each other:*
+A section is a sequence of sequences of directly subsequent nodes, if the nodes
+of its subsections are considered to be *not* included (i.e. `section := [
+sequence-1, sequence-2, ...]`). All subsections of a section can therefore be
+seen to fill the gaps in between the sequences of a section.
+
+### Sequence of subsequent sections - TODO
+
+Document = sequence of subsequent sections -
+
+Any section has a node that precedes it (i.e. the section's sectioning element).
+
+A section is a subsection to the outer section of its sectioning element. Put
+differently, the outer section of a sectioning element tells the section that
+is introduced to which section it is a subsection.
+
+The section of a sectioning root belongs to a document. As such, it contributes
+to the outline (tree of sections) of its document. The choice to not include
+such an inner outline in a document's TOC is a choice by preference, (i.e. not
+a strict requirement).
 
 <!-- ======================================================================= -->
 ## Tag sequence
