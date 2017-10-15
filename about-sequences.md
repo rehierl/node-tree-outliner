@@ -83,8 +83,7 @@ end
 
 It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`,
 or even both are used. Both will be executed multiple times per node. An in-order
-tree traversal of a generic tree is therefore no traversal that corresponds with
-the strict definition of a tree traversal.
+tree traversal of a generic tree is therefore no strict tree traversal.
 
 ### Breadth-first (BFS) search
 
@@ -160,6 +159,9 @@ When a node is exited, an algorithm has to:
 
 Which of these actions need to be executed must be defined for each node type.
 
+Note - Nodes must be associated with a section while they are being entered.
+**TODO** - explain why
+
 <!-- ======================================================================= -->
 ## Node sequences
 
@@ -194,8 +196,8 @@ end
 
 The sequence of nodes created this way is said to be **the document's sequence
 of nodes**, or simply the document's **node sequence**. As such, a node sequence
-represents the path an algorithm will take through a document when traversing
-its tree of nodes.
+represents the path an algorithm will take through the tree of a document when
+visiting its nodes.
 
 A memory hook: The start tags of an HTML file have the exact same order.
 
@@ -208,7 +210,7 @@ indexOf(sequence, node) begin
       return i
     end
   end
-  throw error
+  throw new NodeNotFoundError()
 end
 
 //- distanceBetween(n1, n2) := (indexOf(n2) - indexOf(n1))
@@ -224,33 +226,38 @@ isSubsequentTo(sequence, n1, n2) begin
   return (distanceBetween(sequence, n1, n2) >= 1)
 end
 
-isDirectlySubsequentTo(sequence, n1, n2) begin
+isStrictlySubsequentTo(sequence, n1, n2) begin
   return (distanceBetween(sequence, n1, n2) == 1)
 end
 ```
 
-With regards to some node sequence, `Y` is said to be **(merely) subsequent to**
-`X`, if `Y` appears after `X` in that sequence. Node `Y` is said to be
-**directly subsequent to** `X`, if `Y` appears directly after `X`.
+* [en.wikipedia.org, binary relation](https://en.wikipedia.org/wiki/Binary_relation)
 
-Consequently, a node that is directly subsequent to another node is also
+Node `Y` is said to be **(merely) subsequent to** `X` with regards to some node
+sequence, if `Y` appears after `X` in that sequence (i.e. `X < Y`).
+The properties of this binary relation are:
+
+* irreflexive, because `(X < X)` is never true
+* asymmetric, because if `(X < Y)`, then `(Y < X)` is not true
+* transitive, because if `((X < Y) && (Y < Z))`, then also `(X < Z)`
+
+Node `Y` is said to be **strictly subsequent to** `X`, if `Y` appears directly
+after `X` (i.e. `X << Y`). The properties of this binary relation are:
+
+* irreflexive, because `(X << X)` is never true
+* asymmetric, because if `(X << Y)`, then `(Y << X)` is not true
+* not transitive, because if `((X << Y) && (Y << Z))`, then only `(X < Z)`
+
+Consequently, a node that is strictly subsequent to another node is also
 subsequent to it. In contrary to that, a node that is subsequent to another
-node is not necessarily directly subsequent to it (because there could be any
+node is not necessarily strictly subsequent to it (because there could be any
 number of other nodes in between).
 
-This relationship is not reflexive because node `X` can not appear after node
-`Y` and `Y` after `X` at the same time. It is therefore an error to state that
-two nodes are subsequent to each other.
-
-This relationship is however transitive, because if `Y` is subsequent to `X`
-and `Z` to `Y`, then `Z` is automatically subsequent to `X`
-(i.e. if `((X < Y) && (Y < Z))`, then `(X < Z)`).
-
-The structural relationship between `X` and `Y` (i.e. Where inside the DOM tree
-is `X` located in relation to `Y`?) can not be determined if `Y` is (directly)
-subsequent to `X`. This relationship merely states that `Y` will be entered after
-`X`. Consequently, it can also not be determined if `Y` will be exited before or
-after `X` is (or was) exited:
+The **structural relationship** between `X` and `Y` (i.e. Where inside the DOM
+tree is `X` located in relation to `Y`?) can not be determined if `Y` is merely,
+or even directly subsequent to `X`. Both relations merely state that `Y` will
+be entered after `X`. Consequently, it can also not be determined if `Y` will
+be exited before or after `X` is (or was) exited:
 
 Example (1): `Y` is next sibling to `X`: If `X` has child nodes, then `Y` is
 merely subsequent to `X`. If `X` has no child nodes, then `Y` is directly
@@ -304,20 +311,19 @@ of such a sequence may still be directly subsequent).
 A **section** is a sequence of subsequent nodes.
 
 This definition does not state anything about a section's first and last nodes.
-It merely states that a section is not some sequence of arbitrarily selected
-nodes. The order of the nodes associated with a section always corresponds with
-the document's node sequence.
-
-explain ...
+It merely states that a section is not just some sequence of arbitrarily selected
+nodes: The order of nodes associated with a section always corresponds with a
+document's node sequence because nodes must be associated with a section while
+they are being entered.
 
 A section that has no subsections is a sequence of directly subsequent nodes.
 Consequently, such a section is a subsequence of its document's node sequence.
 
-*From the perspective of subsequences:*
+*From the perspective of subsequences*:
 A section that has subsections is a sequence of directly subsequent nodes, if
 it is considered to also contain all nodes within all of its subsections.
 
-*From the perspective of objects directly connected with each other:*
+*From the perspective of objects directly connected with each other*:
 A section is a sequence of sequences of directly subsequent nodes, if the nodes
 of its subsections are considered to be *not* included (i.e. `section := [
 sequence-1, sequence-2, ...]`). All subsections of a section can therefore be
