@@ -20,7 +20,7 @@ characteristics - such as:
 ### Depth-first search (DFS)
 
 The traversal of a tree is referred to as a depth-first (DFS) search, if all
-the nodes of a branch are visited before the nodes any other branch.
+the nodes of a branch are visited before the nodes of any other branch.
 
 **FTL, DFS, Pre-order tree traversal**
 
@@ -82,8 +82,8 @@ end
 ```
 
 It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`,
-or even both are used. Both will be executed multiple times per node. An in-order
-tree traversal of a generic tree is therefore no strict tree traversal.
+or even both are used. Both will be executed multiple times per node. An
+in-order tree traversal of a generic tree is therefore no strict tree traversal.
 
 ### Breadth-first (BFS) search
 
@@ -98,7 +98,7 @@ of a tree are visited one level at a time.
 //- the root node of a tree has a level value of 1
 
 traverseBFS(root, min, max) begin
-  assert((min >= 1) && (max >= 1) && (min <= max))
+  assert((1 <= min) && (min <= max))
 
   queue = new Queue()
   queue.enqueue(root)
@@ -122,8 +122,8 @@ traverseBFS(root, min, max) begin
 end
 ```
 
-Executing `traverseTree(node, 1, 1)` (= **BFS-1**) will only visit the 1st level,
-which only contains the specified node. Executing `traverseTree(node, 2, 2)`
+Executing `traverseBFS(node, 1, 1)` (= **BFS-1**) will only visit the 1st level,
+which only contains the specified node. Executing `traverseBFS(node, 2, 2)`
 (= **BFS-2**) will only visit the 2nd level, which only contains a node's
 immediate descendants (i.e. child nodes).
 
@@ -165,8 +165,8 @@ Note - Nodes must be associated with a section while they are being entered.
 <!-- ======================================================================= -->
 ## Node sequences
 
-The above tree traversal fragment can be used to produce a sequence of nodes that
-contains the nodes of a document in the order in which these nodes are entered:
+The above tree traversal fragment can be used to produce a sequence of nodes
+that contains the nodes of a document in the order in which these are entered:
 
 ```
 nodeSequenceOf(root) begin
@@ -194,10 +194,9 @@ nodeSequenceOf(root) begin
 end
 ```
 
-The sequence of nodes created this way is said to be **the document's sequence
-of nodes**, or simply the document's **node sequence**. As such, a node sequence
-represents the path an algorithm will take through the tree of a document when
-visiting its nodes.
+The sequence of nodes created this way is said to be the document's
+**node sequence**. As such, these sequences represent the path an algorithm will
+take through the DOM tree when visiting each node.
 
 A memory hook: The start tags of an HTML file have the exact same order.
 
@@ -210,11 +209,12 @@ indexOf(sequence, node) begin
       return i
     end
   end
-  throw new NodeNotFoundError()
+  throw new NodeNotFoundException()
 end
 
 //- distanceBetween(n1, n2) := (indexOf(n2) - indexOf(n1))
 //- the result is negative, if n2 appears before n1
+//- the result is in [0,+Infinity] for any other pair of nodes
 
 distanceBetween(sequence, n1, n2) begin
   i1 = indexOf(sequence, n1)
@@ -253,11 +253,10 @@ subsequent to it. In contrary to that, a node that is subsequent to another
 node is not necessarily strictly subsequent to it (because there could be any
 number of other nodes in between).
 
-The **structural relationship** between `X` and `Y` (i.e. Where inside the DOM
-tree is `X` located in relation to `Y`?) can not be determined if `Y` is merely,
-or even directly subsequent to `X`. Both relations merely state that `Y` will
-be entered after `X`. Consequently, it can also not be determined if `Y` will
-be exited before or after `X` is (or was) exited:
+**structural relationship**: Both relations only state that `Y` will be entered
+after `X`. It can not be determined if `Y` will be exited before or after `X` is
+(or was) exited. Consequently, it can not be determined where inside the DOM
+tree `X` is located in relation to `Y`:
 
 Example (1): `Y` is next sibling to `X`: If `X` has child nodes, then `Y` is
 merely subsequent to `X`. If `X` has no child nodes, then `Y` is directly
@@ -267,23 +266,23 @@ Example (2): `Y` is a child node of `X`: If `Y` is the first child node, then
 `Y` is directly subsequent to `X`, otherwise it is merely subsequent to it. In
 both cases, `Y` will be exited before `X` is exited.
 
-### Sequence of subsequent nodes
+### Sequences of subsequent nodes
 
 ```
-isSubsequent(docSequence, sequence) begin
+isSubsequent(nodeSequence, sequence) begin
   for(i in 0 to sequence.length-2) begin
     n1 = sequence(i), n2 = sequence(i+1)
-    if(not isSubsequentTo(docSequence, n1, n2)) then
+    if(not isSubsequentTo(nodeSequence, n1, n2)) then
       return false
     end
   end
   return true
 end
 
-isDirectlySubsequent(docSequence, sequence) begin
+isStrictlySubsequent(nodeSequence, sequence) begin
   for(i in 0 to sequence.length-2) begin
     n1 = sequence(i), n2 = sequence(i+1)
-    if(not isDirectlySubsequentTo(docSequence, n1, n2)) then
+    if(not isStrictlySubsequentTo(nodeSequence, n1, n2)) then
       return false
     end
   end
@@ -294,16 +293,62 @@ end
 A sequence of nodes is said to be **a sequence of (merely) subsequent nodes**,
 if any node within that sequence is subsequent to its predecessor.
 
-A sequence of nodes is said to be **a sequence of directly subsequent nodes**,
-if any node within that sequence is directly subsequent to its predecessor.
+A sequence of nodes is said to be **a sequence of strictly subsequent nodes**,
+if any node within that sequence is strictly subsequent to its predecessor.
 
-Consequently, the node sequence of a document is a sequence of directly
-subsequent nodes. The same obviously applies to all the subsequences of a node
+Consequently, the node sequence of a document is a sequence of strictly
+subsequent nodes. Obviously, the same applies to all the subsequences of a node
 sequence.
 
-Also, any sequence of subsequent nodes may contain subsequences that are directly
-subsequent (i.e. if a sequences is itself not directly subsequent, then portions
-of such a sequence may still be directly subsequent).
+Also, any sequence of subsequent nodes may contain subsequences that are strictly
+subsequent (i.e. if a sequences is itself not strictly subsequent, then portions
+of such a sequence may still be strictly subsequent).
+
+### Sequences subsequent to a node
+
+```
+isSubsequentTo(nodeSequence, n1, sequence) begin
+  n2 = sequence(0)
+  return isSubsequentTo(nodeSequence, n1, n2)
+end
+
+isStrictlySubsequentTo(nodeSequence, n1, sequence) begin
+  n2 = sequence(0)
+  return isStrictlySubsequentTo(nodeSequence, n1, n2)
+end
+```
+
+A sequence of subsequent nodes is said to be **a sequence that is (merely)
+subsequent to a node**, if the first node of that sequence is subsequent to a
+given node.
+
+A sequence of subsequent nodes is said to be **a sequence that is strictly
+subsequent to a node**, if the first node of that sequence is strictly
+subsequent to a given node.
+
+Note - Both definitions do not require that the sequence of nodes is a sequence
+of strictly subsequent nodes. It can be, but it does not have to be one.
+
+### Sequences of subsequent sequences
+
+```
+isSubsequentTo(nodeSequence, sequence1, sequence2) begin
+  n1 = sequence1(0)
+  n2 = sequence2(0)
+  return isSubsequentTo(nodeSequence, n1, n2)
+end
+```
+
+A sequence of subsequent nodes (s2) is said to be **a sequence that is (merely)
+subsequent to another sequence of subsequent nodes** (s1), if s2 is subsequent
+to the first node of s1.
+
+Because the definition is based upon "the first node of s1", the sequences may
+be interleaved. As a result, a "strictly subsequent" definition has not much use.
+Things would be different, if the definition would be based upon "the last node
+of s1".
+
+Note - None of those sequences has to be a sequence of strictly subsequent nodes.
 
 <!-- ======================================================================= -->
 ## Section
@@ -311,27 +356,27 @@ of such a sequence may still be directly subsequent).
 A **section** is a sequence of subsequent nodes.
 
 This definition does not state anything about a section's first and last nodes.
-It merely states that a section is not just some sequence of arbitrarily selected
+It merely states that a section is not just some sequence of randomly selected
 nodes: The order of nodes associated with a section always corresponds with a
 document's node sequence because nodes must be associated with a section while
 they are being entered.
 
-A section that has no subsections is a sequence of directly subsequent nodes.
+A section that has no subsections is a sequence of strictly subsequent nodes.
 Consequently, such a section is a subsequence of its document's node sequence.
 
-*From the perspective of subsequences*:
-A section that has subsections is a sequence of directly subsequent nodes, if
+A section that has subsections is a sequence of strictly subsequent nodes, if
 it is considered to also contain all nodes within all of its subsections.
 
-*From the perspective of objects directly connected with each other*:
-A section is a sequence of sequences of directly subsequent nodes, if the nodes
-of its subsections are considered to be *not* included (i.e. `section := [
-sequence-1, sequence-2, ...]`). All subsections of a section can therefore be
-seen to fill the gaps in between the sequences of a section.
+If the nodes of a section's subsections are *not* considered to be included,
+then a section is merely a sequence of subsequent nodes. But, in addition to
+that, these sequences of nodes can be split up into sequences of strictly
+subsequent nodes. With that perspective, the subsections of a section can be
+seen to fill the gaps in between the strictly subsequent subsequences.
 
-### Sequence of subsequent sections - TODO
+<!-- ======================================================================= -->
+## Document - TODO
 
-Document = sequence of subsequent sections -
+A document's node sequence is a sequence of subsequent sections.
 
 Any section has a node that precedes it (i.e. the section's sectioning element).
 
