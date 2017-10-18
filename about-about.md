@@ -1,6 +1,95 @@
 
 # Notes
 
+**TODO** -
+Nodes must be associated with a section while they are being entered.
+Explain why!
+
+<!-- ======================================================================= -->
+## Active/Passive nodes
+
+Entering and/or exiting **an inactive (or passive) node** has no effect on the
+current state of the outline (i.e. the outline remains unchanged). However, a
+passive node may contain active descendant nodes.
+
+Entering and/or exiting **an active node** will always changes the current state
+of an outline in some way, even if that node only has passive descendant nodes.
+
+**A seemingly active node** is a node that needs to change the outline's state
+because of a definition that is not directly associated with itself.
+
+The body element is a seemingly active node because ultimately, any section has
+to end with the body element. Also, any document always has at least one section
+that ends with the document's body element (because all nodes within a document
+always belong to some section).
+
+**TODO** -
+ends with parent container - a characteristic of a section, or an element?
+the body element is inactive, if it is a characteristic of a section!
+
+<!-- ======================================================================= -->
+## Active/Passive content
+
+A sequence of subsequent passive nodes, represents passive content. Processing
+the nodes of such a sequence will not change the document's outline in any way.
+
+A group of nodes that contains at least one active node, is said to represent
+active content. Processing all nodes of active content will eventually change
+the document's outline.
+
+<!-- ======================================================================= -->
+## Processing nodes/content
+
+Processing a node, that has no child nodes, means to execute all operations
+associated with entering and exiting that node.
+
+Processing a node that has descendant nodes means to process the node itself
+and any of its descendant nodes.
+
+Processing content means to process any of its directly subsequent nodes.
+The outline of a document is created by processing the document's content.
+
+**TODO** -
+partially processed parent nodes
+
+<!-- ======================================================================= -->
+## Section
+
+A **section** is a sequence of subsequent nodes.
+
+This definition merely states that a section is not just some sequence of
+randomly selected nodes: The order of nodes associated with a section always
+corresponds with a document's node sequence (because nodes must be associated
+with a section while they are being entered).
+
+A section that has no subsections is a sequence of strictly subsequent nodes.
+Consequently, such a section is a subsequence of its document's node sequence.
+
+A section that has subsections is a sequence of strictly subsequent nodes, if
+it is considered to also contain all nodes within all of its subsections.
+
+If the nodes of a section's subsections are *not* considered to be included,
+then a section is merely a sequence of subsequent nodes. But, in addition to
+that, these sequences of nodes can be split up into sequences of strictly
+subsequent nodes. With that perspective, the subsections of a section can be
+seen to fill the gaps in between the strictly subsequent subsequences.
+
+<!-- ======================================================================= -->
+## Document - TODO
+
+A document's node sequence is a sequence of subsequent sections.
+
+Any section has a node that precedes it (i.e. the section's sectioning element).
+
+A section is a subsection to the parent section of its sectioning element. Put
+differently, the outer section of a sectioning element tells the section that
+is introduced to which section it is a subsection.
+
+The section of a sectioning root belongs to a document. As such, it contributes
+to the outline (tree of sections) of its document. The choice to not include
+such an inner outline in a document's TOC is a choice by preference, (i.e. not
+strictly required).
+
 <!-- ======================================================================= -->
 ## Open/Closed Sections
 
@@ -83,6 +172,7 @@ section ends, any resources associated with it can be released. After that,
 those resources can no longer be accessed because any such attempt would
 inevitably trigger an access violation error.
 
-**TODO** - Each heading element has a rank.
+**TODO** -
+Each heading element has a rank.
 Is it necessary to associate a rank (highest or lowest) with an implied heading?
 Does the algorithm implicitly associate a rank with an implied heading?

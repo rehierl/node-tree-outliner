@@ -33,47 +33,6 @@ Each heading within such a tree represents its corresponding section.
 Note - A TOC does not have to include the headings of an outline, (i.e. inner
 outlines may be ignored).
 
-## Processing nodes/content
-
-Processing a node, that has no child nodes, means to execute all operations
-associated with entering and exiting that node.
-
-Processing a node that has descendant nodes means to process the node itself
-and any of its descendant nodes.
-
-Processing content means to process any of its directly subsequent nodes. The
-outline of a document is created by processing the document's content.
-
-## Active/Passive nodes
-
-A node that has no effect on the outline of a document is said to be **passive**
-with regards to the process of creating a document's outline. Entering and exiting
-a passive node does not change the document's outline in any way. However, a
-passive node may contain active descendant nodes.
-
-An **active** node introduces a new section, ends existing ones, or has both
-of these characteristics. Entering and/or exiting an active node will therefore
-always change the document's outline in some way, even if that node only has
-passive descendant nodes.
-
-Note - Like any heading element, the body element is an active node because
-ultimately, any section has to end with the body element. Also, any document
-always has at least one section that ends with the document's body element
-(because all nodes within a document always belong to some section).
-
-**TODO** -
-ends with parent container - a characteristic of a section, or an element?
-
-## Active/Passive content
-
-A group of one or more subsequent passive nodes, is said to represent passive
-content. Processing the nodes of such a group will not change the document's
-outline in any way.
-
-A group of nodes that contains at least one active node, is said to represent
-active content. Processing all nodes of active content will eventually change
-the document's outline.
-
 ## The body section
 
 The section that is introduced by a document's body element is simply referred
