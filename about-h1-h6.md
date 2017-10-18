@@ -22,8 +22,8 @@ Example:
 </body>
 ```
 
-Note - Upper case letters represent passive content;
-i.e. these nodes have no effect on a document's outline.
+Note - Upper case letters represent passive content
+(i.e. nodes have no effect on a document's outline).
 
 The the consensus to print the table of contents (TOC) for this fragment is:
 

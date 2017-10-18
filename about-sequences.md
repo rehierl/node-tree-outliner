@@ -2,10 +2,30 @@
 # Notes
 
 <!-- ======================================================================= -->
+## Tree (data structure)
+
+* [en.wikipedia.org, tree structure](https://en.wikipedia.org/wiki/Tree_structure)
+* [en.wikipedia.org, tree (data structure)](https://en.wikipedia.org/wiki/Tree_%28data_structure%29)
+
+A tree data structure is an abstract data type that represents a tree structure
+using nodes and edges.
+
+* Except for a tree's root node, each node has a single parent node.
+* Each node may have any number of child nodes.
+* Any parent node, that can be reached beginning with some initial node, is
+  an ancestor to that node.
+* Any node is a descendant to all of its ancestor nodes.
+* Any child node is a descendant to its parent node
+  (i.e. `(node.children[i].parent == node)`).
+* Each node has a level value associated with it:
+  `level := 1 + (number of ancestors)`.
+* A tree has no cycles (i.e. no parent node leads to a descendant).
+
+<!-- ======================================================================= -->
 ## Tree traversal
 
 * [en.wikipedia.org, tree traversal](https://en.wikipedia.org/wiki/Tree_traversal)
-* [en.wikipedia.org, depth-first search (DFS)](https://en.wikipedia.org/wiki/Depth-first_search)
+* [en.wikipedia.org, depth-first search](https://en.wikipedia.org/wiki/Depth-first_search)
 
 In order to create an outline that accurately represents a document's structure,
 the document's DOM tree must be traversed by visiting each node. In general,
@@ -166,7 +186,8 @@ Note - Nodes must be associated with a section while they are being entered.
 ## Node sequences
 
 The above tree traversal fragment can be used to produce a sequence of nodes
-that contains the nodes of a document in the order in which these are entered:
+(i.e. traversal trace) that contains the nodes of a document in the order in
+which these are entered:
 
 ```
 nodeSequenceOf(root) begin
@@ -195,8 +216,8 @@ end
 ```
 
 The sequence of nodes created this way is said to be the document's
-**node sequence**. As such, these sequences represent the path an algorithm will
-take through the DOM tree when visiting each node.
+**node sequence**. As such, these sequences represent the path an algorithm
+will take through the DOM tree when visiting each node.
 
 A memory hook: The start tags of an HTML file have the exact same order.
 
@@ -254,8 +275,8 @@ node is not necessarily strictly subsequent to it (because there could be any
 number of other nodes in between).
 
 **structural relationship**: Both relations only state that `Y` will be entered
-after `X`. It can not be determined if `Y` will be exited before or after `X` is
-(or was) exited. Consequently, it can not be determined where inside the DOM
+after `X`. It can not be determined if `Y` will be exited before or after `X`
+is (or was) exited. Consequently, it can not be determined where inside the DOM
 tree `X` is located in relation to `Y`:
 
 Example (1): `Y` is next sibling to `X`: If `X` has child nodes, then `Y` is
@@ -355,11 +376,10 @@ Note - None of those sequences has to be a sequence of strictly subsequent nodes
 
 A **section** is a sequence of subsequent nodes.
 
-This definition does not state anything about a section's first and last nodes.
-It merely states that a section is not just some sequence of randomly selected
-nodes: The order of nodes associated with a section always corresponds with a
-document's node sequence because nodes must be associated with a section while
-they are being entered.
+This definition merely states that a section is not just some sequence of
+randomly selected nodes: The order of nodes associated with a section always
+corresponds with a document's node sequence (because nodes must be associated
+with a section while they are being entered).
 
 A section that has no subsections is a sequence of strictly subsequent nodes.
 Consequently, such a section is a subsequence of its document's node sequence.
@@ -380,19 +400,20 @@ A document's node sequence is a sequence of subsequent sections.
 
 Any section has a node that precedes it (i.e. the section's sectioning element).
 
-A section is a subsection to the outer section of its sectioning element. Put
+A section is a subsection to the parent section of its sectioning element. Put
 differently, the outer section of a sectioning element tells the section that
 is introduced to which section it is a subsection.
 
 The section of a sectioning root belongs to a document. As such, it contributes
 to the outline (tree of sections) of its document. The choice to not include
 such an inner outline in a document's TOC is a choice by preference, (i.e. not
-a strict requirement).
+strictly required).
 
 <!-- ======================================================================= -->
 ## Tag sequence
 
-The above tree traversal fragment can also be used to produce a sequence of tags:
+Similar to generating the node sequence of a document, the tree traversal
+fragment can be used to produce **a document's tag sequence**:
 
 ```
 tagSequenceOf(root) begin
@@ -422,9 +443,6 @@ tagSequenceOf(root) begin
 end
 ```
 
-The sequence of tags created this way is said to be **the document's tag
-sequence (TS)**.
-
 Executing this pseudocode with the following example HTML fragment as input ...
 
 ```
@@ -449,16 +467,11 @@ seq-0 := [body, #text, /#text, h1, #text, /#text, /h1, #text, /#text, h1, #text,
 
 Any tag in such a sequence corresponds with an enter or exit event: start tag
 `name` represents an enter and end tag `/name` an exit event. Any tag sequence
-therefore corresponds with the structure of one or more, possibly infinitely
-many, HTML fragments that have identical structure.
+therefore corresponds with the structure of one or more fragments that have the
+same structure.
 
 <!-- ======================================================================= -->
 ## Token sequence
-
-Switching ones own point of view allows to make the following observation: Tag
-sequences can be seen to describe the sequence of events that will be executed
-when processing a document that matches the given sequence (i.e. the document's
-structure corresponds with the sequence).
 
 With regards to a document's outline, any node has one of the following two 
 characteristics: Entering and/or exiting a node either changes the current

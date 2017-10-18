@@ -2,17 +2,11 @@
 # Notes
 
 <!-- ======================================================================= -->
-## The current/active section
-
-* At any given time, multiple sections can be open.
-* Only one open section is considered to be the current/active section.
-
-<!-- ======================================================================= -->
 ## Open/Closed Sections
 
 A section is considered open, if it is still allowed to associate entities
-(nodes, a heading and subsections) with it. A section is closed (has ended), if
-that is no longer allowed.
+(nodes, a heading and subsections) with it. A section is closed (has ended),
+if that is no longer allowed.
 
 Similar to binary streams, certain resources (e.g. memory) will be associated
 with a section. These must be allocated (locked) when a section is opened and
@@ -20,12 +14,18 @@ released (freed, unlocked) when it is closed.
 
 Once created, a new section object is automatically opened for associations.
 As this step will allocate resources, there needs to be a point for each section
-at which these can be released.
+at which a section's resources can be released.
 
 Ultimately, that point is reached for any section when tree traversal ends. But,
 at that point, certain sections might no longer be accessible. In such a case,
 resources allocated for sections that are no longer accessible will remain
 locked (e.g. memory leaks).
+
+<!-- ======================================================================= -->
+## The current/active section - TODO
+
+* At any given time, multiple sections may be open.
+* Only one open section is considered to be the current/active section.
 
 <!-- ======================================================================= -->
 ## Implied headings

@@ -4,26 +4,6 @@
 This document is used to clarify important terms that are used throughout this
 repository.
 
-## Tree (data structure)
-
-* [en.wikipedia.org, Tree structure](https://en.wikipedia.org/wiki/Tree_structure)
-* [en.wikipedia.org, Tree (data structure)](https://en.wikipedia.org/wiki/Tree_%28data_structure%29)
-
-A tree structure represents a hierarchical structure in graphical from. A tree
-data structure is an abstract data type that represents a tree structure using
-nodes and edges.
-
-* Except for the root node of a tree, each node has a single parent node.
-  Each of these may have their own parent node.
-* Each node may have any number of child nodes.
-  Each of these may have child nodes themselves.
-* Any parent node, that can be reached starting from a single node, is said to
-  be an ancestor of the initial node. Likewise, any node is a descendant to all
-  of its ancestor nodes.
-* Each node within a tree has a level value associated with it:
-  `level := 1 + (number of ancestors)`.
-* A tree has no cycles.
-
 ## Outline
 
 The outline of a document represents the structure of its document as
