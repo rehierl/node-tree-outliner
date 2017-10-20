@@ -74,8 +74,8 @@ end
 ```
 
 Node `Y` is **subsequent to** `X` with regards to some node sequence, if `Y`
-appears after `X` in that sequence (i.e. `X < Y`).
-The properties of this binary relation are:
+appears after `X` in that sequence (i.e. `X < Y`). The properties of this
+binary relation are:
 
 * [en.wikipedia.org, binary relation](https://en.wikipedia.org/wiki/Binary_relation)
 * irreflexive, because `(X < X)` is never true
@@ -205,16 +205,16 @@ isMerelyRightSubsequentTo(ns, s1, s2)
 
 *(left) subsequent*
 
-A sequence (s2) is **a sequence that is (left) subsequent to a sequence**
-(s1), if s2 is subsequent to the first node of s1
+A sequence (s2) is **a sequence that is (left) subsequent
+to a sequence** (s1), if s2 is subsequent to the first node of s1
 (i.e. `(s1[0] < s2[0])`).
 
-A sequence (s2) is **a sequence that is strictly (left) subsequent to a sequence**
-(s1), if s2 is strictly subsequent to the first node of s1
+A sequence (s2) is **a sequence that is strictly (left) subsequent
+to a sequence** (s1), if s2 is strictly subsequent to the first node of s1
 (i.e. `(s1[0] << s2[0])`).
 
-A sequence (s2) is **a sequence that is merely (left) subsequent to a sequence**
-(s1), if s2 is merely subsequent to the first node of s1
+A sequence (s2) is **a sequence that is merely (left) subsequent
+to a sequence** (s1), if s2 is merely subsequent to the first node of s1
 (i.e. if there are one or more nodes in between).
 
 * A sequence that is left subsequent to another sequence
@@ -222,16 +222,16 @@ A sequence (s2) is **a sequence that is merely (left) subsequent to a sequence**
 
 *right subsequent*
 
-A sequence (s2) is **a sequence that is right subsequent to a sequence**
-(s1), if s2 is subsequent to the last node of s1
+A sequence (s2) is **a sequence that is right subsequent
+to a sequence** (s1), if s2 is subsequent to the last node of s1
 (i.e. `(s1[N-1] < s2[0])`).
 
-A sequence (s2) is **a sequence that is strictly right subsequent to a sequence**
-(s1), if s2 is strictly subsequent to the last node of s1
+A sequence (s2) is **a sequence that is strictly right subsequent
+to a sequence** (s1), if s2 is strictly subsequent to the last node of s1
 (i.e. `(s1[N-1] << s2[0])`).
 
-A sequence (s2) is **a sequence that is merely right subsequent to a sequence**
-(s1), if s2 is merely subsequent to the last node of s1
+A sequence (s2) is **a sequence that is merely right subsequent
+to a sequence** (s1), if s2 is merely subsequent to the last node of s1
 (i.e. if there are one or more nodes in between).
 
 * A sequence that is right subsequent to another sequence
