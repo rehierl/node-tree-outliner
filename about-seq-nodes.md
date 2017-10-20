@@ -198,10 +198,10 @@ isStrictlyRightSubsequentTo(ns, s1, s2)
 isMerelyRightSubsequentTo(ns, s1, s2)
 ```
 
-* Sequences s1 and s2 are sequences of subsequent nodes.
-* "left" with regards to the first and "right" with regards to the last node.
-* Read "left subsequent", or simply "subsequent", as "s2 begins after s1 has begun".
-* Read "right subsequent" as "s2 begins after s1 has ended".
+* s1 and s2 are sequences of subsequent nodes
+* "left" with regards to the first, "right" with regards to the last node
+* "left subsequent", or simply "subsequent", means "s2 begins after s1 has begun"
+* "right subsequent" means "s2 begins after s1 has ended"
 
 *(left) subsequent*
 
