@@ -1,67 +1,5 @@
 
-<!-- ======================================================================= -->
-## Tag sequence
-
-Similar to generating the node sequence of a document, the tree traversal
-fragment can be used to produce **a document's tag sequence**:
-
-```
-tagSequenceOf(root) begin
-  sequence = new Array()
-
-  onEnter(node) begin
-    name = node.tagName.toLowerCase
-    sequence.add(name)
-  end
-
-  onExit(node) begin
-    name = node.tagName.toLowerCase
-    sequence.add("/" + name)
-  end
-
-  traverseTree(node) begin
-    onEnter(node)
-    child = node.firstChild
-    while(child != null) begin
-      traverseTree(child)
-      child = child.nextSibling
-    end
-    onExit(node)
-  end
-
-  return sequence
-end
-```
-
-Executing this pseudocode with the following example HTML fragment as input ...
-
-```
-Example 1 (E-1):
-----------
-
-<body>
-  A
-  <h1>B</h1>
-  C
-  <h1>D</h1>
-  E
-</body>
-```
-
-... will produce the following tag sequence:
-
-```
-seq-0 := [body, #text, /#text, h1, #text, /#text, /h1, #text, /#text, h1, #text,
-          /#text, /h1, #text, /#text, /body]
-```
-
-Any tag in such a sequence corresponds with an enter or exit event: start tag
-`name` represents an enter and end tag `/name` an exit event. Any tag sequence
-therefore corresponds with the structure of one or more fragments that have the
-same structure.
-
-<!-- ======================================================================= -->
-## Token sequence
+# Token sequence
 
 With regards to a document's outline, any node has one of the following two 
 characteristics: Entering and/or exiting a node either changes the current
@@ -121,7 +59,8 @@ event patterns.
 As a flat list of tokens, a token sequence obfuscates the hierarchical structure
 of an HTML fragment. Care must be taken to not ignore a fragment's structure.
 
-### Simplifications
+<!-- ======================================================================= -->
+## Simplifications
 
 The following simplifications may be used:
 
@@ -160,7 +99,8 @@ may be used to guide ones view to a node's relevant characteristics:
 * `SC` - some sectioning content element
 * `HC` - some heading content element
 
-### Execution, inner and outer effect/view
+<!-- ======================================================================= -->
+## Execution, inner and outer effect/view
 
 Any token that represents content which has no effect on the current outline may
 correspond with content that contains inner sectioning root elements. These
@@ -175,7 +115,8 @@ sectioning content element.
 
 **TODO** - expand
 
-### Points of interest, Cursors
+<!-- ======================================================================= -->
+## Points of interest, Cursors
 
 ```
 seq-x := [body, A, /body]
@@ -195,7 +136,8 @@ seq-x := [body, A, /body]
 * If a following discussion needs to refer to multiple different points, numbers
   may be used clearly identify these.
 
-### Past, present and future
+<!-- ======================================================================= -->
+## Past, present and future
 
 ```
 seq-5 := [SR, A, h1:B, C, h1:D, E, /SR]
@@ -244,24 +186,3 @@ and the end of processing a token sequence:
 
 The `END` constant therefore has the additional meaning, that the last token
 was already executed (i.e. traversal of the subtree has already ended).
-
-<!-- ======================================================================= -->
-## Stack of open sections
-
-Traversing the relevant tree in order to produce an outline needs to (implicitly
-or explicitly) create and update stacks of open sections.
-
-```
-Example 3 (E-3):
-----------------
-
-<h1>A</h1>
-B
-<h2>C</h2>
-D
-<h3>E</h3>
-F
-<h2>G</h2>
-H
-```
-

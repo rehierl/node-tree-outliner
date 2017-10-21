@@ -35,7 +35,7 @@ The sequence of nodes generated this way is referred to as the document's
 **node sequence**. As such, these sequences represent the path an algorithm
 will take through the DOM tree of a document when visiting each node.
 
-Memory hook: The start tags of an HTML file have the exact same order.
+A memory hook: The start tags of an HTML file have the exact same order.
 
 <!-- ======================================================================= -->
 ## Subsequent nodes
@@ -93,10 +93,12 @@ Node `Y` is **strictly subsequent to** `X`, if `Y` appears directly after `X`
 Node `Y` is **merely subsequent to** `X`, if `Y` is subsequent, but not directly
 subsequent to `X` (i.e. there are nodes in between `X` and `Y`).
 
-Consequently, a node that is strictly subsequent to another node is also
-subsequent to it. In contrary to that, a node that is subsequent to another
-node is not necessarily strictly subsequent to it (because there could be any
-number of other nodes in between).
+* strictly subsequent => subsequent
+* subsequent => not necessarily strictly subsequent
+
+A node that is strictly subsequent to another node is also subsequent to it. In
+contrary to that, a node that is subsequent to another node is not necessarily
+strictly subsequent to it (there could be any number of nodes in between).
 
 **structural relationship**: Both relations only state that `Y` will be entered
 after `X`. It can not be determined if `Y` will be exited before or after `X`
@@ -135,17 +137,19 @@ that sequence is (strictly or merely) subsequent to its predecessor.
 A sequence of nodes is **a sequence of strictly subsequent nodes**, if any node
 within that sequence is strictly subsequent to its predecessor.
 
-There are multiple ways to define "a sequence of merely subsequent nodes":
-(1) all nodes are merely subsequent to their predecessor -
-(2) at least one node is merely subsequent to its predecessor (i.e. not all
-are strictly subsequent to their predecessor)
+There are different ways to define "a sequence of merely subsequent nodes":
+(1) all nodes are merely subsequent to their predecessor (i.e. the sequence must
+contain no strictly subsequent nodes at all), or -
+(2) at least one node is merely subsequent to its predecessor (i.e. the sequence
+may still contain strictly subsequent nodes) -
+For the moment, such a definition is not needed.
 
-Consequently, the node sequence of a document is a sequence of strictly
-subsequent nodes. Obviously, the same applies to all of its subsequences.
+The node sequence of a document is a sequence of strictly subsequent nodes.
+Obviously, the same applies to all of its subsequences.
 
-Also, any sequence of subsequent nodes may contain subsequences that are
-strictly subsequent (i.e. if a sequences is itself not strictly subsequent,
-then portions of such a sequence may still be strictly subsequent).
+Any sequence of subsequent nodes may contain subsequences that are strictly
+subsequent (i.e. if a sequence is itself not strictly subsequent, then
+subsequences of it may still be strictly subsequent).
 
 <!-- ======================================================================= -->
 ## Sequences that are subsequent to a node
@@ -174,6 +178,13 @@ if the first node of that sequence is strictly subsequent to that node
 A sequence (s1) is **a sequence that is merely subsequent to a node** (n2),
 if the first node of that sequence is merely subsequent to that node
 (i.e. if there are one or more nodes in between).
+
+* strictly subsequent => subsequent
+* subsequent => not necessarily strictly subsequent
+
+A sequence that is strictly subsequent to a node is also subsequent to it. In
+contrary to that, a sequence that is subsequent to a node is not necessarily
+strictly subsequent to it (there may be any number of nodes in between).
 
 <!-- ======================================================================= -->
 ## Sequences that are subsequent to a sequence
@@ -217,8 +228,11 @@ A sequence (s2) is **a sequence that is merely (left) subsequent
 to a sequence** (s1), if s2 is merely subsequent to the first node of s1
 (i.e. if there are one or more nodes in between).
 
-* A sequence that is left subsequent to another sequence
-  may begin and may even end inside of it.
+* strictly left subsequent => left subsequent
+* left subsequent => not necessarily strictly left subsequent
+
+A sequence that is left subsequent to another sequence
+may begin and may even end inside of it.
 
 *right subsequent*
 
@@ -234,7 +248,9 @@ A sequence (s2) is **a sequence that is merely right subsequent
 to a sequence** (s1), if s2 is merely subsequent to the last node of s1
 (i.e. if there are one or more nodes in between).
 
-* A sequence that is right subsequent to another sequence
-  is also left subsequent to it (i.e. this definition is inclusive).
-* A sequence that is left, but not right subsequent to another sequence
-  begins inside of it.
+* right subsequent => left subsequent
+* strictly right subsequent => right subsequent
+* right subsequent => not necessarily strictly right subsequent
+
+A sequence that is left, but not right subsequent to another sequence
+begins inside of it.

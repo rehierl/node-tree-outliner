@@ -4,67 +4,6 @@
 * [HTML-4, 7.5.5 Headings](https://www.w3.org/TR/html401/struct/global.html#h-7.5.5)
 
 <!-- ####################################################################### -->
-## Introduction
-
-In HTML-4, each heading element is defined to introduce (i.e. mark the beginning
-of) a new section.
-
-Note - There does not seem to exist an explicit definition which states when a
-section ends. The only statement that can be made right away is that,
-**by default, any section ends with the body element.**
-
-```
-Example:
-========
-<body>
-  <h1>A</h1>
-  B
-</body>
-```
-
-Note - Upper case letters represent passive content
-(i.e. nodes have no effect on a document's outline).
-
-The the consensus to print the table of contents (TOC) for this fragment is:
-
-```
-TOC:
-====
-1. A
-```
-
-Even a slight modification of the above fragment reveals that the above TOC can
-only represent a commonly accepted simplification:
-
-```
-Example:
-========
-<body>
-  A
-  <h1>B</h1>
-  C
-</body>
-```
-
-Obviously, node `A` must belong to some section, because that node can not be
-ignored. As a consequence, and even in HTML-4, **heading elements are not the
-only elements that introduce new sections.** The above TOC therefore ignores
-the section that is introduced by the body element.
-
-There are two possible ways to print a TOC for the modified fragment:
-
-```
-TOC-1:                          TOC-2:
-======                          ======
-1. Untitled section             1. Untitled section
-2. B                               1.1. B
-```
-
-Both TOCs are obviously not equivalent because each of these represents a
-different structure. Therefore, only one of these can truly represent the
-fragment's structure, the other one does not. So which of these is invalid?
-
-<!-- ####################################################################### -->
 ## Relationship between sections and nodes
 
 *From a node's perspective:*
@@ -95,39 +34,46 @@ Example:
 </body>
 ```
 
-Node `A` is said to belong to the section introduced by the body element, i.e.
-**the body section**.
+Node `A` belongs to the section introduced by the body element (i.e.
+**the body section**).
 
-Node `C` is said to belong to section `B` because the last section introduced
-before node `C` is reached is section `B`. There is also no indication that
-section `B` ends before node `C` is reached. If that were the case, node `C`
-would have to be associated with the body section.
+Node `C` belongs to section `B` because the last section introduced before node
+`C` is section `B`. There is also no indication that section `B` ends before
+node `C`. If that were the case, node `C` would have to be associated with the
+body section.
 
-**TODO**
+**TODO** -
 It has yet to be determined if associating a heading element and its inner nodes
 (e.g. `h1` and `B`) with the section that the heading element introduces would
-even make any sense at all.
+have any use.
 
 <!-- ####################################################################### -->
 ## Level of heading elements
 
-That any heading element introduces a new section implies that a document can be
-broken up into multiple different sections. Without any further definition, all
+That any heading element introduces a new section implies that a document can
+be broken apart into different sections. Without any further definition, all
 sections would have to be considered equal and there would have been no reason
 to define 6 different heading elements.
 
 HTML-4 therefore also states that each heading element has a level value
-associated with it (`h1` is most important, `h6` is least important). As a
-consequence, all heading elements can be ordered with regards to their
-importance:
+associated with it (`h1` is most important, `h6` is least important).
+Consequently, all heading elements can be ordered according to their
+level of importance:
 
 ```
 => h1 > h2 > h3 > h4 > h5 > h6 - (order of importance)
 => [h1, h2, h3, h4, h5, h6]    - (ordered sequence)
 ```
 
+The properties of this binary is-more-important-than relation are:
+
+* [en.wikipedia.org, binary relation](https://en.wikipedia.org/wiki/Binary_relation)
+* irreflexive, because `(hX > hX)` is never true
+* asymmetric, because if `(hX > hY)` then `(hY > hX)` is not true
+* transitive, because if `((hX > hY) && (hY > hZ))`, then also `(hX > hZ)`
+
 The definition of an order for the set of heading elements has no meaning
-because this order by itself does not define what the semantics are, if ...
+because this order does not define what the semantics are, if ...
 
 * a subsequent heading is just as (i.e. equally) important.
 * a less important heading follows a more important one.
