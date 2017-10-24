@@ -19,13 +19,21 @@ In general, any section ends inside of its parent container element.
 
 **TODO** -
 
-If a node is associated with a section, then all child nodes of that node are
-also (indirectly) associated with that section.
+If a node is associated with a section, then all of its child nodes are also
+(indirectly) associated with that section.
 
 **TODO** -
 
 Nodes must be associated with a section while they are being entered.
 Explain why!
+
+**TODO** -
+Almost a Parker Square - dishonesty
+
+**TODO** -
+The stack of open sections -
+in the section tree -
+a path to the current section
 
 <!-- ======================================================================= -->
 ## Active/Passive nodes
@@ -91,27 +99,18 @@ such an inner outline in a document's TOC is a choice by preference, (i.e. not
 strictly required).
 
 <!-- ======================================================================= -->
-## Open/Closed Sections
+## Element X contains section Y
 
-A section is considered open, if it is still allowed to associate entities
-(nodes, a heading and subsections) with it. A section is closed (has ended),
-if that is no longer allowed.
-
-Similar to binary streams, certain resources (e.g. memory) will be associated
-with a section. These must be allocated (locked) when a section is opened and
-released (freed, unlocked) when it is closed.
-
-Once created, a new section object is automatically opened for associations.
-As this step will allocate resources, there needs to be a point for each section
-at which a section's resources can be released.
-
-Ultimately, that point is reached for any section when tree traversal ends. But,
-at that point, certain sections might no longer be accessible. In such a case,
-resources allocated for sections that are no longer accessible will remain
-locked (e.g. memory leaks).
+A container element `X` contains section `Y` as an inner section, if `X` is the
+section`s parent container. **TODO** - based on container - excludes subsections
 
 <!-- ======================================================================= -->
-## The current/active section - TODO
+## Section X (is located inside | belongs to | is associated with) container Y
 
-* At any given time, multiple sections may be open.
-* Only one open section is considered to be the current/active section.
+A section is said to be located inside of its parent container.
+
+In addition to that, a section can also be said to be belong to, or to be
+associated with its parent container element.
+
+Note that a section's belongs-to-node (outwards) and contains-node (inwards)
+associations have different direction!

@@ -60,31 +60,3 @@ Each title within such a tree represents its corresponding section.
 
 A TOC does not have to include all the titles of an outline,
 (i.e. inner outlines may be ignored).
-
-<!-- ======================================================================= -->
-## Parent container X of section Y
-
-Except for the body element, any node within a document always has a parent
-element. A node's parent element is the node's parent container element because
-it contains the node as one of its inner child nodes.
-
-A heading element is the parent container of all its inner child nodes. The
-inner nodes of a heading element define the heading for the section that the
-heading element introduces.
-
-The parent container of a section introduced by a heading element is the parent
-element of that heading. In general, the parent element of element `X` is the
-parent container of section `Y` if element `X` introduces section `Y` as a
-subsequent section (i.e. not inside of it).
-
-The parent container of the section introduced by the body element is the body
-element. In general, element `X` is the parent container of section `Y` if
-element `X` introduces section `Y` as an inner section.
-
-Note - The element which introduced a section and the section's parent container
-element are not necessarily identical (i.e. these can be different elements).
-
-Note - This definition is based upon an element's characteristic to introduce a
-new section. As a result, it is independent of where exactly a section ends. The
-only statement that can be made is that a section always begins inside its parent
-container.

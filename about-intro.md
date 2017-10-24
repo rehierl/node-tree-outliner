@@ -1,7 +1,5 @@
 
-* [HTML-4, 7.5.5 Headings](https://www.w3.org/TR/html401/struct/global.html#h-7.5.5)
-
-## Introduction
+# Introduction
 
 In HTML-4, each heading element is defined to introduce
 (i.e. mark the beginning of) a new section.

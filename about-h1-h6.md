@@ -4,50 +4,6 @@
 * [HTML-4, 7.5.5 Headings](https://www.w3.org/TR/html401/struct/global.html#h-7.5.5)
 
 <!-- ####################################################################### -->
-## Relationship between sections and nodes
-
-*From a node's perspective:*
-Any node within a document belongs to some section, regardless if that section
-has a title or not. In addition to that, no node can have a direct relationship
-with two different sections at the same time. Any node therefore either directly
-belongs to some section, or it belongs to a different one. (Multiple nodes may
-still belong to the same section.)
-
-*From a section's perspective:*
-Any section directly contains no node at all, a single node or more than one, in
-theory even infinitely many, nodes.
-
-Note - A section, that does not directly contain any nodes, does not have to be
-empty (i.e. a section that only contains subsections is not empty - e.g. the
-content of a body element consist of subsections only).
-
-The direct relationship between sections and nodes can therefore be classified
-as **a two-way, one-to-many (1:N) relationship**.
-
-```
-Example:
-========
-<body>
-  A
-  <h1>B</h1>
-  C
-</body>
-```
-
-Node `A` belongs to the section introduced by the body element (i.e.
-**the body section**).
-
-Node `C` belongs to section `B` because the last section introduced before node
-`C` is section `B`. There is also no indication that section `B` ends before
-node `C`. If that were the case, node `C` would have to be associated with the
-body section.
-
-**TODO** -
-It has yet to be determined if associating a heading element and its inner nodes
-(e.g. `h1` and `B`) with the section that the heading element introduces would
-have any use.
-
-<!-- ####################################################################### -->
 ## Level of heading elements
 
 That any heading element introduces a new section implies that a document can
