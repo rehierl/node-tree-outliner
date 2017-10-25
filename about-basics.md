@@ -14,14 +14,19 @@ Example:
 Node `A` belongs to the section introduced by the body element (i.e.
 **the body section**). The body section is said to contain node `A`.
 
-Node `C` belongs to section `B` because the last section introduced before
-node `C` is section `B`. There is also no indication that section `B` ends
-before node `C`. If that were the case, node `C` would have to belong to
-the body section.
+* Any node always belongs to some section.
+
+Node `C` belongs to section `B`.
+
+* There is no indication that section `B` ends before node `C`.
+  If that were the case, node `C` would have to belong to a pre-existing
+  section (i.e. the body section).
+* No other new section is introduced before node `C`.
+  If that were the case, node `C` would have to belong to this new section.
 
 **TODO** -
 Does a heading element and its inner nodes (e.g. `h1` and `B`) belong to the
-section that the heading element introduces, or to the section to which it is
+section that the heading element introduces, or to a section to which it is
 subsequent (i.e. to some previous section)?
 
 <!-- ======================================================================= -->
@@ -29,23 +34,28 @@ subsequent (i.e. to some previous section)?
 
 A section is a sequence of nodes.
 
-This definition implies that the nodes of a section have a specific order:
+This definition implies that the nodes of a section have some order.
 
 * synonymous - introduce, initialize, declare
 * synonymous - associate with, establish a relationship with
 * synonymous - is associated with, is related to
 
 At some point, an element introduces a new section. From that point on, nodes
-will be associated with this section, one after another, until that is
-no longer allowed.
+will be associated with this section, one after another, until that is no longer
+allowed. Consequently, the order of nodes is based upon the traversal of a node
+tree.
 
-* A two-way, one-to-many (1:N) relationship.
+* The `SxN` relation is a two-way, one-to-many (1:N) relationship
+  (`S` is the set of sections, `N` the set of nodes).
 * A section is empty, if no nodes were associated with it.
-* A node is always added to the end of a section or more accurately,
+* A node is added to the end of a section, or more accurately
   to the end of its sequence, when it has to be associated with it.
 * The n-th node of a section's sequence is the section's n-th node.
 * A non-empty section always has a first and a last node.
-* A section is defined by its node sequence.
+
+A section is declared by its sectioning element and defined by its node sequence.
+To truly distinguish sections from one another, the section's sectioning element
+must be taken into account (e.g. empty section).
 
 Definitions
 
@@ -54,22 +64,25 @@ Definitions
 
 ### open and closed sections
 
+* synonymous - open, has started
+
 A section is open, if it is still allowed to associate entities
 (nodes, a title, subsections, etc.) with it.
 
-* synonymous - open, has started
-* synonymous - closed, has ended, has stopped
+* synonymous - closed, has ended
 
 A section is closed, if no more associations are allowed.
+
+* From that point on, a section is fully defined/qualified.
 
 ### associated resources
 
 * synonymous - allocate, lock, create
-* synonymous - released, unlocked, freed, destroy
+* synonymous - release, unlock, free, destroy
 
 Similar to binary streams, certain resources (e.g. memory) must be associated
-with a section. These need to be allocated when a section is opened and
-released when it is closed.
+with a section. These need to be allocated when a section is opened and released
+when it is closed.
 
 * Once a section is closed, it can not be re-opened.
 
@@ -85,17 +98,20 @@ that are no longer accessible will remain locked (e.g. memory leaks).
 <!-- ======================================================================= -->
 ## Sectioning element (1)
 
-Any sectioning element always introduces a new section.
-
-* A sectioning element introduces a single section
-  (not 0, not 2, ..., not N, but exactly and always 1).
 * synonymous - introduce, initialize, declare
 
-This definition implies that no section can exist without first being
-introduced by some sectioning element.
+A sectioning element introduces a new section.
 
-* A two-way, one-to-one (1:1) relationship.
-* A section can be identified by its sectioning element.
+* Any node can be classified as a sectioning, or as a non-sectioning node:
+  A node either introduces a new section, or it does not.
+* A sectioning element introduces a single section
+  (not 0, not 2, ..., not N, exactly and always 1).
+
+This definition implies that no section can exist without
+first being introduced by some sectioning element.
+
+* This `NxS` relation is a two-way, one-to-one (1:1) relationship.
+* Any section can be identified by its sectioning element.
 
 Definitions
 
@@ -107,37 +123,23 @@ a sectioning element and its section:
 
 * A sectioning element precedes its section.
 * A section is subsequent to its sectioning element.
-* This is an abstract order that represents that a section
-  can not exist without its sectioning element.
-* This does not state that the sectioning element
-  can not be associated with its section.
+* A section can not exist without its sectioning element.
 
-In addition to that, this definition implies that some process will have to
-switch away from a pre-existing section to the next new section as soon as the
-next sectioning element is reached (i.e. there has to be some order on a
-document's set of the sections).
+This definition also implies that some process will have to switch away from
+a pre-existing section to the introduced next new section as soon as the next
+sectioning element is reached (i.e. there is some order on a document's set of
+sections).
 
 * synonymous - declared before, pre-exists, precedes
 * synonymous - next new, declared after, is subsequent to
 
 If there is a preceding section, then there must also be a sectioning element
-that precedes it (because this section must also be declared at some point).
+which precedes it (because that section must also be declared at some point).
 
-* The sectioning element of a preceding section precedes the sectioning element
-  of a subsequent section.
-* The order required on the set of sections is equivalent to the order of their
-  sectioning elements.
-
-In between any two sectioning elements, there may be any number of
-non-sectioning element nodes (i.e. nodes that do not introduce a new section).
-
-Consequently, this definition also implies that all the nodes of a document
-must be processed according to some order (i.e. there are preceding, and there
-are subsequent nodes).
-
-=> see also - a document's node sequence
-
-### Additional notes
+* The sectioning element of a preceding section
+  precedes the sectioning element of a subsequent section.
+* The order on the set of sections is
+  equivalent to the order of their sectioning elements.
 
 This definition does not state that a preceding section must end once the next
 sectioning element is reached. Such a section may simply be suspended when the
@@ -150,15 +152,10 @@ The definition of a sectioning element must define (1) which effect it has on
 pre-existing sections, and (2) what kind of relationship the new section has
 with these.
 
-### Does it, or does it not ...?
-
-**TODO** -
-The section of a sectioning element begins inside, or just behind of it.
-
 => see also - a sequence of nodes subsequent to a node
 
 <!-- ======================================================================= -->
-## Current section
+## Current section (1)
 
 Once a section is declared, it automatically becomes the current section. It
 remains to be the current section for as long as (1) it did not end, and (2)
@@ -184,10 +181,6 @@ be associated with further entities at some later point in time.
 * synonymous - inactive, suspended
 * Sections that are inactive are still open for associations.
 
-**TODO** -
-Stack of open sections - the current section is the section at the top of this
-stack - not some random section, a specific order
-
 ### Node X belongs to section Y
 
 * synonymous - belongs to, is located inside, is associated with, is related to
@@ -197,11 +190,33 @@ A node belongs to a section, if the node is associated with it.
 This definition is based upon the direct relationship between a node and its
 section (i.e. no subsections in between).
 
+**TODO** -
+is located inside -> loosely related to
+
 ### Section X contains node Y
 
 * synonymous - contains, is associated with, is related to
 
 A section contains a node, if the node belongs to it.
+
+<!-- ======================================================================= -->
+## Section (2) - TODO
+
+* `SxS` relation
+
+<!-- ======================================================================= -->
+## Sectioning element (2) - TODO
+
+* Does a sectioning element belong to the section it introduces?
+* The section of a sectioning element begins inside, or just behind of it.
+* A section is subsequent to its sectioning element.
+
+<!-- ======================================================================= -->
+## Stack of open sections - TODO
+
+Stack of open sections - the current section is the section at the top of this
+stack - not some random section, a specific order -
+path in the tree of sections (starts at the root, ends at the current section)
 
 <!-- ======================================================================= -->
 ## Relationship between sections and nodes
@@ -242,92 +257,6 @@ contains no node at all, a single node, or more than one nodes.
 
 A section that itself does not contain any nodes, is not necessarily empty
 (e.g. a section may consist of subsections only).
-
-<!-- ======================================================================= -->
-## Relations
-
-We are already trapped deep inside discrete mathematics (graph theory)!
-
-* [en.wikipedia.org, graph theory](https://en.wikipedia.org/wiki/Graph_theory)
-* [en.wikipedia.org, binary relation](https://en.wikipedia.org/wiki/Binary_relation)
-* [en.wikipedia.org, tree structure](https://en.wikipedia.org/wiki/Tree_structure)
-* [en.wikipedia.org, tree (data structure)](https://en.wikipedia.org/wiki/Tree_%28data_structure%29)
-
-The DOM tree is a tree data structure defined in terms of nodes and edges.
-
-### Node.parentNode, Node.childNodes
-
-The edges of a DOM node tree are defined in terms of pairs of nodes that are
-elements of the Cartesian product `PxC`.
-
-* `P` represents the set of parent nodes - `C` the set of child nodes -
-  `P` and `C` are both equal to `N` - `N` is the set of all nodes.
-* The characteristic function `R(p,c)` returns `1 (true)`, if node `p` is the
-  parent node of child node `c`; otherwise, `0 (false)` is returned.
-* All pairs of nodes for which `R` holds (i.e. is true) define the parent-child
-  relationship between all nodes.
-* `R` can be used to define boolean functions used to test certain conditions
-  and functions that can be used to retrieve all the nodes that are associated
-  with a given node.
-
-Definitions
-
-* `bool Node.isParentOf(Node c)`
-* `bool Node.isChildOf(Node p)`
-* `Node Node.parentNode()`
-* `Node[] Node.childNodes()`
-
-### Node.parentSection, Section.innerNodes
-
-The belongs-to/contains-node relationship between nodes and sections can be
-defined in terms of pairs that elements of the Cartesian product `NxS`.
-
-* `S` represents the set of all sections
-
-Definitions
-
-* `bool Node.belongsTo(Section s)`
-* `bool Section.containsNode(Node n)`
-* `Section Node.parentSection()`
-* `Node[] Section.innerNodes()`
-
-**TODO** -
-Section.firstInnerNode(), Section.lastInnerNode(), ... -
-requires an order of some sort
-
-### Section.parentSection, Section.subsections
-
-The parent-of/contains-section relationship between sections can be defined in
-terms of pairs that are elements of the Cartesian product `SxS`.
-
-* `P` represents the set of sections that have one or more subsections (`PxS`)
-* `C` represents the set of sections that have a parent section (`SxC`) -
-  the root section does not have a parent section
-
-Definitions
-
-* `bool Section.isParentOf(Section c)`
-* `bool Section.isSubsectionTo(Section p)`
-* `Section Section.parentSection()`
-* `Section[] Section.subsections()`
-
-**TODO** -
-firstSubSection(), lastSubSection(), ... -
-requires an order of some sort
-
-<!-- ======================================================================= -->
-## A memory hook
-
-```
-<- root <-          path-of-nodes          -> leaf ->
-<- parent-of                              child-of ->
-
-... x N x N x ... x N x N x ...    (down) belongs-to
-      x                 x
-... x S x S x ... x S x S x ...    (up) contains-node
-
-<- parent-section                      sub-section ->
-```
 
 <!-- ======================================================================= -->
 ## Inner nodes, outer nodes
