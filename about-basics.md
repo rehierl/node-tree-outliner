@@ -30,7 +30,7 @@ section that the heading element introduces, or to a section to which it is
 subsequent (i.e. to some previous section)?
 
 <!-- ======================================================================= -->
-## Nodes and edges
+## Nodes <-> Nodes
 
 * Think in terms of tuples.
 
@@ -67,14 +67,15 @@ and `i in [1,k]` (i.e. bottom-up, e.g. leaf-to-root), `ni` is a descendant of
 * `n1` is loosely related to `nk` := a path `p=(n1,n2,...,nk)` exists
 * `a` is in relationship with `b`, if `a` is strictly or loosely related to `b`.
 
-What this should sum up to is:
+What this should sum up to is this:
 
 * A parent is strictly related to its children.
 * A parent is loosely related to its descendants (minus children).
 * A child is strictly related to its parent.
 * A child is loosely related to its ancestors (minus parent).
 
-### An inaccurate mantra (1)
+<!-- ======================================================================= -->
+## An inaccurate mantra (1)
 
 * Just a pictogram to guide ones thoughts.
 * Yuo can sitll raed tihs!
@@ -86,7 +87,7 @@ What this should sum up to is:
 R x N x ... x N x N x ... x N x N x ... x N x L
 ```
 
-At any non-leaf node, a path of any length may branch off.
+* At any non-leaf node, a path of any length may branch off.
 
 ```
                 x N x N x L
@@ -116,19 +117,20 @@ At some point, an element introduces a new section. From that point on,
 nodes will be associated with this section, one after another, until that
 is no longer allowed.
 
+* `S` is the set of sections, `N` the set of nodes.
 * The `SxN` relation is a two-way, one-to-many (1:N) relationship
-  (`S` is the set of sections, `N` the set of nodes).
-* A section is empty, if no nodes were associated with it.
+* A section is empty, if no nodes are associated with it.
 * A node is added to the end of a section, or more accurately
-  to the end of its sequence, when it has to be associated with it.
+  to the end of its sequence, when a node has to be associated with it.
 * The n-th node of a section's sequence is the section's n-th node.
 * A non-empty section always has a first and a last node.
 
-A section is declared by its sectioning element
-and defined by its node sequence.
+A section is
+declared by its sectioning node and
+defined by its node sequence.
 
 * To distinguish sections from one another, the section's
-  sectioning element must be taken into account (e.g. empty section).
+  sectioning node must be taken into account (e.g. empty section).
 
 Definitions
 
@@ -146,10 +148,12 @@ A section is open, if it is still allowed to associate entities
 
 A section is closed, if no more associations are allowed.
 
-* From that point on, a section is fully defined/qualified.
+* From that point on, a section is fully defined/qualified
+  by the sectioning node and the section's nodes.
 
 **TODO** -
-produce a table-of-contents on the fly
+it must be possible produce a table-of-contents on the fly -
+a TOC is just a hierarchical listing of section properties (e.g. titles)
 
 ### associated resources
 
@@ -172,59 +176,60 @@ might no longer be accessible. In such a case, resources allocated for sections
 that are no longer accessible will remain locked (e.g. memory leaks).
 
 <!-- ======================================================================= -->
-## Sectioning element (1)
+## Sectioning node (1)
 
-A sectioning element introduces a new section.
+A sectioning node introduces a new section.
 
+* synonymous - sectioning node, sectioning element (HTML speech)
 * synonymous - introduce, initialize, declare
 * Any node can be classified as a sectioning, or as a non-sectioning node:
   A node either introduces a new section, or it does not.
-* A sectioning element introduces a single section
+* A sectioning node introduces a single section
   (not 0, not 2, ..., not N, exactly and always 1).
 
 This definition implies that no section can exist without
-first being introduced by some sectioning element.
+first being introduced by some sectioning node.
 
+* `S` is the set of sections, `N` the set of nodes.
 * This `NxS` relation is a two-way, one-to-one (1:1) relationship.
-* Any section can be identified by its sectioning element.
+* Any section can be identified by its sectioning node.
 
 Definitions
 
-* `SectioningElement Section.declaredBy`
-* `Section SectioningElement.declaredSection`
+* `SectioningNode Section.declaredBy`
+* `Section SectioningNode.declaredSection`
 
-As a result, this definition also defines an order between
-a sectioning element and its section:
+This definition also implies an order between a sectioning node and its section:
 
-* A sectioning element precedes its section.
-* A section is subsequent to its sectioning element.
-* A section can not exist without its sectioning element.
+* A section can not exist without its sectioning node.
+* A sectioning node precedes its section.
+* A section is subsequent to its sectioning node.
 
 This definition also implies that some process will have to switch away from
-a pre-existing section to the introduced next new section as soon as the next
-sectioning element is reached (i.e. there is some order on a document's set of
+a pre-existing section to the introduced next new section, as soon as the next
+sectioning node is reached (i.e. there is some order on a document's set of
 sections).
 
 * synonymous - declared before, pre-exists, precedes
 * synonymous - next new, declared after, is subsequent to
 
-If there is a preceding section, then there must also be a sectioning element
+If there is a preceding section, then there must also be a sectioning node
 which precedes it (because that section must also be declared at some point).
 
-* The sectioning element of a preceding section
-  precedes the sectioning element of a subsequent section.
+* The sectioning node of a preceding section
+  precedes the sectioning node of a subsequent section.
 * The order on the set of sections is
-  equivalent to the order of their sectioning elements.
+  equivalent to the order of their sectioning nodes.
 
 This definition does not state that a preceding section must end once the next
-sectioning element is reached. Such a section may simply be suspended when the
-new section begins and it may be resumed once that new section ends.
+sectioning node is reached. Such a section may simply be suspended when the
+new section begins and it may be resumed once the new section ends.
 
 * synonymous - suspend, pause
 * synonymous - resume, continue
 
-The definition of a sectioning element must define (1) which effect it has on
-pre-existing sections, and (2) what kind of relationship the new section has
+The definition of a specific sectioning node must define (1) which effect it has
+on pre-existing sections, and (2) what kind of relationship the new section has
 with these.
 
 => see also - a sequence of nodes subsequent to a node
@@ -234,7 +239,7 @@ with these.
 
 Once a section is declared, it automatically becomes the current section. It
 remains to be the current section for as long as (1) it did not end, and (2)
-no new section was introduced by some other subsequent sectioning element.
+no new section was introduced by some other subsequent sectioning node.
 
 * synonymous - current, active, current active
 
@@ -250,70 +255,74 @@ aspects into account:
    which of these is the next current section?
 
 At any given time, multiple sections may be open, but only one of these can be
-the current active section. All the other sections are suspended, i.e. they may
-be associated with further entities at some later point in time.
+the current active section. All the other open sections are suspended, i.e.
+they may be associated with further entities at some later point in time.
 
 * synonymous - inactive, suspended
 * Sections that are inactive are still open for associations.
+
+<!-- ======================================================================= -->
+## Nodes <-> Sections
+
+Nodes are strictly associated with sections (`NxS`). Once a node is associated
+with a section, the section is automatically strictly associated with it (`SxN`).
+
+* Any node can only be strictly associated with a single section.
+* More than one node can be strictly associated with the same section.
+* The relation `SxN` is a two-way, one-to-many (1:N) relationship.
+
+### nodes -> sections (NxS)
+
+Any node within a tree always strictly belongs to some section.
+
+* `NxS` is left-total.
+* The root node always has to be seen as being a sectioning node.
+
+The strict belongs-to relation puts each node into a strict relationship with a
+single section: A node either strictly belongs to one section, or it strictly
+belongs to a different one (i.e. a node can not strictly belong to two different
+sections at the same time).
+
+* A node may however strictly belong to one section and
+  loosely belong to multiple other sections at the same time.
+* `NxS` is functional
+
+Multiple nodes may still strictly belong to the same section.
+
+### sections -> nodes (SxN)
+
+A section strictly contains a node, if that node strictly belongs to it.
+
+* `SxN` is right-total.
+
+Because multiple nodes may strictly belong to the same section, a section either
+strictly contains no node at all, a single node, or more than one nodes.
+
+* `SxN` is *not* functional
+
+A section that itself does not strictly contain any nodes, does not have to be
+empty (e.g. a section may consist of subsections only). That is, a seemingly
+empty section (i.e. no strict relationship with any node) may still loosely
+contain an infinite number of nodes.
 
 <!-- ======================================================================= -->
 ## Node X belongs to section Y
 
 * synonymous - belongs to, is located inside, is associated with, is related to
 
-A node belongs to a section, if the node is associated with it.
+A node strictly belongs to a section, if the node is strictly associated with it.
 
-This definition is based upon the direct relationship between a node and its
-section (i.e. no subsections in between).
+* This definition relies upon a direct relationship between a node and its
+  section - i.e. there is some `(n,s) in NxS` such that ...
 
-**TODO** -
-is located inside -> loosely related to
+A node `n` loosely belongs to a section, if there is a path `p=(n,n1,...,ni)`
+such that 
 
 ### Section X contains node Y
 
 * synonymous - contains, is associated with, is related to
 
 A section contains a node, if the node belongs to it.
-
-<!-- ======================================================================= -->
-## Relationship between sections and nodes
-
-Nodes are directly associated with sections (`NxS`). Once a node is associated
-with a section, the section is also associated with that node (`SxN`).
-
-* More than one node can be associated with a single section.
-* Any node can only be directly associated with a single section.
-* The relation `SxN` is a two-way, one-to-many (1:N) relationship.
-
-### nodes -> sections (NxS)
-
-Any node within a document always belongs to some section,
-regardless if that section has a title or not.
-
-* NxS is left-total.
-
-The belongs-to association puts each node into a direct relationship with a
-single section: A node either belongs to one section, or it belongs to a
-different one (i.e. a node can not directly belong to two different sections
-at the same time).
-
-* NxS is functional
-
-Multiple nodes may still belong to the same section.
-
-### sections -> nodes (SxN)
-
-A section contains a node, if that node belongs to it.
-
-* SxN is right-total.
-
-Because multiple nodes may belong to the same section, a section either
-contains no node at all, a single node, or more than one nodes.
-
-* SxN is not functional
-
-A section that itself does not contain any nodes, is not necessarily empty
-(e.g. a section may consist of subsections only).
 
 <!-- ======================================================================= -->
 ## Section (2) - TODO
