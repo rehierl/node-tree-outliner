@@ -48,7 +48,8 @@ i.e. we are bound by the rules of discrete mathematics (graph theory)!
 * A child can be a parent or a leaf.
 * `P`, `C` and `L` are all not equal to `N`
 * `PxL subset-of NxN` and `PxCxL subset-of NxNxN`
-* One node must be the root - `r in P` and `(n,r) not in PxC` (has no parent)
+* One node must be the root - `r in (R = {r}) subset-of P`
+* `(n,r) not in PxC` and `r not in C` => the root has no parent and is no child
 * A reference to a node's parent node is required => rooted tree
 * The child nodes of each node are ordered => ordered tree,
   left-to-right, first-to-last
@@ -65,33 +66,39 @@ and `i in [1,k]` (i.e. bottom-up, e.g. leaf-to-root), `ni` is a descendant of
 * synonymous - strictly related to, directly related to
 * `n1` is loosely related to `nk` := a path `p=(n1,n2,...,nk)` exists
 * `a` is in relationship with `b`, if `a` is strictly or loosely related to `b`.
+
+What this should sum up to is:
+
 * A parent is strictly related to its children.
 * A parent is loosely related to its descendants (minus children).
 * A child is strictly related to its parent.
 * A child is loosely related to its ancestors (minus parent).
 
-### An inaccurate mantra
+### An inaccurate mantra (1)
+
+* Just a pictogram to guide ones thoughts.
+* Yuo can sitll raed tihs!
 
 ```
-<- root <-          path-of-nodes          -> leaf ->
-<- parent-of                              child-of ->
+< root <          path-of-nodes        > leaf >
+< parent-of <                      > child-of >
 
-... x N x N x ... x N x N x ...
+R x N x ... x N x N x ... x N x N x ... x N x L
 ```
 
-At any point, a different path of any length may branch off:
+At any non-leaf node, a path of any length may branch off.
 
 ```
-                      x N x N x ...
-... x N x N x ... x N x N x ...
-                  x N x N x N x ...
-            x N x N x N x N x ...
-        x N x N x N x ...
+                x N x N x L
+R x N x ... x N x N x ... x N x L
+            x N x N x N x L
+      x N x N x N x N x L
+  x N x N x N x L
 ```
 
-* `... x N x N x ...` symbolizes an infinite set of paths that all share some
-  common prefix, but (beginning with some node) branch off into a different suffix.
-* Paths may have any different length.
+* `... x N x N x ...` represents an infinite set of paths that share some common
+  prefix, but (beginning with some node) branch off into different suffixes.
+* `R x N x ... x N x L` represents all the paths of a rooted node tree.
 
 <!-- ======================================================================= -->
 ## Section (1)
