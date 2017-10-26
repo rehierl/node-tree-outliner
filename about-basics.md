@@ -30,20 +30,84 @@ section that the heading element introduces, or to a section to which it is
 subsequent (i.e. to some previous section)?
 
 <!-- ======================================================================= -->
+## Nodes and edges
+
+* Think in terms of tuples.
+
+The DOM tree is a tree data structure defined in terms of nodes and edges,
+i.e. we are bound by the rules of discrete mathematics (graph theory)!
+
+* `n in N` is a node, `N` is the set of all nodes
+* Each node `n1` (parent) is connected with another node `n2` (child)
+* Edge `e := (n1,n2) = (p,c) in E subset-of NxN`
+* Each node may be a parent - `p in P` and `P subset-of N`
+* Each node may be a child - `c in C` and `C subset-of N`
+* Each node may be a leaf - `l in L` and `L subset-of N`
+* `P = N - L` => `n in P <=> n not in L` => `n not in P <=> n in L`
+* A parent is no leaf, a leaf is no parent.
+* A child can be a parent or a leaf.
+* `P`, `C` and `L` are all not equal to `N`
+* `PxL subset-of NxN` and `PxCxL subset-of NxNxN`
+* One node must be the root - `r in P` and `(n,r) not in PxC` (has no parent)
+* A reference to a node's parent node is required => rooted tree
+* The child nodes of each node are ordered => ordered tree,
+  left-to-right, first-to-last
+
+For any path `p=(n1, n2, ..., nk) in NxNx...xN` such that `ni parent-of ni+1`
+and `i in [1,k]` (i.e. top-down, e.g. root-to-leaf), `ni` is an ancestor of
+`ni+1` and `ni+1` a descendant of `ni`.
+
+For any path `p=(n1, n2, ..., nk) in NxNx...xN` such that `ni child-of ni+1`
+and `i in [1,k]` (i.e. bottom-up, e.g. leaf-to-root), `ni` is a descendant of
+`ni+1` and `ni+1` an ancestor of `ni`.
+
+* `n1` is strictly related to `n2` := `(n1,n2) in NxN` exists
+* synonymous - strictly related to, directly related to
+* `n1` is loosely related to `nk` := a path `p=(n1,n2,...,nk)` exists
+* `a` is in relationship with `b`, if `a` is strictly or loosely related to `b`.
+* A parent is strictly related to its children.
+* A parent is loosely related to its descendants (minus children).
+* A child is strictly related to its parent.
+* A child is loosely related to its ancestors (minus parent).
+
+### An inaccurate mantra
+
+```
+<- root <-          path-of-nodes          -> leaf ->
+<- parent-of                              child-of ->
+
+... x N x N x ... x N x N x ...
+```
+
+At any point, a different path of any length may branch off:
+
+```
+                      x N x N x ...
+... x N x N x ... x N x N x ...
+                  x N x N x N x ...
+            x N x N x N x N x ...
+        x N x N x N x ...
+```
+
+* `... x N x N x ...` symbolizes an infinite set of paths that all share some
+  common prefix, but (beginning with some node) branch off into a different suffix.
+* Paths may have any different length.
+
+<!-- ======================================================================= -->
 ## Section (1)
 
 A section is a sequence of nodes.
 
-This definition implies that the nodes of a section have some order.
+This implies that the nodes of a section have some order.
 
+* This order is based upon the traversal of the node tree.
 * synonymous - introduce, initialize, declare
 * synonymous - associate with, establish a relationship with
 * synonymous - is associated with, is related to
 
-At some point, an element introduces a new section. From that point on, nodes
-will be associated with this section, one after another, until that is no longer
-allowed. Consequently, the order of nodes is based upon the traversal of a node
-tree.
+At some point, an element introduces a new section. From that point on,
+nodes will be associated with this section, one after another, until that
+is no longer allowed.
 
 * The `SxN` relation is a two-way, one-to-many (1:N) relationship
   (`S` is the set of sections, `N` the set of nodes).
@@ -53,9 +117,11 @@ tree.
 * The n-th node of a section's sequence is the section's n-th node.
 * A non-empty section always has a first and a last node.
 
-A section is declared by its sectioning element and defined by its node sequence.
-To truly distinguish sections from one another, the section's sectioning element
-must be taken into account (e.g. empty section).
+A section is declared by its sectioning element
+and defined by its node sequence.
+
+* To distinguish sections from one another, the section's
+  sectioning element must be taken into account (e.g. empty section).
 
 Definitions
 
@@ -74,6 +140,9 @@ A section is open, if it is still allowed to associate entities
 A section is closed, if no more associations are allowed.
 
 * From that point on, a section is fully defined/qualified.
+
+**TODO** -
+produce a table-of-contents on the fly
 
 ### associated resources
 
@@ -98,10 +167,9 @@ that are no longer accessible will remain locked (e.g. memory leaks).
 <!-- ======================================================================= -->
 ## Sectioning element (1)
 
-* synonymous - introduce, initialize, declare
-
 A sectioning element introduces a new section.
 
+* synonymous - introduce, initialize, declare
 * Any node can be classified as a sectioning, or as a non-sectioning node:
   A node either introduces a new section, or it does not.
 * A sectioning element introduces a single section
@@ -175,13 +243,14 @@ aspects into account:
    which of these is the next current section?
 
 At any given time, multiple sections may be open, but only one of these can be
-the current active section. All the other sections are inactive, i.e. they may
+the current active section. All the other sections are suspended, i.e. they may
 be associated with further entities at some later point in time.
 
 * synonymous - inactive, suspended
 * Sections that are inactive are still open for associations.
 
-### Node X belongs to section Y
+<!-- ======================================================================= -->
+## Node X belongs to section Y
 
 * synonymous - belongs to, is located inside, is associated with, is related to
 
@@ -200,33 +269,14 @@ is located inside -> loosely related to
 A section contains a node, if the node belongs to it.
 
 <!-- ======================================================================= -->
-## Section (2) - TODO
-
-* `SxS` relation
-
-<!-- ======================================================================= -->
-## Sectioning element (2) - TODO
-
-* Does a sectioning element belong to the section it introduces?
-* The section of a sectioning element begins inside, or just behind of it.
-* A section is subsequent to its sectioning element.
-
-<!-- ======================================================================= -->
-## Stack of open sections - TODO
-
-Stack of open sections - the current section is the section at the top of this
-stack - not some random section, a specific order -
-path in the tree of sections (starts at the root, ends at the current section)
-
-<!-- ======================================================================= -->
 ## Relationship between sections and nodes
 
-Nodes are directly associated with sections, which will also associate the
-section with the associated node.
+Nodes are directly associated with sections (`NxS`). Once a node is associated
+with a section, the section is also associated with that node (`SxN`).
 
 * More than one node can be associated with a single section.
-* However, any node can only be directly associated with a single section.
-* A two-way, one-to-many (1:N) relationship.
+* Any node can only be directly associated with a single section.
+* The relation `SxN` is a two-way, one-to-many (1:N) relationship.
 
 ### nodes -> sections (NxS)
 
@@ -257,6 +307,25 @@ contains no node at all, a single node, or more than one nodes.
 
 A section that itself does not contain any nodes, is not necessarily empty
 (e.g. a section may consist of subsections only).
+
+<!-- ======================================================================= -->
+## Section (2) - TODO
+
+* `SxS` relation
+
+<!-- ======================================================================= -->
+## Sectioning element (2) - TODO
+
+* Does a sectioning element belong to the section it introduces?
+* The section of a sectioning element begins inside, or just behind of it.
+* A section is subsequent to its sectioning element.
+
+<!-- ======================================================================= -->
+## Current section (2), Stack of open sections - TODO
+
+Stack of open sections - the current section is the section at the top of this
+stack - not some random section, a specific order -
+path in the tree of sections (starts at the root, ends at the current section)
 
 <!-- ======================================================================= -->
 ## Inner nodes, outer nodes

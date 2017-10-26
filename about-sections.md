@@ -60,3 +60,5 @@ Each title within such a tree represents its corresponding section.
 
 A TOC does not have to include all the titles of an outline,
 (i.e. inner outlines may be ignored).
+
+A TOC is just a hierarchical listing of a certain section property.
