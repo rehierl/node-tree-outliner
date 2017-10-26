@@ -78,7 +78,7 @@ What this should sum up to is this:
 ## An inaccurate mantra (1)
 
 * Just a pictogram to guide ones thoughts.
-* Yuo can sitll raed tihs!
+* Yuo cna sitll raed tihs!
 
 ```
 < root <          path-of-nodes        > leaf >
@@ -87,14 +87,13 @@ What this should sum up to is this:
 R x N x ... x N x N x ... x N x N x ... x N x L
 ```
 
-* At any non-leaf node, a path of any length may branch off.
+* At any non-leaf node, a path of any length may branch off:
 
 ```
-                x N x N x L
+            ... x N x N x L
 R x N x ... x N x N x ... x N x L
-            x N x N x N x L
-      x N x N x N x N x L
-  x N x N x N x L
+        ... x N x N x N x L
+  ... x N x N x N x N x L
 ```
 
 * `... x N x N x ...` represents an infinite set of paths that share some common
@@ -151,10 +150,6 @@ A section is closed, if no more associations are allowed.
 * From that point on, a section is fully defined/qualified
   by the sectioning node and the section's nodes.
 
-**TODO** -
-it must be possible produce a table-of-contents on the fly -
-a TOC is just a hierarchical listing of section properties (e.g. titles)
-
 ### associated resources
 
 * synonymous - allocate, lock, create
@@ -174,6 +169,10 @@ Ultimately, that point is reached for any section when the starting element
 (e.g. the body element) has been processed. But, at that point, certain sections
 might no longer be accessible. In such a case, resources allocated for sections
 that are no longer accessible will remain locked (e.g. memory leaks).
+
+**TODO** -
+it must be possible to produce a table-of-contents on the fly (search engines) -
+a TOC is just a hierarchical listing of section properties (titles)
 
 <!-- ======================================================================= -->
 ## Sectioning node (1)
@@ -315,14 +314,63 @@ A node strictly belongs to a section, if the node is strictly associated with it
 * This definition relies upon a direct relationship between a node and its
   section - i.e. there is some `(n,s) in NxS` such that ...
 
-A node `n` loosely belongs to a section, if there is a path `p=(n,n1,...,ni)`
-such that 
+A node `n` loosely belongs to a section `s`, if there is a path `p=(n,n1,...,nk)`
+such that `n descendant-of nk` and `(nk,s) in NxS`.
+
+* Associating a node with a section automatically establishes a loose
+  relationship between the section and any of the node's descendants.
+* However, the same does not apply to any of the node's ancestors.
+* Any section has a *downwards*, but no *upwards* effect.
+* synonymous - downwards, inwards, inner
+* synonymous - upwards, outwards, outer
+
+A node is related to a section, if it is strictly or loosely related to it.
 
 ### Section X contains node Y
 
 * synonymous - contains, is associated with, is related to
 
-A section contains a node, if the node belongs to it.
+A section strictly/loosely contains a node,
+if the node strictly/loosely belongs to it.
+
+A section contains a node,
+if the section strictly or loosely contains the node.
+
+<!-- ======================================================================= -->
+## An inaccurate mantra (2)
+
+```
+< root <           path-of-nodes         > leaf >
+< parent-of <                        > child-of >
+
+R x n1 x ... x N x n2 x ... x N x L   (down) belongs to
+    x              x
+    s1             s1                 (up) contains node
+```
+
+* `r in R` can not be associated with any section
+  because that section would have no sectioning node.
+
+This extension implies that any descendant of a node `n1`, which is directly
+related to a section `s1`, is naturally loosely related to the same section.
+
+* A strict relation `(n2,s1)` is not required,
+  because `n2` is, due to `(n1,s1)`, already related to `s1`.
+* Any node automatically belongs to a section,
+  if that section directly contains any of the node's ancestors.
+
+```
+< root <           path-of-nodes         > leaf >
+< parent-of <                        > child-of >
+
+R x n1 x ... x N x n2 x ... x N x N x ... x N x L
+    x              x
+    s1             s2
+```
+
+This merely reflects that any descendant of `n2` belongs to section `s1` and
+section `s2` at the same time. However, the same does not apply to any
+descendant of `n1` that is also descendant of `n2`.
 
 <!-- ======================================================================= -->
 ## Section (2) - TODO
@@ -330,7 +378,7 @@ A section contains a node, if the node belongs to it.
 * `SxS` relation
 
 <!-- ======================================================================= -->
-## Sectioning element (2) - TODO
+## Sectioning node (2) - TODO
 
 * Does a sectioning element belong to the section it introduces?
 * The section of a sectioning element begins inside, or just behind of it.

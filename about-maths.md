@@ -9,6 +9,8 @@
 ... x N x N x ... x N x N x ...  (down) belongs-to
       x                      
       S                         (up) contains-node
+
+<- parent-section                   sub-section ->
 ```
 
 * `s in S` is a section, `S` is the set of all sections
@@ -62,21 +64,4 @@ example
   </node-B>
 ... section-A ends here
 </root>
-```
-
-<!-- ======================================================================= -->
-## Conclusion
-
-<!-- ======================================================================= -->
-## A memory hook
-
-```
-<- root <-          path-of-nodes          -> leaf ->
-<- parent-of                              child-of ->
-
-... x N x N x ... x N x N x ...    (down) belongs-to
-      x             x
-... x S x S x ... x S x S x ...    (up) contains-node
-
-<- parent-section                      sub-section ->
 ```
