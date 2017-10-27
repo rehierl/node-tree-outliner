@@ -1,5 +1,5 @@
 
-# Fundamental aspects
+# Basic aspects
 
 ```
 Example:
@@ -11,68 +11,111 @@ Example:
 </body>
 ```
 
-Node `A` belongs to the section introduced by the body element (i.e.
-**the body section**). The body section is said to contain node `A`.
-
 * Any node always belongs to some section.
+
+Node `A` belongs to the section introduced by the body element (i.e.
+**the body section**). The body section contains node `A`.
+
+* The last section introduced before node `C` is section `B`.
+  No other section is introduced before node `C`.
+  If that were the case, node `C` would have to belong to this section instead.
+* There is no indication that section `B` ends before node `C`.
+  If that were the case, node `C` would have to belong to a pre-existing section
+  (e.g. the body section).
 
 Node `C` belongs to section `B`.
 
-* There is no indication that section `B` ends before node `C`.
-  If that were the case, node `C` would have to belong to a pre-existing
-  section (i.e. the body section).
-* No other new section is introduced before node `C`.
-  If that were the case, node `C` would have to belong to this new section.
-
 **TODO** -
 Does a heading element and its inner nodes (e.g. `h1` and `B`) belong to the
-section that the heading element introduces, or to a section to which it is
-subsequent (i.e. to some previous section)?
+section that a sectioning element (heading) introduces, or to a section
+to which it is subsequent (i.e. to some previous section)?
 
 <!-- ======================================================================= -->
-## Nodes <-> Nodes
+## Node <-> Nodes
 
 * Think in terms of tuples.
 
 The DOM tree is a tree data structure defined in terms of nodes and edges,
 i.e. we are bound by the rules of discrete mathematics (graph theory)!
 
-* `n in N` is a node, `N` is the set of all nodes
-* Each node `n1` (parent) is connected with another node `n2` (child)
-* Edge `e := (n1,n2) = (p,c) in E subset-of NxN`
-* Each node may be a parent - `p in P` and `P subset-of N`
-* Each node may be a child - `c in C` and `C subset-of N`
-* Each node may be a leaf - `l in L` and `L subset-of N`
-* `P = N - L` => `n in P <=> n not in L` => `n not in P <=> n in L`
-* A parent is no leaf, a leaf is no parent.
+* `n in N` is a node, `N` is the set of all nodes.
+* A node may be a root - `r in R subset-of N`
+* A node may be a parent - `p in P subset-of N`
+* A node may be a child - `c in C subset-of N`
+* A node may be a leaf - `l in L subset-of N`
+* Edge `e := (p,c) in E subset-of PxC subset-of NxN`
+* Each parent is connected with all of its child nodes.
+* `E` only contains existing edges.
+
+*In general*
+
+* `P`, `C`, `L` and `R` are all not equal to `N`
+* A parent is no leaf. A leaf is no parent.
+* `P = N - L` => `n in P <=> n not in L` => `n in L <=> n not in P`
 * A child can be a parent or a leaf.
-* `P`, `C` and `L` are all not equal to `N`
-* `PxL subset-of NxN` and `PxCxL subset-of NxNxN`
-* One node must be the root - `r in (R = {r}) subset-of P`
-* `(n,r) not in PxC` and `r not in C` => the root has no parent and is no child
-* A reference to a node's parent node is required => rooted tree
-* The child nodes of each node are ordered => ordered tree,
-  left-to-right, first-to-last
+* `CxC subset-of PxC` eq. `PxC contains CxC`
+* `PxL subset-of PxC` eq. `PxC contains PxL`
+* A root has no parent. A root is no leaf.
 
-For any path `p=(n1, n2, ..., nk) in NxNx...xN` such that `ni parent-of ni+1`
-and `i in [1,k]` (i.e. top-down, e.g. root-to-leaf), `ni` is an ancestor of
-`ni+1` and `ni+1` a descendant of `ni`.
+*A rooted, ordered tree*
 
-For any path `p=(n1, n2, ..., nk) in NxNx...xN` such that `ni child-of ni+1`
-and `i in [1,k]` (i.e. bottom-up, e.g. leaf-to-root), `ni` is a descendant of
-`ni+1` and `ni+1` an ancestor of `ni`.
+* There must be a single root - `r in (R = {r}) subset-of P`
+* The child nodes of a node have some order (left-to-right, first-to-last)
 
-* `n1` is strictly related to `n2` := `(n1,n2) in NxN` exists
-* synonymous - strictly related to, directly related to
-* `n1` is loosely related to `nk` := a path `p=(n1,n2,...,nk)` exists
-* `a` is in relationship with `b`, if `a` is strictly or loosely related to `b`.
+*Path tuples*
 
-What this should sum up to is this:
+For any path `p=(n1,n2,...,nk) in NxNx...xN` such that `ni parent-of ni+1`,
+`i in [1,k-1]` and `k in [2,+Inf)` (i.e. top-down, `(ni,ni+1) in E`),
+`ni` is an ancestor of `ni+1` and `ni+1` a descendant of `ni`.
+(special case - `RxNx...xNxL`, root-to-leaf)
+
+* `TD` represents the set of all top-down paths
+* `RD` all paths that begin in a root (`ni in R`)
+* `TL` all paths that end in a leaf (`nk in L`)
+* `RL` all paths that begin in a root and end in a leaf
+* `E in TD`
+
+For any path `p=(n1,n2,...,nk) in NxNx...xN` such that `ni child-of ni+1`
+`i in [1,k-1]` and `k in [2,+Inf)` (i.e. bottom-up, `(ni+1,ni) in E`),
+`ni` is a descendant of `ni+1` and `ni+1` an ancestor of `ni`.
+(special case - `LxNx...xNxR`, leaf-to-root)
+
+* `BU` represents the set of all bottom-up paths
+* `BR` all paths that end in a root (`nk in R`)
+* `LU` all paths that begin in a leaf (`ni in L`)
+* `LR` all paths that being in a leaf and end in a root
+* `E not in BU`
+
+*A tree has no cycles*
+
+* The length of a path `p` is the number of nodes involved (`p.len = k`).
+* The n-th node of a path is the n-th node in its node sequence.
+* `p(i) = ni` for `p=(...,ni-1,ni,ni+1,...)`
+* no cycles => `p(i) != p(j)` for any `i,j in [1,k]` and `i != j`
+
+*related to*
+
+* `n1` is strictly related to `nk`, if `p=(n1,nk) in TD or BU`
+* synonymous - strictly related to,
+  directly related, strictly connected with, in strict relationship with
+* `n1` is loosely related to `nk`, if `p=(n1,n2,...,nk) in TD or BU`
+* synonymous - loosely related to,
+  loosely connected with, in loose relationship with
+* `n1` is related to `n2`, if `n1` is strictly or loosely related to `n2`.
+* synonymous - related to, connected with, in relationship with
+* i.e. (strictly => no nodes in between), (loosely => nodes in between)
+
+*What this should sum up to is this*
 
 * A parent is strictly related to its children.
 * A parent is loosely related to its descendants (minus children).
+* A parent is related to all of its descendants.
+
+and
+
 * A child is strictly related to its parent.
 * A child is loosely related to its ancestors (minus parent).
+* A child is related to all of its ancestors.
 
 <!-- ======================================================================= -->
 ## An inaccurate mantra (1)
