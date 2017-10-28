@@ -11,10 +11,7 @@ Example:
 </body>
 ```
 
-* Any node always belongs to some section.
-
-Node `A` belongs to the section introduced by the body element (i.e.
-**the body section**). The body section contains node `A`.
+Node `C` belongs to section `B`.
 
 * The last section introduced before node `C` is section `B`.
   No other section is introduced before node `C`.
@@ -23,7 +20,13 @@ Node `A` belongs to the section introduced by the body element (i.e.
   If that were the case, node `C` would have to belong to a pre-existing section
   (e.g. the body section).
 
-Node `C` belongs to section `B`.
+Node `A` belongs to the body section.
+
+* Any node always belongs to some section.
+* The body element must introduce a section (i.e. **the body section** -
+  because its the top-most element, not because its the body element -
+  a very subtle distinction!).
+* The body section contains node `A`.
 
 **TODO** -
 Does a heading element and its inner nodes (e.g. `h1` and `B`) belong to the
@@ -44,10 +47,9 @@ i.e. we are bound by the rules of discrete mathematics (graph theory)!
 * A node may be a child - `c in C subset-of N`
 * A node may be a leaf - `l in L subset-of N`
 * Edge `e := (p,c) in E subset-of PxC subset-of NxN`
-* Each parent is connected with all of its child nodes.
 * `E` only contains existing edges.
 
-*In general*
+### in general
 
 * `P`, `C`, `L` and `R` are all not equal to `N`
 * A parent is no leaf. A leaf is no parent.
@@ -57,71 +59,92 @@ i.e. we are bound by the rules of discrete mathematics (graph theory)!
 * `PxL subset-of PxC` eq. `PxC contains PxL`
 * A root has no parent. A root is no leaf.
 
-*A rooted, ordered tree*
+### a rooted, ordered tree
 
-* There must be a single root - `r in (R = {r}) subset-of P`
-* The child nodes of a node have some order (left-to-right, first-to-last)
+* rooted - There must be a single root - `r in (R = {r}) subset-of P`
+* ordered - A node's child nodes are ordered (left-to-right, first-to-last)
 
-*Path tuples*
+### path tuples
 
 For any path `p=(n1,n2,...,nk) in NxNx...xN` such that `ni parent-of ni+1`,
 `i in [1,k-1]` and `k in [2,+Inf)` (i.e. top-down, `(ni,ni+1) in E`),
 `ni` is an ancestor of `ni+1` and `ni+1` a descendant of `ni`.
 (special case - `RxNx...xNxL`, root-to-leaf)
 
-* `TD` represents the set of all top-down paths
-* `RD` all paths that begin in a root (`ni in R`)
-* `TL` all paths that end in a leaf (`nk in L`)
-* `RL` all paths that begin in a root and end in a leaf
-* `E in TD`
+* `TD` represents the set of all top-down paths (= downwards)
+* `RD` - all paths that begin in a root (`ni in R`)
+* `TL` - all paths that end in a leaf (`nk in L`)
+* `RL` or `RTL` - all paths that begin in a root and end in a leaf
+* `RTL subset-of TD`, `E in TD`
 
 For any path `p=(n1,n2,...,nk) in NxNx...xN` such that `ni child-of ni+1`
 `i in [1,k-1]` and `k in [2,+Inf)` (i.e. bottom-up, `(ni+1,ni) in E`),
 `ni` is a descendant of `ni+1` and `ni+1` an ancestor of `ni`.
 (special case - `LxNx...xNxR`, leaf-to-root)
 
-* `BU` represents the set of all bottom-up paths
-* `BR` all paths that end in a root (`nk in R`)
-* `LU` all paths that begin in a leaf (`ni in L`)
-* `LR` all paths that being in a leaf and end in a root
-* `E not in BU`
+* `BU` represents the set of all bottom-up paths (= upwards)
+* `BR` - all paths that end in a root (`nk in R`)
+* `LU` - all paths that begin in a leaf (`ni in L`)
+* `LR` or `LTR` - all paths that being in a leaf and end in a root
+* `LTR subset-of BU`, `E not in BU`
 
-*A tree has no cycles*
+### properties
 
-* The length of a path `p` is the number of nodes involved (`p.len = k`).
+* The length of a path `p` is the number of nodes involved (`p.length = k`).
 * The n-th node of a path is the n-th node in its node sequence.
 * `p(i) = ni` for `p=(...,ni-1,ni,ni+1,...)`
-* no cycles => `p(i) != p(j)` for any `i,j in [1,k]` and `i != j`
+* A tree has no cycles => `p(i) != p(j)` for any `i,j in [1,k]` and `i != j`
 
-*related to*
+Paths `p1=(n1,n2,...,nk)` and `p2=(m1,m2,...,ml)` share a common prefix,
+if `p1(i) == p2(i)` for `i in [1,j]` and `j <= min(k,l)`.
+Paths `p1` and `p2` share a common suffix,
+if `p1(k-i+1) == p2(l-i+1)` for `i in [1,min(k,l)]`.
+
+### undirected definitions
 
 * `n1` is strictly related to `nk`, if `p=(n1,nk) in TD or BU`
-* synonymous - strictly related to,
+* synonymous - strictly related,
   directly related, strictly connected with, in strict relationship with
 * `n1` is loosely related to `nk`, if `p=(n1,n2,...,nk) in TD or BU`
+  and `k in [3,+Infinity)`
 * synonymous - loosely related to,
   loosely connected with, in loose relationship with
-* `n1` is related to `n2`, if `n1` is strictly or loosely related to `n2`.
+* `n1` is related to `nk`, if `n1` is strictly or loosely related to `nk`.
 * synonymous - related to, connected with, in relationship with
-* i.e. (strictly => no nodes in between), (loosely => nodes in between)
+* (strictly => no nodes in between), (loosely => nodes in between)
 
-*What this should sum up to is this*
+### directed definitions
+
+* any path `p in TD` points downwards
+* `n1` contains `nk`, if `p=(n1,...,nk) in TD`
+* synonymous - contains, is ancestor of
+* any path `p in BU` points upwards
+* `n1` is located inside `nk`, if `p=(n1,...,nk) in BU`
+* synonymous - located inside of, is descendant of
+
+### examples
+
+downwards
 
 * A parent is strictly related to its children.
-* A parent is loosely related to its descendants (minus children).
+* A parent is loosely related to any node `n in (descendants - children)`.
 * A parent is related to all of its descendants.
+* A parent strictly contains its child nodes.
+* A parent contains its descendant nodes.
 
-and
+upwards
 
 * A child is strictly related to its parent.
-* A child is loosely related to its ancestors (minus parent).
+* A child is loosely related to any node `n in (ancestors - parent)`.
 * A child is related to all of its ancestors.
+* A child is strictly located inside of its parent node.
+* A child is located inside of its ancestor nodes.
 
 <!-- ======================================================================= -->
 ## An inaccurate mantra (1)
 
-* Just a pictogram to guide ones thoughts.
-* Yuo cna sitll raed tihs!
+* A pictogram to guide ones thoughts.
+* Yuo can sitll raed tihs! (= grasp its essence)
 
 ```
 < root <          path-of-nodes        > leaf >
@@ -130,6 +153,7 @@ and
 R x N x ... x N x N x ... x N x N x ... x N x L
 ```
 
+* `RxNx...xNxL` can be seen to represent all the paths of a tree (=`RTL`).
 * At any non-leaf node, a path of any length may branch off:
 
 ```
@@ -139,9 +163,12 @@ R x N x ... x N x N x ... x N x L
   ... x N x N x N x N x L
 ```
 
-* `... x N x N x ...` represents an infinite set of paths that share some common
-  prefix, but (beginning with some node) branch off into different suffixes.
-* `R x N x ... x N x L` represents all the paths of a rooted node tree.
+It depends on the current context how one needs to look at it.
+
+* `...xNxNx...` can be seen to represent an infinite set of paths that all
+  share some common prefix (same ancestors), but (beginning with some node)
+  branch off into different suffixes (different descendants).
+* `Rx...xL` can also be seen to represent a single path.
 
 <!-- ======================================================================= -->
 ## Section (1)
@@ -167,12 +194,16 @@ is no longer allowed.
 * The n-th node of a section's sequence is the section's n-th node.
 * A non-empty section always has a first and a last node.
 
-A section is
-declared by its sectioning node and
-defined by its node sequence.
+A section is itself not a path!
 
-* To distinguish sections from one another, the section's
-  sectioning node must be taken into account (e.g. empty section).
+* A section may consist of siblings only.
+* Subsequences of a section may be path sequences.
+* A section may be equal to a single path (extreme case only).
+
+A section is declared by its sectioning node and defined by its node sequence.
+
+* To distinguish sections from one another, the section's sectioning node
+  must be taken into account (e.g. empty section).
 
 Definitions
 
@@ -181,17 +212,15 @@ Definitions
 
 ### open and closed sections
 
-* synonymous - open, has started
-
 A section is open, if it is still allowed to associate entities
 (nodes, a title, subsections, etc.) with it.
 
+* synonymous - open, has started
 * synonymous - closed, has ended
 
 A section is closed, if no more associations are allowed.
 
-* From that point on, a section is fully defined/qualified
-  by the sectioning node and the section's nodes.
+* A section is fully qualified/defined once it is closed.
 
 ### associated resources
 
@@ -224,34 +253,30 @@ A sectioning node introduces a new section.
 
 * synonymous - sectioning node, sectioning element (HTML speech)
 * synonymous - introduce, initialize, declare
-* Any node can be classified as a sectioning, or as a non-sectioning node:
-  A node either introduces a new section, or it does not.
 * A sectioning node introduces a single section
   (not 0, not 2, ..., not N, exactly and always 1).
-
-This definition implies that no section can exist without
-first being introduced by some sectioning node.
-
 * `S` is the set of sections, `N` the set of nodes.
 * This `NxS` relation is a two-way, one-to-one (1:1) relationship.
 * Any section can be identified by its sectioning node.
+* Any node can be classified as a sectioning, or as a non-sectioning node
+  (a node either introduces a new section, or it does not).
 
 Definitions
 
 * `SectioningNode Section.declaredBy`
 * `Section SectioningNode.declaredSection`
 
-This definition also implies an order between a sectioning node and its section:
+This definition implies an order between a sectioning node and its section:
 
-* A section can not exist without its sectioning node.
 * A sectioning node precedes its section.
 * A section is subsequent to its sectioning node.
+* A section can not exist without its sectioning node.
 
-This definition also implies that some process will have to switch away from
-a pre-existing section to the introduced next new section, as soon as the next
-sectioning node is reached (i.e. there is some order on a document's set of
-sections).
+This definition implies that some process will have to switch away from a
+pre-existing section to the introduced next new section, as soon as the next
+sectioning node is reached.
 
+* There is some order on a document's set of sections.
 * synonymous - declared before, pre-exists, precedes
 * synonymous - next new, declared after, is subsequent to
 
@@ -298,7 +323,7 @@ aspects into account:
 
 At any given time, multiple sections may be open, but only one of these can be
 the current active section. All the other open sections are suspended, i.e.
-they may be associated with further entities at some later point in time.
+they may be resumed at some later point in time.
 
 * synonymous - inactive, suspended
 * Sections that are inactive are still open for associations.
@@ -318,15 +343,15 @@ with a section, the section is automatically strictly associated with it (`SxN`)
 Any node within a tree always strictly belongs to some section.
 
 * `NxS` is left-total.
-* The root node always has to be seen as being a sectioning node.
+* The root node always acts as a sectioning node.
 
 The strict belongs-to relation puts each node into a strict relationship with a
 single section: A node either strictly belongs to one section, or it strictly
-belongs to a different one (i.e. a node can not strictly belong to two different
-sections at the same time).
+belongs to a different one.
 
-* A node may however strictly belong to one section and
-  loosely belong to multiple other sections at the same time.
+* A node can not strictly belong to two different sections at the same time.
+* A node strictly belong to (`NxS`) one section and may also
+  loosely belong to (`Nx...xNxS`) multiple other sections.
 * `NxS` is functional
 
 Multiple nodes may still strictly belong to the same section.
@@ -336,6 +361,8 @@ Multiple nodes may still strictly belong to the same section.
 A section strictly contains a node, if that node strictly belongs to it.
 
 * `SxN` is right-total.
+* A section strictly contains a node (`SxN`) and may also
+  loosely contain (`SxNx...xN`) multiple other nodes.
 
 Because multiple nodes may strictly belong to the same section, a section either
 strictly contains no node at all, a single node, or more than one nodes.

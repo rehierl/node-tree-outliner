@@ -36,6 +36,26 @@ in the section tree -
 a path to the current section
 
 <!-- ======================================================================= -->
+## sequently
+
+* the elements of an ordered sequence `s=[v1,v2,v3,v4,...]` are sequent
+* `vi in [a-z]`, ordered by some `<` operator
+* `v1=a` is **presequent to** `v2=b` - comes before, precedes
+* `v2` is **subsequent to** `v1` - comes after, succeeds
+* `v3=c` appears to be equal to `v4=c` - not `<` and not `>`
+* but they aren't equal - different variables
+* `s1=[v1,v2,v3,v4,...]` and `s2=[v1,v2,v4,v3,...]` appear to be equal
+  i.e. you can't tell them apart
+* you just can't tell them apart because `c` is not presequent
+  and not subsequent to `c` - they appear to be equal
+* likewise the sequences `s1=[a,b,v1,v2,d,...]` and `s2=[a,b,v2,v1,d,...]`
+  appear to be equal although they are not truly equal
+* `v1` is **insequent to** `v2` - not `<`, not `>`, but not exactly equal either
+* insequent = not strictly sequent
+
+antonym = gegenbegriff
+
+<!-- ======================================================================= -->
 ## Active/Passive nodes
 
 Entering and/or exiting **an inactive (or passive) node** has no effect on the
