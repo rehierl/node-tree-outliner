@@ -149,7 +149,7 @@ For any path `p=(n1,n2,...,nk) in NxNx...xN` such that `ni child-of ni+1`
 * `LR` or `LTR` - all paths that being in a leaf and end in a root
 * `LTR subset-of BU`, `E not in BU`
 
-Any such path has one direction only!
+Any such path has one direction only (i.e. uni-directional)!
 
 * no `p in TD` has a pair of nodes `(ni, ni+1)` such that
   `ni child-of ni+1`, or `ni descendant-of ni+j`
@@ -176,7 +176,7 @@ for any `i in [1,j]` and some `j in [1,min(k,l)]`.
 * `n1` is loosely related to `nk`, if `p=(n1,n2,n3,...,nk) in TD or BU`
   and `k in [3,+Infinity)`
 * `n1` is related to `nk`, if `n1` is strictly or loosely related to `nk`
-* synonymous - related to, connected with, in relationship with
+* synonymous - related to, connected with, in relationship with, coupled with
 
 in simple words:
 
@@ -215,7 +215,7 @@ upwards
 <!-- ======================================================================= -->
 ## An inaccurate mantra (1)
 
-* A pictogram to guide ones thoughts
+* Just a pictogram to guide ones thoughts.
 * Yuo can sitll raed tihs! (= try to grasp its essence)
 
 ```
@@ -249,14 +249,16 @@ A section is a sequence of nodes.
 
 This implies that the nodes of a section have some order.
 
-* The order is based upon the traversal of the node tree.
+* The order is based upon the notation of an HTML document -
+  the tree traversal must respect this order.
+* An outliner must assign nodes to sections according to that order.
 * synonymous - introduce, initialize, declare
 * synonymous - associate with, establish a relationship with
 * synonymous - is associated with, is related to
 
-At some point, an element introduces a new section. From that point on, nodes
-will be associated with this section, one after another, until that is no
-longer allowed.
+At some point, an element introduces a new section. From that point on,
+nodes must be associated with this section, one after another,
+until that is no longer allowed.
 
 * `S` is the set of sections, `N` the set of nodes.
 * The `SxN` relation is a two-way, one-to-many (1:N) relationship
@@ -270,10 +272,10 @@ A section is not a path.
 
 * A section is not necessarily uni-directional.
 * `s=(...,ni,ni+1,ni+2,...)` - `ni+1` may be a child of `ni`
-  and `ni+2` the next sibling to `ni`
-* A section may consist of siblings only.
+  and `ni+2` the next sibling to `ni` - or vice versa.
+* A section may consist of siblings only - i.e. not parent-of and not child-of.
 * The sequence of a section may contain subsequences that are path sequences.
-* A section may be equal to a path - an extreme case.
+* A section may be equal to a path - i.e. just an extreme case.
 
 A section is declared by its sectioning node and defined by its node sequence.
 
@@ -295,7 +297,7 @@ and entities (nodes, subsections, etc.) with it.
 
 A section is closed, if no more associations are allowed.
 
-* A section is fully qualified/defined once it is closed.
+* A closed section is fully qualified/defined.
 
 ### associated resources
 
@@ -338,7 +340,7 @@ A sectioning node introduces a new section.
 
 This definition implies an order between a sectioning node and its section:
 
-* A sectioning node precedes its section.
+* A sectioning node is presequent to its section.
 * A section is subsequent to its sectioning node.
 * A section can not exist without its sectioning node.
 
@@ -350,15 +352,15 @@ sectioning node is reached.
 * synonymous - declared before, pre-exists, precedes
 * synonymous - next new, declared after, is subsequent to
 
-If there is a preceding section, then there must also be a sectioning node
+If there is a presequent section, then there must also be a sectioning node
 which precedes it (because that section must also be declared at some point).
 
-* The sectioning node of a preceding section
-  precedes the sectioning node of a subsequent section.
+* The sectioning node of a presequent section
+  is presequent to the sectioning node of a subsequent section.
 * The order on the set of sections is
   equivalent to the order of their sectioning nodes.
 
-This definition does not state that a preceding section must end once the next
+This definition does not state that a presequent section must end once the next
 sectioning node is reached. Such a section may simply be suspended when the
 new section begins and it may be resumed once the new section ends.
 
@@ -366,8 +368,8 @@ new section begins and it may be resumed once the new section ends.
 * synonymous - resume, continue
 
 The definition of a specific sectioning node must define (1) which effect it has
-on pre-existing sections, and (2) what kind of relationship the new section has
-with these.
+on presequent sections that are still open, and (2) what kind of relationship
+the new section has with these.
 
 Definitions
 
@@ -396,9 +398,9 @@ aspects into account:
 3. If the current section, or even multiple previous open sections have ended,
    which of these is the next current section?
 
-At any given time, multiple sections may be open, but only one of these can be
-the current active section. All the other open sections are suspended, i.e.
-they may be resumed at some later point in time.
+At any given time, multiple sections may be open, but only one of these can
+be the current active section. All the other open sections are suspended,
+i.e. they may be resumed at some later point in time.
 
 * synonymous - inactive, suspended
 * Sections that are inactive are still open for associations.
@@ -425,8 +427,9 @@ single section: A node either strictly belongs to one section, or it strictly
 belongs to a different one.
 
 * A node can not strictly belong to two different sections at the same time.
-* A node strictly belong to (`NxS`) one section and may also
-  loosely belong to (`Nx...xNxS`) multiple other sections.
+* A node strictly belongs to (`NxS`) one section and may also
+  loosely belong to (`Nx...xNxS`) multiple other sections
+  (`Nx...xN in BU` because sections only have a downwards effect).
 * `NxS` is functional
 
 Multiple nodes may still strictly belong to the same section.
@@ -436,18 +439,17 @@ Multiple nodes may still strictly belong to the same section.
 A section strictly contains a node, if that node strictly belongs to it.
 
 * `SxN` is right-total.
-* A section strictly contains a node (`SxN`) and may also
-  loosely contain (`SxNx...xN`) multiple other nodes.
 
-Because multiple nodes may strictly belong to the same section, a section either
-strictly contains no node at all, a single node, or more than one nodes.
+Because multiple nodes may strictly belong to the same section, a section
+either strictly contains no node at all, a single node, or more than one nodes.
 
 * `SxN` is *not* functional
 
+**TODO** -
 A section that itself does not strictly contain any nodes, does not have to be
-empty (e.g. a section may consist of subsections only). That is, a seemingly
+empty (e.g. a section may consist of a single subsection). That is, a seemingly
 empty section (i.e. no strict relationship with any node) may still loosely
-contain an infinite number of nodes.
+contain (`SxNx...xN`) any number of nodes.
 
 <!-- ======================================================================= -->
 ## Node X belongs to section Y
@@ -465,7 +467,8 @@ such that `n descendant-of nk` and `(nk,s) in NxS`.
 * Associating a node with a section automatically establishes a loose
   relationship between the section and any of the node's descendants.
 * However, the same does not apply to any of the node's ancestors.
-* Any section has a *downwards*, but no *upwards* effect.
+* A section does not loosely contain any of the node's ancestors.
+* Any section has *a downwards*, but *no upwards* effect.
 * synonymous - downwards, inwards, inner
 * synonymous - upwards, outwards, outer
 

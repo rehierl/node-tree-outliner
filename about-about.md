@@ -4,7 +4,10 @@
 sections have much in common with the scope of a variable/parameter declaration -
 heading := { int value; ... }, section := function f(int value){ ... } -
 scope - list of commands/blocks for which a name is declared -
-named scope - explicit/implicit scope
+named scope - explicit/implicit scope -
+heading element similar to the declaration of local variables -
+section elemnt similar to a function definitin (parameters) -
+root element similar to the global scope
 
 **TODO** -
 
