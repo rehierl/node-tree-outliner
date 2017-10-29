@@ -11,7 +11,7 @@ Example:
 </body>
 ```
 
-Node `C` belongs to section `B`.
+Node `C` belongs to section `B` and section `B` contains node `C`.
 
 * The last section introduced before node `C` is section `B`.
   No other section is introduced before node `C`.
@@ -20,18 +20,79 @@ Node `C` belongs to section `B`.
   If that were the case, node `C` would have to belong to a pre-existing section
   (e.g. the body section).
 
-Node `A` belongs to the body section.
+Node `A` belongs to the body section and the body section contains node `A`.
 
 * Any node always belongs to some section.
 * The body element must introduce a section (i.e. **the body section** -
-  because its the top-most element, not because its the body element -
+  because it is the top-most element, not because it is the body element -
   a very subtle distinction!).
-* The body section contains node `A`.
 
 **TODO** -
 Does a heading element and its inner nodes (e.g. `h1` and `B`) belong to the
 section that a sectioning element (heading) introduces, or to a section
 to which it is subsequent (i.e. to some previous section)?
+
+<!-- ======================================================================= -->
+## Sequences
+
+* `s=[var1,var2,...,varN]` represents a sequence of variables
+* the entities of that sequence are **sequent** (= in sequence)
+* (en) antonym = (de) gegenbegriff
+
+```
+indexOf(seq, var) begin
+  for i in 1 to seq.length begin
+    if(seq(i) === var) return i
+  end
+  throw new VariableNotFoundException
+end
+```
+
+* here, the (`===`) operator checks for reference (not value) equality
+* here, the (`!==`) operator checks for reference (not value) in-equality
+
+*indexOf(s,v2) &gt; indexOf(s,v1)*
+
+* `v2` **succeeds** `v1`
+* `v2` **sequently** appears after `v1`
+* `v2` is **sub-sequent to** `v1`
+* sub-sequent := both variables are sequent,
+  and the 1st variable appears behind the 2nd
+
+*indexOf(s,v1) &lt; indexOf(s,v2)*
+
+* `v1` **precedes** `v2`
+* `v1` is **pre-sequent to** `v2`
+* pre-sequent := both variables are sequent,
+  and the 1st variable appears before the 2nd
+
+*indexOf(v1) is neither &lt;, nor &gt; to indexOf(v1)*
+
+* there is a 1:1 relationship between the slots of a sequence and its entries -
+  a slot can never hold more than one variable
+* you can always state that `indexOf(v1)` is either pre- or sub-sequent to
+  `indexOf(v2)`
+* for as long as `(v1 !== v2)` is true, there is no need for an additional
+  case (i.e. neither pre-, nor sub-sequent)
+* `indexOf(v1)` is **in-sequent to** `indexOf(v1)`
+* in-sequent := both variables are sequent,
+  and the 1st variable is neither pre-, nor sub-sequent to the 2nd -
+  also, the 2nd variable is neither pre-, nor sub-sequent to the 1st -
+  both appear to be equal
+* in this particular case, both variables are identical (i.e. `(v1 === v1)`)
+
+*valueOf(v1) is neither &lt;, nor &gt; to valueOf(v2)*
+
+```
+v1.value = 3, v2.value = 3
+(a < b) := (a.value < b.value)
+(a > b) := (a.value > b.value)
+```
+
+* `v1` is not necessarily equal to `v2` just because `v1` is neither
+  pre- (i.e. `v1 < v2`), nor sub-sequent (i.e. `v1 > v2`) to `v2`.
+* in this particular case, both operators are insufficient to infer
+  reference equality (i.e. `(v1 !== v2)`)
 
 <!-- ======================================================================= -->
 ## Node <-> Nodes
@@ -88,30 +149,41 @@ For any path `p=(n1,n2,...,nk) in NxNx...xN` such that `ni child-of ni+1`
 * `LR` or `LTR` - all paths that being in a leaf and end in a root
 * `LTR subset-of BU`, `E not in BU`
 
-### properties
+Any such path has one direction only!
+
+* no `p in TD` has a pair of nodes `(ni, ni+1)` such that
+  `ni child-of ni+1`, or `ni descendant-of ni+j`
+* no `p in BU` has a pair of nodes `(ni, ni+1)` such that
+  `ni parent-of ni+1`, or `ni ancestor-of ni+j`
+* Any path is based upon exact one relation only.
+
+### miscellaneous
 
 * The length of a path `p` is the number of nodes involved (`p.length = k`).
-* The n-th node of a path is the n-th node in its node sequence.
+* The n-th node (= `p(n)`) of a path is the n-th node in its node sequence.
 * `p(i) = ni` for `p=(...,ni-1,ni,ni+1,...)`
 * A tree has no cycles => `p(i) != p(j)` for any `i,j in [1,k]` and `i != j`
 
 Paths `p1=(n1,n2,...,nk)` and `p2=(m1,m2,...,ml)` share a common prefix,
-if `p1(i) == p2(i)` for `i in [1,j]` and `j <= min(k,l)`.
-Paths `p1` and `p2` share a common suffix,
-if `p1(k-i+1) == p2(l-i+1)` for `i in [1,min(k,l)]`.
+if `p1(i) == p2(i)` for any `i in [1,j]` and some `j in [1,min(k,l)]`.
+
+Paths `p1` and `p2` share a common suffix, if `p1(k-i+1) == p2(l-i+1)`
+for any `i in [1,j]` and some `j in [1,min(k,l)]`.
 
 ### undirected definitions
 
 * `n1` is strictly related to `nk`, if `p=(n1,nk) in TD or BU`
-* synonymous - strictly related,
-  directly related, strictly connected with, in strict relationship with
-* `n1` is loosely related to `nk`, if `p=(n1,n2,...,nk) in TD or BU`
+* `n1` is loosely related to `nk`, if `p=(n1,n2,n3,...,nk) in TD or BU`
   and `k in [3,+Infinity)`
-* synonymous - loosely related to,
-  loosely connected with, in loose relationship with
-* `n1` is related to `nk`, if `n1` is strictly or loosely related to `nk`.
+* `n1` is related to `nk`, if `n1` is strictly or loosely related to `nk`
 * synonymous - related to, connected with, in relationship with
-* (strictly => no nodes in between), (loosely => nodes in between)
+
+in simple words:
+
+* strictly => connected, and there are no nodes in between
+* loosely => connected, but there are some nodes in between
+* (none) => a path exists such that both are nodes connected -
+  with or without other nodes in between
 
 ### directed definitions
 
@@ -143,8 +215,8 @@ upwards
 <!-- ======================================================================= -->
 ## An inaccurate mantra (1)
 
-* A pictogram to guide ones thoughts.
-* Yuo can sitll raed tihs! (= grasp its essence)
+* A pictogram to guide ones thoughts
+* Yuo can sitll raed tihs! (= try to grasp its essence)
 
 ```
 < root <          path-of-nodes        > leaf >
@@ -153,7 +225,7 @@ upwards
 R x N x ... x N x N x ... x N x N x ... x N x L
 ```
 
-* `RxNx...xNxL` can be seen to represent all the paths of a tree (=`RTL`).
+* `RxNx...xNxL` can be seen to represent all the RTL paths of a tree.
 * At any non-leaf node, a path of any length may branch off:
 
 ```
@@ -168,7 +240,7 @@ It depends on the current context how one needs to look at it.
 * `...xNxNx...` can be seen to represent an infinite set of paths that all
   share some common prefix (same ancestors), but (beginning with some node)
   branch off into different suffixes (different descendants).
-* `Rx...xL` can also be seen to represent a single path.
+* `Rx...xL` can also be seen to represent a single path only.
 
 <!-- ======================================================================= -->
 ## Section (1)
@@ -177,14 +249,14 @@ A section is a sequence of nodes.
 
 This implies that the nodes of a section have some order.
 
-* This order is based upon the traversal of the node tree.
+* The order is based upon the traversal of the node tree.
 * synonymous - introduce, initialize, declare
 * synonymous - associate with, establish a relationship with
 * synonymous - is associated with, is related to
 
-At some point, an element introduces a new section. From that point on,
-nodes will be associated with this section, one after another, until that
-is no longer allowed.
+At some point, an element introduces a new section. From that point on, nodes
+will be associated with this section, one after another, until that is no
+longer allowed.
 
 * `S` is the set of sections, `N` the set of nodes.
 * The `SxN` relation is a two-way, one-to-many (1:N) relationship
@@ -194,11 +266,14 @@ is no longer allowed.
 * The n-th node of a section's sequence is the section's n-th node.
 * A non-empty section always has a first and a last node.
 
-A section is itself not a path!
+A section is not a path.
 
+* A section is not necessarily uni-directional.
+* `s=(...,ni,ni+1,ni+2,...)` - `ni+1` may be a child of `ni`
+  and `ni+2` the next sibling to `ni`
 * A section may consist of siblings only.
-* Subsequences of a section may be path sequences.
-* A section may be equal to a single path (extreme case only).
+* The sequence of a section may contain subsequences that are path sequences.
+* A section may be equal to a path - an extreme case.
 
 A section is declared by its sectioning node and defined by its node sequence.
 
@@ -212,8 +287,8 @@ Definitions
 
 ### open and closed sections
 
-A section is open, if it is still allowed to associate entities
-(nodes, a title, subsections, etc.) with it.
+A section is open, if it is still allowed to associate properties (title, etc.)
+and entities (nodes, subsections, etc.) with it.
 
 * synonymous - open, has started
 * synonymous - closed, has ended
@@ -228,8 +303,8 @@ A section is closed, if no more associations are allowed.
 * synonymous - release, unlock, free, destroy
 
 Similar to binary streams, certain resources (e.g. memory) must be associated
-with a section. These need to be allocated when a section is opened and released
-when it is closed.
+with a section. These need to be allocated when a section is opened and
+released when it is closed.
 
 * Once a section is closed, it can not be re-opened.
 
@@ -255,16 +330,11 @@ A sectioning node introduces a new section.
 * synonymous - introduce, initialize, declare
 * A sectioning node introduces a single section
   (not 0, not 2, ..., not N, exactly and always 1).
-* `S` is the set of sections, `N` the set of nodes.
+* `N` the set of nodes, `S` is the set of sections
 * This `NxS` relation is a two-way, one-to-one (1:1) relationship.
 * Any section can be identified by its sectioning node.
 * Any node can be classified as a sectioning, or as a non-sectioning node
   (a node either introduces a new section, or it does not).
-
-Definitions
-
-* `SectioningNode Section.declaredBy`
-* `Section SectioningNode.declaredSection`
 
 This definition implies an order between a sectioning node and its section:
 
@@ -298,6 +368,11 @@ new section begins and it may be resumed once the new section ends.
 The definition of a specific sectioning node must define (1) which effect it has
 on pre-existing sections, and (2) what kind of relationship the new section has
 with these.
+
+Definitions
+
+* `SectioningNode Section.declaredBy`
+* `Section SectioningNode.declaredSection`
 
 => see also - a sequence of nodes subsequent to a node
 
