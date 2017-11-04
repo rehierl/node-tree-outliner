@@ -1,4 +1,8 @@
 
+**TODO** - 
+
+pre- or subsequent rooted paths
+
 **TODO** -
 
 sections have much in common with the scope of a variable/parameter declaration -
@@ -44,6 +48,18 @@ Almost a Parker Square - dishonesty
 The stack of open sections -
 in the section tree -
 a path to the current section
+
+<!-- ======================================================================= -->
+## Putting it together
+
+* A relation is transitive, if `(a,b) and (b,c) in R`, then also `(a,c) in R`.
+* `R in NxN` is not transitive, `NxNxN` a loose relationship
+
+### NxN -> NxNx...xNxN
+
+### SxN, NxS -> SxNxNx...xNxS
+
+### SxNx...xNxS -> SxS
 
 <!-- ======================================================================= -->
 ## Active/Passive nodes
