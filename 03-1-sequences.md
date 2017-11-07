@@ -2,55 +2,36 @@
 # Sequences
 
 * `s` represents a sequence of elements.
-* `s = [si] = [e1,e2,...,eN]`, or alternatively `s = (si) = (e1,e2,...,eN)`
-  for some `N in [0,+Inf)`, `(Inf := Infinity)`
-* `s = [e(1),...,e(N)] = [e1,...,eN]` -
-  for readability purposes `e(i)` may be used instead of `ei`.
+* `s = [si] = [e1,e2,...,eN] = [e(1),...,e(N)]` for `N in [0,+Inf)`
+* or alternatively `s = (si) = (e1,e2,...,eN)`
 * Two elements of the same sequence are **sequent**.
 * Any two elements appear **sequently** within the same sequence.
 
-Any element `e(i)` of a sequence is an element of its **domain** `E(i)` -
-i.e. `e(i) in E(i)`, or simply `ei in Ei`.
+Any element `e(i)` may belong to a different domain `E(i)`
 
-* `e(i)` is not necessarily in the same domain as `e(j)`
 * `e(i) not in E(j)` may be true
+* `e(i)` is not necessarily in the same domain as `e(j)`
 
 The **length of** a sequence `s`
 
-* `#s = #(s) = lengthOf(s) = s.length = N`
+* `#s := #(s) := lengthOf(s) := s.length := N`
 * `#s length-of s` is always true
 
 Sequence `s` is **empty**
 
-* `isEmpty(s)` is true, if `(#s = 0)`
+* `is-empty s` (alt. `isEmpty(s)`) is true, if `(#s = 0)`
+* `is-empty () := is-empty [] = true`
 
-The **n-th entry of** a sequence
+The **n-th entry of** sequence `s`
 
-* `s(i) = ei` for `i in [1,#s]`
+* `s(i) = s[i] = ei` for `i in [1,#s]`
 * synonymous - entry, element, item
 * `s(i) = undefined`, if `(#s = 0)`
-* `(si) or [si]` is a sequence and `s(i)` the i-th element of one
 
-<!-- ======================================================================= -->
-## equal sign (=)
+The **reversed** sequence `s'` of sequence `s`
 
-From a mathematical point of view:
-
-* `a = b` means that `a` is equal to, or has the same value as `b`
-* Both are equal by definition, if the specified conditions apply
-
-From a source code point of view:
-
-* `a = b` means that the value of `b` is assigned to `a` -
-* After an assignment, the value of `a` might still change at any point.
-* `(a == b)` means that `a` and `b` are tested for equality -
-  `true` if the value of `a` equals the value of `b`, otherwise `false`.
-* `(a = b) <=> (a == b)`
-
-Parenthesis allow to clarify the meaning of (=):
-
-* `a = b` is an assignment
-* `(a = b)` is a test for equality
+* `s' = (eN,...,e1)`, if `s = (e1,...,eN)`
+* `s` and `s'` are palindromic sequences, if `(s = s')`
 
 <!-- ======================================================================= -->
 ## equality, inequality

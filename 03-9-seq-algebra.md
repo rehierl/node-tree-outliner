@@ -90,12 +90,14 @@ Any sequence `s` is the product of its elements `e1,...,eN`
 ## infix, subsequence
 
 * `t subsequence-of s`, if sequences `a` and `b` exist such that `axtxb = s`.
+* `(t = s)`, if and only if `axtxb = s` for `a,b = []`
 
 <!-- ======================================================================= -->
 ## prefix
 
 * `a prefix-of b`, if a sequence `c` exists such that `axc = b`
 * `a prefix-of B`, if `a prefix-of b` is true for any `b in B`
+* All sequences in `B` have sequence `a` as a common prefix.
 * `s = axb`, then `a prefix-of s`
 
 <!-- ======================================================================= -->
@@ -103,4 +105,5 @@ Any sequence `s` is the product of its elements `e1,...,eN`
 
 * `a suffix-of b`, if a sequence `c` exists such that `cxa = b`
 * `a suffix-of B`, if `a suffix-of b` is true for any `b in B`
+* All sequences in `B` have sequence `a` as a common suffix.
 * `s = axb`, then `b suffix-of s`

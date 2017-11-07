@@ -20,7 +20,7 @@ Node `A` belongs to the body element and the body element contains node `A`.
 ### Nodes <-> Nodes
 
 * `N` is the set of nodes, `p` and `c` in `N`.
-* `(p,c) in R in NxN` states that node `n` is in direct relationship with 
+* `(p,c) in R in NxN` states that node `p` is in direct relationship with 
   node `c` (i.e. parent node `p` contains child node `c`).
 * `(c,p) in R' in NxN` states that node `c` is in direct relationship with
   node `p` (i.e. child node `c` belongs to parent container node `p`).
@@ -72,7 +72,7 @@ Elements introduce new sections, but where do they end?
 * `(n,s) in R in NxS` states that node `n` is in direct relationship with
   section `s` (i.e. node `n` belongs to section `s`).
 * `(s,n) in R' in SxN` states that section `s` is in direct relationship with
-  node `n` (i.e. section `s` contains node `n` and `(s,n) in SxN`).
+  node `n` (i.e. section `s` contains node `n`).
 * `(n,s) in R <=> (s,n) in R'`
 
 <!-- ======================================================================= -->
@@ -108,11 +108,10 @@ Example:
 </body>
 ```
 
-Here, the section introduced by the body element is itself not empty (node `A`
-belongs to the body section). As a result, a TOC can no longer ignore this
-section.
+The section introduced by the body element is itself not empty (node `A` belongs
+to the body section). As a result, a TOC can no longer ignore this section.
 
-There are two approaches of how to print a more accurate TOC for this fragment:
+There are two approaches to print a more accurate TOC for this fragment:
 
 ```
 TOC-1:                          TOC-2:
@@ -122,8 +121,8 @@ TOC-1:                          TOC-2:
 ```
 
 Both TOCs are not equivalent because each of these corresponds with a different
-structure. Consequently, only one of these can accurately represent the
-fragment's outline, the other one does not. So which of these is invalid?
+structure. Consequently, only one can accurately represent the fragment's
+outline, the other one does not. So which of these is invalid?
 
 **Question**:
 What kind of relationship do sections have with each other?
