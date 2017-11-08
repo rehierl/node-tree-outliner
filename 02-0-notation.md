@@ -1,12 +1,6 @@
 
 # Notation
 
-## equivalent
-
-* `<=>, =>, <=`
-* `!<=>, !=>, !<=`
-* `<!>, !>, <!`
-
 ## assignment (=)
 
 * `a = b` means that the value of `b` is assigned to `a`
@@ -47,7 +41,7 @@ number intervals
 * `[a,*] := [1,+Inf)`
 * `i in [a,*]` := value `i` may have any value from `a` to `Infinity`
 
-regular expression-like patterns
+regular expression like patterns
 
 * `<e>{a,b}` := expression `<e>` must appear `i` times,
   for `i in [a,b]`, `[a,b] in [0,+Inf]`, `(a <= b)`
@@ -59,10 +53,9 @@ regular expression-like patterns
 
 ## equal by value (==)
 
-* `a == b` := the values of `a` and `b` are tested for equality
+* `(a == b), (a equal-to b)` := the values of `a` and `b` are tested for equality
 * `true` if both values are equal, `false` otherwise
 * signature - (anything, anything) -> boolean
-* synonymous - `a == b`, `(a == b)`
 * `(a == b)` is in general true, if `(a == b)` follows `a = b` or `a := b`
 * e.g. `true` if `b = 3`, but `false` if `b := +Inf`
 * `(a == b) <=> (b == a)`
@@ -76,11 +69,9 @@ clarification (==,if)
 
 ## unequal by value (!=)
 
-* `(a != b) := not (a == b)`
+* `(a != b), (a unequal-to b) := not (a == b)`
 * references `a` and `b` are tested for in-equality by value
-* synonymous - `a != b`, `(a != b)`
 * `(a != b) <=> (b != a)`
-* e.g. `(2 != 3)`
 
 clarification (!=,if)
 
@@ -91,16 +82,56 @@ clarification (!=,if)
 
 ## equal by reference (===)
 
-* `a === b := (a === b) := (addressOf(a) == addressOf(b))`
+* `a === b, (a === b), (a identical-to b) := (addressOf(a) == addressOf(b))`
 * the references of `a` and `b` are tested for equality
 * `true` if `a` is identical to `b`, `false` otherwise
-* synonymous - equal by reference, identical
-* e.g. `(a === a)`, if `a` is itself a reference
 * `(a === b) <=> (b === a)`
+* `(a !== b) <=> (b !== a)`
+
+clarification
+
+* equal by value => not necessarily also equal by reference
 
 ## unequal by reference (!==)
 
-* `a !== b := (a !== b) := not (a === b)`
+* `a !== b, (a !== b) := not (a === b)`
 * `true` if `a` is not identical to `b`, `false` otherwise
-* e.g. `(a !== b)`, if `a` and `b` are references
-* `(a !== b) <=> (b !== a)`
+
+clarification
+
+* unequal by value => also unequal by reference
+
+## (n in N), (n !in N)
+
+* `n in N` is true, if `n` is an element of `N`
+* `(n !in N), (n not in N) := not (n in N)`
+
+clarification
+
+* in general, a boolean operator may be prefixed with the negation operator
+  to express an inverted statement
+* e.g. `(V contains v)` => `(V !contains v)`
+
+## equivalent
+
+* `a <=> b`
+* if `a` is true, then `b` is also true
+* if `a` is not true, then `b` is also not true
+* does not always mean, that both are strictly equivalent
+* also used to clarify, that `a` and `b` have the same meaning
+* `!<=>, <!> := not(<=>)`
+* clarify that `a` and `b` do not have the same meaning
+
+implication
+
+* `a => b`
+* if `a` is true, then `b` is also true
+* if `a` is not true, then `b` may still be true
+* also clarify, that `b` is derived from `a`
+* `!=>, !> := not(=>)`
+* clarify that `a` does not imply `b`
+
+reversed implication
+
+* `(a <= b) <=> (b => a)`
+* `!<=, <! := not(<=)`

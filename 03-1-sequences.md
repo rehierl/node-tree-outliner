@@ -1,77 +1,94 @@
 
 # Sequences
 
-* `s` represents a sequence of elements.
-* `s = [si] = [e1,e2,...,eN] = [e(1),...,e(N)]` for `N in [0,+Inf)`
-* or alternatively `s = (si) = (e1,e2,...,eN)`
-* Two elements of the same sequence are **sequent**.
-* Any two elements appear **sequently** within the same sequence.
+* `s` represents a sequence of elements (aka. slots)
+* `s = [si] = [e1,e2,...,eN] = [e:1,...,e:N]` for `N in [0,*]`
+* or, alternatively `s = (si) = (e1,e2,...,eN)`
 
-Any element `e(i)` may belong to a different domain `E(i)`
+clarification
 
-* `e(i) not in E(j)` may be true
-* `e(i)` is not necessarily in the same domain as `e(j)`
+* `domainOf(ei) := Vi` - any element has its own domain
+* however, different elements may still belong to the same domain -
+  e.g. `domainOf(e2), V2 := V1` is possible
 
-The **length of** a sequence `s`
+clarification
 
-* `#s := #(s) := lengthOf(s) := s.length := N`
-* `#s length-of s` is always true
-
-Sequence `s` is **empty**
-
-* `is-empty s` (alt. `isEmpty(s)`) is true, if `(#s = 0)`
-* `is-empty () := is-empty [] = true`
-
-The **n-th entry of** sequence `s`
-
-* `s(i) = s[i] = ei` for `i in [1,#s]`
-* synonymous - entry, element, item
-* `s(i) = undefined`, if `(#s = 0)`
-
-The **reversed** sequence `s'` of sequence `s`
-
-* `s' = (eN,...,e1)`, if `s = (e1,...,eN)`
-* `s` and `s'` are palindromic sequences, if `(s = s')`
+* changing the value of an element results in a different sequence
+* `s[i] = v` is not allowed - `e = s[i]` is allowed
+* any sequence is itself a value - `e = s` is allowed
 
 <!-- ======================================================================= -->
-## equality, inequality
+## is sequence
 
-Two sequences `s` and `t` are **equal by value (==)**
+* `(is-sequence s), isSequence(s)` is true, if `s` is a sequence
+* i.e. `s` has the characteristics of a sequence
+* signature - (anything) -> boolean
 
-* `(s == t)`, if `(#s = #t)` and `(s(i) = t(i))` for any `i in [1,#s]`
-* synonymous - `(s == t)`, `(s = t)`, `(s equal-to t)`
-* In general, the test for equality by value must take the type of both
-  elements into account (e.g. `(+2 != +2.0)`): `(s == t)`, if `(#s = #t)`
-  and `(typeOf(s(i)) = typeOf(t(i)))` and `(s(i) = t(i))`
+<!-- ======================================================================= -->
+## length of
 
-Two sequences `s` and `t` are **unequal by value (!=)**
+* `#s, #(s), lengthOf(s), s.length, (length-of s) := N`
+* `(#s length-of s)` is always true
 
-* `(s != t)`, if `not (s equal-to t)`
-* synonymous - `(s != t)`, `(s unequal-to t)`
-* They differ in length and/or in some corresponding entries.
+<!-- ======================================================================= -->
+## is empty
 
-Two sequences `s` and `t` are **equal by reference (===)**
+* `(is-empty s), isEmpty(s) := (#s == 0)`
+* `()` and `[]` represent empty sequences
+* i.e. `isEmpty(())` and `isEmpty([])` are always true
 
-* `(s === t)`, if `(addressOf(s) == addressOf(t))`
-* synonymous - `(s === t)`, `(s identical-to t)`
-* `(s === t) => (s == t)` - but not `<=`
+<!-- ======================================================================= -->
+## n-th element of
 
-Two sequences `s` and `t` are **unequal by reference (!==)**
+* `s(i), s[i] := ei` for `i in [1,#s]`
+* `s(i) := undefined` for `i not in [1,#s]`
+* synonymous - entry, element, item
 
-* `(s !== t)`, if `(addressOf(s) != addressOf(t))`
-* synonymous - `(s !== t)`, `(s different-to t)`
-* `(s != t) => (s !== t)` - but not `<=`
-* Different references are needed to store different values.
-* A single reference can not store two different values at the same time.
-* Different references may still represent equal values.
+clarification
 
-Equality/inequality default to equal/unequal by value.
+* `(si)` and `[si]` are sequences
+* `s(i)` and `s[i]` are elements of a sequences
 
-* equal => equal by value, but not necessarily equal by reference
-* unequal => unequal by value and also unequal by reference
+clarification
+
+* comparison with `s[i]` is done against the element's current value
+* `var = s[i]` assigns the value of element `ei` to the given variable
+* the elements of a sequence themselves cannot be changed or accessed -
+  i.e. sequences appear as sequences of values
+* the elements of a sequence and the values they have are used synonymously
+
+<!-- ======================================================================= -->
+## is unique
+
+* `(is-unique s), isUnique(s)` are true, if `(s(i) != s(j))`
+  for any combination of indexes `i,j in [1,#s]` such that `(i != j)`
+* `s` is itself unique, if all elements refer to different/unique values
+
+<!-- ======================================================================= -->
+## equality
+
+equal by value (==)
+
+* `(s == t)` is true, if `(#s == #t)` and `(s(i) == t(i))` for any `i in [1,#s]`
+* In general, the test for equality by value must also take the domains into
+  account - e.g. `(+2 != +2.0)`
+* `(s != t)` => both differ in length and/or corresponding elements/values
+
+<!-- ======================================================================= -->
+## reversed sequence s'
+
+* `s', (s)' := (f1=eN,...,fN=e1)`, if `s = (e1,...,eN)`
+* `(s'(i) == s(N-i+1)` for any `i in [1,N]`
+
+palindrome
+
+* `s` and `s'` are palindromic sequences, if `(s == s')`
+* `(s == (s')')` is always true
 
 <!-- ======================================================================= -->
 ## infix, subsequence
+
+left-bound <=> right-bound
 
 * (left-bound, offset-based notation)
   `t = [e(l),e(l+1),...,e(l+k-1)]`
@@ -81,31 +98,43 @@ Equality/inequality default to equal/unequal by value.
   `t = [e(r-k+1),...,e(r-k+i),...,e(r)]`
   for some `r in [1,N]`, `k in [1,r]` and `i in [1,k]` -
   `r` is the right border.
-* `left-bound <=> right-bound`
 
-Sequence `t` is a **subsequence of** sequence `s`:
+Sequence `t` is **an infix of** sequence `s`
 
-* `t subsequence-of s`, if `(s(o+j) = t(j))`
-  for `o in [1,N]`, `k in [1,(N-o)]` and `j in [1,k]`.
-* `(t = s)`, if `t subsequence-of s` and `(#t = #s)`
+* `t infix-of s`, if `(s(o+j) = t(j))`
+  for `o in [1,N]`, `k in [1,(N-o)]` and `j in [1,k]`
+* `(t subsequence-of s) := (t infix-of s)`
+* signature - (sequence,sequence) -> boolean
+
+clarification
+
+* "subsequence" can have the following meaning:
+* `s = [1, (2, 3), 4]`, `t = [2, 3]` => `s = [1, t, 4]`
+* i.e. a single element of `s` has `t` as its value
+* here, "subsequence" has this meaning:
+* `s = [1, 2, 3, 4]`, `t = [2, 3]`
+* i.e. subsequent elements of `s` match sequence `t`
+
+clarification
+
 * A sequence is a subsequence to itself.
-* `(s = s)` and `s subsequence-of s` are both always true.
+* `(t == s)` => `t infix-of s` and `(#t = #s)`
 * An empty sequence has no subsequence.
+* `(s == s)` and `s infix-of s` are both always true.
 
 <!-- ======================================================================= -->
 ## prefix
 
 Sequence `t` is **a prefix of** sequence `s`
 
-* `t prefix-of s`, if `t subsequence-of s`
-  and offset `(o = 1)` (digit)
+* `t prefix-of s`, if `t infix-of s` and offset `(o = 1)` (digit)
 * `t` is bound to the 1st entry of `s`
 * `s prefix-of s` is always true.
 * A sequence is a prefix to itself.
 
 Sequence `t` is **the n-th prefix of** sequence `s`
 
-* `t n-prefix-of s`, if `t prefix-of s` and `(#t = k = n)`
+* `t n-prefix-of s`, if `t prefix-of s` and `(#t == n)`
 * `prefix(s,n) = t`, if `(t n-prefix-of s)`
 * The N-th prefix of a sequence is the sequence itself.
 
@@ -131,7 +160,7 @@ Sequence `u` is **the common prefix of** sequence `s` and sequence `t`
 
 Sequence `t` is **a suffix of** sequence `s`
 
-* `t suffix-of s`, if `t subsequence-of s` and `(r = N)`
+* `t suffix-of s`, if `t subsequence-of s` and `(r == N)`
 * `t` is bound to the last entry of `s`
 * `t` and `s` have the same order (i.e. `t` is not reversed)
 * `s suffix-of s` is always true
@@ -139,7 +168,7 @@ Sequence `t` is **a suffix of** sequence `s`
 
 Sequence `t` is **the n-th suffix of** sequence `s`
 
-* `t n-suffix-of s`, if `t suffix-of s` and `(#t = k = n)`
+* `t n-suffix-of s`, if `t suffix-of s` and `(#t == n)`
 * `suffix(s,n) = t`, if `(t n-suffix-of s)`
 * The N-th suffix of a sequence is the sequence itself.
 
@@ -159,113 +188,3 @@ Sequence `u` is **the common suffix of** sequence `s` and sequence `t`
 
 * If there is no other common suffix `v` such that `(#v > #u)`
 * `u max-suffix-of s,t`
-
-<!-- ======================================================================= -->
-## x-sequent
-
-* `s=[e1,e2,...,eN]` represents a sequence of variables.
-
-```
-indexOf(sequence,entry) begin
-  for i in 1 to sequence.length begin
-    //- (===) checks for reference equality
-    if(sequence(i) === entry) return i
-  end
-  throw new EntryNotFoundException()
-end
-
-distanceBetween(seq,e1,e2) begin
-  i1 = indexOf(seq,e1)
-  i2 = indexOf(seq,e2)
-  return (i2 - i1)
-end
-
-//- in short: (i1 < i2)
-isPreSequentTo(seq,e1,e2) begin
-  return (distanceBetween(seq,e1,e2) > 0)
-end
-
-//- pre-sequent
-isPreSequentTo := (distanceBetween > 0)
-isStrictlyPreSequentTo := (distanceBetween == +1)
-isLooselyPreSequentTo := (distanceBetween > +1)
-
-//- sub-sequent
-isSubSequentTo := (distanceBetween < 0)
-isStrictlySubSequentTo := (distanceBetween == -1)
-isLooselySubSequentTo := (distanceBetween < -1)
-
-//- in-sequent
-isInSequentTo := (distanceBetween == 0)
-```
-
-### pre-sequent (<,<<)
-
-* `e1` appears before `e2`
-* `e1` **precedes** `e2`
-* `e1` is **presequent to** `e2`
-* **presequent (<)** := `x` and `y` are sequent -
-  and `x` appears before `y`
-* **strictly presequent (<<)** := `x` is presequent to `y` -
-  and `x` appears directly before `y`
-* **loosely presequent** := `x` is presequent to `y` -
-  but `x` is not strictly presequent to `y` -
-  i.e. there are other entries in between
-* `s(i) is presequent to s(j)` for any `i,j in [1,N]` and `(i < j)`
-
-### sub-sequent (>,>>)
-
-* `e2` appears after `e1`
-* `e2` **succeeds** `e1`
-* `e2` is **subsequent to** `e1`
-* **subsequent (>)** := `x` and `y` are sequent -
-  and `y` appears after `x`
-* **strictly subsequent (>>)** := `y` is subsequent to `x` -
-  and `y` appears directly after `x`
-* **loosely subsequent** := `y` is subsequent to `x` -
-  but `y` is not strictly subsequent to `x` -
-  i.e. there are other entries in between
-* `s(i) is subsequent to s(j)` for any `i,j in [1,n]` and `(i > j)`
-
-### in-sequent (<>)
-
-* A slot in a sequence can never hold more than one variable.
-* There is a 1:1 relationship between the slots and its entries.
-* Randomly pick two variables: `v1,v2 in s=[e1,...,eN]`
-* If `(v1 !== v2)`: `v1` is either pre- or subsequent to `v2`.
-* If `(v1 === v2)`: `v1` is neither pre- nor subsequent to `v2`.
-* `e1` is **insequent to** `e1`
-* **insequent (<>)** := `e1` and `e2` are sequent -
-  but `e1` is neither pre- nor subsequent to `e2`.
-
-But, two entities are not necessarily identical just because they are neither
-pre- nor subsequent according to some order:
-
-```
-s=[e1,e2,...,eN]
-
-(a < b) := (a.value < b.value)
-(a > b) := (a.value > b.value)
-
-for i in 1 to N begin
-  s[i].value = (i Mod 2)
-end
-```
-
-With such an order in mind, ...
-
-* `e1` is not identical to `e3` just because `e1` is insequent to `e3`.
-* The order is insufficient to infer reference equality.
-
-### examples
-
-* presequent => strictly or loosely presequent
-* subsequent => strictly or loosely subsequent
-* insequent => not presequent and not subsequent
-
-Assumed that `x` and `y` are sequent, then ...
-
-* `not (x presequent-to y) <=> (x insequent-to y) or (x subsequent-to y)`
-* `not (x subsequent-to y) <=> (x insequent-to y) or (x presequent-to y)`
-* `not (x insequent-to y) <=> (x presequent-to y) or (x subsequent-to y)`
-* `(x insequent-to y) <=> (y insequent-to x)`

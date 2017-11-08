@@ -1,5 +1,11 @@
 
-# Domains
+# Domain of a sequence
+
+Any element `ei` may belong to a different domain `Ei`
+
+* `ei not in Ej` may be true
+* `e(i)` is not necessarily in the same domain as `e(j)`
+
 <!-- ======================================================================= -->
 
 * `s = [e1,...,eN]` for `N in [0,+Inf)`
