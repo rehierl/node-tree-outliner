@@ -20,7 +20,7 @@ clarification
 <!-- ======================================================================= -->
 ## is sequence
 
-* `(is-sequence s), isSequence(s)` is true, if `s` is a sequence
+* `(is-sequence s), isSequence(s)` are true, if `s` is a sequence
 * i.e. `s` has the characteristics of a sequence
 * signature - (anything) -> boolean
 
@@ -65,9 +65,7 @@ clarification
 * `s` is itself unique, if all elements refer to different/unique values
 
 <!-- ======================================================================= -->
-## equality
-
-equal by value (==)
+## equality (==,!=)
 
 * `(s == t)` is true, if `(#s == #t)` and `(s(i) == t(i))` for any `i in [1,#s]`
 * In general, the test for equality by value must also take the domains into
@@ -75,7 +73,7 @@ equal by value (==)
 * `(s != t)` => both differ in length and/or corresponding elements/values
 
 <!-- ======================================================================= -->
-## reversed sequence s'
+## reversed sequence (s')
 
 * `s', (s)' := (f1=eN,...,fN=e1)`, if `s = (e1,...,eN)`
 * `(s'(i) == s(N-i+1)` for any `i in [1,N]`

@@ -1,27 +1,25 @@
 
 # Sequent
 
-* Two elements of the same sequence are **sequent**.
-* Any two elements appear **sequently** within the same sequence.
+* two elements of the same sequence are **sequent**
+* any two elements appear **sequently** within the same sequence
 
 clarification
 
 * the elements of a sequence and the values they have are used synonymously
+* i.e. the values of a sequence are sequent => they appear sequently
+* confusion is inevitable, if a sequence is itself not unique -
+  e.g. `s = (1, 2, 1, 3)`
 
 <!-- ======================================================================= -->
-
-<!-- ======================================================================= -->
-## x-sequent
-
-* `s=[e1,e2,...,eN]` represents a sequence of variables.
+## pseudocode definitions
 
 ```
-indexOf(sequence,entry) begin
+indexOf(sequence,element) begin
   for i in 1 to sequence.length begin
-    //- (===) checks for reference equality
-    if(sequence(i) === entry) return i
+    if(sequence(i) === element) return i
   end
-  throw new EntryNotFoundException()
+  throw new ElementNotFoundException()
 end
 
 distanceBetween(seq,e1,e2) begin
@@ -36,84 +34,78 @@ isPreSequentTo(seq,e1,e2) begin
 end
 
 //- pre-sequent
-isPreSequentTo := (distanceBetween > 0)
-isStrictlyPreSequentTo := (distanceBetween == +1)
-isLooselyPreSequentTo := (distanceBetween > +1)
+isPreSequentTo -> (distanceBetween > 0)
+isStrictlyPreSequentTo -> (distanceBetween == +1)
+isLooselyPreSequentTo -> (distanceBetween > +1)
 
 //- sub-sequent
-isSubSequentTo := (distanceBetween < 0)
-isStrictlySubSequentTo := (distanceBetween == -1)
-isLooselySubSequentTo := (distanceBetween < -1)
+isSubSequentTo -> (distanceBetween < 0)
+isStrictlySubSequentTo -> (distanceBetween == -1)
+isLooselySubSequentTo -> (distanceBetween < -1)
 
 //- in-sequent
-isInSequentTo := (distanceBetween == 0)
+isInSequentTo -> (distanceBetween == 0)
 ```
 
-### pre-sequent (<,<<)
+<!-- ======================================================================= -->
+## pre-sequent (<,<<)
 
 * `e1` appears before `e2`
 * `e1` **precedes** `e2`
-* `e1` is **presequent to** `e2`
-* **presequent (<)** := `x` and `y` are sequent -
-  and `x` appears before `y`
-* **strictly presequent (<<)** := `x` is presequent to `y` -
-  and `x` appears directly before `y`
-* **loosely presequent** := `x` is presequent to `y` -
-  but `x` is not strictly presequent to `y` -
-  i.e. there are other entries in between
+
+x presequent to x (<)
+
+* `x < y` => `x` and `y` are sequent, and `x` appears before `y`
 * `s(i) is presequent to s(j)` for any `i,j in [1,N]` and `(i < j)`
 
-### sub-sequent (>,>>)
+x strictly presequent to y (<<)
+
+* `x << y` => `x` is presequent to `y`, and `x` appears directly before `y`
+
+x loosely presequent to y
+
+* `x` is presequent to `y`, but `x` is not strictly presequent to `y` -
+* i.e. there are other entries in between
+
+<!-- ======================================================================= -->
+## sub-sequent (>,>>)
 
 * `e2` appears after `e1`
-* `e2` **succeeds** `e1`
-* `e2` is **subsequent to** `e1`
-* **subsequent (>)** := `x` and `y` are sequent -
-  and `y` appears after `x`
-* **strictly subsequent (>>)** := `y` is subsequent to `x` -
-  and `y` appears directly after `x`
-* **loosely subsequent** := `y` is subsequent to `x` -
-  but `y` is not strictly subsequent to `x` -
-  i.e. there are other entries in between
+* `e2` succeeds `e1`
+
+y subsequent to x (>)
+
+* `y > x` => `x` and `y` are sequent, and `y` appears after `x`
 * `s(i) is subsequent to s(j)` for any `i,j in [1,n]` and `(i > j)`
 
-### in-sequent (<>)
+y strictly subsequent to x (>>)
 
-* A slot in a sequence can never hold more than one variable.
-* There is a 1:1 relationship between the slots and its entries.
-* Randomly pick two variables: `v1,v2 in s=[e1,...,eN]`
-* If `(v1 !== v2)`: `v1` is either pre- or subsequent to `v2`.
-* If `(v1 === v2)`: `v1` is neither pre- nor subsequent to `v2`.
-* `e1` is **insequent to** `e1`
-* **insequent (<>)** := `e1` and `e2` are sequent -
-  but `e1` is neither pre- nor subsequent to `e2`.
+* `y >> x` => `y` is subsequent to `x`, and `y` appears directly after `x`
 
-But, two entities are not necessarily identical just because they are neither
-pre- nor subsequent according to some order:
+y loosely subsequent to x
 
-```
-s=[e1,e2,...,eN]
+* `y` is subsequent to `x`, but `y` is not strictly subsequent to `x`
+* i.e. there are other entries in between
 
-(a < b) := (a.value < b.value)
-(a > b) := (a.value > b.value)
+<!-- ======================================================================= -->
+## in-sequent (<>)
 
-for i in 1 to N begin
-  s[i].value = (i Mod 2)
-end
-```
+* randomly pick two values: `ei,ej in s=[e1,...,eN]`
+* if `(ei !== ej)`: `ei` is either pre- or subsequent to `ej`
+* if `(ei === ej)`: `ei` is neither pre- nor subsequent to `ej`
 
-With such an order in mind, ...
+x insequent to y (<>)
 
-* `e1` is not identical to `e3` just because `e1` is insequent to `e3`.
-* The order is insufficient to infer reference equality.
+* `x` and `y` are sequent, but neither pre- nor subsequent
 
+<!-- ======================================================================= -->
 ### examples
 
 * presequent => strictly or loosely presequent
 * subsequent => strictly or loosely subsequent
 * insequent => not presequent and not subsequent
 
-Assumed that `x` and `y` are sequent, then ...
+assumed that `x` and `y` are sequent
 
 * `not (x presequent-to y) <=> (x insequent-to y) or (x subsequent-to y)`
 * `not (x subsequent-to y) <=> (x insequent-to y) or (x presequent-to y)`

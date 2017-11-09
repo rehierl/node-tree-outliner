@@ -38,7 +38,7 @@ definition (:=,if)
 
 number intervals
 
-* `[a,*] := [1,+Inf)`
+* `[a,*] := [a,+Inf)`, likewise `[*,b] := (-Inf,b]`
 * `i in [a,*]` := value `i` may have any value from `a` to `Infinity`
 
 regular expression like patterns
@@ -112,7 +112,7 @@ clarification
   to express an inverted statement
 * e.g. `(V contains v)` => `(V !contains v)`
 
-## equivalent
+## equivalent - TODO
 
 * `a <=> b`
 * if `a` is true, then `b` is also true

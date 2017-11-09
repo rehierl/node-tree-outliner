@@ -1,6 +1,19 @@
 
 # Domain of a sequence
 
+* `V` and any `Vi` are sets of values
+* `VxV`/`VxVxV`/`Vx...xV` - binary/ternary/n-ary domain
+* `R` is a n-ary relation for `R in V1x...xVn`
+* `VxVxV` - ternary relation
+* `Vx...xV` - n-ary relation
+
+<!-- ======================================================================= -->
+
+clarification
+
+* `a x b` is always either a sequence, or a set of sequences
+* here, sequences are always flat sequences of values
+
 Any element `ei` may belong to a different domain `Ei`
 
 * `ei not in Ej` may be true
@@ -8,7 +21,7 @@ Any element `ei` may belong to a different domain `Ei`
 
 <!-- ======================================================================= -->
 
-* `s = [e1,...,eN]` for `N in [0,+Inf)`
+* `s = [e1,...,eN]` for `N in [0,*]`
 * Each element `e(i)` is an element of some set `E(i)` (i.e. `e(i) in E(i)`).
 
 Set `E` is the **domain** of element `e`

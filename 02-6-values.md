@@ -52,18 +52,21 @@ clarification
 * sets are constant/immutable, sets can not be changed, sets are not variable
 * any set of values is itself a value - e.g. `V3 := { V1, V2 }`, `v1 := V3`
 
-clarification
-
-* in general, a set contains values that have similar characteristics -
-  e.g. `V5 := { 1, 2, 3 }`, `V6 := { 'a', 'b', 'c' }`
-* however, a set may also consist of arbitrary selected values -
-  e.g. `V7 := { 1, 2.0, 0xab, 'a', "abc" }`
-
 ### is set
 
 * `(is-set s), isSet(s)` is true, if `s` is a set of values
 * i.e. `s` has the characterisitics of a set
 * signature - (anything) -> boolean
+
+### set of X
+
+* in general, a set only contains values that have similar characteristics -
+  e.g. `V5 := { 1, 2, 3 }`, `V6 := { 'a', 'b', 'c' }`
+* however, a set may also consist of arbitrary selected values -
+  e.g. `V7 := { 1, 2.0, 0xab, 'a', "abc", {5} }`
+* a set-of-values - any `vi in V` is a primitive value - no string, no set
+* a set-of-sets - any `vi in V` is itself a set - this does not state what
+  kind of set `vi` is - `V` may contain sets that have any characteristics
 
 ### iteration
 
@@ -151,6 +154,7 @@ clarification
 ### V is equal to W
 
 * `(V == W) := (subsetOf(V,W) and subsetOf(W,V))`
+* `(V == W) := (v in W, for any v in V) and (w in V, for any w in W)`
 * `(V equal-to W) := (V == W)`
 * signature - (set,set) -> boolean
 
@@ -214,6 +218,7 @@ clarification
 * different elements may represent the same value
 * `(ei !== ej) !> (ei != ej)`, e.g. `(e1 == v) and (e2 == v)`
 * different elements may represent different values
+* two elements aren't necessarily identical, if they hold the same value
 * `(ei == ej) !> (ei === ej)`, e.g. `(i != j)`
 * an element can not represent different values at the same time
 * `(ei != ej) => (ei !== ej)`, i.e. `(i != j)`, but not `<=`
@@ -233,20 +238,14 @@ clarification
 * the value `v` an element `e` may represent is limited to a set of values `V`
 * signature - (element) -> set
 
-clarification
-
-* `domainOf(v) := { v }`
-* a value can not represent any other value,
-  the domain of a value is the value itself
-
 ### V domain of e
 
 * `(V domain-of e), (V type-of e) := (e.domain == V)`
 * `V` is said to be the domain or type of element `e`
 * signature - (set,element) -> boolean
 
-### e belongs to V
+### domain of v
 
-* `(e belongs-to V) := (V domain-of e)`
-* an element `e` belongs to a domain `V`, if `V` is the element's domain
-* signature - (element,set) -> boolean
+* `domainOf(v) := { v }`
+* a value can not represent any other value
+* the domain of a value is essentially the value itself
