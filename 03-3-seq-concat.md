@@ -3,11 +3,12 @@
 
 * `x` represents the concatenation operator
 * synonymous - concatenate, add, append
+* `X` represents the Cartesian product operator
 
 clarification
 
-* operators that are missing need to be
-  thought of as being defined in a similar fashion
+* `x` and `X` operator definitions that are missing
+  are thought of as being defined in a similar fashion
 
 clarification
 
@@ -38,6 +39,25 @@ clarification
 * `A` and `B` are sets of sequences
 * any `s in (A X B)` is a sequence of sequences
 * `(#s == 2)` for any `s in (A X B)`
+
+clarification
+
+* `A X (B X C) != (A X B) X C`
+* `A X (A X A) = {(1,(1,1))} != {((1,1),1)} = (A X A) X A` for `A := {1}`
+
+n-ary cartesian power (A^N)
+
+* `A^N := A X ... X A = {(a1,...,aN), ai in A}` - for set `A`
+* not equivalent to concatenation as defined below
+* issue - `A` is a sets of tuples
+* also, `(#s == N)` for any `s in A^N`
+
+n-ary cartesian product (XAi)
+
+* `XAi := A1 X ... X AN = {(a1,...,aN), ai in Ai}` - for any set `Ai`
+* not equivalent to concatenation as defined below
+* issue - some `Ai` is a set of tuples
+* also, `(#s == N)` for any `s in XAi`
 
 <!-- ======================================================================= -->
 ## (v x w)
@@ -112,21 +132,31 @@ clarification
 
 * for sequence `s` and set-of-sequences `T`
 * signature - (sequence, set-of-sequences) -> set-of-sequences
-* in general, sequence `u in (s x T)` may have any length
+* in general, sequence `u in (S x T)` may have any length - i.e. `#u in [0,*]`
+* also, `u1,u2 in (S x T) !> (#u1 == #u2)`
 * `#(s x T) == #T`
 
 `S x T := { s x t | s in S, t in T }`
 
 * for set-of-sequences `S` and set-of-sequences `T`
 * signature - (set-of-sequences, set-of-sequences) -> set-of-sequences
-* in general, sequence `u in (S x T)` may have any length
-* `#(S x T) == (#S * #T)`
+* in general, sequence `u in (S x T)` may have any length - i.e. `#u in [0,*]`
+* also, `u1,u2 in (S x T) !> (#u1 == #u2)`
+* `#(S x T) <= (#S * #T)`
+
+clarification
+
+* `(s1 x t1) == (s2 x t2)` is possible
+* e.g. `([1]x[2,3]) == ([1,2]x[3]) == [1,2,3]`
+* `s1 prefix-of s2`, `t2 suffix-of t1`
+* i.e. `f(x1,y1) == f(x2,y2) == z`
 
 <!-- ======================================================================= -->
 ## multi-concatenation
 
 for sequences `a,b,c` and sets-of-sequences `A,B,C`
 
+* `axbxc = (axb)xc = ax(bxc)`
 * `axbxC = (axb)xC = ax(bxC)`
 * `axBxC = (axB)xC = ax(BxC)`
 * `AxbxC = (Axb)xC = Ax(bxC)`

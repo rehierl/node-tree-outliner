@@ -2,10 +2,9 @@
 # Domain of a sequence
 
 * `V` and any `Vi` are sets of values
-* `VxV`/`VxVxV`/`Vx...xV` - binary/ternary/n-ary domain
-* `R` is a n-ary relation for `R in V1x...xVn`
-* `VxVxV` - ternary relation
-* `Vx...xV` - n-ary relation
+* `V1xV2`/`V1xV2xV3`/`V1x...xVN` - binary/ternary/n-ary domain
+* `R subset-of V1x...xVN` is an n-ary relation
+* `(#r == N)` for any `r in R`
 
 <!-- ======================================================================= -->
 

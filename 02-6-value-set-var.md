@@ -65,8 +65,8 @@ clarification
 * however, a set may also consist of arbitrary selected values -
   e.g. `V7 := { 1, 2.0, 0xab, 'a', "abc", {5} }`
 * a set-of-values - any `vi in V` is a primitive value - no string, no set
-* a set-of-sets - any `vi in V` is itself a set - this does not state what
-  kind of set `vi` is - `V` may contain sets that have any characteristics
+* a set-of-sets - any `si in S` is itself a set - this does not state what
+  kind of set `si` is - `S` may contain sets that have any characteristics
 
 ### iteration
 
@@ -82,19 +82,8 @@ end
 
 ### size of V, cardinality
 
-```
-sizeOf(set) begin
-  size = 0
-  for v in set begin
-    size = size + 1
-  end if
-  return size
-end
-```
-
+* `sizeOf(V)` returns the number of elements in `V`
 * `#V, #(V), (size-of V), (cardinality-of V) := sizeOf(V)`
-* the size of a set is the number of values it contains
-* the size of a set is also known as the set's cardinality
 * signature - (set) -> number `n in [0,*]`
 
 ### n size of V
@@ -103,17 +92,15 @@ end
 * `(n cardinality-of V) := (n size-of V)`
 * signature - (number,set) -> boolean
 
+### is empty V
+
+* `(is-empty V), isEmpty(V) := (#V == 0)`
+* `{}` represents an empty set, i.e. `(#({}) == 0)`
+* `isEmpty({})` is always true
+
 ### V contains v
 
-```
-contains(set, value) begin
-  for v in set begin
-    if(v == value) return true
-  end
-  return false
-end
-```
-
+* `contains(V,v)` is true, if `v` is an element of `V`
 * `(V contains v) := (contains(V, v) == true)`
 * set `V` contains `v`, if `v` is an element of `V`
 * signature - (set, value) -> boolean
@@ -121,7 +108,6 @@ end
 ### (v in V), (v belongs to V)
 
 * `(v in V) := (V contains v)`
-* `v` belongs to `V`, if `v` is an element of `V`
 * `(v element-of V), (v belongs-to V) := (v in V)`
 * signature - (value, set) -> boolean
 
@@ -129,31 +115,12 @@ clarification
 
 * different sets of values may contain the same value
 * `v1 in V1` and `v1 in V2` may be true at the same time
-* however, `v2 !in V2` may also be true
+* however, `v2 !in V2` may also be true -
+  i.e. the indexes are independent from each other
 * `(v in V) <=> (V contains v)`
-
-### V subset-of W
-
-```
-subsetOf(set1, set2) begin
-  for v in set1 begin
-    if(v !in set2) return false
-  end
-  return true
-end
-```
-
-* `(V subset-of W) := (subsetOf(V,W) == true)`
-* set `V` is a subset of set `W`, if `v in W` for any `v in V`
-* signature - (set,set) -> boolean
-
-clarification
-
-* `(V subset-of W) <!> (W subset-of V)`
 
 ### V is equal to W
 
-* `(V == W) := (subsetOf(V,W) and subsetOf(W,V))`
 * `(V == W) := (v in W, for any v in V) and (w in V, for any w in W)`
 * `(V equal-to W) := (V == W)`
 * signature - (set,set) -> boolean
@@ -174,20 +141,37 @@ clarification
 * `(V == W) <=> (W == V)`, and `(V != W) <=> (W != V)`
 * `(V == W) => (#V == #W)`, but `(#V == #W) !> (V == W)`
 
+### V subset-of W
+
+* `(V subset-of W) := (v in W for any v in V)`
+* `subsetOf(V,W) := (V subset-of W)`
+* set `V` is a subset of set `W`, if `v in W` for any `v in V`
+* signature - (set,set) -> boolean
+
+clarification
+
+* `subset-of` is analogous to `<=`
+* `(V subset-of W) => (#V <= #W)`
+* `(V == W) := (subsetOf(V,W) and subsetOf(W,V))`
+* `(V subset-of W) <!> (W subset-of V)`
+
+### V strict-subset-of W
+
+* `(V strict-subset-of W) := (V subset-of W), but (V != W)`
+* a `w in W` exists such that `w !in V`
+* signature - (set,set) -> boolean
+
+clarification
+
+* `strict-subset-of` is analogous to `<`
+* `(V strict-subset-of W) => (#V < #W)`
+
 ### V contains W
 
-```
-contains(set1, set2) begin
-  for v in set1 begin
-    if(v == set2) return true
-  end
-  return false
-end
-```
-
 * any set is itself a value
-* `(W in V), (V contains W) := (contains(V,W) == true)`
-* set `V` contains set `W` as an element, if `W` is an element of `V`
+* `(W in V)` is true, if set `W` is an element of set `V`
+* `(V contains W), contains(V,W) := (W in V)`
+* `(W element-of V), elementOf(W,V) := (W in V)`
 * signature - (set,set) -> boolean
 
 clarification
@@ -230,7 +214,7 @@ clarification
 * different elements are needed to store different values
 * different elements may still represent the same value
 
-### domain of e
+### domain of, type of
 
 * `e.domain := V`, if `e` may represent any value `v in V`
 * `domainOf(e), (domain-of e) := e.domain`
@@ -238,14 +222,14 @@ clarification
 * the value `v` an element `e` may represent is limited to a set of values `V`
 * signature - (element) -> set
 
+clarification
+
+* `domainOf(v) := { v }`
+* a value can not represent any other value
+* the domain of a value is essentially the value itself
+
 ### V domain of e
 
 * `(V domain-of e), (V type-of e) := (e.domain == V)`
 * `V` is said to be the domain or type of element `e`
 * signature - (set,element) -> boolean
-
-### domain of v
-
-* `domainOf(v) := { v }`
-* a value can not represent any other value
-* the domain of a value is essentially the value itself
