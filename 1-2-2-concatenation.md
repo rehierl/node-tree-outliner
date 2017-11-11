@@ -3,11 +3,10 @@
 
 * `x` represents the concatenation operator
 * synonymous - concatenate, add, append
-* `X` represents the Cartesian product operator
 
 clarification
 
-* `x` and `X` operator definitions that are missing
+* `x` operator definitions that are missing
   are thought of as being defined in a similar fashion
 
 clarification
@@ -25,39 +24,13 @@ clarification
 
 clarification
 
+* `XV^N <=> xV^N` if `V` is a set of values
+* `XVi <=> xVi` if `Vi` are all sets of values
+
+clarification
+
 * `s = (e1, ..., eN) := e1 x ... x eN`
 * a sequence `s` is the concatenation of its elements/values `ei`
-
-<!-- ======================================================================= -->
-## Cartesian product
-
-* `A X B = { (a,b) | a in A, b in B }`
-* `(#(A X B) == #A * #B)`
-
-clarification
-
-* `A` and `B` are sets of sequences
-* any `s in (A X B)` is a sequence of sequences
-* `(#s == 2)` for any `s in (A X B)`
-
-clarification
-
-* `A X (B X C) != (A X B) X C`
-* `A X (A X A) = {(1,(1,1))} != {((1,1),1)} = (A X A) X A` for `A := {1}`
-
-n-ary cartesian power (A^N)
-
-* `A^N := A X ... X A = {(a1,...,aN), ai in A}` - for set `A`
-* not equivalent to concatenation as defined below
-* issue - `A` is a sets of tuples
-* also, `(#s == N)` for any `s in A^N`
-
-n-ary cartesian product (XAi)
-
-* `XAi := A1 X ... X AN = {(a1,...,aN), ai in Ai}` - for any set `Ai`
-* not equivalent to concatenation as defined below
-* issue - some `Ai` is a set of tuples
-* also, `(#s == N)` for any `s in XAi`
 
 <!-- ======================================================================= -->
 ## (v x w)
@@ -148,13 +121,11 @@ clarification
 
 * `(s1 x t1) == (s2 x t2)` is possible
 * e.g. `([1]x[2,3]) == ([1,2]x[3]) == [1,2,3]`
-* `s1 prefix-of s2`, `t2 suffix-of t1`
-* i.e. `f(x1,y1) == f(x2,y2) == z`
+* `s1 prefix-of s2` and `t2 suffix-of t1`
+* i.e. `f(x1,y1) == f(x2,y2) == z` for `f(a,b) := (a x b)`
 
 <!-- ======================================================================= -->
-## multi-concatenation
-
-for sequences `a,b,c` and sets-of-sequences `A,B,C`
+## associative
 
 * `axbxc = (axb)xc = ax(bxc)`
 * `axbxC = (axb)xC = ax(bxC)`
@@ -164,7 +135,24 @@ for sequences `a,b,c` and sets-of-sequences `A,B,C`
 
 clarification
 
-* even here, the result is a sequence, or a set of sequences
+* for sequences `a,b,c` and sets-of-sequences `A,B,C`
+* the result always is a sequence or a set of sequences
+
+<!-- ======================================================================= -->
+## n-ary, variable product
+
+n-ary concatenation product (xAi)
+
+* `xA1 := A1` and `xAi := xA(i-1) x Ai`
+* for `s in xAi`, `#s` is not necessarily equal to `N`
+* `(A x B x C x ...) <=> xAi`
+
+n-ary concatenation power (xA^N)
+
+* `xA^1 := A` and `xA^N := xA^(N-1) x A`
+* `xA^N := xAi` for `(Ai == A)` and `i in [1,N]`
+
+variable product
 
 <!-- ======================================================================= -->
 ## infix, subsequence
@@ -174,7 +162,7 @@ clarification
 
 clarification
 
-* `t infix-of S` does not make much sense
+* `t infix-of S` does not make sense, because ...
 * `(offset(t) in s1)` is not necessarily equal to `(offset(t) in s2)`
 
 <!-- ======================================================================= -->

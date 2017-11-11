@@ -1,5 +1,8 @@
 
-# Domain of a sequence
+# Relations
+
+<!-- ======================================================================= -->
+## Domain of a sequence
 
 * `V` and any `Vi` are sets of values
 * `V1xV2`/`V1xV2xV3`/`V1x...xVN` - binary/ternary/n-ary domain

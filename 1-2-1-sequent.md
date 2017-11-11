@@ -97,6 +97,7 @@ y loosely subsequent to x
 x insequent to y (<>)
 
 * `x` and `y` are sequent, but neither pre- nor subsequent
+* `(x <> y) <=> (y <> x)`
 
 <!-- ======================================================================= -->
 ### examples
@@ -110,4 +111,3 @@ assumed that `x` and `y` are sequent
 * `not (x presequent-to y) <=> (x insequent-to y) or (x subsequent-to y)`
 * `not (x subsequent-to y) <=> (x insequent-to y) or (x presequent-to y)`
 * `not (x insequent-to y) <=> (x presequent-to y) or (x subsequent-to y)`
-* `(x insequent-to y) <=> (y insequent-to x)`

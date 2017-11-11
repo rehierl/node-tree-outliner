@@ -11,6 +11,7 @@ en.wikipedia.org, mixed
 * [regular expressions](https://en.wikipedia.org/wiki/Regular_expression)
 * [set theory](https://en.wikipedia.org/wiki/Set_theory)
 * [class, set theory](https://en.wikipedia.org/wiki/Class_%28set_theory29)
+* [arity](https://en.wikipedia.org/wiki/Arity)
 
 en.wikipedia.org, relations
 
@@ -19,6 +20,7 @@ en.wikipedia.org, relations
 * [cartesian product](https://en.wikipedia.org/wiki/Cartesian_product)
 * [binary relation](https://en.wikipedia.org/wiki/Binary_relation)
 * [relational algebra](https://en.wikipedia.org/wiki/Relational_algebra)
+* [transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
 
 en.wikipedia.org, graph theory
 

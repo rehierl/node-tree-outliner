@@ -217,7 +217,7 @@ clarification
 ### domain of, type of
 
 * `e.domain := V`, if `e` may represent any value `v in V`
-* `domainOf(e), (domain-of e) := e.domain`
+* `dom(e), domainOf(e), (domain-of e) := e.domain`
 * `typeOf(e), (type-of e) := e.domain`
 * the value `v` an element `e` may represent is limited to a set of values `V`
 * signature - (element) -> set

@@ -14,7 +14,8 @@ clarification
 clarification
 
 * changing the value of an element results in a different sequence
-* `s[i] = v` is not allowed - `e = s[i]` is allowed
+* `s[i] = v` (changing an element) is not allowed
+* `e = s[i]` (extraction) is allowed
 * any sequence is itself a value - `e = s` is allowed
 
 <!-- ======================================================================= -->
