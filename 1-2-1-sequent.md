@@ -53,7 +53,7 @@ isInSequentTo -> (distanceBetween == 0)
 * `e1` appears before `e2`
 * `e1` **precedes** `e2`
 
-x presequent to x (<)
+x presequent to y (<)
 
 * `x < y` => `x` and `y` are sequent, and `x` appears before `y`
 * `s(i) is presequent to s(j)` for any `i,j in [1,N]` and `(i < j)`

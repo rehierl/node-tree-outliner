@@ -24,8 +24,9 @@ clarification
 
 clarification
 
-* `XV^N <=> xV^N` if `V` is a set of values
 * `XVi <=> xVi` if `Vi` are all sets of values
+* `XV^N <=> xV^N` if `V` is a set of values
+* `XV^{a,b} <=> xV{a,b}` if `V` is a set of values
 
 clarification
 
@@ -125,7 +126,18 @@ clarification
 * i.e. `f(x1,y1) == f(x2,y2) == z` for `f(a,b) := (a x b)`
 
 <!-- ======================================================================= -->
-## associative
+## clarifications
+
+clarification
+
+* `v x ()` or `() x v` => `(v)`
+* `v x {}` or `{} x v` => `{}`
+* `s x ()` or `() x s` => `s`
+* `s x {}` or `{} x s` => `{}`
+* `() x ()` => `()`
+* `{} x {}` => `{}`
+
+clarification
 
 * `axbxc = (axb)xc = ax(bxc)`
 * `axbxC = (axb)xC = ax(bxC)`
@@ -133,26 +145,36 @@ clarification
 * `AxbxC = (Axb)xC = Ax(bxC)`
 * `AxBxC = (AxB)xC = Ax(BxC)`
 
-clarification
-
 * for sequences `a,b,c` and sets-of-sequences `A,B,C`
 * the result always is a sequence or a set of sequences
 
 <!-- ======================================================================= -->
-## n-ary, variable product
+## multi-concatenation
 
 n-ary concatenation product (xAi)
 
 * `xA1 := A1` and `xAi := xA(i-1) x Ai`
 * for `s in xAi`, `#s` is not necessarily equal to `N`
-* `(A x B x C x ...) <=> xAi`
 
 n-ary concatenation power (xA^N)
 
 * `xA^1 := A` and `xA^N := xA^(N-1) x A`
 * `xA^N := xAi` for `(Ai == A)` and `i in [1,N]`
 
-variable product
+clarification
+
+* `xAi <=> (A1 x A2 x ...)`
+* `xA^N <=> (A x A x ...)`
+
+variable concatenation power (xA{a,b})
+
+* see - regular expression like patterns
+* `xA{a,b}, xA^{a,b} := +(xA^i)` for `i in [a,b] in [1,*]`
+* `xA{a,b} = (xA^a + xA^(a+1) + ... + xA^b)`
+* (+) is the union operator for sets
+* `xA{1,4} = (xA^1 + xA^2 + xA^3 + xA^4)`
+* `xA{a} = xA^{a,a} = xA^a`
+* `xA{+} = (xA^1 + xA^2 + ...)`
 
 <!-- ======================================================================= -->
 ## infix, subsequence

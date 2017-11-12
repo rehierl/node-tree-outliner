@@ -18,12 +18,15 @@ clarification
 <!-- ======================================================================= -->
 ## associative
 
-* `A X (B X C) <!> (A X B) X C`
 * `A X (A X A) = {(1,(1,1))} != {((1,1),1)} = (A X A) X A` for `A := {1}`
+* `A X (B X C) <!> (A X B) X C`
+
+clarification
+
 * `A X B X C X ...` is essentially undefined
 
 <!-- ======================================================================= -->
-## n-ary, variable product
+## multi cartesian product
 
 n-ary cartesian product (XAi)
 
@@ -31,9 +34,24 @@ n-ary cartesian product (XAi)
 * not equivalent to concatenation as defined below
 * issue - one or more `Ai` is a set of tuples
 * `(#s == N)` for any `s in XAi`
-* `(A X B X ...) <!> XAi`
 
 n-ary cartesian power (XA^N)
 
 * `XA^N := A X ... X A = {(a1,...,aN), ai in A}` - for set `A`
 * `XA^N := XAi` for `(Ai == A)` and `i in [1,N]`
+
+clarification
+
+* `XAi <!> (A1 X A2 X ...)`
+* `XA^N <!> (A X A X ...)`
+* even if parenthesis were used in some specific order
+
+variable cartesian power (XA{a,b})
+
+* see - regular expression like patterns
+* `XA{a,b}, XA^{a,b} := +(XA^i)` for `i in [a,b] in [1,*]`
+* `XA{a,b} := (XA^a + XA^(a+1) + ... + XA^b)`
+* (+) is the union operator for sets
+* `XA{1,4} = (XA^1 + XA^2 + XA^3 + XA^4)`
+* `XA{a} = XA^{a,a} = XA^a`
+* `XA{+} = (XA^1 + XA^2 + ...)`

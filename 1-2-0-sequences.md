@@ -5,11 +5,20 @@
 * `s = [si] = [e1,e2,...,eN] = [e:1,...,e:N]` for `N in [0,*]`
 * or, alternatively `s = (si) = (e1,e2,...,eN)`
 
+tuple vs. sequence
+
+* tuple - an ordered list of anything - e.g. `(1, 'a')`
+* sequence - an ordered list of something - e.g. `(1, 2, 3, ...)`
+* in general, a rule exists such that subsequent elements in a sequence can be
+  calculated from presequent ones - e.g. `an := a(n-2) + a(n-1)` (Fibonacci)
+* here, the notion of "sequence" will shift from the notion of a tuple towards
+  the notion of a mathematical sequence
+
 clarification
 
-* `domainOf(ei) := Vi` - any element has its own domain
-* however, different elements may still belong to the same domain -
-  e.g. `domainOf(e2), V2 := V1` is possible
+* `dom(ei) := Vi` - any element has its own domain
+* however, different elements may still belong to the same domain
+* e.g. `dom(e2) := V2`, but `V2 := V1` is possible, as is `(e2 == e1)`
 
 clarification
 

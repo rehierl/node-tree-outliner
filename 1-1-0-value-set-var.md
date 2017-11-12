@@ -179,6 +179,40 @@ clarification
 * `subset-of <!> element-of`
 
 <!-- ======================================================================= -->
+## Union
+
+* in this context, the addition of values if of no interest
+* this allows to use the (+) operator as the union operator for sets
+
+### (V + W)
+
+* `(V + W) := { x, (x in V) or (x in W) }`
+* `(V union W) := (V + W)`
+
+clarification
+
+* `((U + V) + W) <=> (U + (V + W))`
+
+### (V + w)
+
+* `(V + w) := (V + {w})`
+* `(V union w) := (V + w)`
+
+### (v + W)
+
+* `(v + W) := ({v} + W)`
+* `(v union W) := (v + W)`
+
+### (v + w)
+
+* `(v + w), ({v} + {w}) := {v, w}`
+* `(v union w) := (v + w)`
+
+clarification
+
+* `((u + v) + w) <=> (u + (v + w))`
+
+<!-- ======================================================================= -->
 ## Variables, Elements
 
 * a variable `var` (aka. element `e`) represents some value `v`

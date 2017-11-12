@@ -4,6 +4,7 @@
 <!-- ======================================================================= -->
 ## Domain of a sequence
 
+* `(x1,...,xn) : T1 x ... x Tn` type theory
 * `V` and any `Vi` are sets of values
 * `V1xV2`/`V1xV2xV3`/`V1x...xVN` - binary/ternary/n-ary domain
 * `R subset-of V1x...xVN` is an n-ary relation
