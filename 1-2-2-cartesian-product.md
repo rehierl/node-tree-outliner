@@ -6,7 +6,7 @@
 <!-- ======================================================================= -->
 ## binary product
 
-* `A X B = { (a,b) | a in A, b in B }`
+* `A X B = { (a,b) : a in A, b in B }`
 * `(#(A X B) == #A * #B)`
 
 clarification
@@ -30,14 +30,14 @@ clarification
 
 n-ary cartesian product (XAi)
 
-* `XAi := A1 X ... X AN = {(a1,...,aN), ai in Ai}` - for any set `Ai`
+* `XAi := A1 X ... X AN = {(a1,...,aN) : (ai in Ai)}` - for any set `Ai`
 * not equivalent to concatenation as defined below
 * issue - one or more `Ai` is a set of tuples
 * `(#s == N)` for any `s in XAi`
 
 n-ary cartesian power (XA^N)
 
-* `XA^N := A X ... X A = {(a1,...,aN), ai in A}` - for set `A`
+* `XA^N := A X ... X A = {(a1,...,aN) : (ai in A)}` - for set `A`
 * `XA^N := XAi` for `(Ai == A)` and `i in [1,N]`
 
 clarification

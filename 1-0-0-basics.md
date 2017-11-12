@@ -1,11 +1,13 @@
 
 # Notation
 
+<!-- ======================================================================= -->
 ## assignment (=)
 
 * `a = b` means that the value of `b` is assigned to `a`
 * `a` may be re-assigned to a different value (e.g. `a = c`)
 
+<!-- ======================================================================= -->
 ## definition (:=)
 
 * `a := b` means that `a` is defined to be equal to `b`
@@ -30,6 +32,7 @@ definition (:=,if)
 * `a` is undefined, if one of the specified conditions does not hold
 * e.g. `a := i`, if `i in [1,N]`
 
+<!-- ======================================================================= -->
 ## fundamental definitions
 
 * `-Inf, -Infinity` := negative infinity
@@ -51,6 +54,7 @@ regular expression like patterns
 * `<e>{a,a}, <e>{a}` := `<e>` must appear exactly `a` times
 * `<e>{1}, <e>{1,1} := <e>`
 
+<!-- ======================================================================= -->
 ## equal by value (==)
 
 * `(a == b), (a equal-to b)` := the values of `a` and `b` are tested for equality
@@ -67,6 +71,7 @@ clarification (==,if)
   if the specified conditions are all true
 * e.g. `(a == 2)`, if `a` evaluates to `2`
 
+<!-- ======================================================================= -->
 ## unequal by value (!=)
 
 * `(a != b), (a unequal-to b) := not (a == b)`
@@ -80,6 +85,7 @@ clarification (!=,if)
   if the specified conditions are all true
 * e.g. `(a != 0)`, if `a in [1,+Inf]`
 
+<!-- ======================================================================= -->
 ## equal by reference (===)
 
 * `a === b, (a === b), (a identical-to b) := (addressOf(a) == addressOf(b))`
@@ -92,6 +98,7 @@ clarification
 
 * equal by value => not necessarily also equal by reference
 
+<!-- ======================================================================= -->
 ## unequal by reference (!==)
 
 * `a !== b, (a !== b) := not (a === b)`
@@ -101,6 +108,7 @@ clarification
 
 * unequal by value => also unequal by reference
 
+<!-- ======================================================================= -->
 ## (n in N), (n !in N)
 
 * `n in N` is true, if `n` is an element of `N`
@@ -112,6 +120,7 @@ clarification
   to express an inverted statement
 * e.g. `(V contains v)` => `(V !contains v)`
 
+<!-- ======================================================================= -->
 ## equivalent - TODO
 
 * `a <=> b`

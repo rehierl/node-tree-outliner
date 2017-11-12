@@ -11,19 +11,6 @@ clarification
 
 clarification
 
-* a set of values `V` contains basic values only
-* `(is-set v)` is false for any `v in V`
-* `(is-sequence v)` is false for any `v in V`
-
-clarification
-
-* a set of sequences `S` contains sequences only
-* `(is-sequence s)` is true for any `s in S`
-* any sequence `s in S` may have any length - i.e. `#s in [0,*]`
-* `(#si != #sj)` may be true for any two sequences `(si !== sj)`
-
-clarification
-
 * `XVi <=> xVi` if `Vi` are all sets of values
 * `XV^N <=> xV^N` if `V` is a set of values
 * `XV^{a,b} <=> xV{a,b}` if `V` is a set of values
@@ -41,14 +28,14 @@ clarification
 * for two values `v` and `w`
 * signature - (value, value) -> sequence
 
-`v x W := { (v,w) | w in W }`
+`v x W := { (v,w) : (w in W) }`
 
 * for value `v` and set-of-values `W`
 * signature - (value, set-of-values) -> set-of-sequences
 * `(#s == 2)` for any `s in (v x W)`
 * `#(v x W) == #W`
 
-`V x W := { (v,w) | v in V, w in W }`
+`V x W := { (v,w) : (v in V) and (w in W) }`
 
 * for set-of-values `V` and set-of-values `W`
 * signature - (set-of-values, set-of-values) -> set-of-sequences
@@ -68,21 +55,21 @@ clarification
 * for sequence `s`, `(#s = i)` and value `v`
 * signature - (value, sequence) -> sequence
 
-`s x V := { s x v | v in V }`
+`s x V := { s x v : (v in V) }`
 
 * for sequence `s` and set-of-values `V`
 * signature - (sequence, set-of-values) -> set-of-sequences
 * `(#t == (#s+1))` for any `t in (s x V)`
 * `#(s x V) == #V`
 
-`S x v := { s x v | s in S }`
+`S x v := { s x v : (s in S) }`
 
 * for set-of-sequences `S` and value `v`
 * signature - (set-of-sequences, value) -> set-of-sequences
 * in general, sequence `t in (S x v)` may have any length
 * `#(S x v) == #S`
 
-`S x V := { s x v | s in S, v in V }`
+`S x V := { s x v : (s in S) and (v in V) }`
 
 * for set-of-sequences `S` and set-of-values `V`
 * signature - (set-of-sequences, set-of-values) -> set-of-sequences
@@ -102,7 +89,7 @@ clarification
 * for sequences `s` and `t`, `(#s = i)`, `(#t = j)` and `i,j in [0,*]`
 * signature - (sequence, sequence) -> sequence
 
-`s x T := { s x t | t in T }`
+`s x T := { s x t : (t in T) }`
 
 * for sequence `s` and set-of-sequences `T`
 * signature - (sequence, set-of-sequences) -> set-of-sequences
@@ -110,7 +97,7 @@ clarification
 * also, `u1,u2 in (S x T) !> (#u1 == #u2)`
 * `#(s x T) == #T`
 
-`S x T := { s x t | s in S, t in T }`
+`S x T := { s x t : (s in S) and (t in T) }`
 
 * for set-of-sequences `S` and set-of-sequences `T`
 * signature - (set-of-sequences, set-of-sequences) -> set-of-sequences

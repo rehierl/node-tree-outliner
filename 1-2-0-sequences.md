@@ -27,6 +27,21 @@ clarification
 * `e = s[i]` (extraction) is allowed
 * any sequence is itself a value - `e = s` is allowed
 
+set of values
+
+* a set of values `V` contains basic values only
+* `(is-set v)` is false for any `v in V`
+* `(is-sequence v)` is false for any `v in V`
+* the elements of such a set appear to be atomic
+* an atomic set -or- a set of atomic values
+
+set of sequences
+
+* a set of sequences `S` contains sequences only
+* `(is-sequence s)` is true for any `s in S`
+* any sequence `s in S` may have any length - i.e. `#s in [0,*]`
+* `(#si != #sj)` may be true for any two sequences `(si !== sj)`
+
 <!-- ======================================================================= -->
 ## is sequence
 
@@ -83,15 +98,21 @@ clarification
 * `(s != t)` => both differ in length and/or corresponding elements/values
 
 <!-- ======================================================================= -->
-## reversed sequence (s')
+## inverse sequence (s')
 
-* `s', (s)' := (f1=eN,...,fN=e1)`, if `s = (e1,...,eN)`
+* `s', (s)', inv(s) := (f1=eN,...,fN=e1)`, if `s = (e1,...,eN)`
 * `(s'(i) == s(N-i+1)` for any `i in [1,N]`
+* synonymous - inverse, reversed, transposed, etc.
+* `inv(inv(s)) <=> s`
+
+inverse set of sequences (S')
+
+* `S', (S)', inv(S) := { inv(s) : s in S }`
+* `inv(inv(S)) <=> S`
 
 palindrome
 
-* `s` and `s'` are palindromic sequences, if `(s == s')`
-* `(s == (s')')` is always true
+* `s` is a palindromic sequence, if `(s == inv(s))`
 
 <!-- ======================================================================= -->
 ## infix, subsequence
