@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Values v
 
 * a value `v` (or a constant `c`) represents a specific abstract value
@@ -31,5 +32,3 @@ clarification
 * `(v3 == v3)` and `(vi == vi)` are always true
 * `(vi == vj)` is true if `(i == j)` and false if `(i != j)`
 * different identifiers always refer to different specific values
-
-<!-- ======================================================================= -->

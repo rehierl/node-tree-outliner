@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Concatenation
 
 * `x` represents the concatenation operator

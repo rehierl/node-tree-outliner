@@ -1,5 +1,6 @@
 
-# Domain of a sequence
+<!-- ======================================================================= -->
+# Patterns
 
 * `A : B` is a typing judgment, i.e. expression `A` has type/domain `B`
 * the universe type (in general `U`) contains all types, but not itself

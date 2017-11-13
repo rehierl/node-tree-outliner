@@ -1,8 +1,6 @@
 
-# Relations
-
 <!-- ======================================================================= -->
-## n-ary relation
+# Relations
 
 * `S,S1,...,Sn` represent sets of sorts
 * `R = (S1,...,Sn,G)`
@@ -10,6 +8,7 @@
 * `n` is the number of slots, places
 * `n` is the arity or dimension of relation `R`
 * `R` is itself a (n+1)-tuple (aka. correspondence)
+* `R` is an n-ary relation
 * `Si` are the domains of `R`
 * `G(R) subset-of XSi` is the relation's graph
 * `XSi <=> xSi` if all sets are sets of atomic values

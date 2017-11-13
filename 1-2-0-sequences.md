@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Sequences
 
 * `s` represents a sequence of elements (aka. slots)

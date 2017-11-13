@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Sequent
 
 * two elements of the same sequence are **sequent**

@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Cartesian product
 
 * `X` represents the Cartesian product operator
