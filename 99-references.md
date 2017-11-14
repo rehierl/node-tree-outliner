@@ -4,6 +4,7 @@ mixed
 * [wiki, boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)
 * [wiki, arity](https://en.wikipedia.org/wiki/Arity)
 * [wiki, type theory](https://en.wikipedia.org/wiki/Type_theory)
+* [wiki, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
 
 syntax specifications
 

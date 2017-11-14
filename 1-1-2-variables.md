@@ -36,26 +36,3 @@ clarification
 * an element can not store different values at the same time
 * different elements are needed to store different values
 * different elements may still represent the same value
-
-<!-- ======================================================================= -->
-## domain of, type of
-
-* `e.domain := V`, if `e` may represent any value `v in V`
-* `dom(e), domainOf(e), (domain-of e) := e.domain`
-* `typeOf(e), (type-of e) := e.domain`
-* the value `v` an element `e` may represent is limited to a set of values `V`
-* signature - (element) -> set
-
-clarification
-
-* `domainOf(v) := { v }`
-* a value can not represent any other value
-* the domain of a value is essentially the value itself
-
-<!-- ======================================================================= -->
-## V domain of e
-
-* `(V domain-of e), (V type-of e) := (e.domain == V)`
-* `V` is said to be the domain or type of element `e`
-* signature - (set,element) -> boolean
-

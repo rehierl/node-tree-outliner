@@ -133,15 +133,16 @@ clarification
 * `(V subset-of W) <!> (W subset-of V)`
 
 <!-- ======================================================================= -->
-## V strict-subset-of W
+## V proper-subset-of W
 
-* `(V strict-subset-of W) := (V subset-of W), but (V != W)`
-* a `w in W` exists such that `w !in V`
+* `(V proper-subset-of W) := (V subset-of W), but (V != W)`
+* some `w in W` exists such that `w !in V`
+* synonymous - proper-subset, strict-subset, true-subset
 * signature - (set,set) -> boolean
 
 clarification
 
-* `strict-subset-of` is analogous to `<`
+* `proper-subset-of` is analogous to `<`
 * `(V strict-subset-of W) => (#V < #W)`
 
 <!-- ======================================================================= -->
@@ -167,11 +168,14 @@ clarification
 <!-- ======================================================================= -->
 ## Operators
 
-* in this context, the addition of values if of no interest
-* this allows to use the (+) operator as the union operator for sets
-* `(A isect B) := { x : (x in A) and (x in B) }`
+* `(A isect B) := { x : (x in A) and (x in B) }` (intersection)
 * `(A \ B), (A sub B) := { x : (x in A) and (x !in B) }` (set difference)
 * `(A - B), (A cut B) := {x : (x in A\B or B\A) }` (symmetric difference)
+
+clarification
+
+* in this context, the addition of values if of no interest
+* this allows to use the (+) operator as the union operator for sets
 
 ### (V + W)
 
