@@ -11,11 +11,11 @@
 <!-- ======================================================================= -->
 ## related to
 
-* a is strictly related to b
 * `a related-to b`, if `(a,b) in R`
-* b is also strictly related to a
-* `b related-to a`, if `(b,a) in R'`
+* a is strictly related to b
 * synonymous - strictly, directly
+* `b related-to a`, if `(b,a) in R'`
+* b is also strictly related to a
 
 clarification
 

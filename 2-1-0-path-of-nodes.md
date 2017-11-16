@@ -1,8 +1,8 @@
 
 # Paths
 
-A path `p` is a sequence of nodes such that `p=(n1,n2,...,nk) in Nx...xN`,
-and `ni parent-of ni+1` or `ni child-of ni+1`
+A path `p` is a sequence of nodes `p=(n1,n2,...,nk) in N^k`
+such that `ni parent-of ni+1` or `ni child-of ni+1`
 for `i in [1,k-1]`, `k in [2,+Infinity)`.
 
 Any definition based on sequences also apply to paths:
@@ -13,8 +13,7 @@ Any definition based on sequences also apply to paths:
 * `t subsequence-of s`
 * `t prefix-of s`, `u prefix-of s,t`
 * `t suffix-of s`, `u suffix-of s,t`
-* (|strictly|loosely) pre-, sub-, in-sequent entries
-* see [sequences]()
+* (strictly|loosely)? pre-, sub-, in-sequent entries
 
 <!-- ======================================================================= -->
 ## miscellaneous

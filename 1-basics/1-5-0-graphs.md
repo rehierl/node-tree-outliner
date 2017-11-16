@@ -4,6 +4,7 @@
 
 * used to model pairwise relations between objects
 * in general, sets of vertices/nodes that are connected by edges
+* a binary relation `R := (A,A,G)` defines a directed graph
 
 definition
 
@@ -23,8 +24,8 @@ definition
   i.e. loops on `v` are counted twice
 * `degree(a,b) := #({ (a,b) : aEb }) + #({ (b,a) : bEa })`
 * symmetric => if `aEb`, then also `bEa`
-* loops => if `aEa`
-* link => if `aEb` for `(a != b)`
+* loops => `aEa`
+* link => `aEb` for `(a != b)`
 * planar => can draw `G` without intersecting edges
 * tree => connected and no cycles
 
@@ -50,14 +51,21 @@ adjacent edges
 vertices
 
 * two vertices are connected, if
-  a path exists that connects them with each other
+  a path exists that leads from one vertex to the other
 * strongly connected vs. weakly connected
 * connected <=> not disconnected
+
+strong vs. weak
+
+* two connected vertices in a directed graph are strongly connected
+* if not, create `G*` by replacing any edge in `G` with undirected edges
+* if two vertices are connected in `G*`, but not in `G`, then
+  those vertices are weakly connected
 
 graph
 
 * `G` has no unreachable vertices
-* a path exists between any two vertices
+* any two vertices in `G` are connected
 * connected <=> not disconnected
 
 <!-- ======================================================================= -->
@@ -109,3 +117,25 @@ oriented
 mixed
 
 * some edges are directed, others are undirected
+
+<!-- ======================================================================= -->
+## path
+
+* directed graph, digraph => directed path, dipath
+* dipath => all edges in the same direction
+
+common definition
+
+* `path := (v0,e0,v1,e2,v2,...,v(n-1),e(n-1),vn)`
+* a path is a trail in which all vertices are distinct
+* a trail is a walk without repeated edges
+* a walk is an alternating sequence of vertices and edges
+* `G` is directed => `ei` connects `vi` with `v(i+1)`
+
+miscellaneous
+
+* vertex-independent paths := `p1` and `p2` have no vertex in common
+* edge-independent paths := `p1` and `p2` have no edge in common
+* vertex-independent => edge-independent
+* distance between vertices := length of shortest path `(p1,p2)`
+* diameter of a connected graph := length of longest path
