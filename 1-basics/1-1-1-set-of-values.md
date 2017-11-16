@@ -76,7 +76,7 @@ end
 
 * `contains(V,v)` is true, if `v` is an element of `V`
 * `(V contains v) := (contains(V, v) == true)`
-* set `V` contains `v`, if `v` is an element of `V`
+* set `V` contains value `v`, if `v` is an element of `V`
 * signature - (set, value) -> boolean
 
 <!-- ======================================================================= -->
@@ -84,6 +84,7 @@ end
 
 * `(v in V) := (V contains v)`
 * `(v element-of V), (v belongs-to V) := (v in V)`
+* value `v` is in set `V`, if `v` is an element of `V`
 * signature - (value, set) -> boolean
 
 clarification
@@ -133,30 +134,52 @@ clarification
 * `(V subset-of W) <!> (W subset-of V)`
 
 <!-- ======================================================================= -->
-## V proper-subset-of W
+## V strict-subset-of W
 
-* `(V proper-subset-of W) := (V subset-of W), but (V != W)`
+* `(V strict-subset-of W) := (V subset-of W), but (V != W)`
 * some `w in W` exists such that `w !in V`
-* synonymous - proper-subset, strict-subset, true-subset
+* synonymous - strict-subset, proper-subset, true-subset
 * signature - (set,set) -> boolean
 
 clarification
 
-* `proper-subset-of` is analogous to `<`
+* `subset-of` is analogous to `<=`
+* `(V subset-of W) => (#V <= #W)`
+* `strict-subset-of` is analogous to `<`
 * `(V strict-subset-of W) => (#V < #W)`
 
 <!-- ======================================================================= -->
-## V contains W
+## Operations on sets
 
-* any set is itself a value
-* `(W in V)` is true, if set `W` is an element of set `V`
-* `(V contains W), contains(V,W) := (W in V)`
-* `(W element-of V), elementOf(W,V) := (W in V)`
-* signature - (set,set) -> boolean
+* in this context, the addition of values if of no interest
+* this allows to use the (+) operator as the union operator for sets
+
+### union (+,or)
+
+* `(V + W), (V or W) := { x : (x in V) or (x in W) }`
+
+likewise
+
+* `(V + w) := (V + {w})`
+* `(v + W) := ({v} + W)`
+* `(v + w), ({v} + {w}) := {v, w}`
 
 clarification
 
-* `subset-of <!> element-of`
+* `((U + V) + W) <=> (U + (V + W))`
+* `((u + v) + w) <=> (u + (v + w))`
+
+### set difference (\,-,sub)
+
+* `(A \ B), (A - B), (A sub B) := { x : (x in A) and (x !in B) }`
+
+### intersection (&,and)
+
+* `(A & B), (A and B) := { x : (x in A) and (x in B) }`
+
+### symmetric difference (xor)
+
+* `(A xor B) := {x : (x in (A\B or B\A)) }`
 
 <!-- ======================================================================= -->
 ## Power set
@@ -166,41 +189,15 @@ clarification
 * `P(A)` is the set of all subsets of `A`
 
 <!-- ======================================================================= -->
-## Operators
+## V contains W
 
-* `(A isect B) := { x : (x in A) and (x in B) }` (intersection)
-* `(A \ B), (A sub B) := { x : (x in A) and (x !in B) }` (set difference)
-* `(A - B), (A cut B) := {x : (x in A\B or B\A) }` (symmetric difference)
-
-clarification
-
-* in this context, the addition of values if of no interest
-* this allows to use the (+) operator as the union operator for sets
-
-### (V + W)
-
-* `(V + W) := { x : (x in V) or (x in W) }`
-* `(V union W) := (V + W)`
+* any set is itself a value
+* `(W in V)` is true, if set `W` is an element of set `V`
+* set `W` is in set `V`, if `W` is an element of `V`
+* `(V contains W), contains(V,W) := (W in V)`
+* `(W element-of V), elementOf(W,V) := (W in V)`
+* signature - (set,set) -> boolean
 
 clarification
 
-* `((U + V) + W) <=> (U + (V + W))`
-
-### (V + w)
-
-* `(V + w) := (V + {w})`
-* `(V union w) := (V + w)`
-
-### (v + W)
-
-* `(v + W) := ({v} + W)`
-* `(v union W) := (v + W)`
-
-### (v + w)
-
-* `(v + w), ({v} + {w}) := {v, w}`
-* `(v union w) := (v + w)`
-
-clarification
-
-* `((u + v) + w) <=> (u + (v + w))`
+* `subset-of <!> element-of`

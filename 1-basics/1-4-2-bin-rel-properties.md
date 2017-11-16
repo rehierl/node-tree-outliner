@@ -69,6 +69,7 @@ clarification
 ### reflexive
 
 * `aRa` for all `a in A`
+* requires `R := (A,A,G)`, i.e. `(B == A)`
 * i.e. there is no `a` such that `(a,a) not in R`
 * i.e. any `a` is also strictly related to itself
 

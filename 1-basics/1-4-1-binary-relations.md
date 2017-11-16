@@ -15,6 +15,7 @@
 * `a related-to b`, if `(a,b) in R`
 * b is also strictly related to a
 * `b related-to a`, if `(b,a) in R'`
+* synonymous - strictly, directly
 
 clarification
 

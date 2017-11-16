@@ -56,13 +56,6 @@ homogenous, heterogenous relation
 * `dom(R) subset-of type(R)`
 
 <!-- ======================================================================= -->
-## inverse relation
-
-* `R := (S1,...,Sn,G)`
-* `R', (R)', inv(R) := (Sn,...,S1,inv(G))`
-* `inv(inv(R)) <=> R`
-
-<!-- ======================================================================= -->
 ## semantics
 
 * without any meaning, a relation is just a set of sequences
@@ -98,11 +91,23 @@ a meaning is based upon the order of elements
 * e.g. `(1,2,3)` vs. `(3,2,1)`
 
 <!-- ======================================================================= -->
+## inverse relation
+
+* `R := (S1,...,Sn,G)`
+* `R', (R)', inv(R) := (Sn,...,S1,inv(G))`
+
+clarification
+
+* `inv(inv(R)) <=> R`
+* this does not state anything about the semantics
+* it merely states that the tuples are turned upside down
+
+<!-- ======================================================================= -->
 ## palindromic relation
 
 palindromic relation
 
-* `R` := (`a` is identical to `b`)
+* `sem(R)` := (`a` is identical to `b`)
 * `R` and `inv(R)` both have a the exact same semantics
 
 <!-- ======================================================================= -->
@@ -118,7 +123,7 @@ if `R` and `S` are antonymous to each other, then
 * `R` is antonymous to `S`, and
 * `S` is antonymous to `R`
 
-`R` and `S` that have antonymous semantics
+`R,S in AxB` that have antonymous semantics
 
 * `R` := (`a` is a subset of `b`), and
   `S` := (`b` is a superset of `a`)
@@ -126,12 +131,18 @@ if `R` and `S` are antonymous to each other, then
   `S` := (`b` is an element of `a`)
 * `R` := (`a` divides `b` without remainder), and
   `S` := (`b` is a multiple of `a`)
+
+`R,S in AxBxC` that have antonymous semantics
+
 * `R` := (`a` and `b` are parents of `c`), and
   `S` := (`c` is child of `b` and `a`)
 
 `R` and `inv(R)` are not necessarily antonymous to each other
 
-* `R` := (set `c` is the intersection of set `a` and set `b`)
+* `R` := (set `c` is the intersection of sets `a` and `b`)
+* an antonymous relation requires antonymous semantics
+* `T` := (set `a` is the intersection of sets `b` and `c`)
+* here, `T` is not antonymous to `R`
 
 <!-- ======================================================================= -->
 ## functional perspective
