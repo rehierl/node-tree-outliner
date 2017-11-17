@@ -13,8 +13,7 @@ definition
 * `G` is in general assumed to not be empty, `E` may be empty
 * a vertex `a` may not be an end to any edge, i.e. there is no `aEb` or `bEa`
 
-<!-- ======================================================================= -->
-## mixed definitions
+basic definitions
 
 * `order(G) := #V`
 * `size(G) := #E`
@@ -27,46 +26,21 @@ definition
 * loops => `aEa`
 * link => `aEb` for `(a != b)`
 * planar => can draw `G` without intersecting edges
-* tree => connected and no cycles
-
-**TODO** - cycles
+* tree => connected with no cycles
 
 <!-- ======================================================================= -->
 ## adjacent to (~)
 
 adjacent vertices
 
-* `(a ~ b)` is true, if `aEb` or `bEa`
-* `(a adjacent-to b) := (a ~ b)`
+* `(a ~ b), (a adjacent-to b)` is true, if `aEb` or `bEa`
 * `a` and `b` are adjacent to one another
+* synonymous - adjacent, strictly related
 
 adjacent edges
 
-* e.g. `(a,b)` and `(b,c)` share the common vertex `b`
-* also consecutive edges
-
-<!-- ======================================================================= -->
-## connected
-
-vertices
-
-* two vertices are connected, if
-  a path exists that leads from one vertex to the other
-* strongly connected vs. weakly connected
-* connected <=> not disconnected
-
-strong vs. weak
-
-* two connected vertices in a directed graph are strongly connected
-* if not, create `G*` by replacing any edge in `G` with undirected edges
-* if two vertices are connected in `G*`, but not in `G`, then
-  those vertices are weakly connected
-
-graph
-
-* `G` has no unreachable vertices
-* any two vertices in `G` are connected
-* connected <=> not disconnected
+* e.g. `e1 := (a,b)` and `e2 := (b,c)`
+* adjacent/consecutive edges share the common vertex
 
 <!-- ======================================================================= -->
 ## simple/multigraph
@@ -78,7 +52,7 @@ multiple edges
 
 multigraph
 
-* undirected, may have multi-edges
+* undirected and may have multi-edges
 * in such a case, `G` must be a multi-set
 
 simple graph
@@ -102,7 +76,7 @@ directed, digraph
 
 * if `aEb` must be understood to not include `bEa`,
   unless `bRa` is itself explicitly mentioned to be included
-* `(a,b)` is also referred to `arrow` from `a` to `b`
+* `(a,b)` is also referred to "arrow" from `a` to `b`
 * `a` reflects the arrow's tail, and `b` the arrow's `head`
 * `b` is a direct successor of `a`
 * `a` is a direct predecessor of `b`
@@ -139,3 +113,57 @@ miscellaneous
 * vertex-independent => edge-independent
 * distance between vertices := length of shortest path `(p1,p2)`
 * diameter of a connected graph := length of longest path
+
+<!-- ======================================================================= -->
+## connected
+
+vertices
+
+* two vertices are connected, if
+  a path exists that leads from one vertex to the other
+* strongly connected vs. weakly connected
+* connected <=> not disconnected
+
+strong vs. weak
+
+* two connected vertices in a directed graph are strongly connected
+* if not, create `G*` by replacing any edge in `G` with undirected edges
+* if two vertices are connected in `G*`, but not in `G`, then
+  those vertices are weakly connected
+
+graph
+
+* `G` has no unreachable vertices
+* any two vertices in `G` are connected
+* connected <=> not disconnected
+
+<!-- ======================================================================= -->
+## further definitions
+
+directed acyclic graph (DAG)
+
+* a DAG is a finite directed graph with no directed cycles
+
+cyclic/acyclic graph
+
+* cyclic - a path exists that
+  leads away from one vertex `v` and eventually back to `v`
+* acyclic - no such path exists
+
+orientation of an undirected graph
+
+* an assignment of a direction (orientation) to each undirected edge
+
+acyclic orientation
+
+* an orientation that does not form any directed cycle
+
+strong orientation
+
+* an orientation that turns the graph into a strongly connected one
+
+aboresence
+
+* there is exactly one path from the root to any other node
+* a directed, rooted tree in which all edges point away from the root
+* aborecence => (but not <=) directed acyclic graph (DAG)

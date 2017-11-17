@@ -233,19 +233,19 @@ isLooselyRightSubsequentTo(ns, s1, s2)
 * "left" with regards to the first, "right" with regards to the last node
 * s2 is left subsequent to s1 => s2 begins after s1 has begun
 * s2 is right subsequent to s1 => s2 begins after s1 has ended
-* "left" is the default perspective - hence "(left)"
+* "left" is the default perspective - hence "left"
 
-### (left) subsequent
+### left subsequent
 
-A sequence (s2) is **a sequence that is (left) subsequent
+A sequence (s2) is **a sequence that is left subsequent
 to a sequence** (s1), if s2 is subsequent to the first node of s1
 (i.e. `(s1[0] < s2[0])`).
 
-A sequence (s2) is **a sequence that is strictly (left) subsequent
+A sequence (s2) is **a sequence that is strictly left subsequent
 to a sequence** (s1), if s2 is strictly subsequent to the first node of s1
 (i.e. `(s1[0] << s2[0])`).
 
-A sequence (s2) is **a sequence that is loosely (left) subsequent
+A sequence (s2) is **a sequence that is loosely left subsequent
 to a sequence** (s1), if s2 is loosely subsequent to the first node of s1
 (i.e. if there are one or more nodes in between).
 

@@ -5,6 +5,13 @@
 In HTML-4, each heading element is defined to introduce
 (i.e. mark the beginning of) a new section.
 
+In general:
+
+The DOM tree is a tree data structure defined in terms of nodes and edges.
+That is, HTML is bound by the rules of discrete mathematics (graph theory)!
+
+Think in terms of graphs and tuples.
+
 <!-- ======================================================================= -->
 ## The NxN Relation
 
