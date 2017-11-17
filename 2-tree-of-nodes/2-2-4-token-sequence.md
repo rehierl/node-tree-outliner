@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Token sequence
 
 With regards to a document's outline, any node has one of the following two 

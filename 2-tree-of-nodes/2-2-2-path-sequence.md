@@ -2,9 +2,8 @@
 <!-- ======================================================================= -->
 # Path sequence
 
-The tree traversal fragment can also be used to produce a sequence of paths.
-This sequence contains the rooted path of each node in the order of the node
-sequence:
+The tree traversal fragment can be used to produce a sequence of paths. This
+sequence contains the rooted path of each node in the order of the node sequence:
 
 ```
 pathOf(node, sequence) begin

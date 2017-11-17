@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Tag sequence
 
 Similar to generating the node sequence of a document, the tree traversal

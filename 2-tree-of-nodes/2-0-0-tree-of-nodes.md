@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Tree (data structure)
+# Tree of nodes
 
 * a tree data structure represents a tree structure using nodes and edges
 * a tree is a connected graph
@@ -73,8 +73,8 @@ the semantics of an edge `e := (p,c) in E` is such that ...
 
 put differently
 
-* the edges `e` of a rooted, ordered and directed tree can be thought of as
-  being ordered into a sequence `s` such that ...
+* the edges `e` of a directed, rooted and ordered tree can be thought of as
+  being elements of a sequence `s` such that ...
 * `(a,b) < (b,ci)` and `(b,ci) < (b,cj)` for `(i < j)`
 
 first/last child
@@ -85,8 +85,7 @@ first/last child
 sibling
 
 * `a` is a sibling of `b`, if `pEa` and `pEb`
-* a tree is not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
-* **TODO** - is a reduced right-euclidean closure needed ?!?
+* not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
 
 previous/next sibling
 

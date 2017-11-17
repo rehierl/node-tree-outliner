@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # Node sequence
 
-The tree traversal pseudocode fragment can be used to produce a sequence of
-nodes (i.e. a traversal trace) that contains the nodes of a document in the
-order in which these are entered:
+The tree traversal fragment can be used to produce a sequence of nodes (i.e.
+a traversal trace) that contains the nodes of a document in the order in which
+these are entered:
 
 ```
 nodeSequenceOf(root) begin
