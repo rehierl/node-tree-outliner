@@ -54,16 +54,16 @@ isInSequentTo -> (distanceBetween == 0)
 * `e1` appears before `e2`
 * `e1` **precedes** `e2`
 
-x presequent to y (<)
+x is presequent to y (<)
 
 * `x < y` => `x` and `y` are sequent, and `x` appears before `y`
 * `s(i) is presequent to s(j)` for any `i,j in [1,N]` and `(i < j)`
 
-x strictly presequent to y (<<)
+x is strictly presequent to y (<<)
 
 * `x << y` => `x` is presequent to `y`, and `x` appears directly before `y`
 
-x loosely presequent to y
+x is loosely presequent to y
 
 * `x` is presequent to `y`, but `x` is not strictly presequent to `y` -
 * i.e. there are other entries in between
@@ -74,16 +74,16 @@ x loosely presequent to y
 * `e2` appears after `e1`
 * `e2` succeeds `e1`
 
-y subsequent to x (>)
+y is subsequent to x (>)
 
 * `y > x` => `x` and `y` are sequent, and `y` appears after `x`
 * `s(i) is subsequent to s(j)` for any `i,j in [1,n]` and `(i > j)`
 
-y strictly subsequent to x (>>)
+y is strictly subsequent to x (>>)
 
 * `y >> x` => `y` is subsequent to `x`, and `y` appears directly after `x`
 
-y loosely subsequent to x
+y is loosely subsequent to x
 
 * `y` is subsequent to `x`, but `y` is not strictly subsequent to `x`
 * i.e. there are other entries in between
@@ -99,6 +99,23 @@ x insequent to y (<>)
 
 * `x` and `y` are sequent, but neither pre- nor subsequent
 * `(x <> y) <=> (y <> x)`
+
+<!-- ======================================================================= -->
+## sequent
+
+* `e1` and `e2` are in the same sequence
+
+The following terms may be used, if the order of both elements is not relevant
+in a given context:
+
+* x is insequent to y <=> `(absDistance(x,y)) == 0)`
+* x is strictly sequent to y <=> `(absDistance(x,y) == 1)`
+* x is loosely sequent to y <=> `(absDistance(x,y) > 1)`
+
+clarification
+
+* `abs()` returns the absolute value of a signed value
+* `absDistance(x,y) := abs(distanceBetween(x,y))`
 
 <!-- ======================================================================= -->
 ### examples

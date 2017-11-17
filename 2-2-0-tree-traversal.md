@@ -1,4 +1,5 @@
 
+<!-- ======================================================================= -->
 # Tree traversal
 
 In order to create an outline that accurately represents a document's structure,

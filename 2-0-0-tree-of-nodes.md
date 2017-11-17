@@ -32,11 +32,6 @@ rooted tree
 * each node has a level value associated with it -
   i.e. `node.level == (number of ancestors) + 1`.
 
-ordered tree
-
-* an ordered tree in which the child nodes of a node are ordered
-* the children of each node are lower than the node
-
 <!-- ======================================================================= -->
 ## nodes <-> nodes
 
@@ -69,3 +64,33 @@ the semantics of an edge `e := (p,c) in E` is such that ...
 * `(L == (N - P)) <=> (P == (N - L))`
 * a child is itself either a parent or a leaf
 * a root may be a leaf (e.g. `(#N == 1)`)
+
+<!-- ======================================================================= -->
+## ordered tree
+
+* an ordered tree in which the child nodes of a node are ordered
+* the children of each node are lower than the node
+
+put differently
+
+* the edges `e` of a rooted, ordered and directed tree can be thought of as
+  being ordered into a sequence `s` such that ...
+* `(a,b) < (b,ci)` and `(b,ci) < (b,cj)` for `(i < j)`
+
+first/last child
+
+* `ci` first child of `p` := there is no `cj` such that `(p,cj) < (p,ci)`
+* `cj` last child of `p` := there is no `cj` such that `(p,ci) < (p,cj)`
+
+sibling
+
+* `a` is a sibling of `b`, if `pEa` and `pEb`
+* a tree is not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
+* **TODO** - is a reduced right-euclidean closure needed ?!?
+
+previous/next sibling
+
+* `cj` is the previous sibling of `ci` := there is no `ck` such that
+  `((p,cj) < (p,ck)) and ((p,ck) < (p,ci))` - i.e. `(cj === c(i-1))`
+* `cj` is the next sibling of `ci` := there is no `ck` such that
+  `((p,ci) < (p,ck)) and ((p,ck) < (p,cj))` - i.e. `(cj === c(i+1))`
