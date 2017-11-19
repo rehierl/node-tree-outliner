@@ -7,7 +7,7 @@
 
 ```
 < root <          path-of-nodes        > leaf >
-< parent-of <                      > child-of >
+> parent-of >                      < child-of <
 
 R x N x ... x N x N x ... x N x N x ... x N x L
 ```

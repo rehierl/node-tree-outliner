@@ -62,11 +62,11 @@ homogenous, heterogenous relation
 
 semantics
 
-* `R, sem(R) := <statement>`
-* these kind of expressions state, that "statement" applies to all `r in R`
-* if there is one `s in R` for which "statement" is not true, then that
-  statement does not apply to the relation
-* the relation has a/no meaning under a statement
+* `sem(R) := <statement>` or simply `R := <statement>`
+* these kind of expressions state, that
+  "statement" applies to all `r in R`
+* the relation has no meaning under a given statement, if
+  that statement does not apply to some `s in R`
 
 examples for `R in (A X B)`
 
@@ -80,14 +80,16 @@ examples for `R in (A X B)`
 examples for `R in (A X B X C)`
 
 * `a` and `b` are the biological parents of `c`
-* `a` is the sum of `b` and `c`
-* `c` is the sum of `a` and `b`
+* `c` is the sum of `a` and `b` - `R: (A,B) -> C` 
+* `a` is the sum of `b` and `c` - `R: (A) -> (B,C)`
 
-a meaning is based upon the order of elements
+the order of elements is relevant for the semantics of a relation
 
 * `R in (A X B X C)` := `c` is the sum of `a` and `b`
-* but not - `inv(R) in (C X B X A)` != `a` is the sum of `c` and `b`
-* the order of elements is relevant to a relation's semantics
+* i.e. the 3rd element is the sum of the 1st and 2nd elements
+* not - `inv(R) in (C X B X A)` := `a` is the sum of `c` and `b`
+* but - `inv(R) in (C X B X A)` := `c` is the sum of `a` and `b`
+* i.e. the 1st element is the sum of the 2nd and 3rd elements
 * e.g. `(1,2,3)` vs. `(3,2,1)`
 
 <!-- ======================================================================= -->
@@ -113,18 +115,18 @@ palindromic relation
 <!-- ======================================================================= -->
 ## antonymous relations
 
-relations `R` and `S` are antonymous to each other, if
+relation `S` is antonymous to `R`
 
-* `(S == inv(R))`, and
-* `sem(R)` is antonymous to `sem(S)`
+* `S := ant(R)`, if `(S == inv(R))` and
+* `sem(S)` is antonymous to `sem(R)`
 
-if `R` and `S` are antonymous to each other, then
+if `S` is antonymous to `R`, then `R` is also antonymous to `S`
 
-* `R` is antonymous to `S`, and
-* `S` is antonymous to `R`
+* `(S == ant(R)) <=> (R == ant(S))`
 
-`R,S in AxB` that have antonymous semantics
+examples for `R,S in AxB` that have antonymous semantics
 
+* assume `R:=(A,B,G)` and `S:=(B,A,G')`
 * `R` := (`a` is a subset of `b`), and
   `S` := (`b` is a superset of `a`)
 * `R` := (`a` contains `b`), and
@@ -132,20 +134,21 @@ if `R` and `S` are antonymous to each other, then
 * `R` := (`a` divides `b` without remainder), and
   `S` := (`b` is a multiple of `a`)
 
-`R,S in AxBxC` that have antonymous semantics
+examples for `R,S in AxBxC` that have antonymous semantics
 
-* `R` := (`a` and `b` are parents of `c`), and
-  `S` := (`c` is child of `b` and `a`)
+* assume `R:=(A,B,C,G)` and `S:=(C,B,A,G)`
+* `R` := (`a` and `b` are the biological parents of `c`), and
+  `S` := (`c` is a biological child of `b` and `a`)
 
 `R` and `inv(R)` are not necessarily antonymous to each other
 
-* `R` := (set `c` is the intersection of sets `a` and `b`)
+* assume `R:=(A,B,C,G)` and `T:=(C,B,A,G):=inv(R)`
+* `R` := (set `c` is the intersection of sets `a` and `b`) =: `T`
+* where `R: (A,B) -> C` and `T: (C) -> (B,A)`
 * an antonymous relation requires antonymous semantics
-* `T` := (set `a` is the intersection of sets `b` and `c`)
-* here, `T` is not antonymous to `R`
 
 <!-- ======================================================================= -->
-## functional perspective
+## a functional perspective
 
 * some relation `R` can be seen to define a function
 * e.g. `G(R) = (A X B)` => `f : A -> B`

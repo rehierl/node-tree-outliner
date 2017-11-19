@@ -24,25 +24,31 @@ still contain different subsequences (i.e. `(B > 0)` and/or `(D > 0)`).
 <!-- ======================================================================= -->
 ## uni-directional paths
 
-For any path `p=(n1,n2,...,nk) in xN^k` such that
-`ni parent-of ni+1` (i.e. top-down) for `i in [1,k-1]`, `k in [2,*]`,
-`ni` is an ancestor of `ni+j` and `ni+j` a descendant of `ni` for `j in [i+1,k]`.
+Given a path `p=(n1,...,nk) in xN^k`
+such that `ni parent-of ni+1` for `i in [1,#p-1]`.
 
-* `TD` represents the set of all top-down paths (= downwards)
-* `RD` - any such path that begins in a root (`n1 in R`)
+* `p` is a top-down/downwards oriented path
+* `ni` is an ancestor of `ni+j`, and `ni+j` is a descendant of `ni`
+* `TD` represents the set of all possible top-down paths
+* `RD` - any such path that begins in a root (`n1 in R`), i.e. any rooted path
 * `TL` - any such path that ends in a leaf (`nk in L`)
 * `RL` or `RTL` - any such path that begins in a root and ends in a leaf
 * `RTL subset-of TD` - read RTL as root-to-leaf
 
-For any path `p=(n1,n2,...,nk) in xN^k` such that
-`ni child-of ni+1` (i.e. bottom-up) for `i in [1,k-1]` and `k in [2,*]`,
-`ni` is a descendant of `ni+j` and `ni+j` an ancestor of `ni` for `j in [i+1,k]`.
+Given a path `p=(n1,...,nk) in xN^k`
+such that `ni child-of ni+1` for `i in [1,#p-1]`.
 
-* `BU` represents the set of all bottom-up paths (= upwards)
+* `p` is a bottom-up/upwards oriented path
+* `ni` is a descendant of `ni+j`, and `ni+j` is an ancestor of `ni`
+* `BU` represents the set of all possible bottom-up paths
 * `BR` - any such path that ends in a root (`nk in R`)
 * `LU` - any such path that begins in a leaf (`n1 in L`)
 * `LR` or `LTR` - any such path that beings in a leaf and ends in a root
 * `LTR subset-of BU` - read LTR as leaf-to-root
+
+clarification
+
+* `E in TD`, but `E not in BU`
 
 Any such path has one direction only!
 
@@ -52,12 +58,23 @@ Any such path has one direction only!
 * no `p in BU` has a pair of nodes `(ni, ni+1)` such that
   `ni parent-of ni+1`, or `ni ancestor-of ni+j`
 
+A path upon relation x
+
+* any path `p in TD` is said to be a path upon the `parent-of` relation
+* any path `p in BU` is said to be a path upon the `child-of` relation
+* one can also state "a path upon `E` (or `E'`)"
+
+<!-- ======================================================================= -->
+## loops, cycles
+
+* a path `p in TD` has loops, if `(p(i) == p(i+1))`
+* a path `p in TD` has cycles, if `(p(i) == p(j))` for some `i,j in [1,#p]`
+
 clarification
 
-* `E in TD`, but `not in BU`.
-* `p in RD` <=> `p` is a rooted path
-* a tree has no cycles, if `p(i) != p(j)`
-  for `i,j in [1,k]`, `i != j` and any `p in TD or BU`
+* a tree is defined to not contain any loops or cycles
+* therefore, any uni-directional path contains any node once or not at all
+* this also applies to any path `p in BU`
 
 <!-- ======================================================================= -->
 ## undirected definitions

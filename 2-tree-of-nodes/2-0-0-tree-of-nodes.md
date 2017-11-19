@@ -69,27 +69,44 @@ the semantics of an edge `e := (p,c) in E` is such that ...
 ## ordered tree
 
 * an ordered tree in which the child nodes of a node are ordered
-* the children of each node are lower than the node
+* the children of each node are lower than the node itself -
+  i.e. with regards to the node's level
 
 put differently
 
 * the edges `e` of a directed, rooted and ordered tree can be thought of as
   being elements of a sequence `s` such that ...
-* `(a,b) < (b,ci)` and `(b,ci) < (b,cj)` for `(i < j)`
+* `(a,b) < (b,cx)` and `(b,cx) < (b,cy)` for `(x < y)`
 
 first/last child
 
-* `ci` first child of `p` := there is no `cj` such that `(p,cj) < (p,ci)`
-* `cj` last child of `p` := there is no `cj` such that `(p,ci) < (p,cj)`
+* `cy` first child of `p` := there is no `cx` such that `(p,cx) < (p,cy)`
+* `cx` last child of `p` := there is no `cy` such that `(p,cx) < (p,cy)`
 
 sibling
 
-* `a` is a sibling of `b`, if `pEa` and `pEb`
+* `x` is a sibling of `y`, if `xEy` and `yEx`
+* `(x sibling-of y) <=> (y sibling-of x)`
 * not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
+
+clarification
+
+* e.g. `s := [a,...,e,f,g,...,k]`
+* all nodes within `s` are direct child nodes of some parent node `p` -
+  i.e. `(p,s(i)) in E` for any `i in [1,n]` and `(n == #s)`
+* `s1` represents the first child and `sn` the last child of parent `p`
 
 previous/next sibling
 
-* `cj` is the previous sibling of `ci` := there is no `ck` such that
-  `((p,cj) < (p,ck)) and ((p,ck) < (p,ci))` - i.e. `(cj === c(i-1))`
-* `cj` is the next sibling of `ci` := there is no `ck` such that
-  `((p,ci) < (p,ck)) and ((p,ck) < (p,cj))` - i.e. `(cj === c(i+1))`
+* `si` is the previous sibling of `sj` := `si` is sequent to `sj`, and
+  there is no sequent sibling `sk` subsequent to `si` and presequent to `sj` -
+  i.e. `(si < sk < sj)`
+* `sj` is the next sibling of `si` := `si` is sequent to `sj`, and
+  there is no sibling `sk` subsequent to `si` and presequent to `sj` -
+  i.e. `(si < sk < sj)`
+
+presequent/subsequent sibling
+
+* `sj` is a subsequent sibling of `si` := `si` is sequent to `sj` and `(si < sj)`
+* `si` is a presequent sibling of `sj` := `si` is sequent to `sj` and `(si < sj)`
+* `(si presequent-sibling-of sj) <=> (sj subsequent-sibling-of si)`

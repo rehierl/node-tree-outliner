@@ -121,7 +121,8 @@ vertices
 
 * two vertices are connected, if
   a path exists that leads from one vertex to the other
-* strongly connected vs. weakly connected
+* strongly connected vs. weakly connected -
+  based upon directed/undirected edges
 * connected <=> not disconnected
 
 strong vs. weak
