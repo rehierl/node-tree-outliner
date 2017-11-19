@@ -86,8 +86,8 @@ first/last child
 sibling
 
 * `x` is a sibling of `y`, if `xEy` and `yEx`
-* `(x sibling-of y) <=> (y sibling-of x)`
 * not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
+* `(x sibling-of y) <=> (y sibling-of x)`
 
 clarification
 
@@ -101,12 +101,9 @@ previous/next sibling
 * `si` is the previous sibling of `sj` := `si` is sequent to `sj`, and
   there is no sequent sibling `sk` subsequent to `si` and presequent to `sj` -
   i.e. `(si < sk < sj)`
-* `sj` is the next sibling of `si` := `si` is sequent to `sj`, and
-  there is no sibling `sk` subsequent to `si` and presequent to `sj` -
-  i.e. `(si < sk < sj)`
+* `(x previous-sibling-of y) <=> (y next-sibling-of x)`
 
 presequent/subsequent sibling
 
 * `sj` is a subsequent sibling of `si` := `si` is sequent to `sj` and `(si < sj)`
-* `si` is a presequent sibling of `sj` := `si` is sequent to `sj` and `(si < sj)`
 * `(si presequent-sibling-of sj) <=> (sj subsequent-sibling-of si)`

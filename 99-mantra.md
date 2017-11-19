@@ -1,35 +1,5 @@
 
 <!-- ======================================================================= -->
-## An inaccurate mantra (1)
-
-* Just a pictogram to guide ones thoughts.
-* Yuo can sitll raed tihs! (= try to grasp its essence)
-
-```
-< root <          path-of-nodes        > leaf >
-> parent-of >                      < child-of <
-
-R x N x ... x N x N x ... x N x N x ... x N x L
-```
-
-* `RxNx...xNxL` can be seen to represent all the RTL paths of a tree.
-* At any non-leaf node, a path of any length may branch off:
-
-```
-            ... x N x N x L
-R x N x ... x N x N x ... x N x L
-        ... x N x N x N x L
-  ... x N x N x N x N x L
-```
-
-It depends on the current context how one needs to look at it.
-
-* `...xNxNx...` can be seen to represent an infinite set of paths that all
-  share some common prefix (same ancestors), but (beginning with some node)
-  branch off into different suffixes (different descendants).
-* `Rx...xL` can also be seen to represent a single path only.
-
-<!-- ======================================================================= -->
 ## An inaccurate mantra (2)
 
 ```
