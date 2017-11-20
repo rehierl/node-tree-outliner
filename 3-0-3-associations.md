@@ -39,112 +39,44 @@ its elements. From that point on, `(s related-to n)` is true.
   as soon as the node is added to the section.
 * No section can contain a node multiple times.
 
+<!-- ======================================================================= -->
+## root node
+
+Because a section can not exist without a presequent sectioning node, the root
+node, with which a process has to start, can not strictly be associated with
+any section as there is no sectioning node that is presequent to the root.
+
+universal section (u)
+
+The only thing that can be done is to think of the root as being associated
+with some universal section `u`. This special section can be understood to
+represent a section that hypothetically contains any possible node.
+
+With that in mind, any node of a node tree always belongs to one or multiple
+sections. That is, there is no node that does not belong to any section.
+
+the root is sectioning node
+
+Without any further clarification, and assumed that a given root does itself
+not (strictly or loosely) contain any other sectioning node, all the nodes in
+the root's subtree would be lost inside the universal section. That is, there
+is no section that corresponds with their relationship (i.e. located inside of
+the very same subtree).
+
+In order to establish that kind of relationship, the root itself needs to
+introduce its own section. Consequently, the root node is always considered
+to be a sectioning node.
+
+<!-- ======================================================================= -->
+## associate operation
+
 Because nodes are visited in some particular order and because nodes are
-associated with sections in an order that is based upon the visit order, the
-general definition of a section can be clarified as a sequence of nodes:
+associated with sections in an order that is based upon the visit order,
+the general definition of a section can be clarified as a sequence of nodes:
 
 * `s := [n1,...,nk]` and `(ni != nj)` for `i,j in [1,k]` and `(i != j)`
 * Any non-empty section always has a first and a last node.
 
 However, the order of nodes within a section must reflect the order of nodes
-within the tree of nodes. After all, any section is intended to accurately
-represent some part of the node tree.
-
-<!-- ======================================================================= -->
-## Mantra
-
-What effects does it have,
-if some node `ni` is associated with some section `s`?
-
-```
-< root <                path-of-nodes                 > leaf >
-> parent-of >                                     < child-of <
-> contains >                                    < belongs-to <
-
-... x (ni-k) x ... x (ni-1) x ni x (ni+1) x ... x (ni+k) x ...
-                              x
-                              s
-```
-
-### pi := s -> ni
-
-Due to the strict association between section `s` and node `ni`, it can be
-stated right away, that section `s` strictly contains node `ni`.
-
-**no conclusion**
-
-That statement is however a direct result of the `SxN` relation and, as such,
-does not state anything new.
-
-### pa: (ni-k) -> ni -> s
-
-A path `pa` can be defined that connects
-the ancestors of node `ni` with section `s`.
-
-*  `pa := ((ni-k),...,(ni),s) in N{+}S`
-* `(ni-k) ... contains ... (ni) belongs-to (s)`
-
-The same applies, if such a path is inverted:
-
-* `pa' := (s,(ni),...,(ni-k)) in SN{+}`
-* `(s) contains (ni) ... belongs-to ... (ni-k)`
-
-Here, the relations used to create such a path have antonymous semantics (i.e.
-`contains` vs. `belongs-to`)! Such a path is said to be inconsistent.
-
-**no conclusion**
-
-A path `p` could be defined that connects
-some node `n` (descendant to `r`, but not ancestral to `ni`) with section `s`
-
-* `p := (n,...,r,...,(ni-k),...,(ni),s) in N{+}S`
-* `(n) ... belongs-to ... (r) ... contains ... (ni) belongs-to s`
-
-Obviously, such a path would be even more inconsistent.
-
-### pd: s -> ni -> (ni+k)
-
-A path `pd` can be defined that connects
-section `s` with nodes that all are descendant to node `ni`:
-
-* `pd .= (s,(ni),...,(ni+k)) in SN{+}`
-* `(s) contains (ni) ... contains ... (ni+k)`
-
-The same applies, if such a path is inverted:
-
-* `pd' := ((ni+k),...,(ni),s) in N{+}S`
-* `(ni+k) ... belongs-to ... (ni) belongs-to s`
-
-Here, the relations used to create such a path have equivalent semantics!
-Such a path is said to be consistent.
-
-**conclusion**
-
-A section, that is strictly related to a node is
-also loosely related to any descendant of that node:
-
-* `(s related-to ni)` and `(s related-to (ni+j))`
-
-Consequently, any node is loosely related to any section that is
-strictly related to any of the node's ancestors:
-
-* `(ni related-to s)` and `((ni+j) related-to s)`
-* `(ny related-to t)` for any `t in S`, if `nx in N` exists
-  such that `(nx ancestor-of ny)` and `(nx related-to t)`
-
-<!-- ======================================================================= -->
-## Mantra
-
-What effects does it have,
-if some node `ni` is associated with section `s` and
-if some node `nj` (descendant to `ni`) is associated with section `t`?
-
-```
-< root <                path-of-nodes                 > leaf >
-> parent-of >                                     < child-of <
-> contains >                                    < belongs-to <
-
-... x N x ni x N x ... x N x nj x N x ...
-          x                  x
-          s                  t
-```
+within the node tree. After all, any section is intended to accurately represent
+some part of the node tree.
