@@ -168,6 +168,7 @@ basic principles of the corresponding relations:
 ```
 < root <          path-of-nodes        > leaf >
 > parent-of >                      < child-of <
+> contains >                     < belongs-to <
 
 R x N x ... x N x N x ... x N x N x ... x N x L
 ```

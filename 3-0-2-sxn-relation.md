@@ -48,8 +48,10 @@ The only generalization currently possible is:
 <!-- ======================================================================= -->
 ## Summary
 
-So far, the above definitions only allow to state if a section strictly contains
-a given node, or if a node strictly belongs to some section.
+So far, the above definitions only allow to state if a section `s`, that already
+contains a node `n`, is strictly related to node `n`, or if a node `n` strictly
+belongs to section `s`. There is no definition that forces node `n` to be
+related to section `s`.
 
 There is no definition of any relationship between a section and those nodes
 that are related to some node, which itself is associated with that section:
