@@ -50,7 +50,7 @@ The only generalization currently possible is:
 
 The above definitions only allow to state if section `s`, that already contains
 node `n`, is strictly related to node `n`, or if node `n` strictly belongs to
-section `s`. This means, that in order to make such a statement, the
+section `s`. This means that, in order to make such a statement, the
 relationship between a section and its nodes must already exist.
 
 * Why are nodes `n,x,y in N` related to sections `s,t in S`?
