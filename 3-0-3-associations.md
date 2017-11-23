@@ -2,42 +2,49 @@
 <!-- ======================================================================= -->
 # Associations
 
-A process of some sort is required to visit the nodes of a tree in some
-particular order (=> tree traversal). As a result, there is some node in a
-non-empty tree, that will be visited first and some node that will be visited
-last. Consequently, any node, except for the first and last nodes themselves,
-is subsequent to the first and presequent to the last node (=> node sequence).
+A process of some sort is required that enters and exits the nodes of a tree
+in some particular order (=> tree traversal).
+
+As a result, there is some node in a non-empty tree, that will be entered first
+and some node that will be entered last. Consequently, any node, except for the
+first and last nodes themselves, is, based on the order of enter events,
+subsequent to the first and presequent to the last node (=> node sequence).
 
 * `ns := [n1,...,nk]`, `ni in N`, `ns in N^k`
-* `n1` was visited first and `nk` was visited last
+* `n1` was entered first and `nk` was entered last
 
-At some point in the above process, nodes will be visited that introduce a new
-section (=> sectioning nodes).
+At some point in this process, nodes will eventually be entered that declare
+(aka. introduce) the existence of a new section (=> sectioning nodes).
 
-* Any sectioning node always declares/introduces a single new section.
-* No section can exist without first being declared by its sectioning node.
-* There is a one-to-one (i.e. 1:1) relationship between the sectioning nodes
-  and the sections they declare.
+* Any sectioning node always declares a single new section.
+* This defines a one-to-one (1:1) relation (NxS) on the
+  sectioning nodes and the sections they declare.
 * Any section can be identified by its sectioning node.
+* There is no knowledge of a section before its sectioning node is entered.
+* No section can exist without first being declared by some sectioning node.
 
-Once a sectioning node is reached, any subsequent node may be associated with
-the sectioning node's section.
+If a sectioning node `n` declares section `s`, then any node entered at some
+later point in time (i.e. subsequent node) may be associated with section `s`.
 
 * A sectioning node is insequent, and therefore not subsequent, to itself.
-* A sectioning node binds its section to presequent nodes/sections.
-* Nodes will potentially be associated with multiple predeclared sections.
+* However, technically it is still possible to associate a sectioning node
+  with the section it declares (i.e. with its own section). That is because
+  a sectioning node has knowledge of the section it declares.
+* Nodes can potentially be associated with multiple sections, that all must
+  be declared by some presequent nodes (i.e. predeclared sections).
 
-Naturally, some rules are required that allow to determine with which section,
-or multiples thereof, a node must be associated. For the moment, it can only be
-assumed that such rules exist.
+Naturally, rules are required that allow to determine with which section, or
+multiples thereof, a node must be strictly associated. For the moment, it can
+only be assumed that such rules exist.
 
-If the these rules allow to determine that some node `n` must be associated
-with some section `s`, then node `n` must be added to section `s` as one of
-its elements. From that point on, `(s related-to n)` is true.
+If these rules allow to determine that node `n` must be strictly associated
+with section `s`, then node `n` must be added to section `s` as one of its
+elements. This operation defines the relation (SxN) on the sections and nodes
+of a node tree.
 
-* A section is related to a node (and vice versa)
-  as soon as the node is added to the section.
-* No section can contain a node multiple times.
+* A section `s` is related to node `n` (and vice versa),
+  as soon as node `n` is added to section `s`.
+* No section can contain any node multiple times.
 
 <!-- ======================================================================= -->
 ## root node
@@ -80,3 +87,8 @@ the general definition of a section can be clarified as a sequence of nodes:
 However, the order of nodes within a section must reflect the order of nodes
 within the node tree. After all, any section is intended to accurately represent
 some part of the node tree.
+
+<!-- ======================================================================= -->
+## sectioning nodes
+
+* A sectioning node binds its section to presequent nodes and sections.

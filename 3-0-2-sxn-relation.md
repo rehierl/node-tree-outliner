@@ -4,7 +4,7 @@
 
 With regards to a tree of nodes, a section can initially be defined as a set of
 nodes `s := { n1, ..., nk }`, and `k in [0,#N]` (or simply via `s subset-of N`).
-Hence, the common operators defined for sets also apply to sections:
+Hence, operators defined for sets also apply to sections:
 
 * `(isEmpty(s) == true)`, if `(#s == 0)` (put differently: `(s == {})`)
 * `(n in s)`, if node `n` is an element of section `s`
@@ -48,16 +48,23 @@ The only generalization currently possible is:
 <!-- ======================================================================= -->
 ## Summary
 
-So far, the above definitions only allow to state if a section `s`, that already
-contains a node `n`, is strictly related to node `n`, or if a node `n` strictly
-belongs to section `s`. There is no definition that forces node `n` to be
-related to section `s`.
+The above definitions only allow to state if section `s`, that already contains
+node `n`, is strictly related to node `n`, or if node `n` strictly belongs to
+section `s`. This means, that in order to make such a statement, the
+relationship between a section and its nodes must already exist.
 
-There is no definition of any relationship between a section and those nodes
-that are related to some node, which itself is associated with that section:
+* Why are nodes `n,x,y in N` related to sections `s,t in S`?
+* for `(n != x != y)` and `(s != t)`
 
-* `(s ??? nk)`, if `(s related-to n)` and `(n related-to nk)`
+There is no definition that forces to establish any relationship between
+nodes and sections: Under which circumstances must node `n` be associated
+with section `s`?
 
-There is no definition of any relationship between two different sections:
+* `(s ??? y)`, if `(s related-to x)` and `(y related-to x)`
 
-* `(s1 ??? s2)`, if `(s1 and s2 in S)` and `(s1 !== s2)`
+There is no clarification of any relationship between a section
+and those nodes that are related to some other, already associated node.
+
+* `(s ??? t)`, if `(s related-to x)`, `(t related-to y)` and `(x related-to y)`
+
+There is no clarification of any relationship between two different sections.
