@@ -1,8 +1,5 @@
 
 <!-- ======================================================================= -->
-# Associations
-
-<!-- ======================================================================= -->
 ## root node
 
 Because a section can not exist without a presequent sectioning node, the
@@ -30,20 +27,6 @@ the very same subtree).
 In order to establish that kind of relationship, the root itself needs to
 introduce its own section. Consequently, the root node is always considered
 to be a sectioning node.
-
-<!-- ======================================================================= -->
-## associate operation
-
-Because nodes are visited in some particular order and because nodes are
-associated with sections in an order that is based upon the visit order,
-the general definition of a section can be clarified as a sequence of nodes:
-
-* `s := [n1,...,nk]` and `(ni != nj)` for `i,j in [1,k]` and `(i != j)`
-* Any non-empty section always has a first and a last node.
-
-However, the order of nodes within a section must reflect the order of nodes
-within the node tree. After all, any section is intended to accurately represent
-some part of the node tree.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
