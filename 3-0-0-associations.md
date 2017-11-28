@@ -47,9 +47,9 @@ In order to support these dynamic goals, certain requirements must be met:
 ## Sections, SxN
 
 The most fundamental aspect of the above requirements is, that any node must
-belong to at least one section. Because of that, any section can initially be
-defined as a set of nodes. As a result, operators defined for sets also apply
-to sections:
+belong to at least one section. In addition to that, no node can belong to the
+same section more than once. Hence, sections can initially be defined as sets
+of nodes. Operators defined for sets can therefore also be used on sections:
 
 * `s := {n1,...,nk}`, `s in S`, `ni in N`
 * `S` represents the set of sections, `N` the set of nodes
@@ -69,35 +69,32 @@ This relation will be referred to as "the SxN relation".
 
 Consequently, an outline algorithm must traverse the node tree in order to
 visit and associate each and every node. As a result, the nodes of a section
-will be added to it in some particular order (which is why a section can be
-defined as a sequence of nodes):
+will be added to it, one after another, in some particular order (this is why
+a section can also be defined as a sequence of nodes):
 
 * `s := [n1,...,nk]`, `s in S`, `ni in N`
 * `(ni != nj)` for `i,j in [1,k]` and `(i != j)`
 * `n1` is the section's first node, `nk` is the section's last node
 
-Despite this definition, no node must be added more than once to any section.
-Because of that, the set operators still apply.
-
-Both of these initial definitions allow to associate any node with multiple
-sections. Additional rules are therefore needed in order to uniquely determine
-the actual context/location of a node.
+Both the above definitions allow to associate any node with multiple sections.
+Additional rules are therefore required to uniquely determine the actual
+context/location of a node.
 
 <!-- ======================================================================= -->
 ## Node sequence
 
-The traversal of a tree can be used to create a sequence of nodes (aka. trace of
-nodes), if each node is added to a sequence while it is in the process of being
-entered. Such a node sequence will be referred to as "the node sequence" `ns` of
-the corresponding node tree:
+The traversal of a tree can be used to create a sequence of nodes (aka. trace
+of nodes), if each node is added to a sequence while it is in the process of
+being entered. Such a node sequence will be referred to as "the node sequence"
+`ns` of the corresponding node tree:
 
 * `ns := [n1,...,ni,...,nk]`
 * `(k == #N)`, `ns(i) in N`, `ns in N^k`
 * `n1` was entered first and `nk` was entered last
-* `ni` was entered after `ni-x`, but before `ni+y`, `x,y in [1,*]`
+* `ni` is entered after `ni-x` and before `ni+y`, `x,y in [1,*]`
 
-Because each node will be entered exactly once, the length of a node sequence is
-identical to the number of nodes in the corresponding node tree.
+Because each node will be entered exactly once, the length of a node sequence
+is identical to the number of nodes in the corresponding node tree.
 
 * `(ni-k presequent-to ni)` is true, if `k in [1,*]`
 * `(ni-k strictly-presequent-to ni)` for `(k == 1)`
@@ -115,89 +112,99 @@ Note that each enter and exit event is an atomic operation. That is, subsequent
 nodes will not be entered or exited, while a presequent node is still in the
 process of being entered or exited.
 
+### current knowledge
+
 ```
        [ s1    ][ s2  ]
 ns := [n1,...,ni,...,nk]
        xxxxxxxxx                - knowledge when ni is entered
-              xxxxxxxxx         - maximum scope of enter actions
+              xxxxxxxxx         - maximum scope of enter operations
 ```
-Because any outline algorithm must always begin with a first node and then
-traverse from one node to another, it can only make decisions based on the
-knowledge it gained from the nodes it has already visited. Hence, if an
-algorithm enters node `ni`, it can only have knowledge of any node within
-subsequence `s1 := [n1,ni]`.
 
-The nodes within subsequence `s1`, that have already been exited, will in
-general be ignored when making any decision. That is, operations will usually
-only depend on a node itself and/or on the ancestors of said node.
+Any outline algorithm must, beginning with a first node, traverse from one node
+to another. In addition to that, an algorithm must execute operations based on
+the knowledge it gained from visiting presequent nodes.
+
+Such an algorithm has, when entering its current node (e.g. `ni`), knowledge of
+any node within subsequence `s1 := [n1,ni]`. The algorithm's current knowledge
+therefore consists of all the nodes within subsequence `s1`.
+
+The nodes within `s1`, that have already been exited, will in general be ignored
+when making any kind of decision. That is, operations will usually only depend
+on a node itself and/or on the ancestors of its current node.
 
 Consequently, no process can make any reasonable decision based upon subsequent
 nodes (i.e. nodes in `s2 := [ni+1,nk]`). That is, unless definitions exist
 which guarantee that some specific subsequent node, or multiples thereof,
-will eventually be entered. In general, such guarantees do not exist (i.e.
-no attempts must be made to make decisions based upon possible future events).
+will eventually be entered. In general, such guarantees do not exist (i.e. no
+attempts must be made to take any action based on possible future events).
 
-In addition to that, any action executed while entering a node can only have
+In addition to that, any operation executed while entering a node can only have
 an effect on the node itself, or on nodes that are subsequent to it. That is,
 if the exit event of its parent node is ignored.
-
-**TODO** -
-can a node be allowed to have any effect on itself
-(e.g. associate with its own section)?
 
 ### exit events
 
 ```
-                [ s1  ][ s2  ]
+                [ s2         ]
+                [ s3  ][ s4  ]
 ns := [n1,...,ni,...,nj,...,nk]
        xxxxxxxxx                - knowledge when ni is entered
        xxxxxxxxxxxxxxxx         - knowledge when ni is exited
-              xxxxxxxxxxxxxxxx  - maximum scope of enter actions
-              xx       xxxxxxx  - maximum scope of exit actions
+              xxxxxxxxxxxxxxxx  - maximum scope of enter operations
+              xx       xxxxxxx  - maximum scope of exit operations
 ```
 
-Any node within subsequence `s1 := [ni+1,nj]` is descendant to `ni` and will
-be entered and exited after `ni` was entered and before `ni` is exited. In
-contrary to that, any node within subsequence `s2 := [nj+1,nk]` will be entered
+Any node within subsequence `s3 := [ni+1,nj]` is descendant to `ni`. These nodes
+will be entered and exited after `ni` was entered and before `ni` is exited. In
+contrary to that, any node within subsequence `s4 := [nj+1,nk]` will be entered
 and exited after `ni` was exited.
 
-Consequently, any node within `s1` may technically still have an effect on its
+Consequently, any node within `s3` might technically still have an effect on its
 presequent ancestor `ni`. That is because a process will have knowledge of any
 node within `s1` by the time `ni` is being exited.
 
-However, this kind of delayed knowledge must not be used to execute any actions
-that may have a side effect on any nodes in `s1`. That is because these kind of
-operations have the potential to produce inconsistencies.
+However, this kind of delayed additional knowledge must not be used to execute
+any operation that might have some side effect on any node within `s1`. That
+is because operations, which depend on this kind of delayed knowledge, have the
+potential to produce contradictions.
+
+**TODO** - 
+associate nodes when entering them
 
 ```
 <n1><n2><n3> ... </n3></n2></n1>
 ```
 
-In addition to that, when executing any action while a node is being exited,
-the overall order of events must be taken into account. That is, ancestors
-will be entered before their descendants are entered. In contrary to that,
-descendants will be exited before their ancestors are exited
-(i.e. exit events are triggered in reverse order).
+In addition to that, when executing any operation while a node is being exited,
+the overall order of events must be taken into account. That is, ancestor nodes
+will be entered before their descendant nodes are entered. In contrary to that,
+descendant nodes will be exited before their ancestor nodes are exited (i.e.
+exit events will be triggered in reverse order).
 
 Consequently, executing any operation while a node is being exited is per se
-problematic. Because of that, exit events must only be used for actions which
-affect nodes that are subsequent, but not descendant to the node being exited
-(i.e. they can affect nodes in `s2`, but must not have any side effect on any
-node in `s1`).
+highly problematic. Because of that, exit events must only be used to execute
+operations which affect nodes that are subsequent, but not descendant to the
+node being exited (i.e. they can affect nodes in `s2`, but must not have any
+side effect on any node in `s1`).
+
+**TODO** -
+can a node be allowed to have any effect on itself
+(e.g. associate with its own section)?
 
 <!-- ======================================================================= -->
 ## Sectioning nodes, NxS
 
 When beginning to traverse a tree of nodes, the set of sections is initially
-empty. Therefore, certain nodes are required that declare (aka. introduce)
-new sections. These type of nodes will be referred to as "sectioning nodes".
+empty. Certain nodes are therfore needed to declare (aka. introduce) new
+sections. These type of nodes will be referred to as "sectioning nodes".
 
 * **DEFINITION**: Any sectioning node always declares a single new section.
+* No section can exist without the sectioning node that declared it.
 * Any section can be identified by its sectioning node.
-* No section can exist without its sectioning node.
 
 Consequently, there is a one-to-one (1:1) relation on the set of sectioning
-nodes `NS` and the set of sections `S`. This relation will be referred to as
+nodes `SN` and the set of sections `S`. This relation will be referred to as
 "the NxS relation".
 
 * for any `sn in SN subset-of N` and `s in S`
@@ -205,52 +212,65 @@ nodes `NS` and the set of sections `S`. This relation will be referred to as
 * `(s declared-by sn)` is true, if `(sn declared s)` is true
 
 As soon as a sectioning node `sn` is entered, the section it declares is known
-to the process that is being executed. At some point, section `s` must therefore
-be added to the set of sections `S`.
+to the process and must immediately be added to the set of sections `S`. In
+general and from that point on, any subsequent node must be associated with it.
 
-### Associations
+Because of that, any node potentially belongs to multiple sections. That is
+because any node can be subsequent to any number of sectioning nodes.
 
-In general, if node `x` declares section `s`, then
-any node `(y subsequent-to x)` must be associated with section `s`. 
+Obviously, rules are required to limit the scope of a section because the very
+last node entered would otherwise have to be associated with all the sections
+that are declared inside of the current tree of nodes.
 
-Because of that, any node must potentially be associated with multiple sections.
-That is because any node can be subsequent to any number of sectioning nodes.
-Consequently, the very last node entered must be associated with all sections
-that are declared inside of the current tree. Obviously, rules are required to
-restrict the scope of a section.
+### Scope of a section
 
-### Closed sections
+
+
+In order to limit the scope of a section, a sectioning node must tell the
+algorithm where its section begins and where it ends. In return, an algorithm
+must know when to start and when to stop associating subsequent nodes with a
+section.
+
+```
+             [ s1  ][ s2  ][ s3  ][ s4  ][ s5  ]
+ns := [...,ni,...,nj,...,nk,...,nl,...,nm,...,nn,...]
+           xxxxxxxxxxxxxxxx  - scope of ni enter operations
+                  xxxxxxxxx  - scope of ni exit operations
+```
+
+* associate a sectioning node with its own section?
+* A sectioning node binds its section to presequent nodes and sections.
+
+### States of a section
 
 Certain rules are required that can be used to determine when it is no longer
-allowed to associate nodes with a specific section. Because of that, sections
-must have an "open-or-closed state".
+allowed to associate nodes with a section. Similar to binary streams, sections
+can be seen to be either "open" or "closed" for associations:
 
 * Nodes must be associated with a section, if it is considered to be "open".
 * No more associations are allowed, if a section is considered to be "closed".
-* A section is fully defined once it is closed.
 
-In addition to an is-open and a is-closed state, the very first node that must
-be associated with a section does not necessarily have to be strictly subsequent
-to the section's sectioning node. That is, a section must be allowed to have a
-delayed start.
+
+
+* A section is fully defined once it is closed.
+* 
+
+However, the very first node that must be associated with a section does not
+necessarily have to be strictly subsequent to the section's sectioning node.
+That is, a section must be allowed to have a delayed start.
+
+* The first child of any node is strictly subsequent to it.
+* If any node has no child, then its next sibling (or some other node) is
+  strictly subsequent to it.
+* If a sectioning node `sn` has a child and a next sibling, and if this next
+  sibling has to become the first node of `sn`'s section, then that first node
+  is not strictly subsequent to `sn`.
 
 ### Reflexive associations
 
 Although a sectioning node is insequent to itself, it is technically still
 possible to associate a sectioning node with the section it declares. That is
 because a section is a known section as soon as its sectioning node is entered.
-
-### Scope
-
-```
-             [ s1  ][ s2  ][ s3  ][ s4  ][ s5  ]
-ns := [...,ni,...,nj,...,nk,...,nl,...,nm,...,nn,...]
-           xxxxxxxxxxxxxxxx  - scope of ni enter actions
-                  xxxxxxxxx  - scope of ni exit actions
-```
-
-* associate a sectioning node with its own section?
-* A sectioning node binds its section to presequent nodes and sections.
 
 <!-- ======================================================================= -->
 ## The root node
