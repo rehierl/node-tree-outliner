@@ -7,10 +7,12 @@ of an accurate listing of sections (aka. table of contents, TOC) that can be
 found within a given node tree. As such, a TOC provides a static overview of
 the tree's contents.
 
-However, the more sections there are, the less helpful such a listing becomes.
-An outline algorithm must therefore allow to support dynamic behavior.
+*dynamic support*
 
-An outliner must allow to change the display of a TOC based on actions
+However, the more sections there are, the less helpful such a listing becomes.
+A design must therefore allow to support dynamic behavior.
+
+A design must allow to change the display of a TOC based on actions
 executed on the display of a tree (i.e. tree -> toc):
 
 * Allow to determine the context of any given node in order to display and
@@ -19,7 +21,7 @@ executed on the display of a tree (i.e. tree -> toc):
   It must be possible to show/unfold those parts of a tree that are within
   a given context and to hide/fold parts that are outside of it.
 
-An outliner must allow to change the display of a tree based on actions
+A design must allow to change the display of a tree based on actions
 executed on the display of a TOC (i.e. toc -> tree):
 
 * Allow to focus on a section depending on which TOC entry was selected.
@@ -28,7 +30,7 @@ executed on the display of a TOC (i.e. toc -> tree):
   TOC that are within the current context and to hide/fold parts that are
   outside of it.
 
-An outliner must allow to manually change the display of a tree depending
+A design must allow to manually change the display of a tree depending
 on actions executed on the display itself (i.e. tree -> tree):
 
 * Allow to show/unfold and to hide/fold a section, if the corresponding
@@ -42,6 +44,27 @@ In order to support these dynamic goals, certain requirements must be met:
   section turns out to be empty. This is needed to focus on any given section.
 * It must be possible to treat any section as a single entity.
   This is needed to fold/unfold whole sections via a single operations.
+
+*efficient implementation*
+
+In addition to the above dynamic goals, it must be possible to efficiently
+implement a TOC generator. Such an implementation represents a reduced/limited
+version of an outline algorithm that has one purpose only:
+To efficiently generate a TOC for any tree.
+
+The first step of a fully functional outline algorithm is to read the contents
+of a tree and to create a structure of sections that accurately represents the
+tree's contents. After that, this structure can be used to generate a TOC. As
+such, the generation of a TOC is, in general, a two-step process that has a
+fully functional temporary result (i.e. the structure of sections).
+
+If a TOC generator would have to be implemented in terms of such a two-step
+process, it would end up having to keep more information in memory than it
+actually needs. Because of that, a design must allow to extract the required
+information and then drop a section object as soon as it is fully specified.
+That is, unless this section has no effect on another section.
+
+This essentially means, that a design must allow to create a TOC on the fly.
 
 <!-- ======================================================================= -->
 ## Sections, SxN
@@ -248,25 +271,59 @@ Note that this is only the easiest to explain reason. As such, it is also the
 weakest of them all. More difficult to explain reasons, which have more impact,
 will follow.
 
-### Scope of a section
+<!-- ======================================================================= -->
+## States of a section
 
-**CLARIFICATION** - A section has three states: "initialized", "open", "closed".
+Any section has, similar to binary output streams, the following states:
 
-*initialized*:
+Also, a section must end at some point as otherwise the very last node of
+a node sequence would have to be associated with all the known sections.
+
+*initialized*
 
 As soon as a sectioning node is known, it is technically possible to associate
-nodes with it. Because of that, and if a section had no delayed start,
-sectioning nodes would have be associated with their own section. Consequently,
-a section's "initialized" state has the following meaning: (1) the section is
-known and (2) an algorithm must start associating nodes with it at some later
-point in the process.
+nodes with it. Because of that, and if a section had no delayed start, a
+section would have to be associated with its own sectioning node.
+
+Consequently, a section's "initialized" state has the following meaning:
+(1) the section is known and (2) an algorithm must start associating nodes
+with it at some later point in the process.
 
 *open*
 
-Once the first node of a section is reached, any subsequent node must be
-associated with it. This means that it is not allowed to skip any subsequent
-node and to continue associating nodes with a section at some later point in
-time. 
+Once a section's first node is entered, this first node and any node subsequent
+to that node must be associated with that section.
+
+Consequently, any section is a subsequence of the node sequence. And, because
+of that, any section is a sequence of strictly subsequent nodes ("strictly
+subsequent" must be understood with regards to the node sequence).
+
+*A section can not be suspended*
+
+Technically it would be possible to define node types that tell an algorithm to
+suspend and, at some later point in the process, resume associating nodes with
+a certain section. However, this would violate the above requirements for an
+outline algorithm.
+
+
+
+* Nodes must be associated with a section, if it is considered to be "open".
+* No more associations are allowed, if a section is considered to be "closed".
+
+* A section is fully defined once it is closed.
+
+However, the very first node that must be associated with a section does not
+necessarily have to be strictly subsequent to the section's sectioning node.
+That is, a section must be allowed to have a delayed start.
+
+* The first child of any node is strictly subsequent to it.
+* If any node has no child, then its next sibling (or some other node) is
+  strictly subsequent to it.
+* If a sectioning node `sn` has a child and a next sibling, and if this next
+  sibling has to become the first node of `sn`'s section, then that first node
+  is not strictly subsequent to `sn`.
+
+### Scope of a section
 
 *closed*
 
@@ -284,34 +341,6 @@ node sequence (i.e. unrestricted scope).
 Obviously, additional rules are required to limit the scope of a section
 because the last node entered would otherwise have to be associated with
 all the sections declared inside of the whole node tree.
-
-**TODO** -
-there can be no empty sections, if sectioning nodes belong to their sections
-
-### States of a section
-
-Certain rules are required that can be used to determine when it is no longer
-allowed to associate nodes with a section. Similar to binary streams, sections
-can be seen to be either "open" or "closed" for associations:
-
-* Nodes must be associated with a section, if it is considered to be "open".
-* No more associations are allowed, if a section is considered to be "closed".
-
-
-
-* A section is fully defined once it is closed.
-* 
-
-However, the very first node that must be associated with a section does not
-necessarily have to be strictly subsequent to the section's sectioning node.
-That is, a section must be allowed to have a delayed start.
-
-* The first child of any node is strictly subsequent to it.
-* If any node has no child, then its next sibling (or some other node) is
-  strictly subsequent to it.
-* If a sectioning node `sn` has a child and a next sibling, and if this next
-  sibling has to become the first node of `sn`'s section, then that first node
-  is not strictly subsequent to `sn`.
 
 ### available events
 
