@@ -238,10 +238,10 @@ nodes `SN` and the set of sections `S`. This relation will be referred to as
 * `(s declared-by sn)` is true, if `(sn declared s)` is true
 
 An algorithm has knowledge of a section as soon as its sectioning node is being
-entered. That is, because a sectioning always (i.e. unconditionally) declares
-a new section. And because of that, any new section must be added to the set of
-sections `S` as soon as its sectioning node is entered. The set of sections `S`
-therefore represents the set of known sections.
+entered. That is, because a sectioning node always (i.e. unconditionally)
+declares a new section. And because of that, any new section must be added to
+the set of sections `S` as soon as its sectioning node is entered. This set of
+sections therefore represents the set of known sections.
 
 In general, and from that point on, any subsequent node must be associated with
 the new and any other known section. Consequently, any node potentially belongs
@@ -254,7 +254,7 @@ Even though a sectioning node is insequent to itself, it is technically still
 possible to associate a sectioning node with the section it declared. That is,
 because an algorithm knows about a section as soon as it enters the section's
 sectioning node. However, this does not imply that it would be reasonable to
-establish such a relationship.
+relate a sectioning node to its section.
 
 Obviously, and as far as possible, an algorithm needs to be able to treat all
 sectioning nodes alike. Associating one type of sectioning nodes with their
@@ -274,75 +274,110 @@ will follow.
 <!-- ======================================================================= -->
 ## States of a section
 
-Any section has, similar to binary output streams, the following states:
+Similar to output streams, any section has the following states:
 
-Also, a section must end at some point as otherwise the very last node of
-a node sequence would have to be associated with all the known sections.
-
-*initialized*
+*initialized state*
 
 As soon as a sectioning node is known, it is technically possible to associate
-nodes with it. Because of that, and if a section had no delayed start, a
-section would have to be associated with its own sectioning node.
+nodes with it. Because of that, and if a section had no delayed start, a section
+would have to be associated with its own sectioning node.
 
-Consequently, a section's "initialized" state has the following meaning:
-(1) the section is known and (2) an algorithm must start associating nodes
-with it at some later point in the process.
+Consequently, a section's "initialized" state has the following meaning: (1)
+the section is known and (2) an algorithm must start associating nodes with
+it at some later point in time.
 
-*open*
+*open state*
 
-Once a section's first node is entered, this first node and any node subsequent
-to that node must be associated with that section.
+Once a section's first node is entered, this first node and any subsequent node
+must be associated with it. 
 
-Consequently, any section is a subsequence of the node sequence. And, because
-of that, any section is a sequence of strictly subsequent nodes ("strictly
-subsequent" must be understood with regards to the node sequence).
+An algorithm therefore needs rules that enable it to determine when to begin
+associating subsequent nodes with a given section.
 
-*A section can not be suspended*
+A section must be marked as being "open", if such a rule applies.
 
-Technically it would be possible to define node types that tell an algorithm to
-suspend and, at some later point in the process, resume associating nodes with
-a certain section. However, this would violate the above requirements for an
-outline algorithm.
+*closed state*
 
+Any section will eventually end at some point. By default, that point is reached
+when the initial/root node of the process is exited. This default unrestricted
+case is on its own insufficient, because the very last node of a node sequence
+would then always have to be associated with all the known sections.
 
+An algorithm therefore needs rules that enable it to determine when it is no
+longer allowed to associate any subsequent node with a given section.
 
-* Nodes must be associated with a section, if it is considered to be "open".
-* No more associations are allowed, if a section is considered to be "closed".
+A section must be marked as being "closed", if such a rule applies.
+From that point on, a section is fully defined/specified.
 
-* A section is fully defined once it is closed.
+*A section can not be re-opened*
 
-However, the very first node that must be associated with a section does not
-necessarily have to be strictly subsequent to the section's sectioning node.
-That is, a section must be allowed to have a delayed start.
+The "closed" state, and the corresponding rules, can therefore also be seen to
+represent a guarantee, that a closed section will not change any further at some
+later point in time.
 
-* The first child of any node is strictly subsequent to it.
-* If any node has no child, then its next sibling (or some other node) is
-  strictly subsequent to it.
-* If a sectioning node `sn` has a child and a next sibling, and if this next
-  sibling has to become the first node of `sn`'s section, then that first node
-  is not strictly subsequent to `sn`.
+This guarantee is critical to an efficient TOC generator, because it allows to
+prematurely drop any section object once its corresponding section is closed.
+After that, any attempt to execute any kind of operation on the dropped section
+object will cause an access violation error.
 
-### Scope of a section
+Re-opening a section for additional associations would therefore mean to violate
+that guarantee. Because of that, such an option must be seen to represent an
+attempt to suspend and resume a section.
 
-*closed*
+*A section must not be suspended*
 
-The "scope of a section" (respectively the scope of a sectioning node) can be
-understood to define when to begin and when to stop associating nodes with a
-section. The scope of a section therefore defines which nodes belong to the
-section of a sectioning node.
+Technically, it would be possible to define rules that tell an algorithm to
+suspend and then, at some later point in time, resume associating nodes with a
+given section. However, this does not mean that it would be reasonable to allow
+such operations.
 
-Because of that, any section always has a scope:
- The scope of an empty section is empty (i.e. empty scope). In addition to that,
-the first node that can potentially be associated with a section is the section's
-sectioning node, and the last node possible is the last node of the corresponding
-node sequence (i.e. unrestricted scope).
+Here, it is assumed that a "resume" operation must always follow a "suspend"
+operation ("suspend" would otherwise be equivalent to "close").
 
-Obviously, additional rules are required to limit the scope of a section
-because the last node entered would otherwise have to be associated with
-all the sections declared inside of the whole node tree.
+Assumed that section `s` would have to be suspended after some node `ns` was
+associated with it and section `s` would have to be resumed beginning with node
+`nr`. This would then mean that, in between both nodes, there could potentially
+be any number of nodes that must not be associated with said section. Because
+these unrelated nodes would then always have to be taken into account, it would
+be impossible treat a section as one entity (see requirements). Consequently,
+strict suspend and resume operations as described here must not be allowed.
 
-### available events
+Note that the subsequent part (begins with `nr`) of the above section `s` can be
+seen to represent new/different section. Hence, the nodes required to tell an
+algorithm to resume a presequent section can themselves be seen to be sectioning
+nodes.
+
+In addition to that, this consideration does not take the definition of rules
+into account that would be necessary to clearly describe when an algorithm has
+to strictly suspend and when it has to resume a section.
+
+<!-- ======================================================================= -->
+## Sections (2)
+
+A section is a subsequence of the corresponding node sequence. That is, because
+any node in between a section's first and last nodes must be associated with
+said section. As such, a section is a sequence of strictly subsequent nodes.
+
+However, the very first node that must be associated with a section, is not
+necessarily strictly subsequent to the section's sectioning node. That is,
+because the very first child of a node is strictly subsequent to said node.
+Because of that, the next sibling of a node is not strictly subsequent to its
+previous sibling, if that previous sibling has even one child node. Consequently,
+there can be any number of nodes in between a section's sectioning node and its
+very first inner node.
+
+*Scope of a section*
+
+The "scope of a section", respectively the scope of a sectioning node, can be
+understood to be the range of nodes that must be associated with a section.
+The scope of a section therefore begins with a section's first and ends with
+a section's last node.
+
+Consequently, any non-empty section has a non-empty scope. The scope of an empty
+section is said to be empty. An empty section can also be seen to have no scope.
+
+<!-- ======================================================================= -->
+## Sectioning nodes (2)
 
 In order to limit the scope of a section, a sectioning node must, one way or
 another, tell the algorithm where the node's section begins and where it ends.
