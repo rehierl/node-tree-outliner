@@ -191,11 +191,8 @@ its presequent ancestor `ni`. That is, because the outline process will have
 knowledge of any node within `s3` by the time `ni` is being exited.
 
 However, this kind of delayed knowledge must not be used to execute any
-operation that might have some side effect on any node within `s3`. These
-kind of operations have the potential to produce contradictions.
-
-**TODO** - 
-associate nodes when entering
+operation that might have some side effect on any node within `s3`. That is,
+because these kind of operations have the potential to produce contradictions.
 
 ```
 <n1><n2><n3> ... </n3></n2></n1>
@@ -205,17 +202,13 @@ In addition to that, when executing any operation while a node is being exited,
 the overall order of events must be taken into account. That is, ancestor nodes
 will be entered before their descendant nodes are entered. In contrary to that,
 descendant nodes will be exited before their ancestor nodes are exited. Hence,
-compared to enter events, exit events will be triggered in reverse order.
+compared to enter events, exit events will be executed in reverse order.
 
 Consequently, executing any operation while a node is being exited is per se
 problematic. Because of that, exit events must only be used to execute actions
 which affect nodes that are subsequent, but not descendant to the node being
 exited (i.e. they can affect nodes in `s4`, but must not have any side effect
 on any node in `s3`).
-
-**TODO** -
-can a node be allowed to have any effect on itself
-(e.g. associate with its own section)?
 
 <!-- ======================================================================= -->
 ## Sectioning nodes, NxS
@@ -300,12 +293,12 @@ associated with it.
 
 *closed state*
 
-Any section will eventually end at some point. By default, that point is reached
-when the initial/root node of the process is exited. This default case is on its
-own insufficient, because the very last node of a node sequence would then always
-have to be associated with all the known sections. An algorithm therefore needs
-additional rules that enable it to determine when it is no longer allowed to
-associate any subsequent node with a given section.
+Any section will eventually end at some point. By default, that point is
+reached when the initial/root node of the process is being exited. This default
+case is on its own insufficient, because the very last node of a node sequence
+would then always have to be associated with all the known sections. An
+algorithm therefore needs additional rules that enable it to determine when it
+is no longer allowed to associate any subsequent node with a given section.
 
 A section counts as being "closed" as soon as it is no longer allowed to
 associate any subsequent node with it. From that point on, a section is fully
@@ -359,84 +352,3 @@ Note that the subsequent part of a strictly suspended section can be seen to
 represent a new/different section. Hence, the nodes that would be required to
 tell an algorithm that it has to resume a section can themselves be seen to be
 sectioning nodes.
-
-<!-- ======================================================================= -->
-## Sections (2)
-
-A result of these section states is, that definitions only need to tell an
-algorithm, where a section begins and where it ends. Because of that, a section
-is a subsequence of the corresponding node sequence. Consequently, ...
-
-**CLARIFICATION** A section is a sequence of strictly subsequent nodes.
-
-In addition to that, a first child node is strictly subsequent to its parent.
-Consequently, the next sibling of a parent node can only be loosely subsequent
-to that parent node. That is, because a node can only be a parent node, if it
-has at least one child node. No sibling can therefore be strictly subsequent
-to any parent node.
-
-Consequently, the very first node of a section, is not necessarily strictly
-subsequent to its sectioning node.
-
-*Scope of a section*
-
-The "scope of a section", respectively the scope of a sectioning node, can be
-understood to be the range of subsequent nodes that must be associated with a
-section. The scope of a section therefore begins with a section's first and
-ends with a section's last node.
-
-Consequently, any non-empty section has a non-empty scope. The scope of an empty
-section is said to be empty. An empty section can also be seen to have no scope.
-
-<!-- ======================================================================= -->
-## Sectioning nodes (2)
-
-In order to limit the scope of a section, a sectioning node must, one way or
-another, tell the algorithm where the node's section begins and where it ends.
-In return, an algorithm must have the means to execute the corresponding
-operations when entering or exiting certain nodes.
-
-```
-             [ s1  ][ s2  ][ s3  ][ s4  ][ s5  ]
-ns := [...,ni,...,nj,...,nk,...,nl,...,nm,...,nn,...]
-           xxxxxxxxxxxxxxxx  - scope enter operations
-                  xxxxxxxxx  - scope exit operations
-```
-
-
-
-* associate a sectioning node with its own section?
-* A sectioning node binds its section to presequent nodes and sections.
-
-<!-- ======================================================================= -->
-## The root node
-
-Because a section can not exist without a presequent sectioning node, the root
-node, with which an algorithm has to begin, can not be associated with any
-predeclared section. That is, because there is no sectioning node that is
-presequent to the root.
-
-*The universal section (u)*
-
-However, the root node can be thought of as being embedded into some universal
-section `u`. This special section can be understood to represent a theoretical
-section that contains any tree of nodes.
-
-As such, that universal section must be seen to be declared by some virtual
-sectioning node that is presequent to any possible node. As such, the universal
-section never ends.
-
-Consequently, any node of a tree therefore belongs to at least the universal
-section. Put differently, there is no node that does not belong to any section
-at all.
-
-*The root node is a sectioning node*
-
-Without any further clarification, and assumed that a given root does itself
-not (strictly or loosely) contain any other sectioning node, all the nodes in
-the root's subtree would therefore only belong to the universal section.
-Because of that, it would in theory not be possible to locate the root's inner
-nodes inside of said universal section.
-
-Consequently, the root node must always be seen to declare its own section.
-As such, the root must itself be understood to represent a sectioning node.
