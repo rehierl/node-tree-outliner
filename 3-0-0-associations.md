@@ -1,72 +1,5 @@
 
 <!-- ======================================================================= -->
-## General goals
-
-The most fundamental goal of an outline algorithm is to allow the generation
-of an accurate listing of sections (aka. table of contents, TOC) that can be
-found within a given node tree. As such, a TOC provides a static overview of
-the tree's contents.
-
-However, the more sections there are, the less helpful such a listing becomes.
-A design must therefore allow to support dynamic behavior.
-
-*dynamic support*
-
-A design must allow to change the display of a TOC based on actions
-executed on the display of a tree (i.e. tree -> toc):
-
-* Allow to determine the context of any given node in order to display and
-  update the display of the current location (e.g. bread crumbs).
-* Allow to dynamically change the TOC of a tree based upon any given node.
-  It must be possible to show/unfold those parts of a tree that are within
-  a given context and to hide/fold parts that are outside of it.
-
-A design must allow to change the display of a tree based on actions
-executed on the display of a TOC (i.e. toc -> tree):
-
-* Allow to focus on a section depending on which TOC entry was selected.
-* Allow to dynamically change the display of a tree depending on which TOC
-  entry was selected. It must be possible to show/unfold those parts of a
-  TOC that are within the current context and to hide/fold parts that are
-  outside of it.
-
-A design must allow to manually change the display of a tree depending
-on actions executed on the display itself (i.e. tree -> tree):
-
-* Allow to show/unfold and to hide/fold a section, if the corresponding
-  event was triggered on a section's representative.
-
-In order to support these dynamic goals, certain requirements must be met:
-
-* Any node within a tree must effectively belong to exactly one section.
-  This is needed to uniquely determine the context of any node.
-* It must be possible to determine the location of a section, even if that
-  section turns out to be empty. This is needed to focus on any given section.
-* It must be possible to treat any section as a single entity.
-  This is needed to fold/unfold whole sections via a single operations.
-
-*efficient implementation*
-
-In addition to the above dynamic goals, it must be possible to efficiently
-implement a TOC generator. Such an implementation represents a reduced/limited
-version of an outline algorithm that has one purpose only:
-To efficiently generate a TOC for any tree.
-
-The first step of a fully functional outline algorithm is to read the contents
-of a tree and to create a structure of sections that accurately represents the
-tree's contents. After that, this structure can be used to generate a TOC. As
-such, the generation of a TOC is, in general, a two-step process that has a
-fully functional temporary result (i.e. the structure of sections).
-
-If a TOC generator would have to be implemented in terms of such a two-step
-process, it would end up having to generate and then keep more information in
-memory than it actually needs. Because of that, a design must allow to extract
-the required information and then drop a section object as soon as it is fully
-specified. That is, unless this section has no effect on another section.
-
-This essentially means, that a design must allow to create a TOC on the fly.
-
-<!-- ======================================================================= -->
 ## Sections, SxN
 
 The common aspect of the above requirements is, that any node must belong to at
@@ -267,6 +200,39 @@ is also the weakest of them all. More difficult to explain reasons, which have
 more impact, will follow.
 
 <!-- ======================================================================= -->
+## The root node
+
+Because a section can not exist without a presequent sectioning node, the root
+node, with which an algorithm has to begin, can not be associated with any
+predeclared section. That is, because there is no sectioning node that is
+presequent to the root.
+
+*The universal section (u)*
+
+However, the root node can be thought of as being embedded into some universal
+section `u`. This special section can be understood to represent a theoretical,
+always available section that contains any tree of nodes.
+
+As such, that universal section must be seen to be declared by some virtual
+sectioning node that is presequent to any possible node. As such, the universal
+section never ends.
+
+Consequently, any node of any tree therefore belongs to at least the universal
+section. Put differently, there can not be any node that does not belong to any
+section at all.
+
+*The root node is a sectioning node*
+
+Without any further clarification, and assumed that a given root does itself
+not (strictly or loosely) contain any other sectioning node, all the nodes in
+the root's subtree would only belong to the universal section. Because of that,
+it would in theory not be possible to locate the root's inner nodes inside of
+said universal section.
+
+Consequently, the root node must always be seen to declare its own section.
+As such, the root must itself be seen to always represent a sectioning node.
+
+<!-- ======================================================================= -->
 ## States of a section
 
 Similar to output streams, any section has the following states:
@@ -274,7 +240,7 @@ Similar to output streams, any section has the following states:
 *initialized state*
 
 As soon as a sectioning node is known, it is technically possible to associate
-nodes with it. Because of that, and if a section had no delayed start, a
+any nodes with it. Because of that, and if a section had no delayed start, a
 sectioning node would have to be associated with its own section.
 
 Consequently, a section's "initialized" state has the following meaning: (1)
@@ -293,16 +259,18 @@ associated with it.
 
 *closed state*
 
-Any section will eventually end at some point. By default, that point is
-reached when the initial/root node of the process is being exited. This default
-case is on its own insufficient, because the very last node of a node sequence
-would then always have to be associated with all the known sections. An
-algorithm therefore needs additional rules that enable it to determine when it
-is no longer allowed to associate any subsequent node with a given section.
+Any section will eventually end at some point. By default, that point
+is reached when the initial/root node of the process is being exited.
+
+This default case is obviously insufficient, because the very last node of
+a node sequence would then always have to be associated with all the known
+sections. An algorithm therefore needs additional rules that enable it to
+determine, before the initial node is being exited, when it is no longer
+allowed to associate any subsequent node with a given section.
 
 A section counts as being "closed" as soon as it is no longer allowed to
-associate any subsequent node with it. From that point on, a section is fully
-defined/specified.
+associate any subsequent node with it. From that point on, a section is
+fully defined/specified.
 
 *A section can not be re-opened*
 
@@ -312,11 +280,11 @@ later point in time.
 
 This guarantee is critical to an efficient TOC generator, because it allows to
 drop a section object once its corresponding section is closed. After that, any
-attempt to execute any kind of operation on the dropped section object will
-cause an access violation error.
+attempt to execute any kind of operation on the dropped section object will issue
+an access violation error.
 
 Re-opening a section for additional associations would therefore mean to violate
-that guarantee. Because of that, such an operation must be seen to represent an
+said guarantee. Because of that, such an operation must be seen to represent an
 attempt to suspend and then resume a section.
 
 *It must not be allowed to strictly suspend a section*
@@ -332,23 +300,25 @@ operation ("suspend" would otherwise be equivalent to "close").
 Assumed that some section `s` would have to be suspended after some node `ns`
 was associated with it and that section `s` would have to be resumed beginning
 with some node `nr`. This would in return mean that, in between both nodes (i.e.
-`ns` and `nr`), there could potentially be any number of nodes that have no
-relationship whatsoever with section `s` (hence, strictly suspended).
+`ns` and `nr`), there could potentially be any number of nodes that have are not
+intended to have any kind of relationship with section `s` (hence, strictly
+suspended).
 
 Because these completely unrelated nodes would then always have to be taken into
 account, it would be impossible treat a section as one entity (see requirements).
-Consequently, strict suspend and resume operations as described above must not
-be allowed.
+That is, because such a section would then consist of multiple parts that are
+separated from each other. Such a section can be said to have gaps. Consequently,
+strict suspend and resume operations as described above must not be allowed.
 
 Because of that, any node, that is located in between a section's first and last
-node (i.e. subsequent to the first and presequent to the last node), belongs to
-a section.
+node (i.e. subsequent to the first and presequent to the last node), must belong
+to a section.
 
-Note that this does not take the definition of nodes into account that would be
-necessary to clearly describe when an algorithm has to strictly suspend and when
-it has to resume a given section.
+Note that this does not take the definition of nodes into account, that would be
+necessary to clearly define when an algorithm has to strictly suspend and then
+resume a given section.
 
-Note that the subsequent part of a strictly suspended section can be seen to
-represent a new/different section. Hence, the nodes that would be required to
-tell an algorithm that it has to resume a section can themselves be seen to be
-sectioning nodes.
+Note that the subsequent part of a strictly suspended section can also be seen
+to represent a new/different section. Hence, the nodes that would be required
+to tell an algorithm that it has to resume a section can themselves be seen to
+represent additional sectioning nodes.

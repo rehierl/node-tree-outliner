@@ -5,10 +5,8 @@
 In HTML-4, each heading element is defined to introduce
 (i.e. mark the beginning of) a new section.
 
-In general:
-
-The DOM tree is a tree data structure defined in terms of nodes and edges.
-That is, HTML is bound by the rules of discrete mathematics (graph theory)!
+In general: The DOM tree is a tree data structure defined in terms of nodes and
+edges. That is, HTML is bound by the rules of graph theory!
 
 Think in terms of graphs and tuples.
 
@@ -35,7 +33,7 @@ Node `A` belongs to the body element and the body element contains node `A`.
 * `(p,c) in R <=> (c,p) in R'`
 
 <!-- ======================================================================= -->
-## The NxS Relation
+## The SxN Relation
 
 ```
 Example:
@@ -74,14 +72,14 @@ Elements introduce new sections, but where do they end?
 * Can a section end before a new one is introduced?
 * What is the scope of a section?
 
-### Nodes <-> Sections
+### Sections <-> Nodes
 
 * `S` the set of sections, `s in S` and `n in N`.
-* `(n,s) in R in NxS` states that node `n` is in direct relationship with
-  section `s` (i.e. node `n` belongs to section `s`).
-* `(s,n) in R' in SxN` states that section `s` is in direct relationship with
+* `(s,n) in R in SxN` states that section `s` is in direct relationship with
   node `n` (i.e. section `s` contains node `n`).
-* `(n,s) in R <=> (s,n) in R'`
+* `(n,s) in R' in NxS` states that node `n` is in direct relationship with
+  section `s` (i.e. node `n` belongs to section `s`).
+* `(s,n) in R <=> (n,s) in R'`
 
 <!-- ======================================================================= -->
 ## The SxS Relation
@@ -103,8 +101,8 @@ TOC:
 1. A
 ```
 
-Even a slight modification of the above fragment reveals, that this TOC can
-only represent a commonly accepted simplification:
+Even a slight modification of the above fragment reveals, that this TOC can only
+represent some commonly accepted simplification:
 
 ```
 Example:
@@ -128,7 +126,7 @@ TOC-1:                          TOC-2:
 2. B                               1.1. B
 ```
 
-Both TOCs are not equivalent because each of these corresponds with a different
+Both TOCs are not equivalent, because each of these corresponds with a different
 structure. Consequently, only one can accurately represent the fragment's
 outline, the other one does not. So which of these is invalid?
 
