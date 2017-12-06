@@ -2,37 +2,29 @@
 <!-- ======================================================================= -->
 # Associations (2)
 
-This section builds upon the fundamental definitions and considerations based on
-conclusions mentioned earlier.
+This section builds upon the fundamental definitions and considerations that
+were mentioned in the previous section.
 
 <!-- ======================================================================= -->
 ## Sections (2)
 
-A consequence of the states a section has is, that definitions only need to tell
-an algorithm, with which node a section begins and with which node it ends.
+**CLARIFICATION**
+Nodes must be associated with sections while they are being entered.
+
+That is, because otherwise the location of a node (with regards to a tree's
+sections) could be affected by nodes that are subsequent to it. Because of that,
+a node could then be affected by nodes that are not within its actual context.
+
+**CLARIFICATION**
+A section is a sequence of strictly subsequent nodes.
+
+A consequence of the states a section has is, that definitions only need to
+tell an algorithm, with which node a section begins and with which node it ends.
 Because of that, a section is a subsequence of the corresponding node sequence.
-Therefore, ...
+Consequently, a section is a sequence of strictly subsequent nodes.
 
-**CLARIFICATION** A section is a sequence of strictly subsequent nodes.
-
-In addition to that, a first child node is strictly subsequent to its parent.
-Consequently, the next sibling of a parent node can only be loosely subsequent
-to it. That is, because a node can only be a parent node, if it has at least one
-child node. No sibling can therefore be strictly subsequent to any parent node.
-
-Consequently, the very first node of a section, is not necessarily strictly
-subsequent to its sectioning node.
-
-*Scope of a section*
-
-The "scope of a section", respectively the scope of a sectioning node, can be
-understood to be the range of strictly subsequent nodes that must be associated
-with a section. The scope of a section therefore begins with a section's first
-and ends with a section's last node.
-
-Consequently, any non-empty section has a non-empty scope. The scope of an empty
-section is said to be empty. However, an empty section can also be seen to have
-no scope at all.
+However, this statement is false, if not all the nodes are associated while they
+are being entered. That is, because exit events are executed in reversed order.
 
 <!-- ======================================================================= -->
 ## Sectioning nodes (2)
@@ -42,8 +34,8 @@ begin and when to end associating nodes with a section. In addition to that,
 it must be taken into account that an algorithm needs to have the means to
 execute the corresponding operations when entering or exiting certain nodes.
 
-The most distinctive characteristic of a section is the definition of its first
-node.
+The most distinctive characteristic of a section is the definition of its
+first node.
 
 Because of that, the first node of a section is defined in
 relation to the corresponding sectioning node. After
@@ -135,6 +127,23 @@ section begins with the next sibling of its sectioning node.
 *last node*
 
 ### Are there any other reasonable section types?
+
+<!-- ======================================================================= -->
+## Sections (3)
+
+**CLARIFICATION**
+The very first node of a section is not necessarily strictly subsequent to its
+sectioning node.
+
+The next sibling of a parent node can only be loosely subsequent to it. That is,
+because a node can only be a parent node, if it has at least one child node. No
+sibling can therefore be strictly subsequent to any parent node.
+
+Because of that, the first node of a section is strictly subsequent to the
+section's sectioning node, if it is also the sectioning node's first child node.
+In contrary to that, the first node of a section is only loosely subsequent to
+the section's sectioning node, if it is the sectioning node's next sibling and
+if the sectioning node is a parent node.
 
 <!-- ======================================================================= -->
 ## Node sequence (2)

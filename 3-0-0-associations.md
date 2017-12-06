@@ -117,9 +117,11 @@ significant to the operation. With that in mind, the context of a node can be
 defined:
 
 **DEFINITION**
-The context of a node, with regards to the execution of operations, consists of
-those nodes that are intended to have an effect on said node. The semantics of
-a node therefore also depends on a node's context.
+The context of a node, with regards to the execution of operations,
+consists of those nodes that are intended to have an effect on said node.
+
+**CLARIFICATION**
+The semantics of a node also depends on a node's context.
 
 In an undirected tree, the context of a node can only contain the ancestors of
 a node. In a directed tree, the context of a node also contains any presequent
@@ -133,25 +135,27 @@ given node. The result of an algorithm, that executes operations in such a tree
 which are based upon presequent siblings, is therefore not guaranteed to be
 deterministic. That is, repeated executions can yield different results.
 
-Because of that, the current knowledge, an algorithm has when traversing a
-tree of nodes and when entering a specific node, does not necessarily have to
-be identical to the context of the current node. That is, because the current
-knowledge includes a node's context and also nodes that are not part it. Not
-all nodes that are presequent to a current node are therefore allowed to have
-an effect on it.
+Because of that, the current knowledge an algorithm has when traversing a tree
+of nodes and when entering a specific node, is in general not identical to the
+context of the current node. That is, because the current knowledge includes
+the context of a node and also nodes that are not part of it (i.e. not all the
+nodes that are presequent to a node are allowed to have an effect on it).
 
 In general, those nodes within subsequence `s1`, that have already been exited,
-will be ignored when executing any kind of operation. That is, operations may in
-general only depend on the current node itself, on its ancestors and any of its
+will be ignored when executing an operation. That is, operations may in general
+only depend on the current node itself, on its ancestors and any of its
 presequent siblings.
 
 <!-- ======================================================================= -->
 ## Sections, SxN
 
+**DEFINITION**
+A section is a set of nodes.
+
 The common aspect of the initially mentioned requirements is, that any node must
 belong to at least one section. In addition to that, no node can belong to the
 same section more than once. Hence, sections can initially be defined as sets of
-nodes. Because of that, operators defined for sets can be used on sections:
+nodes:
 
 * `s := {n1,...,nk}`, `s in S`, `ni in N`
 * `S` represents the set of sections, `N` the set of nodes
@@ -171,6 +175,9 @@ defines a many-to-many (N:M) relation. This relation will be referred to as
 * `(s related-to ni)` is true, if `(ni in s)`
 * `(ni related-to s)` is true, if `(ni in s)`
 
+**DEFINITION**
+A section is a sequence of nodes.
+
 In principle, an outline algorithm must traverse the node tree in order to visit
 and associate each node with at least one section. As a result, the nodes of a
 specific section will be added to a section, one after another, in a particular
@@ -180,10 +187,21 @@ order. Because of that, sections can also be defined as node sequences:
 * `(ni != nj)` for `i,j in [1,k]` and `(i != j)`
 * `n1` is the section's first node, `nk` is the section's last node
 
-Both of the above definitions technically allow to associate any node with
-multiple sections. Additional rules are therefore required in order to uniquely
-determine the actual context of a node (i.e. the node's location with regards
-to the sections of a node tree).
+Both of these definitions technically allow to associate any node with multiple
+sections. Rules are therefore required in order to uniquely determine the actual
+context of a node (i.e. the node's location with regards to the sections of a
+node tree).
+
+**DEFINITION**
+The scope of a section, respectively the scope of a sectioning node, is the
+range of subsequent nodes that must be associated with a section.
+
+The scope of a section therefore begins with the section's first node and ends
+with the section's last node. Consequently, any non-empty section has a
+non-empty scope.
+
+The scope of an empty section is therefore said to be empty. However, an empty
+section can also be seen to have no scope at all.
 
 <!-- ======================================================================= -->
 ## Sectioning nodes, NxS
@@ -227,10 +245,10 @@ sectioning node. However, this does not imply that it would be reasonable to
 associate a sectioning node with its own section.
 
 Obviously, and as far as possible, an algorithm needs to be able to treat all
-sectioning nodes alike. Associating one type of sectioning nodes with their
-own section, but not sectioning nodes of another type, would be bad practice.
-That is, because this would always make it necessary to add additional, logic
-in order to distinguish between the different types of nodes.
+sectioning nodes alike. Associating one type of sectioning nodes with their own
+section, but not sectioning nodes of another type, would be bad practice. That
+is, because this would always make it necessary to add additional logic in order
+to distinguish between the different types of sectioning nodes.
 
 If any sectioning node would have to be associated with its own section, then
 no section would ever be truly empty. That is, because any section would then
@@ -238,50 +256,44 @@ always contain at least its own sectioning node. Because of that, additional
 logic would be required to determine if a section contains meaningful content
 or not.
 
-In addition to that, 
-
 Sectioning nodes must therefore not be associated with the sections they declare.
 
-<!-- ======================================================================= -->
-## Associate nodes while entering
-
-**CLARIFICATION**
-Any node must be associated with sections while it is being entered.
-
-That is, because otherwise the location of a node (with regards to a tree's
-sections) could be affected by nodes that are subsequent to it. Consequently,
-a node could be affected by nodes that are not within its actual context.
+**TODO**
+More reasons will follow, that better explain why sectioning nodes must not be
+associated with the sections they declare.
 
 <!-- ======================================================================= -->
 ## The root node
 
-Because a section can not exist without a presequent sectioning node, the
-root node, with which an algorithm has to begin, can not be associated with
-any predeclared section. That is, because there is no sectioning node that
-is presequent to the root.
+Because a section can not exist without a presequent sectioning node, the first
+node, with which an algorithm has to begin, can not be associated with any
+predeclared section. That is, because there is no sectioning node in the current
+process which is presequent to this initial node.
 
 *The universal section (u)*
 
-However, the root node can be thought of as being embedded into some universal
-section `u`. As such, that universal section must be seen to be declared by some
-virtual sectioning node that is presequent to any possible node. In addition to
-that, the universal section must be seen to never end. Because of that, the
-universal section contains any possible node tree.
+However, the first node can be seen to be embedded into some virtual universal
+section `u`. As such, that universal section must be understood to be declared
+by some virtual sectioning node that is presequent to any possible node. In
+addition to that, the universal section must be seen to never end. Because of
+that, the universal section must be seen to be omnipresent.
 
-Consequently, any node of any tree therefore belongs to at least the universal
-section. Put differently, there can not be any node that does not belong to no
-section at all.
+Consequently, any node of any tree always belongs to at least the universal
+section. Put differently, there is no node that does not belong to any section
+at all. That is, any node always belongs to at least one section.
 
-*The root node is a sectioning node*
+*The root node acts as a sectioning node*
 
-Without any further clarification, and assumed that a given root does itself
-not (strictly or loosely) contain any other sectioning node, all the nodes in
-the root's subtree would only belong to the universal section. Because of that,
-it would in theory not be possible to locate the root's inner nodes inside of
-said universal section.
+Without any further clarification, and assumed that a tree's root node does
+itself not (strictly or loosely) contain any other sectioning node, all the
+nodes in the root's subtree would only belong to the universal section.
 
-Consequently, the root node must always be seen to declare its own section.
-As such, the root must itself be seen to always represent a sectioning node.
+Because of that, it would not be possible to locate the nodes of a tree inside
+of the universal section. That is, all the nodes would always appear lost inside
+of the universal section.
+
+Consequently, the root node of a tree must be understood to declare its own
+section. As such, the root node of a tree always represents a sectioning node.
 
 <!-- ======================================================================= -->
 ## States of a section
@@ -290,9 +302,10 @@ Similar to output streams, any section has the following states:
 
 *initialized state*
 
-As soon as a sectioning node is known, it is technically possible to associate
-any nodes with it. Because of that, and if a section had no delayed start, a
-sectioning node would have to be associated with its own section.
+As soon as a sectioning node is known, it is technically possible, beginning
+with the current node, to associate any subsequent node with it. Because of
+that, and if a section had no delayed start, a sectioning node would have to
+be associated with its own section.
 
 Consequently, a section's "initialized" state has the following meaning: (1)
 the section is known and (2) an algorithm must start associating nodes with
@@ -302,15 +315,14 @@ it at some later point in time.
 
 Once a section's first node is entered, this first node and any subsequent node
 must be associated with it. An algorithm therefore needs additional rules that
-enable it to determine when to begin associating subsequent nodes with a given
-section.
+enable it to determine when to begin associating nodes with a given section.
 
 A section counts as being "open" as soon as the next subsequent node must be
 associated with it.
 
 *closed state*
 
-Any section will eventually end at some point. By default, that point
+Any section must eventually end at some point. By default, that point
 is reached when the initial/root node of the process is being exited.
 
 This default case is obviously insufficient, because the very last node of
@@ -320,8 +332,9 @@ determine, before the initial node is being exited, when it is no longer
 allowed to associate any subsequent node with a given section.
 
 A section counts as being "closed" as soon as it is no longer allowed to
-associate any subsequent node with it. From that point on, a section is
-fully defined/specified.
+associate any more nodes with it. From that point on, a section is fully
+defined/specified. That is, because no subsequent node is allowed to modify
+a section that counts as being closed.
 
 *A section can not be re-opened*
 
@@ -330,23 +343,24 @@ represent a guarantee, that a closed section will not change any further at some
 later point in time.
 
 This guarantee is critical to an efficient TOC generator, because it allows to
-drop a section object once its corresponding section is closed. After that, any
-attempt to execute any kind of operation on the dropped section object will issue
-an access violation error.
+drop a section object once its corresponding section is closed and once the
+required information has been read from it. After that, any attempt to execute
+any kind of operation on the dropped section object will issue an access
+violation error.
 
 Re-opening a section for additional associations would therefore mean to violate
-said guarantee. Because of that, such an operation must be seen to represent an
-attempt to suspend and then resume a section.
+the above guarantee. Because of that, such an operation must be seen to represent
+an attempt to suspend and then resume a section.
 
 *It must not be allowed to strictly suspend a section*
 
 Technically, it would be possible to define rules that tell an algorithm to
 suspend and then, at some later point in time, resume associating nodes with
 a section. However, this does not mean that it would be reasonable to allow
-such a operations.
+such operations.
 
-Here, it is assumed that a "resume" operation must always follow a "suspend"
-operation ("suspend" would otherwise be equivalent to "close").
+Note that it is assumed, that a "resume" operation must always follow a
+"suspend" operation ("suspend" would otherwise be equivalent to "close").
 
 Assumed that some section `s` would have to be suspended after some node `ns`
 was associated with it and that section `s` would have to be resumed beginning
@@ -358,18 +372,19 @@ suspended).
 Because these completely unrelated nodes would then always have to be taken into
 account, it would be impossible treat a section as one entity (see requirements).
 That is, because such a section would then consist of multiple parts that are
-separated from each other. Such a section can be said to have gaps. Consequently,
-strict suspend and resume operations as described above must not be allowed.
+separated from each other. Because of that, such a section can be said to have
+gaps. Consequently, strict suspend and resume operations as described above must
+not be allowed.
 
 Because of that, any node, that is located in between a section's first and last
-node (i.e. subsequent to the first and presequent to the last node), must belong
+nodes (i.e. subsequent to the first and presequent to the last node), must belong
 to a section.
 
-Note that this does not take the definition of nodes into account, that would be
-necessary to clearly define when an algorithm has to strictly suspend and then
-resume a given section.
+Note that this does not take the definition of nodes into account, that would
+be necessary to clearly define when an algorithm has to strictly suspend and
+then resume a given section.
 
 Note that the subsequent part of a strictly suspended section can also be seen
 to represent a new/different section. Hence, the nodes that would be required
 to tell an algorithm that it has to resume a section can themselves be seen to
-represent additional sectioning nodes.
+represent sectioning nodes.
