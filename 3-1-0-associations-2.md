@@ -1,5 +1,11 @@
 
 <!-- ======================================================================= -->
+# Associations (2)
+
+This section builds upon the fundamental definitions and considerations based on
+conclusions mentioned earlier.
+
+<!-- ======================================================================= -->
 ## Sections (2)
 
 A consequence of the states a section has is, that definitions only need to tell
