@@ -93,9 +93,9 @@ and if `x` strictly belongs to `t`:
 * `(y loosely-belongs-to t)`, if some `x in N` exists
   such that `(x ancestor-of y)` and `(x strictly-belongs-to t)`
 
-Consequently, any node automatically loosely belongs to any section that
-strictly contains any of its ancestors. Each node may therefore belong to
-any number of sections.
+Consequently, any node automatically loosely belongs to any section that strictly
+contains any of its ancestors. Each node may therefore belong to any number of
+(i.e. multiple) sections.
 
 These loose relationships can not be undefined because they will be established
 automatically as soon as any ancestor is associated with a section.

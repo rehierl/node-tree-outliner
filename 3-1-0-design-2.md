@@ -9,6 +9,17 @@ conclusions mentioned previously.
 ## Sections (2)
 
 **CLARIFICATION**
+Any descendant of a node, that is associated with a section, also loosely
+belongs to the very same section. Consequently, any node loosely belongs
+to any section with which any of its ancestors is associated.
+
+That is, because a semantically consistent path can be defined that
+connects a section with any of the associated node's descendants.
+
+Note that, if this statement would not be applicable/true, then there
+would also be no definition for the terms "ancestor" and "descendant".
+
+**CLARIFICATION**
 Nodes must be associated with sections while they are being entered.
 
 That is, because otherwise the location of a node (with regards to a tree's
@@ -29,6 +40,9 @@ section has no gaps in between its nodes.
 However, this statement requires that all the nodes are being associated with
 their sections while they are being entered. That is, because exit events are
 executed in reversed order.
+
+Consequently, sections can not accurately represent the contents of an ordered
+node tree, if nodes would have to be associated while they are being exited.
 
 **CLARIFICATION**
 The very first node of a section is not necessarily strictly subsequent to its
@@ -95,37 +109,44 @@ ordered tree of nodes. That is, because nodes in an unordered tree are not
 guaranteed to have a dedicated next sibling, or even a dedicated first child.
 
 Because of that, a sectioning node itself has no order with regards to any
-of its siblings (i.e. there is no guaranteed next sibling). Consequently,
-the result of an algorithm that attempts to support type-2 section in such
-a tree would be non-deterministic (i.e. any subsequent run could have a
-different result).
+of its siblings or children. Consequently, the result of an algorithm that
+attempts to support type-2 section in such a tree would be non-deterministic
+(i.e. subsequent runs can potentially produce different results).
 
 Unordered trees can therefore only support type-1 sections.
-That is, with the limitation that there is no actual first child.
+That is, with the limitation that all child nodes are equal.
 
 <!-- ======================================================================= -->
 ## Overview of other possible first nodes
 
-Attempting to define any other node, as the section's first node, will add
+Attempting to define any other type of node, as a section's first node, will add
 secondary constraints to a definition and to an implementation. Apart from the
 additional effort needed to detect when to actually begin associating nodes with
 a section, an implementation would also have to take into account that a given
-tree might violate the required structure. In order to justify these constraints,
-a definition would need to have a clear reason as to why certain nodes (i.e.
-those in between the sectioning node and the section's first node) would have
-to be excluded. That is, the semantics of these unrelated nodes must be defined
-separately and with regards to the declared section. Because of that, such an
-attempt is, although technically possible, ill advised.
+tree might violate the required structure.
+
+In order to justify these constraints, a definition would need to have a clear
+reason as to why certain nodes (i.e. those in between the sectioning node and
+the section's first node) would have to be excluded. That is, the semantics of
+these unrelated nodes must be defined separately and with regards to the declared
+section. Because of that, such an attempt is, although technically possible, ill
+advised.
+
+### cheating the tree traversal
 
 However, an implementation has in theory the ability to cheat the traversal of
 the node tree by directly examining the tree's structure as soon as a certain
 sectioning node is entered. Because of that, it could simply determine ahead of
 schedule, if that sectioning node has for example a 2nd child, a 2nd subsequent
-sibling, or a parent node. Consequently, an algorithm could configure itself to
-act accordingly. The downside of this kind of look ahead would be, that the
-ability to look ahead would have to become a requirement, if it could not be
-avoided. That is, implementations, that can not support any kind of look ahead
-(e.g. due to technical reasons), would not be impossible. Hence, ill advised.
+sibling, or even a any ancestors. Consequently, an algorithm could configure
+itself to act accordingly.
+
+The downside of this kind of look ahead would be, that the ability to look
+ahead would have to become a requirement, if it could not be avoided. That
+is, efficient implementations, that can not support any kind of look ahead
+(e.g. due to technical limitations), would not be impossible.
+
+Because of that, such an approach is ill advised.
 
 ### other siblings
 
@@ -204,9 +225,9 @@ enough to justify the above mentioned additional constraints.
 
 ### next sibling of an ancestor
 
-Although not every node is guaranteed to have an ancestor node, an algorithm is
-technically allowed to begin associating nodes with a declared section, if one
-of its ancestor nodes is exited.
+Although not every node is guaranteed to have an ancestor node, an algorithm
+is technically allowed to begin associating nodes with a declared section, if
+one of its ancestor nodes is exited.
 
 `<container> ... <type-x> A ... </type-x> B ... </container> C`
 
@@ -223,25 +244,8 @@ sectioning node.
 
 ### further options
 
-Although there are even further ways to define the first node of a section
-(e.g. variable relationship, descendants of siblings or children, etc.), it
-seems obvious that, the greater the distance between the sectioning node and
-the section's first node, the more questions would have to be answered in
-order to clearly define an additional section type.
-
-<!-- ======================================================================= -->
-## Sectioning nodes - last nodes (3)
-
-
-
-Consequently, the general definitions mentioned below define the default scope
-for certain types of sectioning nodes. However, it is still allowed to define
-additional characteristics (e.g. rank of a heading) which further limit the
-scope of a presequent sectioning node.
-
-<!-- ======================================================================= -->
-## Node sequence (2)
-
-**TODO** -
-can a node be allowed to have any effect on itself
-(e.g. associate with its own section)?
+Although there are even further ways to define the first node of a section (e.g.
+variable relationship, descendants of siblings or children, etc.), it seems that
+the more intricate the relationship between a sectioning node and the section's
+first node is, the more questions would have to be answered in order to clearly
+define an additional section type.
