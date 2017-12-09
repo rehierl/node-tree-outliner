@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Single associations
+# Single associations (s)
 
 What effects does it have,
 if node `n` is associated with section `s`?
