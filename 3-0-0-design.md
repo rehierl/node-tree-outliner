@@ -258,9 +258,8 @@ or not.
 
 Sectioning nodes must therefore not be associated with the sections they declare.
 
-**TODO**
-More reasons will follow, that better explain why sectioning nodes must not be
-associated with the sections they declare.
+Note that more reasons will follow, which better explain why sectioning nodes
+must not be associated with the sections they declare.
 
 <!-- ======================================================================= -->
 ## The root node

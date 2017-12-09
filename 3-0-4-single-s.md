@@ -103,38 +103,3 @@ automatically as soon as any ancestor is associated with a section.
 The only method to break up these loose relationships is to change the structure
 of the node tree. Obviously, that is not allowed because the purpose of these
 associations is ultimately to represent the tree's structure as is.
-
-<!-- ======================================================================= -->
-## Multiple associations (s)
-
-What effect does it have,
-if multiple different nodes are associated with the same section `s`?
-
-```
-r x ... x (x):s x (x+1):s x ... x L
-                x ... x (y):s x ... x L
-                      x ... (z):s x ... x L
-```
-
-If some node `x` is strictly associated with section `s`, then any descendant
-of `x` is already loosely related to `s`. As a result, descendant nodes of `x`
-do not have to be strictly associated with the same section, if the distinction
-between a "strict" and a "loose" relationship is not relevant.
-
-Memory hook:
-Associating a single node is equivalent to associating a whole subtree of nodes
-whose root is the strictly associated node.
-
-With that in mind, and in this context, any rooted path can be reduced to a path
-that ends with a strictly associated node, because the remainder of a path, that
-passes through such a node, will not change the path's characteristics any
-further.
-
-```
-r x ... x (x:s)
-```
-
-Consequently, a path that is not supposed to fall into the same category must
-branch off from some common prefix before the first associated node is reached.
-That is, a second path may branch off beginning with the parent of an associated
-node and up until the root of the node tree.
