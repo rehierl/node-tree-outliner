@@ -25,11 +25,18 @@ is derived from the definition of the term "descendant".
 **CLARIFICATION**
 Nodes must be associated with sections while they are being entered.
 
-That is, because otherwise the location of a node (with regards to a tree's
-sections) could be affected by nodes that are subsequent to it. Because of that,
-a node could then be affected by nodes that are not within its actual context,
-which would consequently be in conflict with the definition of the context of
-a node.
+The order of a tree's traversal is dictated by the node order of a tree. That
+is, the traversal of a tree must reflect the tree's semantics. Because exit
+events will be executed in reverse order, associating any nodes while they are
+being exited would constitute a deviation of the tree traversal's order and, as
+such, a deviation of the tree's semantics. Consequently, associating nodes with
+sections while they are being exited can not result in sections that accurately
+represent the contents of a tree.
+
+Also, the location of a node (with regards to a tree's sections) could otherwise
+be affected by nodes that are subsequent to it. Because of that, a node could
+then be affected by nodes that are not within its actual context, which would
+consequently be in conflict with the definition of a node's context.
 
 **CLARIFICATION**
 A section is a sequence of strictly subsequent nodes.
@@ -37,17 +44,11 @@ A section is a sequence of strictly subsequent nodes.
 A consequence of the states a section has is, that definitions only need to
 tell an algorithm, with which node a section begins and with which node it ends.
 Because of that, a section is a subsequence of the corresponding node sequence.
-Consequently, a section is a sequence of strictly subsequent nodes. That is, a
-section has no gaps in between its nodes.
+Consequently, a section is a sequence of strictly subsequent nodes.
 
-However, this clarification requires that all the nodes are being associated
-with their sections while they are being entered. That is, because exit events
-are executed in reverse order.
-
-Consequently, sections can not accurately represent the contents of an ordered
-node tree, if nodes would have to be associated while they are being exited.
-That is, because these sections could contain nodes in an order that is in
-conflict with the order of the node tree.
+Put differently, a section has no gaps in between its nodes. That is, any
+subsequent node in between a section's first and last node is in relationship
+with the corresponding section.
 
 **CLARIFICATION**
 The very first node of a section is not necessarily strictly subsequent to its

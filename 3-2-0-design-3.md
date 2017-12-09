@@ -70,12 +70,12 @@ of nodes whose root is the strictly associated node.
 
 **CLARIFICATION**
 Node `n` must be strictly associated with section `s`, if `n` is in relationship
-with `s`, and if `n` does not already have a loose relationship with it. Node `n`
-would otherwise remain unrelated to section `s`.
+with `s`, and if `n` does not already have a loose relationship with it. Node
+`n` would otherwise remain unrelated to section `s`.
 
 **DEFINITION**
-Node `n` is said to be a top-level node of section `s`, if `n` must be strictly
-associated with `s`.
+Node `n` is said to be a top-level node of a section, if `n` must be strictly
+associated with it.
 
 **CLARIFICATION**
 Any section is defined by its top-level nodes. That is, because any other
@@ -85,10 +85,10 @@ associated node can be derived from the section's top-level nodes.
 ## derived statements
 
 **CLARIFICATION**
-No descendant of a strictly or loosely associated node can be excluded from
-any of its ancestor's sections. Any attempt to define a descendant to be
-unrelated to any one of its ancestor's sections is going to be in conflict
-with the afore mentioned loose associations.
+No descendant of a strictly or loosely associated node can be excluded from any
+of its ancestor's sections. Any attempt to define a descendant to be unrelated
+to any one of its ancestor's sections is going to be in conflict with the afore
+mentioned loose associations.
 
 **CLARIFICATION**
 A non-empty section can always be seen to end with its last top-level node.
@@ -101,16 +101,19 @@ descendant (i.e. not some randomly selected one).
 
 **CLARIFICATION**
 The last node of any non-empty section will always be a leaf (either by strict,
-or by loose association). Put differently, no last node will ever be a parent
-node. That is, because the last descendant entered of any container will always
-be a leaf. After all, it wouldn't be the last descendant, if it were a parent.
+or by loose association). That is, because the last descendant entered of any
+container will always be a leaf. After all, it wouldn't be the last descendant,
+if it were a parent.
+
+Put differently, no last node will ever be a parent node.
 
 No such clarification can be derived for the first node of a section. That
 is, because the first node of a section is specified by a sectioning node's
 definition. In addition to that, such a definition is in general independent
 of a node tree's structure.
 
-Again, any node must be associated with its sections while it is being entered.
+<!-- ======================================================================= -->
+## derived statements
 
 **CLARIFICATION**
 The end of a section can either be defined in terms of the last node that is
