@@ -16,7 +16,7 @@ The questions that now need to be answered next are:
 strict/explicit vs. loose/implicit
 
 <!-- ======================================================================= -->
-## multiple associations (s)
+## multiple associations (1)
 
 ```
 r x ... x (n):s x (x):s x ... x L
@@ -70,25 +70,38 @@ of nodes whose root is the strictly associated node.
 
 **CLARIFICATION**
 Node `n` must be strictly associated with section `s`, if `n` is in relationship
-with `s`, and if `n` does not already have a loose relationship with it. Node
-`n` would otherwise remain unrelated to section `s`.
+with `s`, and if `n` does not already have a loose relationship with it.
+
+Node `n` would otherwise remain unrelated to section `s`.
 
 **DEFINITION**
 Node `n` is said to be a top-level node of a section, if `n` must be strictly
 associated with it.
 
 **CLARIFICATION**
-Any section is defined by its top-level nodes. That is, because any other
-associated node can be derived from the section's top-level nodes.
+Any section is defined by its top-level nodes.
+
+That is, because any other associated node can be derived from the section's
+top-level nodes.
 
 <!-- ======================================================================= -->
 ## derived statements
 
 **CLARIFICATION**
 No descendant of a strictly or loosely associated node can be excluded from any
-of its ancestor's sections. Any attempt to define a descendant to be unrelated
-to any one of its ancestor's sections is going to be in conflict with the afore
-mentioned loose associations.
+of its ancestor's sections.
+
+Any attempt to define a descendant to be unrelated to any one of its ancestor's
+sections is going to be in conflict with the afore mentioned loose associations.
+
+**CLARIFICATION**
+It is not possible to clearly identify the relationship between the first node
+and the last node of a section.
+
+That is, because any associated node can have any number of descendant nodes.
+It is therefore not possible, from a definition's point of view, to clearly
+identify a section's last node without forcing a certain structure upon the
+nodes of a section.
 
 **CLARIFICATION**
 A non-empty section can always be seen to end with its last top-level node.
@@ -100,17 +113,21 @@ be misleading, because a section can only end with the very last subsequent
 descendant (i.e. not some randomly selected one).
 
 **CLARIFICATION**
-The last node of any non-empty section will always be a leaf (either by strict,
-or by loose association). That is, because the last descendant entered of any
-container will always be a leaf. After all, it wouldn't be the last descendant,
-if it were a parent.
+The last node of any non-empty section will always be a leaf
+(either by strict, or by loose association).
 
-Put differently, no last node will ever be a parent node.
+That is, because the last descendant entered will always be a leaf.
+After all, it would not be the last descendant, if it were a parent.
+
+Put differently, the last node of a section will never be a parent node.
 
 No such clarification can be derived for the first node of a section. That
 is, because the first node of a section is specified by a sectioning node's
 definition. In addition to that, such a definition is in general independent
-of a node tree's structure.
+of a tree's structure.
+
+<!-- ======================================================================= -->
+## multiple associations (2)
 
 <!-- ======================================================================= -->
 ## derived statements
