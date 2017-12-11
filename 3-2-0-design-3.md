@@ -6,7 +6,7 @@ As mentioned before, associating a single node with a section also loosely
 associates any descendant of that node. In addition to that, any node loosely
 belongs to any section with which any of its ancestors is associated.
 
-The questions that now need to be answered next are:
+The questions, that now need to be answered next, are:
 
 * What happens, if other nodes are associated with the same section?
 * What are the consequences with regards to a section's last node?
@@ -28,8 +28,8 @@ of `n` is already loosely related to `s`.
 
 Consequently, descendants of node `n` do not have to be strictly associated with
 section `s`, if the distinction between a "strict" and a "loose" relationship is
-not relevant. That is, if a loose association can be seen to be equal to a
-strict association.
+not relevant. That is, if a loose association can be seen to be equal to a strict
+association.
 
 Because of that, any rooted path in this context can be reduced to a path which
 ends with a strictly associated node. That is, because the remainder of a path,
@@ -55,8 +55,8 @@ section `s`.
 
 The next node, that must be strictly associated with section `s` is node `C`.
 Unlike with descendant nodes, an association does not carry over to a subsequent
-sibling. That is, because no semantically consistent path can be defined which
-connects a node with its next sibling.
+sibling. That is, because no semantically consistent path can be defined on top
+of the underlying relation, which connects a node with its next sibling.
 
 The loose associations mentioned above also apply to any descendant of node `C`.
 Node `E` therefore also belongs to section `s`, whether that node is strictly
@@ -69,38 +69,53 @@ associated with it or not.
 Strictly associating a single node is equivalent to associating a whole
 subtree of nodes. The root of that subtree is the strictly associated node.
 
-**CLARIFICATION**
-Node `n` must be strictly associated with section `s`, if `n` is in
-relationship with `s`, and if `n` does not already have a loose relationship
-with it (`n` would otherwise remain unrelated to section `s`).
-
-**DEFINITION**
-Node `n` is said to be a top-level node of a section, if `n` must be strictly
-associated with it.
+Because of that, a section does not change, if a descendant of a strictly
+associated node is itself strictly associated. The strict association merely
+transforms the descendant's implicit relationship with that section into an
+explicit relationship.
 
 **CLARIFICATION**
-Any section is defined by a sequence of nodes which only contains the top-level
-nodes of a section (in the order of the tree's node sequence). Any other node,
-which is related to that section, can be derived from such a sequence.
+Node `n` must be strictly associated with section `s`, if `n` is intended to be
+in relationship with `s`, and if `n` is not already have a loosely related to it
+(`n` would otherwise remain unrelated to `s`).
+
+In the end, the algorithm's resulting structure of sections must reflect the
+relationship of any node with its sections by establishing connections between
+the tree's sections and all of its nodes.
 
 **DEFINITION**
-The sequence of strictly subsequent nodes, which contains all the nodes of
-a section, will be referred to as the section's complete node sequence. The
-sequence of nodes, which contains all the top-level nodes of a section, will
-be referred to as the section's reduced node sequence.
+Node `n` will be referred to as a section's top-level node, if
+`n` must be strictly associated with it.
+
+**CLARIFICATION**
+Any section is defined by a sequence of nodes which only contains the
+section's top-level nodes (in the order of the tree's node sequence).
+Any other node, which is related to that section, can be derived from
+such a node sequence.
+
+**DEFINITION**
+The sequence of strictly subsequent nodes, which contains all the nodes
+of a section, will be referred to as the section's complete node sequence.
+The sequence of nodes, which only contains all the top-level nodes of a
+section, will be referred to as the section's reduced, or as the section's
+characteristic node sequence.
 
 * A complete sequence is a sequence of strictly subsequent nodes.
-* A reduced sequence is not necessarily strictly subsequent. It can only be
-  strictly subsequent, if all top-level nodes are leaf nodes. In that case,
-  the reduced sequence is even identical to the section's complete sequence.
-* However, the reduced sequence still is a sequence of subsequent nodes.
-* If a sequence is created by removing one or more nodes from a section's
-  reduced sequence, then that sequence is insufficient to determine the
-  section's complete sequence of nodes.
-* The reduced sequence represents the minimum sequence of nodes
-  required in order to determine a section's complete sequence.
-* A non-empty section has exactly one complete and exactly one
-  reduced sequence of nodes.
+* A reduced sequence is not necessarily strictly subsequent.
+* The reduced sequence can only be strictly subsequent, if all the
+  top-level nodes are leaf nodes. In that case, the reduced sequence
+  is even identical to the complete sequence.
+* The reduced sequence will always be a sequence of subsequent nodes.
+* If a sequence is created by removing one or more nodes from
+  a reduced sequence, then that sequence is insufficient to
+  determine the section's complete sequence.
+* The reduced sequence represents the shortest sequence possible
+  that still allows to determine the complete sequence.
+* A non-empty section has exactly one complete
+  and exactly one reduced sequence.
+* The first node of a reduced sequence is identical to the section's
+  first node. The last node of a reduced sequence is not necessarily
+  identical to the section's last node.
 
 **TODO**
 a section's reduced sequence allows transformations -

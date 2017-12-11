@@ -91,7 +91,7 @@ because these kind of operations have the potential to produce conflicts
 (see - associating nodes while exiting).
 
 ```
-<n1><n2><n3> ... </n3></n2></n1>
+<n1><n2> n3 </n2></n1>
 ```
 
 In addition to that, when executing any operation while a node is being exited,
@@ -99,6 +99,17 @@ the overall order of events must be taken into account. That is, ancestor nodes
 will be entered before their descendant nodes are entered. In contrary to that,
 descendant nodes will be exited before their ancestor nodes are exited. Compared
 to enter events, exit events will be executed in reverse order.
+
+```
+s5 := [n1, n2, n3]
+s6 := [n3, n2, n1]
+```
+
+Example: If a section would only contain the above three nodes, then associating
+these while they are being entered would result in sequence `s5` and associating
+them while they are being exited would result in sequence `s6`. Obviously, the
+node order order, that is reflected by sequence `s6`, does not represent the
+section's actual order of nodes.
 
 Consequently, executing any operation while a node is being exited is per se
 problematic. Exit events must therefore only be used to execute actions which
