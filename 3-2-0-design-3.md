@@ -11,9 +11,6 @@ The questions, that now need to be answered next, are:
 * What happens, if other nodes are associated with the same section?
 * What are the consequences with regards to a section's last node?
 
-**TODO**
-strict/explicit vs. loose/implicit
-
 <!-- ======================================================================= -->
 ## multiple associations (1)
 
@@ -31,6 +28,10 @@ section `s`, if the distinction between a "strict" and a "loose" relationship is
 not relevant. That is, if a loose association can be seen to be equal to a strict
 association.
 
+From this point on, all associations (strict/explicit or loose/implicit) are
+considered to be semantically equivalent. Because of that, this perspective
+is a necessity.
+
 Because of that, any rooted path in this context can be reduced to a path which
 ends with a strictly associated node. That is, because the remainder of a path,
 that passes through such a node, will not change the path's characteristics any
@@ -42,8 +43,8 @@ r x ... x (x:s)
 
 A path that is not supposed to fall into the same category must therfore branch
 off from an ancestor of the first associated node. That is, a second path may
-branch off beginning with the parent of an associated node and up until the root
-of the node tree.
+branch off beginning with the parent of an associated node and up until the
+first node's top-most relevant ancestor.
 
 <!-- ======================================================================= -->
 ## example fragment
@@ -75,9 +76,9 @@ transforms the descendant's implicit relationship with that section into an
 explicit relationship.
 
 **CLARIFICATION**
-Node `n` must be strictly associated with section `s`, if `n` is intended to be
-in relationship with `s`, and if `n` is not already have a loosely related to it
-(`n` would otherwise remain unrelated to `s`).
+Node `n` must be strictly associated with section `s`, if `n` is intended to
+be in relationship with `s`, and if `n` is not already have a loosely related
+to it (`n` would otherwise remain unrelated to `s`).
 
 In the end, the algorithm's resulting structure of sections must reflect the
 relationship of any node with its sections by establishing connections between
@@ -94,11 +95,11 @@ Any other node, which is related to that section, can be derived from
 such a node sequence.
 
 **DEFINITION**
-The sequence of strictly subsequent nodes, which contains all the nodes
-of a section, will be referred to as the section's complete node sequence.
+The sequence of strictly subsequent nodes, which contains all the nodes of a
+section, will be referred to as the section's complete node sequence (`cs`).
 The sequence of nodes, which only contains all the top-level nodes of a
-section, will be referred to as the section's reduced, or as the section's
-characteristic node sequence.
+section, will be referred to as the section's reduced (`rs`), or as the
+section's characteristic node sequence.
 
 * A complete sequence is a sequence of strictly subsequent nodes.
 * A reduced sequence is not necessarily strictly subsequent.
@@ -127,18 +128,76 @@ no other section has the exact same sequences -
 depends on the definitions of sectioning nodes
 
 <!-- ======================================================================= -->
+## multiple associations (2)
+
+The definition of a section's reduced node sequence allows to clarify
+the general characteristics of a section independent of any particular
+sectioning node:
+
+```
+r x ak x ... x a2 x a1 x n1:s
+                       x n2:s
+                  x n3:s
+                  x n4:s
+             x n5:s
+       x ... x
+  x nl:s
+
+//- this section's reduced sequence:
+rs := [n1, n2, n3, n4, n5, ..., nl]
+```
+
+Recall that, in between a section's open and closed states, any subsequent node
+must be associated with said section. Because of that, a section is a sequence
+of strictly subsequent nodes (i.e. no gaps in between any two adjacent nodes).
+
+Once the very first node of a section is strictly associated (e.g. `n1`), any
+of its descendants are implicitly associated with the same section. If the
+section did not end with that node, then the next node that must be strictly
+associated is the first node's next sibling (e.g. `n2`). The next node after
+that then is the next sibling of that node. Consequently, and for as long as
+a section does not end, an algorithm must at least strictly associate all the
+subsequent siblings of the section's first node.
+
+The next node entered, after the first node's last subsequent sibling was
+associated, is the next sibling of the first node's parent node (e.g. `n3`).
+Similar as before, any subsequent sibling of that node must be strictly
+associated until the parent's last subsequent sibling is associated (e.g. `n4`).
+
+Consequently, and unless a section must be closed, an algorithm must continue
+with the next sibling of first node's next ancestor (e.g. `n5`).
+
+By now it should be obvious, that this process must be continued until the last
+sibling of the first node's top-most ancestor was associated. And because the
+root node has no sibling, the last relevant ancestor of the first node is one
+of the root's child nodes. To be more clear, ancestors are skipped if they have
+no next sibling. The actual last relevant ancestor therefore is the top-most
+ancestor for which a next sibling exists.
+
+**CLARIFICATION**
+The reduced sequence of a section is a sequence of top-level nodes that all are
+subsequent siblings to a section's first node, or to any of its ancestors.
+
+In addition to that, the reduced sequence is ordered such that it begins with
+the siblings of the first node, followed by the siblings of its parent. After
+these, the sequence contains the siblings of the first node's ancestors until
+it ends with the siblings of the last relevant ancestor.
+
+<!-- ======================================================================= -->
 ## derived statements
 
 **CLARIFICATION**
-No descendant of a strictly or loosely associated node can be excluded from any
-of its ancestor's sections.
+No descendant of an associated node can be excluded from the sections of its
+ancestors. Descendants are implicitly associated by the tree's structure.
 
-Any attempt to define a descendant to be unrelated to any one of its ancestor's
-sections is going to be in conflict with the afore mentioned loose associations.
+Any attempt to define a descendant to be unrelated to the sections of its
+ancestors is going to be in conflict with the afore mentioned implicit loose
+associations.
 
 **CLARIFICATION**
-It is not possible to clearly identify the relationship between the first node
-and the last node of a section.
+Unlike with a section's first node, it is in general not possible
+to clearly identify a section's last node. Obviously, the same also
+applies to the relationship between a section's first and last node.
 
 That is, because any associated node can have any number of descendant nodes.
 It is therefore not possible, from a definition's point of view, to clearly
@@ -147,12 +206,14 @@ nodes of a section.
 
 **CLARIFICATION**
 A non-empty section can always be seen to end with its last top-level node.
+If this top-level node has any descendants, then the section's last node is
+the last subsequent descendant of this top-level node.
 
 With that in mind, a section can also be seen to end inside of an associated
-container, because the last subsequent descendant of that container (e.g. node
-`E`) will then become the section's last node. However, this perspective could
-be misleading, because a section can only end with the very last subsequent
-descendant (i.e. not some randomly selected one).
+container, if the last subsequent descendant of that container (e.g. node `E`)
+is the section's last node. However, this perspective could be misleading,
+because a section can only end with the very last subsequent descendant
+(i.e. not some randomly selected descendant).
 
 **CLARIFICATION**
 The last node of a non-empty section will always be a leaf (either by strict,
@@ -160,15 +221,13 @@ or by loose association). Put differently, the last node of a section will
 never be a parent node.
 
 That is, because the last descendant entered will always be a leaf. After all,
-a section's last node would not be the section's last node, if it were a parent.
+a section's last node would not be the section's last node, if it were a parent
+(Note also, that all nodes must be associated while they are being entered).
 
-No such clarification can be derived for the first node of a section. That
-is, because the first node of a section is specified by a sectioning node's
-definition. In addition to that, such a definition is in general independent
-of a tree's structure.
-
-<!-- ======================================================================= -->
-## multiple associations (2)
+No such clarification can be derived for the first node of a section. That is,
+because the first node of a section depends on the definition of the section's
+sectioning node. In addition to that, such a definition must in general be
+independent of the tree's structure.
 
 <!-- ======================================================================= -->
 ## derived statements
