@@ -6,10 +6,9 @@ As mentioned before, associating a single node with a section also loosely
 associates any descendant of that node. In addition to that, any node loosely
 belongs to any section with which any of its ancestors is associated.
 
-The questions, that now need to be answered next, are:
-
-* What happens, if other nodes are associated with the same section?
-* What are the consequences with regards to a section's last node?
+The next questions therefore are:
+(1) What happens, if other nodes are associated with the same section?
+(2) What are the consequences with regards to a section's last node?
 
 <!-- ======================================================================= -->
 ## multiple associations (1)
@@ -118,15 +117,6 @@ section's characteristic node sequence.
   first node. The last node of a reduced sequence is not necessarily
   identical to the section's last node.
 
-**TODO**
-a section's reduced sequence allows transformations -
-how to determine the top-level nodes of a section
-
-**TODO**
-complete and reduced sequences are unique to their section -
-no other section has the exact same sequences -
-depends on the definitions of sectioning nodes
-
 <!-- ======================================================================= -->
 ## multiple associations (2)
 
@@ -176,12 +166,12 @@ ancestor for which a next sibling exists.
 
 **CLARIFICATION**
 The reduced sequence of a section is a sequence of top-level nodes that all are
-subsequent siblings to a section's first node, or to any of its ancestors.
+subsequent siblings to the section's first node, or to any of its ancestors.
 
 In addition to that, the reduced sequence is ordered such that it begins with
 the siblings of the first node, followed by the siblings of its parent. After
-these, the sequence contains the siblings of the first node's ancestors until
-it ends with the siblings of the last relevant ancestor.
+these nodes, the sequence contains the siblings of the first node's ancestors
+until it finally ends with the siblings of the last relevant ancestor.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -191,17 +181,17 @@ No descendant of an associated node can be excluded from the sections of its
 ancestors. Descendants are implicitly associated by the tree's structure.
 
 Any attempt to define a descendant to be unrelated to the sections of its
-ancestors is going to be in conflict with the afore mentioned implicit loose
+ancestors is going to be in conflict with the afore mentioned implicit
 associations.
 
 **CLARIFICATION**
-Unlike with a section's first node, it is in general not possible
-to clearly identify a section's last node. Obviously, the same also
-applies to the relationship between a section's first and last node.
+Unlike a section's first node, it is in general not possible to clearly
+identify a section's last node. Obviously, the same also applies to the
+relationship between a section's first and last node.
 
 That is, because any associated node can have any number of descendant nodes.
 It is therefore not possible, from a definition's point of view, to clearly
-identify a section's last node without forcing a certain structure upon the
+identify a section's last node without enforcing a certain structure upon the
 nodes of a section.
 
 **CLARIFICATION**
@@ -216,6 +206,11 @@ because a section can only end with the very last subsequent descendant
 (i.e. not some randomly selected descendant).
 
 **CLARIFICATION**
+A non-empty section can be seen to end with an unrelated container, if the
+section's last node is the container's last subsequent descendant. Because of
+that, an unrestricted section can be seen to end with the tree's root node.
+
+**CLARIFICATION**
 The last node of a non-empty section will always be a leaf (either by strict,
 or by loose association). Put differently, the last node of a section will
 never be a parent node.
@@ -228,93 +223,3 @@ No such clarification can be derived for the first node of a section. That is,
 because the first node of a section depends on the definition of the section's
 sectioning node. In addition to that, such a definition must in general be
 independent of the tree's structure.
-
-<!-- ======================================================================= -->
-## derived statements
-
-**CLARIFICATION**
-The end of a section can either be defined in terms of the last node that is
-allowed to be associated with a section, or in terms of the first node
-that is not allowed to be associated. In the latter case, any node, beginning
-with a section's first node, is seen to be related to a section until the first
-node is entered that is not intended to be associated with a given section.
-
-Because of that, the search for a section's very last node may skip the
-
-**CLARIFICATION**
-If an associated node has subsequent siblings, then these siblings must be
-strictly associated next. That is, unless rules exist that the section has
-to end with a presequent sibling.
-
-Consequently, the search for a section's very last node may skip the descendants
-of any associated node. Because 
-
-<!-- ======================================================================= -->
-
-```
-r x ... x n1 x ... x n2:s
-        x n3 x ... x n4:s
---- (includes)
-<n1>
-  <n2:s> ... </n2:s>
-</n1>
-<n3>
-  <n4:s> ... </n4:s>
-</n3>
-```
-
-<!-- ======================================================================= -->
-
-```
-r x ... x n2:s
-        x n4:s
---- (includes)
-<n2:s> ... </n2:s>
-<n4:s> ... </n4:s>
-```
-
-<!-- ======================================================================= -->
-
-```
-r x ... x n2:s
-        x n3 x ... x n4:s
---- (includes)
-<n2:s> ... </n2:s>
-<n3>
-  <n4:s> ... </n4:s>
-</n3>
-```
-
-<!-- ======================================================================= -->
-
-```
-r x ... x n1 x ... x n2:s
-        x n4:s
---- (includes)
-<n1>
-  <n2:s> ... </n2:s>
-</n1>
-<n4:s> ... </n4:s>
-```
-
-<!-- ======================================================================= -->
-## Sectioning nodes
-
-```
-... x n x c1:s x ...
-        x c2:s x ...
-```
-
-If no other node in the whole tree is strictly associated with section `s`,
-then node `n` is a type-1 sectioning node, because any node descendant to it
-is related to that section.
-
-```
-... x n x c1   x ...
-        x c2:s x ...
-        x c3:s x ...
-        x c4   x ...
-```
-
-However, node `n` can not be a type-1 sectioning node, if it has any child nodes
-(e.g. `c1`) that are not associated with section `s`.
