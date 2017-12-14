@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Associations (2)
+# Design (2)
 
 This section builds upon the fundamental definitions, considerations and
 conclusions mentioned previously.
@@ -10,31 +10,31 @@ conclusions mentioned previously.
 
 Similar to output streams, any section has the following states:
 
-*initialized state*
+### initialized state
 
-As soon as a sectioning node is known, it is technically possible, beginning
-with the current node, to associate any subsequent node with it. Because of
-that, and if a section had no delayed start, a sectioning node would have to
-be associated with its own section.
+As soon as a sectioning node is known, it is technically possible to, beginning
+with the current node, associate any subsequent node with it. Because of that,
+and if a section had no delayed start, a sectioning node would have to be
+associated with its own section.
 
-Consequently, a section's "initialized" state has the following meaning: (1)
-the section is known and (2) an algorithm must start associating nodes with
-it at some later point in time.
+Consequently, a section's "initialized" state means that: (1) the section is
+known and (2) an algorithm must start associating nodes with it at some later
+point in time.
 
-*open state*
+### open state
 
 Once a section's first node is entered, this first node and any subsequent node
 must be associated with it. An algorithm therefore needs additional rules that
 enable it to determine when to begin associating nodes with a section.
 
-A section counts as being "open" as soon as the next subsequent node must be
-associated with it.
+A section is considered to be "open" as soon as the next subsequent node must
+be associated with it.
 
-*closed state*
+### closed state
 
-Any section must eventually end at some point. By default, that point is
-reached when the initial root node of the process is being exited. That is,
-because there is no node subsequent to this exit event.
+Any section must eventually end at some point. By default, that point is reached
+when the initial root node of the process is being exited. That is, because
+there is no subsequent node with regards to this exit event.
 
 This default case is obviously insufficient, because the very last node of
 a node sequence would then always have to be associated with all the known
@@ -42,55 +42,60 @@ sections. An algorithm therefore needs additional rules that enable it to
 determine, when it is no longer allowed to associate any subsequent node
 with a section.
 
-A section counts as being "closed" as soon as it is no longer allowed to
-associate any more nodes with it. From that point on, a section is fully
-defined/specified. That is, because no subsequent node is allowed to have
-any further effect on a closed section.
+A section is considered to be "closed" as soon as it is no longer allowed to
+associate any more nodes with it.
 
-*A section can not be re-opened*
+<!-- ======================================================================= -->
+## derived statements
+
+**CLARIFICATION**
+Once closed, a section is fully defined/specified. That is, because no
+subsequent node will, by definition, have any further effect on it.
+
+**CLARIFICATION**
+A section can not be re-opened.
 
 The "closed" state, and the corresponding rules, can therefore also be seen
 to represent a guarantee, that a closed section will not change any further.
 
 This guarantee is critical to an efficient TOC generator, because it allows
-to drop a section object once its corresponding section is closed and once the
-required information has been read from it. After that, any attempt to execute
+to drop a section object once the corresponding section is closed and once the
+the information it holds has been extracted. After that, any attempt to execute
 any kind of operation on a dropped section object will result in an access
 violation error.
 
-Re-opening a section for additional associations would therefore mean to
-violate the above guarantee. Because of that, such an operation must be
-seen to represent an attempt to suspend and resume a section.
-
-*It must not be allowed to strictly suspend a section*
-
-Technically, it would be possible to define rules that tell an algorithm
-to suspend and then, at some later point in time, resume a section. However,
-this does not mean that it would be reasonable to allow such an operation.
+Re-opening a section for additional associations would therefore be in conflict
+with the above guarantee. Because of that, such an operation must be seen to
+represent an attempt to suspend and resume a section.
 
 **CLARIFICATION**
-Any node belongs to a section, if it is subsequent to its first
-and presequent to its last node (i.e. a section has no gaps).
+A section can not be strictly suspended.
+
+Note that it is assumed, that a "resume" operation must always follow a
+"suspend" operation ("suspend" would otherwise be equivalent to "close").
+
+Technically, it would be possible to define rules that tell an algorithm to
+suspend and then, at some later point in time, resume associating nodes with a
+section. However, this does not mean that it would be reasonable to allow such
+an operation.
 
 Assumed that some section `s` would have to be suspended after some node `ns`
 was associated with it, and that section `s` would have to be resumed beginning
 with some node `nr`. This would in return mean that, in between both nodes,
-there could potentially be any number of nodes that are not intended to be
-completely unrelated to section `s` (hence, strictly suspended).
+there could potentially be any number of nodes that are intended to be unrelated
+to this section (hence, strictly suspended).
 
 Such a section would then consist of multiple subsequent parts that are separate
-from each other (i.e. gaps in between). An algorithm would then have no means to
-treat a section as one entity (see the requirements).
+from each other. Due to the gaps in between its parts, an algorithm would then
+have no means to treated a section as as one entity by grouping all of the
+section's nodes.
 
-In addition to that, the intermediate nodes in between the separate parts of
-a strictly suspended section can still be seen to be in relationship with it.
-That is, because the very reason, as to why these intermediate nodes would
-have to be excluded, puts these intermediate nodes into a relationship with
-said section. Because of that, the ultimate goal of such an attempt (i.e.
-completely unrelated nodes) can't even be reached without any conflict.
-
-Note that it is assumed, that a "resume" operation would have to always follow
-a "suspend" operation ("suspend" would otherwise be equivalent to "close").
+In addition to that, the intermediate nodes in between the separate parts of a
+strictly suspended section can still be seen to be in relationship with it. That
+is, because the very reason, as to why these intermediate nodes would have to be
+excluded, puts these intermediate nodes into a relationship with said section.
+Because of that, the ultimate goal of such an attempt (i.e. completely unrelated
+nodes) can't even be reached without producing any conflict.
 
 Note that these considerations do not take the definition of nodes into account,
 that would be necessary to clearly define when a section has to be suspended.
@@ -100,70 +105,44 @@ to represent a section of its own. Hence, the nodes that would be required in
 order to tell an algorithm that it has to resume a section can themselves be
 seen to represent separate sectioning nodes.
 
-<!-- ======================================================================= -->
-## Sections (2)
-
 **CLARIFICATION**
-Any descendant of a node, that is associated with a section, also loosely
-belongs to the very same section. Also, any node loosely belongs to any
-section with which any of its ancestors is associated.
+A section has no gaps. Any node belongs to a section, if it is subsequent to the
+section's first and presequent to its last node.
 
-That is, because a semantically consistent path can be defined that
-connects a section with any of the associated node's descendants.
-
-Note that, if this statement would not be true, then there would consequently
-be no definition for the term "descendant". That is, because the definition of
-this term is also based upon the construction of a semantically consistent path.
-In addition to that, the definition of the term "ancestor" can be derived from
-the definition of the term "descendant".
+<!-- ======================================================================= -->
+## derived statements
 
 **CLARIFICATION**
 Nodes must be associated with sections while they are being entered.
 
 Because exit events will be executed in reverse order, associating any nodes
 while they are being exited would constitute a deviation of the tree traversal's
-order of nodes and, as such, a deviation of the tree's semantics. Consequently,
-associating nodes with sections while they are being exited can not result in
-sections that accurately represent the contents of a tree.
+order of nodes, and, as such, a deviation of the tree's semantics. Consequently,
+associating any nodes with sections while they are being exited can in principle
+not result in sections that accurately represent the contents of a tree.
 
-The location of a node (with regards to a tree's sections) could then also
-be affected by nodes that are subsequent to it. Because of that, a node could
-then be affected by nodes that are not within its actual context. This would
-then consequently be in conflict with the definition of a node's context.
+Apart from that, the location of a node (with regards to a tree's sections)
+could then be affected by nodes that are subsequent to it. Because of that,
+a subsequent node could end up having an effect presequent nodes.
+
+**CLARIFICATION**
+A section is a sequence of subsequent nodes.
+
+That is, because any node must be associated with a section while it is being
+entered. Consequently, the node order of a section corresponds with the node
+order of a tree.
 
 **CLARIFICATION**
 A section is a sequence of strictly subsequent nodes.
-
-A consequence of the states a section has is, that definitions only need to
-tell an algorithm, with which nodes a section begins and ends. Because of that,
-a section is a subsequence of the corresponding node sequence. Consequently, a
-section is a sequence of strictly subsequent nodes.
-
-Put differently, a section has no gaps in between any of its nodes. That is,
-any subsequent node in between a section's first and last node is related to
-a section.
-
-**CLARIFICATION**
-The very first node of a section is not necessarily strictly subsequent to its
-sectioning node.
-
-The next sibling of a parent node can only be loosely subsequent to it. That is,
-because a node can only be a parent node, if it has at least one child node. No
-sibling can therefore be strictly subsequent to any parent node.
-
-Because of that, the first node of a section is strictly subsequent to a
-section's sectioning node, if it is also the sectioning node's first child node.
-In contrary to that, the first node of a section is only loosely subsequent to
-the section's sectioning node, if it is the sectioning node's next sibling and
-if the sectioning node is a parent node.
+That is, because a section has no gaps in between any of its adjacent nodes.
 
 <!-- ======================================================================= -->
 ## Sectioning nodes - first nodes (2)
 
-As stated before, rules are required to tell an algorithm when to begin
-associating nodes with a section. In addition to that, an algorithm must
-have the means to implement the corresponding operations efficiently (or
-even at all).
+Because a section is a sequence of strictly subsequent nodes, definitions only
+need to tell an algorithm, with which node a section begins and with which node
+it ends. In addition to that, an algorithm must have the means to implement the
+corresponding operations efficiently (or even at all).
 
 Because an algorithm knows about a section as soon as it enters the section's
 sectioning node, it has the ability to execute operations that prepare itself
@@ -172,29 +151,26 @@ for the association of the section's first node (e.g. mark a section as being
 Because of that, the first node of a section must be defined in terms of the
 structural relationship that this node has with the section's sectioning node.
 
-The very first node that could possibly be associated with a section is the
-first child of the sectioning node. That is, because it is unreasonable to
-associate a sectioning node with its own section. All an algorithm would have
-to do in the case of such a sectioning node is to mark the declared section
-as being open when it is about to exit the sectioning node's enter event.
+Because a sectioning node does not belong to its own section, the very first
+node that could possibly be associated with a section is the first child of a
+sectioning node. All an algorithm would have to do in such a case is to mark
+the declared section as being open when it is about to exit the sectioning
+node's enter event.
 
 **DEFINITION**
 A section will be referred to as a "type-1 section", if its scope begins with
 the first child of its sectioning node. Consequently, a sectioning node that
 declares a type-1 section will be referred to as a "type-1 sectioning node".
-("type-1" because the section's first node is the first subsequent node
-possible).
 
 Likewise, an algorithm can easily implement a rule that defines the next sibling
 of a sectioning node as the section's first node. All an algorithm would have
-to do in the case of such a sectioning node is to mark the declared section as
-being open when it is about to exit the sectioning node's exit event.
+to do in such a case is to mark the declared section as being open when it is
+about to exit the sectioning node's exit event.
 
 **DEFINITION**
 A section will be referred to as a "type-2 section", if its scope begins with
 the next sibling of its sectioning node. Consequently, a sectioning node that
 declares a type-2 section will be referred to as a "type-2 sectioning node".
-("type-2" because this first node is the 2nd easiest to implement option).
 
 Note that these two definitions are independent of a tree's structure. That
 is, the declared section is empty, if the sectioning node has, depending on
@@ -202,32 +178,47 @@ its type, no first child or no next sibling. Because of that, there is no
 requirement with regards to the structure of a tree.
 
 **CLARIFICATION**
-Unless additional section types are defined (see below), the first node of
-a section is, depending on the section's type, strictly subsequent to the
-enter or exit event of the corresponding sectioning node (i.e. no gap with
-that regards).
+Unless further types of sections are defined (see below), the first node of a
+section is strictly subsequent to the corresponding event of the sectioning
+node. That is, no other event will be executed after the sectioning node's
+event was exited and before the first node was entered.
 
 **TODO**
-Note however, that a type-2 sectioning node, if it has no next sibling, may
-still have nodes that are strictly subsequent to its exit event. The question
-therefore is, if it would be feasible to define a type-2 section as "begins
-with the next subsequent node" instead of the current strict definition,
-which is based upon the node's "next sibling" instead.
+Note that a type-2 sectioning node, if it has no next sibling, can still have
+nodes that are subsequent to its exit event (i.e. the next sibling of one of
+its ancestors). The question therefore is, if it would be reasonable to define
+a type-2 section as "begins with the 'next strictly subsequent' node" instead
+of the current strict definition (i.e. "begins with the node's next sibling").
+
+**CLARIFICATION**
+The first node of a section is, in general, not necessarily strictly subsequent
+to the section's sectioning node.
+
+The next sibling of a parent node can only be loosely subsequent to it. That
+is, because a node can only be a parent node, if it has at least one child node.
+No sibling can therefore be strictly subsequent to any parent node.
+
+Because of that, the first node of a section is strictly subsequent to the
+section's sectioning node, if it is also the sectioning node's first child.
+
+In contrary to that, the first node of a section is only loosely subsequent to
+the section's sectioning node, if it is the sectioning node's next sibling and
+if the sectioning node is a parent node.
 
 <!-- ======================================================================= -->
 ## Unordered trees
 
 Note that type-2 sections can only be defined, if the underlying tree is an
 ordered tree of nodes. That is, because nodes in an unordered tree are not
-guaranteed to have a next sibling, or even a first child. Any of these nodes
+guaranteed to have a next sibling or even a first child. Any of these nodes
 have to be considered equal.
 
-Because of that, a sectioning node itself has no order with regards to any
-of its siblings or children. Consequently, the result of an algorithm that
-attempts to support type-2 section in such a tree would be non-deterministic.
-Because the nodes of an unordered tree are not guaranteed to be served to
-an algorithm in any particular order, subsequent executions can potentially
-produce different results.
+Because of that, a sectioning node itself has no order with regards to any of
+its siblings or children. Consequently, the result of an algorithm that attempts
+to support a type-2 section in such a tree would be non-deterministic. That is,
+because the nodes of an unordered tree are not guaranteed to be served to an
+algorithm in any particular order, subsequent executions can potentially produce
+different results.
 
 Unordered trees can therefore only support type-1 sections.
 

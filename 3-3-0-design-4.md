@@ -1,12 +1,12 @@
 
 <!-- ======================================================================= -->
-# The last node of a section
+# Design (4)
 
-As mentioned before, the last node of a section can not be clearly identified
+As mentioned before, the last node of a section can not be clearly defined
 because any associated node can have any number of descendant nodes.
 
 The next question therefore is: Is it possible to define the end of a section
-without a clear identification of the section's last node?
+without a clear definition of the section's last node?
 
 <!-- ======================================================================= -->
 ## intervals of real numbers
@@ -21,8 +21,8 @@ meaning is that `r` may have any value in between `a` (inclusive) and `b`
 (exclusive). Put differently, any number from `a` to `(b - e)` is included
 (with `e` representing an infinitesimal small positive number).
 
-Consequently, the initial question can be rephrased: Is it possible to clearly
-identify the end of a section in terms of an event, beginning with which no more
+The initial question can therefore be rephrased: Is it possible to clearly
+define the end of a section in terms of an event, beginning with which no more
 associations with a given section are allowed (i.e. definition by exclusion)?
 
 <!-- ======================================================================= -->
@@ -30,22 +30,24 @@ associations with a given section are allowed (i.e. definition by exclusion)?
 
 As mentioned earlier, and without the ability to limit a section's scope, a
 tree's last subsequent node would have to be associated with all the known
-sections. Obviously, authors need the means to tell an algorithm when it is
+sections. Obviously, authors need the means to tell an algorithm when it is no
 longer allowed to associate any nodes with a given section. Once these kind of
 statements are detected, an algorithm must mark the corresponding section, or
-multiples thereof, from being "open" as being "closed".
+multiples thereof, as being "closed".
 
-Consequently, and at any given point of time in an algorithm's process, the set
-of known sections contains sections that are "initialized", "open" or "closed".
-Because of that, the set of known sections `S` can be split up into three
-disjunct sets of sections (with each set containing only those sections that
-are marked with the corresponding state):
+Consequently, and at any given point in time, any section within the set of
+known sections are "initialized", "open" or "closed". Because of that, the set
+of known sections `S` can be broken apart into three disjunct sets of sections
+(with each set containing only those sections that are marked with the
+corresponding state):
 
 * the set of initialized sections `IS`
 * the set of open sections `OS`
 * the set of closed sections `CS`.
 
-With regards to associations, a section's "initialized" and "closed" state, 
+With regards to associations, a section's "initialized" and "closed" states
+appear to be semantically equivalent, because no associations are allowed
+for as long as a section's state is not "open".
 
 <!-- ======================================================================= -->
 ## available events
