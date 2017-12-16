@@ -19,7 +19,7 @@ of the corresponding tree:
 
 The length of a node sequence is identical to the number of nodes in the node
 tree. That is, because each node will be entered exactly once. In addition to
-that, the node sequence contains each node (exactly once).
+that, the node sequence contains each node exactly once.
 
 * `(ni-k presequent-to ni)` is true, if `k in [1,*]`
 * `(ni-k strictly-presequent-to ni)` for `(k == 1)`
@@ -89,9 +89,9 @@ are subsequent to its current node. That is, unless definitions exist which
 guarantee that some specific subsequent node, or multiples thereof, will be
 entered eventually. In general, such guarantees do not exist.
 
-In addition to that, any operation executed while entering a node is intended to
-only have an effect on the node itself and on nodes that are subsequent to it.
-That is, if the exit events of its ancestors are ignored (technically, exit
+In addition to that, any operation executed while entering a node is intended
+to only have an effect on the node itself and on nodes that are subsequent to
+it. That is, if the exit events of its ancestors are ignored (technically, exit
 events allow to affect presequent nodes).
 
 ### exit events
@@ -140,13 +140,13 @@ them while they are being exited would result in sequence `s6`.
 
 Obviously, the order of nodes in sequence `s6`, does not correspond with the
 section's actual order of nodes. That is, this order is in conflict with the
-tree's node order.
+tree's order of nodes.
 
 Consequently, executing any operation while a node is being exited is per se
-problematic. Exit events must therefore only be used to execute operations which
-only affect nodes that are subsequent, but not descendant to the node being
-exited. That is, operations executed while exiting `ni` may only affect the
-nodes in `s4`, but must not have any side effect on nodes in `s3`.
+problematic. Exit events must therefore only be used to execute operations
+which only affect nodes that are subsequent, but not descendant to the node
+being exited. That is, operations executed while exiting `ni` may only affect
+the nodes in `s4`, but must not have any side effect on nodes in `s3`.
 
 <!-- ======================================================================= -->
 ## Context of a node
@@ -184,6 +184,27 @@ allowed to have an effect on it).
 
 Note that even nodes, which were exited, can be allowed to have an effect on
 subsequent nodes (e.g. a heading element).
+
+<!-- ======================================================================= -->
+## Look ahead
+
+A certain implementation could technically have the ability to cheat the
+traversal of a tree by directly examining the tree's structure as soon as a
+certain sectioning node is entered. Because of that, an implementation could
+simply determine ahead of schedule, if that sectioning node has for example
+a 2nd child, a 2nd subsequent sibling, or even a certain ancestor.
+
+The downside of this kind of look ahead would be, that this ability would turn
+into a requirement, if it could not be avoided. That is, implementations that
+can not support any kind of look ahead (e.g. due to technical limitations),
+would become impossible. However, if it is guaranteed to implement an operation
+without such an approach, a look ahead could be used as the basis of a more
+efficient implementation.
+
+Despite that, a look ahead is an attempt to bypass the current knowledge of what
+is guaranteed by the traversal of the tree. As such, a look ahead represents an
+attempt to predict future events. Because of that, a design must avoid such an
+attempt.
 
 <!-- ======================================================================= -->
 ## Sections, SxN
