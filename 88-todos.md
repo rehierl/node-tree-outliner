@@ -3,10 +3,6 @@
 # List of things to do
 
 **TODO**
-split design-2 into two documents -
-states and types
-
-**TODO**
 don't associate sectioning nodes with the sections they declare -
 `Section Node.parentSection` property would be inconsistent
 

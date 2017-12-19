@@ -1,387 +1,294 @@
 
 <!-- ======================================================================= -->
-# Design (3)
+# Design (3) - Sectioning nodes
 
-Associating a single node with a section loosely associates any descendant
-of that node (downwards). In addition to that, any node loosely belongs to
-any section with which any of its ancestors is associated (upwards). That
-is, because a semantically consistent path can be defined which connects a
-section with any of the associated node's descendants.
+Because a section is a sequence of strictly subsequent nodes, definitions only
+need to tell an algorithm, with which node a section begins and with which node
+it ends. In addition to that, an algorithm must have the means to implement the
+corresponding operations efficiently, or even at all.
 
-Note that these loose associations will be established automatically by the
-structure of a tree. Because of that, these associations can not be undefined
-and they can not be ignored (i.e. they must be taken into account).
+Because an algorithm knows about a section as soon as it enters the section's
+sectioning node, it has the ability to execute operations that prepare itself
+for the association of the first node (e.g. mark a section as being "open").
+That is, either when entering or when exiting the sectioning node.
 
-Note that, if the above statement would not be true, then there would
-consequently be no definition for the term "descendant". That is, because
-the definition of "descendant" is also based upon the construction of a
-semantically consistent path. In addition to that, the term "descendant"
-is used to define the term "ancestor".
+The use of the sectioning node's enter or exit event is, by itself, not a
+requirement for the definition of a certain type of sectioning nodes. That is,
+in theory, any subsequent event could be used. However, an algorithm must know
+which event exactly it has to use. Because of that, the relationship of the
+sectioning node and the section's first node must be clearly defined.
 
-<!-- ======================================================================= -->
-## multiple associations
-
-```
-r x ... x (n):s x (x):s x ... x L
-                x ... x (y):s x ... x L
-                      x ... (z):s x ... x L
-```
-
-If some node `n` is strictly associated with section `s`, then any descendant
-of `n` is already loosely related to `s`.
-
-Consequently, descendants of node `n` do not have to be strictly associated with
-section `s`, if the distinction between a "strict" and a "loose" relationship is
-not significant. That is, if a loose association can be seen to be equal to a
-strict association.
-
-**CLARIFICATION**
-All associations (strict/explicit or loose/implicit) are considered to be
-semantically equivalent. From that point on, this semantical equivalence
-is a necessity/requirement.
-
-Consequently, any rooted path in this context can be reduced to a path which
-ends with a strictly associated node. That is, because the remainder of a path,
-that passes through such a node, will not change the path's characteristics any
-further.
-
-```
-r x ... x (x:s)
-```
-
-A path that is not supposed to fall into the same category must therfore branch
-off from an ancestor of the first associated node. That is, a second path may
-branch off beginning with the parent of an associated node and up until the
-first node's top-most relevant ancestor.
+Note that, the definition of a sectioning node can, in principle, only define
+one effective open event, during which the declared section has to be marked as
+being "open". Multiple such events do not necessarily represent a design flaw
+because an open command executed on an already open section won't change the
+section's state. However, it must not be possible to close a section before the
+execution of a second subsequent open command, as this would represent a design
+error. It must not be allowed to re-open an already closed section.
 
 <!-- ======================================================================= -->
-## example fragment
+## type-1, first child
 
-`A:s <C:s> D:s E </C:s> F`
+Because a sectioning node does not belong to its own section, the very first
+node that could possibly be associated with a section is the first child of a
+sectioning node.
 
-Here, node `A` can be understood to represent the first node of section `s`.
-
-The next node, that must be strictly associated with section `s` is node `C`.
-Unlike with descendant nodes, an association does not carry over to a subsequent
-sibling. That is, because, based upon the underlying relation, no semantically
-consistent path can be defined which connects a node with its next sibling
-(i.e. a node does not contain its siblings).
-
-The loose associations mentioned above also apply to any descendant of node `C`.
-Node `E` therefore also belongs to section `s`, whether that node is strictly
-associated with it or not. Consequently, section `s` can not end with node `D`
-and, because of that, section `s` does not end inside of node `C`.
-
-<!-- ======================================================================= -->
-## derived statements
-
-**CLARIFICATION**
-No descendant of an associated node can be excluded from the sections of its
-ancestors. Descendants are implicitly associated with these by the structure
-of the node tree.
-
-Any attempt to define a descendant to be unrelated to the sections of its
-ancestors is going to be in conflict with the afore mentioned implicit
-associations.
-
-**CLARIFICATION**
-A section can not end inside of an associated container.
-
-If a given section would be defined to end inside of an associated container,
-then that container would have subsequent descendant nodes, which are then
-defined to be unrelated to that section. Consequently, such an attempt is
-going to be in conflict with the afore mentioned implicit associations.
-
-**Memory hook**
-Strictly associating a single node is equivalent to associating a whole
-subtree of nodes. The root of that subtree is the strictly associated node.
-
-Because of that, a section does not change, if a descendant of a strictly
-associated node is itself strictly associated. The strict association merely
-transforms the descendant's implicit relationship with that section into an
-explicit relationship.
-
-<!-- ======================================================================= -->
-## reduced sequence (1)
-
-**CLARIFICATION**
-Node `n` must be strictly associated with section `s`, if `n` is intended
-to be in relationship with `s`, and if `n` is not already loosely related
-to it (`n` would otherwise remain unrelated to `s`).
-
-After all, an algorithm must reflect the relationship of any node with the
-node's sections by establishing strict or loose connections between the
-sections of a tree and all of its nodes.
+All an algorithm has to do in such a case is to mark the declared section as
+being open when it is about to exit the sectioning node's enter event.
 
 **DEFINITION**
-Node `n` will be referred to as a section's top-level node,
-if `n` must be strictly associated with it.
-
-Note that any ancestors of a particular top-level node have no relationship
-with the corresponding top-level node's section. If that would not be the
-case, then that top-level node would not be a top-level node.
+A section will be referred to as a "type-1 section", if its scope begins with
+the first child of its sectioning node. Consequently, a sectioning node that
+declares a type-1 section will be referred to as a "type-1 sectioning node".
 
 **CLARIFICATION**
-A section can be defined by a sequence of nodes which only contains the
-top-level nodes of a section, in the order of the tree's node sequence.
-Any other node, which is related to that section, can be derived from the
-section's sequence of top-level nodes.
+A type-1 section is empty, if its sectioning node has no child nodes.
 
-In order to create the node sequence of a section, all the node sequences
-of the section's top-level nodes would have to be concatenated into a single
-sequence of nodes.
+Note that, in an unordered tree of nodes, any child would have to belong to
+a type-1 section. That is, because there is no guarantee that a certain child
+will be a parent's first child. All child nodes are considered to be equal.
+
+<!-- ======================================================================= -->
+## type-2, next sibling
+
+Likewise, an algorithm can easily implement a rule that defines the next
+sibling of a sectioning node as the section's first node.
+
+All an algorithm has to do in such a case is to mark the declared section
+as being open when it is about to exit the sectioning node's exit event.
 
 **DEFINITION**
-The sequence of strictly subsequent nodes, which contains all the nodes of
-a section, will be referred to as the section's complete node sequence.
+A section will be referred to as a "type-2 section", if its scope begins with
+the next sibling of its sectioning node. Consequently, a sectioning node that
+declares a type-2 section will be referred to as a "type-2 sectioning node".
 
-**DEFINITION**
-The sequence of nodes, which only contains all the top-level nodes of a
-section, will be referred to as the section's reduced, or as the section's
-characteristic node sequence.
+**CLARIFICATION**
+Authors need to be aware that, due to the strict definition (i.e. "next
+sibling"), the placement of a type-2 sectioning node is significant to
+the section of a sectioning node.
 
-* A complete sequence is a sequence of strictly subsequent nodes.
-* A reduced sequence is not necessarily strictly subsequent.
-* The reduced sequence can only be strictly subsequent, if all the
-  top-level nodes are leaf nodes. In that case, the reduced sequence
-  is also identical to the complete sequence.
-* The reduced sequence will always be a sequence of subsequent nodes.
-* If a sequence is created by removing one or more nodes from a
-  reduced sequence, then that sequence is insufficient to determine
-  the section's complete sequence.
-* The reduced sequence represents the shortest sequence possible
-  that still allows to determine the complete sequence.
-* A non-empty section has exactly one complete
-  and exactly one reduced sequence.
-* The first node of a reduced sequence is identical to the first
-  node. That is, because the first node always is a top-level node.
-* The last node of a reduced sequence is not necessarily identical
-  to the last node of a section. That is, because the last node can
-  be a descendant of the last top-level node.
+**CLARIFICATION**
+A type-2 section is empty, if its sectioning node has no next sibling. Put
+differently, a type-2 section is non-empty, if the sectioning node has a next
+sibling. The latter is true, whether this next sibling represents meaningful
+content or not (e.g. whitespace node).
+
+Note that this definition requires an ordered tree of nodes. That is, because
+in an unordered tree, no node has one specific next sibling. All siblings are
+considered to be equal.
+
+Attempting to use this strict definition in an unordered tree will not allow
+deterministic results. That is, because siblings are not guaranteed to be
+served in any particular order. Subsequent runs will produce different results
+(e.g. different number of nodes for a specific section). Because of that, all
+siblings would have to belong to a type-2 section. Consequently, and in an
+unordered tree, type-2 sectioning nodes would not be much different to type-1
+sectioning nodes.
 
 <!-- ======================================================================= -->
-## reduced sequence (2)
-
-The definition of a section's reduced sequence allows to describe the general
-characteristics of a section (Note that this is independent of any particular
-sectioning node):
-
-```
-r x ak x ... x a2 x a1 x n1:s
-                       x n2:s
-                  x n3:s
-                  x n4:s
-             x n5:s
-       x ... x
-  x nl:s
-
-//- this section's reduced sequence:
-rs := [n1, n2, n3, n4, n5, ..., nl]
-```
-
-In between a section's open and close events, any subsequent node must be
-associated with a section. Because of that, a section is a sequence of
-strictly subsequent nodes (i.e. no gaps in between two adjacent nodes).
-
-Once the very first node of a section is strictly associated (e.g. `n1`), any
-of its descendants are implicitly associated with the same section. The next
-node that must be strictly associated is the first node's next sibling (e.g.
-`n2`). The next node after that is the next sibling of that node. Consequently,
-an algorithm must at least strictly associate all the subsequent siblings of
-the section's first node.
-
-The next node entered, after the first node's last subsequent sibling was
-associated, is the next sibling of the first node's parent node (e.g. `n3`).
-Similar as before, any subsequent sibling of that node must be strictly
-associated until the parent's last subsequent sibling is associated (e.g. `n4`).
-
-Consequently, an algorithm must then continue with the next sibling of first
-node's next upper ancestor (e.g. `n5`). This process will obviously continue
-upwards until the last sibling of the first node's top-most ancestor was
-associated. And because the root node has no sibling, the last relevant
-ancestor of the first node is one of the root's child nodes.
-
-To be more clear: Ancestors will be skipped, if they have no next sibling.
-The actual last relevant ancestor therefore is the top-most ancestor for
-which there is a next sibling.
+### derived statements
 
 **CLARIFICATION**
-A reduced sequence is a sequence of top-level nodes that, except for the first
-node itself, are siblings to the first node, or siblings to any of the first
-node's ancestors.
+Type-1 and type-2 sectioning nodes force no pattern upon a tree's structure.
 
-In addition to that, the reduced sequence begins with the section's first node,
-followed by its siblings. These siblings are then followed by the siblings of
-the first node's parent. After that, the sequence continues with the siblings
-of the first node's next upper ancestor until it finally ends with the siblings
-of the last relevant ancestor.
+That is, the declared section is empty, if the sectioning node has, depending
+on its definition, no first child or no next sibling. Because of that, both
+definitions do not force that the tree must have a specific structure.
 
 **CLARIFICATION**
-A reduced sequence contains subsequences of subsequent siblings. All the nodes
-of a particular subsequence have the same parent. The parent of a subsequent
-subsequence is an ancestor of a presequent subsequence.
+The sectioning node's event is strictly presequent
+to the first node's enter event.
 
-**Memory hook**
-A reduced sequence, and even its section, can loosely be described as
-"a sequence of siblings".
+Unless further types of sections are defined, the first node of a section is
+strictly subsequent to the corresponding event of the sectioning node. That is,
+no other event will be executed after the sectioning node's event was exited
+and before the first node is entered.
+
+**CLARIFICATION**
+The sectioning node's enter event is not necessarily strictly presequent
+to the first node's enter event.
+
+The next sibling of a parent can only be loosely subsequent to it. That is,
+because a node can only be a parent node, if it has at least one child node.
+No sibling can therefore be strictly subsequent to a parent node.
+
+Because of that, the first node of a section is strictly subsequent to
+a sectioning node, if it is also the sectioning node's first child.
+
+In contrary to that, the first node of a section is only loosely subsequent
+to a sectioning node, if it is the sectioning node's next sibling and if the
+sectioning node is a parent node.
+
+Put differently, type-2 sectioning nodes allow any number of events in between
+the sectioning node's enter event and the first node's enter event.
 
 <!-- ======================================================================= -->
-## association of sectioning nodes
+## Why the strict, why no loose type-2 definition?
+
+Would it be reasonable to loosely define a type of section as "begins with the
+'next subsequent' node" instead of the above strict definition (i.e. "begins
+with the next sibling").
+
+() Reader libraries tend to create implicit whitespace nodes. Because of that,
+if an implicit whitespace node would follow such a sectioning node, then the
+next subsequent node would not be the next sibling of an ancestor. Consequently,
+and in order to truly support a loose definition, those whitespace nodes would
+have to be taken into account.
+
+() A strict type-2 sectioning node, if it has no next sibling, can still have
+nodes that are subsequent to its exit event (i.e. the next sibling of one of
+its ancestors). After all, once a section is marked as being open inside of
+the corresponding exit event, the section remains open until it is closed.
+Because of that, a loose definition combines in itself, multiple strict
+definitions (i.e. "next sibling", "the parent's next sibling", etc). This
+essentially means, that the exact semantics of such a sectioning node depends
+on missing subsequent nodes.
+
+() Additional logic would always be required in order to traverse from the
+sectioning node to the first node, or vice versa. That is, the potentially
+greater distance between those two nodes would always have to be taken into
+account.
+
+() Because the previous sibling of the first node could be an ancestor of the
+sectioning node, there would have to be a clear reason as to why that ancestor
+is not supposed to be the actual sectioning node.
+
+() It does matter, where the sectioning node and the section's first node is
+located. Both can be seen to define a section's "location". Consequently, the
+corresponding statements can be in conflict with each other (e.g. if both nodes
+have different parent nodes).
+
+() Such a definition would disallow consistent transformations. In general,
+type-2 patterns can be transformed into type-1 patterns by grouping all the
+nodes of a type-2 section as descendants of a type-1 sectioning node.
+(forwards)
+Where would such a type-1 sectioning node would have to be placed, if it
+were supposed to replace the pattern of a loose definition? At the location
+of the sectioning node, or at the first node of its section?
+(backwards)
+If, in addition to that, the inserted type-1 sectioning node would have to be
+replaced with the initial pattern, the resulting structure would be different
+to the initial structure. That is, the result of subsequent transformations is
+not guaranteed to be semantically equivalent to the original structure. After
+all, the information of the distance between the sectioning node and the first
+node would no longer be available.
 
 **CLARIFICATION**
-A sectioning node does not belong to its own section.
-
-In general, there are multiple definitions of sectioning nodes possible, which
-have the characteristic that the first node is strictly subsequent to a
-sectioning node (i.e. no other subsequent node in between): (1) the first node
-is the sectioning node's first child, and (2) the first node is the next sibling
-of the sectioning node, or the next sibling of the nearest relevant ancestor.
-Obviously, the 2nd case can only be true, if the sectioning node itself would
-be defined to always be a leaf node, which would then force a certain structure
-upon the tree of nodes.
-
-Consequently, it would not be possible to describe the general characteristics
-of a section's node sequence independently of a sectioning node, if sectioning
-nodes would have to be associated with the sections they declare. That is,
-because the index of the first content node within the section's node sequence
-would then not be the same for all section types. That is, because a section's
-node sequence would then always begin with the section's sectioning node, which
-is followed by intermediate nodes, which are then followed by the section's
-content nodes.
+A loose type-2 definition is insufficient to guarantee consistent dynamic
+support. Because of that, a strict type-2 definition is a necessity.
 
 <!-- ======================================================================= -->
-## associate nodes while entering
+## Overview of other possible first nodes
 
-As mentioned before, associating any nodes while they are being exited is in
-principle in conflict with the node order of a tree. In addition to that, the
-event that is used to associate nodes has a significant impact on the detection
-of a section's first and last nodes.
+Attempting to define any other type of node, as a section's first node, will
+add additional requirements to a definition and to an implementation. Apart
+from the additional effort needed to detect when to actually begin associating
+subsequent nodes with a section, an implementation would also have to take into
+account that the structure of a tree could violate these requirements.
 
-Note that the first node of a section is, by definition, identical to its first
-top-level node. In contrary to that, the last node of a section is not always
-identical to its last top-level node.
+In order to justify these additional requirements, a definition would need
+to have a clear reason as to why certain nodes (i.e. those in between the
+sectioning node and the section's first node) would have to be excluded.
+That is, the semantics of these unrelated nodes must be defined separately
+and with regards to the declared section. Because of that, such an attempt
+is, although technically possible, ill advised.
 
-```
-<n1><n2> <n3/> <n4/> </n2></n1>
-```
+### second sibling
 
-Assumed, that node `n1` would be defined to be a section's first node. Which
-effects would it have, if nodes were associated while they are being entered?
-(e.g. Is the first node of a section going to be associated first)? What can
-be said, if `n1` would be defined as a section's last top-level node (e.g. Is
-the last node of a section going to be associated last)?
+As mentioned above, type-2 sectioning nodes define the next sibling of the
+sectioning node to be the first node of the declared section. As such, there
+must be a definition of what the semantics of the sectioning node's descendants
+are with regards to the declared section.
 
-```
-                         | entering | exiting
--------------------------|----------|--------
-first (/top-level) node  |   1/1    |   0/0
--------------------------|----------|--------
-last (/top-level) node   |   1/0    |   0/1
-```
+`<type-2> A </type-2> B C`
 
-(A) first associated node + while entering:
-(1) Guaranteed to be the section's first node and
-(2) guaranteed to be the section's first top-level node
-(=> `1/1`).
-
-(C) first associated node + while exiting:
-(1) Not necessarily the section's first node and
-(2) not necessarily the section's first top-level node
-(=> `0/0`).
-
-(B) last associated node + while entering:
-(1) Guaranteed to be the section's last node, but
-(2) not necessarily the section's last top-level node
-(=> `1/0`).
-
-(D) last associated node + while exiting:
-(1) Not necessarily the section's last node, but
-(2) guaranteed to be the section's last top-level node
-(=> `0/1`).
-
-Associating nodes while exiting them neither guarantees that a section's first
-node will be associated first, nor that a section's last node will be associated
-last. Put differently, and with that order of association, a section's first and
-last nodes can not be consistently determined. The nodes associated first and
-last can turn out to be false positives. However, the last node associated is
-guaranteed to be the section's last top-level node.
-
-In contrary to that, associating nodes while entering them guarantees that a
-section's first node will be associated first and that a section's last node
-will be associated last.
-
-**CLARIFICATION**
-All nodes must be associated while they are being entered.
-
-<!-- ======================================================================= -->
-## reduced sequence (3)
-
-Not all the nodes of a section are relevant to allow transformations (dynamic
-support needs those). That is, because only the section's top-level nodes are
-needed to group the contents of a section. Each subsequence in a reduced
-sequence can be grouped by placing its nodes inside of a container. Because
-of that, a section can be transformed into a sequence of such container nodes.
-
-Note that, without any restriction in scope, and because the ancestors of the
-section's first node do not belong to the same section, a section can not be
-grouped into a single container. A type-2 section can therefore still not be
-transformed into a semantically equivalent type-1 section.
+Here, node `B` will be the 1st and `C` the 2nd node of the declared section.
+Because of that, node `A` can be understood to represent data that can be
+used to initialize the section that is declared by the sectioning node:
 
 ```
-r x ak x ... x a2 x a1 x n1:s
-                  x n2:s
-                  x n3:s
-                  x n4:s
-             x n5:s
+// while exiting "type-2"
+section = new Section("A")
+knownSections.add(section)
+section.open()
 ```
 
-The basic approach to determine all the top-level nodes of a section is to start
-with one node that is associated with a given section. This initial node allows
-to determine the first top-level node (e.g. `n3`) of the section. This node is
-the node to which the initial node is a descendant (i.e. the top-most node that
-belongs to the same section).
+Note that node `A` does not necessarily have to be a single node. As such, node
+`A` can represent a whole subtree of nodes, or even a sequence of such subtrees,
+which must all be inactive with regards to the design. That is, no node within
+subtree `A` must be allowed to have any effect on predeclared sections, or
+declare new sections themselves.
 
-Next, an algorithm would have to detect all those siblings that are subsequent
-to `n3` (e.g. `n4`, `n5`). This process is straight forward, as one would only
-have to traverse from one sibling to another and, if there is no next sibling,
-continue with the next upper relevant ancestor (e.g. `a2`).
+If node `C` would have to become the section's actual 1st node, then node `B`
+would need to have semantics defined with regards to the declared section. That
+is, `B`'s semantics would have to be similar to those of node `A`. Because of
+that, the definition of a 2nd subtree that has similar semantics to node `A`,
+does not justify the additional requirements that would have to be met because
+of having to skip subtree `B`.
 
-After that, an algorithm would have to detect all those siblings that are
-presequent to `n3` (e.g. `n2`, `n1`). With regards to the siblings of `n3`,
-that belong to the same section, this step is also straight forward. However,
-things are not straight forward, if the previous sibling does not belong to
-the same section: (1) If there is no previous sibling, then the last sibling's
-parent could be a type-1 sectioning node. (2) If the previous sibling does not
-belong to the same section, it could be a type-2 sectioning node, or (3) the
-next presequent sibling is the last child of the unassociated last sibling.
+Consequently, defining any other subsequent sibling as the section's first node
+is unreasonable, because any node in the sequence of skipped nodes could easily
+be added as descendants of the sectioning node.
 
-Note that this approach requires the ability to reliably determine if the node
-is in relationship with the section in question, regardless if a node belongs
-to one of the section's subsections or not.
+### second child
 
-**conclusions**
+Type-1 sectioning nodes define the first child of the sectioning node to be the
+first node of the declared section. Because of that, these type of nodes can not
+themselves support any data that can be used to set any section properties.
 
-(1) Only the top-level nodes of a section are needed to support transformations.
-It is not required to have knowledge of all the section's nodes.
+`<type-1> A B </type-1> C`
 
-(2) It is preferable, if an algorithm could start directly with a top-level
-node. That is, because the search for the first top-level node would then be
-a non-issue. Each section object should therefore hold one or more references
-to its top-level nodes.
+However, the first child of the sectioning node could be used to specify data
+that could be used to set such properties before any node will be associated
+with the corresponding section.
 
-(3) It is almost straight forward to traverse the top-level nodes of a section
-away from a section's first top-level node towards a section's last top-level
-node. Because of that, it is preferable to begin with a section's first
-top-level node (see associate nodes while entering).
+```
+// while entering "type-1"
+section = new Section()
+knownSections.add(section)
 
-**CLARIFICATION**
-A section object does not have to store any reference to any of the section's
-nodes. That is, because a section's first node always is a top-level node, and
-the first node of a section can be determined from a section's sectioning node.
+// while exiting "A"
+section.configure("A")
+section.open()
+```
 
-Note that, in order to allow sections to not store any node references, it must
-be possible to easily determine the first node of a section from its sectioning
-node.
+In such a case, the question would have to be answered as to why node `A` must
+not be associated with the declared section. After all, even if the above data
+container `A` would be associated with that section, it could still be excluded
+from a subsequent process (e.g. excluded from being displayed).
 
-**CLARIFICATION**
-The first node of a section is critical to efficient transformations.
+`<container> <type-2> A </type-2> B </container> C`
+
+In addition to that, there needs to be sufficient reason to choose this pattern
+over the pattern of a type-2 sectioning node. That is, because subtree `A` could
+then be understood to be the actual sectioning node. Consequently, there always
+is a certain amount of symmetry that needs to be taken into account when
+defining additional types of sectioning nodes.
+
+Out of all the other options, and because a type-1 sectioning node does not
+support any configuration data, this option could be seen to be reasonable
+enough to justify the above mentioned additional constraints.
+
+Note the HTML `<header>` element.
+
+### next sibling of an ancestor
+
+Although not every node is guaranteed to have an ancestor node, an algorithm
+technically has the means to begin with associating nodes, if one of the
+sectioning node's ancestors was exited. However, this would add additional
+difficulty to a clear definition of such a sectioning node.
+
+`<container> ... <A:type-x/> ... <B:type-x/> ... </container> C`
+
+That is, because there would have to be a clear answer as to which section node
+`C` would have to belong, if a child contains multiple sectioning nodes of this
+type. In addition to that, the corresponding ancestor could then be understood
+to be the actual sectioning node.
+
+### further options
+
+Although there are even further ways to define the first node of a section (e.g.
+variable relationship, descendants of siblings or children, etc.), it seems that
+the more intricate the relationship between a sectioning node and the section's
+first node is, the more questions would have to be answered in order to clearly
+define an additional section type.
