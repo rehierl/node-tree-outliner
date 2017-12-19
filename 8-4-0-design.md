@@ -157,14 +157,3 @@ r x ... x n1 x ... x n2:s
 </n1>
 <n4:s> ... </n4:s>
 ```
-
-<!-- ======================================================================= -->
-## TODOs
-
-**TODO**
-a section's reduced sequence allows transformations -
-how to determine the top-level nodes of a section
-
-**TODO** -
-can a node be allowed to have any effect on itself
-(e.g. associate with its own section)?

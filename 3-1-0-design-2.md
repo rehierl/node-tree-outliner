@@ -185,9 +185,12 @@ A section will be referred to as a "type-1 section", if its scope begins with
 the first child of its sectioning node. Consequently, a sectioning node that
 declares a type-1 section will be referred to as a "type-1 sectioning node".
 
+**CLARIFICATION**
+A type-1 section is empty, if its sectioning node has no child nodes.
+
 Note that, in an unordered tree of nodes, any child would have to belong to
-such a section. That is, because there is no guarantee that a certain child
-will be a parent's first child. These nodes have to be considered equal.
+a type-1 section. That is, because there is no guarantee that a certain child
+will be a parent's first child. All child nodes are considered to be equal.
 
 ### type-2, next sibling
 
@@ -205,16 +208,25 @@ declares a type-2 section will be referred to as a "type-2 sectioning node".
 **CLARIFICATION**
 Authors need to be aware that, due to the strict definition (i.e. "next
 sibling"), the placement of a type-2 sectioning node is significant to
-a section's first node.
+the section of a sectioning node.
 
-Note that this type of section requires an ordered tree of nodes. That is,
-because, in an unordered tree, nodes are not guaranteed to have any specific
-next sibling or first child. These nodes have to be considered equal.
+**CLARIFICATION**
+A type-2 section is empty, if its sectioning node has no next sibling. Put
+differently, a type-2 section is non-empty, if the sectioning node has a next
+sibling. The latter is true, whether this next sibling represents meaningful
+content or not (e.g. whitespace node).
 
-Attempting to use such a section in an unordered tree will not produce
-deterministic results. That is, because the nodes are not guaranteed to
-be served in any particular order. Subsequent runs will eventually
-produce different results.
+Note that this definition requires an ordered tree of nodes. That is, because
+in an unordered tree, no node has one specific next sibling. All siblings are
+considered to be equal.
+
+Attempting to use this strict definition in an unordered tree will not allow
+deterministic results. That is, because siblings are not guaranteed to be
+served in any particular order. Subsequent runs will produce different results
+(e.g. different number of nodes for a specific section). Because of that, all
+siblings would have to belong to a type-2 section. Consequently, and in an
+unordered tree, type-2 sectioning nodes would not be much different to type-1
+sectioning nodes.
 
 <!-- ======================================================================= -->
 ### derived statements
@@ -256,72 +268,57 @@ the sectioning node's enter event and the first node's enter event.
 <!-- ======================================================================= -->
 ## Why the strict, why no loose type-2 definition?
 
-Note that a type-2 sectioning node, if it has no next sibling, can still have
+Would it be reasonable to loosely define a type of section as "begins with the
+'next subsequent' node" instead of the above strict definition (i.e. "begins
+with the next sibling").
+
+() Reader libraries tend to create implicit whitespace nodes. Because of that,
+if an implicit whitespace node would follow such a sectioning node, then the
+next subsequent node would not be the next sibling of an ancestor. Consequently,
+and in order to truly support a loose definition, those whitespace nodes would
+have to be taken into account.
+
+() A strict type-2 sectioning node, if it has no next sibling, can still have
 nodes that are subsequent to its exit event (i.e. the next sibling of one of
 its ancestors). After all, once a section is marked as being open inside of
-the exit event, the section remains to be open until it is closed.
+the corresponding exit event, the section remains open until it is closed.
+Because of that, a loose definition combines in itself, multiple strict
+definitions (i.e. "next sibling", "the parent's next sibling", etc). This
+essentially means, that the exact semantics of such a sectioning node depends
+on missing subsequent nodes.
 
-The question therefore is: Would it be reasonable to loosely define a type of
-section as "begins with the 'next subsequent' node" instead of the above strict
-definition (i.e. "begins with the next sibling").
-
-If such a loose sectioning node would itself have no next sibling, then the
-section's first node is going to be the next sibling of one of its ancestors.
-
-Note that reader libraries tend to create implicit whitespace nodes. Because
-of that, if an implicit whitespace node would follow such a sectioning node,
-then the next subsequent node would not be the next sibling of an ancestor.
-Consequently, in order to truly support the loose definition of a sectioning
-node, implicit whitespace nodes must be taken into account.
-
-Note that a loose definition combines in itself, multiple strict definitions
-(i.e. "next sibling", "the parent's next sibling", etc).
-
-Note that it does matter, where exactly the sectioning node and the section's
-first node is located. Both can be seen to define a section's "location".
-Consequently, the corresponding statements should not be in conflict with
-each other (see subsections). **TODO**
-
-A loose definition would have to solve multiple issues:
-
-() The relationship between the sectioning node and the first node is unclear.
-
-Additional logic would always be required in order to traverse from the
+() Additional logic would always be required in order to traverse from the
 sectioning node to the first node, or vice versa. That is, the potentially
 greater distance between those two nodes would always have to be taken into
 account.
 
-() An ancestor could be seen as the actual sectioning node.
-
-Because the previous sibling of the first node could be an ancestor of the
+() Because the previous sibling of the first node could be an ancestor of the
 sectioning node, there would have to be a clear reason as to why that ancestor
 is not supposed to be the actual sectioning node.
 
-() The sectioning node and the first node could have different parent nodes.
+() It does matter, where the sectioning node and the section's first node is
+located. Both can be seen to define a section's "location". Consequently, the
+corresponding statements can be in conflict with each other (e.g. if both nodes
+have different parent nodes).
 
-Because of that, the first node can be seen to state: "begins with an ancestor".
-In contrary to that, the sectioning node can be understood to state: "begins
-inside of a descendant". That is, such a loose definition will result in
-conflicting semantics.
-
-() Such a definition would prevent consistent transformations.
-
-In general, type-2 patterns can be transformed into type-1 patterns by grouping
-all the nodes of a type-2 section as descendants of a type-1 sectioning node.
-
-(forwards) Where exactly would such a type-1 sectioning node would have to be
-placed, if it were supposed to replace the pattern of such a loose definition?
-At the location of the sectioning node, or at the first node of its section?
-
-(backwards) If, in addition to that, the inserted type-1 sectioning node would
-have to be replaced with the initial pattern, the resulting structure would be
-different to initial structure, i.e. the result can not be semantically
-equivalent to the original structure. After all, the information of the distance
-between the sectioning node and the first node would no longer be available.
+() Such a definition would disallow consistent transformations. In general,
+type-2 patterns can be transformed into type-1 patterns by grouping all the
+nodes of a type-2 section as descendants of a type-1 sectioning node.
+(forwards)
+Where would such a type-1 sectioning node would have to be placed, if it
+were supposed to replace the pattern of a loose definition? At the location
+of the sectioning node, or at the first node of its section?
+(backwards)
+If, in addition to that, the inserted type-1 sectioning node would have to be
+replaced with the initial pattern, the resulting structure would be different
+to the initial structure. That is, the result of subsequent transformations is
+not guaranteed to be semantically equivalent to the original structure. After
+all, the information of the distance between the sectioning node and the first
+node would no longer be available.
 
 **CLARIFICATION**
-A loose type-2 definition is not sufficient to guarantee consistent dynamic
-support. A strict type-2 definition is therfore required.
+A loose type-2 definition is insufficient to guarantee consistent dynamic
+support. Because of that, a strict type-2 definition is a necessity.
 
 <!-- ======================================================================= -->
 ## Overview of other possible first nodes

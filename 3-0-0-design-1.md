@@ -5,7 +5,7 @@
 This section describes fundamental definitions and considerations.
 
 <!-- ======================================================================= -->
-## Node sequence
+## The node sequence of a tree
 
 The traversal of a tree can be used to create a sequence of nodes (aka. trace
 of nodes), if each node is added to a sequence while it is in the process of
@@ -41,14 +41,14 @@ operation based on possible future events.
 
 ### order of nodes
 
-An algorithm must, beginning with some initial root node, traverse the tree from
-one node to another. The order in which the nodes are visited must obviously
-correspond with the node order of the tree. After all, the algorithm's result is
-intended to accurately represent the tree's contents, which includes the correct
+An algorithm must, beginning with some initial node, traverse a tree from one
+node to another and in the tree's node order. After all, the algorithm's result
+is intended to accurately represent the tree's contents, which includes a tree's
 order of nodes.
 
-The sequence of enter events is therefore assumed to correspond with the node
-order of the tree. Consequently, the same applies to a tree's node sequence.
+Because of that, the tree traversal's sequence of enter events is understood
+to represent a tree's order of nodes. Consequently, the node order of a node
+sequence also represents the node order of the corresponding tree.
 
 ### executing operations
 
@@ -153,9 +153,9 @@ the nodes in `s4`, but must not have any side effect on nodes in `s3`.
 
 In general, the minimal set of data used by an operation is referred to as the
 operation's context. And because an operation can not function properly, if any 
-data is taken away from its context, the data within its context is considered
-to be significant to it. With that in mind, the context of a node can be defined
-as follows:
+data is taken away from its context (minimal set), the data within its context
+is considered to be significant to it. With that in mind, the context of a node
+can be defined as follows:
 
 **DEFINITION**
 The context of a node, with regards to the execution of an operation, consists
@@ -257,9 +257,9 @@ The scope of a section, respectively the scope of a sectioning node, is the
 range of subsequent nodes that are related to it.
 
 The scope of a section therefore begins with the section's first node and ends
-with the section's last node. Consequently, any non-empty section has a
-non-empty scope. The scope of an empty section is said to be empty. However, an
-empty section can also be seen to have no scope at all.
+with the section's last node. Consequently, any non-empty section always has a
+non-empty scope. The scope of an empty section is said to be empty. However,
+an empty section can also be seen to have no scope at all.
 
 <!-- ======================================================================= -->
 ## Sectioning nodes, NxS
@@ -302,28 +302,29 @@ sectioning node. However, this does not imply that it would be reasonable to
 associate a sectioning node with its own section.
 
 Obviously, and as far as possible, an algorithm needs to be able to treat all
-sectioning nodes alike. Associating one type of sectioning nodes with their own
-section, but not sectioning nodes of another type, would be bad. That is,
-because this would require to always add additional logic with regards to the
-different types of sectioning nodes.
+sectioning nodes alike. That is, because associating one type of sectioning
+nodes with their own section, but not sectioning nodes of another type, would
+make it necessary to add additional logic with regards to the different types
+of sectioning nodes.
 
-If any sectioning node would have to be associated with its own section, then
-no section would ever be truly empty. That is, because any section would then
-always contain at least its own sectioning node. Because of that, additional
-logic would be required to determine if a section contains meaningful content
-or not.
+If all sectioning nodes would have to be associated with their own section,
+then no section would ever be absolutely empty. That is, because any section
+would then always contain at least its own sectioning node. And because of
+that, additional logic would always be necessary to determine if a section
+contains meaningful content or not.
 
-**TODO**
-Note that more reasons will follow, which better explain why sectioning nodes
-must not be associated with their own sections. For the moment, it is easier
-to simply assume that this is how it has to be.
+Note that more explanations will follow, which explain from additional
+perspectives, why sectioning nodes must not be associated with their own
+sections. For the moment, it helps to simply accept that this is how it
+has to be.
 
 **CLARIFICATION**
-Any sectioning node must be associated with sections that are declared by
-presequent sectioning nodes.
+Any sectioning node must only be associated with presequent sections
+(i.e. those that are declared by presequent sectioning nodes).
 
-**TODO**
-descendants, if sibling is first node
+If a sectioning node does not belong to the section it declares, then sectioning
+nodes need to have a purpose inside of presequent sections. For the moment, that
+purpose can be understood to connect presequent sections with declared sections.
 
 <!-- ======================================================================= -->
 ## The root node
@@ -361,6 +362,3 @@ inside of the universal section.
 Consequently, the root node of a tree must be understood to always declare its
 own section. That is especially true, if the initial node is not an arbitrarily
 selected node.
-
-**TODO**
-what type of sectioning node is the root node?

@@ -222,8 +222,32 @@ of a particular subsequence have the same parent. The parent of a subsequent
 subsequence is an ancestor of a presequent subsequence.
 
 **Memory hook**
-A reduced sequence, or even its section, could loosely be described as
+A reduced sequence, and even its section, can loosely be described as
 "a sequence of siblings".
+
+<!-- ======================================================================= -->
+## association of sectioning nodes
+
+**CLARIFICATION**
+A sectioning node does not belong to its own section.
+
+In general, there are multiple definitions of sectioning nodes possible, which
+have the characteristic that the first node is strictly subsequent to a
+sectioning node (i.e. no other subsequent node in between): (1) the first node
+is the sectioning node's first child, and (2) the first node is the next sibling
+of the sectioning node, or the next sibling of the nearest relevant ancestor.
+Obviously, the 2nd case can only be true, if the sectioning node itself would
+be defined to always be a leaf node, which would then force a certain structure
+upon the tree of nodes.
+
+Consequently, it would not be possible to describe the general characteristics
+of a section's node sequence independently of a sectioning node, if sectioning
+nodes would have to be associated with the sections they declare. That is,
+because the index of the first content node within the section's node sequence
+would then not be the same for all section types. That is, because a section's
+node sequence would then always begin with the section's sectioning node, which
+is followed by intermediate nodes, which are then followed by the section's
+content nodes.
 
 <!-- ======================================================================= -->
 ## associate nodes while entering
@@ -296,7 +320,7 @@ Not all the nodes of a section are relevant to allow transformations (dynamic
 support needs those). That is, because only the section's top-level nodes are
 needed to group the contents of a section. Each subsequence in a reduced
 sequence can be grouped by placing its nodes inside of a container. Because
-of that, a section can be transformed into a sequence of such containers.
+of that, a section can be transformed into a sequence of such container nodes.
 
 Note that, without any restriction in scope, and because the ancestors of the
 section's first node do not belong to the same section, a section can not be
@@ -311,10 +335,10 @@ r x ak x ... x a2 x a1 x n1:s
              x n5:s
 ```
 
-The general-purpose approach to determine the top-level nodes of a section
-would have to start with one node that is associated with a given section.
-This initial node then allows to determine the top-level node (e.g. `n3`)
-of the section to which the node belongs (i.e. the top-most node that
+The basic approach to determine all the top-level nodes of a section is to start
+with one node that is associated with a given section. This initial node allows
+to determine the first top-level node (e.g. `n3`) of the section. This node is
+the node to which the initial node is a descendant (i.e. the top-most node that
 belongs to the same section).
 
 Next, an algorithm would have to detect all those siblings that are subsequent
