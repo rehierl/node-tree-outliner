@@ -102,6 +102,27 @@ transforms the descendant's implicit relationship with that section into an
 explicit relationship.
 
 <!-- ======================================================================= -->
+## sectioning nodes (1)
+
+**CLARIFICATION**
+A sectioning node does not belong to its own section.
+
+If a type-1 sectioning node would have to be associated with its own section,
+then all of its descendants would automatically belong to the same section.
+Consequently, a type-1 section could not end inside of a type-1 sectioning
+node.
+
+Not associating sectioning nodes with their own section, therefore technically
+allows to let a type-1 section end inside of a type-1 sectioning node. However,
+this does not mean that there are no other reasons for or against such an option.
+
+Apart from that, allowing a type-1 section to end inside of a type-1 sectioning
+node would require that there would have to be descendant nodes that are not
+supposed to belong to the declared section. Consequently, the type-1 definition
+for an ordered tree would have to be inconsistent with the type-1 definition of
+an unordered tree.
+
+<!-- ======================================================================= -->
 ## reduced sequence (1)
 
 **CLARIFICATION**
@@ -226,7 +247,7 @@ A reduced sequence, and even its section, can loosely be described as
 "a sequence of siblings".
 
 <!-- ======================================================================= -->
-## association of sectioning nodes
+## sectioning nodes (2)
 
 **CLARIFICATION**
 A sectioning node does not belong to its own section.

@@ -19,19 +19,20 @@ point in time.
 <!-- ======================================================================= -->
 ## open state
 
-Once a section's first node is entered, this first node and any subsequent node
-must be associated with it. An algorithm therefore needs additional rules that
-enable it to determine when to begin associating nodes with a section.
+Once a section's first node is entered, this first node and any subsequent
+node must be associated with it. An algorithm therefore needs additional
+rules that enable it to determine when to begin associating nodes with a
+section.
 
-A section is considered to be "open" as soon as the next subsequent node must
-be associated with it.
+A section is considered to be "open" as soon as the next subsequent node
+must be associated with it.
 
 <!-- ======================================================================= -->
 ## closed state
 
-Any section must eventually end at some point. By default, that point is reached
-when the initial root node of the process is being exited. That is, because
-there is no subsequent node with regards to this exit event.
+Any section must eventually end at some point. By default, that point is
+reached when the initial root node of the process is being exited. That is,
+because there is no subsequent node with regards to this exit event.
 
 This default case is obviously insufficient, because the very last node of
 a node sequence would then always have to be associated with all the known
@@ -39,8 +40,32 @@ sections. An algorithm therefore needs additional rules that enable it to
 determine, when it is no longer allowed to associate any subsequent node
 with a section.
 
-A section is considered to be "closed" as soon as it is no longer allowed to
-associate any more nodes with it.
+A section is considered to be "closed" as soon as it is no longer allowed
+to associate any more nodes with it.
+
+<!-- ======================================================================= -->
+## set of open sections
+
+As mentioned earlier, and without the ability to limit a section's scope, a
+tree's last subsequent node would have to be associated with all the known
+sections. Obviously, authors need the means to tell an algorithm when it is
+no longer allowed to associate any nodes with a given section. Once such a
+statement is detected, an algorithm must mark the corresponding section, or
+multiples thereof, as being "closed".
+
+Consequently, and at any given point in time, any section within the set of
+known sections is "initialized", "open" or "closed". Because of that, the set
+of known sections `S` can be broken apart into three disjunct sets of sections
+(with each set containing only those sections that are marked with the
+corresponding state):
+
+* the set of initialized sections `IS`
+* the set of open sections `OS`
+* the set of closed sections `CS`.
+
+With regards to associations, a section's "initialized" and "closed" states
+appear to be semantically equivalent. That is, because no associations are
+allowed unless a section's state is set to be "open".
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -52,8 +77,8 @@ subsequent node will, by definition, have any further effect on it.
 **CLARIFICATION**
 A section can not be re-opened.
 
-The "closed" state, and the corresponding rules, can therefore also be seen
-to represent a guarantee, that a closed section will not change any further.
+The "closed" state, and the corresponding rules, can therefore also be seen to
+represent a guarantee that a closed section will not change any further.
 
 This guarantee is critical to an efficient TOC generator, because it allows to
 drop a section object once the corresponding section is closed and once the the
@@ -92,13 +117,13 @@ would then have no means to treat a section as as one entity by grouping all of
 the section's nodes, which would obviously be in conflict with the initial
 requirements.
 
-In addition to that, the intermediate nodes in between the separate parts of a
-strictly suspended section can still be seen to be in relationship with it. That
-is, because the very reason, as to why these intermediate nodes would have to be
-excluded, puts these intermediate nodes into a relationship with said section.
-After all, they would be a reason as to why they are surrounded by the section's
-parts. Because of that, the ultimate goal of such an attempt (i.e. completely
-unrelated nodes) can't even be reached without producing a conflict.
+In addition to that, the intermediate nodes in between the separate parts of
+a strictly suspended section can still be seen to be in relationship with it.
+That is, because the very reason, as to why these intermediate nodes would have
+to be excluded, puts these intermediate nodes into a relationship with said
+section. After all, they would be a reason as to why they are surrounded by the
+section's parts. Because of that, the ultimate goal of such an attempt (i.e.
+completely unrelated nodes) can't even be reached without producing a conflict.
 
 Finally, the subsequent parts of a strictly suspended section can also be seen
 to represent sections of its own. Hence, the nodes that would be required in

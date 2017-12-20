@@ -334,7 +334,8 @@ node, with which an algorithm has to begin, can not be associated with any
 predeclared section. That is, because there is no presequent sectioning node
 that could declare such a section.
 
-### The universal section (u)
+**CLARIFICATION**
+Any node always belongs to at least one section.
 
 However, the root node can be seen to be embedded into a theoretical universal
 section `u`. As such, that universal section must be understood to be declared
@@ -347,9 +348,7 @@ section. Put differently, there is in theory no node that does not belong to
 any section at all.
 
 **CLARIFICATION**
-Any node always belongs to at least one section.
-
-### The root node is a sectioning node
+The root node is a sectioning node.
 
 Without any further clarification, and assumed that a tree's root node does
 itself not (strictly or loosely) contain any other sectioning node, all the

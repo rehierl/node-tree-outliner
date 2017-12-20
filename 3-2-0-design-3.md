@@ -48,6 +48,13 @@ Note that, in an unordered tree of nodes, any child would have to belong to
 a type-1 section. That is, because there is no guarantee that a certain child
 will be a parent's first child. All child nodes are considered to be equal.
 
+**CLARIFICATION**
+The root node is a type-1 sectioning node.
+
+That is, because the root's first child must belong to the declared section. In
+addition to that, there are no outer nodes that are subsequent to it. Because of
+that, no other type of sectioning node can match the root node.
+
 <!-- ======================================================================= -->
 ## type-2, next sibling
 
@@ -86,7 +93,7 @@ unordered tree, type-2 sectioning nodes would not be much different to type-1
 sectioning nodes.
 
 <!-- ======================================================================= -->
-### derived statements
+## derived statements
 
 **CLARIFICATION**
 Type-1 and type-2 sectioning nodes force no pattern upon a tree's structure.
@@ -123,7 +130,7 @@ Put differently, type-2 sectioning nodes allow any number of events in between
 the sectioning node's enter event and the first node's enter event.
 
 <!-- ======================================================================= -->
-## Why the strict, why no loose type-2 definition?
+## Why no loose type-2 definition?
 
 Would it be reasonable to loosely define a type of section as "begins with the
 'next subsequent' node" instead of the above strict definition (i.e. "begins
@@ -178,7 +185,7 @@ A loose type-2 definition is insufficient to guarantee consistent dynamic
 support. Because of that, a strict type-2 definition is a necessity.
 
 <!-- ======================================================================= -->
-## Overview of other possible first nodes
+## Other possible first nodes
 
 Attempting to define any other type of node, as a section's first node, will
 add additional requirements to a definition and to an implementation. Apart
