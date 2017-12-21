@@ -69,6 +69,7 @@ allowed to establish any association before closing these sections.
 <!-- ======================================================================= -->
 ## available events
 
+**TODO**
 For obvious reasons, a section has to be empty, if its first node does not
 exist. Because of that, the very first event that could possibly be used
 to close a section is the exit event of a section's first node. Obviously,
@@ -76,41 +77,53 @@ using this particular event to end a section by definition would only cover
 one specific case. That is, because it would limit a section to a single
 top-level node.
 
-Note that, because the descendants of a top-level node can not be excluded,
-none of the enter and exit events of a top-level node's descendants are suited
-to generically define the end of a section. That is, because it is in principle
-not possible to find a definition based on the descendants of an associated node
-which is also independent of any additional structural requirement.
-Such a definition would simply not be generic.
+Note that, because no descendant of a top-level node can be excluded, none of
+the enter and exit events of such a descendant node are suited to generically
+define the end of a section. That is, because it is in principle not possible
+to find a definition based on the descendants of an associated node, which is
+also independent of any additional structural requirement. Because of these
+additional requirements, such a definition would simply not be generic.
 
-Note that, in order to generically define the end of a section, that definition
-needs to be independent of any type of sectioning node. Because of that, a
-definition needs to describe the end of a section in terms of the relationship
-a section's end has with regards to the section's first node.
+Note that, in order to generically define the end of a section, such a
+definition also needs to be independent of any specific type of sectioning node.
+Because of that, such a definition needs to describe the end of a section in
+terms of the relationship the end of a section has with regards to the section's
+first node.
 
-Note that the generic definition of the end of a section can only be used to
-define the "unrestricted" scope of a section. In principle, additional rules
-(e.g. rank) can be defined that allow to further limit the scope of a section.
+Note that this is yet another reason as to why not to associate a sectioning
+node with the section it declares: It would otherwise not be possible to define
+the end of a section independently of the section's sectioning node.
+
+**DEFINITION**
+The maximum (i.e. largest) scope of a section, that does not produce any
+conflict, is said to be "the default scope of a section".
+
+Note that generically defining the end of a section can only define a section's
+default scope. In principle, additional rules (e.g. rank) can still be defined
+that allow to further limit the scope of a section (hence, default scope).
 
 **CLARIFICATION**
-The unrestricted, maximum scope of a section can also be referred to as the
-section's "default scope".
-
-**CLARIFICATION**
-The search for an event that allows to define the end of a section can be
+The search for an event that allows to define the end of a section is
 limited to (1) the exit event of a section's last top-level node,
-(2) the enter event of the first node that is not to be associated, and
-(3) the exit events of one of the first node's ancestors.
+(2) the enter event of the first node that is not to be associated,
+and (3) an exit event of one of the first node's ancestors.
 
 Note that the enter event of a top-level node can not be taken into account, as
 this would produce a conflict: A top-level node is a top-level node, because it
-is associated with a section. Using the enter event of such a node would result
-in not associating the top-level node. Such a definition would, because of that,
-be in conflict with the definition of a top-level node.
+is associated with a section. Making use of the enter event of such a node would
+result in not associating the top-level node. Such a definition would therefore
+be equivalent to case (2) and, because of that, be in conflict with the
+definition of a top-level node.
 
-### (1) exit a top-level node
+Note that the enter events of any ancestor of a section's first node can not be
+used. That is, because in order to enter a sectioning node, all of its ancestors
+must have already been entered. Put differently, no node can be entered, if its
+ancestors have not been entered already (i.e. these enter events a no longer
+available).
 
-Case (1) is not suited for a default generic definition.
+### exit a top-level node
+
+Case (1) is not suited for a generic definition.
 
 That is, because it would require that an algorithm had the means to detect
 whether the next node is a section's last top-level node. Because of that,
@@ -124,16 +137,41 @@ inclusion" ("inclusion" because the last top-level node is explicitly included,
 Apart from that, such a definition could be considered to be inconsistent with
 the definition of a sectioning node: Why consider a sectioning node to not
 belong to its own section, but, in contrary to that, associate an end marker
-with the section it is supposed to end (i.e. either all in, or all out)?
+node with the section it is supposed to end (i.e. either all in, or all out)?
 
-### (2) enter an unassociated node
+### enter an unassociated node
 
-Case (2) is not suited for a default generic definition.
+Case (2) is not suited for a generic definition.
 
-That is, because it would require to give a guaranteed that such a node will
-always be entered. Because of that, such a definition would add an additional
-requirement and would therefore not be generic.
+That is, because it would require to give a guarantee that such a node will
+always be entered eventually. Consequently, such a definition would add an
+additional requirement and, because of that, would not be generic.
 
-However, 
+However, it is still possible to define specific nodes that, when entered,
+end one or more presequent sections. The focus here is that such a node is
+optional and, because of that, not guaranteed to be entered.
 
-### (3) exit an ancestor
+### exit an ancestor
+
+Case (3) is suited for a generic definition.
+
+Except for the root node, any node in a rooted tree of nodes always has at
+least one ancestor. Because of that, no additional requirements are added,
+if case (3) is limited to the exit event of the sectioning node's parent.
+
+Any attempt to use the exit event of any other ancestor will add an additional
+requirement. That is, because from the perspective of the definition of a
+sectioning node, other ancestors are not guaranteed to exist. Put differently,
+and unless defined otherwise, a sectioning node can be a direct descendant
+(i.e. child) of the root node.
+
+**CLARIFICATION**
+The exit event of a sectioning node's parent node is the only event that
+can be used to generically limit the scope of a section.
+
+<!-- ======================================================================= -->
+## the default scope
+
+Just because an event can be used to generically limit the scope of a section,
+does not mean that it would be reasonable to do so. It is therefore necessary
+to examine which effects such a definition would have. **TODO**
