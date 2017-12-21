@@ -313,10 +313,9 @@ would then always contain at least its own sectioning node. And because of
 that, additional logic would always be necessary to determine if a section
 contains meaningful content or not.
 
-Note that more explanations will follow, which explain from additional
-perspectives, why sectioning nodes must not be associated with their own
-sections. For the moment, it helps to simply accept that this is how it
-has to be.
+Note that more explanations will follow, which explain from other perspectives
+why sectioning nodes must not be associated with their own sections. For the
+moment, it helps to simply accept that this is how it has to be.
 
 **CLARIFICATION**
 Any sectioning node must only be associated with presequent sections
@@ -341,11 +340,11 @@ However, the root node can be seen to be embedded into a theoretical universal
 section `u`. As such, that universal section must be understood to be declared
 by a virtual sectioning node that is presequent to any node. The universal
 section must also be seen to never end. Because of that, the universal section
-is omnipresent (i.e. any node is in relationship with it).
+is omnipresent. That is any node always is in relationship with this universal
+section (aka. global scope).
 
-Consequently, any node of any tree always belongs to at least the universal
-section. Put differently, there is in theory no node that does not belong to
-any section at all.
+Consequently, any node of any tree always belongs to at least one section.
+Put differently, there is no node that does not belong to any section at all.
 
 **CLARIFICATION**
 The root node is a sectioning node.
@@ -356,8 +355,12 @@ nodes in the root's subtree would then only belong to the universal section.
 
 Because of that, it would not be possible to locate the nodes of a tree inside
 of the universal section. That is, all the nodes would always appear to be lost
-inside of the universal section.
+inside of the global scope.
 
 Consequently, the root node of a tree must be understood to always declare its
 own section. That is especially true, if the initial node is not an arbitrarily
-selected node.
+selected node (e.g. the `<body>` element).
+
+**CLARIFICATION**
+The section declared by the root sectioning node
+will be referred to as the "root section".

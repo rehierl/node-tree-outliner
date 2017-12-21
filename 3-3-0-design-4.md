@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (3)
+# Design (4)
 
 Associating a single node with a section loosely associates any descendant
 of that node (downwards). In addition to that, any node loosely belongs to
@@ -184,8 +184,8 @@ characteristic node sequence.
 ## reduced sequence (2)
 
 The definition of a section's reduced sequence allows to describe the general
-characteristics of a section (Note that this is independent of any particular
-sectioning node):
+pattern of a section. Note that the following description is independent of
+any particular sectioning node.
 
 ```
 r x ak x ... x a2 x a1 x n1:s
@@ -257,18 +257,18 @@ have the characteristic that the first node is strictly subsequent to a
 sectioning node (i.e. no other subsequent node in between): (1) the first node
 is the sectioning node's first child, and (2) the first node is the next sibling
 of the sectioning node, or the next sibling of the nearest relevant ancestor.
-Obviously, the 2nd case can only be true, if the sectioning node itself would
-be defined to always be a leaf node, which would then force a certain structure
-upon the tree of nodes.
+Obviously, the 2nd case (i.e. strictly subsequent) can only be true, if the
+sectioning node itself would be defined to always be a leaf node, which would
+then force a certain structure upon the tree of nodes.
 
-Consequently, it would not be possible to describe the general characteristics
-of a section's node sequence independently of a sectioning node, if sectioning
-nodes would have to be associated with the sections they declare. That is,
-because the index of the first content node within the section's node sequence
-would then not be the same for all section types. That is, because a section's
-node sequence would then always begin with the section's sectioning node, which
-is followed by intermediate nodes, which are then followed by the section's
-content nodes.
+It would therefore not be possible to describe the general characteristics of a
+section's node sequence independently of a sectioning node, if sectioning nodes
+would have to be associated with the sections they declare. That is, because the
+index of the first content node within the section's node sequence would then
+not be the same for all section types. That is, because a section's node
+sequence would then always begin with the section's sectioning node, which is
+followed by one or more intermediate nodes, which are then followed by the
+section's content nodes.
 
 <!-- ======================================================================= -->
 ## associate nodes while entering
@@ -283,7 +283,7 @@ top-level node. In contrary to that, the last node of a section is not always
 identical to its last top-level node.
 
 ```
-<n1><n2> <n3/> <n4/> </n2></n1>
+<n1> <n2> <n3> </n1>
 ```
 
 Assumed, that node `n1` would be defined to be a section's first node. Which
@@ -322,14 +322,15 @@ last (/top-level) node   |   1/0    |   0/1
 
 Associating nodes while exiting them neither guarantees that a section's first
 node will be associated first, nor that a section's last node will be associated
-last. Put differently, and with that order of association, a section's first and
-last nodes can not be consistently determined. The nodes associated first and
-last can turn out to be false positives. However, the last node associated is
-guaranteed to be the section's last top-level node.
+last. Put differently, and with that order of association in mind, a section's
+first and last nodes can not be consistently detected. The nodes associated
+first and last can turn out to be false positives. However, the last node
+associated is guaranteed to be the section's last top-level node.
 
 In contrary to that, associating nodes while entering them guarantees that a
 section's first node will be associated first and that a section's last node
-will be associated last.
+will be associated last. In addition to that, the first node associated is also
+guaranteed to be a section's first top-level node.
 
 **CLARIFICATION**
 All nodes must be associated while they are being entered.
@@ -339,11 +340,12 @@ All nodes must be associated while they are being entered.
 
 Not all the nodes of a section are relevant to allow transformations (dynamic
 support needs those). That is, because only the section's top-level nodes are
-needed to group the contents of a section. Each subsequence in a reduced
-sequence can be grouped by placing its nodes inside of a container. Because
-of that, a section can be transformed into a sequence of such container nodes.
+needed to group the contents of a section. Each subsequence in a section's
+reduced sequence of nodes can be grouped by placing its nodes inside of a
+container. Because of that, a section can be transformed into a sequence of
+such container nodes.
 
-Note that, without any restriction in scope, and because the ancestors of the
+Note that, without any restriction in scope, and because the ancestors of a
 section's first node do not belong to the same section, a section can not be
 grouped into a single container. A type-2 section can therefore still not be
 transformed into a semantically equivalent type-1 section.
@@ -380,29 +382,34 @@ Note that this approach requires the ability to reliably determine if the node
 is in relationship with the section in question, regardless if a node belongs
 to one of the section's subsections or not.
 
-**conclusions**
+**CONCLUSIONS**
 
 (1) Only the top-level nodes of a section are needed to support transformations.
-It is not required to have knowledge of all the section's nodes.
+It is not required to have knowledge of all the nodes of a section.
 
 (2) It is preferable, if an algorithm could start directly with a top-level
 node. That is, because the search for the first top-level node would then be
 a non-issue. Each section object should therefore hold one or more references
-to its top-level nodes.
+to a section's top-level nodes.
 
 (3) It is almost straight forward to traverse the top-level nodes of a section
-away from a section's first top-level node towards a section's last top-level
-node. Because of that, it is preferable to begin with a section's first
-top-level node (see associate nodes while entering).
+away from a section's first top-level node in the direction of a section's last
+top-level node. Because of that, it is preferable to begin with a section's
+first top-level node (see associate nodes while entering).
 
 **CLARIFICATION**
 A section object does not have to store any reference to any of the section's
 nodes. That is, because a section's first node always is a top-level node, and
-the first node of a section can be determined from a section's sectioning node.
+because the first node of a section can be determined by the definition of the
+section's sectioning node.
 
-Note that, in order to allow sections to not store any node references, it must
-be possible to easily determine the first node of a section from its sectioning
-node.
+Note that, in order to allow sections to not store any node references at all,
+the definition of a sectioning node must allow to easily and unambiguously
+determine the first node of a section.
+
+However, in order to avoid having to distinguish between the different types
+of sections, a section object should at least hold a reference to a section's
+first (top-level) node.
 
 **CLARIFICATION**
 The first node of a section is critical to efficient transformations.

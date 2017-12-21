@@ -12,11 +12,12 @@ sectioning node, it has the ability to execute operations that prepare itself
 for the association of the first node (e.g. mark a section as being "open").
 That is, either when entering or when exiting the sectioning node.
 
-The use of the sectioning node's enter or exit event is, by itself, not a
-requirement for the definition of a certain type of sectioning nodes. That is,
-in theory, any subsequent event could be used. However, an algorithm must know
-which event exactly it has to use. Because of that, the relationship of the
-sectioning node and the section's first node must be clearly defined.
+The use of the sectioning node's own enter or exit event is, by itself, not
+a requirement for the definition of a certain type of sectioning node. That
+is, in theory, any event subsequent to a sectioning node's enter event could
+be used. However, an algorithm must know which event exactly it has to use.
+Because of that, the relationship of the sectioning node and the section's
+first node must be clearly and unambiguously defined.
 
 Note that, the definition of a sectioning node can, in principle, only define
 one effective open event, during which the declared section has to be marked as
@@ -24,7 +25,7 @@ being "open". Multiple such events do not necessarily represent a design flaw
 because an open command executed on an already open section won't change the
 section's state. However, it must not be possible to close a section before the
 execution of a second subsequent open command, as this would represent a design
-error. It must not be allowed to re-open an already closed section.
+error. That is, because it must not be possible to re-open a closed section.
 
 <!-- ======================================================================= -->
 ## type-1, first child
@@ -51,9 +52,9 @@ will be a parent's first child. All child nodes are considered to be equal.
 **CLARIFICATION**
 The root node is a type-1 sectioning node.
 
-That is, because the root's first child must belong to the declared section. In
-addition to that, there are no outer nodes that are subsequent to it. Because of
-that, no other type of sectioning node can match the root node.
+As mentioned before, the root node must declare its own section. In addition to
+that, even the first child of the root must belong to the root section. Because
+of that, the root node matches the definition of a type-1 sectioning node.
 
 <!-- ======================================================================= -->
 ## type-2, next sibling
@@ -295,7 +296,7 @@ to be the actual sectioning node.
 ### further options
 
 Although there are even further ways to define the first node of a section (e.g.
-variable relationship, descendants of siblings or children, etc.), it seems that
+variable relationship, descendants of children or siblings, etc.), it seems that
 the more intricate the relationship between a sectioning node and the section's
 first node is, the more questions would have to be answered in order to clearly
-define an additional section type.
+and unambiguously define any additional section type.
