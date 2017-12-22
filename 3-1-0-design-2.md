@@ -7,57 +7,67 @@ Similar to output streams, any section has the following states:
 <!-- ======================================================================= -->
 ## initialized state
 
-As soon as a sectioning node is known, it is technically possible to, beginning
-with the current node, associate any subsequent node with it. Because of that,
-and if a section had no delayed start, a sectioning node would have to be
+As soon as a sectioning node is known, it is technically possible to, including
+the current sectioning node, associate any subsequent node with it. Because of
+that, and if a section had no delayed start, a sectioning node would have to be
 associated with its own section.
 
 Consequently, a section's "initialized" state means that: (1) the section is
-known and (2) an algorithm must start associating nodes with it at some later
-point in time.
+created/initialized and (2) an algorithm will, at some later point in time,
+begin associating nodes with it.
+
+(-> initialized)
+A section's "initialized" state is a section's first/initial state.
 
 <!-- ======================================================================= -->
 ## open state
 
-Once a section's first node is entered, this first node and any subsequent
-node must be associated with it. An algorithm therefore needs additional
-rules that enable it to determine when to begin associating nodes with a
-section.
+Once a section's first node is entered, this first node and any subsequent node
+must be associated with it. An algorithm therefore needs additional rules that
+enable it to determine when to begin with the association of nodes.
 
 A section is considered to be "open" as soon as the next subsequent node
 must be associated with it.
+
+(initialized -> open)
+A section can only change to its "open" state,
+if its current state is "initialized".
 
 <!-- ======================================================================= -->
 ## closed state
 
 Any section must eventually end at some point. By default, that point is
 reached when the initial root node of the process is being exited. That is,
-because there is no subsequent node with regards to this exit event.
+because the root node has no node that is subsequent to it.
 
 This default case is obviously insufficient, because the very last node of
 a node sequence would then always have to be associated with all the known
 sections. An algorithm therefore needs additional rules that enable it to
-determine, when it is no longer allowed to associate any subsequent node
-with a section.
+determine, when it is no longer allowed to associate any other subsequent
+nodes with a section.
 
 A section is considered to be "closed" as soon as it is no longer allowed
-to associate any more nodes with it.
+to associate any further nodes with it.
+
+(open -> closed)
+A section can only change to its "closed" state,
+if its current state is "open".
 
 <!-- ======================================================================= -->
 ## set of open sections
 
-As mentioned earlier, and without the ability to limit a section's scope, a
-tree's last subsequent node would have to be associated with all the known
+As mentioned earlier, and without the ability to limit a section's scope, the
+last subsequent node of a tree would have to be associated with all the known
 sections. Obviously, authors need the means to tell an algorithm when it is
-no longer allowed to associate any nodes with a given section. Once such a
-statement is detected, an algorithm must mark the corresponding section, or
+no longer allowed to associate any more nodes with a given section. Once such
+a statement is detected, an algorithm must mark the corresponding section, or
 multiples thereof, as being "closed".
 
 Consequently, and at any given point in time, any section within the set of
 known sections is "initialized", "open" or "closed". Because of that, the set
 of known sections `S` can be broken apart into three disjunct sets of sections
-(with each set containing only those sections that are marked with the
-corresponding state):
+(with each subset containing only those sections that are in the corresponding
+state):
 
 * the set of initialized sections `IS`
 * the set of open sections `OS`
@@ -71,14 +81,20 @@ allowed unless a section's state is set to be "open".
 ## derived statements
 
 **CLARIFICATION**
-Once closed, a section is fully defined/specified. That is, because no
-subsequent node will, by definition, have any further effect on it.
+A closed section can only be understood to represent an empty section, if
+it was opened and then closed without associating any nodes with it.
+
+Consequently, it must be considered to be an error, if the section's state
+is "initialized" when it is about to be closed. Otherwise, the contents of
+a section would have to be understood as being "undefined". That is, no
+statements can be made about the contents of a closed section that was
+never open. After all, "undefined" is not equal to "empty".
 
 **CLARIFICATION**
-A section can not be re-opened.
+It is not allowed to re-initialize, or re-open a closed section.
 
-The "closed" state, and the corresponding rules, can therefore also be seen to
-represent a guarantee that a closed section will not change any further.
+The "closed" state, and the corresponding rules, can therefore also be seen
+to represent a guarantee that a closed section will not change any further.
 
 This guarantee is critical to an efficient TOC generator, because it allows to
 drop a section object once the corresponding section is closed and once the the
@@ -88,7 +104,11 @@ error.
 
 Re-opening a section for additional associations would therefore be in conflict
 with the above guarantee. Because of that, such an operation must be seen to
-represent an attempt to suspend and resume a section.
+represent an attempt to suspend and then resume a section.
+
+**CLARIFICATION**
+Once closed, a section is fully defined/specified. That is, because no
+subsequent node will, by definition, have any further effect on it.
 
 **CLARIFICATION**
 A section can not be strictly suspended.
@@ -145,13 +165,13 @@ All nodes must be associated while they are being entered.
 
 Because exit events will be executed in reverse order, associating any nodes
 while they are being exited would constitute a deviation of the tree traversal's
-order of nodes, and, as such, a deviation of the tree's semantics. Consequently,
+order of nodes, and as such, a deviation of the tree's semantics. Consequently,
 associating any nodes with sections while they are being exited can in principle
 not result in sections that accurately represent the contents of a tree.
 
 Apart from that, the location of a node (in terms of a tree's sections) could
 also be affected by nodes that are subsequent to it. Because of that, a node
-could turn out to have an effect on nodes that are presequent to it.
+could end up having an effect on nodes that are presequent to it.
 
 **CLARIFICATION**
 A section is a sequence of subsequent nodes.
@@ -164,4 +184,4 @@ sequence of a tree.
 A section is a sequence of strictly subsequent nodes.
 
 That is, because a section corresponds with the node sequence of a tree, and
-because a section has no gaps in between any two adjacent nodes.
+because a section has no gaps in between any two of its adjacent nodes.

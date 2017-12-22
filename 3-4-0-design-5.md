@@ -173,5 +173,5 @@ can be used to generically limit the scope of a section.
 ## the default scope
 
 Just because an event can be used to generically limit the scope of a section,
-does not mean that it would be reasonable to do so. It is therefore necessary
-to examine which effects such a definition would have. **TODO**
+it does not mean that it would be reasonable to do so. Because of that, it is
+necessary to take a look at which effects such a definition would have. **TODO**

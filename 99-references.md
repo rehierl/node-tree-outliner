@@ -49,6 +49,6 @@ traversal
 
 context
 
-* [wikipedia, context (computing)](https://en.wikipedia.org/wiki/Context_%28computing%29]
+* [wikipedia, context (computing)](https://en.wikipedia.org/wiki/Context_%28computing%29)
 * [wikipedia, operational context](https://en.wikipedia.org/wiki/Operational_context)
 * [wikipedia, operating context](https://en.wikipedia.org/wiki/Operating_context)

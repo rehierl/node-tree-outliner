@@ -53,7 +53,7 @@ sequence also represents the node order of the corresponding tree.
 ### executing operations
 
 In order to produce any result, an algorithm must execute certain operations,
-which it can only do while entering or exiting nodes.
+which it can only do while it is entering or exiting nodes.
 
 Note that each enter and exit event is atomic. That is, nodes will neither be
 entered nor exited while another node is still in the process of being entered
@@ -120,7 +120,7 @@ could turn out to have side effects on nodes in `s3`. That is, because these
 operations have the potential to produce conflicts.
 
 ```
-<n1><n2> n3 </n2></n1>
+<n1> <n2> <n3> </n1>
 ```
 
 In addition to that, when executing any operation while a node is being exited,
@@ -131,7 +131,7 @@ events, exit events will be executed in reverse order.
 
 ```
 s5 := [n1, n2, n3]
-s6 := [n3, n2, n1]
+s6 := [n2, n3, n1]
 ```
 
 Example: If a section would only contain the above three nodes, then associating
@@ -140,29 +140,31 @@ them while they are being exited would result in sequence `s6`.
 
 Obviously, the order of nodes in sequence `s6`, does not correspond with the
 section's actual order of nodes. That is, this order is in conflict with the
-tree's order of nodes.
+node order of the tree.
 
-Consequently, executing any operation while a node is being exited is per se
-problematic. Exit events must therefore only be used to execute operations
-which only affect nodes that are subsequent, but not descendant to the node
-being exited. That is, operations executed while exiting `ni` may only affect
-the nodes in `s4`, but must not have any side effect on nodes in `s3`.
+Consequently, executing any operation while a node is being exited is in
+principle problematic. Exit events must therefore only be used to execute
+operations which only affect nodes that are subsequent, but not descendant to
+the node being exited. That is, operations executed while exiting `ni` may only
+affect the nodes in `s4`, but must not have any effect on nodes in `s3`.
 
 <!-- ======================================================================= -->
 ## Context of a node
 
-In general, the minimal set of data used by an operation is referred to as the
-operation's context. And because an operation can not function properly, if any 
-data is taken away from its context (minimal set), the data within its context
-is considered to be significant to it. With that in mind, the context of a node
-can be defined as follows:
+In general, the minimal set of data used by an operation can be referred to as
+the context of an operation. And because an operation can not function properly,
+if any data is taken away from its context (minimal set), the data within its
+context is considered to be significant to it (see also en.wikipedia.org:
+Context (computing), Operational context, Operating context).
 
-**DEFINITION**
-The context of a node, with regards to the execution of an operation, consists
-of those nodes that are allowed to have an effect on it.
+With that in mind, the context of a node can be defined as follows:
 
 **CLARIFICATION**
-The semantics of a node also depends on its context.
+The context of a node, with regards to the execution of an operation,
+consists of those nodes that are allowed to have an effect on it.
+
+**CLARIFICATION**
+The semantics of a node therefore also depends on a node's context.
 
 In an undirected tree, the context of a node can only contain the ancestors of
 a node. In a directed tree, the context of a node can also contain presequent
@@ -265,8 +267,8 @@ an empty section can also be seen to have no scope at all.
 ## Sectioning nodes, NxS
 
 When beginning to traverse a node tree, the set of sections is initially empty.
-Certain nodes are therfore required to declare (aka. introduce) new sections.
-This type of nodes will be referred to as "sectioning nodes".
+Certain nodes are therefore required to declare (aka. introduce) new sections.
+These type of nodes will be referred to as "sectioning nodes".
 
 **DEFINITION**
 Any sectioning node always declares a single new section.
@@ -303,27 +305,31 @@ associate a sectioning node with its own section.
 
 Obviously, and as far as possible, an algorithm needs to be able to treat all
 sectioning nodes alike. That is, because associating one type of sectioning
-nodes with their own section, but not sectioning nodes of another type, would
-make it necessary to add additional logic with regards to the different types
-of sectioning nodes.
+nodes with their own section, but not the sectioning nodes of another type,
+would make it necessary to add additional logic with regards to the different
+types of sectioning nodes.
 
 If all sectioning nodes would have to be associated with their own section,
 then no section would ever be absolutely empty. That is, because any section
-would then always contain at least its own sectioning node. And because of
-that, additional logic would always be necessary to determine if a section
-contains meaningful content or not.
+would then always begin with its own sectioning node. And because of that,
+additional logic would always be necessary to determine if a section contains
+meaningful content or not.
 
 Note that more explanations will follow, which explain from other perspectives
 why sectioning nodes must not be associated with their own sections. For the
-moment, it helps to simply accept that this is how it has to be.
+moment it helps to simply accept that this is how it has to be.
 
 **CLARIFICATION**
-Any sectioning node must only be associated with presequent sections
-(i.e. those that are declared by presequent sectioning nodes).
+A section can be seen to be presequent to a node, if the section is declared by
+a sectioning node that is presequent to that node.
+
+**CLARIFICATION**
+A sectioning node can only be associated with presequent sections.
 
 If a sectioning node does not belong to the section it declares, then sectioning
-nodes need to have a purpose inside of presequent sections. For the moment, that
-purpose can be understood to connect presequent sections with declared sections.
+nodes need to have a purpose with regards to presequent sections. For the moment,
+that purpose can be understood to establish a relationship between presequent
+sections and the corresponding sectioning node.
 
 <!-- ======================================================================= -->
 ## The root node
@@ -332,9 +338,6 @@ Because a section can not exist without a presequent sectioning node, the root
 node, with which an algorithm has to begin, can not be associated with any
 predeclared section. That is, because there is no presequent sectioning node
 that could declare such a section.
-
-**CLARIFICATION**
-Any node always belongs to at least one section.
 
 However, the root node can be seen to be embedded into a theoretical universal
 section `u`. As such, that universal section must be understood to be declared
@@ -347,7 +350,7 @@ Consequently, any node of any tree always belongs to at least one section.
 Put differently, there is no node that does not belong to any section at all.
 
 **CLARIFICATION**
-The root node is a sectioning node.
+Any node always belongs to at least one section.
 
 Without any further clarification, and assumed that a tree's root node does
 itself not (strictly or loosely) contain any other sectioning node, all the
@@ -362,5 +365,5 @@ own section. That is especially true, if the initial node is not an arbitrarily
 selected node (e.g. the `<body>` element).
 
 **CLARIFICATION**
-The section declared by the root sectioning node
-will be referred to as the "root section".
+The root node must be a sectioning node. The section that is declared by the
+root node will be referred to as the "root section".
