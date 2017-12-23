@@ -1,16 +1,10 @@
 
 <!-- ======================================================================= -->
-# Design (1)
-
-This section describes fundamental definitions and considerations.
-
-<!-- ======================================================================= -->
-## the node sequence of a tree
+# Design (1) - node sequence
 
 The traversal of a tree can be used to create a sequence of nodes (aka. trace
-of nodes), if each node is added to a sequence while it is in the process of
-being entered. Such a node sequence will be referred to as "the node sequence"
-of the corresponding tree:
+of nodes), if each node is added to a sequence while it is being entered. This
+node sequence will be referred to as "the node sequence" of the tree:
 
 * `ns := [n1,...,ni,...,nk]`
 * `(k == #N)`, `ns(i) in N`, `ns in N^k`
@@ -19,7 +13,7 @@ of the corresponding tree:
 
 The length of a node sequence is identical to the number of nodes in the node
 tree. That is, because each node will be entered exactly once. In addition to
-that, the node sequence contains each node exactly once.
+that, the node sequence contains no node more than once.
 
 * `(ni-k presequent-to ni)` is true, if `k in [1,*]`
 * `(ni-k strictly-presequent-to ni)` for `(k == 1)`
@@ -42,18 +36,18 @@ operation based on possible future events.
 ### order of nodes
 
 An algorithm must, beginning with some initial node, traverse a tree from one
-node to another and in the tree's node order. After all, the algorithm's result
-is intended to accurately represent the tree's contents, which includes a tree's
-order of nodes.
+node to another and in the tree's order of nodes. After all, the algorithm's
+result is intended to accurately represent the tree's contents, which includes
+the node order or a tree.
 
 Because of that, the tree traversal's sequence of enter events is understood
 to represent a tree's order of nodes. Consequently, the node order of a node
-sequence also represents the node order of the corresponding tree.
+sequence is identical to the node order of the corresponding tree.
 
 ### executing operations
 
 In order to produce any result, an algorithm must execute certain operations,
-which it can only do while it is entering or exiting nodes.
+which it can only do while the enter or exit events are being executed.
 
 Note that each enter and exit event is atomic. That is, nodes will neither be
 entered nor exited while another node is still in the process of being entered
@@ -62,7 +56,7 @@ or exited.
 ### current knowledge
 
 In order to execute any operation, an algorithm needs to have knowledge that
-enables it to decide which operations need to be executed. The knowledge an
+it can use to decide which operations need to be executed. The knowledge an
 algorithm has, while it is entering or exiting a given node, will be referred
 to as its "current knowledge".
 
@@ -76,9 +70,14 @@ ns := [n1,...,ni,...,nk]
 An algorithm has, when entering its current node `ni`, knowledge of any node
 within `s1 := [n1,ni]`.
 
-This sequence of nodes contains all the nodes an algorithm has entered until and
-including its current node. However, because of an algorithm's current node, an
-algorithm's current knowledge also contains nodes that it still needs to exit.
+This sequence of nodes contains all the nodes an algorithm has entered until
+and including its current node. However, because of an algorithm's current
+node, an algorithm's current knowledge also contains nodes that it still needs
+to exit.
+
+Note that the latter includes the current node and all of its ancestors. That
+is, all the nodes in the path that begins with the tree's root node and ends
+with the current node.
 
 Apart from that, the existence of nodes in `s1` is confirmed. This is obviously
 not the case with regards to the subsequent nodes in `s2 := [ni+1,nk]`: These
@@ -91,8 +90,8 @@ entered eventually. In general, such guarantees do not exist.
 
 In addition to that, any operation executed while entering a node is intended
 to only have an effect on the node itself and on nodes that are subsequent to
-it. That is, if the exit events of its ancestors are ignored (technically, exit
-events allow to affect presequent nodes).
+it. That is, if the exit events of its ancestors are ignored (technically,
+exit events allow to affect presequent nodes).
 
 ### exit events
 
@@ -126,8 +125,8 @@ operations have the potential to produce conflicts.
 In addition to that, when executing any operation while a node is being exited,
 the order of events must be taken into account. That is, ancestor nodes will be
 entered before their descendant nodes are entered. In contrary to that,
-descendants will be exited before their ancestors are exited. Compared to enter
-events, exit events will be executed in reverse order.
+descendants will be exited before their ancestors are exited. Consequently, and
+compared to enter events, exit events will be executed in reversed order.
 
 ```
 s5 := [n1, n2, n3]
@@ -136,17 +135,17 @@ s6 := [n2, n3, n1]
 
 Example: If a section would only contain the above three nodes, then associating
 these while they are being entered would result in sequence `s5` and associating
-them while they are being exited would result in sequence `s6`.
-
-Obviously, the order of nodes in sequence `s6`, does not correspond with the
-section's actual order of nodes. That is, this order is in conflict with the
-node order of the tree.
+them while they are being exited would result in sequence `s6`. Obviously, the
+order of nodes in sequence `s6`, does not correspond with the node order of the
+tree. Because of that, and if those three nodes would be the only nodes of a
+section, then sequence `s6` can not be used to accurately represent the contents
+of that section.
 
 Consequently, executing any operation while a node is being exited is in
-principle problematic. Exit events must therefore only be used to execute
-operations which only affect nodes that are subsequent, but not descendant to
-the node being exited. That is, operations executed while exiting `ni` may only
-affect the nodes in `s4`, but must not have any effect on nodes in `s3`.
+principle problematic. Exit events must be used to execute operations which
+only affect nodes that are subsequent, but not descendant to the node being
+exited. That is, operations executed while exiting `ni` may only affect the
+nodes in `s4`, but must not have any effect on nodes in `s3`.
 
 <!-- ======================================================================= -->
 ## the context of a node
@@ -157,26 +156,29 @@ if any data is taken away from its context (minimal set), the data within its
 context is considered to be significant to it (see also en.wikipedia.org:
 Context (computing), Operational context, Operating context).
 
-With that in mind, the context of a node can be defined as follows:
-
 **CLARIFICATION**
+Operations executed during an event must only affect those nodes that are
+subsequent (forwards) to the event. In addition to that, operations can only
+rely on the current node and those nodes that are presequent (backwards) to
+the event in question.
+
+**DEFINITION**
 The context of a node, with regards to the execution of an operation,
 consists of those nodes that are allowed to have an effect on it.
 
 **CLARIFICATION**
-The semantics of a node therefore also depends on a node's context.
+The semantics of a node also depends on a node's context.
 
-In an undirected tree, the context of a node can only contain the ancestors of
-a node. In a directed tree, the context of a node can also contain presequent
-siblings (but not their descendants). Note that a context might also include
-presequent siblings of the node's ancestors.
+In an undirected tree, the context of a node can only contain the ancestors
+of a node. That is, because there is no guarantee that certain nodes will
+always be presequent to a given node. The result of an algorithm, which
+executes operations based upon presequent siblings, is not guaranteed to
+be deterministic (i.e. repeated executions may yield different results).
 
-The reason why the context of a node in an undirected tree must not contain any
-siblings is that, in such a tree, a node has no next and no previous sibling.
-That is, there is no guarantee that certain nodes will always be presequent to
-a given node. The result of an algorithm, which executes operations in such a
-tree, based upon presequent siblings, is therefore not guaranteed to be
-deterministic (i.e. repeated executions may yield different results).
+In a directed tree, the context of a node can also contain presequent siblings.
+Note that the descendants of those siblings are not included as they need to be
+understood to be sandboxed within those siblings. Note also that the context of
+a node can include those siblings that are presequent to the node's ancestors.
 
 Because of that, the current knowledge of an algorithm, is in general not
 identical to the context of the current node. That is, because the current
@@ -185,28 +187,30 @@ are not part of it (i.e. not all the nodes that are presequent to a node are
 allowed to have an effect on it).
 
 Note that even nodes, which were exited, can be allowed to have an effect on
-subsequent nodes (e.g. a heading element).
+subsequent nodes (i.e. presequent siblings, e.g. a heading element).
 
 <!-- ======================================================================= -->
 ## look ahead
 
 A certain implementation could technically have the ability to cheat the
-traversal of a tree by directly examining the tree's structure as soon as a
-certain sectioning node is entered. Because of that, an implementation could
-simply determine ahead of schedule, if that sectioning node has for example
-a 2nd child, a 2nd subsequent sibling, or even a certain ancestor.
+traversal of a tree by directly examining the tree's structure as soon as
+a certain node is entered. Because of that, an implementation could simply
+determine ahead of schedule, if that node has for example a 2nd child, a
+2nd subsequent sibling, or even a certain ancestor.
 
 The downside of this kind of look ahead would be, that this ability would turn
-into a requirement, if it could not be avoided. That is, implementations that
-can not support any kind of look ahead (e.g. due to technical limitations),
-would become impossible. However, if it is guaranteed to implement an operation
-without such an approach, a look ahead could be used as the basis of a more
-efficient implementation.
+into a necessity, if it could not be avoided. That is, implementations would
+become impossible, if they can not support any kind of look ahead (e.g. due to
+technical limitations).
+
+However, if it is possible to implement an operation without such an approach,
+a look ahead could be used as the basis of a more efficient implementation.
+The point is to not rely on the availability of a look a head.
 
 Despite that, a look ahead is an attempt to bypass the current knowledge of what
 is guaranteed by the traversal of the tree. As such, a look ahead represents an
-attempt to predict future events. Because of that, a design must avoid such an
-attempt.
+attempt to bypass the context of a node and to predict future events. Because of
+that, a design must not use any look ahead.
 
 <!-- ======================================================================= -->
 ## sections, SxN
@@ -257,7 +261,8 @@ context of a node (i.e. its location with regards to the tree's sections).
 
 Note that, because of this theoretical approach (i.e. associate each node with
 one or more sections), the relationship between sections can be ignored for the
-time being.
+time being. Because of that, the relationship between sections must then be
+determined from the associations the sections have with the nodes of the tree.
 
 **DEFINITION**
 The scope of a section, respectively the scope of a sectioning node, is the
@@ -282,8 +287,8 @@ Any sectioning node always declares a single new section.
 * Any section can be identified by its sectioning node.
 
 Consequently, there is a one-to-one (1:1) relation on the set of sectioning
-nodes `SN` and the set of sections `S`. This relation will be referred to as
-"the NxS relation".
+nodes `SN` and the set of known sections `S`. This relation will be referred
+to as "the NxS relation".
 
 * for any `sn in SN subset-of N` and for any `s in S`
 * `(sn declared s)` is true, if node `sn` declared section `s`
@@ -308,6 +313,11 @@ because an algorithm knows about a section as soon as it enters the section's
 sectioning node. However, this does not imply that it would be reasonable to
 associate a sectioning node with its own section.
 
+Note that associating a sectioning node with its own section could be seen to
+add a node to its own context. In addition to that, the corresponding property
+of a sectioning node would depend on a node that is not presequent to it. That
+is, a sectioning node would end up having an effect on itself.
+
 Obviously, and as far as possible, an algorithm needs to be able to treat all
 sectioning nodes alike. That is, because associating one type of sectioning
 nodes with their own section, but not the sectioning nodes of another type,
@@ -325,16 +335,20 @@ why sectioning nodes must not be associated with their own sections. For the
 moment it helps to simply accept that this is how it has to be.
 
 **CLARIFICATION**
+A sectioning node can only be associated with presequent sections.
+
+**CLARIFICATION**
 A section can be seen to be presequent to a node, if the section is declared by
 a sectioning node that is presequent to that node.
 
 **CLARIFICATION**
-A sectioning node can only be associated with presequent sections.
+A section can be seen to be presequent to another section, if its sectioning
+node is presequent to the other section's sectioning node.
 
 If a sectioning node does not belong to the section it declares, then sectioning
 nodes need to have a purpose with regards to presequent sections. For the moment,
 that purpose can be understood to establish a relationship between presequent
-sections and the corresponding sectioning node.
+sections and the corresponding sectioning node. **TODO**
 
 <!-- ======================================================================= -->
 ## the root node
@@ -351,8 +365,9 @@ section must also be seen to never end. Because of that, the universal section
 is omnipresent. That is any node always is in relationship with this universal
 section (aka. global scope).
 
-Consequently, any node of any tree always belongs to at least one section.
-Put differently, there is no node that does not belong to any section at all.
+Consequently, and because of this theoretical concept, any node of any tree
+always belongs to at least one section. Put differently, there is no node that
+does not belong to any section at all.
 
 **CLARIFICATION**
 Any node always belongs to at least one section.
@@ -370,5 +385,5 @@ own section. That is especially true, if the initial node is not an arbitrarily
 selected node (e.g. the `<body>` element).
 
 **CLARIFICATION**
-The root node must be a sectioning node. The section that is declared by the
-root node will be referred to as the "root section".
+The root node is a sectioning node. The section that is declared by the root
+node will be referred to as the "root section".

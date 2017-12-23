@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (5)
+# Design (5) - last nodes
 
 **CLARIFICATION**
 A section can be seen to *end with an associated container*, if the
@@ -59,15 +59,16 @@ and `b` (exclusive). Put differently, any number from `a` to `(b - e)` is
 included, if `e` (epsilon) represents an infinitesimal small positive number.
 
 **CLARIFICATION**
+A type-1 sectioning node is the last unrelated node entered, but not exited,
+before the section's first node is entered. A type-2 sectioning node is the
+last unrelated node exited, before the section's first node is entered.
+
 Recall, that a type-1 section is defined to begin with the sectioning node's
 first child. Because of that, and in order to support empty sections, the
 definition requires to open the declared section when the sectioning node's
 enter event is about to be exited, not when the first node is being entered.
 Because of that, the definition of the section's first node can also be
-understood to represent a definition by exclusion: The sectioning node is
-the last unrelated node entered, but not exited, before the section's first
-node is entered. Note that the first node of a type-2 section can be defined
-in a similar fashion.
+understood to represent a definition by exclusion.
 
 **QUESTION**
 Is it possible to define the end of a section in terms of an (enter or exit)
@@ -81,32 +82,33 @@ allowed to establish any association before closing these sections.
 ## available events
 
 As mentioned before, a section must be empty, if its first node does not exist.
-Because of that, and in theory, the very first event that could possibly be used
-to close a section is the exit event of a section's first node. Obviously, using
+Because of that, and in theory, the very first event that could be used to
+close a section is the exit event of a section's first node. Obviously, using
 this particular event to end a section by definition would not only cover one
 specific case, but it would also make it impossible to support empty sections.
-That is, because it would force a section to always have at least one node.
+That is, because it would require that a section always has at least one node.
 
 Note that, because no descendant of a top-level node can be excluded, none
 of the events of such a descendant node are suited to generically define the
-end of a section. That is, because it is in principle not possible to find a
-definition based on the descendants of an associated node, which is also
-independent of any additional structural requirement. Such a definition would
-simply not be generic.
+end of a section. That is, because it is in principle not possible to find
+a definition based on the descendants of an associated node, which is also
+independent of any additional structural requirement. Such a definition
+would simply not be generic.
 
 Note that a generic definition is a necessity, as any node of a section is
 subsequent to the section's sectioning node. Allowing a requirement, that some
-condition must be true with regards to a subsequent node, would mean that the
+condition must be met with regards to a subsequent node, would mean that the
 semantics of a presequent node (i.e. the sectioning node) would depend on nodes
-that are subsequent to it.
+that are subsequent to it. No subsequent node is allowed to have any effect on
+presequent nodes.
 
 Note that, in order to generically define the end of a section, a definition
 also needs to be independent of any specific type of sectioning node. That is,
 because a definition that is based upon a specific type of sectioning node is
 not completely generic (i.e. generic with regards to subsequent nodes, but not
-generic with regards to the sectioning node's type). Because of that,  such a
-definition needs to define the end of a section in terms of the relationship
-the section's end has with regards to the section's first node.
+generic with regards to the sectioning node's type). Because of that, it would
+be preferable to define the end of a section in terms of the relationship the
+section's end has with regards to the section's first node.
 
 Note that this is yet another indication to not associate sectioning nodes with
 the sections they declare: It would otherwise not be possible to define the end

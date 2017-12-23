@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (3) - Sectioning nodes
+# Design (3) - sectioning nodes
 
 Because a section is a sequence of strictly subsequent nodes, definitions only
 need to tell an algorithm when a section begins and when it ends. In addition to
@@ -9,25 +9,25 @@ efficiently, or even at all.
 
 Because an algorithm knows about a section as soon as it enters the section's
 sectioning node, it has the ability to execute operations that prepare itself
-for the association of the first node (e.g. mark a section as being "open").
-That is, either when entering or when exiting the sectioning node.
+for the association of the first node (e.g. change a section's state to "open"
+when entering or exiting the section's sectioning node).
 
-The use of the sectioning node's enter or exit event is, by itself, not a
-requirement for the definition of a certain type of sectioning node. That
-is, the sectioning node's enter event, or any event subsequent to it, could
-be used.
+The use of the sectioning node's enter or exit event is, by itself, not
+a requirement for the definition of a certain type of sectioning node.
+Technically, the sectioning node's enter event and any event subsequent
+to it could be used to open the declared section.
 
 However, an algorithm must know which event exactly it has to use. Because of
 that, the relationship of the sectioning node and the section's first node must
 be clearly and unambiguously defined.
 
 Note that, the definition of a sectioning node can, in principle, only define
-one effective open event. Multiple defined open events do not necessarily
-represent a design flaw because an open operation, executed on an already open
-section, is ineffective as it won't change the section's state. However, it must
+one effective open event. Multiple open events do not necessarily represent a
+design error because an open operation, executed on an already open section, is
+ineffective as it won't further change the section's state. However, it must
 not be possible to close a section before the execution of a second subsequent
-open event. This would represent a design error because it must not be allowed
-to re-open a section that is already closed.
+open event. This would represent a design error as it would re-open an already
+closed section.
 
 <!-- ======================================================================= -->
 ## type-1, first child
@@ -77,16 +77,16 @@ the sectioning node's exit event. Put differently, the sectioning node's exit
 event represents the section's open event.
 
 **CLARIFICATION**
-Authors need to be aware that, due to the strict definition (i.e. "next
-sibling"), the placement of a type-2 sectioning node is significant to
-the section of such a sectioning node.
+Authors need to be aware that, due to this strict definition (i.e. "next
+sibling"), the placement of a type-2 sectioning node is significant to the
+section of such a sectioning node.
 
 **CLARIFICATION**
 A type-2 section is empty, if its sectioning node has no next sibling.
 
 Note that a type-2  section is non-empty, if the sectioning node has a next
 sibling, regardless of what type of node the next sibling is (i.e. whether
-the next sibling represents meaningful content or not).
+the next sibling represents meaningful content or not, e.g. a whitespace node).
 
 Note that this definition requires an ordered tree of nodes. That is, because
 in an unordered tree, no node has one specific next sibling. All siblings are
@@ -97,7 +97,7 @@ deterministic results. That is, because siblings are not guaranteed to be
 served in any particular order. Subsequent runs will produce different results
 (e.g. different number of nodes for a specific section). Because of that, all
 siblings would have to belong to a type-2 section. Consequently, type-2
-sectioning nodes would not be much different to type-1 sectioning nodes.
+sectioning nodes would be similar to type-1 sectioning nodes.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -106,12 +106,11 @@ sectioning nodes would not be much different to type-1 sectioning nodes.
 Type-1 and type-2 sectioning nodes add no additional requirement to the
 structure of a node tree. That is, because the section's open event is the
 corresponding event of the section's sectioning node. As such, the "open"
-operation does not require any additional node, or any specific structure.
+operation does not require any additional node, or any specific node structure.
 
 Note that using the enter event of the first node to change a section's state
-to "open" would add the requirement that a section always needs to have at
-least one node. Because of that, the state transition (initialized -> closed)
-would have to be allowed in order to support empty sections.
+to "open" would add the requirement that a section would always need at least
+one node.
 
 **CLARIFICATION**
 The first node's enter event is said to be strictly subsequent
@@ -308,7 +307,7 @@ That is, because there would have to be a clear answer as to which section node
 type. In addition to that, the corresponding ancestor could also be understood
 to represent the actual sectioning node.
 
-### further options
+### other options
 
 Although there are even further ways to define the first node of a section (e.g.
 variable relationship, descendants of children or siblings, etc.), it seems that

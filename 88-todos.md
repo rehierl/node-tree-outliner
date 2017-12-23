@@ -3,6 +3,10 @@
 # List of things to do
 
 **TODO**
+Allowing to let a type-2 section reach past its parent container is effectively
+adding a descendant of a presequent sibling to the context of a subsequent node.
+
+**TODO**
 first node associated by exclusion
 
 **TODO**

@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (2) - States of a section
+# Design (2) - states of a section
 
 Similar to output streams, any section has the following states:
 
@@ -8,13 +8,11 @@ Similar to output streams, any section has the following states:
 ## initialized state
 
 As soon as a sectioning node is known, it is technically possible to associate
-any subsequent node, including the current sectioning node, with it. Because
-of that, and if a section had no delayed start, a sectioning node would have
-to be associated with its own section.
+any subsequent node with it (including the sectioning node itself).
 
 Consequently, a section's "initialized" state means that: (1) the section is
-created/initialized and (2) an algorithm will, at some later point in time,
-begin associating nodes with it.
+created/initialized/known and (2) an algorithm needs to, at some later point
+in time, begin associating nodes with it.
 
 (-> initialized)
 A section's "initialized" state is a section's first/initial state,
@@ -24,14 +22,15 @@ which needs to be set once a section object is created.
 ## open state
 
 Once a section's first node is entered, this first node and any subsequent node
-must be associated with it. An algorithm therefore needs additional rules that
-enable it to determine when to begin with the association of nodes.
+must be associated with it until that section is closed. An algorithm therefore
+needs additional rules that enable it to determine when to begin with the
+association of nodes.
 
 A section is considered to be "open" as soon as the next subsequent node
 must be associated with it.
 
 (initialized -> open)
-A section can only change to its state to "open",
+A section can only change its state to "open",
 if its current state is "initialized".
 
 <!-- ======================================================================= -->
@@ -43,22 +42,22 @@ the root node has no node that is subsequent to it.
 
 This default case is obviously insufficient, because the very last node of
 a node sequence would then always have to be associated with all the known
-sections. An algorithm therefore needs additional rules that enable it to
-determine, when it is no longer allowed to associate any other subsequent
-nodes with a section.
+sections. An algorithm therefore needs rules that enable it to determine,
+when it is no longer allowed to associate any further subsequent nodes with
+a known section.
 
 A section is considered to be "closed" as soon as it is no longer allowed
 to associate any further nodes with it.
 
 (open -> closed)
-A section can only change to its state to "closed",
+A section can only change its state to "closed",
 if its current state is "open".
 
 <!-- ======================================================================= -->
 ## set of open sections
 
 As mentioned earlier, an algorithm needs rules that enable it to determine
-when it is no longer allowed to associate any more nodes with a section.
+when it is no longer allowed to associate any more nodes with a known section.
 Once such a rule applies, an algorithm must mark the corresponding section,
 or multiples thereof, as being "closed".
 
@@ -92,15 +91,19 @@ change a section's state.
 
 **CLARIFICATION**
 A closed section can only be understood to represent an empty section, if
-it was opened and closed without associating any nodes with it.
+it was opened and then closed without associating any nodes with it.
 
 The contents of a section, that still counts as being "initialized", must be
 understood to be "undefined". That is, because the section's "open" event was
-not yet triggered. Because of that, no statements can be made with regards to
+not yet executed. Because of that, no statements can be made with regards to
 the contents of such a section. Consequently, a section that was never opened
 can also not be seen to be "empty". After all, an "initialized" section can
 still be opened, and nodes can still be associated with it. Any attempt to
 close an "initialized" section must be understood to represent an error.
+
+In short: The state transitions must be understood to be strict. That is, no
+other transitions are allowed. And, in general, no statements can be made with
+regards to the contents of a section, unless the section's state is "closed".
 
 **CLARIFICATION**
 It is not allowed to re-initialize, or re-open a closed section.
@@ -191,7 +194,7 @@ A section is a sequence of subsequent nodes.
 
 That is, because any node must be associated with a section while it is being
 entered. Consequently, the node order of a section corresponds with the node
-sequence of a tree.
+order of the tree.
 
 **CLARIFICATION**
 A section is a sequence of strictly subsequent nodes.
