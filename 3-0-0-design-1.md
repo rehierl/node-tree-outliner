@@ -5,7 +5,7 @@
 This section describes fundamental definitions and considerations.
 
 <!-- ======================================================================= -->
-## The node sequence of a tree
+## the node sequence of a tree
 
 The traversal of a tree can be used to create a sequence of nodes (aka. trace
 of nodes), if each node is added to a sequence while it is in the process of
@@ -149,7 +149,7 @@ the node being exited. That is, operations executed while exiting `ni` may only
 affect the nodes in `s4`, but must not have any effect on nodes in `s3`.
 
 <!-- ======================================================================= -->
-## Context of a node
+## the context of a node
 
 In general, the minimal set of data used by an operation can be referred to as
 the context of an operation. And because an operation can not function properly,
@@ -188,7 +188,7 @@ Note that even nodes, which were exited, can be allowed to have an effect on
 subsequent nodes (e.g. a heading element).
 
 <!-- ======================================================================= -->
-## Look ahead
+## look ahead
 
 A certain implementation could technically have the ability to cheat the
 traversal of a tree by directly examining the tree's structure as soon as a
@@ -209,7 +209,7 @@ attempt to predict future events. Because of that, a design must avoid such an
 attempt.
 
 <!-- ======================================================================= -->
-## Sections, SxN
+## sections, SxN
 
 **DEFINITION**
 A section is a set of nodes.
@@ -250,9 +250,14 @@ defined as node sequences:
 * `(ni != nj)` for `i,j in [1,k]` and `(i != j)`
 * `n1` is the section's first node, `nk` is the section's last node
 
+**CLARIFICATION**
 Both of these definitions technically allow to associate any node with multiple
 sections. Rules are therefore required in order to uniquely determine the actual
 context of a node (i.e. its location with regards to the tree's sections).
+
+Note that, because of this theoretical approach (i.e. associate each node with
+one or more sections), the relationship between sections can be ignored for the
+time being.
 
 **DEFINITION**
 The scope of a section, respectively the scope of a sectioning node, is the
@@ -264,7 +269,7 @@ non-empty scope. The scope of an empty section is said to be empty. However,
 an empty section can also be seen to have no scope at all.
 
 <!-- ======================================================================= -->
-## Sectioning nodes, NxS
+## sectioning nodes, NxS
 
 When beginning to traverse a node tree, the set of sections is initially empty.
 Certain nodes are therefore required to declare (aka. introduce) new sections.
@@ -332,7 +337,7 @@ that purpose can be understood to establish a relationship between presequent
 sections and the corresponding sectioning node.
 
 <!-- ======================================================================= -->
-## The root node
+## the root node
 
 Because a section can not exist without a presequent sectioning node, the root
 node, with which an algorithm has to begin, can not be associated with any
