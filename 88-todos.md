@@ -7,9 +7,6 @@ Allowing to let a type-2 section reach past its parent container is effectively
 adding a descendant of a presequent sibling to the context of a subsequent node.
 
 **TODO**
-first node associated by exclusion
-
-**TODO**
 no conflict in location of a section -
 sectioning node, first node, last node, etc.
 
