@@ -33,14 +33,14 @@ sectioning node (as it should). In addition to that, such a definition should
 in general be independent of a tree's structure.
 
 **CLARIFICATION**
-In contrary to a section's first node, it is in principle not possible to
-clearly identify a section's last node independently of any specific structure.
-Consequently, the same also applies to the the relationship between a section's
-first and last node.
+In contrary to a section's first node, it is in principle not possible
+to precisely pinpoint a section's last node independently of any specific
+structure. Consequently, the same also applies to the the relationship
+between a section's first and last node.
 
 That is, because any associated node can potentially have any number of
-descendant nodes. Consequently, if the defined last node had a descendant,
-then that last node would not be the section's last node. Due to the loose
+descendant nodes. Because of that, and if the last node had a descendant,
+that last node would then not be the section's last node. Due to the loose
 associations mentioned earlier, the node tree and the section's definition
 would then be in conflict with each other.
 
@@ -48,9 +48,9 @@ would then be in conflict with each other.
 ## question
 
 Because the last node of a section can not be clearly identified, the question
-where a section has to end is similar to the definition of intervals on the set
-of real numbers. That is, because in between any two real numbers, there always
-is an infinite amount of additional numbers.
+where a section has to end by default is similar to the definition of intervals
+on the set of real numbers. That is, because in between any two real numbers,
+there always is an infinite amount of additional numbers.
 
 Apart from any specific and included upper boundary, it is possible to specify
 an interval of real numbers by exclusion: `r in [a,b)`. The meaning of this
@@ -60,15 +60,16 @@ included, if `e` (epsilon) represents an infinitesimal small positive number.
 
 **CLARIFICATION**
 A type-1 sectioning node is the last unrelated node entered, but not exited,
-before the section's first node is entered. A type-2 sectioning node is the
-last unrelated node exited, before the section's first node is entered.
+before a section's first node is entered. A type-2 sectioning node is the last
+unrelated node exited, before a section's first node is entered.
 
-Recall, that a type-1 section is defined to begin with the sectioning node's
+Note that a type-1 section is defined to begin with the sectioning node's
 first child. Because of that, and in order to support empty sections, the
 definition requires to open the declared section when the sectioning node's
 enter event is about to be exited, not when the first node is being entered.
-Because of that, the definition of the section's first node can also be
-understood to represent a definition by exclusion.
+Because of that, the definition of the first node of a type-1 section can
+also be seen as a definition by exclusion. Note also that the definition of
+a type-2 section is similar with that regards.
 
 **QUESTION**
 Is it possible to define the end of a section in terms of an (enter or exit)
@@ -76,75 +77,72 @@ event, beginning with which no more associations are allowed?
 
 To be more clear, once such an event is entered, the corresponding section or
 multiples thereof must be immediately closed. That is, not even the event is
-allowed to establish any association before closing these sections.
+allowed to establish any further associations before closing these sections.
 
 <!-- ======================================================================= -->
 ## available events
 
-As mentioned before, a section must be empty, if its first node does not exist.
-Because of that, and in theory, the very first event that could be used to
-close a section is the exit event of a section's first node. Obviously, using
-this particular event to end a section by definition would not only cover one
-specific case, but it would also make it impossible to support empty sections.
-That is, because it would require that a section always has at least one node.
+One of the first events that could be used to close a section is the exit event
+of a section's first (top-level) node. Obviously, using this particular event
+to end a section by default won't help much as (1) a section would always need
+to have at least one node (i.e. empty sections could not be supported because
+an empty section could then not be closed) and (2) any such section would always
+have to end with its first top-level node (i.e. multiple top-level nodes could
+not be supported because a section can not be re-opened).
 
 Because no descendant of a top-level node can be excluded, none of the events
-of such a descendant node are suited to generically define the end of a section.
-That is, because it is in principle not possible to find a definition based on
-the descendants of an associated node, which is also independent of any
-additional structural requirement. Such a definition would not be generic.
+of any descendant is suited to generically define the end of a section. That
+is, because choosing one particular descendant as a section's last node would
+represent an attempt to exclude any potential subsequent descendant. And,
+because of that, the only event that could potentially be used would be the
+exit event of the actual last descendant. Obviously, such a definition can
+not be independent of any particular structure and thus would not be generic.
 
-A generic definition is in principle a necessity, as any node of a section is
-subsequent to the section's sectioning node. Allowing a requirement, that some
-condition must be met with regards to a subsequent node, would mean that the
-semantics of a presequent node (i.e. the sectioning node) would depend on nodes
-that are subsequent to it. No subsequent node must be allowed to have any effect
-on any node that is presequent to it.
+A generic definition is in principle a necessity because any node of a section
+is subsequent to the section's sectioning node. Allowing a default definition
+to have a requirement, that some condition must hold with regards to one or
+more subsequent nodes, would mean that subsequent nodes would have an effect
+on a presequent node (i.e. the sectioning node). Consequently, and due to an
+algorithm's current knowledge, such a definition would disallow an efficient
+and straight forward implementation.
 
-In order to generically define the end of a section, a definition also needs
+In order to generically define the end of a section, the definition also needs
 to be independent of any specific type of sectioning node. That is, because a
-definition that is based upon a specific type of sectioning node is not
-completely generic (i.e. generic with regards to subsequent nodes, but not
-with regards to the sectioning node's type). Because of that, it would be
-preferable to define the end of a section in terms of the relationship the
-section's end has with regards to the section's first node.
+definition, which is based upon a specific type of sectioning node, is not
+completely generic (i.e. generic with regards to subsequent nodes, but not with
+regards to the sectioning node's type). Because of that, it would be preferable
+to define the end of a section in terms of the relationship the section's end
+has with regards to the section's first node.
 
-Note that this already indicates, that such a completely generic definition can
-not exist. That is, because the definition of a section's end with regards to a
-section's first content node builds upon the existence of a first content node.
-
-Note that this also indicates, that sectioning nodes should not be associated
-with the sections they declare: It would otherwise not be possible to define
-the end of a section independently of a sectioning node, because any section
-would then always begin with the sectioning node (followed by potential
-intermediate nodes).
+Note that this already indicates, that a completely generic definition can not
+exist. That is, because the definition of a section's end, with regards to a
+section's first content node, builds upon the existence of a first content node.
 
 **DEFINITION**
-The maximum (i.e. widest) scope of a section allowed, that does not produce any
-conflict, is said to be "the default scope of a section".
+The maximum (i.e. widest) scope of a section, that does not produce any
+conflict, will be referred to as "the default scope of a section".
 
 A generic definition of the end of a section can only define a section's default
 scope. In principle, additional rules (e.g. rank) can still be defined that can
 be used to further limit the scope of a section (hence, default scope).
 
 **CLARIFICATION**
-The search for an event that could be used to define the end of a section is
-limited to (1) the exit event of a section's last top-level node, (2) the enter
-event of the first unrelated node, and (3) an exit event of one of the top-level
-node's ancestors.
+The search for an event that could be used to define the end of a section, with
+regards to its first node, can be limited to (1) the exit event of a section's
+last top-level node, (2) the enter event of the first unrelated node, and (3)
+an exit event of one of the top-level node's ancestors.
 
 The enter events of a section's top-level nodes can not be taken into account,
 as this would produce a conflict: A top-level node is a top-level node, because
-it is associated with a section. Making use of the enter event of such a node
-would result in not associating the top-level node. Such a definition would
+it is associated with a section. Using the enter event of such a node would
+result in not associating the top-level node itself. Such a definition would
 therefore be equivalent to case (2) and, because of that, be in conflict with
 the definition of a top-level node.
 
-The enter events of one of the top-level node's ancestors can also not be used.
-That is, because in order to enter a sectioning node, all of its ancestors must
-have already been entered. Put differently, no node can be entered and, because
-of that, associated, if its ancestors have not been entered already (i.e. these
-enter events are no longer available).
+The enter events of one of the top-level node's ancestors can also not be
+used. That is, because in order to enter and associate a top-level node, all
+of its ancestors must have been entered already. Because of that, the enter
+events of a top-level node's ancestors are unavailable.
 
 ### exit the last top-level node
 
@@ -161,7 +159,7 @@ inclusion" ("inclusion" because the last top-level node is explicitly included,
 
 However, the most important issue with this case is that it would add the
 requirement, that any section must always have at least one node. That is,
-because the section's close event could otherwise not be triggered. As such,
+because the section's close event could otherwise not be executed. As such,
 this case can not be used for a generic definition.
 
 Apart from that, such a definition could also be seen to be inconsistent with
@@ -175,12 +173,12 @@ Case (2) is not suited for a generic definition.
 
 That is, because it would require to give a guarantee that such a node will
 always be entered eventually. Consequently, such a definition would add an
-additional requirements and, because of that, would not be generic.
+additional requirement and, because of that, would not be generic.
 
 However, it is still possible to define specific nodes (e.g. headings or
 an end marker node) that, when entered, end one or more presequent sections.
-The focus here is, that such a node is optional and, because of that, not
-guaranteed to exist for all sections.
+The focus here is that such a node is optional and, because of that, not
+guaranteed to exist in all situations.
 
 Note also the switch in perspective: "forwards" from the current sectioning
 node and "backwards" from a subsequent heading/marker.
@@ -191,25 +189,174 @@ Case (3) is somewhat suited for a generic definition.
 
 Except for the root node, any node in a rooted tree of nodes always has at least
 one ancestor. Because of that, and with regards to the ancestors of a top-level
-node, no additional requirements are added, if case (3) is limited to the exit
-events of the first ancestors (i.e. parents).
+node, no additional requirements are added, if this case is limited to the exit
+events of the nearest ancestors (i.e. parents).
 
 Any attempt to use the exit event of any other ancestor will add an additional
 requirement. That is, because from the perspective of the definition of a
 sectioning node, other ancestors are not guaranteed to exist. Put differently,
-and unless defined otherwise, a sectioning node can be a direct descendant
-(i.e. child) of the root and, as such, does not have any ancestor other than
-its parent (i.e. the root).
+a sectioning node, unless defined otherwise, can be a direct descendant of the
+root (i.e. child) and, as such, does not have any ancestor other than its parent
+node (i.e. root).
 
 However, this case also requires, that a section always has at least one node.
+
+### conclusion
+
+None of the above cases is suited to support empty sections. That is, because
+all of them, one way or another, add a requirement that at least one subsequent
+node must exist. Even if there were corresponding definitions, it simply is not
+possible to truly guarantee that even one subsequent node always exists.
+
+However, because the sectioning node has already been entered, the sectioning
+node itself is guaranteed to exist. Because of that, its events can be used
+to end the section it declares. For obvious reasons, it is unreasonable to use
+the same event to open and close a declared section. That is, because it would
+guarantee that the declared sections would always be empty. Consequently, the
+only event that can be used is the sectioning node's exit event.
+
+In addition to that, and except for the root node itself, any sectioning node
+always has a parent node. Because of that, the events of the sectioning node's
+parent are also candidates to close a section by default. However, the parent's
+enter event is unavailable because it will always be executed even before the
+sectioning node is entered. Consequently, the event that remains here is the
+parent's exit event.
+
+**CLARIFICATION**
+The only events that can be used to generically limit the scope of a section
+by default are: (1) the exit events of the sectioning nodes, and (2) the exit
+events of their parent nodes.
+
+Note that these events are in general independent of the specific type of
+section. That is, additional types of sectioning nodes would have to add
+even further requirements if they intended to use other events. Because of
+that, only these two events can be used to end a section.
 
 <!-- ======================================================================= -->
 ## the default scope
 
-Just because an event can be used to generically limit the scope of a section,
-it does not mean that it would be reasonable to do so. Because of that, it is
-necessary to take a look at which effects such a definition would have. **TODO**
+As mentioned above, it is technically possible to generically limit the scope
+of a section. Because of that, the next question is: Would it be reasonable to
+restrict the scope of a section by definition?
 
-Consequently, the definition of a section is actually a definition by exclusion:
-`r in (a,b)`. That is, any positive number in between `(a+e)` and `(b-e)` is
-included.
+On a side note: What is the value of a data format,
+if it does not allow an algorithm to produce consistent results?
+
+```
+1) ... n1:s </parent> n2:s ...
+2) ... <group> n1:s </parent> n2:s </group> ...
+```
+
+Assumed that nodes `n1` and `n2` are the only top-level nodes of section `s` and
+that `n2` is the first subsequent node after `n1`'s parent is exited. Note that
+this parent node will either be the sectioning node's parent, or the sectioning
+node itself.
+
+Obviously, consistent transformations (and consequently dynamic support) are not
+possible, if a section contains top-level nodes that belong to different parent
+nodes. Because of that, unrestricted sections need to end with the first node's
+parent node. That is, the parent's exit event must be used to close the
+corresponding section.
+
+**DEFINITION**
+The parent node of a section's top-level nodes will be referred to as the
+section's parent container.
+
+Note that the exact definition of a section's parent container must depend
+on the definition of the corresponding sectioning node. The parent container
+would otherwise be undefined for as long as a section has no first node and,
+because of that, an algorithm could not decide when it needs to close the
+corresponding section. Again, optional subsequent nodes, which might close
+the declared section, are outside of the sectioning node's context.
+
+**CLARIFICATION**
+Allowing to let a section to reach past its parent container can potentially
+add a descendant of a presequent sibling to the context of a subsequent node.
+As such, this option would be in conflict with the current definition of "the
+context of a node".
+
+### type-1, first child
+
+**DEFINITION**
+The default scope of a type-1 section ends with its sectioning node.
+
+**CLARIFICATION**
+An algorithm must mark a type-1 section as being closed as soon as it enters
+the exit event of its sectioning node. Consequently, a type-1 sectioning node
+represents the parent container of the declared type-1 section.
+
+Note that, because the root node must always be seen to represent a type-1
+sectioning node, there is no need to take the root's missing parent node
+into account.
+
+**CLARIFICATION**
+Even if the default scope of a type-1 section has to end with the section's
+sectioning node, a type-1 section can technically still be closed by an event
+that is subsequent to the section's open and presequent to the container's
+exit event. Again, just because an option is technically possible, it does not
+imply that it would be reasonable to support such an option.
+
+### type-2, next sibling
+
+**DEFINITION**
+The default scope of a type-2 section ends with the parent of its
+sectioning node.
+
+**CLARIFICATION**
+An algorithm must mark a type-2 section as being closed as soon as it enters
+the exit event of the sectioning node's parent. Consequently, the parent of a
+type-2 sectioning node represents the parent container of the declared type-2
+section.
+
+Note that the parent container of a type-2 section is guaranteed to exist. That
+is, because an algorithm must always treat its root node as a type-1 sectioning
+node, even if that node is by definition a type-2 sectioning node. However,
+these side effects can be avoided, if an algorithm is only allowed to begin its
+execution with certain nodes (e.g. type-1 sectioning nodes).
+
+Note that an algorithm, which begins with a type-2 sectioning node as its root,
+will not visit the actual content nodes of that type-2 section. In addition to
+that, a type-2 sectioning node is defined to only contain passive nodes. Because
+of that, an algorithm will produce a single section that contains all the node's
+descendants, if it had to begin with a type-2 sectioning node.
+
+**CLARIFICATION**
+Closing a type-2 section when its parent container is exited can not be avoided,
+if the type-2 definition is strict (see also "Why no loose type-2 definition?").
+
+That is, because if a type-2 sectioning node has no next sibling, the first node
+associated will be the next sibling of one of the sectioning node's ancestors,
+if one even exists. Consequently, the type-2 section would be in conflict with
+the strict type-2 definition.
+
+<!-- ======================================================================= -->
+## derived statements
+
+**Memory hook**
+A section, as an abstract group of nodes, can be seen to be located in between
+the section's parent container and the section's top-level nodes. As such, a
+section can be seen to separate its nodes from the rest of the node tree. Any
+node beneath that separator belongs to the section, and any node above or next
+to it does not.
+
+```
+             n1
+             |
+ ------------------------
+  |     |    section   | 
+  |    ==================
+  |     |   separator  | 
+  n2    n3             n4
+```
+
+(Node `n2` needs to be seen as a type-2 sectioning node.)
+
+**CLARIFICATION**
+The default scope of a section ends with the section's parent container.
+
+Note that this statement does not turn a section's parent container into an
+active node. However, the parent container does also not have to be an inactive
+node (e.g. type-1 sectioning node). Put differently, whether a parent container
+is an active, or an inactive node depends on the node's own definition, not on
+the necessity that an inner section's default scope has to end with it. That is,
+the parent container by itself does not add anything to that requirement.

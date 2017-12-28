@@ -3,10 +3,6 @@
 # List of things to do
 
 **TODO**
-Allowing to let a type-2 section reach past its parent container is effectively
-adding a descendant of a presequent sibling to the context of a subsequent node.
-
-**TODO**
 no conflict in location of a section -
 sectioning node, first node, last node, etc.
 
@@ -35,4 +31,5 @@ requires hierarchy of sections
 
 **TODO**
 can a running algorithm easily store references to all top-level nodes? -
-is it possible to avoid having to determine them manually?
+is it possible to avoid having to determine them manually by providing
+a list of top-level nodes?

@@ -15,8 +15,9 @@ created/initialized/known and (2) an algorithm needs to, at some later point
 in time, begin associating nodes with it.
 
 (-> initialized)
-A section's "initialized" state is a section's first/initial state,
-which needs to be set once a section object is created.
+As soon as a new section object is created, it must be marked as being
+"initialized". A section's "initialized" state therefore is a section's
+first/initial state.
 
 <!-- ======================================================================= -->
 ## open state
@@ -54,12 +55,48 @@ A section can only change its state to "closed",
 if its current state is "open".
 
 <!-- ======================================================================= -->
-## set of open sections
+## derived statements
 
-As mentioned earlier, an algorithm needs rules that enable it to determine
-when it is no longer allowed to associate any more nodes with a known section.
-Once such a rule applies, an algorithm must mark the corresponding section,
-or multiples thereof, as being "closed".
+**CLARIFICATION**
+The event that is used to create and initialize a new section object (e.g. the
+enter event of its sectioning node) is said to represent a section's "create"
+event. Likewise, the event used to open a section is referred to as a section's
+"open" event, and the event used to close a section as the section's "close"
+event.
+
+In short: No other operation is allowed to be executed. That is, an algorithm
+is not allowed to associate any nodes with the corresponding section (i.e. add
+nodes to it) during the execution of one of the above mentioned events. These
+events are only allowed to change a section's state.
+
+However, a single node event can still be used to execute multiple section
+events. A node event can still create, initialize and open a declared section.
+Also, a single node event could in theory open and close a section. Obviously,
+and in the latter case, such a section would always count as being empty.
+
+**CLARIFICATION**
+A section that counts as being "initialized" is neither "open" nor "closed".
+
+The goal must be to have clear definitions, for each and every section, which
+clearly state when a section has to be opened and when it has to closed. That
+is, it must count as an implementation or even a design error, if an
+implementation would try to execute an undefined state transition.
+
+The contents of a section, that still counts as being "initialized", must be
+understood to be "undefined". As such, no statements can be made with regards
+to the contents of such a section. That is, because the section's "open" event
+was never executed. Consequently, a section that was never opened can also not
+be seen as being "empty". After all, an "initialized" section can still be
+opened, and nodes can still be associated with it. Any attempt to close an
+"initialized" section, without first changing its state to being "open", must
+be understood to represent an error.
+
+In short: No other transitions, except for the above mentioned, are allowed.
+In addition to that, no statements can be made with regards to the contents
+of a section, unless the section's state is "closed".
+
+<!-- ======================================================================= -->
+## set of open sections
 
 At any given point in time, any section within the set of known sections is
 either "initialized", "open" or "closed". Because of that, the set of known
@@ -78,34 +115,6 @@ allowed unless a section's state is "open".
 ## derived statements
 
 **CLARIFICATION**
-The event used to create a new section object (e.g. the enter event of its
-sectioning node) is said to represent a section's "create" event. Likewise,
-the event used to open a section is referred to as a section's "open" event,
-and the event that is used to close a section as the section's "close" event.
-
-Unless defined otherwise, no other operation, with regards to the section in
-question, is allowed to be executed. That is, an algorithm is not allowed to
-associate any node with the corresponding section (i.e. add nodes to it) during
-the execution of the above mentioned events. These events are only allowed to
-change a section's state.
-
-**CLARIFICATION**
-A closed section can only be understood to represent an empty section, if
-it was opened and then closed without associating any nodes with it.
-
-The contents of a section, that still counts as being "initialized", must be
-understood to be "undefined". That is, because the section's "open" event was
-not yet executed. Because of that, no statements can be made with regards to
-the contents of such a section. Consequently, a section that was never opened
-can also not be seen to be "empty". After all, an "initialized" section can
-still be opened, and nodes can still be associated with it. Any attempt to
-close an "initialized" section must be understood to represent an error.
-
-In short: The state transitions must be understood to be strict. That is, no
-other transitions are allowed. And, in general, no statements can be made with
-regards to the contents of a section, unless the section's state is "closed".
-
-**CLARIFICATION**
 It is not allowed to re-initialize, or re-open a closed section.
 
 A section's "close" event, and the corresponding rules, can therefore also
@@ -120,10 +129,6 @@ error.
 Re-opening a section for additional associations would be in conflict with the
 above guarantee. Because of that, such an operation must be understood as an
 attempt to suspend and then resume a section.
-
-**CLARIFICATION**
-Once closed, a section is fully defined/specified. That is, because no
-subsequent node will, by definition, have any further effect on it.
 
 **CLARIFICATION**
 A section can not be strictly suspended.
@@ -172,6 +177,10 @@ A section has no gaps.
 
 Because of that, any node belongs to a section, if it is subsequent to the
 section's first and presequent to the section's last node.
+
+**CLARIFICATION**
+Once closed, a section is fully defined/specified. That is, because no
+subsequent node will, by definition, have any further effect on it.
 
 <!-- ======================================================================= -->
 ## derived statements

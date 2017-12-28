@@ -99,6 +99,11 @@ served in any particular order. Subsequent runs will produce different results
 siblings would have to belong to a type-2 section. Consequently, type-2
 sectioning nodes would be similar to type-1 sectioning nodes.
 
+**DEFINITION**
+A type-2 sectioning node must not contain an active node as one of its
+descendant nodes. The descendants of a type-2 sectioning node must only
+be used to initialize the declared section. (see below).
+
 <!-- ======================================================================= -->
 ## derived statements
 

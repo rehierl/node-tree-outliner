@@ -268,10 +268,10 @@ determined from the associations the sections have with the nodes of the tree.
 The scope of a section, respectively the scope of a sectioning node, is the
 range of subsequent nodes that are related to it.
 
-The scope of a section therefore begins with the section's first node and ends
-with the section's last node. Consequently, any non-empty section always has a
-non-empty scope. The scope of an empty section is said to be empty. However,
-an empty section can also be seen to have no scope at all.
+The scope of a section begins with the section's first node and ends with the
+section's last node. Consequently, any non-empty section always has a non-empty
+scope. The scope of an empty section is said to be empty. However, an empty
+section can also be seen to have no scope at all.
 
 <!-- ======================================================================= -->
 ## sectioning nodes, NxS
@@ -303,6 +303,20 @@ In general, and from that point on, any subsequent node must be associated with
 the new and any other known section. Consequently, any node potentially belongs
 to multiple sections. That is, because any node can be subsequent to any number
 of sectioning nodes.
+
+**DEFINITION**
+With regards to the process of creating an outline, the sectioning nodes of a
+tree can be referred to as a tree's "active" nodes. Any other node can therefore
+be seen to be an "inactive" or a "passive" node. Because of that, the set of
+nodes within a tree can be broken apart into active and passive nodes.
+
+Here, the notion of the terms "active" and "passive" refers to a node's ability
+to influence the creation of an outline. If a node has an effect on the outline,
+the node is active, otherwise it is passive.
+
+Note that this definition assumes that no other types of nodes are active nodes.
+If that changes, e.g. due to the definition of end marker nodes, then the set of
+active nodes also contain these new nodes.
 
 **DEFINITION**
 A sectioning node does not belong to its own section.
