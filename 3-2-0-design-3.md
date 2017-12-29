@@ -3,9 +3,9 @@
 # Design (3) - sectioning nodes
 
 Because a section is a sequence of strictly subsequent nodes, definitions only
-need to tell an algorithm when a section begins and when it ends. In addition to
-that, an algorithm must have the means to implement the corresponding operations
-efficiently, or even at all.
+need to tell an algorithm when a section begins and when it ends. In addition
+to that, an algorithm must have the means to implement the corresponding
+operations efficiently, or even at all.
 
 Because an algorithm knows about a section as soon as it enters the section's
 sectioning node, it has the ability to execute operations that prepare itself

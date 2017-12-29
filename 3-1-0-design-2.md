@@ -205,8 +205,13 @@ That is, because any node must be associated with a section while it is being
 entered. Consequently, the node order of a section corresponds with the node
 order of the tree.
 
+Note that this statement by itself allows sections to have gaps. Consequently,
+the above statement is not overly accurate. That is, because sections do not
+contain any gaps.
+
 **CLARIFICATION**
 A section is a sequence of strictly subsequent nodes.
+And, because of that, a section is a subsequence of the tree's node sequence.
 
 That is, because a section corresponds with the node sequence of a tree, and
 because a section has no gaps in between any two of its adjacent nodes.

@@ -358,5 +358,53 @@ Note that this statement does not turn a section's parent container into an
 active node. However, the parent container does also not have to be an inactive
 node (e.g. type-1 sectioning node). Put differently, whether a parent container
 is an active, or an inactive node depends on the node's own definition, not on
-the necessity that an inner section's default scope has to end with it. That is,
-the parent container by itself does not add anything to that requirement.
+the necessity that an inner section's default scope has to end with it. That
+is, the parent container by itself does not add anything to that requirement.
+
+**CLARIFICATION**
+The default scopes of multiple sections may end with the same parent container.
+
+Obviously, a parent container may contain multiple type-2 sectioning nodes.
+Because of that, such a parent container marks the end of the default scopes
+of all of those declared sections.
+
+Consequently, there is a 1:M relationship between the set of parent containers
+and the set of sections (or sectioning nodes).
+
+**CLARIFICATION**
+A parent container, which marks the end of a section's default scope,
+does not belong to the corresponding section.
+
+*With regards to type-1 sectioning nodes*:
+
+Any sectioning node is defined to not be part of the section it
+declares (this includes the parent container of a type-1 section).
+
+Note that associating sectioning nodes with the sections they declare would,
+at this point, add some inconsistency with the type-2 case. However, this is
+just a minor aspect as to why not to associate sectioning nodes with the
+sections they declare.
+
+*With regards to type-2 sectioning nodes*:
+
+If a parent container belonged to such a section, it would be one of the
+section's top-level nodes. (To be more clear, the parent container would then
+be the section's only top-level node). Consequently, nodes that are presequent
+to a type-2 sectioning node, whose default scope the parent container has to
+end, would implicitly be associated with a subsequent section. That is, the
+subsequent sectioning node would have an effect on nodes that are presequent
+to it. Because of this potential conflict, the parent container of a type-2
+section must not belong to the section whose default scope it has to end.
+
+Put differently: The presequent parent container would have to be associated
+with a section which is declared by a subsequent sectioning node (i.e. with
+an, at the time of being entered, undefined section).
+
+**CLARIFICATION**
+A section is not some arbitrary subsequence of the tree's node sequence.
+
+In addition to being a mere subsequence, any event executed in between
+two nodes of a section belongs to an associated node. Put differently, any
+event in between entering a section's first and exiting a section's last
+node belongs to one of the section's nodes. That is, because the default
+scope ends with the first exit event that belongs to an unassociated node.
