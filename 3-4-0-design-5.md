@@ -3,46 +3,46 @@
 # Design (5) - last nodes
 
 **CLARIFICATION**
-A section can be seen to *end with an associated container*, if the
+A section can be understood to *end with an associated container*, if the
 section's last node is the last subsequent descendant of that container.
 
 **CLARIFICATION**
-A section can be seen to *end inside of an associated container*, if the
-last subsequent descendant of that container is the section's last node.
+A section can be understood to *end inside of an associated container*,
+if the section ends with it.
 
 Note that this perspective can be misleading. That is, because in order
 for that statement to be true, a section must end with the last subsequent
 descendant (i.e. not some arbitrarily selected descendant).
 
 **CLARIFICATION**
-A section can be seen to *end with an unassociated container*, if the section's
-last node is the container's last subsequent descendant. Consequently, any
-remaining open section can be seen to end with the tree's root.
+A section can be understood to *end with an unassociated container*, if the
+section's last node is the container's last subsequent descendant. Consequently,
+any remaining open section can be understood to end with the tree's root.
 
 **CLARIFICATION**
 The last subsequent node of a section will always be a leaf (either by strict,
 or by loose association). Put differently, the last node of a section will
-never be a parent node.
+never be a parent.
 
 That is, because a section's last node would not be the section's last node,
-if it were a parent node (see: tree traversal).
+if it were a parent (see: tree traversal).
 
-However, no such clarification can be derived for the first node of a section.
+Note that no such clarification can be derived for the first node of a section.
 That is, because the first node of a section depends on the definition of the
 sectioning node (as it should be). In addition to that, such a definition
-should not require a specific first node.
+should not require any specific first node.
 
 **CLARIFICATION**
 In contrary to a section's first node, it is in principle not possible
 to precisely pinpoint a section's last node independently of any specific
-structure. Consequently, the same also applies to the the relationship
-between a section's first and last node.
+structure. Consequently, the relationship between a section's first and
+last node can not be accurately defined.
 
 That is, because any associated node can potentially have any number of
 descendant nodes. Because of that, and if the last node had a descendant,
 that last node would then not be the section's last node. Due to the loose
 associations mentioned earlier, the node tree and the section's definition
-would then be in conflict with each other.
+would be in conflict with each other.
 
 <!-- ======================================================================= -->
 ## question
@@ -230,15 +230,15 @@ events of their parent nodes.
 <!-- ======================================================================= -->
 ## the default scope
 
-The next question is: Would it reasonable to use the definition of a sectioning
-node to restrict the default scope of a section?
+Would it be reasonable to use the definition of a sectioning node to restrict
+the default scope of a section?
 
 ```
 1) ... n1:s </parent> n2:s ...
 2) ... <group> n1:s </parent> n2:s </group> ...
 ```
 
-Assumed that nodes `n1` and `n2` are the only top-level nodes of section `s`
+Assumed that nodes `n1` and `n2` are the only top-level nodes of section
 and that `n2` is the first subsequent node after `n1`'s parent is exited.
 
 Obviously, consistent transformations (and consequently dynamic support) are
@@ -248,20 +248,21 @@ to end with the exit event of the first node's parent node.
 
 **DEFINITION**
 The parent node of a section's first node
-is said to be the section's "parent container".
+will be referred to as the section's "parent container".
 
 Note that the parent container of a section either is the section's
 sectioning node (type-1), or the parent node of its sectioning node (type-2).
 
-Note that allowing a section to contain nodes, that are subsequent to its
-parent container's exit event, can potentially add a descendant of a presequent
-sibling to the context of a subsequent node. Such an option would therefore be
-in conflict with the current definition of "the context of a node".
+Note that allowing a section to contain nodes, that are subsequent to its parent
+container's exit event, can potentially add a descendant of a presequent sibling
+to the context of a subsequent node. Such an option would therefore be in
+conflict with the current definition of a node's context.
 
 ### type-1, first child
 
 **DEFINITION**
-The default scope of a type-1 section ends with its sectioning node.
+The default scope of a type-1 section
+ends with its sectioning node.
 
 **CLARIFICATION**
 An algorithm must mark a type-1 section as being closed as soon as it enters
@@ -272,27 +273,36 @@ Note that, because the root node must always be seen to represent a type-1
 sectioning node, there is no need to take the root's missing parent node
 into account.
 
+Note that no two type-1 sections have the same parent container. That is,
+because any sectioning node always declares a single section only.
+
 **CLARIFICATION**
 Even if the default scope of a type-1 section has to end with the section's
 sectioning node, a type-1 section can technically still be closed by an event
-that is subsequent to the section's open and presequent to the container's
-exit event. Again, just because an option is technically possible, it does not
-imply that it would be reasonable to support such an option.
+that is subsequent to the section's open and presequent to its close event.
+
+Again, just because an option is technically possible, it does not imply that
+it would be reasonable to support such an option.
 
 ### type-2, next sibling
 
 **DEFINITION**
-The default scope of a type-2 section ends with the parent of its
-sectioning node.
+The default scope of a type-2 section
+ends with the parent of its sectioning node.
 
 **CLARIFICATION**
 An algorithm must mark a type-2 section as being closed as soon as it enters
 the exit event of the sectioning node's parent. Consequently, the parent of a
 type-2 sectioning node represents the parent container of the declared section.
 
-Note that the parent container of a type-2 section is presequent to the
-section's sectioning node. That is, because the parent container is an
-ancestor of the section's sectioning node.
+Note that the parent container of a type-2 section is presequent to its
+sectioning node. That is, because the parent container is an ancestor of
+the sectioning node and, as such, will be entered before the sectioning
+node is entered.
+
+Note that multiple type-2 sections can have the same parent container. In
+addition to that, the parent container of a type-2 section may even be the
+parent container of a type-1 section (i.e. a type-1 sectioning node).
 
 Note that the parent container of a type-2 section is guaranteed to exist.
 That is, because an algorithm must always treat its root node as a type-1
@@ -303,17 +313,17 @@ to begin its execution with certain nodes (e.g. type-1 sectioning nodes).
 Note that an algorithm, which begins with a type-2 sectioning node, will
 not visit the section's actual content nodes. In addition to that, a type-2
 sectioning node is defined to only contain passive nodes. Because of that,
-an algorithm would only produce a single section that is limited to all the
-sectioning node's descendants.
+an algorithm would only produce a single section that is limited to the
+descendants of the type-2 sectioning node.
 
 **CLARIFICATION**
-Closing a type-2 section when its parent container is exited can not be avoided,
+Closing a type-2 section when its parent container is exited is a necessity,
 if the type-2 definition is strict (see: "Why no loose type-2 definition?").
 
-That is, because if a type-2 sectioning node has no next sibling, the first node
-associated will be the next sibling of one of the sectioning node's ancestors,
-if one even exists. Consequently, the type-2 section would then be in conflict
-with the strict type-2 definition.
+That is, because if a type-2 sectioning node has no next sibling, the first
+node associated will be the next sibling of one of the sectioning node's
+ancestors. The type-2 section would then consequently be in conflict with
+a strict type-2 definition.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -348,14 +358,14 @@ Note that this statement neither turns a section's parent container into an
 active node, nor does it force a section's parent container to be an inactive
 node (e.g. type-1 sectioning node). Put differently, whether a parent container
 is active or inactive only depends on the node's own definition, not on the
-requirement that an inner section's default scope has to end with it.
+requirement that a section's default scope has to end with it.
 
 **CLARIFICATION**
 The default scopes of multiple sections may end with the same parent container.
 
-Obviously, a parent container may have multiple type-2 sectioning nodes as
-its child nodes. Because of that, such a parent container marks the end of
-the default scopes of all of those sections.
+Obviously, a parent container may have multiple type-2 sectioning nodes as its
+child nodes. Because of that, such a parent container marks the end of the
+default scopes of all of those sections.
 
 Consequently, there is a 1:M relationship (not 1:1) between the set of parent
 containers and the set of sections (or sectioning nodes).
@@ -393,9 +403,9 @@ an, at the time of being entered, unknown section.
 **CLARIFICATION**
 A section is not some arbitrary subsequence of the tree's node sequence.
 
-In addition to being a mere subsequence, any event executed in between two
-nodes of a section belongs to an associated node. Put differently, any event
-in between entering a section's first and exiting a section's last node belongs
-to an associated node. That is, because (1) nodes are associated while they
-are being entered and (2) the section's default scope ends with the first exit
-event of a presequent and unassociated node.
+In addition to being a subsequence, any event executed in between two nodes of
+a section belongs to an associated node. Put differently, any event in between
+entering a section's first and exiting a section's last node belongs to an
+associated node. That is, because (1) nodes are associated while they are being
+entered and (2) the section's default scope ends with the first exit event of a
+presequent and unassociated node.

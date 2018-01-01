@@ -173,17 +173,19 @@ greater "distance" between those two nodes would always have to be taken
 into account.
 
 () Because the previous sibling of the first node could potentially be an
-ancestor of the sectioning node, there would have to be a clear reason as to
-why that ancestor is not supposed to be the actual sectioning node.
+ancestor of the sectioning node, there would have to be a clear reason as
+to why that ancestor is not supposed to be the actual sectioning node.
 
-Note that there is a certain amount of "symmetry" that needs to be taken into
-account. After all, it does not make much sense to define an additional type
-of sectioning nodes, if it would only be slightly different to an existing one.
+Consequently, a certain amount of "symmetry" needs to be taken into account
+when defining sectioning nodes. After all, it does not make much sense to define
+an additional type of sectioning nodes, if it would only be slightly different
+to an existing one.
 
 () It does matter, where the sectioning node and the section's first node is
-located. Both can be seen to define the "location" of a section. Consequently,
-the corresponding statements can be understood to be in conflict with each
-other, if both nodes turn out to have different parent nodes.
+located. Both can be seen to define the "location" of a section, and, as such
+the relationship with other sections. Consequently, the corresponding statements
+can be understood to be in conflict with each other, if both nodes turn out to
+have different parent nodes.
 
 Note that this can also be understood to indicate that all sections must be
 strongly connected. That is, a section must not be allowed to contain any gaps
