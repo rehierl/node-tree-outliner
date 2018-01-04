@@ -3,6 +3,9 @@
 # List of things to do
 
 **TODO**
+clearly state what content nodes are
+
+**TODO**
 no conflict in location of a section -
 sectioning node, first node, last node, etc.
 
