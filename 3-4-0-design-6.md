@@ -21,21 +21,22 @@ sections, which obviously does not include the characteristic to close any
 predeclared section. Because of that, and so far, the only option to close
 a section is by exiting the section's parent container.
 
-Note that this does not imply that an additional sectioning node property
-(e.g. rank) can not result in such a characteristic. However, these additional
-properties can only be defined if they do not produce any conflict with the
-following statements.
+Note that this does not imply that a (to be defined) sectioning node property
+can not result in such a characteristic. However, these additional properties
+must not produce any conflict with the following statements.
 
 **CLARIFICATION**
-A subsequent section is said to belong to a presequent section, if the
-presequent section still counts as being open when the subsequent sectioning
-node is entered.
+Two sections may have nodes in common, if nodes exist that are associated
+with both sections. This can only be the case, if the presequent section
+still counts as being open when the subsequent sectioning node is entered.
+In such a case, the subsequent section is said to belong to the presequent
+section.
 
-Note that this indicates that a section's sectioning node and its content
-nodes must be strongly connected. It must not be allowed to have a subsequent
-sectioning node belong to a presequent section, but not the the content
-nodes of the subsequent section. This would otherwise result in conflicting
-statements.
+Note that a section's sectioning node and its content nodes must be strongly
+connected. It must not be allowed to have a subsequent sectioning node belong
+to a presequent section, but not the content nodes of the subsequent section.
+This could otherwise result in conflicting statements with regards to the
+subsequent section's location.
 
 **CLARIFICATION**
 Two sections have no nodes in common, if the presequent section is closed
@@ -50,18 +51,13 @@ A section that belongs to another section is said to be "an inner section of"
 the presequent section. In addition to that, the presequent section is said
 to be "the parent section of" the inner section.
 
-Note that the "an inner section of" reference, for now only refers to a section
-that belongs to another section. That is, a reference without any additional
+At this point, the "an inner section of" reference only refers to a section
+which belongs to another section. That is, a reference without any additional
 meaning. Likewise, the "the parent section of" reference only refers to a
-section that is presequent to one of its inner sections.
+section which is presequent to one of its inner sections.
 
-The actual semantics of these references will be defined below.
-
-**CLARIFICATION**
-The parent container of an inner section either is the parent container of its
-parent section, or a descendant of the parent section's parent container. Put
-differently, the parent container of an inner section is by definition never
-an ancestor of the parent section's parent container.
+**Memory hook**
+Just an example to showcase the parent containers of a section.
 
 ```
               n1
@@ -69,15 +65,24 @@ A:        ==========
           n2      n3
 B:  ===========
 C:  n4 ========
-       n5 n6 n7
+D:     n5 =====
 ```
 
-(Nodes `n1` and `n2` represent type-1 sectioning nodes
-and `n4` a type-2 sectioning node.)
+Nodes `n1` and `n2` represent type-1 sectioning nodes.
+Nodes `n4` and `n5` represent type-2 sectioning nodes.
 
 **CLARIFICATION**
-The default scope of an inner section always begins and always ends inside
-of, or with the default scope of its parent section.
+The parent container of an inner section either is the parent container of its
+parent section, or a descendant of the parent section's parent container. Put
+differently, the parent container of an inner section is never an ancestor of
+the parent section's parent container.
+
+**TODO** -
+explain in detail?
+
+**CLARIFICATION**
+The default scope of an inner section always begins and always
+ends inside of, or with the default scope of its parent section.
 
 (1) An inner section always ends with, or inside of its parent section:
 That is, because the inner section's parent container never is an ancestor
@@ -88,27 +93,47 @@ That is, because the first content node of an inner section always is
 located in between the inner section's sectioning node and the end of
 the inner section's parent container.
 
+Put differently: No inner section can contain even one node that does not
+also belong to the inner section's parent section.
+
 **CLARIFICATION**
-The content nodes of an inner section also belong to the parent section. As
+All content nodes of an inner section also belong to the parent section. As
 such, they must be associated with the inner section and the parent section.
 
 That is, because both sections count as being open for as long as the inner
 section is open. Because of that, all the content nodes of an inner section
 must also be associated with the inner section's parent section.
 
-Note that this is a purely formal requirement because the definitions treat
-all sections as separate entities. Practically, and depending on the exact
-structure of sections, it could still be possible to strictly associate any
-node with one section only.
+This is however a purely formal requirement. That is, because the definitions
+treat all sections as separate entities. Practically, and depending on the
+exact nature of the resulting structure of sections, it could still be allowed
+to strictly associate a node with one section only. That is, if the strict
+associations in combination with the relationship between sections result in
+implicit associations of the nodes of an inner section with the inner section's
+ancestor sections.
 
 **DEFINITION**
-An inner section is said to be a sub-section of its parent section.
+An inner section is said to be a sub-section of its parent section. That is,
+because any content node of a subsection also belongs to the corresponding
+parent section.
 
-That is, because any content node of a subsection also belongs to
-the corresponding parent section.
+Note that this definition is similar to the formal definition
+of a subset of values:
 
-Note that this definition is similar to the formal definition of
-a "subset": i.e. `(V subset-of W) := ((v in W) for any (v in V))`
+* `(V subset-of W) := ((v in W) for any (v in V))`
+
+**CLARIFICATION**
+The intersection of a subsection with its parent section is always identical
+to the subsection itself. That is, because all the nodes of a subsection also
+belong to the parent section.
+
+* `(A & B), (A and B) := { x : (x in A) and (x in B) }`
+* `(s & p) == s`, for any subset `s` and parent set `p`
+
+**CLARIFICATION**
+A section, a type-2 section in particular, can be an inner section of multiple
+other parent sections. That is, because a section can be subsequent to one or
+more open sections.
 
 <!-- ======================================================================= -->
 ## derived statements
