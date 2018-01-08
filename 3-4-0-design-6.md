@@ -26,11 +26,11 @@ can not result in such a characteristic. However, these additional properties
 must not produce any conflict with the following statements.
 
 **CLARIFICATION**
-Two sections may have nodes in common, if nodes exist that are associated
-with both sections. This can only be the case, if the presequent section
-still counts as being open when the subsequent sectioning node is entered.
-In such a case, the subsequent section is said to belong to the presequent
-section.
+Two sections have one or more nodes in common, if nodes exist that are
+associated with both sections. This can obviously only be the case, if the
+presequent section still counts as being open when the subsequent sectioning
+node is entered. In such a case, the subsequent section is said to belong to
+the presequent section.
 
 Note that a section's sectioning node and its content nodes must be strongly
 connected. It must not be allowed to have a subsequent sectioning node belong
@@ -96,31 +96,30 @@ the inner section's parent container.
 Put differently: No inner section can contain even one node that does not
 also belong to the inner section's parent section.
 
+<!-- ======================================================================= -->
+## derived statements
+
 **CLARIFICATION**
-All content nodes of an inner section also belong to the parent section. As
-such, they must be associated with the inner section and the parent section.
+All content nodes of an inner section also belong to its parent section.
+As such, its nodes must also be associated with its parent section.
 
 That is, because both sections count as being open for as long as the inner
 section is open. Because of that, all the content nodes of an inner section
 must also be associated with the inner section's parent section.
 
 This is however a purely formal requirement. That is, because the definitions
-treat all sections as separate entities. Practically, and depending on the
-exact nature of the resulting structure of sections, it could still be allowed
-to strictly associate a node with one section only. That is, if the strict
-associations in combination with the relationship between sections result in
-implicit associations of the nodes of an inner section with the inner section's
-ancestor sections.
+treat all sections as separate entities. For practical reasons, and depending
+on the exact nature of the resulting structure of sections, it could still be
+allowed to associate each node with one section only.
 
 **DEFINITION**
-An inner section is said to be a sub-section of its parent section. That is,
-because any content node of a subsection also belongs to the corresponding
-parent section.
+An inner section is said to be a sub-section of its parent section.
 
-Note that this definition is similar to the formal definition
-of a subset of values:
+Note that this definition is based upon the definition of a subset of values.
+That is, because sections can still be seen to represent sets of nodes.
 
 * `(V subset-of W) := ((v in W) for any (v in V))`
+* `(s subsection-of p) := (s subset-of p)`
 
 **CLARIFICATION**
 The intersection of a subsection with its parent section is always identical
@@ -128,12 +127,21 @@ to the subsection itself. That is, because all the nodes of a subsection also
 belong to the parent section.
 
 * `(A & B), (A and B) := { x : (x in A) and (x in B) }`
-* `(s & p) == s`, for any subset `s` and parent set `p`
+* `(s & p) == s`, for any subset `s` and a parent set `p`
+
+**CLARIFICATION**
+A subsection is a subsequence of its parent section.
+
+That is, because any section is a subsequence of the tree's node sequence. In
+addition to that, all nodes of a subsection also belong to its parent section.
+
+<!-- ======================================================================= -->
+## derived statements
 
 **CLARIFICATION**
 A section, a type-2 section in particular, can be an inner section of multiple
 other parent sections. That is, because a section can be subsequent to one or
 more open sections.
 
-<!-- ======================================================================= -->
-## derived statements
+**TODO** -
+define "parent section of a node"
