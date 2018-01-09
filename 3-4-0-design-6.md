@@ -29,8 +29,7 @@ must not produce any conflict with the following statements.
 Two sections have one or more nodes in common, if nodes exist that are
 associated with both sections. This can obviously only be the case, if the
 presequent section still counts as being open when the subsequent sectioning
-node is entered. In such a case, the subsequent section is said to belong to
-the presequent section.
+node is entered.
 
 Note that a section's sectioning node and its content nodes must be strongly
 connected. It must not be allowed to have a subsequent sectioning node belong
@@ -46,6 +45,14 @@ Note that these circumstances are of no interest at this point. The relevant
 aspect here is to define the relationship between two sections, if those two
 sections have one or more nodes in common.
 
+<!-- ======================================================================= -->
+## inner section
+
+**CLARIFICATION**
+A section which is subsequent to an open section is said to belong to the
+presequent section. In addition to that, the presequent section is said to
+contain the subsequent section.
+
 **CLARIFICATION**
 A section that belongs to another section is said to be "an inner section of"
 the presequent section. In addition to that, the presequent section is said
@@ -56,8 +63,13 @@ which belongs to another section. That is, a reference without any additional
 meaning. Likewise, the "the parent section of" reference only refers to a
 section which is presequent to one of its inner sections.
 
+Note that both sections are not required to have any content nodes in common.
+That is, because the subsequent sectioning node is a content node of the
+presequent, but not a content node of its own section. In short: The subsequent
+section is not required to have any content nodes at all.
+
 **Memory hook**
-Just an example to showcase the parent containers of a section.
+Just an example:
 
 ```
               n1
@@ -72,10 +84,10 @@ Nodes `n1` and `n2` represent type-1 sectioning nodes.
 Nodes `n4` and `n5` represent type-2 sectioning nodes.
 
 **CLARIFICATION**
-The parent container of an inner section either is the parent container of its
-parent section, or a descendant of the parent section's parent container. Put
-differently, the parent container of an inner section is never an ancestor of
-the parent section's parent container.
+The parent container of an inner section either is the parent container of
+its parent section, or a descendant of the parent section's parent container.
+Put differently, the parent container of an inner section is never an ancestor
+of the parent section's parent container.
 
 **TODO** -
 explain in detail?
@@ -96,52 +108,71 @@ the inner section's parent container.
 Put differently: No inner section can contain even one node that does not
 also belong to the inner section's parent section.
 
-<!-- ======================================================================= -->
-## derived statements
-
 **CLARIFICATION**
-All content nodes of an inner section also belong to its parent section.
-As such, its nodes must also be associated with its parent section.
+All content nodes of an inner section are also content nodes of the inner
+section's parent section.
 
 That is, because both sections count as being open for as long as the inner
-section is open. Because of that, all the content nodes of an inner section
-must also be associated with the inner section's parent section.
+section is open. Because of that, all content nodes of an inner section must
+also be associated with the inner section's parent section.
 
 This is however a purely formal requirement. That is, because the definitions
 treat all sections as separate entities. For practical reasons, and depending
 on the exact nature of the resulting structure of sections, it could still be
 allowed to associate each node with one section only.
 
+**CLARIFICATION**
+A parent section, which only contains a single inner section, will always
+contain at least one content node that does not belong to the inner section
+(i.e. the subsection's sectioning node). Because of that, a parent section
+will never be empty - even if all of its inner sections are themselves empty.
+
+<!-- ======================================================================= -->
+## subsection
+
 **DEFINITION**
 An inner section is said to be a sub-section of its parent section.
 
 Note that this definition is based upon the definition of a subset of values.
-That is, because sections can still be seen to represent sets of nodes.
+That is, because a section can still be defined as a set of nodes.
 
 * `(V subset-of W) := ((v in W) for any (v in V))`
 * `(s subsection-of p) := (s subset-of p)`
 
+Note that, by this definition, the terms "inner section" and "subsection" are
+synonymous and independent of any section hierarchy. In addition to that, the
+term "parent section" may refer to multiple different sections. That is, a
+subsection does not necessarily have a single, unique parent section.
+
 **CLARIFICATION**
 The intersection of a subsection with its parent section is always identical
-to the subsection itself. That is, because all the nodes of a subsection also
-belong to the parent section.
+to the subsection itself. That is, because all content nodes of a subsection
+also belong to its parent section.
 
 * `(A & B), (A and B) := { x : (x in A) and (x in B) }`
 * `(s & p) == s`, for any subset `s` and a parent set `p`
 
 **CLARIFICATION**
-A subsection is a subsequence of its parent section.
+A subsection is a subsequence to its parent section.
 
 That is, because any section is a subsequence of the tree's node sequence. In
-addition to that, all nodes of a subsection also belong to its parent section.
+addition to that, all content nodes of a subsection also belong to its parent
+section.
+
+**CLARIFICATION**
+Any parent section may contain multiple subsections that are independent from
+each other. That is, the subsections of a parent section don't necessarily have
+any nodes in common.
+
+<!-- ======================================================================= -->
+## section hierarchy
+
+**CLARIFICATION**
+Any section can be a subsection of multiple parent sections. That is, because a
+section can be subsequent to one or more open sections.
 
 <!-- ======================================================================= -->
 ## derived statements
-
-**CLARIFICATION**
-A section, a type-2 section in particular, can be an inner section of multiple
-other parent sections. That is, because a section can be subsequent to one or
-more open sections.
 
 **TODO** -
 define "parent section of a node"
