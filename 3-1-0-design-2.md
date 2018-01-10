@@ -199,6 +199,11 @@ also be affected by nodes that are subsequent to it. Because of that, a node
 could end up having an effect on nodes that are presequent to it.
 
 **CLARIFICATION**
+All nodes that are entered in between a section's open and close events are
+said to define the content of a section. These nodes are said to be the content
+nodes of a section.
+
+**CLARIFICATION**
 A section is a sequence of subsequent nodes.
 
 That is, because any node must be associated with a section while it is being

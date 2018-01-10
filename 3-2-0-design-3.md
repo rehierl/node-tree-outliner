@@ -76,6 +76,12 @@ An algorithm must mark a type-2 section as being open when it is about to exit
 the sectioning node's exit event. Put differently, the sectioning node's exit
 event represents the section's open event.
 
+Note that, because the descendants of a type-2 sectioning node are entered
+before the section's open event is executed, the sectioning node's descendants
+do not contribute to the content of the declared type-2 section. In other words,
+these nodes are not content nodes of the declared section, but content nodes of
+the sections with which the sectioning node is associated.
+
 **CLARIFICATION**
 Authors need to be aware that, due to this strict definition (i.e. "next
 sibling"), the placement of a type-2 sectioning node is significant to the

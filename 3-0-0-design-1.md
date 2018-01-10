@@ -304,7 +304,7 @@ the new and any other known section. Consequently, any node potentially belongs
 to multiple sections. That is, because any node can be subsequent to any number
 of sectioning nodes.
 
-**DEFINITION**
+**CLARIFICATION**
 With regards to the process of creating an outline, the sectioning nodes of a
 tree can be referred to as a tree's "active" nodes. Any other node can therefore
 be seen to be an "inactive" or a "passive" node. Because of that, the set of
@@ -317,6 +317,11 @@ the node is active, otherwise it is passive.
 Note that this definition assumes that no other types of nodes are active nodes.
 If that changes, e.g. due to the definition of end marker nodes, then the set of
 active nodes also contain these new nodes.
+
+**CLARIFICATION**
+In order to simplify discussion, all the nodes of a section, excluding the
+section's sectioning node, are said to be the section's content nodes. All
+these nodes combined are said to define the content of a section.
 
 **DEFINITION**
 A sectioning node does not belong to its own section.
