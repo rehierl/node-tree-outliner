@@ -3,14 +3,14 @@
 # List of things to do
 
 **TODO**
+a section ends with the first unassociated node (exit event)
+
+**TODO**
 a section corresponds to some nodes in the tree -
 i.e. a section is an arbitrary set/group of nodes -
 they simply ignore the node order of a section! -
 you can not bend the rules of science, science bends you! -
 stop the pillow fight and find a consistent solution!
-
-**TODO**
-clearly state what content nodes are
 
 **TODO**
 no conflict in location of a section -

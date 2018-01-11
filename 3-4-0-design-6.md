@@ -81,9 +81,9 @@ clarify sibling sections
 
 **CLARIFICATION**
 A section that belongs to another section is said to be "an inner section of"
-the presequent section. In addition to that, the presequent section is said
-to be "a parent section of" the inner section. Consequently, an inner section
-is said to be related with all of its parent sections.
+the presequent section. In addition to that, the presequent section is said to
+be "a parent section of" the inner section. Consequently, an inner section is
+said to be related with all of its parent sections.
 
 Note that a section can be an inner section with regards to multiple different
 parent sections. That is, because it can be subsequent to multiple different
@@ -128,15 +128,14 @@ explain in detail?
 The default scope of an inner section begins and ends inside of,
 or with the default scope of its parent section.
 
-(1) An inner section always ends with, or inside of its parent section:
-That is, because the inner section's parent container never is an ancestor
-of the parent section's parent container. Because of that, an inner section
-can not end outside of its parent section.
-
-(2) An inner section always begins inside of its parent section:
-That is, because the first content node of an inner section always is
-located in between the inner section's sectioning node and the end of
-the inner section's parent container.
+* An inner section always ends with, or inside of its parent section:
+  That is, because the inner section's parent container never is an
+  ancestor of the parent section's parent container. Because of that,
+  an inner section can not end outside of its parent section.
+* An inner section always begins inside of its parent section:
+  That is, because the first content node of an inner section always
+  is located in between the inner section's sectioning node and the
+  end of the inner section's parent container.
 
 Put differently:
 
@@ -178,7 +177,8 @@ inner sections don't have any content nodes themselves (i.e. are empty).
 ## subsection
 
 **DEFINITION**
-An inner section is a sub-section, or sub-set, of its parent section.
+An inner section is a sub-section, or a sub-set, of its parent section.
+That is, because a section is still also a set of nodes.
 
 * `(V subset-of W) := ((v in W) for any (v in V))`
 * `(s subsection-of p) := (s subset-of p)`
@@ -188,77 +188,82 @@ synonymous and independent of any section hierarchy. In addition to that, the
 term "parent section" may still refer to one of multiple different sections.
 
 **CLARIFICATION**
-The intersection of a subsection with its parent section is always identical
-to the subsection itself. That is, because all content nodes of a subsection
-also belong to its parent section. The focus here is to concentrate on the
-content nodes of a section.
+The intersection of a subsection with its parent section is always identical to
+the subsection itself. That is, because all content nodes of a subsection also
+belong to its parent section. The point here is to concentrate on the content
+nodes of a section.
 
 * `(A & B), (A and B) := { x : (x in A) and (x in B) }`
 * `(s & p) == s`, for any subsection `s` and a parent section `p`
 
 **CLARIFICATION**
-A subsection is a subsequence of its parent section.
+An inner section (or subsection) is a subsequence of its parent sections.
 
 That is, because any section still is a subsequence of the tree's node sequence.
 In addition to that, all content nodes of a subsection also belong to its parent
 section.
 
+<!-- ======================================================================= -->
+## derived statements
+
+**CLARIFICATION**
+The section of a subsequent sectioning node
+is a subsection to all open presequent sections.
+
+That is, because all these presequent sections remain to be open for as long
+as the subsection is open. And, because of that, a subsequent section always
+is a subsection to all open presequent sections.
+
+Note that this is merely intended to change the perspective from a pair of
+sections towards a subsequent inner section (aka. subsection) with regards
+to all of its presequent and still open parent sections.
+
 **CLARIFICATION**
 Any parent section may contain multiple subsections that are independent from
-each other. That is, the subsections of a parent section are not required to
+each other. That is, the subsections of a parent section do not necessarily
 share any content nodes.
 
-For now, these kind of independent and intermediate subsections will be ignored.
+That is, because it is possible that the parent container of a presequent
+subsection is exited before a subsequent subsection is entered (e.g. a type-1
+sectioning node that is presequent to a type-1, or a type-2 sectioning node).
+
+Note that all of these independent and intermediate subsections will be ignored.
+That is, because the focus now is on sections that still count as being open
+and/or on those sections that will be opened next.
+
+**CLARIFICATION**
+At any given point in time, during the traversal of the node tree,
+there always are one or more open sections.
+
+That is, because each node of a node tree must be associated with at least
+one section. For that to happen, one or more sections must always be open
+when one of the tree's nodes is entered - even if the only open section
+left is the universal section.
+
+Note that, when the root node is entered, the universal section is open. When
+the root's first child is entered, the universal section and the root's section,
+a type-1 section, is open. In addition to that, it must not be allowed to close
+all of the remaining open sections. The latter is guaranteed by the concept of
+default scopes, but not by possible sectioning node properties.
+
+**CLARIFICATION**
+A sectioning node always declares a new subsection
+(i.e. not just some abstract and isolated unit).
+
+Note that this, by itself, does not allow to conclude that the structure of
+sections is a single tree of sections. That structure can technically still be
+a list of one or more sections. That is, if the universal section is ignored.
+What exactly a tree's structure of sections is, still needs to be determined.
 
 <!-- ======================================================================= -->
 ## section hierarchy
 
 **CLARIFICATION**
-The section of a subsequent sectioning node is a subsection to all presequent
-and still open sections. Put differently, a sectioning node always declares a
-new sub-section (i.e. not just some section).
+Any section, by default (i.e. default scopes) and by itself,
+defines a rooted ordered tree of sections.
 
-That is, because a subsequent section does, by default, not close any presequent
-section. Consequently, all these presequent sections remain to be open for as
-long as the subsection is open. And, because of that, a subsequent section
-always is a subsection to all open presequent sections.
-
-Note that this merely changes the perspective from one pair of sections towards
-a subsequent inner section with regards to multiple presequent parent sections.
-
-Note that this is independent of those cases in which there are one or more
-other sections in between two involved sections. That is, an independent section
-can be subsequent to a parent section and presequent to another subsection.
-
-Note that this, by itself, does not clarify that the structure of sections
-is a tree of sections. That structure can technically still be a list of one
-or more sections. What exactly the structure of sections is, still needs to
-be determined.
-
-<!-- ======================================================================= -->
-## open sections
-
-**CLARIFICATION**
-There must always be at least one open section.
-
-That is, because each node of a node tree must be associated with at least one
-section. For that to happen, at any time one or more sections must be open when
-any node is entered.
-
-Note that, when the root node is entered, the universal section is open. When
-the root's first child is entered, the universal section and the root's section,
-a type-1 section, is open. In addition to that, it must not be allowed to close
-all the remaining open sections.
-
-**CLARIFICATION**
-By default, there will always be at least one open section.
-
-That is, because the root section is closed after the last subsequent node was
-entered and because the universal section always counts as being open.
-
-**CLARIFICATION**
-A sectioning node must never be allowed to close all predeclared and still open
-sections. Obviously, the universal section can, by definition, never be closed.
+The relevant aspect here is to define the relationship between two sections, if
+those two sections are related with each other.
 
 **TODO** -
 issue - list of sections - elevate a t2 sectioning node to the same level a t1
