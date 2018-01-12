@@ -73,9 +73,6 @@ with each other. That is, under the relation of a tree of nodes, siblings are
 unrelated. However, siblings still have the same parent node (i.e. an implicit
 relationship).
 
-**TODO** -
-clarify sibling sections
-
 <!-- ======================================================================= -->
 ## inner section
 
@@ -157,7 +154,6 @@ That is, because both sections count as being open for as long as the inner
 section is open. Because of that, all content nodes of an inner section must
 also be associated with the inner section's parent section.
 
-**TODO** -
 Note that this is just a formal requirement. That is, because the definitions
 treat all sections as separate entities. For practical reasons, and depending
 on the exact nature of the resulting structure of sections, it could still be
@@ -165,7 +161,7 @@ allowed, due to implied associations, to associate each node with one section
 only.
 
 **CLARIFICATION**
-A parent section always has at least one content node (i.e. never empty).
+A parent section always has at least one content node.
 
 That is, because a parent section can only be a parent section, if it contains
 at least one inner section. As such, a parent section always contains at least
@@ -177,8 +173,8 @@ inner sections don't have any content nodes themselves (i.e. are empty).
 ## subsection
 
 **DEFINITION**
-An inner section is a sub-section, or a sub-set, of its parent section.
-That is, because a section is still also a set of nodes.
+An inner section is a sub-section, or a sub-set, of its parent section. That is,
+because a section is still also a set of nodes.
 
 * `(V subset-of W) := ((v in W) for any (v in V))`
 * `(s subsection-of p) := (s subset-of p)`
@@ -219,36 +215,33 @@ sections towards a subsequent inner section (aka. subsection) with regards
 to all of its presequent and still open parent sections.
 
 **CLARIFICATION**
-Any parent section may contain multiple subsections that are independent from
-each other. That is, the subsections of a parent section do not necessarily
-share any content nodes.
+Any parent section may contain multiple independent subsections. That is, the
+subsections of a parent section do not necessarily share any content nodes.
 
 That is, because it is possible that the parent container of a presequent
 subsection is exited before a subsequent subsection is entered (e.g. a type-1
 sectioning node that is presequent to a type-1, or a type-2 sectioning node).
 
 Note that all of these independent and intermediate subsections will be ignored.
-That is, because the focus now is on sections that still count as being open
-and/or on those sections that will be opened next.
+That is, because the focus now is on multiple related open sections.
 
 **CLARIFICATION**
-At any given point in time, during the traversal of the node tree,
-there always are one or more open sections.
+At any given point in time, during the traversal of the node tree, there always
+are one or more open sections.
 
-That is, because each node of a node tree must be associated with at least
-one section. For that to happen, one or more sections must always be open
-when one of the tree's nodes is entered - even if the only open section
-left is the universal section.
+That is, because each node in a node tree must be associated with at least one
+section. For that to happen, one or more sections must always be open when a
+nodes is entered - even if the only open section left is the universal section.
 
 Note that, when the root node is entered, the universal section is open. When
-the root's first child is entered, the universal section and the root's section,
+the root's first child is entered, the universal section and the root section,
 a type-1 section, is open. In addition to that, it must not be allowed to close
 all of the remaining open sections. The latter is guaranteed by the concept of
 default scopes, but not by possible sectioning node properties.
 
 **CLARIFICATION**
-A sectioning node always declares a new subsection
-(i.e. not just some abstract and isolated unit).
+A sectioning node always declares a new subsection. That is, a sectioning node
+does not declare some abstract and isolated entity.
 
 Note that this, by itself, does not allow to conclude that the structure of
 sections is a single tree of sections. That structure can technically still be
@@ -256,19 +249,109 @@ a list of one or more sections. That is, if the universal section is ignored.
 What exactly a tree's structure of sections is, still needs to be determined.
 
 <!-- ======================================================================= -->
-## section hierarchy
+## tree of sections
+
+```
+... n0 n1 n2 n3 n4 n5 n6 n7 n8 n9 ...
+       ========================== s0
+          ======================= s1
+             ========    ======== s2, s7
+```
+
+Select a subsection (e.g. `s2`) and all of its parent sections (e.g. `s0, s1`).
+Obviously, all these sections are related with each other. This group of related
+sections represents a subset (e.g. `s := { s2, s0, s1 }`) of the set of known
+sections.
+
+In addition to that, the sections in the above set of related sections `s` are
+ordered. That is, because the set of sectioning nodes is ordered according to
+the node order of the tree. Consequently, and if that node order is taken into
+account, the above set of related sections `s` is also an ordered list of
+sections (i.e. `s := [ s0, s1, s2 ]`).
+
+As mentioned above, all sections are subsequences of the tree's node sequence.
+And, because of that, any section is a subsequence with regards to all of its
+parent sequences. That is, `s2` is a subsequence of `s1` and `s2` is also a
+subsequence of `s0`. In addition to that, `s1` is a subsequence of `s0`.
+
+The relationships between the section in the above ordered list of related
+sections can be formalized into:
+
+* `(a -> b) := (a subsection-of b) := (a subsequence-of b)`
+* `G := { (s2 -> s1), (s2 -> s0), (s1 -> s0) }`
+* `G := { (s2,s1), (s2,s0), (s1,s0) }`
+
+Note that this graph is transitive:
+
+* transitive := if `aRb` and `bRc`, then also `aRc`
+* from the example: `(s2,s1)` and `(s1,s0)` and also `(s2,s0)`
+
+Note that, like the inverted graph of a rooted tree, the above graph does not
+(necessarily) define a rooted tree. That is, because node `s0` has two parent
+nodes (i.e. `s1` and `s2`).
+
+If an implicit transitivity is taken into account, the complete graph for the
+above example can be defined as follows:
+
+* `G := { (s2,s1), (s1,s0), (s7,s1) }`
+
+Note that this reduced graph does not define a rooted tree. That is, because
+node `s1` has two parent nodes (i.e. `s2` and `s7`). Also note that sections
+`s2` and `s7` are independent from each other.
+
+In addition to that, the semantics `sem(R) := "subsection-of"` of this relation
+`R := (S,G)` is not consistent with the semantics of the relation of a node tree
+(i.e. `sem(T) := "parent-of"`). However, `sem(R)` matches the antonym (i.e.
+inverted) semantics of a tree `sem(T') := "child-of"`.
+
+* `R' := (S,G')`
+* `G' := { (s0,s1), (s1,s2), (s1,s7) }`
+* `sem(R') := "parent-sequence-of" or "parent-section-of"`
+
+Note that nodes `s2` and `s7` now have the same unique parent node `s1`. These
+sections can therefore be seen to be child sections of their common parent
+section `s1`. Because of that, both sections are said to be "sibling sections".
+Hence, all terms (ascendant, descendant, etc.) defined for a tree of nodes also
+apply to a tree of sections.
 
 **CLARIFICATION**
-Any section, by default (i.e. default scopes) and by itself,
-defines a rooted ordered tree of sections.
+By default, any sectioning node defines a rooted tree of sections. In addition
+to that, and because of the node tree's order of nodes, these trees of sections
+are rooted and ordered trees of sections.
 
-The relevant aspect here is to define the relationship between two sections, if
-those two sections are related with each other.
+Note that this settles the issue of having multiple parent sections: A section
+always has exactly one unique parent section and may have multiple ancestor
+sections.
+
+**CLARIFICATION**
+The definition of sectioning nodes defines the relationship between nodes and
+sections, and the relationship between all sections.
+
+```
+NxN + SN => NxS + SxS
+```
+
+* `NxN` represents the relation of nodes
+* `SN` represents the definitions of sectioning nodes
+* `NxS` represents the relationship between nodes and sections
+* `SxS` represents the relationship between all sections
+
+<!-- ======================================================================= -->
+## derived statements
+
+**CLARIFICATION**
+That is, because each section always has exactly one direct/immediate parent
+section. It simply is not possible for a section to have multiple parent
+sections.
+
+**CLARIFICATION**
+A node sequence of length `N` can declare no more than `N` sections. That is,
+because each sectioning node always declares a single section only.
+
+**TODO** -
+associate each node with one section only
 
 **TODO** -
 issue - list of sections - elevate a t2 sectioning node to the same level a t1
 sectioning node has - also - the nodes of a t1 section are all descendants of
 the t1 sectioning node
-
-**TODO** -
-define "parent section of a node"

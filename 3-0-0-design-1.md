@@ -321,7 +321,8 @@ active nodes also contain these new nodes.
 **CLARIFICATION**
 In order to simplify discussion, all the nodes of a section, excluding the
 section's sectioning node, are said to be the section's content nodes. All
-these nodes combined are said to define the content of a section.
+these nodes combined are said to define the content of a section. Last but
+not least, the term "section" usually only refers to its content nodes.
 
 **DEFINITION**
 A sectioning node does not belong to its own section.
