@@ -31,7 +31,7 @@ paths `p1 := (r,...,n,c1,...,L)` and `p2 := (r,...,n,c2,...,L)` both share
 the common prefix `pref := (r,...,n)`, but end in the different suffixes
 `s1 := suffixOf(p1,#p1-#p)` and `s2 := suffixOf(p2,#p2-#p)`.
 
-All nodes in `pref` are ancestors to any nodes in `s1` and `s2`.
+All nodes in `pref` are ancestors to any node in `s1` and `s2`.
 Also, any node in `s1` or `s2` is descendant to any node in `pref`.
 In addition to that, `c1` is a sibling of `c2` and vice versa.
 
@@ -50,7 +50,7 @@ path, or even a complete tree of nodes. Which of these perspectives applies
 depends on one's own current point of view.
 
 <!-- ======================================================================= -->
-## Associations
+## associations
 
 ```
 .. x n x ...      (or)          s
@@ -58,13 +58,13 @@ depends on one's own current point of view.
      s                    ... x n x ...
 ```
 
-In both cases, node `n` is directly associated with section `s`.
+In both cases, node `n` is strictly associated with section `s`.
 
 ```
 r x ... x (n:s) x ...
 ```
 
-In short, `n:s` means that node `n` is directly (aka. strictly, explicitly)
+In short, `n:s` means that node `n` is strictly (aka. directly, explicitly)
 associated with section `s`.
 
 ```

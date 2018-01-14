@@ -23,7 +23,7 @@ as such, does not state anything new.
 r x ... x (n-k) x ... x (n-1) x (n:s) x ...
 ```
 
-A path `pa` can be defined that connects
+A path `pa` can be defined which connects
 the ancestors of node `n` with section `s`.
 
 *  `pa := (n-k,...,n,s) in N{+}S`
@@ -35,10 +35,11 @@ The same applies, if such a path is inverted:
 * `(s) contains (n) ... belongs-to ... (n-k)`
 
 Here, the relations used to create such a path have antonymous semantics
-(i.e. `contains` vs. `belongs-to`). Such a path is said to be inconsistent.
+(i.e. `contains` vs. `belongs-to`). Such a path is said to be semantically
+inconsistent.
 
 <!-- ======================================================================= -->
-## clarification
+## derived statements
 
 The reason why no clear conclusion can be drawn is, that the ancestors of node
 `n` may have any number of nodes that are descendant to the root `r`, but that
@@ -58,7 +59,7 @@ r x ... x (x:s) x (x+1) x ... x (x+k) x ...
                 x (y+1) x ... x (y+l) x ...
 ```
 
-A path `pd` can be defined that connects
+A path `pd` can be defined which connects
 section `s` with nodes that all are descendant to `n`:
 
 * `pd .= (s,x,...,x+k) in SN{+}`
@@ -69,11 +70,11 @@ The same applies, if such a path is inverted:
 * `pd' := (x+k,...,x,s) in N{+}S`
 * `(x+k) ... belongs-to ... (x) belongs-to s`
 
-Here, the relations used to create such a path have equivalent semantics!
-Such a path is said to be consistent.
+Here, the relations used to create such a path all have equivalent semantics!
+Such a path is said to be semantically consistent (aka. unidirectional).
 
 <!-- ======================================================================= -->
-## clarification
+## derived statements
 
 Section `s` loosely contains any descendant of node `x`,
 if section `s` strictly contains node `x`.
@@ -93,12 +94,12 @@ and if `x` strictly belongs to `t`:
 * `(y loosely-belongs-to t)`, if some `x in N` exists
   such that `(x ancestor-of y)` and `(x strictly-belongs-to t)`
 
-Consequently, any node automatically loosely belongs to any section that strictly
-contains any of its ancestors. Each node may therefore belong to any number of
-(i.e. multiple) sections.
+Consequently, any node automatically loosely belongs to any section that
+strictly contains any of its ancestors. Each node can therefore belong to
+any number of sections.
 
 These loose relationships can not be undefined because they will be established
-automatically as soon as any ancestor is associated with a section.
+automatically as soon as an ancestor is strictly associated with a section.
 
 The only method to break up these loose relationships is to change the structure
 of the node tree. Obviously, that is not allowed because the purpose of these

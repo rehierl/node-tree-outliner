@@ -2,32 +2,33 @@
 <!-- ======================================================================= -->
 # Design (3) - sectioning nodes
 
-Because a section is a sequence of strictly subsequent nodes, definitions only
-need to tell an algorithm when a section begins and when it ends. In addition
-to that, an algorithm must have the means to implement the corresponding
-operations efficiently, or even at all.
+Because a section is a sequence of strictly subsequent nodes, definitions
+only need to tell an algorithm when a section begins and when it ends. In
+addition to that, an algorithm must have the means to implement the
+corresponding operations efficiently, or even at all.
 
 Because an algorithm knows about a section as soon as it enters the section's
 sectioning node, it has the ability to execute operations that prepare itself
-for the association of the first node (e.g. change a section's state to "open"
-when entering or exiting the section's sectioning node).
+for the association of the first content node (e.g. change a section's state
+to "open" when entering or exiting the section's sectioning node).
 
 The use of the sectioning node's enter or exit event is, by itself, not
 a requirement for the definition of a certain type of sectioning node.
 Technically, the sectioning node's enter event and any event subsequent
 to it could be used to open the declared section.
 
-However, an algorithm must know which event exactly it has to use. Because of
-that, the relationship of the sectioning node and the section's first node must
-be clearly and unambiguously defined.
+However, an algorithm must know which event exactly it has to use. Because
+of that, the relationship of the sectioning node and the section's first
+content node must be clearly and unambiguously defined.
 
-Note that, the definition of a sectioning node can, in principle, only define
-one effective open event. Multiple open events do not necessarily represent a
-design error because an open operation, executed on an already open section, is
-ineffective as it won't further change the section's state. However, it must
-not be possible to close a section before the execution of a second subsequent
-open event. This would represent a design error as it would re-open an already
-closed section.
+Note that the definition of a sectioning node can in principle only define
+one effective open event. Multiple open events do not necessarily represent
+a design error because an open operation, executed on an already open section,
+is ineffective. That is, because it won't further change the section's state.
+
+However, it must not be possible to close a section before the execution of a
+second subsequent open event. This would represent a design error as this would
+obviously represent an attempt to re-open a section that is already closed.
 
 <!-- ======================================================================= -->
 ## type-1, first child
@@ -42,8 +43,8 @@ the first child of its sectioning node. Consequently, a sectioning node that
 declares a type-1 section will be referred to as a "type-1 sectioning node".
 
 **CLARIFICATION**
-An algorithm must mark a type-1 section as being being open when it is about to
-exit the sectioning node's enter event. Put differently, the sectioning node's
+An algorithm must open a type-1 section when it is about to exit the
+sectioning node's enter event. Put differently, the sectioning node's
 enter event represents the section's open event.
 
 **CLARIFICATION**
@@ -55,10 +56,11 @@ All child nodes are considered to be equal.
 **CLARIFICATION**
 The root node is a type-1 sectioning node.
 
-As mentioned before, the root node must declare its own section. In addition to
-that, even the first child of the root must belong to the root section. That is,
-because every node in a tree must belong to at least one section. Consequently,
-the root node matches the definition of a type-1 sectioning node.
+As mentioned before, the root node must declare its own section. In addition
+to that, even the first child of the root must belong to the root section. That
+is, because every node in a tree must belong to at least one section which is
+declared within the current tree. Consequently, the root node matches the
+definition of a type-1 sectioning node.
 
 <!-- ======================================================================= -->
 ## type-2, next sibling
@@ -72,20 +74,21 @@ the next sibling of its sectioning node. Consequently, a sectioning node that
 declares a type-2 section will be referred to as a "type-2 sectioning node".
 
 **CLARIFICATION**
-An algorithm must mark a type-2 section as being open when it is about to exit
-the sectioning node's exit event. Put differently, the sectioning node's exit
-event represents the section's open event.
+An algorithm must open a type-2 section when it is about to exit the sectioning
+node's exit event. Put differently, the sectioning node's exit event represents
+the section's open event.
 
 Note that, because the descendants of a type-2 sectioning node are entered
 before the section's open event is executed, the sectioning node's descendants
 do not contribute to the content of the declared type-2 section. In other words,
-these nodes are not content nodes of the declared section, but content nodes of
-the sections with which the sectioning node is associated.
+these nodes are not understood to represent content nodes of the declared
+section, but content nodes of those sections with which the sectioning node
+is associated.
 
 **CLARIFICATION**
 Authors need to be aware that, due to this strict definition (i.e. "next
-sibling"), the placement of a type-2 sectioning node is significant to the
-section of such a sectioning node.
+sibling"), the placement of a type-2 sectioning node is significant to a
+type-2 section.
 
 **CLARIFICATION**
 A type-2 section is empty, if its sectioning node has no next sibling.
@@ -96,32 +99,34 @@ the next sibling represents meaningful content or not, e.g. a whitespace node).
 
 Note that this definition requires an ordered tree of nodes. That is, because
 in an unordered tree, no node has one specific next sibling. All siblings are
-considered to be equal; even the presequent ones.
+considered to be equal - even the presequent ones.
 
 Attempting to use this strict definition in an unordered tree will not allow
 deterministic results. That is, because siblings are not guaranteed to be
 served in any particular order. Subsequent runs will produce different results
 (e.g. different number of nodes for a specific section). Because of that, all
-siblings would have to belong to a type-2 section. Consequently, type-2
-sectioning nodes would be similar to type-1 sectioning nodes.
+siblings would have to belong to a type-2 section. Consequently, and with
+regards to an unordered tree, type-2 sectioning nodes would be similar to
+type-1 sectioning nodes.
 
 **DEFINITION**
-A type-2 sectioning node must not contain an active node as one of its
-descendant nodes. The descendants of a type-2 sectioning node must only
-be used to initialize the declared section. (see below).
+A type-2 sectioning node must not contain an active node as one of
+its descendant nodes. The data defined by the descendants of a type-2
+sectioning node must only be used to initialize the declared section.
 
 <!-- ======================================================================= -->
 ## derived statements
 
 **CLARIFICATION**
 Type-1 and type-2 sectioning nodes add no additional requirement to the
-structure of a node tree. That is, because the section's open event is the
-corresponding event of the section's sectioning node. As such, the "open"
-operation does not require any additional node, or any specific node structure.
+structure of a node tree. That is, because the section's open event is
+the corresponding event of the section's sectioning node. As such, the
+"open" operation does not require any additional node, or any specific
+node structure.
 
-Note that using the enter event of the first node to change a section's state
-to "open" would add the requirement that a section would always need at least
-one node.
+Note that using the enter event of the first content node to open a
+declared section would add the requirement that a section would always
+need at least one node. That is, such a section could never be empty.
 
 **CLARIFICATION**
 The first node's enter event is said to be strictly subsequent
@@ -157,16 +162,17 @@ Would it be reasonable to loosely define a type of section as "begins with the
 'next subsequent' node" instead of the above strict definition (i.e. "begins
 with the next sibling").
 
-() Reader libraries tend to create implicit whitespace nodes. Because of that,
-if an implicit whitespace node would immediately follow a loosely defined
-sectioning node, then the intended next subsequent node would not be the next
-sibling of an ancestor. Consequently, and in order to truly support a loose
-definition, those whitespace nodes would have to be taken into account.
+() Reader libraries tend to create implicit whitespace nodes. Because of
+that, if an implicit whitespace node would immediately follow a loosely
+defined sectioning node, then the intended next subsequent node would not
+be the next sibling of an ancestor. That is, because that whitespace node
+would be the next sibling. Consequently, and in order to truly support a
+loose definition, those whitespace nodes would have to be taken into account.
 
 () A strict type-2 sectioning node, if it has no next sibling, can still
 have nodes that are subsequent to its exit event (i.e. the next sibling of
 one of its ancestors). After all, once a section is marked as being open
-inside of the corresponding exit event, the section remains to be open until
+by the sectioning node's exit event, the section remains to be open until
 it is closed. Because of that, a loose definition combines in itself, multiple
 strict definitions (i.e. "next sibling", "the parent's next sibling", etc).
 A loose definition would therefore mean that the semantics of a sectioning
@@ -183,9 +189,9 @@ ancestor of the sectioning node, there would have to be a clear reason as
 to why that ancestor is not supposed to be the actual sectioning node.
 
 Consequently, a certain amount of "symmetry" needs to be taken into account
-when defining sectioning nodes. After all, it does not make much sense to define
-an additional type of sectioning nodes, if it would only be slightly different
-to an existing one.
+when defining sectioning nodes. After all, it does not make much sense to
+define an additional type of sectioning nodes, if it would only be slightly
+different to an existing one.
 
 () It does matter, where the sectioning node and the section's first node is
 located. Both can be seen to define the "location" of a section, and, as such
@@ -203,16 +209,16 @@ nodes of a type-2 section as descendants of a type-1 sectioning node.
 (forwards) Where would such a type-1 sectioning node have to be placed, if it
 were supposed to replace the pattern of a loose definition? At the location of
 the sectioning node, or at the location of the first node?
-(backwards) If, in addition to that, the inserted type-1 sectioning node would
-have to be replaced by the initial pattern, the resulting structure would be
-different to the initial structure. That is, the result of subsequent
+(backwards) If, in addition to that, the injected type-1 sectioning node would
+have to be replaced by the initial pattern, the resulting structure would then
+be different to the initial structure. That is, the result of subsequent
 transformations is not guaranteed to be semantically equivalent to the initial
 structure. After all, the information of the distance between the sectioning
 node and the first node would no longer be available.
 
 **CLARIFICATION**
 A loose type-2 definition is insufficient to guarantee consistent dynamic
-support. Because of that, a strict type-2 definition is a necessity.
+support. Because of that, a strict type-2 definition is required.
 
 <!-- ======================================================================= -->
 ## other possible first nodes
@@ -234,14 +240,14 @@ is, although technically possible, ill advised.
 
 As mentioned above, type-2 sectioning nodes define the next sibling of the
 sectioning node to be the first node of the declared section. As such, there
-must be a definition of what the semantics of the sectioning node's descendants
-are with regards to the declared section.
+must be a definition that clarifies what the semantics of the sectioning node's
+descendants are with regards to the declared section.
 
 `<type-2> A </type-2> B C`
 
 Here, node `B` will be the 1st and `C` the 2nd node of the declared section.
 Because of that, node `A` can be understood to represent data that can be
-used to initialize the section that is declared by the sectioning node:
+used to initialize the declared section:
 
 ```
 // while exiting "type-2"
@@ -270,8 +276,8 @@ be added as descendants of the sectioning node.
 ### second child
 
 Type-1 sectioning nodes define the first child of the sectioning node to be the
-first node of the declared section. Because of that, these type of nodes can not
-themselves support any data that can be used to set any section properties.
+first node of the declared section. Because of that, these type of nodes can
+themselves not support any data that can be used to set any section properties.
 
 `<type-1> A B </type-1> C`
 

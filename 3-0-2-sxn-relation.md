@@ -3,16 +3,17 @@
 # The SxN relation
 
 With regards to a tree of nodes, a section can initially be defined as a set of
-nodes `s := { n1, ..., nk }`, and `k in [0,#N]` (or simply via `s subset-of N`).
+nodes `s := { n1, ..., nk }`, and `k in [0,#N]` (or simply `(s subset-of N)`).
 Hence, operators defined for sets also apply to sections:
 
-* `(isEmpty(s) == true)`, if `(#s == 0)` (put differently: `(s == {})`)
-* `(n in s)`, if node `n` is an element of section `s`
+* `isEmpty(s)` is true, if `(#s == 0)`
+* put differently: `(s == {})`
+* `(n in s)` is true, if node `n` is an element of section `s`
 
 Assumed that any number of sections is allowed, all sections of a tree can be
-seen to be an element of some set-of-sections `S`:
+seen to be an element of some set of all declared sections `S`:
 
-* `s in S` for any section `s`
+* `(s in S)` is true for any section `s`
 
 <!-- ======================================================================= -->
 ## (s contains n)
@@ -33,7 +34,7 @@ definition, a relation can be defined that is antonymous to it:
 <!-- ======================================================================= -->
 ## (s related-to n)
 
-So far, a `related-to` relation can only be defined based upon a direct
+So far, a `related-to` relation can only be defined based on a direct
 relationship between a section and its nodes:
 
 * `(s strictly-related-to n)`, if `(n in s)`
@@ -46,19 +47,19 @@ The only generalization currently possible is:
 * synonymous - `related-to`, `associated-with`
 
 <!-- ======================================================================= -->
-## Summary
+## summary
 
 The above definitions only allow to state if section `s`, that already contains
 node `n`, is strictly related to node `n`, or if node `n` strictly belongs to
-section `s`. This means that, in order to make such a statement, the
-relationship between a section and its nodes must already exist.
+section `s`. This means that, in order to make a statement, the relationship
+between a section and its nodes must already exist.
 
-* Why are nodes `n,x,y in N` related to sections `s,t in S`?
+* So, why are nodes `n,x,y in N` related to sections `s,t in S`?
 * for `(n != x != y)` and `(s != t)`
 
-There is no definition that forces to establish any relationship between
-nodes and sections: Under which circumstances must node `n` be associated
-with section `s`?
+There is no definition that forces to establish any relationship between nodes
+and sections: So, under which circumstances must node `n` be associated with
+section `s`?
 
 * `(s ??? y)`, if `(s related-to x)` and `(y related-to x)`
 

@@ -27,7 +27,7 @@ example fragment         (while exiting)
    <h3>F</h3>            => D
    G                     => F
   </div>                 => F
-</body>
+</body>                  => F
 ```
 
 In this case, the above `div` container must be associated with section `F`.
@@ -40,11 +40,11 @@ The above example therefore has multiple conflicts ...
   the container's context. That is, because section `F` is declared by
   a subsequent sectioning node (i.e. heading `F`).
 * Nodes `C` through `E` are obviously affected in a similar fashion.
-* Heading `F` is implicitly associated with its own section. Because
-  of that, section `F` can be seen to declare itself.
+* Heading `F` is implicitly associated with its own section.
+  Because of that, section `F` can be seen to declare itself.
 * Section `D` (a superordinate section) is declared by a node that
   implicitly belongs to section `F` (a subordinate section).
-* In general, section/heading `F` has an effect on presequent nodes.
+* In general: Section/heading `F` has an effect on presequent nodes.
 
 Again, these kind of loose associations can not be undefined, because they
 will be established as soon as any ancestor is associated with a section.
@@ -53,7 +53,7 @@ will be established as soon as any ancestor is associated with a section.
                          strict associations
 example fragment         (while entering)
 ----------------         ------------
-<body>
+<body>                   => universe
   <h1>A</h1>             => body
   B                      => A
   <div>                  => A
@@ -74,7 +74,7 @@ no further issues:
                          strict associations
 example fragment         (while entering)
 ----------------         ------------
-<body>
+<body>                   => universe
   <h1>A</h1>             => body
   B                      => A
   <div>                  => A
