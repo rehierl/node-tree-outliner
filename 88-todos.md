@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # List of things to do
 
-**TODO**
-a section ends with the first unassociated node (exit event)
+**TODO** -
+tree of sectioning nodes
 
 **TODO**
 a section corresponds to some nodes in the tree -
@@ -35,14 +35,6 @@ describe the purpose of a sectioning node inside of presequent sections -
 not associated with its declared section
 
 **TODO**
-don't associate sectioning nodes with the sections they declare -
-`Section Node.parentSection` property would be inconsistent -
-requires hierarchy of sections
-
-**TODO**
 can a running algorithm easily store references to all top-level nodes? -
 is it possible to avoid having to determine them manually by providing
 a list of top-level nodes?
-
-**TODO**
-show that it is allowed to associate each node with one section only.
