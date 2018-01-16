@@ -397,3 +397,24 @@ mentioned tests have failed.
 Note that an implicit association is not guaranteed to be verified correctly,
 if only the ancestor nodes of node `n` are tested. That is, because a type-2
 section can be hidden in that rooted path of nodes.
+
+<!-- ======================================================================= -->
+## derived statements
+
+**DEFINITION**
+The rank of a section is the number of its ancestor sections.
+
+Note that the universal section is always included. That is, the root section
+has rank 1 and the universal section has rank 0. Note also that this is similar
+to a node's node level within a tree of nodes. That is, the root node has node
+level 1.
+
+**CLARIFICATION**
+The parent section of a node's parent section is identical
+to the parent section of the corresponding sectioning node.
+
+```
+section = node.parentSection
+sectioningNode = section.sectioningNode
+(section.parentSection === sectioningNode.parentSection)
+```

@@ -31,10 +31,7 @@ allow a type-1 section to end inside of its container? -
 with regards to the root node
 
 **TODO**
-describe the purpose of a sectioning node inside of presequent sections -
-not associated with its declared section
-
-**TODO**
 can a running algorithm easily store references to all top-level nodes? -
 is it possible to avoid having to determine them manually by providing
-a list of top-level nodes?
+a list of top-level nodes? -
+issue: associate with a single section

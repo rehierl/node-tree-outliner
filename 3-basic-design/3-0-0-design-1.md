@@ -338,15 +338,20 @@ types of sectioning nodes.
 If all sectioning nodes would have to be associated with their own section,
 then no section could ever be completely empty. That is, because any section
 would then always begin with its own sectioning node. And because of that,
-additional logic would always be necessary to determine if a section contains
-meaningful content or not.
+additional logic would always be necessary in order to determine if a section
+contains any meaningful content or not.
 
 Note that more explanations will follow, which explain from other perspectives
 why sectioning nodes must not be associated with their own sections. For the
-moment it helps to simply accept that this is how it has to be. **TODO**
+moment it helps to accept that, due to multiple technical reasons, this is how
+it has to be.
 
 <!-- ======================================================================= -->
 ## derived statements
+
+**CLARIFICATION**
+A node sequence of length `N` can declare no more than `N` sections.
+That is, because each sectioning node always declares a single section only.
 
 **CLARIFICATION**
 A section is said to be presequent to a node, if the section
@@ -359,16 +364,16 @@ node is presequent to the other section's sectioning node.
 If a sectioning node does not belong to the section it declares, then
 sectioning nodes need to have a purpose with regards to presequent sections.
 For the moment, that purpose can be understood to establish a relationship
-between presequent sections and the corresponding sectioning node. **TODO**
+between presequent sections and the corresponding sectioning node.
 
 **CLARIFICATION**
-A sectioning node can only be associated with presequent sections.
+A sectioning node can only be associated with one or more presequent sections.
 
-Note that this is a mere consequence of the above statement that
-a sectioning node does not belong to its own section.
+Note that this is a mere consequence of the above statement that a sectioning
+node does not belong to its own section.
 
 **CLARIFICATION**
-"outline" **TODO**
+define "outline" - or some other word for the structure of sections **TODO**
 
 **CLARIFICATION**
 With regards to the process of creating an outline, the sectioning nodes of

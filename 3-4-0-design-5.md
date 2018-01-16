@@ -397,7 +397,8 @@ undefined section error).
 ## sectioning nodes (1)
 
 **CLARIFICATION**
-A sectioning node does not belong to its own section.
+A sectioning node does not belong to its own section:
+Consistency with regards to the parent containers.
 
 Associating sectioning nodes with the sections they declare would add
 inconsistency with regards to the parent containers:
