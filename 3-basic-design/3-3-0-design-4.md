@@ -103,30 +103,7 @@ transforms the descendant's implicit relationship with that section into an
 explicit relationship.
 
 <!-- ======================================================================= -->
-## sectioning nodes (1)
-
-**CLARIFICATION**
-A sectioning node does not belong to its own section:
-Allow the possibility to end a type-1 section prematurely.
-
-If a type-1 sectioning node would have to be associated with its own section,
-then all of its descendants would also automatically belong to the declared
-section. Consequently, it would not be possible for a type-1 section to end
-inside of a type-1 sectioning node.
-
-Not associating sectioning nodes with their own section, therefore technically
-allows a type-1 section to end inside of its sectioning node. However, this
-does not mean that it would be reasonable to let a type-1 section end before
-its sectioning node is being exited. Not associating sectioning nodes with
-their own section merely does not disallow this option.
-
-Apart from that, allowing a type-1 section to end inside of its sectioning
-node would require to allow having nodes that are not supposed to belong to
-the declared section. Consequently, the type-1 definition of an ordered tree
-would have to be inconsistent with the type-1 definition of an unordered tree.
-
-<!-- ======================================================================= -->
-## reduced sequence (1)
+## reduced sequence
 
 **CLARIFICATION**
 Node `n` must be strictly associated with section `s`, if `n` is intended to
@@ -184,7 +161,7 @@ characteristic node sequence.
   be a descendant of the section's last top-level node.
 
 <!-- ======================================================================= -->
-## reduced sequence (2)
+## reduced sequence
 
 The definition of a section's reduced sequence allows to describe the general
 pattern of a section. Note that the following description is independent of
@@ -261,31 +238,6 @@ ignored and if the nodes are ordered according to the distance they have
 with regards to the current node.
 
 <!-- ======================================================================= -->
-## sectioning nodes (2)
-
-**CLARIFICATION**
-A sectioning node does not belong to its own section:
-Description of a section's general properties.
-
-If a type-2 sectioning node would have to be associated with its own section,
-then all of its descendants would also automatically belong to the declared
-section. It would therefore not be possible to describe the general properties
-of the node sequence of a section independently of the corresponding sectioning
-node.
-
-That is, because the index of the first actual content node within the section's
-node sequence would then not be the same for all section types. That is, because
-a section's node sequence would then always begin with the section's sectioning
-node, which is then followed by one or more intermediate nodes, which are then
-followed by the section's actual content nodes.
-
-Note that this is also an implementation specific aspect. That is, because
-when a type-2 sectioning node would have to be associated with its own section,
-an implementation would have to store a reference to the section's first actual
-content node in order to bypass having to distinguish between the different
-types of sections.
-
-<!-- ======================================================================= -->
 ## associate nodes while entering
 
 As mentioned before, associating any nodes while they are being exited is in
@@ -351,7 +303,7 @@ guaranteed to be a section's first top-level node.
 All nodes must be associated while they are being entered.
 
 <!-- ======================================================================= -->
-## reduced sequence (3)
+## reduced sequence
 
 Not all the nodes of a section are relevant to allow transformations (dynamic
 support needs those). That is, because only the section's top-level nodes are

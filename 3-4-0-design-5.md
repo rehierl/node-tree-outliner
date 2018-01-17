@@ -278,7 +278,7 @@ sectioning node, a type-1 section can technically still be closed by an event
 that is subsequent to the section's open and presequent to its default close
 event.
 
-Again, just because an option is technically possible, does not imply that
+However, just because an option is technically possible, does not imply that
 it would be reasonable to support such an option.
 
 ### type-2, next sibling
@@ -392,26 +392,6 @@ Put differently: The presequent parent container would have to be associated
 with a section which is declared by a sectioning node that is subsequent to
 it. That is with an, at the time of being entered, unknown section (i.e. an
 undefined section error).
-
-<!-- ======================================================================= -->
-## sectioning nodes (1)
-
-**CLARIFICATION**
-A sectioning node does not belong to its own section:
-Consistency with regards to the parent containers.
-
-Associating sectioning nodes with the sections they declare would add
-inconsistency with regards to the parent containers:
-
-(1) The parent containers of all type-1 sections would then belong to the
-corresponding type-1 section.
-
-(2) Because of the above mentioned potential conflict (i.e. implicitly
-associated presequent nodes), no parent container can be allowed to be
-associated with a type-2 section, whose default scope it has to end.
-
-In other words: Some parent containers would then belong to the sections,
-but others would not.
 
 <!-- ======================================================================= -->
 ## derived statements

@@ -6,13 +6,6 @@
 tree of sectioning nodes
 
 **TODO**
-a section corresponds to some nodes in the tree -
-i.e. a section is an arbitrary set/group of nodes -
-they simply ignore the node order of a section! -
-you can not bend the rules of science, science bends you! -
-stop the pillow fight and find a consistent solution!
-
-**TODO**
 no conflict in location of a section -
 sectioning node, first node, last node, etc.
 
@@ -25,13 +18,66 @@ These are unique to a section.
 * No two sections have the exact same first node.
 
 **TODO**
+can a running algorithm easily store references to all top-level nodes? -
+is it possible to avoid having to determine them manually by providing
+a list of top-level nodes? -
+issue: associate with a single section
+
+**TODO**
+a section corresponds to some nodes in the tree -
+i.e. a section is an arbitrary set/group of nodes -
+they simply ignore the node order of a section! -
+you can not bend the rules of science, science bends you! -
+stop the pillow fight and find a consistent solution!
+
+<!-- ======================================================================= -->
+
+**DEFINITION**
+The rank of a section is the number of its ancestor sections.
+
+Note that the universal section is always included. That is, the root section
+has rank 1 and the universal section has rank 0. Note also that this is similar
+to a node's node level within a tree of nodes. That is, the root node has node
+level 1.
+
+<!-- ======================================================================= -->
+## implementation specific
+
+`Section Node.parentSection` -
+a hint towards how it has to be implemented.
+
+**CLARIFICATION**
+(2) the section's default scope ends with the first exit event of a presequent
+(i.e. with regards to the first node) and unassociated node.
+
+**CLARIFiCATION**
+Because an implementation does not always have to keep references to
+all open sections at hand. That is, because an algorithm only needs to know
+what the parent section of the next subsequent node is. 
+
+<!-- ======================================================================= -->
+## type-1 sectioning nodes
+
+**TODO** -
+issue - list of sections - elevate a t2 sectioning node to the same level a
+t1 sectioning node has - also - the nodes of a t1 section are all descendants
+of the t1 sectioning node
+
+`[section, A, section, B, /section, C, /section]`
+
+**TODO**
 type-1 section -
 all child nodes, or just the first ones? -
 allow a type-1 section to end inside of its container? -
 with regards to the root node
 
-**TODO**
-can a running algorithm easily store references to all top-level nodes? -
-is it possible to avoid having to determine them manually by providing
-a list of top-level nodes? -
-issue: associate with a single section
+**TODO** -
+`declaredSection` is singular, not plural -
+in conflict with "one or more sections"
+
+```
+Section SectioningNode.declaredSection
+```
+
+Note that this does not mean that a sectioning node is not allowed to hold
+a reference to the section it declares.

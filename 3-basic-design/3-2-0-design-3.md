@@ -57,10 +57,10 @@ All child nodes are considered to be equal.
 The root node is a type-1 sectioning node.
 
 As mentioned before, the root node must declare its own section. In addition
-to that, even the first child of the root must belong to the root section. That
-is, because every node in a tree must belong to at least one section which is
-declared within the current tree. Consequently, the root node matches the
-definition of a type-1 sectioning node.
+to that, even the first child of the root must belong to the root section.
+That is, because every node in a tree must belong to at least one section
+which is declared within the current tree. Consequently, the root node
+matches the definition of a type-1 sectioning node.
 
 <!-- ======================================================================= -->
 ## type-2, next sibling
@@ -110,9 +110,10 @@ regards to an unordered tree, type-2 sectioning nodes would be similar to
 type-1 sectioning nodes.
 
 **DEFINITION**
-A type-2 sectioning node must not contain an active node as one of
-its descendant nodes. The data defined by the descendants of a type-2
-sectioning node must only be used to initialize the declared section.
+A type-2 sectioning node must not contain any active nodes as one of its
+descendant nodes. The data defined by the descendants of a type-2 sectioning
+node must only be used to initialize the declared section (i.e. set certain
+properties of the declared section).
 
 <!-- ======================================================================= -->
 ## derived statements

@@ -17,8 +17,8 @@ the explanations simple, think of that range to only contain those values that
 do not result in a conflict.
 
 The length of a node sequence is identical to the number of nodes in the node
-tree. That is, because each node will be entered exactly once. Obviously, the
-node sequence contains no node more than once.
+tree. That is, because each node will be entered exactly once. Because of that,
+the node sequence contains each node exactly once.
 
 * `(ni+k subsequent-to ni)` is true, if `k in [1,*]`
 * `(ni+k strictly-subsequent-to ni)` for `(k == 1)`
@@ -43,10 +43,10 @@ operation based on possible future events.
 An algorithm must, beginning with some initial node, traverse a tree from one
 node to another and in the tree's order of nodes. After all, the algorithm's
 result is intended to accurately represent the tree's contents, which includes
-the tree's node order.
+the tree's order of nodes.
 
 Because of that, the tree traversal's sequence of enter events is understood
-to be identical to a tree's order of nodes. Consequently, the node order of a
+to correspond with the tree's node order. Consequently, the node order of a
 tree's node sequence is identical to the node order of the corresponding tree.
 
 ### executing operations
@@ -343,7 +343,7 @@ contains any meaningful content or not.
 
 Note that more explanations will follow, which explain from other perspectives
 why sectioning nodes must not be associated with their own sections. For the
-moment it helps to accept that, due to multiple technical reasons, this is how
+moment it helps to accept that, due to multiple practical reasons, this is how
 it has to be.
 
 <!-- ======================================================================= -->
@@ -360,11 +360,6 @@ is declared by a sectioning node that is presequent to that node.
 **CLARIFICATION**
 A section is said to be presequent to another section, if its sectioning
 node is presequent to the other section's sectioning node.
-
-If a sectioning node does not belong to the section it declares, then
-sectioning nodes need to have a purpose with regards to presequent sections.
-For the moment, that purpose can be understood to establish a relationship
-between presequent sections and the corresponding sectioning node.
 
 **CLARIFICATION**
 A sectioning node can only be associated with one or more presequent sections.
@@ -387,7 +382,7 @@ characteristic to have an effect on the creation of an outline. If a node
 has such an effect, the node is active, otherwise it is passive.
 
 Note that currently no other types of nodes are active. If that ever changes
-(e.g. due to the definition of an end marker node, or some new node property),
+(e.g. due to the definition of an end marker node, or some node property),
 then the set of active nodes will also contain the corresponding nodes.
 
 **CLARIFICATION**

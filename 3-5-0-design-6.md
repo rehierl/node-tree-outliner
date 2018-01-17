@@ -248,8 +248,9 @@ The section that a sectioning node declares always is a subsection to one or
 more presequent sections.
 
 Note that this, by itself, does not allow to conclude that the structure of
-sections is a single tree of sections. That structure can technically still be
-a list of one or more sections. That is, if the universal section is ignored.
+sections is a single tree of sections. The overall structure can technically
+still be a list of one or more root sections. That is, if the universal
+section is ignored.
 
 What exactly the structure of sections is, still needs to be determined.
 
@@ -333,9 +334,9 @@ is the last declared section which still counts as being "open".
 
 **CLARIFICATION**
 The definition of sectioning nodes, in combination with the relation of the
-rooted ordered tree of nodes, automatically defines the relationships between
-sections and nodes, and between the sections themselves. Because of that, the
-corresponding relations do not have to be defined explicitly.
+rooted ordered tree of nodes, automatically defines the relationship between
+sections and nodes, and the relationship between the sections themselves.
+Consequently, the corresponding relations do not have to be defined explicitly.
 
 ```
 ... x N x ... x N x ...
@@ -397,24 +398,3 @@ mentioned tests have failed.
 Note that an implicit association is not guaranteed to be verified correctly,
 if only the ancestor nodes of node `n` are tested. That is, because a type-2
 section can be hidden in that rooted path of nodes.
-
-<!-- ======================================================================= -->
-## derived statements
-
-**DEFINITION**
-The rank of a section is the number of its ancestor sections.
-
-Note that the universal section is always included. That is, the root section
-has rank 1 and the universal section has rank 0. Note also that this is similar
-to a node's node level within a tree of nodes. That is, the root node has node
-level 1.
-
-**CLARIFICATION**
-The parent section of a node's parent section is identical
-to the parent section of the corresponding sectioning node.
-
-```
-section = node.parentSection
-sectioningNode = section.sectioningNode
-(section.parentSection === sectioningNode.parentSection)
-```

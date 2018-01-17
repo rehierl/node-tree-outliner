@@ -195,7 +195,8 @@ the content nodes of a section.
 
 Note that this clarification is needed, because the descendants of a type-2
 sectioning node are not supposed to contribute to the content of such a
-declared section.
+declared section. This would otherwise be inconsistent with not associating
+sectioning nodes with their own section.
 
 **CLARIFICATION**
 A section is a sequence of subsequent nodes.
@@ -215,15 +216,3 @@ Put differently, a section is a subsequence of the tree's node sequence.
 
 That is, because a section is a sequence of subsequent nodes, and because a
 section has no gaps in between any two of its adjacent nodes.
-
-<!-- ======================================================================= -->
-## sectioning nodes (1)
-
-**CLARIFICATION**
-A sectioning node does not belong to its own section:
-Better consistency with a section's open event.
-
-Associating a sectioning node can be seen to be in conflict with a section's
-open event. That is, because nodes would have to be associated before the
-section's actual content node (i.e. before a section can even count as being
-open).
