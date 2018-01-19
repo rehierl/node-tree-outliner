@@ -38,7 +38,7 @@ if its current state is "initialized".
 ## closed state
 
 Any section must eventually end at some point. By default, that point is
-reached when the root node of the process is being exited. That is, because
+reached when the root node of the tree is being exited. That is, because
 the root node has no node that is subsequent to it.
 
 This default case is obviously insufficient, because the very last node of
@@ -48,39 +48,41 @@ when it is no longer allowed to associate any further subsequent nodes with
 a known section.
 
 A section is considered to be "closed" as soon as it is no longer allowed
-to associate any further nodes with it.
+to associate any further subsequent nodes with it.
 
 (open -> closed)
-A section can only change its state to "closed",
-if its current state is "open".
+A section can only change its state to "closed", if its current state is "open".
+A section's "closed" state is the final state of a section. That is, once a
+section's state is "closed", no further state transitions are allowed.
 
 <!-- ======================================================================= -->
 ## derived statements
 
 **CLARIFICATION**
-The event that is used to create and initialize a new section object (e.g. the
-enter event of its sectioning node) is said to represent a section's "create"
-event. Likewise, the event used to open a section is referred to as a section's
-"open" event, and the event used to close a section as the section's "close"
-event.
+The event that is used to create and initialize a new section object (e.g.
+the enter event of its sectioning node) is said to represent a section's
+"create" event. Likewise, the event used to open a section is referred to
+as the section's "open" event, and the event used to close a section as the
+section's "close" event.
 
-No other operation is allowed to be executed during such an event. That is, an
-algorithm is not allowed to associate any nodes with the corresponding section
-(i.e. add nodes to it) during the execution of one of the above mentioned
-events. These events are only allowed to change a the state of a section.
+No other operation with regards to the corresponding section is allowed to
+be executed during such an event. That is, an algorithm is not allowed to
+associate any nodes with the corresponding section (i.e. add nodes to it)
+during the execution of one of the above mentioned events. These events are
+only allowed to change the state of a section.
 
 However, a single node event can still be used to execute multiple section
 events. A node event can still create, initialize and open a declared section.
 Also, a single node event could technically open and close a section. Obviously,
-and in the latter case, such a section would always count as being empty.
+and in the latter case, such a section would then always be empty.
 
 **CLARIFICATION**
 A section that counts as being "initialized" is neither "open" nor "closed".
 
 The goal must be to have clear definitions, for each and every section, which
-clearly state when a section has to be opened and when it has to closed. That
-is, it must count as an implementation, or even a design error, if an
-implementation would try to execute an undefined state transition.
+state when a section has to be opened and when it has to closed. That is, it
+must count as an implementation, or even a design error, if an implementation
+would try to execute an undefined state transition.
 
 The contents of a section, that still counts as being "initialized", must be
 understood to be "undefined". As such, no statements can be made with regards
@@ -103,13 +105,15 @@ either "initialized", "open" or "closed". Because of that, the set of known
 sections `S` can be broken apart into three disjunct subsets (with each
 subset containing only those sections that have the corresponding state):
 
-* the set of initialized sections `IS`
-* the set of open sections `OS`
-* the set of closed sections `CS`.
+The set of ...
+
+* initialized sections `IS`
+* open sections `OS`
+* closed sections `CS`.
 
 With regards to associations, a section's "initialized" and "closed" states
-appear to be semantically equivalent. That is, because no associations are
-allowed unless a section's state is "open".
+appear to be equivalent. That is, because no associations are allowed unless
+a section's state is "open".
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -117,8 +121,8 @@ allowed unless a section's state is "open".
 **CLARIFICATION**
 It is not allowed to re-initialize, or re-open a closed section.
 
-A section's "close" event, and the corresponding rules, can therefore also
-be seen to represent a guarantee that a section will not change any further.
+A section's "close" event, and the corresponding rules, can be understood
+to represent a guarantee that a section will not change any further.
 
 This guarantee is critical to an efficient TOC generator, because it allows to
 drop a section object once the corresponding section is closed and once the
@@ -148,25 +152,26 @@ there could be any number of nodes that are supposed to be completely
 unrelated to this section (hence, strictly suspended).
 
 A section would therefore, if suspend-and-resume operations were allowed,
-consist of multiple subsequent parts that are separate from each other. Due to
-these gaps in between the separate parts, an algorithm would then have no means
-to treat a section as one entity by grouping all of the section's nodes, which
-would then be in conflict with the initial requirements.
+consist of multiple subsequent parts that are separate from each other. Due
+to these gaps in between the separate parts, an algorithm would then have
+no means to treat a section as one entity by grouping all of the section's
+nodes. Because of that, suspend-and-resume operations are in conflict with
+the initial requirements.
 
 In addition to that, the subsequent parts of a strictly suspended section can
-also be seen to represent sections of their own. Hence, the nodes that would be
-required in order to tell an algorithm that it has to resume a section can
-themselves be seen to represent additional sectioning nodes. The separate parts
-can then be understood to represent separate sections.
+also be seen to represent sections of their own. Hence, the nodes that would
+be required to tell an algorithm that it has to resume a section can themselves
+be seen to represent additional sectioning nodes. The separate parts can thus
+be understood to represent separate sections.
 
-In short: There does not seem to be reasonable to support such strict
-suspend-and-resume operations.
+In short: It does not seem to be reasonable to support
+strict suspend-and-resume operations.
 
 **CLARIFICATION**
 A section has no gaps.
 
-Because of that, any node belongs to a section, if it is subsequent to the
-section's open and presequent to the section's close events.
+Because of that, any node belongs to a section, if it is subsequent
+to the section's open and presequent to the section's close event.
 
 **CLARIFICATION**
 Once closed, a section is fully defined/specified. That is, because no
@@ -189,13 +194,13 @@ could also be affected by nodes that are subsequent to it. Because of that, a
 node could end up having an effect on nodes that are presequent to it.
 
 **CLARIFICATION**
-All nodes that are entered in between a section's open and close events
-are said to define the content of a section. These nodes are said to be
-the content nodes of a section.
+All nodes entered in between a section's open and close events
+are said to represent the content nodes of a section.
 
 Note that this clarification is needed, because the descendants of a type-2
-sectioning node are not supposed to contribute to the content of such a
-declared section. This would otherwise be inconsistent with not associating
+sectioning node are not supposed to contribute to the content of such a section.
+This would otherwise be inconsistent with the initial requirement that it must
+be possible to treat a section as a whole. That is, because of not associating
 sectioning nodes with their own section.
 
 **CLARIFICATION**
@@ -207,12 +212,13 @@ order of the tree.
 
 Note that "subsequent" always is with regards to the node sequence of a tree.
 
-Note also that this statement by itself allows sections to have gaps.
-Because of that, this statement is not entirely accurate.
+Note that this statement is by itself not entirely accurate as it allows
+sections to have gaps.
 
 **CLARIFICATION**
-A section is a sequence of strictly subsequent nodes.
-Put differently, a section is a subsequence of the tree's node sequence.
+A section is a subsequence of the tree's node sequence.
 
-That is, because a section is a sequence of subsequent nodes, and because a
-section has no gaps in between any two of its adjacent nodes.
+Because a section is a sequence of subsequent nodes, and because a section has
+no gaps in between any two of its adjacent nodes, a section is a sequence of
+strictly subsequent nodes. As a direct consequence of this statement, a section
+is a subsequence of the tree's node sequence.

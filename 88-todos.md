@@ -2,7 +2,14 @@
 <!-- ======================================================================= -->
 # List of things to do
 
-**TODO** -
+**TODO**
+one association only vs. reduced node sequence
+
+**TODO**
+are there better terms for "type-1/2 sectioning node"? -
+e.g. sectioning container/parent node, etc.
+
+**TODO**
 tree of sectioning nodes
 
 **TODO**
@@ -54,6 +61,32 @@ a hint towards how it has to be implemented.
 Because an implementation does not always have to keep references to
 all open sections at hand. That is, because an algorithm only needs to know
 what the parent section of the next subsequent node is. 
+
+<!-- ======================================================================= -->
+## implementation specific
+
+* any parent node could be the parent container of a type-2 section.
+* any number of sections may have the same parent container.
+* a declared section may already be closed by some non-default definition.
+
+**CLARIFICATION**
+similar to if-then-else constructs of a programming language -
+
+<!-- ======================================================================= -->
+## optional end marker nodes
+
+**CLARIFICATION**
+The definition of optional end marker nodes (e.g. `<close/>`) must not define
+these nodes to be associated with the sections they are supposed close.
+
+That is, because it would be inconsistent with not associating sectioning
+nodes with the sections they declare.
+
+In addition to that, and if such an end marker would be allowed to close
+multiple sections at once, then there would be the issue to decide with
+which of the to-be closed sections it would have to be associated.
+
+-> parent section -> frame/window
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes

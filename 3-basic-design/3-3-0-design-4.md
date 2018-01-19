@@ -6,7 +6,7 @@ Associating a single node with a section loosely associates any descendant
 of that node (downwards). In addition to that, any node loosely belongs to
 any section with which any of its ancestors is associated (upwards). That
 is, because a semantically consistent path can be defined which connects a
-section with any of the associated descendants.
+section with any of the implicitly associated descendants.
 
 Note that these loose associations will be established automatically by the
 structure of a tree. Because of that, these associations can not be undefined
@@ -28,7 +28,7 @@ r x ... x (n):s x (x):s x ... x L
 ```
 
 If some node `n` is strictly associated with section `s`, then any descendant
-of `n` is already loosely related to `s`.
+of `n` is also loosely related to `s`.
 
 Consequently, descendants of node `n` do not have to be strictly associated with
 section `s`, if the distinction between a "strict" and a "loose" relationship is
@@ -43,7 +43,7 @@ necessity/requirement.
 Consequently, any rooted path in this context can be reduced to a path which
 ends with a strictly associated node. That is, because the remainder of a path,
 that passes through such a node, will not change the path's characteristics any
-further.
+further. That is, with regards to a single section.
 
 ```
 r x ... x (x:s)
@@ -63,15 +63,15 @@ Here, node `A` can be understood to represent the first node of section `s`.
 
 The next node, that must be strictly associated with section `s` is node `C`.
 Unlike with descendant nodes, an association does not carry over to subsequent
-siblings. That is, because based upon the underlying relation, no semantically
-consistent path can be defined which connects a node with its next sibling. That
-is, because a node does not contain any of its siblings.
+siblings. That is, because based upon the `parent-of` relation of a tree, no
+semantically consistent path can be defined which connects a node with its
+next sibling.
 
 The loose associations mentioned above also apply to any descendant of node `C`.
 Node `E` therefore also belongs to section `s`, whether that node is strictly
 associated with it or not. Consequently, section `s` can not end with node `D`
 and, because of that, section `s` does not end inside of node `C`. However,
-section `s` can be intuitively understood to end with node `C`.
+section `s` can intuitively be understood to end with node `C`.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -97,7 +97,7 @@ is going to be in conflict with the afore mentioned implicit associations.
 Strictly associating a single node is equivalent to associating a whole
 subtree of nodes. The root of that subtree is the strictly associated node.
 
-Because of that, a section does not change, if a descendant of a strictly
+Because of that, a section does not change, if a descendant of an strictly
 associated node is itself strictly associated. The strict association merely
 transforms the descendant's implicit relationship with that section into an
 explicit relationship.
@@ -120,7 +120,9 @@ if `n` must be strictly associated with it.
 
 Note that no ancestor of a top-level node has a relationship with the
 corresponding section. If that would not be the case, then that top-level
-node would not be a top-level node.
+node would not be one of the corresponding section's top-level nodes.
+
+Note that a section's first content node always is a top-level node.
 
 **CLARIFICATION**
 A section can be defined as a sequence of nodes which only contains its
@@ -134,12 +136,12 @@ nodes of a section, would have to be concatenated into a single node sequence.
 
 **DEFINITION**
 The sequence of strictly subsequent nodes, which contains all the nodes of
-a section, will be referred to as the section's complete node sequence.
+a section, will be referred to as the section's "complete node sequence".
 
 **DEFINITION**
 The sequence of nodes, which only contains all the top-level nodes of a
-section, will be referred to as the section's reduced, or as the section's
-characteristic node sequence.
+section, will be referred to as the section's "reduced node sequence", or
+as the section's "characteristic node sequence".
 
 * A complete sequence is a sequence of strictly subsequent nodes.
 * A reduced sequence is not necessarily strictly subsequent.
@@ -187,10 +189,10 @@ strictly subsequent nodes (i.e. no gaps in between two adjacent nodes).
 
 Once the very first node of a section is strictly associated (e.g. `n1`), any
 of its descendants are implicitly associated with the same section. The next
-node that must be strictly associated is the first node's next sibling (e.g.
-`n2`). The next node after that is the next sibling of that node. Consequently,
-an algorithm must at least strictly associate all the subsequent siblings of
-the section's first node.
+node that must be strictly associated therefore is the first node's next
+sibling (e.g. `n2`). The next node after that is the next sibling of that node.
+Consequently, an algorithm must at first (and at least) strictly associate all
+the subsequent siblings of the section's first node.
 
 The next node entered, after the first node's last subsequent sibling was
 associated, is the next sibling of the first node's parent node (e.g. `n3`).
@@ -204,8 +206,8 @@ associated. And because the root node has no sibling, the last relevant
 ancestor of the first node is one of the root's child nodes.
 
 To be more clear: Ancestors will be skipped, if they have no next sibling.
-The actual last relevant ancestor therefore is the top-most ancestor which
-has a next sibling.
+The last relevant ancestor therefore is the top-most ancestor that has a
+next sibling.
 
 **CLARIFICATION**
 A reduced sequence is a sequence of top-level nodes that, except for the
@@ -229,7 +231,7 @@ sibling because the previous sibling could have child nodes. Therefore:
 "subsequences of subsequent siblings" and not "of strictly subsequent siblings".
 
 **Memory hook**
-A reduced sequence, and even its section, can loosely be described as
+A reduced sequence, and therefore even a section, can loosely be described as
 "a sequence of siblings".
 
 Note that, in an ordered tree of nodes, the context of a current node has
@@ -240,14 +242,36 @@ with regards to the current node.
 <!-- ======================================================================= -->
 ## associate nodes while entering
 
-As mentioned before, associating any nodes while they are being exited is in
-principle in conflict with the node order of a tree. In addition to that, the
-event that is used to associate nodes has a significant impact on the detection
-of a section's first and last nodes.
+**CLARIFICATION**
+An implementation can easily store a reference to the node that was
+associated first and a reference to the node that was associated last:
 
-Note that the first node of a section is, by definition, identical to its first
-top-level node. In contrary to that, the last node of a section is not always
-identical to its last top-level node.
+```
+Section.associate(Node node) begin
+  //- reference to the first node
+  if(this.firstNode === null) begin
+    this.firstNode = node
+  end
+
+  //- reference to the last node
+  this.lastNode = node
+end
+```
+
+Note that this code snippet is independent of which type of sectioning
+node was used to create and initialize the corresponding section object.
+
+**CLARIFICATION**
+All nodes must be associated while they are being entered.
+
+As mentioned before, associating any nodes while they are being exited is
+in principle in conflict with the node order of a tree. In addition to that,
+the event that is used to associate nodes has a significant impact on the
+detection of a section's first and last nodes.
+
+Note that the first node of a section is, by definition, identical to its
+first top-level node. In contrary to that, the last node of a section is
+not always identical to its last top-level node.
 
 ```
 <n1> <n2> <n3> </n1>
@@ -256,8 +280,8 @@ identical to its last top-level node.
 Assumed, that node `n1` would be defined to be a section's first node. Which
 effects would it have, if nodes were associated while they are being entered?
 (e.g. Is the first node of a section going to be associated first)? What can
-be said, if `n1` would be defined as a section's last top-level node (e.g. Is
-the last node of a section going to be associated last)?
+be said, if `n1` would be a section's last top-level node (e.g. Is the last
+node of a section going to be associated last)?
 
 ```
                          | entering | exiting
@@ -297,20 +321,17 @@ associated is guaranteed to be the section's last top-level node.
 In contrary to that, associating nodes while entering them guarantees that a
 section's first node will be associated first and that a section's last node
 will be associated last. In addition to that, the first node associated is
-guaranteed to be a section's first top-level node.
-
-**CLARIFICATION**
-All nodes must be associated while they are being entered.
+also guaranteed to be the section's first top-level node.
 
 <!-- ======================================================================= -->
 ## reduced sequence
 
 Not all the nodes of a section are relevant to allow transformations (dynamic
-support needs those). That is, because only the section's top-level nodes are
-needed to group the contents of a section. Each subsequence in a section's
-reduced sequence of nodes can be grouped by placing its nodes inside of a
-container. Because of that, a section can be transformed into a sequence of
-such container nodes.
+support needs to be able to execute transformations). That is, because only
+the top-level nodes of a section are needed to group the contents of a section.
+Each subsequence in a section's reduced sequence of nodes can be grouped by
+placing its nodes inside of a container. Because of that, a section can be
+transformed into a sequence of such container nodes.
 
 Note that, without any restriction in scope, and because the ancestors of a
 section's first node do not belong to the same section, a section can not be
@@ -325,11 +346,11 @@ r x ak x ... x a2 x a1 x n1:s
              x n5:s
 ```
 
-The basic approach to determine all the top-level nodes of a section is to start
-with a node that is associated with a given section. This initial node then
-allows to determine the first top-level node (e.g. `n3`) of the section. That
-is, because the initial node is a descendant of that initial top-level node,
-which (by definition) is the top-most node that belongs to the same section.
+The basic approach to determine all the top-level nodes of a section is
+to start with a node that is associated with a given section. This initial
+node then allows to determine the first top-level node (e.g. `n3`). That is,
+because the initial node is a descendant of that first top-level node, which
+(by definition) is the top-most node that belongs to the same section.
 
 Next, an algorithm would have to detect all those siblings that are subsequent
 to `n3` (e.g. `n4`, `n5`). This process is straight forward, as one would only
@@ -340,20 +361,23 @@ After that, an algorithm would have to detect all those siblings that are
 presequent to `n3` (e.g. `n2`, `n1`). With regards to the siblings of `n3`,
 that belong to the same section, this step is at first also straight forward.
 However, things stop to be straight forward, if the previous sibling does not
-belong to the same section: (1) If there is no previous sibling, then the last
-previous sibling's parent could be a type-1 sectioning node. (2) If the previous
-sibling does not belong to the same section, it could be a type-2 sectioning
-node, or (3) the algorithm needs to continue with the last child of an
-unassociated sibling.
+belong to the same section: (1) If there is no previous sibling, then the
+last previous sibling's parent could be a type-1 sectioning node. (2) If the
+previous sibling does not belong to the same section, it could be a type-2
+sectioning node, or (3) the algorithm needs to continue with the last child
+of an unassociated sibling.
 
-Note that this approach requires the ability to reliably determine if the node
-is in relationship with a given section, regardless whether a node belongs to
-one of the section's subsections or not (hint: associate with one section only).
+Obviously, this approach requires the ability to reliably determine if the node
+is in relationship with a given section, regardless whether a node strictly
+belongs to one of the section's subsections or not (hint: associate with one
+section only).
 
-**CONCLUSIONS**
+<!-- ======================================================================= -->
+## conclusions
 
 (1) Only the top-level nodes of a section are needed to support transformations.
-It is not required to have knowledge of all the nodes of a section.
+It is not required to have knowledge of all the nodes of a section. If needed,
+this information can be recreated by traversing the top-level nodes.
 
 (2) It is preferable, if an algorithm could start directly with a top-level
 node. That is, because the search for the initial top-level node would then be
@@ -368,7 +392,7 @@ first (top-level) node (hint: associate all nodes while entering).
 **CLARIFICATION**
 A section object does not have to store any reference to any of the section's
 nodes. That is, because a section's first node always is a top-level node, and
-because the first node of a section can be determined by the section's type.
+because the first node of a section can be deduced from the section's type.
 
 Note that, in order to allow sections to not store any node references at all,
 the definition of a sectioning node must allow to easily and unambiguously

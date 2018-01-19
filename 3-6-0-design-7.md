@@ -37,20 +37,20 @@ Fundamental considerations.
 
 See the introduction to sectioning nodes:
 
-* Associating sectioning nodes with their own section adds the
-  sectioning to its own context, even though a sectioning node
-  is not presequent to itself.
-* From a strict perspective, a section would not be subsequent to
-  its sectioning node. That is, because the sectioning node would
-  then be the section's very first node.
+* Associating sectioning nodes with their own section adds a sectioning
+  node to its own context, although no such node is presequent to itself.
+* From a strict perspective, a section would not be subsequent to its
+  sectioning node, if a sectioning node would have to be associated with
+  its own section. That is, because any sectioning node would then always
+  be the very first node of its own section.
 * No section would ever be truly empty. That is, because any section
   would then always have at least one node (i.e. the sectioning node)
-  that is strictly associated with it.
+  which is strictly associated with it.
 
 See the definition of the section states/events:
 
-* Associating sectioning nodes with their own section can be seen to be
-  in conflict with a section's open event. That is, because nodes would
+* Associating sectioning nodes with their own section can be seen to be in
+  conflict with the open event of a section. That is, because nodes would
   have to be associated before a section can even count as being open.
 
 <!-- ======================================================================= -->
@@ -70,12 +70,12 @@ section's sectioning node, and (2) the section's first actual content node.
 
 **CLARIFICATION**
 A sectioning node does not belong to its own section:
-Technically allows to prematurely close a type-1 section.
+Allows to close a type-1 section before the end of its default scope.
 
 If a type-1 sectioning node would have to be associated with its own section,
-then all of its descendants would also automatically belong to the declared
-section. Consequently, and because of implicit associations, it would not be
-possible for a type-1 section to end inside of a type-1 sectioning node.
+then all of its descendants would also implicitly belong to the declared
+section. Consequently, it would not be possible for a type-1 section to end
+inside of a type-1 sectioning node.
 
 Not associating sectioning nodes with their own section, therefore technically
 allows a type-1 section to end inside of its sectioning node. However, this
@@ -104,12 +104,12 @@ of the corresponding sectioning node.
 That is, because the index of the first actual content node within the section's
 node sequence would then not be the same for all section types. That is, because
 a section's node sequence would then always begin with the section's sectioning
-node, which is then can be followed by one or more intermediate nodes, which are
-then followed by the section's actual content nodes.
+node, which is then followed by one or more intermediate nodes, which are then
+followed by the section's actual content nodes.
 
-Note that this is also an implementation specific aspect. That is, because
-when a type-2 sectioning node would have to be associated with its own section,
-an implementation would have to store a reference to the section's first actual
+Note that this is also an implementation specific aspect. That is, because if
+a type-2 sectioning node would have to be associated with its own section, an
+implementation would have to hold a reference to the section's first actual
 content node in order to bypass having to distinguish between the different
 types of sections.
 
@@ -120,18 +120,20 @@ types of sections.
 A sectioning node does not belong to its own section:
 Consistency with regards to the parent container of a section.
 
-That is, the parent container of a type-1 section, which is identical to a
-type-1 sectioning node, would then also belong to the type-1 section. In
-contrary to that, the parent container of a type-2 section, which is not
-identical to a type-2 sectioning node, would still belong to a section that
-is presequent to the declared type-2 section.
+That is, the parent container of a type-1 section, which is identical to
+a type-1 sectioning node, would then also belong to the type-1 section.
+In contrary to that, the parent container of a type-2 section, which is
+not identical to a type-2 sectioning node, would still belong to a section
+that is presequent to the declared type-2 section.
 
-Note that the parent container of a type-2 section must not belong to a
-type-2 section, as it would implicitly associate any node that is presequent
-to the sectioning node of a declared type-2 section.
+Note that the parent container of a type-2 section must not belong to a type-2
+section, as it would implicitly associate any node that is subsequent to the
+parent container and presequent to the sectioning node. This would obviously
+represent a design error as those nodes would then depend on a subsequent
+sectioning node.
 
-In other words: Some parent containers would belong to a declared section,
-but others would not.
+In other words: Some parent containers would then belong to a declared
+section, but others would not.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -184,12 +186,12 @@ section's first node.
 
 That is, there is no need to check the existence of possible subsections, if
 the only question that needs to be answered is, whether the parent section
-is empty or not. One only needs to check, if a node exists that is strictly
+is empty or not. One only needs to test, if a node exists that is strictly
 associated with the corresponding section.
 
 * has subsections => has strictly associates nodes => not empty
 * not empty => does not necessarily have subsections
-* has no strictly associated nodes => empty
+* has no strictly associated node => empty
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -223,7 +225,7 @@ entering and traversing the sections).
 
 Note that the parent property, with regards to the descendants of a type-2
 sectioning node, obviously needs to be consistent with its ancestor (i.e.
-the sectioning node), regardless if sectioning nodes are associate with
+the sectioning node), regardless if sectioning nodes are associated with
 their sections or not. That is, because of descendant nodes being implicitly
 associated with the sections of their ancestors.
 
@@ -235,11 +237,11 @@ sectioning node.
 Not associating all sectioning nodes with their own section guarantees that
 the orientation of this property is always consistent with regards to all
 nodes in the corresponding tree. That is, the `parentSection` property will
-always point upwards.
+always point "upwards".
 
 Note that the focus here is to have a consistent definition of the above
-mentioned property and consequently allow to use it in a consistent manner.
-Any inconsistency is prone to be misunderstood and thus, prone to trigger
+mentioned property and consequently allow to use it consistently. Any
+inconsistency is prone to be misunderstood and thus, prone to trigger
 implementation errors.
 
 <!-- ======================================================================= -->
@@ -265,6 +267,9 @@ to the parent section of the corresponding sectioning node.
 section = node.parentSection
 (section.parentSection === section.sectioningNode.parentSection)
 ```
+
+That is, because (1) a section is strongly connected with its sectioning
+node, and (2) any sectioning node always declares a new subsection.
 
 The focus of this expression is that the corresponding associations must be
 consistent with each other. That is, the sectioning node's parent section
