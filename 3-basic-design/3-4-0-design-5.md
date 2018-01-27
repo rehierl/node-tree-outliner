@@ -377,30 +377,31 @@ Consequently, there is a 1:M relationship (not 1:1) between the set of parent
 containers and the set of sections (or sectioning nodes).
 
 **CLARIFICATION**
-A parent container does not belong to any of the sections
-that have to end with it.
+A parent container does not belong to any section
+whose default scope has to end with it.
 
-*With regards to type-1 sectioning nodes*:
+*With regards to a type-1 sectioning node*:
 
 A sectioning node is defined to not be part of the section it declares.
 This consequently also includes the parent container of a type-1 section.
 
-*With regards to type-2 sectioning nodes*:
+*With regards to a type-2 sectioning node*:
 
 If a parent container would belong to such a section, it would have to become
 one of the section's top-level nodes. (To be more clear, the parent container
 would then be the section's only top-level node). Consequently, nodes that
-are presequent to a type-2 sectioning node, whose default scope has to end
-with it, would, because of the associated parent container, implicitly be
-associated with a subsequent section. That is, the subsequent sectioning node
-would have an effect on nodes that are presequent to it. The parent container
-of a type-2 section must, because of this potential conflict, not belong to
-the section whose default scope has to end with it.
+are presequent to a type-2 sectioning node, would, because of the associated
+parent container, implicitly be associated with a subsequent section. That is,
+the subsequent sectioning node would have an effect on nodes that are presequent
+to it. As such, associating a parent container with a type-2 section would be
+in conflict with the very definition of a node's context.
 
-Put differently: The presequent parent container would have to be associated
-with a section which is declared by a sectioning node that is subsequent to
-it. That is with an, at the time of being entered, unknown section. This would
-consequently trigger an undeclared section error.
+In addition to that, and because multiple type-2 sections may have the same
+parent container, the question that would then have to be answered would be
+with which inner section to associate such a parent container: With the first
+inner section, or an inner section that is subsequent to it?
+
+In short: A parent container must not be associated with a type-2 section.
 
 <!-- ======================================================================= -->
 ## derived statements

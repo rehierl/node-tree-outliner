@@ -3,18 +3,21 @@
 # List of things to do
 
 **TODO**
-one association only vs. reduced node sequence
-
-**TODO**
 are there better terms for "type-1/2 sectioning node"? -
 e.g. sectioning container/parent node, etc.
 
 **TODO**
-tree of sectioning nodes
+can a running algorithm easily store references to all top-level nodes? -
+is it possible to avoid having to determine them manually by providing
+a list of top-level nodes? -
+one association only vs. reduced node sequence
 
 **TODO**
-no conflict in location of a section -
-sectioning node, first node, last node, etc.
+describe multistep transformations
+
+**TODO**
+tree of sectioning nodes -
+issue with tables?: table/tr/td
 
 **CLARIFICATION**
 No two sections within a single tree have identical reduced sequences.
@@ -23,12 +26,6 @@ These are unique to a section.
 * Each sectioning node declares its own section.
 * Each first node is strictly subsequent to the corresponding event.
 * No two sections have the exact same first node.
-
-**TODO**
-can a running algorithm easily store references to all top-level nodes? -
-is it possible to avoid having to determine them manually by providing
-a list of top-level nodes? -
-issue: associate with a single section
 
 **TODO**
 a section corresponds to some nodes in the tree -
@@ -46,6 +43,33 @@ Note that the universal section is always included. That is, the root section
 has rank 1 and the universal section has rank 0. Note also that this is similar
 to a node's node level within a tree of nodes. That is, the root node has node
 level 1.
+
+<!-- ======================================================================= -->
+## type-1 sectioning nodes
+
+**TODO** -
+issue - list of sections - elevate a t2 sectioning node to the same level a
+t1 sectioning node has - also - the nodes of a t1 section are all descendants
+of the t1 sectioning node
+
+`[section, A, section, B, /section, C, /section]`
+
+**TODO**
+type-1 section -
+all child nodes, or just the first ones? -
+allow a type-1 section to end inside of its container? -
+with regards to the root node
+
+**TODO** -
+`declaredSection` is singular, not plural -
+in conflict with "one or more sections"
+
+```
+Section SectioningNode.declaredSection
+```
+
+Note that this does not mean that a sectioning node is not allowed to hold
+a reference to the section it declares.
 
 <!-- ======================================================================= -->
 ## implementation specific
@@ -87,30 +111,3 @@ multiple sections at once, then there would be the issue to decide with
 which of the to-be closed sections it would have to be associated.
 
 -> parent section -> frame/window
-
-<!-- ======================================================================= -->
-## type-1 sectioning nodes
-
-**TODO** -
-issue - list of sections - elevate a t2 sectioning node to the same level a
-t1 sectioning node has - also - the nodes of a t1 section are all descendants
-of the t1 sectioning node
-
-`[section, A, section, B, /section, C, /section]`
-
-**TODO**
-type-1 section -
-all child nodes, or just the first ones? -
-allow a type-1 section to end inside of its container? -
-with regards to the root node
-
-**TODO** -
-`declaredSection` is singular, not plural -
-in conflict with "one or more sections"
-
-```
-Section SectioningNode.declaredSection
-```
-
-Note that this does not mean that a sectioning node is not allowed to hold
-a reference to the section it declares.
