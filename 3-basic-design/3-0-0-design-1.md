@@ -360,8 +360,18 @@ A node sequence of length `N` can declare no more than `N` sections.
 That is, because each sectioning node always declares a single section only.
 
 **CLARIFICATION**
+A section is said to be subsequent to its sectioning node.
+
+Note that this perspective is based upon a section's first content node,
+which always is subsequent to the section's sectioning node.
+
+**CLARIFICATION**
 A section is said to be presequent to a node, if the section
 is declared by a sectioning node that is presequent to it.
+
+Note that, because of that, a section is presequent to its first content node.
+However, the focus of this statement is on nodes that are unassociated with
+the corresponding section.
 
 **CLARIFICATION**
 A section is said to be presequent to another section, if its
@@ -378,8 +388,8 @@ node does not belong to its own section.
 The combination of all sections is referred to as a tree's "outline".
 
 Note that this basic term does not allow to determine which relationship the
-sections have with each other. What structure exactly a tree's outline has
-needs to be determined.
+sections have with each other. What structure exactly a tree's outline has,
+if any, still needs to be determined.
 
 **CLARIFICATION**
 With regards to the process of creating an outline, the sectioning nodes of

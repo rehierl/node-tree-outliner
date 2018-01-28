@@ -4,7 +4,7 @@
 
 **TODO**
 are there better terms for "type-1/2 sectioning node"? -
-e.g. sectioning container/parent node, etc.
+e.g. section container node, section starter node
 
 **TODO**
 can a running algorithm easily store references to all top-level nodes? -
@@ -48,19 +48,6 @@ level 1.
 ## type-1 sectioning nodes
 
 **TODO** -
-issue - list of sections - elevate a t2 sectioning node to the same level a
-t1 sectioning node has - also - the nodes of a t1 section are all descendants
-of the t1 sectioning node
-
-`[section, A, section, B, /section, C, /section]`
-
-**TODO**
-type-1 section -
-all child nodes, or just the first ones? -
-allow a type-1 section to end inside of its container? -
-with regards to the root node
-
-**TODO** -
 `declaredSection` is singular, not plural -
 in conflict with "one or more sections"
 
@@ -78,23 +65,20 @@ a reference to the section it declares.
 a hint towards how it has to be implemented.
 
 **CLARIFICATION**
-(2) the section's default scope ends with the first exit event of a presequent
-(i.e. with regards to the first node) and unassociated node.
+(2) the section's default scope ends with the first exit event of a
+presequent (i.e. with regards to the first node) and unassociated node.
 
-**CLARIFiCATION**
+**CLARIFICATION**
 Because an implementation does not always have to keep references to
-all open sections at hand. That is, because an algorithm only needs to know
-what the parent section of the next subsequent node is. 
+all open sections at hand. That is, because an algorithm only needs to
+know what the parent section of the next subsequent node is. 
 
-<!-- ======================================================================= -->
-## implementation specific
+**CLARIFICATION**
+similar to if-then-else constructs in a programming language -
 
 * any parent node could be the parent container of a type-2 section.
 * any number of sections may have the same parent container.
 * a declared section may already be closed by some non-default definition.
-
-**CLARIFICATION**
-similar to if-then-else constructs of a programming language -
 
 <!-- ======================================================================= -->
 ## optional end marker nodes
