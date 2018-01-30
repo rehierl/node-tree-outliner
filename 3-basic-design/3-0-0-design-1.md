@@ -337,10 +337,11 @@ have an effect on itself as this information would be used to set the
 corresponding property of the sectioning node.
 
 Obviously, and as far as possible, an algorithm needs to be able to treat all
-sectioning nodes alike. That is, because associating one type of sectioning
-nodes with their own section, but not the sectioning nodes of another type,
-would make it necessary to add additional logic with regards to the different
-types of sectioning nodes.
+sectioning nodes alike. (Note that this will be referred to as "consistent
+association across all types of sectioning nodes".) That is, because associating
+one type of sectioning nodes with their own section, but not the sectioning
+nodes of another type, would make it necessary to add additional logic with
+regards to the different types of sectioning nodes.
 
 If all sectioning nodes would have to be associated with their own section,
 then no section could ever be completely empty. That is, because any section

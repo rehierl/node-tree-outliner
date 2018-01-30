@@ -2,6 +2,33 @@
 <!-- ======================================================================= -->
 # Design (6) - associating sectioning nodes
 
+In principle, any node, including all sectioning nodes, must be associated with
+all open presequent sections (formal approach). That is, even if each node is
+strictly associated with one section only (practical approach). Because of that,
+a sectioning node can not be associated with some random section.
+
+* No sectioning node can be associated with a section that is subsequent to
+  it. That is, because these sections do not count as being open by the time
+  the sectioning node is being entered. Despite that, such an association
+  would also be in conflict with the context of the sectioning node.
+* No sectioning node can be associated with a presequent section that
+  counts as being closed by the time the sectioning node is being entered.
+  This would otherwise be in conflict with the closed state of a section.
+
+Consequently, a sectioning node can only be associated with the section it
+declares and/or with all remaining open presequent sections. Because of that,
+there are only two options available (practical approach):
+
+1. Associate a sectioning node with its own section, or
+2. with the parent section of the section it declares.
+
+Note that the statement "A sectioning node does not belong to its own section",
+i.e. not option (1), is equivalent to the following statement: "A sectioning
+node belongs to the parent section of the section it declares", i.e. option (2).
+
+<!-- ======================================================================= -->
+## sectioning nodes
+
 **CLARIFICATION**
 A sectioning node does not belong to its own section:
 Fundamental considerations.
@@ -22,8 +49,10 @@ Introduction to sectioning nodes:
 Definition of section states/events:
 
 * Associating sectioning nodes with their own section can be seen to be in
-  conflict with the open event of a section. That is, because nodes would
-  have to be associated before a section can even count as being open.
+  conflict with the open event of a section. That is, because nodes would have
+  to be associated before a section can truly count as being open. However, a
+  section is guaranteed to exist by the time its sectioning node is being
+  entered.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -53,15 +82,16 @@ sequence (see: reduced sequence) independently of its sectioning node.
 That is, because the index of the first actual content node within the section's
 node sequence would then not be the same for all section types. That is, because
 a section's node sequence would then always begin with the section's sectioning
-node, which might then followed by one or more intermediate nodes, which are
-then followed by the section's actual content nodes.
+node, which could then be followed by one or more intermediate data nodes (see
+type-2 sectioning nodes), which are then followed by the section's actual
+content nodes.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
 
 **CLARIFICATION**
 A sectioning node does not belong to its own section:
-Consistency with regards to parent containers.
+Consistency with regards to all parent containers.
 
 If a sectioning node would have to be associated with its own section, then the
 parent container of a type-1 section, which is identical to a type-1 sectioning
@@ -83,11 +113,12 @@ must not be associated with such a section.
 A sectioning node does not belong to its own section:
 Non-Empty parent sections.
 
-If all sectioning nodes would have to be associated with their own section, then
-a parent section, which only contains a single subsection, but no actual content
-nodes of its own, would appear to have no meaningful content. That is, the
-corresponding section would appear to be empty. And, because of that, one would
-always also have to explicitly check for the existence of possible subsections.
+If all sectioning nodes would have to be associated with their own section,
+then a parent section, which only contains a single subsection, but no actual
+content nodes of its own, would appear to have no meaningful content. Due to
+having no strict association of its own, it would appear to be empty. And,
+because of that, one would always also have to explicitly check for the
+existence of possible subsections.
 
 Note that the sectioning node of a subsection would then only be associated
 with the subsection it declares. That is, because each node can and will be
@@ -96,11 +127,12 @@ as being implicitly associated with all of its ancestor sections.
 
 With that regards, the advantage of not associating a sectioning node with its
 own section therefore is that no parent section will ever appear to be empty.
-A parent section will then always have at least one content node and, because
-of that, can never be misunderstood to be empty.
+A parent section will always have one or more content nodes (i.e. the sectioning
+nodes of its subsections) and, because of that, can never be misunderstood to
+be empty.
 
 That is, there is no need to check the existence of possible subsections, if
-the only question that needs to be answered is, whether the parent section
+the only question that needs to be answered is, whether the section in question
 is empty or not. One only needs to test, if a node exists that is strictly
 associated with the corresponding section.
 
@@ -147,7 +179,7 @@ nodes, is guaranteed to be consistent with the afore mentioned orientation.
 That is, because they will always be associated with the section of a
 presequent sectioning node.
 
-Not associating all sectioning nodes with their own section guarantees that
+Not associating any sectioning node with its own section guarantees that
 the orientation of this property is always consistent with regards to all
 nodes in the corresponding tree. That is, the `parentSection` property will
 always point "upwards".
@@ -155,8 +187,8 @@ always point "upwards".
 Note that this parent property, with regards to the descendants of a type-2
 sectioning node, obviously needs to be consistent with its ancestor (i.e.
 the sectioning node), regardless if sectioning nodes are associated with
-their sections or not. That is, because of descendant nodes being implicitly
-associated with the sections of their ancestors.
+their own sections or not. That is, because of descendant nodes being
+implicitly associated with the sections of their ancestors.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -209,11 +241,17 @@ If all sectioning nodes would have to be associated with their own section,
 then a sectioning node counts as the first content node of the corresponding
 section. And, because of that, the above expression would be false for all
 sections. That is, because the second part would represent a self-reference,
-which obviously could never correspond with a `Section.parentSection` property.
+which obviously could never correspond with the `parentSection` property of
+a section.
 
-With that in mind, not associating any sectioning node with its own section has
-the advantage, that the above expression would always be true. And, because of
-that, a `Section.parentSection` property is not required (i.e. optional).
+With that in mind, not associating any sectioning node with its own section
+has the advantage, that the above expression would always be true. And,
+because of that, the `parentSection` property of a section is in principle
+not required (i.e. optional). As such, that property is a mere matter of
+convenience.
+
+Note that this appears to be consistent with not having to explicitly define
+the corresponding relations (i.e. `SxN` and `SxS`).
 
 See also: A consistent `Node.parentSection` reference.
 
@@ -237,16 +275,56 @@ If all sectioning nodes would have to be associated with their own section,
 then a sectioning node counts as the first content node of the corresponding
 section. And, because of that, the `firstContentNode` property would have to
 be used to reference the section's first actual content node, instead of its
-very first node. That is, in order to bypass having to distinguish between the
-different types of sectioning nodes. As such, these properties can then be seen
-to be inconsistent with such a design decision.
+very first node. That is, in order to bypass having to distinguish between
+the different types of sectioning nodes. Consequently, the referenced node
+may itself be strictly associated with a subsection. As such, these properties
+can be seen to be in conflict with such a design decision.
 
-In contrary to that, and when not associating any sectioning node with its own
-section, the `firstContentNode` property always corresponds with the section's
-very first node.
+In contrary to that, and when not associating any sectioning node with its
+own section, the `firstContentNode` property will always correspond with the
+section's very first node (see below).
+
+<!-- ======================================================================= -->
+## sectioning nodes
+
+**CLARIFICATION**
+A sectioning node does not belong to its own section:
+The `firstContentNode` property.
+
+Note that this consideration assumes that no sectioning node belongs to
+its own section. The following clarifications would otherwise not be true.
+
+**CLARIFICATION**
+Any non-empty section always has one or more strictly associated nodes.
+That is, the `parentSection` property of these nodes holds a reference
+to the corresponding non-empty section.
+
+That is, because if a non-empty section has no subsections, then it contains
+at least one inactive node that is strictly associated with it. If a non-empty
+section also contains subsections, then such a parent section also strictly
+contains the sectioning nodes of one or more subsections.
+
+**CLARIFICATION**
+The very first node of a section always is strictly associated with it.
+Put differently, a section has no implicitly associated node that is
+presequent to its first strictly associated node.
+
+In order to begin with an implicitly associated node, the very first node would
+have to be strictly associated with a subsection. But, as no sectioning node
+belongs to its own section, a section's very first node can never be strictly
+associated with one of the parent section's subsections.
+
+Consequently, and even if each node is associated with one section only, the
+`firstContentNode` property will always hold a reference to a section's very
+first content node. In addition to that, this node always is identical to the
+section's very first top-level node (i.e. critical to transformations).
 
 <!-- ======================================================================= -->
 ## derived statements
+
+**CLARIFICATION**
+Any sectioning node must be associated with
+the parent section of the section it declares.
 
 **CLARIFICATION**
 The sectioning node of a node's parent section
@@ -256,12 +334,12 @@ never is identical to the corresponding node itself.
 (node.parentSection.sectioningNode !== node)
 ```
 
-That is obviously true for any node which is not a sectioning node. However,
-this expression is also true if the node is a sectioning node. That is, because
-no such node is associated with the section it declares.
+That is obviously true for any node which is not a sectioning node.
+However, this expression is also true if the node is a sectioning node.
+That is, because no such node is associated with the section it declares.
 
-Note that, if sectioning nodes would have to be associated with their own
-section, then the first part of the above expression will be a self-reference,
-if the node in question is a sectioning node.
+Note that, if sectioning nodes would have to be associated with their
+own section, then the first part of the above expression would be a
+self-reference, if the node in question would be a sectioning node.
 
 See also: A consistent `Node.parentSection` reference.

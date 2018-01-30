@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # Design (7) - type-1 sections
 
+**TODO**
+A single tree of sections.
+
 **QUESTION**
 Would it be reasonable to allow an inner sectioning node to close a type-1
 section before the end of its sectioning node (default scope) is reached?
@@ -158,7 +161,7 @@ between its sectioning node and its content nodes.
 ### n1:s0, n5:s5
 
 1. Context dependent associations with regards to case 1.
-2. Inconsistent associations with regards to all types of sectioning nodes.
+2. Inconsistent associations with regards to the types of sectioning nodes.
 
 Note that HTML's current associations aren't that arbitrary after all:
 compare sectioning root with heading content.
@@ -182,7 +185,7 @@ This conflict exists, regardless to which section node `n5` belongs.
 ### n1:s1, n5:s0
 
 1. Context dependent associations with regards to case 1.
-2. Inconsistent associations with regards to all types of sectioning nodes.
+2. Inconsistent associations with regards to the types of sectioning nodes.
 
 Note that associating `n5` with `s0` is non-trivial.
 
