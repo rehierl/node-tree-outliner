@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (2) - states
+# Design (2) - section states
 
 Similar to output streams, any section has the following states:
 

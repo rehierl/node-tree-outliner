@@ -27,13 +27,6 @@ These are unique to a section.
 * Each first node is strictly subsequent to the corresponding event.
 * No two sections have the exact same first node.
 
-**TODO**
-a section corresponds to some nodes in the tree -
-i.e. a section is an arbitrary set/group of nodes -
-they simply ignore the node order of a section! -
-you can not bend the rules of science, science bends you! -
-stop the pillow fight and find a consistent solution!
-
 <!-- ======================================================================= -->
 
 **DEFINITION**
