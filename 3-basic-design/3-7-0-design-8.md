@@ -3,7 +3,7 @@
 # Design (7) - type-1 sections
 
 **TODO**
-A single tree of sections.
+A single tree of sections?
 
 **QUESTION**
 Would it be reasonable to allow an inner sectioning node to close a type-1

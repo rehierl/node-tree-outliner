@@ -12,8 +12,8 @@ a sectioning node can not be associated with some random section.
   the sectioning node is being entered. Despite that, such an association
   would also be in conflict with the context of the sectioning node.
 * No sectioning node can be associated with a presequent section that
-  counts as being closed by the time the sectioning node is being entered.
-  This would otherwise be in conflict with the closed state of a section.
+  is already closed when the sectioning node is being entered. This
+  would otherwise be in conflict with the closed state of a section.
 
 Consequently, a sectioning node can only be associated with the section it
 declares and/or with all remaining open presequent sections. Because of that,
@@ -245,10 +245,9 @@ which obviously could never correspond with the `parentSection` property of
 a section.
 
 With that in mind, not associating any sectioning node with its own section
-has the advantage, that the above expression would always be true. And,
-because of that, the `parentSection` property of a section is in principle
-not required (i.e. optional). As such, that property is a mere matter of
-convenience.
+has the advantage, that the above expression would always be true. And, because
+of that, the `parentSection` property of a section object is in principle not
+required (i.e. optional). As such, that property is a matter of convenience.
 
 Note that this appears to be consistent with not having to explicitly define
 the corresponding relations (i.e. `SxN` and `SxS`).
@@ -301,13 +300,13 @@ to the corresponding non-empty section.
 
 That is, because if a non-empty section has no subsections, then it contains
 at least one inactive node that is strictly associated with it. If a non-empty
-section also contains subsections, then such a parent section also strictly
-contains the sectioning nodes of one or more subsections.
+section contains subsections, then such a parent section will (also) strictly
+contain the sectioning nodes of one or more subsections.
 
 **CLARIFICATION**
-The very first node of a section always is strictly associated with it.
-Put differently, a section has no implicitly associated node that is
-presequent to its first strictly associated node.
+The very first node of a section always is strictly associated with it. Put
+differently, a section has no implicitly associated node that is presequent
+to its first strictly associated node.
 
 In order to begin with an implicitly associated node, the very first node would
 have to be strictly associated with a subsection. But, as no sectioning node
@@ -315,9 +314,9 @@ belongs to its own section, a section's very first node can never be strictly
 associated with one of the parent section's subsections.
 
 Consequently, and even if each node is associated with one section only, the
-`firstContentNode` property will always hold a reference to a section's very
-first content node. In addition to that, this node always is identical to the
-section's very first top-level node (i.e. critical to transformations).
+`firstContentNode` property will always hold a reference to a section's first
+content node. In addition to that, this node always is identical to the
+section's first top-level node (i.e. critical to transformations).
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -325,6 +324,8 @@ section's very first top-level node (i.e. critical to transformations).
 **CLARIFICATION**
 Any sectioning node must be associated with
 the parent section of the section it declares.
+
+Note that there is no room for any exception!
 
 **CLARIFICATION**
 The sectioning node of a node's parent section
