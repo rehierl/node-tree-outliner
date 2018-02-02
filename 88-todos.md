@@ -17,25 +17,19 @@ describe multistep transformations
 
 **TODO**
 tree of sectioning nodes -
-issue with tables?: table/tr/td
+the parent node of a type-1 sectioning node always is a type-1 -
+the parent node of a type-2 sectioning node always is a type-1 -
+a type-1 sectioning node can be a parent or a leaf -
+a type-2 sectioning node always is a leaf node -
+issue with tables? table/tr/td -
 
-**CLARIFICATION**
+**TODO**
 No two sections within a single tree have identical reduced sequences.
 These are unique to a section.
 
 * Each sectioning node declares its own section.
 * Each first node is strictly subsequent to the corresponding event.
 * No two sections have the exact same first node.
-
-<!-- ======================================================================= -->
-
-**DEFINITION**
-The rank of a section is the number of its ancestor sections.
-
-Note that the universal section is always included. That is, the root section
-has rank 1 and the universal section has rank 0. Note also that this is similar
-to a node's node level within a tree of nodes. That is, the root node has node
-level 1.
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
@@ -88,3 +82,13 @@ multiple sections at once, then there would be the issue to decide with
 which of the to-be closed sections it would have to be associated.
 
 -> parent section -> frame/window
+
+<!-- ======================================================================= -->
+
+**DEFINITION**
+The rank of a section is the number of its ancestor sections.
+
+Note that the universal section is always included. That is, the root section
+has rank 1 and the universal section has rank 0. Note also that this is similar
+to a node's node level within a tree of nodes. That is, the root node has node
+level 1.

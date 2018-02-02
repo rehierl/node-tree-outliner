@@ -6,7 +6,8 @@ This overview is not meant to be overly accurate: It's just a short summary.
 
 Note that most statements are derived conclusions, or only introduce new names
 for particular entities. There are very few definitions that choose one option
-out of multiple available options (i.e. not much room for political decisions).
+out of multiple available options (i.e. not much room for political decisions
+or personal preferences).
 
 node sequence
 
@@ -36,18 +37,18 @@ section states
 
 * Any section has three states: initialized, open and closed.
 * Any node, sectioning nodes included, that is subsequent to a section's open,
-  and presequent to its close event is said to be one of the section's content
-  nodes.
-* All nodes, no exceptions, must be associated with their sections while they
-  are being entered.
-* A section is a subsequence of the tree's node sequence.
+  and presequent to its close event is said to be a content node of the
+  corresponding section.
+* All nodes, no exceptions, must be associated while they are being entered.
+* Any node can be subsequent to multiple open sections.
+* A section always is a subsequence of the tree's node sequence.
 
 sectioning nodes
 
 * There are two types of sectioning nodes that can be defined without any
   structural requirement: type-1 (e.g. `<section>`) and type-2 (e.g. `<h1>`).
-* The scope of a type-1 section begins with its first child and the scope of a
-  type-2 section with its next sibling.
+* The scope of a type-1 section begins with its first child and the scope of
+  a type-2 section with its next sibling.
 * Sectioning nodes must define where a section begins (open event) and where
   the declared section ends (close event).
 * The definition of a type-2 sectioning node must be strict:
@@ -63,45 +64,49 @@ sequence of siblings
 * A node that is supposed to be associated with a section, but is not yet
   implicitly associated, must be strictly associated. These nodes are the
   top-level nodes of a section.
-* The complete node sequence of a section (subsequence of the tree's node
-  sequence) can be derived from a section's reduced node sequence (top-level
-  nodes only).
+* With regards to a specific section, a top-level node has no strictly or
+  implicitly associated node; hence the name.
+* The complete node sequence of a section (i.e. a subsequence of the tree's
+  node sequence) can be derived from a section's reduced node sequence (i.e.
+  a sequence of top-level nodes).
 * Mind hook: A section is a sequence of siblings (i.e. the top-level nodes).
-* The very first node of a section, always a top-level node, is critical to
-  transformations: Associate all nodes while entering is a must.
+* The very first node of a section, which always is a top-level node, is
+  critical to transformations.
+* Associating all nodes while entering them is a must.
 
 last nodes
 
-* The default scope of a section is the widest range of nodes possible
-  that does not result in any conflict.
+* The default scope of a section is the widest range of nodes possible that does
+  not result in any conflict.
 * The default scope of any section must end with the section's parent container.
 * The parent container of a type-1 section is its sectioning node.
 * The parent container of a type-2 section is the parent of its sectioning node.
 * The default scopes of multiple sections may end with the same parent container.
-* A parent container does not belong to those sections whose default scopes it
-  has to end.
+* A parent container does not belong to any section whose default scope it has
+  to end.
 
 subsection
 
 * An inner section (or subsection) is a subsequence of all of its ancestor
   sections. By default, a subsequent section is a subsection of all open
   presequent sections.
-* Any sectioning node always declares a new subsection
+* Any sectioning node always declares a new sub-section
   (i.e. not some isolated entity).
 * By default, any sectioning node defines a rooted ordered tree of sections.
-* The `SxN` and `SxS` relations don't have to be defined explicitly.
+* The `SxN` relation (i.e. section-contains-node) and `SxS` relation (i.e.
+  section-contains-section) don't have to be defined explicitly.
 * Each node can be associated with one section only (i.e. the parent section
-  of a node) => one reference per node.
-* Any node must be associated with the closest open presequent section.
-* In order to re-create the complete node sequence of a section the nodes
+  of a node): multiple references => one reference per node.
+* A node's parent section is the closest open presequent section.
+* In order to re-create the complete node sequence of a section, the nodes
   of a section and all the nodes of its inner sections must be concatenated
   in the corresponding node order.
 
 associating sectioning nodes
 
-* Any sectioning node must be associated with the parent section
-  of the section it declares: There are multiple reasons for that.
-* The very first node of any section always is strictly associated
-  with it => critical to transformations.
+* Any sectioning node, no exception, must be associated with the parent
+  section of the section it declares: There are multiple reasons for that.
+* The very first node of any section always is strictly associated with it
+  => critical to transformations.
 
 **... to be continued ...**
