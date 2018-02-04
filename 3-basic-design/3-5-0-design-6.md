@@ -423,3 +423,46 @@ mentioned tests have failed.
 Note that an implicit association is not guaranteed to be verified correctly,
 if only the ancestor nodes of node `n` are tested. That is, because a type-2
 section can be hidden in that rooted path of nodes.
+
+<!-- ======================================================================= -->
+## top-level nodes
+
+Note that the initial definition of a top-level node (i.e. A node is a top-level
+node of a section, if it must be strictly associated with it) is with regards to
+the formal definitions (i.e. Associate each node with all open sections).
+
+```
+n0 n1 n2 n3 n4 n5 n6 n7 n8 n9
+   ========================== -> s0
+      ======================= -> s1
+```
+
+* All nodes are siblings to each other (i.e. descendants are ignored).
+* `n0` and `n1` are type-2 sectioning nodes.
+
+Strictly applying the initial definition, and associating each node with one
+section only, has the following effect: (1) Node `n1` is the only top-level
+node of `s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`. Because
+of that, the initial definition needs to be clarified:
+
+**DEFINITION**
+Node `n` is a top-level node of section `s`, if `n` must be (strictly or
+loosely) associated with `s`, and if `n` has no ancestors that are already
+(strictly or loosely) associated with `s`.
+
+Consequently, the focus of this term is on the second part (i.e. has no
+ancestor that is associated with the corresponding section). Because of that,
+the "top-level" prefix is a reference to "upper-most" and "level" a reference
+with regards to the node's "node level".
+
+Note that all nodes must be associated with a section while they are being
+entered. Consequently, when `n` is entered, all ancestors of `n` are already
+strictly associated with a section.
+
+Note that a section's first content node still and always is a top-level node.
+
+Applying this clarified definition, and associating each node with one section
+only, has the following effect: (1) Nodes `n1-9` all are top-level nodes of
+`s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.
+
+Note that any node can be a top-level node to multiple sections.

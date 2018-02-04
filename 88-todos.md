@@ -31,12 +31,18 @@ These are unique to a section.
 * Each first node is strictly subsequent to the corresponding event.
 * No two sections have the exact same first node.
 
+**TODO**
+sectioning content - subsection of -
+if deep into the structure, then close multiple sections -
+if shallow, then close just a few, if any -
+can be seen to be inconsistent
+
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
 
 **TODO** -
 `declaredSection` is singular, not plural -
-in conflict with "one or more sections"
+in conflict with "one or more (i.e. list of) sections"
 
 ```
 Section SectioningNode.declaredSection
@@ -68,6 +74,18 @@ similar to if-then-else constructs in a programming language -
 * a declared section may already be closed by some non-default definition.
 
 <!-- ======================================================================= -->
+## rank of a section
+
+**DEFINITION**
+The rank of a section is the number of its ancestor sections -
+or better outline depth
+
+Note that the universal section is always included. That is, the root section
+has rank 1 and the universal section has rank 0. Note also that this is similar
+to a node's node level within a tree of nodes. That is, the root node has node
+level 1.
+
+<!-- ======================================================================= -->
 ## optional end marker nodes
 
 **CLARIFICATION**
@@ -82,13 +100,3 @@ multiple sections at once, then there would be the issue to decide with
 which of the to-be closed sections it would have to be associated.
 
 -> parent section -> frame/window
-
-<!-- ======================================================================= -->
-
-**DEFINITION**
-The rank of a section is the number of its ancestor sections.
-
-Note that the universal section is always included. That is, the root section
-has rank 1 and the universal section has rank 0. Note also that this is similar
-to a node's node level within a tree of nodes. That is, the root node has node
-level 1.

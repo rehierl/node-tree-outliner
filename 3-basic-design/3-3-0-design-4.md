@@ -118,9 +118,9 @@ of a tree and all of its nodes.
 Node `n` will be referred to as a section's top-level node,
 if `n` must be strictly associated with it.
 
-Note that no ancestor of a top-level node has a relationship with the
-corresponding section. If that would not be the case, then that top-level
-node would not be one of the corresponding section's top-level nodes.
+Note that no ancestor of a top-level node is strictly or loosely associated
+with the corresponding section. If that would not be the case, then that
+top-level node would not be one of the section's top-level nodes.
 
 Note that a section's first content node always is a top-level node.
 

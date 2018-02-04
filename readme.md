@@ -12,9 +12,21 @@ used to implement an outliner for HTML, or any rooted ordered tree of nodes.
 
 **upload-log**
 
-* 2018-01-31 - commit 19abbd2 - first/initial upload
+* 2018-02-04
+* 2018-01-31 - commit 19abbd2 - first public upload
 
 **PRELIMINARY LICENSE**
 
-* Free for science and discussions.
-* Non-free (i.e without license) for anything else.
+$1 Free for science and discussions.
+
+* Including free bare-bone, proof-of-concept implementations.
+
+$2 Non-free (i.e unlicensed) for anything else.
+
+* Including commercial purposes of any sorts.
+* Including software patents, trademarks, etc.
+
+$3 General goal
+
+The ultimate goal is to end up with a royalty-free, free-for-all design.
+Any use that is in conflict with this general goal is prohibited.

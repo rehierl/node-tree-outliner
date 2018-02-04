@@ -195,7 +195,7 @@ implicitly associated with the sections of their ancestors.
 
 **CLARIFICATION**
 A sectioning node does not belong to its own section:
-A sectioning node binds the contents of a section to the node tree.
+Binds the contents of a section to the node tree.
 
 ```
 Node Section.sectioningNode
@@ -229,7 +229,7 @@ would no longer be available.
 
 **CLARIFICATION**
 A sectioning node does not belong to its own section:
-A sectioning node binds a section to its parent section.
+Binds a section to its parent section.
 
 ```
 (1) Section Section.parentSection
