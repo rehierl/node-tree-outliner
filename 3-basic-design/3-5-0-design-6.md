@@ -429,7 +429,7 @@ section can be hidden in that rooted path of nodes.
 
 Note that the initial definition of a top-level node (i.e. A node is a top-level
 node of a section, if it must be strictly associated with it) is with regards to
-the formal definitions (i.e. Associate each node with all open sections).
+the formal definitions (i.e. associate each node with all open sections).
 
 ```
 n0 n1 n2 n3 n4 n5 n6 n7 n8 n9
@@ -450,19 +450,13 @@ Node `n` is a top-level node of section `s`, if `n` must be (strictly or
 loosely) associated with `s`, and if `n` has no ancestors that are already
 (strictly or loosely) associated with `s`.
 
-Consequently, the focus of this term is on the second part (i.e. has no
-ancestor that is associated with the corresponding section). Because of that,
-the "top-level" prefix is a reference to "upper-most" and "level" a reference
-with regards to the node's "node level".
+Note that the focus of this term is on the second part (i.e. has no
+ancestor that is already associated with the corresponding section).
 
-Note that all nodes must be associated with a section while they are being
-entered. Consequently, when `n` is entered, all ancestors of `n` are already
-strictly associated with a section.
+Note that a section's first content node still and always is a top-level
+node. Consequently, a section can still be loosely referred to as a sequence
+of siblings.
 
-Note that a section's first content node still and always is a top-level node.
-
-Applying this clarified definition, and associating each node with one section
-only, has the following effect: (1) Nodes `n1-9` all are top-level nodes of
-`s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.
-
-Note that any node can be a top-level node to multiple sections.
+Applying this clarified definition, and associating each node with one
+section only, has the following effect: (1) Nodes `n1-9` all are top-level
+nodes of `s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.

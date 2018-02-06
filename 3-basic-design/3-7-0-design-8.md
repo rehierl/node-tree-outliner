@@ -164,7 +164,7 @@ section to it.
 **n1:s0, n5:s0**
 
 With regards to associations, this case does not seem to result in a conflict,
-or add inconsistencies => Requires further considerations.
+or add inconsistencies. => Requires further considerations.
 
 **n1:s0, n5:s1**
 
@@ -250,28 +250,32 @@ of the optional subsequent section `s5`.
 <!-- ======================================================================= -->
 ## preliminary summary
 
-With regards to associations, only case **n1:s0, n5:s0** does not seem to
+With regards to associations, only case "n1:s0, n5:s0" does not seem to
 result in a conflict. That is, because the associations are consistent with
 "Associate each sectioning node with the parent section of the section it
 declares".
 
 Note that `n5` is defined to close `s1`. Consequently, and when entering `n5`,
 a `currentSection` variable would have to be modified in order to point to
-`s1`'s parent section (i.e. `s0`). Because of that, an implementation of the
+`s1`'s parent section (e.g. `s0`). Because of that, an implementation of the
 `n5:s0` association appears to be possible.
 
 Note that the use of such definitions is still limited:
 Node `n5` must be a child node of `n1`.
 
 However, placing a section inside of a parent node and then define it to be
-independent of that parent node still appears to be inconsistent. Because of
-that, further considerations are in order.
+independent of that parent node still appears to be inconsistent. That is,
+because `n5`, an inner node (i.e. descendant of `n1`), is associated with an
+outer section.
+
+**TODO**
+Further considerations are in order.
 
 <!-- ======================================================================= -->
 ## derived statements
 
-**DEFINITION**
-A type-1 section always ends with its default scope.
-
 **TODO**
 A single tree of sections?
+
+**DEFINITION**
+A type-1 section always ends with its default scope.

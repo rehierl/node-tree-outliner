@@ -4,16 +4,15 @@
 
 **TODO**
 are there better terms for "type-1/2 sectioning node"? -
-e.g. section container node, section starter node
+sectioning container node (ok) -
+sectioning offset node (?) -
 
 **TODO**
-can a running algorithm easily store references to all top-level nodes? -
-is it possible to avoid having to determine them manually by providing
-a list of top-level nodes? -
-one association only vs. reduced node sequence
-
-**TODO**
-describe multistep transformations
+can an algorithm easily store references to all top-level nodes? -
+is it possible to avoid having to determine them as a post-process
+by providing a list of top-level nodes? -
+won't work on the fly (associate with one section only) -
+when a section is being closed, or an on demand feature
 
 **TODO**
 tree of sectioning nodes -
@@ -21,21 +20,22 @@ the parent node of a type-1 sectioning node always is a type-1 -
 the parent node of a type-2 sectioning node always is a type-1 -
 a type-1 sectioning node can be a parent or a leaf -
 a type-2 sectioning node always is a leaf node -
-issue with tables? table/tr/td -
+issue with tables? table/tr/td (sectioning root) -
 
 **TODO**
-No two sections within a single tree have identical reduced sequences.
-These are unique to a section.
-
-* Each sectioning node declares its own section.
-* Each first node is strictly subsequent to the corresponding event.
-* No two sections have the exact same first node.
+No two sections within a single tree have identical
+complete or even reduced sequences. These are unique to a section. -
+No two sections have identical first nodes.
 
 **TODO**
-sectioning content - subsection of -
+HTML's sectioning content is defined as - subsection-of the nearest -
 if deep into the structure, then close multiple sections -
 if shallow, then close just a few, if any -
 can be seen to be inconsistent
+
+**TODO**
+describe multistep transformations -
+already done ?
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
@@ -86,9 +86,19 @@ to a node's node level within a tree of nodes. That is, the root node has node
 level 1.
 
 <!-- ======================================================================= -->
+## other applications
+
+**filesystems** -
+what about folder/file nodes? -
+similar to browser bookmarks, etc -
+
+**compilers** -
+headings <=> variable/parameter declarations -
+sections <=> scopes/blocks -
+
+<!-- ======================================================================= -->
 ## optional end marker nodes
 
-**CLARIFICATION**
 The definition of optional end marker nodes (e.g. `<close/>`) must not define
 these nodes to be associated with the sections they are supposed close.
 

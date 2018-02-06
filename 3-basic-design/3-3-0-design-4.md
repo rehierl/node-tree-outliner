@@ -122,7 +122,17 @@ Note that no ancestor of a top-level node is strictly or loosely associated
 with the corresponding section. If that would not be the case, then that
 top-level node would not be one of the section's top-level nodes.
 
-Note that a section's first content node always is a top-level node.
+Note that "top" in the "top-level" term is a reference to "an upper-most
+node" and that "level" is with regards to the node's "node level".
+
+Note that a section's first content node always is a top-level node. That is,
+because a section's first node can not be loosely associated. In order to be
+loosely associated, a node must have a strictly associated presequent ancestor.
+Put differently, a section's first node would then not be the first node of
+its section.
+
+Note that any node can be a top-level node to multiple sections. That is,
+because a node can be subsequent to multiple open presequent sections.
 
 **CLARIFICATION**
 A section can be defined as a sequence of nodes which only contains its
