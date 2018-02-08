@@ -1,11 +1,12 @@
 
 <!-- ======================================================================= -->
-# Design (6) - associating sectioning nodes
+# Design (7) - associating sectioning nodes
 
 In principle, any node, including all sectioning nodes, must be associated with
 all open presequent sections (formal approach). That is, even if each node is
 strictly associated with one section only (practical approach). Because of that,
-a sectioning node can not be associated with some random section.
+no sectioning node can be associated with a random/arbitrary section. That is,
+because the practical associations must correspond with the formal associations.
 
 * No sectioning node can be associated with a section that is subsequent to
   it. That is, because these sections do not count as being open by the time
@@ -198,7 +199,7 @@ A sectioning node does not belong to its own section:
 Binds the contents of a section to the node tree.
 
 ```
-Node Section.sectioningNode
+SectioningNode Section.sectioningNode
 ```
 
 The sectioning node of a section can be understood to act as a frame that
@@ -251,8 +252,6 @@ required (i.e. optional). As such, that property is a matter of convenience.
 
 Note that this appears to be consistent with not having to explicitly define
 the corresponding relations (i.e. `SxN` and `SxS`).
-
-See also: A consistent `Node.parentSection` reference.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -322,10 +321,8 @@ section's first top-level node (i.e. critical to transformations).
 ## derived statements
 
 **CLARIFICATION**
-Any sectioning node must be associated with
-the parent section of the section it declares.
-
-Note that there is no room for any exception!
+Any sectioning node must be associated with the parent section
+of the section it declares. There is no room for any exception!
 
 **CLARIFICATION**
 The sectioning node of a node's parent section
@@ -342,5 +339,3 @@ That is, because no such node is associated with the section it declares.
 Note that, if sectioning nodes would have to be associated with their
 own section, then the first part of the above expression would be a
 self-reference, if the node in question would be a sectioning node.
-
-See also: A consistent `Node.parentSection` reference.

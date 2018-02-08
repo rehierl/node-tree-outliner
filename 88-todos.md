@@ -3,9 +3,10 @@
 # List of things to do
 
 **TODO**
-are there better terms for "type-1/2 sectioning node"? -
+better terms for type-1/2 sectioning nodes? -
 sectioning container node (ok) -
-sectioning offset node (?) -
+sectioning offset/open node (?) -
+sectioning end/close node (see end marker nodes) -
 
 **TODO**
 can an algorithm easily store references to all top-level nodes? -
@@ -13,14 +14,6 @@ is it possible to avoid having to determine them as a post-process
 by providing a list of top-level nodes? -
 won't work on the fly (associate with one section only) -
 when a section is being closed, or an on demand feature
-
-**TODO**
-tree of sectioning nodes -
-the parent node of a type-1 sectioning node always is a type-1 -
-the parent node of a type-2 sectioning node always is a type-1 -
-a type-1 sectioning node can be a parent or a leaf -
-a type-2 sectioning node always is a leaf node -
-issue with tables? table/tr/td (sectioning root) -
 
 **TODO**
 No two sections within a single tree have identical
@@ -37,19 +30,23 @@ can be seen to be inconsistent
 describe multistep transformations -
 already done ?
 
+**TODO**
+tree of sectioning nodes -
+the parent node of a type-1 sectioning node always is a type-1 -
+the parent node of a type-2 sectioning node always is a type-1 -
+a type-1 sectioning node can be a parent or a leaf -
+a type-2 sectioning node always is a leaf node -
+issue with tables? table/tr/td (sectioning root) -
+
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
 
 **TODO** -
-`declaredSection` is singular, not plural -
-in conflict with "one or more (i.e. list of) sections"
-
-```
-Section SectioningNode.declaredSection
-```
+`Section SectioningNode.declaredSection` is singular, not plural -
+in conflict with "one or more (i.e. a list of) sections"
 
 Note that this does not mean that a sectioning node is not allowed to hold
-a reference to the section it declares.
+a reference to the section it declares, which still is a single section only.
 
 <!-- ======================================================================= -->
 ## implementation specific
@@ -57,21 +54,24 @@ a reference to the section it declares.
 `Section Node.parentSection` -
 a hint towards how it has to be implemented.
 
-**CLARIFICATION**
-(2) the section's default scope ends with the first exit event of a
-presequent (i.e. with regards to the first node) and unassociated node.
+An implementation does not have to keep references to
+all open sections at hand - i.e. as an ordered list.
 
-**CLARIFICATION**
-Because an implementation does not always have to keep references to
-all open sections at hand. That is, because an algorithm only needs to
-know what the parent section of the next subsequent node is. 
+An algorithm only needs to know what the parent section of the
+next subsequent node is - use `Section Section.parentSection`.
 
-**CLARIFICATION**
+**TODO** -
 similar to if-then-else constructs in a programming language -
+rethink that thought! - sibling sections? -
+sectioning nodes belong to the parent section? -
 
-* any parent node could be the parent container of a type-2 section.
+**TODO** -
+The exit event of any container node needs to check
+if one or more sections end with it.
+
+* any container node could be the parent container of a section.
 * any number of sections may have the same parent container.
-* a declared section may already be closed by some non-default definition.
+* a declared section may already be closed due to a non-default definition.
 
 <!-- ======================================================================= -->
 ## rank of a section
@@ -89,8 +89,9 @@ level 1.
 ## other applications
 
 **filesystems** -
-what about folder/file nodes? -
+issue with folder/file node types? -
 similar to browser bookmarks, etc -
+could allow a "different" view -
 
 **compilers** -
 headings <=> variable/parameter declarations -
@@ -109,4 +110,6 @@ In addition to that, and if such an end marker would be allowed to close
 multiple sections at once, then there would be the issue to decide with
 which of the to-be closed sections it would have to be associated.
 
--> parent section -> frame/window
+The issue with such nodes is that they could be placed inside of a type-1
+section. To which section does a subsequent node belong? That is, user/input
+errors must be taken into account.

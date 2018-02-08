@@ -353,9 +353,10 @@ node above or next to it does not.
 
 (`n2` represents a type-2 and `n5` a type-1 sectioning node)
 
-Similar to that, a closed line can be drawn around the nodes of a section. Any
-node within the enclosed area/segment belongs to the section, any node outside
-of it does not.
+Similar to that, and if a node tree is drawn on a flat two-dimensional surface,
+a closed line can be drawn around the nodes of a section. Any node within such
+an enclosed area/segment belongs to the section, any node outside of it does
+not.
 
 **CLARIFICATION**
 The default scope of any section ends with the section's parent container.

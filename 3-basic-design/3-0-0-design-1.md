@@ -322,6 +322,13 @@ that new and any other known section. Consequently, any node potentially belongs
 to multiple sections. That is, because any node can be subsequent to any number
 of sectioning nodes.
 
+**PROPERTIES**
+The above mentioned 1:1 relation can be seen to define the following two
+implementation specific object properties:
+
+* `Section SectioningNode.declaredSection`
+* `SectioningNode Section.sectioningNode`
+
 **DEFINITION**
 A sectioning node does not belong to its own section.
 

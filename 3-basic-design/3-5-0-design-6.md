@@ -365,9 +365,8 @@ Each node can be associated with one section only, if (and only if) the node
 can also be understood to be (implicitly) associated with all ancestors of
 that section.
 
-Consequently, these implicit associations are used in order to condense
-the amount of explicit associations (i.e. section references) into a single
-reference per node.
+Consequently, these implicit associations are used to condense the amount of
+strict associations (i.e. section references) into a single reference per node.
 
 Note that the only reason, why a node can be associated with a single section,
 is that the multiple associations of a node, which would be required by the
@@ -389,7 +388,7 @@ important, implementation specific property:
 Section Node.parentSection
 ```
 
-Because of this unique reference, a node's parent section reflects
+Because of this unique reference, a node's parent section defines
 the context/location of a node with regards to the sections of a tree.
 
 **CLARIFICATION**
@@ -442,8 +441,9 @@ n0 n1 n2 n3 n4 n5 n6 n7 n8 n9
 
 Strictly applying the initial definition, and associating each node with one
 section only, has the following effect: (1) Node `n1` is the only top-level
-node of `s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`. Because
-of that, the initial definition needs to be clarified:
+node of `s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.
+
+Because of that, the initial definition needs to be clarified:
 
 **DEFINITION**
 Node `n` is a top-level node of section `s`, if `n` must be (strictly or
@@ -460,3 +460,5 @@ of siblings.
 Applying this clarified definition, and associating each node with one
 section only, has the following effect: (1) Nodes `n1-9` all are top-level
 nodes of `s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.
+
+Note that any node can still be a top-level node to multiple sections.
