@@ -3,6 +3,9 @@
 # List of things to do
 
 **TODO**
+`currentSection` variable
+
+**TODO**
 better terms for type-1/2 sectioning nodes? -
 sectioning container node (ok) -
 sectioning offset/open node (?) -
