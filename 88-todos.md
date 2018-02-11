@@ -3,8 +3,9 @@
 # List of things to do
 
 The ultimate goal is to leave no question unanswered.
-=> A painfully slow and nerve wrecking process.
-=> As it turns out, I'm just too stubborn to give up ...
+=> A painfully slow and nerve wrecking process ...
+As it turns out, I'm just too darn stubborn to give up ...
+Ain't No Mountain High Enough
 
 **TODO**
 No two sections within a single tree have identical

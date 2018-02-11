@@ -6,6 +6,9 @@ The following statements clarify the first practical (i.e. implementation
 specific) implication that results from the formal definition of what a
 subsection is.
 
+<!-- ======================================================================= -->
+## associate with one section only
+
 **CLARIFICATION**
 Each node can be associated with one section only, if (and only if) the node
 can also be understood to be (implicitly) associated with all ancestors of

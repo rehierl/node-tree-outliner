@@ -375,7 +375,7 @@ subsequent sectioning node was entered.
 ## TODO
 
 **TODO** -
-a subsection is subordinate to is superordinate parent section -
+a subsection is subordinate to its superordinate parent section -
 add as a note-like clarification -
 
 **TODO** -
@@ -389,4 +389,4 @@ is it necessary to distinguish (i.e. strict vs. loose)? -
 
 **TODO** -
 independent sections are sibling sections -
-nope, not all -
+nope, not always the case -
