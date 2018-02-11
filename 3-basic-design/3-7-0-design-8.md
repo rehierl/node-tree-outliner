@@ -91,7 +91,7 @@ If, for example, `s1` would have to be folded, then how could that be done
 without automatically and completely hiding `s5`, a supposedly independent
 sibling section?
 
-Transparent (i.e hidden) background transformations in advance to such an
+Transparent (i.e hidden) background transformations prior to such an
 operation could not be avoided.
 
 > Node `n5` must be a child node of `n1`.
@@ -144,7 +144,7 @@ association.
 * columns represent those cases in which `n5` is associated with `s0/1/5`.
 * `x` marks those cases which result in conflicts, inconsistencies
   and/or non-trivial associations.
-* `*` marks those cases which could allow such modified definitions.
+* `*` marks those cases which don't disallow such modified definitions.
 
 Note that associating a sectioning node with its own section (i.e. `n1:s1`
 or `n5:s5`) will automatically be in conflict with those considerations that
@@ -155,9 +155,6 @@ Note that it is trivial to associate a sectioning node with its own section
 (e.g. `n1:s1`, `n5:s5`). If a `currentSection` variable is available, then
 it is also rather straight forward to associate a sectioning node with the
 last open presequent section (e.g. `n1:s0`, `n5:s1`, `n5:s0`).
-
-Note that HTML's current approach supports two types of type-1 sectioning
-nodes: (1) sectioning content and (2) sectioning root elements.
 
 <!-- ======================================================================= -->
 ## n1:s0
@@ -276,7 +273,7 @@ with the default association of sectioning nodes.
 Note that when entering `n5` and closing `s1`, a `currentSection` variable
 would have to be modified in order to point to `s1`'s parent section (e.g.
 `s0`). Because of that, an implementation of the `n5:s0` association seems
-to be possible.
+possible.
 
 Note that the use of such definitions is still limited:
 Node `n5` must be a child node of `n1`.

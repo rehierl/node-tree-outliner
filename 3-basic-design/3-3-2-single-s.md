@@ -6,7 +6,7 @@ What effects does it have,
 if node `n` is associated with section `s`?
 
 <!-- ======================================================================= -->
-## pi := s -> nx
+## pi: s -> nx
 
 ```
 r x ... x (n:s) x ...
@@ -104,3 +104,12 @@ automatically as soon as an ancestor is strictly associated with a section.
 The only method to break up these loose relationships is to change the structure
 of the node tree. Obviously, that is not allowed because the purpose of these
 associations is ultimately to represent the tree's structure as is.
+
+**Memory hook**
+The `NxN` relation can be understood to define a spacial relationship (e.g.
+cities on a continent). In contrary to that, the `SxN` relation can be
+understood to define a logical relationship (e.g. political affiliation).
+
+Note that, this perspective is not overly accurate because a political
+affiliation may span over multiple segments (e.g. islands) that are
+separated from each other.
