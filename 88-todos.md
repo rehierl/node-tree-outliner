@@ -3,9 +3,10 @@
 # List of things to do
 
 The ultimate goal is to leave no question unanswered.
-=> A painfully slow and nerve wrecking process ...
-As it turns out, I'm just too darn stubborn to give up ...
-Ain't No Mountain High Enough
+
+A painfully slow and nerve wrecking process ...
+It looks like, I'm just too darn stubborn to give up ...
+"Ain't No Mountain High Enough" :)
 
 **TODO**
 No two sections within a single tree have identical
@@ -104,7 +105,8 @@ An implementation does not have to keep references to
 all open sections at hand - i.e. as an ordered list of sections.
 
 An algorithm only needs to know what the parent section of the
-next subsequent node is - then use `Section Section.parentSection`.
+next subsequent node is -
+then use the `Section Section.parentSection` property -
 
 **TODO** -
 similar to if-then-else constructs in a programming language -
@@ -119,15 +121,19 @@ if one or more sections end with it.
 * any number of sections may have the same parent container.
 * a declared section may already be closed due to a non-default definition.
 
+close the inner sections in reverse order until the parent container's
+parent section is reached, i.e. close the open presequent sections upwards,
+in the direction of the root section
+
 <!-- ======================================================================= -->
 ## tree of sectioning nodes
 
 In order to avoid unexpected results due to implicit associations,
 a node tree should contain a tree of sectioning nodes.
 
-Take a node tree and remove all inactive nodes including those edges that
-begin or end in such a node. The resulting relation should (A) contain the
-original root node, and (B) define a single rooted tree of sectioning nodes.
+Take a node tree and remove all inactive nodes and those edges that begin or
+end in such a node. The resulting relation should (A) contain the original
+root node, and (B) define a single rooted tree of sectioning nodes.
 
 the parent node of a type-1 sectioning node always is a type-1 -
 the parent node of a type-2 sectioning node always is a type-1 -
@@ -143,7 +149,8 @@ The definition of optional end marker nodes (e.g. `<close/>`) must not define
 these nodes to be associated with the sections they are supposed close.
 
 That is, because it would be inconsistent with not associating sectioning
-nodes with the sections they declare.
+nodes with the sections they declare. The subsection's "frame" belongs to
+the parent section.
 
 In addition to that, and if such an end marker would be allowed to close
 multiple sections at once, then there would be the issue to decide with
