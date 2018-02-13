@@ -14,24 +14,32 @@ fragment             assoc-1    assoc-2
 ```
 
 * the first element of heading content defines a section's heading/title
-* does not state anything about a heading's rank (R)
+* does not state anything about that heading's rank (R)
 * no indication that the 1st heading's rank is relevant in any way
-* however, if the 2nd heading's rank has equal or higher rank, the initial
+* however, if the 2nd heading's rank is equal or higher, then the initial
   section is closed and a sibling section (implied section) is created
 * consequently, the 1st heading's rank is relevant to the internal structure
-* this is what forces an outline to be a list of sections
+* this is so far the only reason for: the outline is a list of sections
 
 In other words: HTML's current structure of sections is dictated by the rank
-of heading content elements, an addition to the default/base definition.
+of heading content elements, which only is an addition to the default/base
+definition. That is, the default definitions are without rank.
 
 * looks the same - must act the same - wrong
-* the default/base definition must define the overall structure
-* and no addition must be allowed to deviate from it
+* the default definition must define the overall structure
+* no addition must be allowed to deviate from it
 * additions must respect the default case, not vice versa
 
-section+heading
+the issue is
 
-* section+heading won't work
+* the above structure (list) has significant impact on an implementation
+* there must be a darn good reason to support it
+
+section + heading
+
+* section + heading won't work
+* not from a design-based (theoretical) point of view,
+* but because it is too misleading/tempting to get it wrong
 * irritating as the 2nd heading (same rank) needs to be a subsection
 * the actual reason behind this decision - less irritating for authors?
 * courtesy to authors while ignoring implementations/theory?
@@ -45,8 +53,7 @@ inconsistent transformations (t2 -> t1)
 * the above t2 sequence can therefore not be transformed into a t1 sequence
 * a transformation must tear the parent t1 node apart into two sibling t1 nodes
 * transforming those t1 nodes back into t2 nodes can not result in the original
-  fragment - the initial parent t1 node is lost
-* i.e. inconsistent
+  fragment - the initial parent t1 node is lost - inconsistent
 
 does a t1 section need/have a rank?
 
@@ -63,15 +70,15 @@ does a t1 section need/have a rank?
 
 explicit parent containers
 
-* the use of explicit parent containers can be used to support any hierarchy
-* due to implicit associations, the section will always be a subsection
+* explicit parent containers can be used to support any hierarchy
+* due to implicit associations, a section will always be a subsection
 * regardless of what the element's rank is
 
 highest rank (infinity)
 
 * a sequence of H elements defines a flat list of sibling sections
-* consistent with HTML's current design (not an argument)
-* this seems to be the better choice
+* consistent with HTML's current design - not meant as an argument
+* seems to be the better choice
 
 lowest rank (epsilon)
 

@@ -58,7 +58,10 @@ level 1.
 
 **TODO** -
 `Section SectioningNode.declaredSection` - singular, not plural -
-in conflict with "one or more (i.e. a list of) sections"
+in conflict with "one or more (i.e. a list of) sections" -
+
+an outline object type (singular) can be used to represent such a list -
+but that requires an extra dedicated object type
 
 Note that this does not mean that a sectioning node is not allowed to hold
 a reference to the section it declares, which still is a single section only.

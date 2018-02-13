@@ -62,6 +62,10 @@ That is, because any node in a tree must belong to at least one section
 which is declared within the corresponding tree. Consequently, the root
 node matches the definition of a type-1 sectioning node.
 
+Note that the type-1 sectioning nodes can be understood as the most fundamental
+type of sectioning nodes. That is, because no design is complete (i.e. total
+with regards to all nodes of a tree) without this type of sectioning nodes.
+
 <!-- ======================================================================= -->
 ## type-2, next sibling
 

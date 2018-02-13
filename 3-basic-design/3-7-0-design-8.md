@@ -16,6 +16,10 @@ that are unrelated to the associations mentioned below.
 <!-- ======================================================================= -->
 ## introduction
 
+**TODO**
+`n1 -> n0 + hierarchy` -
+compare with type-2 fragments
+
 ```
 n1 n2 n3 n4 n5 n6 n7 n8 n9
 ========================== -> s0
@@ -285,6 +289,22 @@ outer section.
 
 **TODO**
 Further considerations are in order.
+
+<!-- ======================================================================= -->
+
+**issue**
+`t1 A t1 B /t1 C /t1` -
+
+to which section would C belong, if the inner t1 would end section A? -
+to the next outer section - which is why one would be required -
+problematic with regards to the root section -
+
+lost in U - unrelated to A and B - although in the same tree -
+really that lost? - sibling sections -
+
+can not end an outer section at the same time -
+especially an outer type-1 section (e.g. root section) -
+a type-1 sectioning node can not end a presequent type-1 section?
 
 <!-- ======================================================================= -->
 ## derived statements
