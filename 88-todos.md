@@ -96,6 +96,8 @@ which must have precedence over any user-defined rank value -
 the node level of the top-level content nodes can be derived from the
 definition of the corresponding sectioning node
 
+plot twist: its the parent container, not the node level
+
 <!-- ======================================================================= -->
 ## implementation specific
 

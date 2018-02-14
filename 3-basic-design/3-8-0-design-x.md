@@ -21,15 +21,15 @@ n1 n2 n3 n4 n5 n6 n7 n8 n9
 ```
 
 * `n0` declares the next outer type-1 section `s0`
-* all nodes (i.e. `n1-9`) are siblings to each other
-* all other descendant nodes will be ignored
-* nodes `n1-9` all represent type-2 sectioning nodes
+* nodes `n1-9` are siblings to each other
+* other descendant nodes will be ignored
+* nodes `n1-9` represent type-2 sectioning nodes
 * nodes `n1-9` declare sections `s1-9`
-* obviously, `s9` will always be empty
+* obviously, section `s9` will always be empty
 
 Note that any type-2 sectioning node will have at least one type-1 sectioning
-node as its ancestor. That is, because the root node always acts as a type-1
-sectioning node.
+node as its (not necessarily immediate/direct) ancestor. That is, because the
+root node always acts as a type-1 sectioning node.
 
 Note that the default definition of sectioning nodes does not define the
 characteristic to close any open presequent section. Because of that, `s1` is
@@ -38,8 +38,8 @@ a subsection to `s8`. Consequently, the tree of sections that has `s0` as its
 root section contains a single rtl-path of sections (i.e. a rooted path that
 ends in a leaf - "rtl" for "root-to-leaf"): `(s0,s1,s2,s3,s4,s5,s6,s7,s8,s9)`.
 
-Obviously, the default definition of type-2 sectioning nodes alone is
-insufficient to manually define a proper section hierarchy. That is, because
+Obviously, the default definition of type-2 sectioning nodes alone is not
+sufficient to manually define a proper section hierarchy. That is, because
 no section is closed before a subsequent sectioning node is entered. As a
 result, the next subsequent section will always be a subsection to all
 presequent sections. Because of that, and in order to support any tree of
@@ -109,25 +109,16 @@ three leaf sections: `s5`, `s6` and `s9`).
 
 Note that, `n0` could also be some inactive common parent container, instead of
 a type-1 sectioning node. In such a case `s0` would then have to represent the
-section that `n0` is associated with. Consequently, all rtl-paths would have
+section that was used to associate `n0`. Consequently, all rtl-paths would have
 some common prefix of sections (i.e. absolute vs. relative paths/sequences).
 
 <!-- ======================================================================= -->
 ## derived statements
 
 **CLARIFICATION**
-The default definitions (type-2 sectioning nodes, parent containers and implicit
-associations) provide the means to manually define any hierarchy of sections.
-
-That is, because the parent containers not only define when sections have to
-end, but also, due to implicit associations, to which sections all of their
-inner nodes and sections belong. Which is, because all formal associations
-of a parent container carry over to all of its contents.
-
-**CLARIFICATION**
-Presequent sections need to be altered in order to change the relationship of a
-subsequent section. That is, the actual subsequent section and its default scope
-remains unchanged.
+Presequent sections need to be altered in order to change the relationship of
+a subsequent section. That is, the actual subsequent section and its default
+scope remains essentially unchanged.
 
 In order to shift a subsequent section upwards in the section hierarchy, the
 default scopes of one or more open presequent sections need to be reduced.
@@ -138,40 +129,99 @@ subsequent section must be located within the scope of all of its presequent
 ancestor sections. That is, the scope of all presequent ancestor sections must
 be widened in order to include the subsequent descendant section.
 
-<!-- ======================================================================= -->
-## preliminary summary
+**CLARIFICATION**
+The default definitions (type-2 sectioning nodes, parent containers and
+implicit associations) provide the means to manually define any hierarchy
+of sections.
 
+That is, because the parent containers not only define when sections end, but
+also, due to implicit associations, to which sections all of their inner nodes
+and sections belong. Which is, because all formal associations of a parent
+container carry over to all of its contents.
+
+**CLARIFICATION**
 The injection of explicit parent containers does not answer the initial
-question. That is, because only the default scopes of the above sections are
-changed. As a result, any section in the above node trees still ends with its
-default scope and not any sooner. Note that the focus of the initial question
-is on the latter aspect.
+question. That is, because only the default scope of an affected section is
+changed. As a result, any section in the above fragments still ends with its
+default scope and not any sooner.
 
-
+Note that the focus of the initial question is on the latter aspect. That is,
+to close a presequent section before the end of its default scope is reached.
 
 <!-- ======================================================================= -->
+## derived statements
 
-> A subsequent type-2 Node `n5` must be a child node of `n1`.
+Note that the node level of a node is defined as 1 + the number of edges in
+between a node and the tree's root. That is, the root node has a node level
+of 1, its child nodes a node level of 2, and their children a node level of 3.
+In short: The higher the node level, the deeper into the hierarchy a node is
+located.
 
-meaning - parent containers have precedence over any user-defined rank value -
-that is, because they are presequent to this user-provided information
+```
+      n0
+ ------------
+ n1        n2
+----
+ n3
+```
 
-If `n5` is some other descendant of `n1` (i.e. not a child node), then the
-parent container of `s5` will be associated with `s1`. That is, because it
-will be associated before `n5` is entered and thus before `s1` can even be
-closed.
+* `n1` is an inactive container node
+* `n2,n3` are type-2 sectioning nodes
 
-Consequently, all content nodes of `s5` would be implicitly associated with
-`s1`: Section `s5` would be a subsection of `s1` by structural relationship.
-Because of that, and in order to avoid conflicting statements with regards
-to these implicit associations, `n5` could not be allowed to close `s1`.
+If a presequent sectioning node `n3` has a higher node level than the next
+subsequent sectioning node `n2`, then the default scope of `s3` ends before
+`n2` is entered. That is, `s3` and `s2` are, by structural relationship,
+independent from each other. Consequently, `n2` can not have any effect on
+`s3`. That is, `s2` can not be a subsection to `s3` and `n2` can not close
+`s3` (as it is already closed when `n2` is being entered).
 
-If that condition is not met, then an implementation can not support these
-kind of modified definitions. Under these circumstances, these definitions
-must be ignored. Consequently, the use of such definitions is limited.
+Note that under these kind of circumstances, any such definition is not with
+regards to `n3/s3`, but with regards to some other open presequent section.
+Consequently, modified definitions can yield unexpected results, if the above
+structural dependency is not taken into account.
+
+Note however that certain conditions may still yield a seemingly identical
+result. If that is the case, the reasons for those matching results differ
+none the less.
+
+```
+      n0
+ ------------
+ n1        n2
+          ----
+           n3
+```
+
+* `n2` is an inactive container node
+* `n1,n3` are type-2 sectioning nodes
+
+If, in contrary to that, the next subsequent sectioning node `n3` has a higher
+node level than a presequent sectioning node `n1`, then `n3` has an ancestor
+that is a top-level node of `s1`. Consequently, `s3` is by structural
+relationship a subsection of `s1`. Because of that, any attempt to close
+`s1` when `n3` is being entered, must be ignored. That is, `s3` can not be
+independent of `s1` (e.g. a sibling section to it).
+
+```
+      n0
+ ------------
+ n1        n2
+```
+
+* `n1,n2` are type-2 sectioning nodes
+
+**CLARIFICATION**
+In order for modified definitions to not result in any conflict or unexpected
+results, the corresponding type-2 sectioning nodes must have the same parent
+node (i.e. not just the same node level). That is, the involved type-2 sections
+must have the same parent container.
+
+Note that these considerations (i.e. parent containers) always have
+precedence over any modified definition.
 
 <!-- ======================================================================= -->
 
 default definitions are rank-less
 
-difference between type-1 and -2 sections
+difference between type-1 and -2 sections -
+type-1 is always rank-less?
