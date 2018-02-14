@@ -61,7 +61,7 @@ level 1.
 in conflict with "one or more (i.e. a list of) sections" -
 
 an outline object type (singular) can be used to represent such a list -
-but that requires an extra dedicated object type
+but that requires an additional type of object
 
 Note that this does not mean that a sectioning node is not allowed to hold
 a reference to the section it declares, which still is a single section only.
@@ -98,6 +98,11 @@ definition of the corresponding sectioning node
 
 plot twist: its the parent container, not the node level
 
+two type-1 sections can't have the same parent container -
+the subsequent type-1 section is a subsection
+
+what about type-2 sections ...
+
 <!-- ======================================================================= -->
 ## implementation specific
 
@@ -119,7 +124,7 @@ rethink that thought! - sibling sections? -
 sectioning nodes belong to the parent section? -
 
 **TODO** -
-The exit event of any container node needs to check
+The exit event of any container node always needs to check
 if one or more sections end with it.
 
 * any container node could be the parent container of a section.
@@ -143,9 +148,11 @@ root node, and (B) define a single rooted tree of sectioning nodes.
 the parent node of a type-1 sectioning node always is a type-1 -
 the parent node of a type-2 sectioning node always is a type-1 -
 a type-1 sectioning node can be a parent or a leaf -
-a type-2 sectioning node always is a leaf node -
+a type-2 sectioning node always is a leaf node - nope, data nodes -
 
-issue with tables? table/tr/td (sectioning root) -
+issue with tables (not exactly) -
+table/tr/td (sectioning root) -
+all td-sections are subsections of the section with which a table is associated
 
 <!-- ======================================================================= -->
 ## optional end marker nodes?

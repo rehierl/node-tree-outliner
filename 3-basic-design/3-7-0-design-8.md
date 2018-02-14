@@ -1,316 +1,258 @@
 
 <!-- ======================================================================= -->
-# Design (8) - type-1 sections
+# Design (8) - type-2 sections
 
 **QUESTION**
-Would it be reasonable to allow an inner sectioning node to close a type-1
-section before the end of its sectioning node (default scope) is reached?
+Would it be reasonable to allow a subsequent type-2 sectioning node to close an 
+open presequent type-2 section before the end of its default scope is reached?
 
-Note that the following considerations are based upon the association of two
-sectioning nodes. That is, if all of the below mentioned associations result
-in conflicts, then such an "option" can not be allowed. However, if certain
-associations would seem to support such an "option", then that "option" might
-still not be possible. That is, because it could still result in conflicts
-that are unrelated to the associations mentioned below.
+Note that the following considerations focus on type-2 sectioning nodes only.
+That is, they do not cover the question whether a type-1 sectioning node should
+be allowed to close a type-2 section, nor if an inner type-2 sectioning node
+should be allowed to close a type-1 section.
 
 <!-- ======================================================================= -->
 ## introduction
 
-**TODO**
-`n1 -> n0 + hierarchy` -
-compare with type-2 fragments
-
 ```
+            n0
+==========================
 n1 n2 n3 n4 n5 n6 n7 n8 n9
-========================== -> s0
 ```
 
-* `s0` represents the next outer section (e.g. the universal section)
-* `n1` is a type-1 sectioning node (declares section `s1`)
-* nodes `n2-5` are child nodes of `n1`
+* `n0` declares the next outer type-1 section `s0`
+* nodes `n1-9` are siblings to each other
+* other descendant nodes will be ignored
+* nodes `n1-9` represent type-2 sectioning nodes
+* nodes `n1-9` declare sections `s1-9`
+* obviously, section `s9` will always be empty
 
-Case 1 - default
+Note that any type-2 sectioning node will have at least one type-1 sectioning
+node as its (not necessarily immediate/direct) ancestor. That is, because the
+root node always acts as a type-1 sectioning node.
 
-* `n5` is an inner type-1 sectioning node (declares section `s5`)
-* nodes `n6-9` are child nodes of `n5` (i.e. distant descendants of `n1`)
+Note that the default definition of sectioning nodes does not define the
+characteristic to close any open presequent section. Because of that, `s1` is
+a subsection to `s0`, `s2` is a subsection to `s1`, ..., and finally, `s9` is
+a subsection to `s8`. Consequently, the tree of sections that has `s0` as its
+root section contains a single rtl-path of sections (i.e. a rooted path that
+ends in a leaf - "rtl" for "root-to-leaf"): `(s0,s1,s2,s3,s4,s5,s6,s7,s8,s9)`.
 
-Case 2 - alternatively
-
-* `n5` is an inner type-2 sectioning node (declares section `s5`)
-* nodes `n6-9` are siblings to `n5` (i.e. additional child nodes of `n1`)
-
-In both cases, `n5` needs to be understood to be defined in such a way that it
-closes section `s1` before the content nodes of `s5` are entered. That is, `s5`
-is defined to be independent of `s1`. Put differently, no content node of `s1`
-can be a content node of `s5` (and vice versa). Because of that, none of these
-sections can be an ancestor section of the other. Consequently, both sections
-are sibling sections with regards to the next outer section `s0`.
-
-Note that if `n1` is itself defined to close the last outer open presequent
-section, then section `s0`  represents the last presequent section that remains
-to be open. That is, the following considerations need to be understood to be
-independent of this outer aspect.
+Obviously, the default definition of type-2 sectioning nodes alone is not
+sufficient to manually define a proper section hierarchy. That is, because
+no section is closed before a subsequent sectioning node is entered. As a
+result, the next subsequent section will always be a subsection to all
+presequent sections. Because of that, and in order to support any tree of
+sections, means to explicitly mark the end of an open presequent section,
+or multiples thereof, are required.
 
 <!-- ======================================================================= -->
-## fundamental considerations
-
-The goal of allowing to close section `s1` raises the question as to why not
-to add an additional type-1 sectioning node as sibling to `n1` and then use it
-to hold the contents of section `s5`. That is, the current default definitions
-already allow to express the structure that the modified definitions are
-supposed to support.
-
-The only possible reason could therefore be to apply some other characteristic
-of a type-1 sectioning node (i.e. due to its grouping characteristic) to the
-optional inner subsequent section `s5`. However, a second subsequent sibling
-type-1 sectioning node would have the very same characteristic.
-
-> Optional subsequent descendant nodes.
-
-Such an option will obviously have to depend on optional subsequent descendant
-nodes. That is, because the definition of a type-1 sectioning node is only able
-to cover a single default case. And, because of that, a type-1 section will by
-default (i.e. in cases where there are no such optional nodes) still have to
-end with its default scope.
-
-Note that this should not be understood as an argument against such an option.
-That is, because there is no other way to deviate from the default definitions.
-
-> Structural relationship
-
-Placing section `s5` inside of node `n1` by itself states that sections `s1`
-and `s5` have a strong structural relationship with each other. That is,
-because nodes `n2-9` all have `n1` as one of their ancestor nodes.
-
-Note that this relationship can not be undefined.
-That is, the modified definitions must take this dependency into account.
-
-> In conflict with dynamic support.
-
-One negative aspect of this placement (i.e. `s5` inside of `n1`) is, that
-any dynamic operation on `n1` (e.g. fold/unfold) will automatically also
-affect `n5/s5`.
-
-If, for example, `s1` would have to be folded, then how could that be done
-without automatically and completely hiding `s5`, a supposedly independent
-sibling section?
-
-Transparent (i.e hidden) background transformations prior to such an
-operation could not be avoided.
-
-> Node `n5` must be a child node of `n1`.
-
-If `n5` is some other descendant of `n1` (i.e. not a child node), then the
-parent container of `s5` will be associated with `s1`. That is, because it
-will be associated before `n5` is entered and thus before `s1` can even be
-closed.
-
-Consequently, all content nodes of `s5` would be implicitly associated with
-`s1`: Section `s5` would be a subsection of `s1` by structural relationship.
-Because of that, and in order to avoid conflicting statements with regards
-to these implicit associations, `n5` could not be allowed to close `s1`.
-
-If that condition is not met, then an implementation can not support these
-kind of modified definitions. Under these circumstances, these definitions
-must be ignored. Consequently, the use of such definitions is limited.
-
-> Context dependent associations must be avoided.
-
-If a certain type of sectioning node is by default associated with a presequent
-section, and under certain circumstances associated with some other section
-(e.g. the section it declares), then the association of that type of sectioning
-node would depend on the surrounding context in which it is used.
-
-Consequently, an implementation would always have to first determine the context
-in which this type of sectioning node is used. And, because of that, there could
-not be a simple and straight forward implementation.
-
-Note that any sectioning node could initially be associated according to some
-default definition. Then, if certain conditions are detected/met, the default
-association could be replaced with a context dependent association. However,
-one would have to ensure that the initial association does not have any side
-effect, as that could result in a conflict with regards to the node's final
-association.
-
-<!-- ======================================================================= -->
-## overview
+## explicit parent containers
 
 ```
-   \ n5 |    |    | 
- n1 \   | s0 | s1 | s5
---------|----|----|----
-     s0 | *  | x  | x
-     s1 | x  | x  | x
-     s5 | x  | x  | x
+            n0
+==========================
+n1 n2 n3 n4 n5
+            --------------
+               n6 n7 n8 n9
 ```
 
-* rows represent those cases in which `n1` is associated with `s0/1/5`.
-* columns represent those cases in which `n5` is associated with `s0/1/5`.
-* `x` marks those cases which result in conflicts, inconsistencies
-  and/or non-trivial associations.
-* `*` marks those cases which don't disallow such modified definitions.
+If `n5` is turned into an inactive container node to hold the nodes that are
+subsequent to it (i.e. no longer a sectioning node), then that node still has
+to be associated with `s4`. Consequently, and due to implicit associations, 
+all nodes descendant to `n5` (i.e. `n6-9`) are automatically loosely associated
+with `s4`. And, because of that, sections `s6-9` still are subsections to `s4`.
 
-Note that associating a sectioning node with its own section (i.e. `n1:s1`
-or `n5:s5`) will automatically be in conflict with those considerations that
-are related to not associating any sectioning node with its own section. This
-aspect applies to any case that does not follow this default definition.
-
-Note that it is trivial to associate a sectioning node with its own section
-(e.g. `n1:s1`, `n5:s5`). If a `currentSection` variable is available, then
-it is also rather straight forward to associate a sectioning node with the
-last open presequent section (e.g. `n1:s0`, `n5:s1`, `n5:s0`).
-
-<!-- ======================================================================= -->
-## n1:s0
+Note that the tree of sections still contains a single rtl-path:
+`(s0,s1,s2,s3,s4,s6,s7,s8,s9)` (`s5` does not exist because `n5` no
+longer is a sectioning node).
 
 ```
-n1 n2 n3 n4 n5 n6 n7 n8 n9
-========================== -> s0
-   ===========             -> s1
-            ============== -> s5
+            n0
+==========================
+n1             n6 n7 n8 n9
+--------------
+   n2 n3 n4 n5
 ```
 
-Because the sectioning node `n1` is not associated with its own section, there
-is no conflict with regards to implicit associations. Consequently, closing
-`s1` before `n1` will be exited, appears to be possible.
+However, if `n1` is turned into an inactive container node instead, then all
+aspects mentioned above apply to the corresponding inner nodes and sections
+(i.e. `n2-5` and `s2-5`). But, as `n1` now acts as the parent container of
+sections `s2-5`, they all end with it. Consequently, those inner sections
+can no longer have any effect on any other subsequent sectioning node (i.e.
+`n6-9`). Because of that, `s6-9` no longer are subsections to `s2-5` and,
+as such, independent to those sections.
 
-Note that, because of `n1:s0`, `n5` and all nodes of `s5` are automatically
-implicitly associated with section `s0`. However, this is not in conflict
-with the goal of `s5` being independent of `s1`.
-
-**n1:s0, n5:s0**
-
-With regards to associations, this case does not seem to result in a
-conflict, or add inconsistencies. => Requires further considerations.
-
-**n1:s0, n5:s1**
-
-Associating `n5` with `s1` results in a conflict:
-(1 - due to `n5:s1`) section `s5` is located inside of `s1`, and
-(2 - due to `n5` closing `s1`) nodes `n6-9` are not located inside of `s1`.
-
-Both statements combined result in an unclear statement with
-regards to the location of a section (see strong connectivity).
-
-**n1:s0, n5:s5**
-
-1. Context dependent associations (case 1).
-2. Inconsistent associations across all types of sectioning nodes (case 2).
-
-Note HTML's current associations:
-sectioning root vs. heading content.
-
-<!-- ======================================================================= -->
-## n1:s1
+Note that the tree of sections now contains two rtl-paths:
+`(s0,s2,s3,s4,s5)` and `(s0,s6,s7,s8,s9)` (`s1` does not exist
+because `n1` is no longer a sectioning node).
 
 ```
-n1 n2 n3 n4 n5 n6 n7 n8 n9
-========================== -> s0
-==============             -> s1
-            ============== -> s5
+           n0
+===========================
+n1                 n7
+-----------------  --------
+   n2 n3       n6     n8 n9
+      --------
+         n4 n5
 ```
 
-Associating `n1` with `s1` results in the following conflict:
-(1 - due to `n1:s1`) nodes `n6-9` are implicitly associated with `s1`, and
-(2 - due to `n5` closing `s1`) nodes `n6-9` are unrelated to `s1`.
+* `n1, n3, n7` are inactive container nodes
+* `n2, n4, n5, n6, n8, n9` are type-2 sectioning nodes
 
-Both statements combined result in an unclear statement with
-regards to `s5` being a subsection of `s1` or not.
+Consequently, inactive container nodes (aka. parent containers)
+can be used to manually define any tree of sections.
 
-This conflict exists, regardless to which section `n5` belongs.
+Note that the tree of sections now contains three rtl-paths:
+`(s0,s2,s4,s5)`, `(s0,s2,s6)` and `(s0,s8,s9)` (there are only
+three leaf sections: `s5`, `s6` and `s9`).
 
-**n1:s1, n5:s0**
-
-1. Context dependent associations (case 1).
-2. Inconsistent associations across all types of sectioning nodes (case 2).
-
-**n1:s1, n5:s1**
-
-1. Context dependent associations (case 1).
-2. Inconsistent associations across all types of sectioning nodes (case 2).
-
-Associating `n5` with `s1` adds another conflict:
-(1 - due to `n5:s1`) section `s5` is located inside of `s1`, and
-(2 - due to `n5` closing `s1`) section `s5` is not located inside of `s1`.
-
-Both statements combined result in an unclear statement with
-regards to the location of a section (see strong connectivity).
-
-**n1:s1, n5:s5**
-
-No conflict other than the one caused by the
-implicit associations (i.e. `n1:s1`).
-
-Note HTML's current associations:
-sectioning content vs. heading content.
-
-<!-- ======================================================================= -->
-## n1:s5
-
-```
-n1 n2 n3 n4 n5 n6 n7 n8 n9
-========================== -> s0
-  ============             -> s1
-            ============== -> s5
-==                         -> n1:s5
-```
-
-Associating `n1` with `s5` results in the following conflict:
-The subsequent optional node `n5` determines to which
-section the presequent node `n1` belongs.
-
-Note that node `n5` is not within the context of `n1` and
-therefore not allowed to have such an effect on it.
-
-In addition to that, and because nodes `n2-4` are then also implicitly
-associated with section `s5`, they would also depend on the subsequent
-node `n5`. And, because of that, section `s1` would be a subsection
-of the optional subsequent section `s5`.
-
-<!-- ======================================================================= -->
-## preliminary summary
-
-With regards to associations, only case "n1:s0, n5:s0" does not seem to
-result in any conflict. That is, because the associations are consistent
-with the default association of sectioning nodes.
-
-Note that when entering `n5` and closing `s1`, a `currentSection` variable
-would have to be modified in order to point to `s1`'s parent section (e.g.
-`s0`). Because of that, an implementation of the `n5:s0` association seems
-possible.
-
-Note that the use of such definitions is still limited:
-Node `n5` must be a child node of `n1`.
-
-However, placing a section inside of a type-1 sectioning node and then define
-it to be independent of that node still appears to be inconsistent. That is,
-because `n5`, an inner node (i.e. descendant of `n1`), is associated with an
-outer section.
-
-**TODO**
-Further considerations are in order.
-
-<!-- ======================================================================= -->
-
-**issue**
-`t1 A t1 B /t1 C /t1` -
-
-to which section would C belong, if the inner t1 would end section A? -
-to the next outer section - which is why one would be required -
-problematic with regards to the root section -
-
-lost in U - unrelated to A and B - although in the same tree -
-really that lost? - sibling sections -
-
-can not end an outer section at the same time -
-especially an outer type-1 section (e.g. root section) -
-a type-1 sectioning node can not end a presequent type-1 section?
+Note that, `n0` could also be some inactive common parent container, instead of
+a type-1 sectioning node. In such a case `s0` would then have to represent the
+section that was used to associate `n0`. Consequently, all rtl-paths would have
+some common prefix of sections (i.e. absolute vs. relative paths/sequences).
 
 <!-- ======================================================================= -->
 ## derived statements
 
-**TODO**
-A single tree of sections?
+**CLARIFICATION**
+Presequent sections need to be altered in order to change the relationship of
+a subsequent section. That is, the actual subsequent section and its default
+scope remains essentially unchanged.
 
-**DEFINITION**
-A type-1 section always ends with its default scope.
+In order to shift a subsequent section upwards in the section hierarchy, the
+default scopes of one or more open presequent sections need to be reduced.
+That is, they need to be closed before the subsequent section will be entered.
+
+In order to shift a subsequent section downwards in the section hierarchy, a
+subsequent section must be located within the scope of all of its presequent
+ancestor sections. That is, the scope of all presequent ancestor sections must
+be widened in order to include the subsequent descendant section.
+
+**CLARIFICATION**
+The default definitions (type-2 sectioning nodes, parent containers and
+implicit associations) provide the means to manually define any hierarchy
+of sections.
+
+That is, because the parent containers not only define when sections end, but
+also, due to implicit associations, to which sections all of their inner nodes
+and sections belong. Which is, because all formal associations of a parent
+container carry over to all of its contents.
+
+**CLARIFICATION**
+The injection of explicit parent containers does not answer the initial
+question. That is, because only the default scope of an affected section is
+changed. As a result, any section in the above fragments still ends with its
+default scope and not any sooner.
+
+Note that the focus of the initial question is on the latter aspect. That is,
+to close a presequent section before the end of its default scope is reached.
+
+<!-- ======================================================================= -->
+## derived statements
+
+Note that the node level of a node is defined as 1 + the number of edges in
+between a node and the tree's root. That is, the root node has a node level
+of 1, its child nodes a node level of 2, and their children a node level of 3.
+In short: The higher the node level, the deeper into the hierarchy a node is
+located.
+
+**case 1: (node level 1 > node level 2)**
+
+```
+      n0
+ ------------
+ n1        n2
+----
+ n3
+```
+
+* `n1` is an inactive container node
+* `n2,n3` are type-2 sectioning nodes
+
+If a presequent sectioning node `n3` has a higher node level than the next
+subsequent sectioning node `n2`, then the default scope of `s3` ends before
+`n2` is entered. That is, `s3` and `s2` are, by structural relationship,
+independent from each other. Consequently, `n2` can not have any effect on
+`s3`. That is, `s2` can not be a subsection to `s3` and `n2` can not close
+`s3` (as it is already closed when `n2` is being entered).
+
+Note that, from the perspective of this design, this case is a non-issue. That
+is, because sections will be ignored once they are closed. Because of that, any
+such modified definition (`n2`) is not understood to be with regards to `n3/s3`,
+but with regards to some other open presequent section. Consequently, modified
+definitions may yield unexpected results, if the above structural dependency is
+not taken into account.
+
+Note however that certain conditions may still yield a seemingly identical
+result. If that is the case, the reasons for those matching results differ
+none the less.
+
+**case 2: (node level 1 < node level 2)**
+
+```
+      n0
+ ------------
+ n1        n2
+          ----
+           n3
+```
+
+* `n2` is an inactive container node
+* `n1,n3` are type-2 sectioning nodes
+
+If, in contrary to that, the next subsequent sectioning node `n3` has a higher
+node level than a presequent sectioning node `n1`, then `n3` has an ancestor
+that is a top-level node of `s1`. Consequently, `s3` is by structural
+relationship a subsection of `s1`. Because of that, any attempt to close
+`s1` when `n3` is being entered, must be ignored. That is, `s3` can not be
+independent of `s1` (e.g. a sibling section to it).
+
+**case 3: (node level 1 == node level 2)**
+
+```
+      n0
+ ------------
+ n1        n3
+----      ----
+ n2        n4
+```
+
+* `n1,n3` are inactive container nodes
+* `n2,n4` are type-2 sectioning nodes
+
+Note that this case can be understood to contain two independent subtrees.
+Because of that, this case is similar to case 1. That is, `s2` will be closed
+before `n4` is entered.
+
+**case 4: (same parent container)**
+
+```
+      n0
+ ------------
+ n1        n2
+```
+
+* `n1,n2` are type-2 sectioning nodes
+
+However, `n2` is in principle free to close the open presequent section `s1`,
+if (and only if) both type-2 sectioning nodes have the same parent node (i.e.
+same parent container).
+
+Note that the parent section of `s2` can then only be one of the remaining
+open sections, which are presequent to `s1` (i.e. ancestor sections of `s1`).
+
+**CLARIFICATION**
+In order for modified definitions to not yield any conflict or unexpected
+result, the corresponding type-2 sectioning nodes must have the same parent
+container.
+
+Note that these considerations (i.e. parent containers) always have
+precedence over any modified definition.
+
+<!-- ======================================================================= -->
+
+default definitions are rank-less
+
+difference between type-1 and -2 sections -
+type-1 is always rank-less?
