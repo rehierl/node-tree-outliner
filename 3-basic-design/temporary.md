@@ -23,7 +23,8 @@ fragment             assoc-1    assoc-2
 
 In other words: HTML's current structure of sections is dictated by the rank
 of heading content elements, which only is an addition to the default/base
-definition. That is, the default definitions are without rank.
+definition of t2 sectioning nodes. That is, the default definitions are without
+rank (i.e they are rank-less).
 
 * looks the same - must act the same - wrong
 * the default definition must define the overall structure
@@ -33,7 +34,7 @@ definition. That is, the default definitions are without rank.
 the issue is
 
 * the above structure (list) has significant impact on an implementation
-* there must be a darn good reason to support it
+* because of that, there must be a darn good reason to support it
 
 section + heading
 
@@ -78,7 +79,7 @@ highest rank (infinity)
 
 * a sequence of H elements defines a flat list of sibling sections
 * consistent with HTML's current design - not meant as an argument
-* seems to be the better choice
+* seems to be the better (user friendly) choice
 
 lowest rank (epsilon)
 

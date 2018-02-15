@@ -18,7 +18,7 @@ that are unrelated to the associations mentioned below.
 
 **TODO**
 `n1 -> n0 + hierarchy` -
-compare with type-2 fragments
+see the type-2 fragments
 
 ```
 n1 n2 n3 n4 n5 n6 n7 n8 n9

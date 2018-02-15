@@ -34,6 +34,12 @@ if shallow, then close just a few, if any -
 can be seen to be context-dependent (i.e. inconsistent) -
 
 **TODO**
+the algorithm can in principle start at any node -
+the root node must be treated as a type-1 sectioning node -
+any node can therefore be understood to have an outline -
+issue header element in combination with the reuse of heading content -
+
+**TODO**
 describe multistep transformations -
 already done ?
 
@@ -93,10 +99,12 @@ The path/stack of open sections is a rooted path in the tree of sections.
 the node level of a sectioning node acts as a rank-like value -
 which must have precedence over any user-defined rank value -
 
-the node level of the top-level content nodes can be derived from the
-definition of the corresponding sectioning node
+the node level of the top-level content nodes can be derived
+from the definition of the corresponding sectioning node -
++1 in case of type-1, +0 in case of type-2
 
-plot twist: its the parent container, not the node level
+plot twist: its the parent container, not the node level -
+even better for implementations
 
 two type-1 sections can't have the same parent container -
 the subsequent type-1 section is a subsection
@@ -150,8 +158,9 @@ the parent node of a type-2 sectioning node always is a type-1 -
 a type-1 sectioning node can be a parent or a leaf -
 a type-2 sectioning node always is a leaf node - nope, data nodes -
 
-issue with tables (not exactly) -
+issue with tables -
 table/tr/td (sectioning root) -
+can only be a rule of thumb -
 all td-sections are subsections of the section with which a table is associated
 
 <!-- ======================================================================= -->
