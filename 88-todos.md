@@ -4,8 +4,8 @@
 
 The ultimate goal is to leave no question unanswered.
 
-A painfully slow and nerve wrecking process ...
-It looks like, I'm just too darn stubborn to give up ...
+A painfully slow and nerve wrecking process -
+It looks like, I'm just too darn stubborn to give up -
 "Ain't No Mountain High Enough" :)
 
 **TODO**
@@ -23,7 +23,8 @@ sectioning end/close node, or end marker node -
 can an algorithm easily store references to all top-level nodes? -
 is it possible to avoid having to determine them as a post-process
 by providing a list of top-level nodes? -
-won't work on the fly (associate with one section only) -
+issue: associate with one section only (not that easy) -
+issue: subsequent t2 with equal or higher rank (tricky) -
 when a section is being closed, or an on demand feature?
 
 **TODO**
@@ -34,10 +35,14 @@ if shallow, then close just a few, if any -
 can be seen to be context-dependent (i.e. inconsistent) -
 
 **TODO**
-the algorithm can in principle start at any node -
+an algorithm can in principle start at any node -
 the root node must be treated as a type-1 sectioning node -
-any node can therefore be understood to have an outline -
-issue header element in combination with the reuse of heading content -
+any node can be understood to have an outline -
+issue header element in combination with reusing heading content -
+i.e. a 1st header element can not always be recognized to be with
+regards to a presequent (possibly not within the corresponding
+subtree) type-1 sectioning node -
+this might not be the case with a title element
 
 **TODO**
 describe multistep transformations -
@@ -46,18 +51,6 @@ already done ?
 **TODO**
 "executing" an algorithm on a node sequence (event sequence)
 feels a lot like a turing machine
-
-<!-- ======================================================================= -->
-## rank of a section
-
-**DEFINITION**
-The rank of a section is the number of its ancestor sections -
-or better outline depth
-
-Note that the universal section is always included. That is, the root section
-has rank 1 and the universal section has rank 0. Note also that this is similar
-to a node's node level within a tree of nodes. That is, the root node has node
-level 1.
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
@@ -71,6 +64,31 @@ but that requires an additional type of object
 
 Note that this does not mean that a sectioning node is not allowed to hold
 a reference to the section it declares, which still is a single section only.
+
+<!-- ======================================================================= -->
+## rank of a section
+
+**DEFINITION**
+The rank of a section is the number of its ancestor sections -
+or better outline depth
+
+Note that the universal section is always included. That is, the root section
+has rank 1 and the universal section has rank 0. Note also that this is similar
+to a node's node level within a tree of nodes. That is, the root node has node
+level 1.
+
+plot twist: sections have no rank
+
+a rank value, absolute or relative, represents a top-down perspective -
+a close-n-sections value represents a bottom-up perspective -
+the former is more user friendly than the latter
+
+**type-1 sectioning nodes**
+they can in principle also have a rank value -
+however a subsequent t1 section can not become
+a subsection of a closed presequent section -
+because rank values are with regards to open sections -
+a t1 rank can only refer to presequent t2 sections -
 
 <!-- ======================================================================= -->
 ## the current section variable
@@ -132,10 +150,10 @@ rethink that thought! - sibling sections? -
 sectioning nodes belong to the parent section? -
 
 **TODO** -
-The exit event of any container node always needs to check
+The exit event of any parent node always needs to check
 if one or more sections end with it.
 
-* any container node could be the parent container of a section.
+* any parent node could be the parent container of a section.
 * any number of sections may have the same parent container.
 * a declared section may already be closed due to a non-default definition.
 
