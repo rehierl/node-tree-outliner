@@ -1,18 +1,42 @@
 
 <!-- ======================================================================= -->
-# Design (8) - type-2 sections
+# Design (7) - current section
 
-**QUESTION**
-Would it be reasonable to allow a subsequent type-2 sectioning node to close an 
-open presequent type-2 section before the end of its default scope is reached?
+At any given point in time, one or more sections count as being open. This
+set of open sections will be referred to as the current set of open sections
+(`cs` for "current-set").
 
-Note that the following considerations focus on type-2 sectioning nodes only.
-That is, they do not cover the question whether a type-1 sectioning node should
-be allowed to close a type-2 section, nor if an inner type-2 sectioning node
-should be allowed to close a type-1 section.
+* `cs := { s0, s1, s2, ... }` and `(cs subset-of S)`
+* `S` is the set of all declared/known sections
+
+If the node sequence of the tree and the sectioning nodes of all open sections
+are taken into account, then that set of sections can be understood to define
+the current ordered list of open sections (`cl` for "current-list").
+
+* `cl := [ s0, s1, s2, ... ]`
+* `(si subsection-of si-k)` for `si in cl` and any `k in [1,i)`
+* `(si declared-by ni)` for any `si in cl`
+* `(ni subsequent-to ni-k)` for any `k in [1,i)`
+
+**CLARIFICATION**
+The current set of open sections will be referred to as "the set of (open)
+sections" and the current ordered list of sections as "the list of (open)
+sections", or "the sequence of (open) sections".
+
+Note that this list does by itself not represent an existing list object. It
+merely represents an ordered listing of sections that, at a given point in
+time, still count as being open. That is, this list can be understood as the
+result of a lookup operation.
+
+Note that this lookup operation is completely based upon those nodes that have
+already been visited (i.e. presequent nodes). That is, an implementation could
+maintain such a listing while it is traversing the node tree. However, the
+corresponding list object must accurately represent the list of open sections.
 
 <!-- ======================================================================= -->
-## introduction
+## list operations
+
+**case 1:** `(s0,s1,s2,s3,s4) => +{s5} => (s0,s1,s2,s3,s4,s5)`
 
 ```
             n0
@@ -27,271 +51,225 @@ n1 n2 n3 n4 n5 n6 n7 n8 n9
 * nodes `n1-9` declare sections `s1-9`
 * obviously, section `s9` will always be empty
 
-Note that any type-2 sectioning node will have at least one type-1 sectioning
-node as its (not necessarily direct) ancestor. That is, because the root node
-always acts as a type-1 sectioning node.
+If, for example, an implementation would enter node `n5`,
+then the list of sections will be the sequence `(s0,s1,s2,s3,s4)`.
 
-Note that the default definition of sectioning nodes does not define the
-characteristic to close any open presequent section. Because of that, `s1` is
-a subsection to `s0`, `s2` is a subsection to `s1`, ..., and finally, `s9` is
-a subsection to `s8`. Consequently, the tree of sections that has `s0` as its
-root section contains a single rtl-path of sections (i.e. a rooted path that
-ends in a leaf - "rtl" for "root-to-leaf"): `(s0,s1,s2,s3,s4,s5,s6,s7,s8,s9)`.
+When creating/opening section `s5`, that list will change into the sequence
+`(s0,s1,s2,s3,s4,s5)`. Which is, because no open presequent section will be
+closed (i.e. `s5` is a subsection to `s4`).
 
-Evidently, the default definition of type-2 sectioning nodes alone is not
-sufficient to manually define a proper section hierarchy. That is, because
-no section is closed before a subsequent sectioning node is entered. As a
-result, the next subsequent section will always be a subsection to all
-presequent sections. Because of that, and in order to support any tree of
-sections, means to explicitly mark the end of an open presequent section,
-or multiples thereof, are required.
-
-Note that, `n0` could also be an inactive container node, instead of a type-1
-sectioning node. In such a case `s0` would then represent the section that was
-used to associate `n0`. Consequently, all rtl-paths would then have a common
-prefix of sections (i.e. absolute vs. relative paths/sequences).
-
-<!-- ======================================================================= -->
-## explicit parent containers
+**case 2:** `(s0,s1,s2,s3,s4,s6) => -{s6} => (s0,s1,s2,s3,s4)`
 
 ```
             n0
 ==========================
-n1 n2 n3 n4 n5
-            --------------
-               n6 n7 n8 n9
+n1 n2 n3 n4 n5    n7 n8 n9
+            -----
+               n6
 ```
 
-If `n5` is turned into an inactive container node that holds the nodes which are
-subsequent to it (i.e. no longer a sectioning node), then that node will still
-be associated with `s4`. Consequently, and due to implicit associations, all
-nodes descendant to `n5` (i.e. `n6-9`) are automatically loosely associated
-with `s4`. And, because of that, sections `s6-9` still are subsections to `s4`.
+* `n5` is an inactive parent node
+* `n6` is a child node to `n5`
 
-As a result, the tree of sections still contains a single rtl-path:
-`(s0,s1,s2,s3,s4,s6,s7,s8,s9)` (`s5` does not exist because `n5` is
+If, for example, an implementation would exit node `n6` (i.e. after opening
+`s6`), then that list of sections is equivalent to `(s0,s1,s2,s3,s4,s6)`
+(`s5` does not exist because `n5` is no longer a sectioning node).
+
+The next node event that will have to be processed is the exit event of `n5`.
+And because `n5` acts as the parent container of `s6`, `s6` has to be closed
+during `n5`'s exit event. Consequently, the list of sections will no longer
+contain `s6`: `(s0,s1,s2,s3,s4)`.
+
+**case 3:** `(s0,s1,s2,s3,s4,s6,s7) => -{s6,s7} => (s0,s1,s2,s3,s4)`
+
+```
+            n0
+==========================
+n1 n2 n3 n4 n5       n8 n9
+            --------
+               n6 n7
+```
+
+* `n5` is an inactive parent node
+* `n6, n7` are both child nodes of `n6`
+
+In contrary to the previous case, `n5` now has two inner sections (i.e. `s6`
+and `s7`). Consequently, when exiting `n7` after opening `s7`, the list of
+sections is `(s0,s1,s2,s3,s4,s6,s7)` (`s5` does not exist because `n5` is
 no longer a sectioning node).
 
+Similar to before, the exit event of `n5` has to close all remaining open
+inner sections. Consequently, and after `n5`'s exit event, the list of
+sections will be `(s0,s1,s2,s3,s4)`.
+
+<!-- ======================================================================= -->
+## derived statements
+
+**CLARIFICATION**
+The list of sections will be extended by a new section,
+if the next node event results in opening a new section.
+
+Note that new section will always appear at the end of the list (i.e. not at
+an arbitrary position). That is, because the new section will be a subsection
+to all sections in the previous listing (formal perspective).
+
+Note that any sectioning node can only declare a single new section. That is,
+no node event will extend the list of sections by more than one section.
+
+**CLARIFICATION**
+The list of sections will be reduced by one or more sections,
+if the next node event results in closing the corresponding sections.
+
+Note that all of these sections will always be removed from the end of the
+list (i.e. not from an arbitrary position). That is, because no subsection can
+remain open if its parent section has to be closed. Note that this is a mere
+consequence of "the parent container of a subsection never is an ancestor of
+its parent section's parent container".
+
+**CLARIFICATION**
+If multiple sections need to be closed during the same node event, then those
+sections need to be closed in reverse order. That is, if `s6` was opened before
+`s7`, then `s7` needs to be closed before `s6` is closed.
+
+That is, because `s7` is a subsection to `s6` and because no subsection can
+remain open if its parent section has to be closed. Put differently, any other
+close order would be in conflict with "a parent section is open for as long as
+its subsections are open".
+
+Note that it might not seem to be relevant in which order sections are closed.
+After all, they need to be closed during the same node event. However, the
+order of close events can be quite relevant, if those operations are used to
+trigger event handler routines.
+
+Note that an implementation might initially not be aware of how many inner
+sections need to be closed when exiting a given parent container. In addition
+to that, an implementation might even not have to be aware of the exact number
+(e.g. repeat to close the last subsection until a certain condition is met).
+
+**CLARIFICATION**
+The behavior of the list of open sections is consistent with the
+operations of a first-in-first-out data structure (aka. stack).
+
+1) `push()` a new section onto the stack
+2) `pop()` the last subsection from the stack
+3) `get()` the last subsection from the stack
+
+**CLARIFICATION**
+The list of open sections can also be
+referred to as the "stack of (open) sections.
+
+<!-- ======================================================================= -->
+## trace of section sequences
+
 ```
             n0
 ==========================
-n1             n6 n7 n8 n9
---------------
-   n2 n3 n4 n5
+n1 n2 n3 n4 n5       n8 n9
+            --------
+               n6 n7
 ```
 
-However, if `n1` is turned into an inactive container node instead, then all
-aspects mentioned above apply to the corresponding inner nodes and sections
-(i.e. `n2-5` and `s2-5`). But, as `n1` now acts as the parent container of
-sections `s2-5`, they all end with it. Consequently, those inner sections
-can no longer have any effect on any other subsequent sectioning node (i.e.
-`n6-9`). Because of that, `s6-9` no longer are subsections to `s2-5` and,
-as such, independent to those sections.
+* `n5` is an inactive parent node
+* `n6, n7` are both child nodes of `n6`
 
-As a result, the tree of sections now contains two rtl-paths:
-`(s0,s2,s3,s4,s5)` and `(s0,s6,s7,s8,s9)` (`s1` does not exist
-because `n1` is no longer a sectioning node).
+Logging the list of sections at certain points in time, while the above 
+fragment is being processed, would result in the following trace of section
+sequences:
 
 ```
-             n0
-==============================
-n1                    n7
------------------     --------
-   n2 n3       n6        n8 n9
-      --------
-         n4 n5
+trace of sequences:     -  node event:
+======================  -  ====================
+()                      -  before entering n0
+(s0)                    -  after entering n0
+(s0,s1)                 -  after exiting n1
+...                     -  ...
+(s0,s1,s2,s3,s4)        -  after exiting n4
+(s0,s1,s2,s3,s4,s6)     -  after exiting n6
+(s0,s1,s2,s3,s4,s6,s7)  -  after exiting n7
+(s0,s1,s2,s3,s4,s6)     -  while exiting n5
+(s0,s1,s2,s3,s4)        -  after exiting n5
+(s0,s1,s2,s3,s4,s8)     -  after exiting n8
+(s0,s1,s2,s3,s4,s8,s9)  -  after exiting n9
+(s0,s1,s2,s3,s4,s8)     -  while exiting n0
+(s0,s1,s2,s3,s4)        -  while exiting n0
+...                     -  ...
+(s0,s1)                 -  while exiting n0
+(s0)                    -  while exiting n0
+()                      -  after exiting n0
 ```
 
-* `n1, n3, n7` are inactive container nodes
-* `n2, n4, n5, n6, n8, n9` are type-2 sectioning nodes
+Note that the root section `s0` is always located at the beginning of the
+list of sections. That is, because any other section is a subsection to it.
 
-Consequently, explicit inactive container nodes (aka. parent containers) can be
-used to manually alter the default scopes of the involved sections and therefore
-allow to define any tree of sections.
+As mentioned before, and in contrary to the formal perspective, each node
+will be associated with one section only (practical perspective). However,
+this single association must, based on implicit associations, represent all
+the formal associations (i.e. both perspectives must be equivalent). And,
+because of that, each node must be associated with the closest presequent
+section that still counts as being open (i.e. the node's parent section).
 
-As a result, the tree of sections now contains three rtl-paths:
-`(s0,s2,s4,s5)`, `(s0,s2,s6)` and `(s0,s8,s9)` (there are only
-three leaf sections: `s5`, `s6` and `s9`).
+Note that the parent section of any node always is located at the end of
+the list of sections. That is, when being entered, a node will be associated
+with the last section of that list.
 
-<!-- ======================================================================= -->
-## derived statements
+Note that it does not really matter, if `n0` is a type-1 sectioning node, or
+an inactive parent container. If `n0` would be such a container node, then `s0`
+would represent the section that was used to associate `n0`. Consequently, `s0`
+would not have to be created when entering, and closed when exiting `n0`. Other
+than that, all sequences of sections would begin with some common prefix, which
+would end in `s0`.
 
 **CLARIFICATION**
-Presequent sections need to be altered in order to change the relationship of
-a subsequent section. That is, the actual subsequent section and its default
-scope remains essentially unchanged.
+The last/top-most) section in the list/stack of sections will be referred
+to as the "current section". A reference to this section, provided by the
+`Section currentSection` variable, will be used to associate each node.
 
-In order to shift a subsequent section upwards in the section hierarchy, the
-default scopes of one or more open presequent sections need to be restricted.
-That is, they need to be closed before the subsequent section will be entered.
-
-In order to shift a subsequent section downwards in the section hierarchy, a
-subsequent section must be located within the scope of all of its presequent
-ancestor sections. That is, the scope of all presequent ancestor sections must
-be widened in order to include the "new" subsequent descendant section.
-
-**CLARIFICATION**
-The default definitions (type-2 sectioning nodes, parent containers and
-implicit associations) together provide the means to manually define any
-hierarchy of sections.
-
-That is, because the parent containers not only define when sections end, but
-also, due to implicit associations, to which sections all of their inner nodes
-and sections belong. Which is, because all formal associations of a parent
-container carry over to all of its contents.
-
-**CLARIFICATION**
-The injection of explicit parent containers does however not answer the initial
-question. That is, because only the default scope of an affected section is
-changed. As a result, any section in the above fragments still ends with its
-default scope and not any sooner.
-
-Note that the focus of the initial question is on the latter aspect
-(i.e. close a presequent section before the end of its default scope).
+Note that an explicit reference variable is optional, if an implementation
+chooses to maintain a stack of open sections. That is, because the corresponding
+reference can always be retrieved from that stack via a call to `stack.get()`.
 
 <!-- ======================================================================= -->
-## implicit parent containers
+## compared with the tree of sections
 
-As mentioned before, a section's parent container isn't a parent container
-because the definition of the corresponding node has certain characteristics.
-
-Any parent node is a parent container, if a section was declared inside of it.
-If that would not be the case, then consistent dynamic support (see the
-requirements) could not be guaranteed. In short: Any parent node can become
-a section's parent container, regardless of its specific definition.
-
-Because of that, such parent containers exist whether they are manually
-injected (explicit), or due to some structural requirement (implicit).
-
-Note that a node can be defined to never be a section's parent container, if
-(and only if) the node is not allowed to have type-2 sectioning nodes as its
-child nodes. However, a general purpose implementation is unaware of these kind
-of exceptions. That is, in case of input/user errors, such an implementation
-will still treat these nodes as parent containers.
-
-Note that the node level of a node is defined as "1 + the number of edges in
-between the node and the tree's root". That is, the root node has a node level
-of 1, its child nodes a node level of 2, and their children a node level of 3.
-In short: The higher the node level, the deeper within the node tree's hierarchy
-a node is located.
-
-**case 1: (node level 1 >> node level 2)**
+Processing the above fragment node tree will, according to the default
+definitions, result in the following tree of sections:
 
 ```
-      n0
- ------------
- n1        n2
-----
- n3
+s0 - s1 - s2 - s3 - s4 -|- s6 - s7
+                        |- s8 - s9
 ```
 
-* `n1` is an inactive container node
-* `n2, n3` are type-2 sectioning nodes
-
-If a presequent sectioning node `n3` has a higher node level than the next
-subsequent sectioning node `n2`, then the default scope of `s3` ends before
-`n2` is entered. That is, `s3` and `s2` are, by structural relationship,
-independent from each other. Consequently, `n2` can not have any effect on
-`s3`. That is, `s2` can not be a subsection to `s3` and `n2` can no longer
-close `s3` (as it is already closed when `n2` is being entered).
-
-Note that, from the perspective of this design, this case is a non-issue. That
-is, because sections will be ignored as soon as they are closed. Because of
-that, any such modified definition (with regards to `n2`) is not understood to
-be with regards to `n3/s3`, but with regards to some other open presequent
-section. Consequently, modified definitions may yield unexpected results, if
-the above structural dependency is not correctly taken into account.
-
-However, certain conditions may still yield a seemingly identical result. If
-that is the case, the reasons for those matching results differ none the less.
-
-**case 2: (node level 1 << node level 2)**
-
-```
-      n0
- ------------
- n1        n2
-          ----
-           n3
-```
-
-* `n2` is an inactive container node
-* `n1, n3` are type-2 sectioning nodes
-
-If, in contrary to that, the next subsequent sectioning node `n3` has a higher
-node level than a presequent sectioning node `n1`, then `n3` has an ancestor
-that is a top-level node of `s1`. Consequently, `s3` is by structural
-relationship a subsection to `s1`. Because of that, and in order to avoid
-conflicting statements, any attempt to close `s1` when `n3` is being entered,
-must be ignored. That is, `s3` can not be independent of `s1` (e.g. a sibling
-section to it).
-
-**case 3: (node level 1 == node level 2)**
-
-```
-      n0
- ------------
- n1        n3
-----      ----
- n2        n4
-```
-
-* `n1, n3` are inactive container nodes
-* `n2, n4` are type-2 sectioning nodes
-
-Note that this case can be understood to contain two subsequent subtrees that
-have `n1` and `n3` as their root nodes. Because of that, this case is similar
-to case 1: `s2` will be closed before `n4` is entered.
-
-Note that the node levels of the corresponding sectioning nodes don't even have
-to be equal for as long as both nodes are located within two different subtrees.
-The effect will still be covered by case 1: `s2` will be closed before `n4` is
-entered.
-
-**case 4: (same parent container)**
-
-```
-      n0
- ------------
- n1        n2
-```
-
-* `n1, n2` are type-2 sectioning nodes
-
-However, `n2` is in principle free to close the open presequent section `s1`,
-if (and only if) both type-2 sectioning nodes have the same parent node (i.e.
-the same parent container).
-
-Note that the actual parent section of `s2` can then only be one of the
-remaining open sections, which all are presequent to `s1` (i.e. ancestor
-sections of `s1`).
-
-<!-- ======================================================================= -->
-## derived statements
+If the above trace of section sequences is compared to the resulting tree,
+then the following observation can be made right away: The list of sections
+represents a path in the tree of sections, which connects the root section
+with the current section (i.e. a rooted path of sections).
 
 **CLARIFICATION**
-In order for modified definitions to not yield any conflict or an unexpected
-result, the corresponding type-2 sectioning nodes must have the same parent
-container.
+The list of open sections can also be
+referred to as the "(current) path of (open) sections.
 
-Note that the above considerations have precedence over any modified definition.
-That is, those definitions must be ignored, if they are in conflict with the
-corresponding structural considerations. Hence, the use of such definitions is
-always limited.
+Note that an implementation does not have to maintain an explicit list of
+sections. That is, because it is always implicitly available: Beginning
+with a reference to the current section, one would just have to traverse
+upwards (hint: the `Section.parentSection` properties) until the root
+section is reached. However, note the bottom-up order of this traversal.
 
-Note that this can be understood as an indication that, in principle, the
-default definitions always have precedence over any modified definition. That
-is, modified definitions must not be in conflict with the default definitions.
+**CLARIFICATION**
+The tree of sections will be created in the order, in which its sections will
+be entered during a tree traversal. Consequently, the sequence of section
+related open events is consistent with the node sequence of the section tree.
 
-<!-- ======================================================================= -->
+**TODO** -
+That is, because ...
+what's the main reason for that?
 
-**TODO**
-"extended" rather than "modified" definitions -
-just a naming related aspect
+Note that the overall list/sequence of section lists has itself no particular
+order. That is, because any sequence may appear multiple times at different
+positions. In order to get a specific order, one would have to exclude those
+repetitions, which requires a clear definition of when to dump a list of
+sections (e.g. based on the enter/open events).
 
-**TODO**
-default definitions are rank-less
-
-**TODO**
-difference between type-1 and -2 sections -
-type-1 is always rank-less?
+Note that, not any tree data structure is suited to represent the tree of
+sections. That is, because an AVL tree, for example, will repeatedly trigger
+balancing operations, if it is constructed using an ordered list of entries.
+Consequently, a list-based data structure would be more appropriate.

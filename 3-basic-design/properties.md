@@ -6,6 +6,7 @@ Global begin
   - all currently open sections
   - the bottom section is the root section
   - the top-most section is the current section
+  - not needed -> currentSection.parentSection
   Stack<Section> openSections
 
   - a reference to the current section
