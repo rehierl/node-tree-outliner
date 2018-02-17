@@ -52,6 +52,17 @@ already done ?
 "executing" an algorithm on a node sequence (event sequence)
 feels a lot like a turing machine
 
+**TODO**
+associating a node (strict association) with a section is equivalent to
+associating a whole subtree of nodes (implicit associations). -
+two levels of implicitness -
+implicitly with the explicitly associated section, and -
+implicitly with the implicitly associated section (one section only)
+
+**TODO**
+superordinate/subordinate section -
+already done ?
+
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
 
@@ -91,25 +102,6 @@ because rank values are with regards to open sections -
 a t1 rank can only refer to presequent t2 sections -
 
 <!-- ======================================================================= -->
-## the current section variable
-
-**TODO**
-explain the `currentSection` variable -
-used to associate each node with a single section -
-in combination with a stack-of-open-sections
-
-<!-- ======================================================================= -->
-## list/path/stack of open sections
-
-**CLARIFICATION**
-The path/stack of open sections is a rooted path in the tree of sections.
-
-* contains all currently open sections
-* connects the root section with the current section
-* a presequent path of sections contains closed sections
-* a subsequent path of sections contains subsequent sections
-
-<!-- ======================================================================= -->
 ## implementation specific
 
 (with regards to - implicit associations)
@@ -132,22 +124,8 @@ what about type-2 sections ...
 <!-- ======================================================================= -->
 ## implementation specific
 
-(with regards to - parent containers)
-
-`Section Node.parentSection` -
-a hint towards how it has to be implemented.
-
-An implementation does not have to keep references to
-all open sections at hand - i.e. as an ordered list of sections.
-
-An algorithm only needs to know what the parent section of the
-next subsequent node is -
-then use the `Section Section.parentSection` property -
-
-**TODO** -
-similar to if-then-else constructs in a programming language -
-rethink that thought! - sibling sections? -
-sectioning nodes belong to the parent section? -
+(with regards to - parent containers) -
+i.e. how to close inner sections
 
 **TODO** -
 The exit event of any parent node always needs to check
@@ -160,6 +138,11 @@ if one or more sections end with it.
 close the inner sections in reverse order until the parent container's
 parent section is reached, i.e. close the open presequent sections upwards,
 in the direction of the root section
+
+**TODO** -
+similar to if-then-else constructs in a programming language -
+rethink that thought! - sibling sections? -
+sectioning nodes belong to the parent section? -
 
 <!-- ======================================================================= -->
 ## tree of sectioning nodes
