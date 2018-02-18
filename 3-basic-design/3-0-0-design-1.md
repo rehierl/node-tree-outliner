@@ -397,13 +397,17 @@ The combination of all sections is referred to as a tree's "outline".
 
 Note that this basic term does not allow to determine which relationship the
 sections have with each other. What structure exactly a tree's outline has,
-if any, still needs to be determined.
+still needs to be determined.
 
 **CLARIFICATION**
-With regards to the process of creating an outline, the sectioning nodes of
-a tree are said to be the tree's "active" nodes. Any other node is therefore
-said to be an "inactive" or a "passive" node. Because of that, a tree's set
-of nodes consists of: (1) the set of active and (2) the set of passive nodes.
+The process of creating an outline for a given tree of nodes can be
+referred to as "sectioning the tree", or in general "to section a tree".
+
+**CLARIFICATION**
+With regards to sectioning a tree, the sectioning nodes are said to be the
+tree's "active" nodes. Any other node is therefore said to be an "inactive",
+or a "passive" node. Because of that, a tree's set of nodes consists of:
+(1) the set of active and (2) the set of passive nodes.
 
 Here, the notion of the terms "active" and "passive" refers to a node's
 characteristic to have an effect on the outline of its tree. If a node

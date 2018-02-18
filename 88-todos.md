@@ -9,6 +9,13 @@ It looks like, I'm just too darn stubborn to give up -
 "Ain't No Mountain High Enough" :)
 
 **TODO**
+find a term for type-2 sections that
+have an inactive node as parent container -
+inner sections: also applies if the parent container
+is a type-1 sectioning node -
+a description similar to "implied sections"
+
+**TODO**
 No two sections within a single tree have identical
 complete or even reduced sequences. These are unique to a section. -
 No two sections have identical first nodes.
@@ -18,14 +25,6 @@ better terms for type-1/2 sectioning nodes? -
 sectioning container node (ok) -
 sectioning offset/open node (?) -
 sectioning end/close node, or end marker node -
-
-**TODO**
-can an algorithm easily store references to all top-level nodes? -
-is it possible to avoid having to determine them as a post-process
-by providing a list of top-level nodes? -
-issue: associate with one section only (not that easy) -
-issue: subsequent t2 with equal or higher rank (tricky) -
-when a section is being closed, or an on demand feature?
 
 **TODO**
 HTML's sectioning content nodes are defined as -
@@ -49,18 +48,7 @@ describe multistep transformations -
 already done ?
 
 **TODO**
-"executing" an algorithm on a node sequence (event sequence)
-feels a lot like a turing machine
-
-**TODO**
-associating a node (strict association) with a section is equivalent to
-associating a whole subtree of nodes (implicit associations). -
-two levels of implicitness -
-implicitly with the explicitly associated section, and -
-implicitly with the implicitly associated section (one section only)
-
-**TODO**
-superordinate/subordinate section -
+explain superordinate/subordinate section -
 already done ?
 
 <!-- ======================================================================= -->
@@ -102,49 +90,6 @@ because rank values are with regards to open sections -
 a t1 rank can only refer to presequent t2 sections -
 
 <!-- ======================================================================= -->
-## implementation specific
-
-(with regards to - implicit associations)
-
-the node level of a sectioning node acts as a rank-like value -
-which must have precedence over any user-defined rank value -
-
-the node level of the top-level content nodes can be derived
-from the definition of the corresponding sectioning node -
-+1 in case of type-1, +0 in case of type-2
-
-plot twist: its the parent container, not the node level -
-even better for implementations
-
-two type-1 sections can't have the same parent container -
-the subsequent type-1 section is a subsection
-
-what about type-2 sections ...
-
-<!-- ======================================================================= -->
-## implementation specific
-
-(with regards to - parent containers) -
-i.e. how to close inner sections
-
-**TODO** -
-The exit event of any parent node always needs to check
-if one or more sections end with it.
-
-* any parent node could be the parent container of a section.
-* any number of sections may have the same parent container.
-* a declared section may already be closed due to a non-default definition.
-
-close the inner sections in reverse order until the parent container's
-parent section is reached, i.e. close the open presequent sections upwards,
-in the direction of the root section
-
-**TODO** -
-similar to if-then-else constructs in a programming language -
-rethink that thought! - sibling sections? -
-sectioning nodes belong to the parent section? -
-
-<!-- ======================================================================= -->
 ## tree of sectioning nodes
 
 In order to avoid unexpected results due to implicit associations,
@@ -165,6 +110,33 @@ can only be a rule of thumb -
 all td-sections are subsections of the section with which a table is associated
 
 <!-- ======================================================================= -->
+## general thoughts
+
+**TODO**
+sectioning a tree (i.e. creating an outline for a tree)
+is like grouping nodes on a logical level -
+geographical (node tree) vs. political (sections) -
+elevate the nodes of a flat, two dimensional surface into the next dimension
+
+**TODO**
+"executing" an algorithm on a node sequence (event sequence)
+feels a lot like a turing machine
+
+**compilers** -
+headings <=> variable/parameter declarations -
+sections <=> scopes/blocks -
+
+**file systems** -
+issue with folder/file node types? -
+similar to browser bookmarks, etc -
+could allow a "different" view -
+similar to views in a database
+
+these act (display wise) more like unordered trees -
+with that in mind, folders are like type-1 sectioning nodes -
+type-2 sectioning nodes don't/can't exist
+
+<!-- ======================================================================= -->
 ## optional end marker nodes?
 
 The definition of optional end marker nodes (e.g. `<close/>`) must not define
@@ -181,16 +153,3 @@ which of the to-be closed sections it would have to be associated.
 The issue with such nodes is that they could be placed inside of a type-1
 section. To which section does a subsequent node belong? That is, user/input
 errors must be taken into account.
-
-<!-- ======================================================================= -->
-## other applications
-
-**filesystems** -
-issue with folder/file node types? -
-similar to browser bookmarks, etc -
-could allow a "different" view -
-similar to views in databases
-
-**compilers** -
-headings <=> variable/parameter declarations -
-sections <=> scopes/blocks -

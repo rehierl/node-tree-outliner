@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (7) - current section
+# Design (8) - current section
 
 At any given point in time, one or more sections count as being open. This
 set of open sections will be referred to as the current set of open sections
@@ -173,8 +173,7 @@ n1 n2 n3 n4 n5       n8 n9
 * `n6, n7` are both child nodes of `n6`
 
 Logging the list of sections at certain points in time, while the above 
-fragment is being processed, would result in the following trace of section
-sequences:
+fragment is being processed, could result in the following trace of lists:
 
 ```
 trace of sequences:     -  node event:
@@ -204,9 +203,9 @@ list of sections. That is, because any other section is a subsection to it.
 As mentioned before, and in contrary to the formal perspective, each node
 will be associated with one section only (practical perspective). However,
 this single association must, based on implicit associations, represent all
-the formal associations (i.e. both perspectives must be equivalent). And,
-because of that, each node must be associated with the closest presequent
-section that still counts as being open (i.e. the node's parent section).
+the formal associations (i.e. both perspectives are equivalent). And, because
+of that, each node must be associated with the closest presequent section
+that still counts as being open (i.e. the node's parent section).
 
 Note that the parent section of any node always is located at the end of
 the list of sections. That is, when being entered, a node will be associated
@@ -220,18 +219,19 @@ than that, all sequences of sections would begin with some common prefix, which
 would end in `s0`.
 
 **CLARIFICATION**
-The last/top-most) section in the list/stack of sections will be referred
-to as the "current section". A reference to this section, provided by the
+The last/top-most section in the list/stack of sections will be referred to
+as the "current section". A reference to this section, provided by the global
 `Section currentSection` variable, will be used to associate each node.
 
 Note that an explicit reference variable is optional, if an implementation
-chooses to maintain a stack of open sections. That is, because the corresponding
-reference can always be retrieved from that stack via a call to `stack.get()`.
+chooses to maintain an explicit stack of open sections. That is, because the
+corresponding reference can always be retrieved from that stack via a call to
+`stack.get()`.
 
 <!-- ======================================================================= -->
 ## compared with the tree of sections
 
-Processing the above fragment node tree will, according to the default
+Processing the above fragment will, according to the default
 definitions, result in the following tree of sections:
 
 ```
@@ -239,10 +239,12 @@ s0 - s1 - s2 - s3 - s4 -|- s6 - s7
                         |- s8 - s9
 ```
 
-If the above trace of section sequences is compared to the resulting tree,
-then the following observation can be made right away: The list of sections
-represents a path in the tree of sections, which connects the root section
-with the current section (i.e. a rooted path of sections).
+If the above trace of section sequences is compared to that tree, then the
+following observation can be made right away:
+
+A section sequence represents a path in the tree of sections, which connects
+the root section with the current section (i.e. just another rooted path of
+nodes/sections).
 
 **CLARIFICATION**
 The list of open sections can also be
@@ -251,25 +253,26 @@ referred to as the "(current) path of (open) sections.
 Note that an implementation does not have to maintain an explicit list of
 sections. That is, because it is always implicitly available: Beginning
 with a reference to the current section, one would just have to traverse
-upwards (hint: the `Section.parentSection` properties) until the root
+upwards, using the `Section.parentSection` properties, until the root
 section is reached. However, note the bottom-up order of this traversal.
 
 **CLARIFICATION**
 The tree of sections will be created in the order, in which its sections will
-be entered during a tree traversal. Consequently, the sequence of section
-related open events is consistent with the node sequence of the section tree.
+be entered during the traversal of this tree. Consequently, the sequence of
+section related open events is consistent with the node sequence of the tree.
 
 **TODO** -
 That is, because ...
-what's the main reason for that?
+what's the main reason here?
 
 Note that the overall list/sequence of section lists has itself no particular
 order. That is, because any sequence may appear multiple times at different
-positions. In order to get a specific order, one would have to exclude those
-repetitions, which requires a clear definition of when to dump a list of
-sections (e.g. based on the enter/open events).
+positions in such a trace. In order to get a specific order, one would have to
+exclude those repetitions, which requires a clear definition of when to dump a
+list of sections (e.g. based on the enter/open events).
 
-Note that, not any tree data structure is suited to represent the tree of
+Note that not any tree data structure is well suited to represent the tree of
 sections. That is, because an AVL tree, for example, will repeatedly trigger
-balancing operations, if it is constructed using an ordered list of entries.
-Consequently, a list-based data structure would be more appropriate.
+balancing operations, if entries are added to it in an orderly fashion (e.g.
+in ascending order). Consequently, a list-based data structure would be more
+appropriate.
