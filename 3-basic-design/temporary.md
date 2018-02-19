@@ -33,7 +33,8 @@ rank (i.e they are rank-less).
 
 the issue is
 
-* the above structure (list) has significant impact on an implementation
+* the list structure has significant impact on an implementation
+* it forces the definition of a list type, which would otherwise not be needed
 * because of that, there must be a darn good reason to support it
 
 section + heading
@@ -44,7 +45,7 @@ section + heading
 * irritating as the 2nd heading (same rank) needs to be a subsection
 * the actual reason behind this decision - less irritating for authors?
 * courtesy to authors while ignoring implementations/theory?
-* the title element should be used for the 1st section's heading/title
+* the "title" element should be re-used instead
 
 inconsistent transformations (t2 -> t1)
 
@@ -59,8 +60,8 @@ inconsistent transformations (t2 -> t1)
 does a t1 section need/have a rank?
 
 * or is this a t2-only property?
-* HTML's approach uses the (arbitrary) rank only internally
-* has no effect whatsoever on any outer section
+* HTML's approach uses the (arbitrary) rank only t1-internally
+* has no impact on any outer section
 
 <!-- ======================================================================= -->
 ## the h element

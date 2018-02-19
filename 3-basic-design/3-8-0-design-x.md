@@ -49,7 +49,8 @@ or multiples thereof, are required.
 Note that, `n0` could also be an inactive container node, instead of a type-1
 sectioning node. In such a case `s0` would then represent the section that was
 used to associate `n0`. Consequently, all rtl-paths would then have a common
-prefix of sections (i.e. absolute vs. relative paths/sequences).
+prefix of sections (i.e. absolute vs. relative paths/sequences) that ends in
+`s0`.
 
 <!-- ======================================================================= -->
 ## explicit parent containers
@@ -165,15 +166,10 @@ injected (explicit), or due to some structural requirement (implicit).
 
 Note that a node can be defined to never be a section's parent container, if
 (and only if) the node is not allowed to have type-2 sectioning nodes as its
-child nodes. However, a general purpose implementation is unaware of these kind
+child nodes (e.g. the type-2 sectioning nodes themselves).
+However, a general purpose implementation is in general unaware of these kind
 of exceptions. That is, in case of input/user errors, such an implementation
 will still treat these nodes as parent containers.
-
-Note that the node level of a node is defined as "1 + the number of edges in
-between the node and the tree's root". That is, the root node has a node level
-of 1, its child nodes a node level of 2, and their children a node level of 3.
-In short: The higher the node level, the deeper within the node tree's hierarchy
-a node is located.
 
 **case 1: (node level 1 >> node level 2)**
 

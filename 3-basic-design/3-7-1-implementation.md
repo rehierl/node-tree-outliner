@@ -37,8 +37,8 @@ trace of sequences:     -  node event:
 
 Note that the sequence of sections just before entering the parent container
 is identical to the sequence of sections just after exiting said container.
-That is, the sequence of sections must be restored, before any other subsequent
-event can be processed.
+Because of that, an implementation must restore the sequence of sections
+when exiting a parent container.
 
 As mentioned before, any parent node can in principle act as the parent
 container of one or more sections. The only exception to that rule are the
@@ -47,7 +47,8 @@ and when exiting any parent node, an implementation must always test whether
 inner sections need to be closed.
 
 1. Inner sections may have parent containers that are descendants to `n0`.
-   These sections will be closed before the exit event of `n0` is reached.
+   These sections will be closed before the exit event of `n0` is reached
+   (i.e. same routine, but with regards to another parent container).
 2. `n0` is the parent container of inner sections, but some non-default
    rule applies. These sections will be closed before the exit event of
    `n0` is entered.
@@ -84,20 +85,46 @@ Note that ...
 * the remaining open inner sections will be closed in reverse order. That is,
   subsections will be closed before their ancestor sections are closed.
 * an implementation does not have to know how many sections need to be closed.
-* the close operation of an implementation could have unexpected side effects.
+* the close operation of an implementation could have unexpected side effects
+  (e.g. due to releasing locked resources).
 
 With regards to efficiency, it does not appear to be possible to gain anything
 from maintaining a boolean `isParentContainer` flag variable. Therefore, and
 apart from gaining some amount of additional clarity, an implementation does
-not have to test beforehand (e.g. by the use of an `if-then` construct), whether
-the node in question is indeed a parent container. That is, one test must always
-be executed either way (i.e. even if the corresponding node is actually not a
-parent container).
+not have to test beforehand (e.g. by the use of an `if-then` construct),
+whether the node in question is indeed a parent container. That is, one test
+must always be executed either way (i.e. even if the corresponding node is
+actually not a parent container).
 
 <!-- ======================================================================= -->
-## implementation specific
+## implicit associations
 
-(with regards to - implicit associations)
+The focus of this part is on the implementation of:
+Always treat a section as a subsection of some presequent section
+(regardless of any other definition), if its sectioning node is a
+descendant of an associated parent node.
+
+Put differently: How not to be in conflict with implicit associations?
+
+Therefore, the most important question that needs to be answered is:
+How is it possible to efficiently detect whether implicit associations
+have precedence over any other definition?
+
+```
+      n0
+================
+n1 n2         n5
+   --------
+      n3 n4
+```
+
+Note that the node level of a node is defined as "1 + the number of edges in
+between the node and the tree's root". That is, the root node has a node level
+of 1, its child nodes a node level of 2, and their children a node level of 3.
+In short: The higher the node level, the deeper within the node tree's hierarchy
+a node is located.
+
+Note that the universal section has no existing (i.e. virtual) parent container.
 
 the node level of a sectioning node acts as a rank-like value -
 which must have precedence over any user-defined rank value -

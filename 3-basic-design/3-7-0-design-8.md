@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # Design (8) - current section
 
-At any given point in time, one or more sections count as being open. This
-set of open sections will be referred to as the current set of open sections
-(`cs` for "current-set").
+At any given point in time, one or more sections always count as being open.
+This set of open sections will be referred to as the current set of open
+sections (`cs` for "current-set").
 
 * `cs := { s0, s1, s2, ... }` and `(cs subset-of S)`
 * `S` is the set of all declared/known sections
@@ -26,12 +26,12 @@ sections", or "the sequence of (open) sections".
 Note that this list does by itself not represent an existing list object. It
 merely represents an ordered listing of sections that, at a given point in
 time, still count as being open. That is, this list can be understood as the
-result of a lookup operation.
+result of an implicit lookup operation.
 
 Note that this lookup operation is completely based upon those nodes that have
 already been visited (i.e. presequent nodes). That is, an implementation could
 maintain such a listing while it is traversing the node tree. However, the
-corresponding list object must accurately represent the list of open sections.
+corresponding list object must accurately represent the list of sections.
 
 <!-- ======================================================================= -->
 ## list operations
@@ -51,8 +51,8 @@ n1 n2 n3 n4 n5 n6 n7 n8 n9
 * nodes `n1-9` declare sections `s1-9`
 * obviously, section `s9` will always be empty
 
-If, for example, an implementation would enter node `n5`,
-then the list of sections will be the sequence `(s0,s1,s2,s3,s4)`.
+If an implementation would begin to enter `n5`, then
+the list of sections will be the sequence `(s0,s1,s2,s3,s4)`.
 
 When creating/opening section `s5`, that list will change into the sequence
 `(s0,s1,s2,s3,s4,s5)`. Which is, because no open presequent section will be
@@ -71,13 +71,13 @@ n1 n2 n3 n4 n5    n7 n8 n9
 * `n5` is an inactive parent node
 * `n6` is a child node to `n5`
 
-If, for example, an implementation would exit node `n6` (i.e. after opening
-`s6`), then that list of sections is equivalent to `(s0,s1,s2,s3,s4,s6)`
+If an implementation would exit `n6` (i.e. after opening `s6`), then
+that list of sections would be equivalent to `(s0,s1,s2,s3,s4,s6)`
 (`s5` does not exist because `n5` is no longer a sectioning node).
 
 The next node event that will have to be processed is the exit event of `n5`.
 And because `n5` acts as the parent container of `s6`, `s6` has to be closed
-during `n5`'s exit event. Consequently, the list of sections will no longer
+during that exit event. Consequently, the list of sections will no longer
 contain `s6`: `(s0,s1,s2,s3,s4)`.
 
 **case 3:** `(s0,s1,s2,s3,s4,s6,s7) => -{s6,s7} => (s0,s1,s2,s3,s4)`
@@ -98,7 +98,7 @@ and `s7`). Consequently, when exiting `n7` after opening `s7`, the list of
 sections is `(s0,s1,s2,s3,s4,s6,s7)` (`s5` does not exist because `n5` is
 no longer a sectioning node).
 
-Similar to before, the exit event of `n5` has to close all remaining open
+Similar as before, the exit event of `n5` has to close all remaining open
 inner sections. Consequently, and after `n5`'s exit event, the list of
 sections will be `(s0,s1,s2,s3,s4)`.
 
@@ -118,7 +118,7 @@ no node event will extend the list of sections by more than one section.
 
 **CLARIFICATION**
 The list of sections will be reduced by one or more sections,
-if the next node event results in closing the corresponding sections.
+if the next node event results in closing these sections.
 
 Note that all of these sections will always be removed from the end of the
 list (i.e. not from an arbitrary position). That is, because no subsection can
@@ -138,8 +138,8 @@ its subsections are open".
 
 Note that it might not seem to be relevant in which order sections are closed.
 After all, they need to be closed during the same node event. However, the
-order of close events can be quite relevant, if those operations are used to
-trigger event handler routines.
+close order can be relevant, if those operations are used to trigger event
+handler routines.
 
 Note that an implementation might initially not be aware of how many inner
 sections need to be closed when exiting a given parent container. In addition
@@ -147,15 +147,15 @@ to that, an implementation might even not have to be aware of the exact number
 (e.g. repeat to close the last subsection until a certain condition is met).
 
 **CLARIFICATION**
-The behavior of the list of open sections is consistent with the
+The behavior of the list of sections is consistent with the
 operations of a first-in-first-out data structure (aka. stack).
 
-1) `push()` a new section onto the stack
+1) `push()` a new subsection onto the stack
 2) `pop()` the last subsection from the stack
 3) `get()` the last subsection from the stack
 
 **CLARIFICATION**
-The list of open sections can also be
+The list of sections can also be
 referred to as the "stack of (open) sections.
 
 <!-- ======================================================================= -->
@@ -197,30 +197,30 @@ trace of sequences:     -  node event:
 ()                      -  after exiting n0
 ```
 
-Note that the root section `s0` is always located at the beginning of the
-list of sections. That is, because any other section is a subsection to it.
+Note that the root section `s0` is always located at the beginning of
+the list. That is, because any other section is a subsection to it.
 
 As mentioned before, and in contrary to the formal perspective, each node
 will be associated with one section only (practical perspective). However,
 this single association must, based on implicit associations, represent all
-the formal associations (i.e. both perspectives are equivalent). And, because
+formal associations (i.e. both perspectives are equivalent). And, because
 of that, each node must be associated with the closest presequent section
 that still counts as being open (i.e. the node's parent section).
 
 Note that the parent section of any node always is located at the end of
-the list of sections. That is, when being entered, a node will be associated
-with the last section of that list.
+the list. That is, when being entered, a node will be associated with the
+last/top-most section of that list.
 
 Note that it does not really matter, if `n0` is a type-1 sectioning node, or
 an inactive parent container. If `n0` would be such a container node, then `s0`
 would represent the section that was used to associate `n0`. Consequently, `s0`
 would not have to be created when entering, and closed when exiting `n0`. Other
-than that, all sequences of sections would begin with some common prefix, which
-would end in `s0`.
+than that, all sequences of sections would still begin with some common prefix,
+which always begins with `s0`.
 
 **CLARIFICATION**
-The last/top-most section in the list/stack of sections will be referred to
-as the "current section". A reference to this section, provided by the global
+The last/top-most section in the list/stack will be referred to as the
+"current section". A reference to this section, provided by the global
 `Section currentSection` variable, will be used to associate each node.
 
 Note that an explicit reference variable is optional, if an implementation
@@ -239,39 +239,41 @@ s0 - s1 - s2 - s3 - s4 -|- s6 - s7
                         |- s8 - s9
 ```
 
-If the above trace of section sequences is compared to that tree, then the
-following observation can be made right away:
+If the above trace of section sequences is compared to that tree, then
+the following observation can be made right away:
 
 A section sequence represents a path in the tree of sections, which connects
 the root section with the current section (i.e. just another rooted path of
 nodes/sections).
 
+Note that the overall trace of lists has itself no particular order. That
+is, because any sequence may appear multiple times at different positions.
+In order to get a specific order, one would have to exclude those repetitions,
+which would require a clear definition of when to print a list of sections
+(e.g. based on the enter/open events).
+
 **CLARIFICATION**
-The list of open sections can also be
+The list of sections can also be
 referred to as the "(current) path of (open) sections.
 
 Note that an implementation does not have to maintain an explicit list of
-sections. That is, because it is always implicitly available: Beginning
-with a reference to the current section, one would just have to traverse
-upwards, using the `Section.parentSection` properties, until the root
-section is reached. However, note the bottom-up order of this traversal.
+sections. That is, because it is always implicitly available: Beginning with
+a reference to the current section, one would just have to traverse upwards,
+using the `Section.parentSection` references, until the root section is
+reached. However, note the reversed/bottom-up order of this traversal.
 
 **CLARIFICATION**
-The tree of sections will be created in the order, in which its sections will
-be entered during the traversal of this tree. Consequently, the sequence of
-section related open events is consistent with the node sequence of the tree.
+The node order of the section three is given/defined by the node order of the
+node tree. In addition to that, the section tree will be created in the order
+in which its sections will be entered during the traversal of the section tree.
 
-**TODO** -
-That is, because ...
-what's the main reason here?
+That is, because due to the node order of the node tree, all parent sections
+will be entered/created/opened before any subsection will be entered. In
+addition to that, the sectioning nodes of sibling sections are entered
+according to the node order of the node tree (i.e. in the sequence in
+which they appear in the node tree).
 
-Note that the overall list/sequence of section lists has itself no particular
-order. That is, because any sequence may appear multiple times at different
-positions in such a trace. In order to get a specific order, one would have to
-exclude those repetitions, which requires a clear definition of when to dump a
-list of sections (e.g. based on the enter/open events).
-
-Note that not any tree data structure is well suited to represent the tree of
+Note that not any tree data structure is suited to represent the tree of
 sections. That is, because an AVL tree, for example, will repeatedly trigger
 balancing operations, if entries are added to it in an orderly fashion (e.g.
 in ascending order). Consequently, a list-based data structure would be more

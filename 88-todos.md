@@ -136,6 +136,10 @@ these act (display wise) more like unordered trees -
 with that in mind, folders are like type-1 sectioning nodes -
 type-2 sectioning nodes don't/can't exist
 
+the node order of the tree must be independent of the node types -
+in contrary to that, the view of a fs is ordered folders-first -
+but, folders are just files themselves (folder = list of files and folders)
+
 <!-- ======================================================================= -->
 ## optional end marker nodes?
 

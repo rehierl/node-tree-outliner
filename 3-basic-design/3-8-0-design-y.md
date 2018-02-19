@@ -10,15 +10,12 @@ Note that the following considerations are based upon the association of two
 sectioning nodes. That is, if all of the below mentioned associations result
 in conflicts, then such an "option" can not be allowed. However, if certain
 associations would seem to support such an "option", then that "option" might
-still not be possible. That is, because it could still result in conflicts
-that are unrelated to the associations mentioned below.
+still not be free of conflicts. That is, because such conflicts could still
+be caused based on reasons that are unrelated to the associations mentioned
+below.
 
 <!-- ======================================================================= -->
 ## introduction
-
-**TODO**
-`n1 -> n0 + hierarchy` -
-see the type-2 fragments
 
 ```
 n1 n2 n3 n4 n5 n6 n7 n8 n9
@@ -54,24 +51,24 @@ independent of this outer aspect.
 <!-- ======================================================================= -->
 ## fundamental considerations
 
-The goal of allowing to close section `s1` raises the question as to why not
-to add an additional type-1 sectioning node as sibling to `n1` and then use it
-to hold the contents of section `s5`. That is, the current default definitions
-already allow to express the structure that the modified definitions are
-supposed to support.
+The intention behind allowing to close section `s1` raises the question as to
+why not to add an additional type-1 sectioning node as sibling to `n1` and then
+use it to hold the contents of section `s5`. That is, the current default
+definitions already allow to express the structure that the modified
+definitions are supposed to support.
 
-The only possible reason could therefore be to apply some other characteristic
-of a type-1 sectioning node (i.e. due to its grouping characteristic) to the
-optional inner subsequent section `s5`. However, a second subsequent sibling
-type-1 sectioning node would have the very same characteristic.
+One possible reason could be to apply some other characteristic of a type-1
+sectioning node (i.e. due to its grouping characteristic) to the optional inner
+subsequent section `s5`. However, a second subsequent sibling type-1 sectioning
+node would have the very same characteristic.
 
-> Optional subsequent descendant nodes.
+> Based on optional subsequent nodes.
 
 Such an option will obviously have to depend on optional subsequent descendant
 nodes. That is, because the definition of a type-1 sectioning node is only able
-to cover a single default case. And, because of that, a type-1 section will by
-default (i.e. in cases where there are no such optional nodes) still have to
-end with its default scope.
+to cover a single default case (e.g. there is no such inner node). And, because
+of that, a type-1 section will by default still have to end with its default
+scope.
 
 Note that this should not be understood as an argument against such an option.
 That is, because there is no other way to deviate from the default definitions.
@@ -79,8 +76,8 @@ That is, because there is no other way to deviate from the default definitions.
 > Structural relationship
 
 Placing section `s5` inside of node `n1` by itself states that sections `s1`
-and `s5` have a strong structural relationship with each other. That is,
-because nodes `n2-9` all have `n1` as one of their ancestor nodes.
+and `s5` are structurally related with each other. That is, because nodes
+`n2-9` all have `n1` as an ancestor node.
 
 Note that this relationship can not be undefined.
 That is, the modified definitions must take this dependency into account.
@@ -91,12 +88,12 @@ One negative aspect of this placement (i.e. `s5` inside of `n1`) is, that
 any dynamic operation on `n1` (e.g. fold/unfold) will automatically also
 affect `n5/s5`.
 
-If, for example, `s1` would have to be folded, then how could that be done
+If, for example, `s1` would have to be folded, then that could not be done
 without automatically and completely hiding `s5`, a supposedly independent
-sibling section?
+sibling section. Transparent (i.e hidden/background) transformations prior
+to such an operation could not be avoided.
 
-Transparent (i.e hidden) background transformations prior to such an
-operation could not be avoided.
+(That consideration alone nullifies any such definition).
 
 > Node `n5` must be a child node of `n1`.
 
@@ -106,13 +103,13 @@ will be associated before `n5` is entered and thus before `s1` can even be
 closed.
 
 Consequently, all content nodes of `s5` would be implicitly associated with
-`s1`: Section `s5` would be a subsection of `s1` by structural relationship.
-Because of that, and in order to avoid conflicting statements with regards
-to these implicit associations, `n5` could not be allowed to close `s1`.
+`s1`: Section `s5` would be (by structural relationship) a subsection of `s1`.
+Because of that, and in order to avoid conflicting statements caused by these
+implicit associations, `n5` could then not be allowed to close `s1`.
 
-If that condition is not met, then an implementation can not support these
-kind of modified definitions. Under these circumstances, these definitions
-must be ignored. Consequently, the use of such definitions is limited.
+If that condition is not met, then an implementation can not support these kind
+of modified definitions. Under these circumstances, these definitions would have
+to be ignored. Consequently, the use of such definitions is limited.
 
 > Context dependent associations must be avoided.
 
@@ -128,9 +125,9 @@ not be a simple and straight forward implementation.
 Note that any sectioning node could initially be associated according to some
 default definition. Then, if certain conditions are detected/met, the default
 association could be replaced with a context dependent association. However,
-one would have to ensure that the initial association does not have any side
-effect, as that could result in a conflict with regards to the node's final
-association.
+one would have to ensure that the initial association (until changed) does not
+have any side effect, as that could result in a conflict with regards to the
+node's final association.
 
 <!-- ======================================================================= -->
 ## overview
@@ -157,8 +154,10 @@ aspect applies to any case that does not follow this default definition.
 
 Note that it is trivial to associate a sectioning node with its own section
 (e.g. `n1:s1`, `n5:s5`). If a `currentSection` variable is available, then
-it is also rather straight forward to associate a sectioning node with the
-last open presequent section (e.g. `n1:s0`, `n5:s1`, `n5:s0`).
+it is also trivial to associate a sectioning node with the last open presequent
+section (e.g. `n1:s0`, `n5:s1`, `n5:s0`).
+
+Recall that `x:y` represents the association of node `x` with section `y`.
 
 <!-- ======================================================================= -->
 ## n1:s0
@@ -189,7 +188,7 @@ Associating `n5` with `s1` results in a conflict:
 (1 - due to `n5:s1`) section `s5` is located inside of `s1`, and
 (2 - due to `n5` closing `s1`) nodes `n6-9` are not located inside of `s1`.
 
-Both statements combined result in an unclear statement with
+Both statements combined result in contradictory statements with
 regards to the location of a section (see strong connectivity).
 
 **n1:s0, n5:s5**
@@ -214,7 +213,7 @@ Associating `n1` with `s1` results in the following conflict:
 (1 - due to `n1:s1`) nodes `n6-9` are implicitly associated with `s1`, and
 (2 - due to `n5` closing `s1`) nodes `n6-9` are unrelated to `s1`.
 
-Both statements combined result in an unclear statement with
+Both statements combined result in contradictory statements with
 regards to `s5` being a subsection of `s1` or not.
 
 This conflict exists, regardless to which section `n5` belongs.
@@ -233,13 +232,13 @@ Associating `n5` with `s1` adds another conflict:
 (1 - due to `n5:s1`) section `s5` is located inside of `s1`, and
 (2 - due to `n5` closing `s1`) section `s5` is not located inside of `s1`.
 
-Both statements combined result in an unclear statement with
+Both statements combined result in contradictory statements with
 regards to the location of a section (see strong connectivity).
 
 **n1:s1, n5:s5**
 
 No conflict other than the one caused by the
-implicit associations (i.e. `n1:s1`).
+afore mentioned implicit associations (i.e. `n1:s1`).
 
 Note HTML's current associations:
 sectioning content vs. heading content.
@@ -276,11 +275,11 @@ with the default association of sectioning nodes.
 
 Note that when entering `n5` and closing `s1`, a `currentSection` variable
 would have to be modified in order to point to `s1`'s parent section (e.g.
-`s0`). Because of that, an implementation of the `n5:s0` association seems
+`s0`). Because of that, an implementation of the `n5:s0` association is
 possible.
 
 Note that the use of such definitions is still limited:
-Node `n5` must be a child node of `n1`.
+`n5` must be a child node of `n1`.
 
 However, placing a section inside of a type-1 sectioning node and then define
 it to be independent of that node still appears to be inconsistent. That is,
@@ -292,15 +291,25 @@ Further considerations are in order.
 
 <!-- ======================================================================= -->
 
-**issue**
-`t1 A t1 B /t1 C /t1` -
+Note that an inner type-1 sectioning node can (by default) not be allowed
+to close its next outer type-1 section. If the default definition had that
+characteristic, then no section hierarchy could be established, if only
+type-1 sectioning nodes were available. That is, apart from sandboxing an
+inner sectioning node inside of an explicit parent container node.
+
+=> limit to an outer t1 in combination with inner t2s
+
+<!-- ======================================================================= -->
+
+`t1 A t1 B /t1 C /t1`
 
 to which section would C belong, if the inner t1 would end section A? -
 to the next outer section - which is why one would be required -
 problematic with regards to the root section -
 
 lost in U - unrelated to A and B - although in the same tree -
-really that lost? - sibling sections -
+really that lost? - yes, that lost -
+the logical view (sections) must be complete/total -
 
 can not end an outer section at the same time -
 especially an outer type-1 section (e.g. root section) -
