@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Overview of the conclusions and definitions
+# Overview of conclusions and definitions
 
 This overview is not meant to be overly accurate: It's just a "short" summary.
 

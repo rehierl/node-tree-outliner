@@ -12,22 +12,22 @@ implement a general-purpose outliner for any rooted ordered tree of nodes.
 
 **upload log**
 
-* 2018-02-19 - commit ... - current section
+* 2018-02-19 - commit ef94c42 - current section
 * 2018-02-04 - commit 55cc8a7 - clarifications
 * 2018-01-31 - commit 19abbd2 - first public upload
 
 **PRELIMINARY LICENSE**
 
-$1 Free for science and discussions.
+§1 Free for science and discussions.
 
 * Including free open-source proof-of-concept implementations.
 
-$2 Non-free (i.e unlicensed) for anything else.
+§2 Non-free (i.e. unlicensed) for anything else.
 
 * Including commercial purposes of any sorts.
 * Including software patents, trademarks, etc.
 
-$3 General goals
+§3 General goals
 
 The ultimate goal is to end up with a royalty-free, free-for-all design.
 Any use that is in conflict with this general goal is prohibited.

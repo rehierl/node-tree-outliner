@@ -6,7 +6,6 @@ The ultimate goal is to leave no question unanswered.
 
 A painfully slow and nerve wrecking process -
 It looks like, I'm just too darn stubborn to give up -
-"Ain't No Mountain High Enough" :)
 
 **TODO**
 find a term for type-2 sections that
@@ -52,19 +51,6 @@ explain superordinate/subordinate section -
 already done ?
 
 <!-- ======================================================================= -->
-## type-1 sectioning nodes
-
-**TODO** -
-`Section SectioningNode.declaredSection` - singular, not plural -
-in conflict with "one or more (i.e. a list of) sections" -
-
-an outline object type (singular) can be used to represent such a list -
-but that requires an additional type of object
-
-Note that this does not mean that a sectioning node is not allowed to hold
-a reference to the section it declares, which still is a single section only.
-
-<!-- ======================================================================= -->
 ## rank of a section
 
 **DEFINITION**
@@ -88,6 +74,25 @@ however a subsequent t1 section can not become
 a subsection of a closed presequent section -
 because rank values are with regards to open sections -
 a t1 rank can only refer to presequent t2 sections -
+
+plot twist: the rank in its original/natural form is a user-defined outline depth
+
+i.e. add the section to the tree such that it has the given outline depth -
+that is the top-down perspective - close the last couple of open section such
+that the section has the given outline depth - bottom-up perspective
+
+<!-- ======================================================================= -->
+## type-1 sectioning nodes
+
+**TODO** -
+`Section SectioningNode.declaredSection` - singular, not plural -
+in conflict with "one or more (i.e. a list of) sections" -
+
+an outline object type (singular) can be used to represent such a list -
+but that requires an additional type of object
+
+Note that this does not mean that a sectioning node is not allowed to hold
+a reference to the section it declares, which still is a single section only.
 
 <!-- ======================================================================= -->
 ## tree of sectioning nodes

@@ -48,7 +48,7 @@ inner sections need to be closed.
 
 1. Inner sections may have parent containers that are descendants to `n0`.
    These sections will be closed before the exit event of `n0` is reached
-   (i.e. same routine, but with regards to another parent container).
+   (i.e. same issue, but with regards to an inner parent container).
 2. `n0` is the parent container of inner sections, but some non-default
    rule applies. These sections will be closed before the exit event of
    `n0` is entered.
@@ -80,10 +80,11 @@ onExitParentContainer end
 Note that ...
 
 * any node is associated while it is being entered. Because of that, the
-  parent container's parent section reference is always and already set
-  (Note that the root node must be associated with the universal section).
-* the remaining open inner sections will be closed in reverse order. That is,
-  subsections will be closed before their ancestor sections are closed.
+  parent container's parent section reference is always set when a parent
+  container is being exited. Note that the root node must be associated
+  with the universal section.
+* the remaining open inner sections will be closed in reverse order. That
+  is, subsections will be closed before their ancestor sections are closed.
 * an implementation does not have to know how many sections need to be closed.
 * the close operation of an implementation could have unexpected side effects
   (e.g. due to releasing locked resources).
@@ -100,15 +101,16 @@ actually not a parent container).
 ## implicit associations
 
 The focus of this part is on the implementation of:
-Always treat a section as a subsection of some presequent section
-(regardless of any other definition), if its sectioning node is a
-descendant of an associated parent node.
+Always add a section as a subsection of the current section (i.e. regardless
+of any non-default definition), if its sectioning node is a descendant of an
+associated container node.
+
+Note that this can not be avoided, because these kind of sections then are,
+by structural relationship/definition, subsections to the current section.
+Consequently, ignoring these circumstances could result in statements that
+are in conflict with each other.
 
 Put differently: How not to be in conflict with implicit associations?
-
-Therefore, the most important question that needs to be answered is:
-How is it possible to efficiently detect whether implicit associations
-have precedence over any other definition?
 
 ```
       n0
@@ -118,13 +120,7 @@ n1 n2         n5
       n3 n4
 ```
 
-Note that the node level of a node is defined as "1 + the number of edges in
-between the node and the tree's root". That is, the root node has a node level
-of 1, its child nodes a node level of 2, and their children a node level of 3.
-In short: The higher the node level, the deeper within the node tree's hierarchy
-a node is located.
-
-Note that the universal section has no existing (i.e. virtual) parent container.
+Note that the universal section has no existing parent container (i.e. virtual).
 
 the node level of a sectioning node acts as a rank-like value -
 which must have precedence over any user-defined rank value -
