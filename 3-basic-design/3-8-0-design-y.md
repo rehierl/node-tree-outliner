@@ -66,7 +66,7 @@ node would have the very same characteristic.
 
 Such an option will obviously have to depend on optional subsequent descendant
 nodes. That is, because the definition of a type-1 sectioning node is only able
-to cover a single default case (e.g. there is no such inner node). And, because
+to cover a single default case (i.e. there is no such inner node). And, because
 of that, a type-1 section will by default still have to end with its default
 scope.
 
@@ -84,16 +84,16 @@ That is, the modified definitions must take this dependency into account.
 
 > In conflict with dynamic support.
 
-One negative aspect of this placement (i.e. `s5` inside of `n1`) is, that
-any dynamic operation on `n1` (e.g. fold/unfold) will automatically also
-affect `n5/s5`.
+One negative aspect of this placement (i.e. `s5` inside of `n1`) is, that any
+dynamic operation (e.g. fold/unfold) on `n1` targeted at `s1` will also affect
+`n5/s5`.
 
 If, for example, `s1` would have to be folded, then that could not be done
 without automatically and completely hiding `s5`, a supposedly independent
 sibling section. Transparent (i.e hidden/background) transformations prior
 to such an operation could not be avoided.
 
-(That consideration alone nullifies any such definition).
+(That consideration alone nullifies the purpose of any such definition).
 
 > Node `n5` must be a child node of `n1`.
 
@@ -116,7 +116,7 @@ to be ignored. Consequently, the use of such definitions is limited.
 If a certain type of sectioning node is by default associated with a presequent
 section, and under certain circumstances associated with some other section
 (e.g. the section it declares), then the association of that type of sectioning
-node would depend on the surrounding context in which it is used.
+node would depend on its outer context in which it is used.
 
 Consequently, an implementation would always have to first determine the context
 in which this type of sectioning node is used. And, because of that, there could
@@ -127,7 +127,9 @@ default definition. Then, if certain conditions are detected/met, the default
 association could be replaced with a context dependent association. However,
 one would have to ensure that the initial association (until changed) does not
 have any side effect, as that could result in a conflict with regards to the
-node's final association.
+node's final association. - Then again, how could one possibly know if the
+association of such a sectioning node won't have to be changed at some later
+point in time?
 
 <!-- ======================================================================= -->
 ## overview

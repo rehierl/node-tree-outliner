@@ -229,7 +229,7 @@ depend on subsequent nodes) and thus to predict future events. Because of that,
 a design must not use any kind of look ahead.
 
 <!-- ======================================================================= -->
-## sections, S
+## set of sections, S
 
 **DEFINITION**
 A section is a set of nodes.

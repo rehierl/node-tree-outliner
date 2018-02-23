@@ -30,8 +30,8 @@ result of an implicit lookup operation.
 
 Note that this lookup operation is completely based upon those nodes that have
 already been visited (i.e. presequent nodes). That is, an implementation could
-maintain such a listing while it is traversing the node tree. However, that list
-object must accurately represent the list of sections.
+maintain such a listing while it is traversing the node tree. However, that
+list object must accurately represent the list of sections.
 
 <!-- ======================================================================= -->
 ## list operations
@@ -113,8 +113,8 @@ Note that the new section will always appear at the end of the list (i.e.
 not at some arbitrary position). That is, because the new section will be
 a subsection to all sections in the previous listing (formal perspective).
 
-Note that any sectioning node can only declare a single new section. That is,
-no node event will extend the list of sections by more than one section.
+Note that any sectioning node can only declare a single new section. That
+is, no node event will extend the list of sections by more than one section.
 
 **CLARIFICATION**
 The list of sections will be reduced by one or more sections,
@@ -136,7 +136,7 @@ its subsections are open".
 
 Note that it might not seem to be relevant in which order sections are closed.
 After all, they need to be closed during the same node event. However, the
-close order can be relevant, if those operations are used to trigger event
+close order will be relevant, if those operations are used to trigger event
 handler routines.
 
 Note that an implementation might initially not be aware of how many inner
@@ -172,7 +172,7 @@ n1 n2 n3 n4 n5       n8 n9
 
 Logging the list of sections at certain points in time, while the
 above fragment is being processed, could result in the following
-trace of lists/sequences:
+trace of section sequences:
 
 ```
 trace of sequences:     -  node event:
@@ -197,7 +197,7 @@ trace of sequences:     -  node event:
 ```
 
 Note that the root section `s0` is always located at the beginning of
-the list. That is, because any other section is a subsection to it.
+any sequence. That is, because any other section is a subsection to it.
 
 As mentioned before, and in contrary to the formal perspective, each node
 will be associated with one section only (practical perspective). However,
@@ -207,15 +207,15 @@ of that, each node must be associated with the closest presequent section
 that still counts as being open (i.e. the node's parent section).
 
 Note that the parent section of any node always is located at the end of
-the list. That is, when being entered, a node will be associated with the
-last/top-most section of that list/stack.
+the current sequence. That is, when being entered, a node will be associated
+with the last/top-most section of that sequence/stack.
 
 Note that it does not really matter, if `n0` is a type-1 sectioning node, or
 an inactive parent container. If `n0` would be such a container node, then
 `s0` would represent the section that was used to associate `n0`. Consequently,
 `s0` would not have to be created when entering, and closed when exiting `n0`.
-In addition to that, all sequences of sections would begin with some common
-prefix, which always ends with `s0`.
+In addition to that, all section sequences would begin with some common prefix,
+which would always end with `s0`.
 
 **CLARIFICATION**
 The last/top-most section in the list/stack of open sections will be referred
@@ -231,7 +231,7 @@ to `stack.get()`.
 ## compared with the tree of sections
 
 Processing the above fragment will, according to the default
-definitions, result in the following tree of sections:
+definitions, will result in the following tree of sections:
 
 ```
 s0 - s1 - s2 - s3 - s4 -|- s6 - s7
@@ -248,12 +248,12 @@ nodes/sections).
 Note that the overall trace of lists has itself no particular order. That
 is, because any sequence may appear multiple times at different positions.
 In order to get a specific order, one would have to exclude those repetitions,
-which would require a clear definition of when to print a list of sections
+which would require a clear definition of when to log a list of sections
 (e.g. based on the enter/open events).
 
 **CLARIFICATION**
 The list of sections can also be
-referred to as "the (current) path of (open) sections.
+referred to as "the (current) path of (open) sections".
 
 **CLARIFICATION**
 An implementation does not have to maintain an explicit list of sections
@@ -287,8 +287,8 @@ appropriate.
 **CLARIFICATION**
 The outline depth of a section is "1 + the number of its ancestor sections"
 (not counting the universal section). That is, starting with an outline depth
-value of 1, the higher the value is, the deeper within the section hierarchy
-a section is located.
+value of 1, the higher the value, the deeper within the section hierarchy a
+section is located.
 
 That is, the root section has an outline depth of 1, its child sections an
 outline depth of 2, and their child sections an outline depth of 3.
@@ -303,43 +303,45 @@ between the node and the tree's root" (In short: "1 + the number of ancestors
 that a node has").
 
 Note that the term "outline depth" is, in the context of a section tree,
-synonymous to "node level".
+synonymous to "node level". That is, the sections are themselves considered
+to be the nodes of the section tree.
 
 **CLARIFICATION**
 The outline depth of a node is the outline depth of its unique parent section
 ("unique" due to multiple associations).
 
 Note that the outline depth of the root node is 0. That is, because the root
-node is associated with the universal section, which the above definition does
-not count. Consequently, the outline depth of an unassociated node is 0.
+node does not have such a parent section (not counting the universal section).
+Consequently, the outline depth of any unassociated node is 0.
 
 **CLARIFICATION**
 The outline height of a section tree is the outline height of its root section.
-The outline height of a section is the the distance to its furthest descendant
-(i.e. a leaf section). That is, the most amount of jumps/edges between that
-leaf and the corresponding section.
+The outline height of a section is the distance to its furthest descendant
+(which always is a leaf section). That is, the most amount of jumps/edges 
+between that leaf and the corresponding section.
 
 That is, the height of a leaf section is 0. The height of a section which only
-has a single child section is 1. The height of a section that only has such a
-subtree (i.e. a child section that itself only has one child section) is 2.
+has a single and empty child section is 1. The height of a section that only
+has such a subtree (i.e. a child section that itself only has one empty child
+section) is 2.
 
 Note that, similar as above and in the context of a section tree, the term
 "outline height of a section" is synonymous to the "height of a node".
 
-Note that a node can not have an "outline height". That is, because a node
-does in general not have any descendant sections (Although declared sections
-could be seen to be descendant to their sectioning nodes; i.e. "descendant"
-with regards to "subordinate").
+Note that a node in the node tree can not have an "outline height". That is,
+because a node does in general not have any descendant sections (Although
+declared sections could be seen to be descendant to their sectioning nodes
+- i.e. "descendant" with regards to "subordinate").
 
 <!-- ======================================================================= -->
 ## height map
 
 ```
             n0
-==========================
-n1 n2                n8 n9
-   -----------------
-      n3 n4       n7
+============================
+n1 n2                  n8 n9
+   ------------------
+      n3 n4        n7
          --------
             n5 n6
 ```
@@ -381,13 +383,23 @@ allows to turn a one-dimensional (short: 1-dim) listing (i.e. the node
 sequence) into a 2-dim graph, which can be referred to as the tree's 2-dim
 height map.
 
-Similar to that, and if the nodes of a node tree are drawn onto a flat
-2-dim surface, the outline depth can be used to shift the nodes into the
-3rd dimension. What results can be seen to represent the 3-dim height map
-of the corresponding node tree.
+Note that the 2-dim height map could be displayed e.g. instead of a textual,
+low resolution overview that some editors allow to use in addition to, or
+instead of a scrollbar.
 
-Another way to display the outline depth, and thus allow to visualize the
-associations, could be to indent the textual definition of the node tree
+Note that, except for the root node, each node has a well defined (unique)
+outline depth. Because of that, this relation (i.e. `R := index x depth`)
+is left-total. That is, if the root node is defined to have a depth value
+of 0.
+
+Similar to that, and if the nodes of a node tree are drawn onto a flat 2-dim
+surface (the node level on the x-axis, the node's level index on the y-axis),
+the outline depth can be used to shift the nodes into the 3rd dimension (the
+outline depth on the z-axis). This can be understood to represent the 3-dim
+height map of the corresponding node tree.
+
+Another way to display the outline depth, and thus allow to visually indicate
+the associations, could be to indent the textual definition of the node tree
 by the display of a border:
 
 ```
@@ -409,6 +421,15 @@ outline depth      node tree
                    </n0>
 ```
 
+Question: Could a metric be defined in order to classify node trees?
+this metric could then be used to estimate a document's "quality".
+
+* How much content (in terms of nodes) per section?
+* Are the sections in general overloaded, or barely filled?
+* Few sections with almost all content, or evenly distributed?
+* Is the tree's height map smooth or steep?
+
 **Memory hook**
-The outline depth is similar to stacking wood planks:
-The greater the value, the smaller the length.
+The height map is similar to stacking wood planks: The greater the value, the
+shorter the wood plank. Similar to that, the horizontal cross sections of a
+mountain decreases in size/surface the higher that cross section is located.

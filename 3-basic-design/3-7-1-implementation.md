@@ -57,7 +57,8 @@ inner sections need to be closed.
 
 In short, the exit event of a given parent container must only close those
 sections that remain to be open by the time the parent container is being
-exited. All other independent inner sections can and will be ignored.
+exited. All other closed independent inner sections can and will be ignored
+(i.e those are no longer relevant).
 
 Because of that, all relevant sections are part of the current section sequence.
 Furthermore, and because all those sections are subsections to the section, with
@@ -98,19 +99,30 @@ must always be executed either way (i.e. even if the corresponding node is
 actually not a parent container).
 
 <!-- ======================================================================= -->
+## fundamental considerations
+
+<!-- ======================================================================= -->
 ## implicit associations
 
 The focus of this part is on the implementation of:
-Always add a section as a subsection of the current section (i.e. regardless
-of any non-default definition), if its sectioning node is a descendant of an
-associated container node.
+Treat a section as subsection to the current section (i.e. regardless of
+any non-default definition), if its sectioning node is the descendant of
+an inactive container.
 
-Note that this can not be avoided, because these kind of sections then are,
-by structural relationship/definition, subsections to the current section.
-Consequently, ignoring these circumstances could result in statements that
-are in conflict with each other.
+- only needed in combination with non-default definitions
+- only then, the implicit associations matter
+- only when open sections need to be closed
+- can't close a section inside of an associated container
+- the default definitions have no such issue
+- these are consistent with the implicit associations
+- that is, a subsequent section automatically is a subsection
 
-Put differently: How not to be in conflict with implicit associations?
+Note that these kind of sections then are, by structural relationship (i.e. by
+implicit associations), subsections to the section with which such an ancestor
+container is associated. Consequently, ignoring these kind of dependencies can
+result in statements that are in conflict with each other.
+
+Put differently: How to avoid conflicts with regards to implicit associations?
 
 ```
       n0
@@ -119,6 +131,27 @@ n1 n2         n5
    --------
       n3 n4
 ```
+
+* `n0` represents a type-1 sectioning node
+* `n1, n3-5` represent type-2 sectioning nodes
+* `n2` represents an inactive parent container
+
+Note that `s3` is, first and foremost due to its structural relationship, a
+subsection to `s1`. That is the case even if a non-default addition to the
+definition of `n3` would define its declared section to be the next sibling
+section of `s1`. That is, under these circumstances, the non-default
+definitions would have to be ignored, which effectively grants implicit
+associations precedence over any non-default definition.
+
+
+
+Because of that, implicit associations have precedence over a non-default
+ if the node level of the
+subsequent sectioning node is higher than the node level of the open presequent
+section's sectioning node.
+
+
+
 
 Note that the universal section has no existing parent container (i.e. virtual).
 

@@ -7,6 +7,10 @@ The ultimate goal is to leave no question unanswered.
 A painfully slow and nerve wrecking process -
 It looks like, I'm just too darn stubborn to give up -
 
+always having to look/backwards in order to
+know where and how to continue -
+like climbing a mountain by moving backwards
+
 **TODO**
 find a term for type-2 sections that
 have an inactive node as parent container -
@@ -50,6 +54,15 @@ already done ?
 explain superordinate/subordinate section -
 already done ?
 
+**TODO**
+structural vs. logical perspective -
+recheck
+
+**TODO**
+Overlay or embedded perspective?
+does the logical hierarchy act as a flat overlay,
+or is it embedded into the node tree?
+
 <!-- ======================================================================= -->
 ## rank of a section
 
@@ -72,7 +85,7 @@ the former is more user friendly than the latter
 they can in principle also have a rank value -
 however a subsequent t1 section can not become
 a subsection of a closed presequent section -
-because rank values are with regards to open sections -
+rank values are with regards to open sections -
 a t1 rank can only refer to presequent t2 sections -
 
 plot twist: the rank in its original/natural form is a user-defined outline depth
@@ -144,6 +157,9 @@ type-2 sectioning nodes don't/can't exist
 the node order of the tree must be independent of the node types -
 in contrary to that, the view of a fs is ordered folders-first -
 but, folders are just files themselves (folder = list of files and folders)
+
+understand sections to be folders and nodes to be files? -
+meh, files are leaf nodes - they have no subordinate entities
 
 <!-- ======================================================================= -->
 ## optional end marker nodes?
