@@ -1,7 +1,4 @@
 
-**TODO**
-requires current section
-
 <!-- ======================================================================= -->
 # Design (8) - how to implement ...
 
