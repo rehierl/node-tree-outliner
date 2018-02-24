@@ -92,7 +92,11 @@ plot twist: the rank in its original/natural form is a user-defined outline dept
 
 i.e. add the section to the tree such that it has the given outline depth -
 that is the top-down perspective - close the last couple of open section such
-that the section has the given outline depth - bottom-up perspective
+that the section has the given outline depth - bottom-up perspective -
+
+rank only with regards to the outline depth -
+not a presequent rank-infected sectioning node? -
+what would be the difference if any?
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes

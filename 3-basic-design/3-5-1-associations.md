@@ -2,20 +2,23 @@
 <!-- ======================================================================= -->
 # Design (6) - associating nodes
 
-The following statements clarify the first practical (i.e. implementation
-specific) implication that results from the formal definition of what a
-subsection is.
+The following content is intended to clarify practical, implementation
+specific implications that result from the formal definitions.
 
 <!-- ======================================================================= -->
 ## associate with one section only
+
+The following content is intended to clarify that, in accordance with the
+formal associations, any node can be associated with one section only.
 
 **CLARIFICATION**
 Each node can be associated with one section only, if (and only if) the node
 can also be understood to be (implicitly) associated with all ancestors of
 that section.
 
-Consequently, these implicit associations are used to condense the amount of
-strict associations (i.e. section references) into a single reference per node.
+Consequently, these implicit associations are used to condense the amount
+of associations required into a single reference per node. Such a reference
+is considered to be an explicit or strict (as in direct) association.
 
 Note that the only reason, why a node can be associated with a single section,
 is that the multiple associations of a node, which would be required by the
@@ -25,8 +28,8 @@ are defined by the relationships that the sections have with each other.
 **CLARIFICATION**
 A node must be associated with the closest open presequent section.
 
-That is, because this one (strict) association must reflect all the
-formal associations that a node has with all open presequent sections.
+That is, because this one explicit association must reflect all the formal
+associations that a node has with all open presequent sections.
 
 **CLARIFICATION**
 The section, with which a node must be associated, is referred to as the
@@ -76,9 +79,12 @@ path of nodes.
 <!-- ======================================================================= -->
 ## top-level nodes
 
+The following content is intended to clarify the definition of top-level
+nodes. That is, with regards to associating each node with one section only.
+
 Note that the initial definition of a top-level node (i.e. A node is a
 top-level node of a section, if it must be strictly associated with it)
-is with regards to the formal definitions (i.e. associate each node with
+is with regards to the formal perspective (i.e. associate each node with
 all open sections).
 
 ```
