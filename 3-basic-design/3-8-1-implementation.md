@@ -103,7 +103,7 @@ previous sibling when closed by a t2 sectioning node -
 ## parent containers
 
 The focus of this part is on the implementation of:
-Close one or more sections when exiting a parent container.
+Close one or more inner sections when exiting a parent container.
 
 ```
 n0

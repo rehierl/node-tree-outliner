@@ -12,134 +12,6 @@ be allowed to close a type-2 section, nor if an inner type-2 sectioning node
 should be allowed to close a type-1 section.
 
 <!-- ======================================================================= -->
-## introduction
-
-```
-            n0
-==========================
-n1 n2 n3 n4 n5 n6 n7 n8 n9
-```
-
-* `n0` declares the next outer type-1 section `s0`
-* nodes `n1-9` are all child nodes to `n0`
-* other descendant nodes will/can be ignored
-* nodes `n1-9` represent type-2 sectioning nodes
-* nodes `n1-9` declare sections `s1-9`
-* obviously, section `s9` will always be empty
-
-Note that any type-2 sectioning node will have at least one type-1 sectioning
-node as its (not necessarily direct) ancestor. That is, because the root node
-always acts as a type-1 sectioning node.
-
-Note that the default definition of sectioning nodes does not define the
-characteristic to close any open presequent section. Because of that, and
-by default, `s1` is a subsection to `s0`, `s2` is a subsection to `s1`,
-..., and finally, `s9` is a subsection to `s8`. Consequently, the tree of
-sections that has `s0` as its root section contains a single rtl-path of
-sections (i.e. a rooted path that ends in a leaf - "rtl" for "root-to-leaf"):
-`(s0,s1,s2,s3,s4,s5,s6,s7,s8,s9)`.
-
-Evidently, the default definition of type-2 sectioning nodes alone is not
-sufficient to manually define a proper section hierarchy. That is, because
-no section is closed before a subsequent sectioning node is entered. As a
-result, the next subsequent section will always be a subsection to all
-presequent sections. Because of that, and in order to support any tree of
-sections, means to explicitly mark the end of an open presequent section,
-or multiples thereof, are required.
-
-Note that, `n0` could also be an inactive container node, instead of a type-1
-sectioning node. In such a case `s0` would then have to represent the section
-that was used to associate `n0`. Consequently, all rtl-paths would then have
-a common prefix of sections (i.e. absolute vs. relative paths/sequences) that
-ends in `s0`.
-
-<!-- ======================================================================= -->
-## explicit parent containers
-
-```
-            n0
-==========================
-n1 n2 n3 n4 n5
-            --------------
-               n6 n7 n8 n9
-```
-
-If `n5` is turned into an inactive container node that holds the nodes which
-are subsequent to it (i.e. no longer a sectioning node), then that node will
-still be associated with `s4`. Consequently, and due to implicit associations,
-all nodes descendant to `n5` (i.e. `n6-9`) are automatically loosely associated
-with `s4`. And, because of that, sections `s6-9` still are subsections to `s4`.
-
-As a result, the tree of sections still contains a single rtl-path:
-`(s0,s1,s2,s3,s4,s6,s7,s8,s9)` (`s5` does not exist because `n5` is
-no longer a sectioning node).
-
-```
-            n0
-==========================
-n1             n6 n7 n8 n9
---------------
-   n2 n3 n4 n5
-```
-
-However, if `n1` is turned into an inactive container node instead, then all
-aspects mentioned above apply to the corresponding inner nodes and sections
-(i.e. `n2-5` and `s2-5`). But, as `n1` now acts as the parent container of
-sections `s2-5`, they all end with it. Consequently, those inner sections can
-no longer have any effect on any other subsequent section. That is, `s6-9` no
-longer are subsections to `s2-5` and, as such, independent to those sections.
-
-As a result, the tree of sections now contains two rtl-paths:
-`(s0,s2,s3,s4,s5)` and `(s0,s6,s7,s8,s9)` (`s1` does not exist
-because `n1` is no longer a sectioning node).
-
-```
-             n0
-==============================
-n1                    n7
------------------     --------
-   n2 n3       n6        n8 n9
-      --------
-         n4 n5
-```
-
-* `n1, n3, n7` are inactive container nodes
-* `n2, n4, n5, n6, n8, n9` are type-2 sectioning nodes
-
-Consequently, explicit inactive container nodes (aka. parent containers)
-can be used to manually alter the default scopes of the sections involved
-and therefore allow to define any tree of sections.
-
-As a result, the tree of sections now contains three rtl-paths:
-`(s0,s2,s4,s5)`, `(s0,s2,s6)` and `(s0,s8,s9)` (there are only
-three leaf sections: `s5`, `s6` and `s9`).
-
-<!-- ======================================================================= -->
-## derived statements
-
-**CLARIFICATION**
-Presequent sections need to be altered in order to change the relationship of
-a subsequent section. That is, the actual subsequent section and its default
-scope remains essentially unchanged.
-
-In order to move a subsequent section upwards in the section hierarchy, the
-default scopes of one or more open presequent sections need to be restricted.
-That is, they need to be closed before the subsequent section will be entered.
-
-In order to shift a subsequent section downwards in the section hierarchy, a
-subsequent section must be located within the scope of all of its presequent
-ancestor sections. That is, the scope of all presequent ancestor sections must
-be widened in order to include the "new" subsequent descendant section.
-
-**CLARIFICATION**
-The default definitions (type-2 sectioning nodes, parent containers and
-implicit associations) together provide the means to manually define any
-hierarchy of sections.
-
-That is, because the parent containers not only define when sections end, but
-also, due to implicit associations, to which sections all of their inner nodes
-and sections belong. Which is, because all formal associations of a parent
-container carry over to all of its contents.
 
 **CLARIFICATION**
 The injection of explicit parent containers does however not answer the initial
@@ -151,25 +23,25 @@ Note that the focus of the initial question is on the latter aspect
 (i.e. close a presequent section *before* the end of its default scope).
 
 <!-- ======================================================================= -->
-## implicit parent containers
+## parent containers
 
 As mentioned before, a section's parent container isn't a parent container
 because the definition of the corresponding node has certain characteristics.
 
-Any parent node is a parent container, if a section was declared inside of
-it. If that would not be the case, then consistent dynamic support (see the
-requirements) could not be guaranteed. In short: Any parent node can become
-a section's parent container, regardless of its specific definition.
+Any parent node is a parent container, if it is a type-1 sectioning node, or
+if it has type-2 sectioning nodes as child nodes. If that would not be the case,
+then consistent dynamic support (see the requirements) could not be guaranteed.
+In short: Any parent node can become a section's parent container, regardless
+of its specific definition.
 
 Because of that, such parent containers exist whether they are manually
 injected (explicit), or due to some structural requirement (implicit).
 
-Note that a node can be defined to never be a section's parent container,
-if (and only if) the node is not allowed to have type-2 sectioning nodes
-as its child nodes (e.g. type-2 sectioning nodes).
-However, a general purpose implementation is in general unaware of these
-kind of additional definitions. That is, in case of input/user errors,
-such an implementation will still treat these nodes as parent containers.
+Note that a node can be defined to never be a section's parent container, if
+(and only if) the node is not allowed to have type-2 sectioning nodes as child
+nodes (e.g. type-2 sectioning nodes). However, a general purpose implementation
+is unaware of these kind of additional definitions. That is, in case of input
+errors, an implementation will still treat these nodes as parent containers.
 
 **case 1: (node level 1 >> node level 2)**
 

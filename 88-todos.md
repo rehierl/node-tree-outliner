@@ -61,7 +61,15 @@ recheck
 **TODO**
 Overlay or embedded perspective?
 does the logical hierarchy act as a flat overlay,
-or is it embedded into the node tree?
+or is it embedded into the node tree? -
+i.e. is the logical structure an integral part of the node tree?
+
+**TODO**
+we have an outline height/depth - define an outline width? -
+the maximum number of sections on a certain outline level? -
+
+**TODO**
+mobile - crib mobile
 
 <!-- ======================================================================= -->
 ## rank of a section
@@ -97,6 +105,8 @@ that the section has the given outline depth - bottom-up perspective -
 rank only with regards to the outline depth -
 not a presequent rank-infected sectioning node? -
 what would be the difference if any?
+
+plot twist: the essence of a rank value is to close sections
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
