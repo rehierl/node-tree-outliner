@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (9) - type-1 sections
+# Design - type-1 sections
 
 **QUESTION**
 Would it be reasonable to allow an inner sectioning node to close a type-1

@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (8) - how to implement ...
+# How to implement ...
 
 The following content is intended to clarify implementation specific aspects.
 

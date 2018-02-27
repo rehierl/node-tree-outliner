@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (8) - current section
+# Design - current section
 
 At any given point in time, one or more sections always count as being open.
 This set of open sections will be referred to as the current set of open
@@ -257,7 +257,7 @@ referred to as "the (current) path of (open) sections".
 
 **CLARIFICATION**
 An implementation does not have to maintain an explicit list of sections
-because it is always implicitly available via the `currentSection` variable.
+because it is always implicitly provided by the `currentSection` variable.
 
 Beginning with a reference to the current section, one would just have to
 traverse upwards, using the `Section.parentSection` references, until the

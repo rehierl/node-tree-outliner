@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (6) - associating nodes
+# Associating nodes
 
 The following content is intended to clarify practical, implementation
 specific implications that result from the formal definitions.

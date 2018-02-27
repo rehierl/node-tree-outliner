@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (6) - subsection
+# Design - subsection
 
 **CLARIFICATION**
 A section is said to be presequent (or predeclared) with regards to another

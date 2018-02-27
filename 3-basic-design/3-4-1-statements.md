@@ -1,11 +1,11 @@
 
 <!-- ======================================================================= -->
-# derived statements
+# Derived statements
 
-The focus of these statements is not to be overly accurate, but to have easy to
-understand and easy to remember statements. Because of that, these statements
-do no represent any definitions. They merely allow to loosely describe certain
-conditions.
+The focus of the following statements is not to be overly accurate, but to have
+easy to understand and easy to remember statements. Because of that, these
+statements do no represent any definitions. They merely allow to loosely
+describe certain conditions.
 
 **CLARIFICATION**
 A section can be understood to *end with an associated container*, if the

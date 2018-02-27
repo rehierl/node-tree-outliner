@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (4) - sequence of siblings
+# Design - reduced node sequence
 
 Associating a single node with a section loosely associates any descendant
 of that node (downwards). In addition to that, any node loosely belongs to

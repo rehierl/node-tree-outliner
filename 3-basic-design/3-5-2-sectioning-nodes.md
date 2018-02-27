@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (7) - associating sectioning nodes
+# Associating sectioning nodes
 
 In principle, any node, including all sectioning nodes, must be associated with
 all open presequent sections (formal approach). That is, even if each node is

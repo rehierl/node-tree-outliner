@@ -59,7 +59,7 @@ structural vs. logical perspective -
 recheck
 
 **TODO**
-Overlay or embedded perspective?
+overlay or embedded perspective?
 does the logical hierarchy act as a flat overlay,
 or is it embedded into the node tree? -
 i.e. is the logical structure an integral part of the node tree?
@@ -122,27 +122,7 @@ Note that this does not mean that a sectioning node is not allowed to hold
 a reference to the section it declares, which still is a single section only.
 
 <!-- ======================================================================= -->
-## tree of sectioning nodes
-
-In order to avoid unexpected results due to implicit associations,
-a node tree should contain a tree of sectioning nodes.
-
-Take a node tree and remove all inactive nodes and those edges that begin or
-end in such a node. The resulting relation should (A) contain the original
-root node, and (B) define a single rooted tree of sectioning nodes.
-
-the parent node of a type-1 sectioning node always is a type-1 -
-the parent node of a type-2 sectioning node always is a type-1 -
-a type-1 sectioning node can be a parent or a leaf -
-a type-2 sectioning node always is a leaf node - nope, data nodes -
-
-issue with tables -
-table/tr/td (sectioning root) -
-can only be a rule of thumb -
-all td-sections are subsections of the section with which a table is associated
-
-<!-- ======================================================================= -->
-## general thoughts
+## general ideas
 
 **TODO**
 sectioning a tree (i.e. creating an outline for a tree)
@@ -174,6 +154,26 @@ but, folders are just files themselves (folder = list of files and folders)
 
 understand sections to be folders and nodes to be files? -
 meh, files are leaf nodes - they have no subordinate entities
+
+<!-- ======================================================================= -->
+## tree of sectioning nodes
+
+In order to avoid unexpected results due to implicit associations,
+a node tree should contain a tree of sectioning nodes.
+
+Take a node tree and remove all inactive nodes and those edges that begin or
+end in such a node. The resulting relation should (A) contain the original
+root node, and (B) define a single rooted tree of sectioning nodes.
+
+the parent node of a type-1 sectioning node always is a type-1 -
+the parent node of a type-2 sectioning node always is a type-1 -
+a type-1 sectioning node can be a parent or a leaf -
+a type-2 sectioning node always is a leaf node - nope, data nodes -
+
+issue with tables -
+table/tr/td (sectioning root) -
+can only be a rule of thumb -
+all td-sections are subsections of the section with which a table is associated
 
 <!-- ======================================================================= -->
 ## optional end marker nodes?

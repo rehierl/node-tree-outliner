@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (8) - type-2 sections
+# Design - type-2 sections
 
 **QUESTION**
 Would it be reasonable to allow a subsequent type-2 sectioning node to close an 

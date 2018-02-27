@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (5) - last nodes
+# Design - last nodes
 
 **CLARIFICATION**
 The last subsequent node of a section will always be a leaf (either by strict,

@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design (1) - node sequence
+# Design - node sequence
 
 The traversal of a tree can be used to create a sequence of nodes (aka. trace
 of nodes), if each node of the tree's set of nodes `N` is added to a sequence
