@@ -17,6 +17,10 @@ below.
 <!-- ======================================================================= -->
 ## introduction
 
+**TODO**
+fragments need a better structure -
+i.e. a node hierarchy, not linear
+
 ```
 n1 n2 n3 n4 n5 n6 n7 n8 n9
 ========================== -> s0
@@ -51,11 +55,11 @@ independent of this outer aspect.
 <!-- ======================================================================= -->
 ## fundamental considerations
 
-The intention behind allowing to close section `s1` raises the question as to
-why not to add an additional type-1 sectioning node as sibling to `n1` and then
-use it to hold the contents of section `s5`. That is, the current default
-definitions already allow to express the structure that the modified
-definitions are supposed to support.
+The intention behind allowing to close section `s1` raises the question as
+to why not to add an additional type-1 sectioning node as sibling to `n1` and
+then use it to hold the contents of section `s5`. That is, the current default
+definitions already allow to express the section hierarchy that the modified
+definitions are supposed to allow.
 
 One possible reason could be to apply some other characteristic of a type-1
 sectioning node (i.e. due to its grouping characteristic) to the optional inner
@@ -71,7 +75,7 @@ of that, a type-1 section will by default still have to end with its default
 scope.
 
 Note that this should not be understood as an argument against such an option.
-That is, because there is no other way to deviate from the default definitions.
+That is, because there is no other way to deviate from default definitions.
 
 > Structural relationship
 
@@ -84,16 +88,16 @@ That is, the modified definitions must take this dependency into account.
 
 > In conflict with dynamic support.
 
-One negative aspect of this placement (i.e. `s5` inside of `n1`) is, that any
-dynamic operation (e.g. fold/unfold) on `n1` targeted at `s1` will also affect
-`n5/s5`.
+One issue that results from such a placement (i.e. `s5` inside of `n1`) is,
+that any dynamic operation (e.g. fold/unfold) on `n1` targeted at `s1` will
+also affect `n5/s5`.
 
 If, for example, `s1` would have to be folded, then that could not be done
-without automatically and completely hiding `s5`, a supposedly independent
-sibling section. Transparent (i.e hidden/background) transformations prior
-to such an operation could not be avoided.
+without hiding `s5` at the same time (although `s5` is supposed to be
+independent of `s1`). Transparent (i.e hidden/background) transformations
+prior to such an operation could not be avoided.
 
-(That consideration alone nullifies the purpose of any such definition).
+(That consideration alone nullifies the purpose of any such definitions).
 
 > Node `n5` must be a child node of `n1`.
 
@@ -129,7 +133,8 @@ one would have to ensure that the initial association (until changed) does not
 have any side effect, as that could result in a conflict with regards to the
 node's final association. - Then again, how could one possibly know if the
 association of such a sectioning node won't have to be changed at some later
-point in time?
+point in time? That is, at what point does an implementation have the guarantee
+that the node's association will remain as is?
 
 <!-- ======================================================================= -->
 ## overview
@@ -275,34 +280,38 @@ With regards to associations, only case "n1:s0, n5:s0" does not seem to
 result in any conflict. That is, because the associations are consistent
 with the default association of sectioning nodes.
 
-Note that when entering `n5` and closing `s1`, a `currentSection` variable
-would have to be modified in order to point to `s1`'s parent section (e.g.
-`s0`). Because of that, an implementation of the `n5:s0` association is
-possible.
+Note that when entering `n5` and closing `s1`, the `currentSection` variable
+needs to be modified to refer to `s1`'s parent section (e.g. `s0`). Because
+of that, an implementation of the `n5:s0` association is trivial.
 
 Note that the use of such definitions is still limited:
 `n5` must be a child node of `n1`.
 
 However, placing a section inside of a type-1 sectioning node and then define
 it to be independent of that node still appears to be inconsistent. That is,
-because `n5`, an inner node (i.e. descendant of `n1`), is associated with an
-outer section.
+because `n5`, a descendant of `n1`, is associated with an outer section.
 
 **TODO**
 Further considerations are in order.
 
 <!-- ======================================================================= -->
 
+**TODO**
+feels a bit like trying to redefine sectioning nodes -
+i.e. appears to declare multiple sections instead of one -
+can "declares one" support/include multiple, equally ranked sections? -
+does a type-1 sectioning node not imply a single hierarchy?
+
+**TODO**
 Note that an inner type-1 sectioning node can (by default) not be allowed
 to close its next outer type-1 section. If the default definition had that
 characteristic, then no section hierarchy could be established, if only
-type-1 sectioning nodes were available. That is, apart from sandboxing an
-inner sectioning node inside of an explicit parent container node.
+type-1 sectioning nodes were available. That is, apart from sandboxing such
+a sectioning node inside of an explicit parent container.
 
-=> limit to an outer t1 in combination with inner t2s
+=> must be limited to an outer t1 in combination with inner t2s?
 
-<!-- ======================================================================= -->
-
+**TODO**
 `t1 A t1 B /t1 C /t1`
 
 to which section would C belong, if the inner t1 would end section A? -

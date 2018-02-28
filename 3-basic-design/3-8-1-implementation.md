@@ -8,9 +8,9 @@ The following content is intended to clarify implementation specific aspects.
 ## implicit associations
 
 The focus of this part is on the implementation of:
-Treat a section as subsection to the current section (i.e. regardless of
-any non-default definition), if its sectioning node is the descendant of
-an inactive container.
+Section `s1`, which is declared by a sectioning node `n1`, is a subsection to
+`s0` (i.e. regardless of any non-default definition), if `n1` is a descendant
+of a node that is associated with `s0`.
 
 - only needed in combination with non-default definitions
 - only then, the implicit associations matter
@@ -46,15 +46,10 @@ section of `s1`. That is, under these circumstances, the non-default
 definitions would have to be ignored, which effectively grants implicit
 associations precedence over any non-default definition.
 
-
-
 Because of that, implicit associations have precedence over a non-default
  if the node level of the
 subsequent sectioning node is higher than the node level of the open presequent
 section's sectioning node.
-
-
-
 
 Note that the universal section has no existing parent container (i.e. virtual).
 

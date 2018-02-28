@@ -6,21 +6,16 @@
 Would it be reasonable to allow a subsequent type-2 sectioning node to close an 
 open presequent type-2 section before the end of its default scope is reached?
 
+Note that the injection of inactive parent containers can not answer that
+question. That is, because only the default scope of an affected section is
+changed, which is why any section will still end with its default scope and
+not any sooner. In addition to that, the subsequent type-2 sectioning node
+won't be the node that closes the corresponding presequent section.
+
 Note that the following considerations focus on type-2 sectioning nodes only.
 That is, they do not cover the question whether a type-1 sectioning node should
 be allowed to close a type-2 section, nor if an inner type-2 sectioning node
 should be allowed to close a type-1 section.
-
-<!-- ======================================================================= -->
-
-**CLARIFICATION**
-The injection of explicit parent containers does however not answer the initial
-question. That is, because only the default scope of an affected section is
-changed. As a result, any section in the above fragments still ends with its
-default scope and not any sooner.
-
-Note that the focus of the initial question is on the latter aspect
-(i.e. close a presequent section *before* the end of its default scope).
 
 <!-- ======================================================================= -->
 ## parent containers
@@ -29,13 +24,13 @@ As mentioned before, a section's parent container isn't a parent container
 because the definition of the corresponding node has certain characteristics.
 
 Any parent node is a parent container, if it is a type-1 sectioning node, or
-if it has type-2 sectioning nodes as child nodes. If that would not be the case,
-then consistent dynamic support (see the requirements) could not be guaranteed.
-In short: Any parent node can become a section's parent container, regardless
-of its specific definition.
+if it has type-2 sectioning nodes as child nodes. Consistent dynamic support
+could otherwise not be guaranteed (i.e. sections can not be allowed to reach
+past their parent containers). In short: Any parent node can become a section's
+parent container, regardless of its specific definition.
 
 Because of that, such parent containers exist whether they are manually
-injected (explicit), or due to some structural requirement (implicit).
+injected (explicit), or due to structural circumstances (implicit).
 
 Note that a node can be defined to never be a section's parent container, if
 (and only if) the node is not allowed to have type-2 sectioning nodes as child
@@ -64,11 +59,11 @@ independent from each other. Consequently, `n2` can not have any effect on
 close `s3` (as it is already closed when `n2` is being entered).
 
 Note that, from the perspective of this design, this case is a non-issue. That
-is, because sections will be ignored as soon as they are closed. Because of
-that, any such modified definition (with regards to `n2`) is not understood to
-be with regards to `n3/s3`, but with regards to some other open presequent
-section. Consequently, modified definitions may yield unexpected results, if
-the above structural dependency is not correctly taken into account.
+is, because sections will be ignored by subsequent operations as soon as they
+are closed. Because of that, any such modified definition (with regards to `n2`)
+is not understood to be with regards to `n3/s3`, but with regards to some other
+open presequent section. Consequently, modified definitions may yield unexpected
+results, if the above structural aspect is not correctly taken into account.
 
 However, certain conditions may still yield a seemingly identical result. If
 that is the case, the reasons for those matching results differ none the less.
@@ -109,10 +104,10 @@ to it).
 
 Note that this case can be understood to contain two subsequent subtrees that
 have `n1` and `n3` as their root nodes. Because of that, this case is similar
-to case 1: `s2` will be closed before `n4` is entered.
+to case 1: `s2` will be closed before `n4` is even entered.
 
-Note that the node levels of the corresponding sectioning nodes don't even have
-to be equal for as long as both nodes are located within two different subtrees.
+Note that the node levels of the corresponding sectioning nodes don't have to be
+identical for as long as both nodes are located within two different subtrees.
 The effect will still be covered by case 1: `s2` will be closed before `n4` is
 entered.
 
@@ -138,18 +133,23 @@ sections of `s1`).
 ## derived statements
 
 **CLARIFICATION**
-In order for modified definitions to not yield any conflict or an unexpected
-result, the corresponding type-2 sectioning nodes must have the same parent
-container.
+Parent containers have significant impact on the use of extended definitions.
 
-Note that the above considerations have precedence over any modified definition.
-That is, those definitions must be ignored, if they are in conflict with the
-corresponding structural considerations. Hence, the use of such definitions is
-always limited.
+Note that the above considerations have precedence over any extended definition.
+That is, such non-default definitions must be ignored, if they are in conflict
+with structural dependencies. Hence, the use of such definitions is limited.
 
 Note that this can be understood as an indication that, in principle, the
-default definitions always have precedence over any modified definition. That
-is, modified definitions must not be in conflict with the default definitions.
+default definitions have precedence over any non-default definition. That
+is, such definitions must not be in conflict with the default definitions.
+
+**CLARIFICATION**
+In order for non-default definitions to not yield any conflict, or an
+unexpected result, the corresponding type-2 sectioning nodes must have
+the same parent container.
+
+**Mind hook**
+The placement of sectioning nodes is significant.
 
 <!-- ======================================================================= -->
 
@@ -162,4 +162,7 @@ default definitions are rank-less
 
 **TODO**
 difference between type-1 and -2 sections -
-type-1 is always rank-less?
+type-1 is always rank-less? -
+
+could be allowed to close presequent type-2 sections -
+as such, they would have an outer rank associated with them
