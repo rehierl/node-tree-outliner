@@ -12,20 +12,7 @@ Section `s1`, which is declared by a sectioning node `n1`, is a subsection to
 `s0` (i.e. regardless of any non-default definition), if `n1` is a descendant
 of a node that is associated with `s0`.
 
-- only needed in combination with non-default definitions
-- only then, the implicit associations matter
-- only when open sections need to be closed
-- can't close a section inside of an associated container
-- the default definitions have no such issue
-- these are consistent with the implicit associations
-- that is, a subsequent section automatically is a subsection
-
-Note that these kind of sections then are, by structural relationship (i.e. by
-implicit associations), subsections to the section with which such an ancestor
-container is associated. Consequently, ignoring these kind of dependencies can
-result in statements that are in conflict with each other.
-
-Put differently: How to avoid conflicts with regards to implicit associations?
+In short: How to avoid conflicts due to implicit associations?
 
 ```
       n0
@@ -40,28 +27,17 @@ n1 n2         n5
 * `n2` represents an inactive parent container
 
 Note that `s3` is, first and foremost due to its structural relationship, a
-subsection to `s1`. That is the case even if a non-default addition to the
-definition of `n3` would define its declared section to be the next sibling
-section of `s1`. That is, under these circumstances, the non-default
-definitions would have to be ignored, which effectively grants implicit
-associations precedence over any non-default definition.
+subsection to `s1`. That is the case even if an extension to the definition of
+`n3` would define its declared section to be the next sibling section of `s1`.
+That is, under these circumstances, the non-default definitions would have to be
+ignored, which effectively grants implicit associations precedence over any
+non-default definition.
 
-Because of that, implicit associations have precedence over a non-default
- if the node level of the
-subsequent sectioning node is higher than the node level of the open presequent
-section's sectioning node.
+Because of that, implicit associations have precedence over any non-default
+definition, if both sections have different parent containers (e.g. `n0` vs.
+`n2`).
 
 Note that the universal section has no existing parent container (i.e. virtual).
-
-the node level of a sectioning node acts as a rank-like value -
-which must have precedence over any user-defined rank value -
-
-the node level of the top-level content nodes can be derived
-from the definition of the corresponding sectioning node -
-+1 in case of type-1, +0 in case of type-2
-
-plot twist: its the parent container, not the node level -
-even better for implementations
 
 two type-1 sections can't have the same parent container -
 the subsequent type-1 section is a subsection

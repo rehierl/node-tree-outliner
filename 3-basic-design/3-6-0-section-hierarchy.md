@@ -267,96 +267,10 @@ The definition of type-2 sectioning nodes, in combination with parent
 containers, allows to define a section hierarchy of any width and height.
 
 <!-- ======================================================================= -->
-## extended/non-default definitions
-
-
 
 **TODO**
-the injection of explicit parent containers is tricky -
-edit the scope of a presequent section in order to edit
-the relationship of a subsequent section -
-define means (e.g. rank) that allow to simplify this process -
-that is, the rank is a matter of convenience
-
-everything is based around closing presequent sections -
-because the default case is to continue these -
-
-not surprising -
-those sections that are already closed are no longer relevant -
-those sections that are subsequent can not be taken into account -
-i.e. can not predict possible future events -
-those that are still open can only be closed
-
-**TODO**
-A parent node is "turned into" a parent container of a type-2 section by an
-optional subsequent sectioning node. That is, a parent node can not determine,
-while it is being entered, whether it will have to close any inner sections
-during its exit event. inconsistency?
-
-**TODO**
-conversions/transformations?
-type-1 <=> type-2
-
-<!-- ======================================================================= -->
-## implicit associations
-
-**CLARIFICATION**
-Sections can not be closed arbitrarily.
-
-```
-   n0
-========
- n1  n2
-----
- n3
-```
-
-* `n0` is an inactive parent container (associated with `s0`)
-* `n1` is a sectioning node (type-1 or type-2, declares `s1`)
-* `n2,n3` are inactive nodes
-
-If, for example, the definition of `n1` would be altered in such a way that
-entering `n1` would result in closing section `s0` (but no other ancestor
-section in addition to that), then `s1` would be, by the definition of `n1`,
-a sibling section to `s0`. That is, no content node of `s1` is a content node
-of `s0`. However, because `n0` is still associated with `s0`, any content node
-of `s1` remains to be an implicit content node of `s0`.
-
-The conflicting statements therefore are:
-(1) `s1` is not a subsection of `s0` (modified definition of `n1`), and
-(2) `s1` is a subsection of `s0` (structural relationship via `n0:s0`).
-
-Under these kind of circumstances, `n1` can not be allowed to close `s0`.
-In order to avoid such conflicts, such an instruction to close `s0` must be
-ignored because `s1` is by structural relationship a subsection of `s0`.
-
-Note that these structural dependencies can not be undefined. Because of that,
-structural dependencies override any non-default definition. That is, those
-always have precedence over any modified/extended definition.
-
-Note that these considerations are independent of where (inside of a node tree)
-such a subtree can be found. Such a subtree will always result in the afore
-mentioned conflict.
-
-**CLARIFICATION**
-Section `s1`, which is declared by a sectioning node `n1`, is a subsection to
-`s0` (i.e. regardless of any non-default definition), if `n1` is a descendant
-of a node that is associated with `s0`.
-
-Note that this statement applies whether sectioning node `n1` ...
-
-* is a type-1, or a type-2 sectioning node.
-* is associated with the section it declares (i.e. `s1`) or not.
-
-Note HTML's definition of sectioning content elements (error). And in
-combination with "the first element of heading content" (different error).
-
-**CLARIFICATION**
-The default definitions of sectioning nodes are consistent with (these kind of)
-implicit associations. Therefore, implicit associations have no effect (i.e.
-are dormant) for as long as no changes or additions are made to the default
-definitions.
-
-Note that, by default, any section still ends with its default scope. That is,
-because no sectioning node is defined to close a presequent section. Because of
-that, the above implicit associations can not trigger these kind of conflicts.
+conversions/transformations? -
+type-1 <=> type-2 -
+show that the types of sections are interchangeable/synonymous under the
+default definitions -
+if so, then the extended definitions must not deviate

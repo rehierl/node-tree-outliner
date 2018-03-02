@@ -247,7 +247,7 @@ regards to the location of a section (see strong connectivity).
 No conflict other than the one caused by the
 afore mentioned implicit associations (i.e. `n1:s1`).
 
-Note HTML's current associations:
+Note HTML's current associations (an error):
 sectioning content vs. heading content.
 
 <!-- ======================================================================= -->
@@ -306,7 +306,7 @@ does a type-1 sectioning node not imply a single hierarchy?
 Note that an inner type-1 sectioning node can (by default) not be allowed
 to close its next outer type-1 section. If the default definition had that
 characteristic, then no section hierarchy could be established, if only
-type-1 sectioning nodes were available. That is, apart from sandboxing such
+type-1 sectioning nodes are available. That is, apart from sandboxing such
 a sectioning node inside of an explicit parent container.
 
 => must be limited to an outer t1 in combination with inner t2s?
