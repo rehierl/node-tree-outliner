@@ -60,9 +60,10 @@ recheck
 
 **TODO**
 overlay or embedded perspective?
-does the logical hierarchy act as a flat overlay,
+does the logical hierarchy act as a flat overlay on top of,
 or is it embedded into the node tree? -
-i.e. is the logical structure an integral part of the node tree?
+i.e. is the logical structure an integral part of the node tree? -
+similar to looking through a window
 
 **TODO**
 we have an outline height/depth - define an outline width? -
@@ -70,6 +71,11 @@ the maximum number of sections on a certain outline level? -
 
 **TODO**
 mobile - crib mobile
+
+**TODO**
+implicit relationship -> descendants -
+implicit associations -> one section only -
+combine both levels of implicitness?
 
 <!-- ======================================================================= -->
 ## rank of a section
@@ -192,3 +198,5 @@ which of the to-be closed sections it would have to be associated.
 The issue with such nodes is that they could be placed inside of a type-1
 section. To which section does a subsequent node belong? That is, user/input
 errors must be taken into account.
+
+plot twist: see the "extensions" chapter

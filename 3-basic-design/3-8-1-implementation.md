@@ -7,6 +7,8 @@ The following content is intended to clarify implementation specific aspects.
 <!-- ======================================================================= -->
 ## implicit associations
 
+(related to the implementation of close modifiers)
+
 The focus of this part is on the implementation of:
 Section `s1`, which is declared by a sectioning node `n1`, is a subsection to
 `s0` (i.e. regardless of any non-default definition), if `n1` is a descendant
@@ -29,10 +31,8 @@ n1 n2         n5
 Note that `s3` is, first and foremost due to its structural relationship, a
 subsection to `s1`. That is the case even if an extension to the definition of
 `n3` would define its declared section to be the next sibling section of `s1`.
-That is, under these circumstances, the non-default definitions would have to be
-ignored, which effectively grants implicit associations precedence over any
-non-default definition.
-
+That is, under these circumstances, the non-default definitions would have to
+be ignored. Which is, because structural relationships can not be undefined.
 Because of that, implicit associations have precedence over any non-default
 definition, if both sections have different parent containers (e.g. `n0` vs.
 `n2`).
@@ -46,6 +46,8 @@ what about type-2 sections ...
 
 <!-- ======================================================================= -->
 ## top-level nodes
+
+(related to the support of transformations)
 
 associating a node (strict association) with a section is equivalent to
 associating a whole subtree of nodes (implicit associations). -
@@ -72,6 +74,8 @@ previous sibling when closed by a t2 sectioning node -
 
 <!-- ======================================================================= -->
 ## parent containers
+
+(related to the implementation of sectioning nodes)
 
 The focus of this part is on the implementation of:
 Close one or more inner sections when exiting a parent container.
