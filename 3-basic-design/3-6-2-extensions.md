@@ -272,9 +272,9 @@ mentioned conflict.
 Sections can not be closed arbitrarily.
 
 **CLARIFICATION**
-Section `s1`, which is declared by some sectioning node `n1`, is a subsection
-to `s0` (i.e. regardless of any non-default definition), if `n1` is a descendant
-of a node that is associated with `s0`.
+Section `s1`, which is declared by some sectioning node `n1`, is a forced
+(or structural) subsection of `s0` (i.e. regardless of any close modifier),
+if `n1` is a descendant of a node that is associated with `s0`.
 
 Note that this statement applies whether sectioning node `n1` ...
 

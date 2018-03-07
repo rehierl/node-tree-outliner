@@ -13,8 +13,8 @@ associating a node (strict association) with a section is equivalent to
 associating a whole subtree of nodes (implicit associations). -
 
 two levels of implicitness -
-implicitly with the explicitly associated section (associate a subtree), and
-implicitly with the implicitly associated section (one section only)
+implicitly with the explicitly associated section (associate a subtree),
+and implicitly with the implicitly associated section (one section only)
 
 can an algorithm easily store references to all top-level nodes? -
 issue: associate with one section only (not that easy) -
@@ -139,9 +139,9 @@ is actually not a parent container).
 (related to the implementation of close modifiers)
 
 The focus of this part is on the implementation of:
-Section `s1`, which is declared by a sectioning node `n1`, is a subsection of
-section `s0` (i.e. regardless of any close modifier), if `n1` is a descendant
-of a node that is associated with `s0`.
+Section `s1`, which is declared by some sectioning node `n1`, is a forced
+(or structural) subsection of `s0` (i.e. regardless of any close modifier),
+if `n1` is a descendant of a node that is associated with `s0`.
 
 In short: How to avoid conflicts due to implicit associations?
 
@@ -165,22 +165,83 @@ relationships can not be undefined. Consequently, implicit associations have
 precedence over any non-default definition, if both sections have different
 parent containers (see `n0` vs. `n2`).
 
-### basic means of detection
+### finding the declared section's parent section
+
+In essence, an algorithm is executed on the tree's node sequence. That is, it
+enters one node after another and, at some point, reaches the next subsequent
+sectioning node. At that point, the algorithm's current context contains the
+current rooted path of nodes (begins in the node tree's root and ends in the
+current sectioning node being entered) and the current path of sections
+(begins in the root section and ends in the current section).
+
+Note that the current path of nodes holds all parent containers of all sections
+in the current path of sections. That is, because otherwise those sections would
+no longer be open. In contrary to that, the current path of nodes does not
+necessarily hold all sectioning nodes of those open sections. That is, because
+all presequent type-2 sectioning nodes will have been exited by then.
+
+If the current sectioning node being entered had no close modifier, then the
+current section would have to become the parent section of the declared section.
+That case consequently reflects the default definitions, which are not part of
+this consideration. Because of that, it is assumed that the current sectioning
+node holds a close modifier which instructs the algorithm to close one or more
+sections.
+
+Because of that, the first section that has to be closed always is the current
+section (i.e. the currently least significant section). That is, because no
+ancestor section can be closed before any of its subsections are closed. That
+is, all sections must be closed in an orderly, bottom-up fashion.
+
+At some point, the algorithm therefore has to enter/continue the following loop:
+
+1. Evaluate the sectioning node's close modifier in order to determine,
+   whether there (still) are sections that need to be closed.
+1. Exit the loop, if no sections need to be closed (i.e. break).
+1. Because sections can not be closed arbitrarily, the algorithm
+   has to verify next, that the declared section *is not* a forced
+   subsection of the current section.
+1. If that verification failed (i.e. the declared section *is* such
+   a forced subsection), then the algorithm can not and must not close
+   the current section. The current loop must be exited (i.e. break).
+1. If that verification succeeded (i.e. the declared section *is not*
+   a forced subsection), then the algorithm needs to close and pop the
+   current section, after which the current section's parent section
+   is the new current section.
+1. (reenter/continue the loop)
+
+Finally, the declared section can be added as subsection to the current section
+(Note that this current section is not necessarily identical to the initial
+current section), after which the declared section is the final current section.
 
 **TODO**
-rephrase .. run an algorithm .. pause it at the next sectioning node .. what
-it knows is the current path of open sections .. focus on the parent containers
-of those sections .. these can be found in the current rooted path of nodes
+Note that it is not possible to skip this loop in order to improve performance.
+That is, because any open section can be a structural subsection of its parent
+section. Entirely skipping the above loop (based on certain conditions) will
+eventually produce a result that is in conflict with structural dependencies.
 
-Because the parent containers of the involved sections all are located on the
-same rooted path of nodes that ends in the current sectioning node (e.g. `n3`),
-an outline algorithm will only encounter case-2 and case-4 (see extensions).
+**TODO**
+Could a boolean `Section.isForcedSubsection` property be of any use?
 
-That is, because the node levels of those sectioning nodes that belong to open
-presequent sections all are lower or equal to the sectioning node being entered
-(i.e. never greater than the current node level). Which is, because no parent
-container of an ancestor section is a descendant of a subsection's parent
-container.
+### basic method of detection
+
+The question now is, how could an algorithm detect whether or not the declared
+subsequent section is a forced subsection of the current section?
+
+Note that the parent container of an ancestor section *never* is a descendant
+of a subsection's parent container. Consequently, the parent container of a
+descendant section *never* is closer to the root node than the parent container
+of an ancestor section. Because of that, the node level of an ancestor section's
+parent container always is lower or equal to the node level of a subsection's
+parent container.
+
+Note that a running algorithm will neither encounter case-1 nor case-3 (see the
+extensions chapter). That is, because the corresponding presequent sections are
+already closed and can therefore no longer appear within the current path of
+sections. Hence, the remaining relevant cases are case-2 and case-4.
+
+
+
+**TODO**
 
 *redo, open sections, current sectioning node*
 Note that the parent container of the current subsequent section will always be
