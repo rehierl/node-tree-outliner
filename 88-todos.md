@@ -11,6 +11,8 @@ always having to look/backwards in order to
 know where and how to continue -
 like climbing a mountain by moving backwards
 
+<!-- ======================================================================= -->
+
 **TODO**
 find a term for type-2 sections that
 have an inactive node as parent container -
@@ -30,33 +32,37 @@ sectioning offset/open node (?) -
 sectioning end/close node, or end marker node -
 
 **TODO**
-HTML's sectioning content nodes are defined as -
-subsection-of the nearest ... -
-if deep into the structure, then close multiple sections -
-if shallow, then close just a few, if any -
-can be seen to be context-dependent (i.e. inconsistent) -
+explain superordinate/subordinate section -
+already done ?
+
+**TODO**
+we have an outline height/depth - define an outline width? -
+the maximum number of sections on a certain outline level? -
+
+**TODO**
+implicit relationship -> descendants -
+implicit associations -> one section only -
+combine both levels of implicitness?
 
 **TODO**
 an algorithm can in principle start at any node -
 the root node must be treated as a type-1 sectioning node -
 any node can be understood to have an outline -
-issue header element in combination with reusing heading content -
+issue header element in combination with reusing heading elements -
 i.e. a 1st header element can not always be recognized to be with
-regards to a presequent (possibly not within the corresponding
-subtree) type-1 sectioning node -
-this might not be the case with a title element
+regards to a presequent (possibly outside of corresponding subtree)
+type-1 sectioning node -
+not the case when reusing the title element
 
 **TODO**
-describe multistep transformations -
-already done ?
+HTML's sectioning content nodes are defined as -
+subsection-of the nearest ... -
+if deep into the structure, then close multiple sections -
+if shallow, then close just a few, if any -
+i.e. context-dependent - inconsistent?
 
-**TODO**
-explain superordinate/subordinate section -
-already done ?
-
-**TODO**
-structural vs. logical perspective -
-recheck
+<!-- ======================================================================= -->
+## perspectives
 
 **TODO**
 overlay or embedded perspective?
@@ -66,21 +72,37 @@ i.e. is the logical structure an integral part of the node tree? -
 similar to looking through a window
 
 **TODO**
-we have an outline height/depth - define an outline width? -
-the maximum number of sections on a certain outline level? -
+structural vs. logical perspective -
+node tree vs. section tree -
+recheck
 
 **TODO**
-mobile - crib mobile
+sectioning a tree (i.e. creating an outline for a tree)
+is like grouping nodes on a logical level -
+geographical (node tree) vs. political (sections) -
+elevate the nodes of a flat, two dimensional surface into the next dimension
+
+<!-- ======================================================================= -->
+## transformations
+
+(type-1 <=> type-2)
+
+interchangeable/synonymous under the default definitions? -
+if so, then the extended definitions must not deviate
+
+not quite -
+t1 sections are in general closed -
+t2 sections are in general open -
 
 **TODO**
-implicit relationship -> descendants -
-implicit associations -> one section only -
-combine both levels of implicitness?
+describe multistep transformations -
+already done ?
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
 
-**TODO** -
+(close modifiers vs. type-1 sections)
+
 `Section SectioningNode.declaredSection` - singular, not plural -
 in conflict with "one or more (i.e. a list of) sections" -
 
@@ -89,40 +111,6 @@ but that requires an additional type of object
 
 Note that this does not mean that a sectioning node is not allowed to hold
 a reference to the section it declares, which still is a single section only.
-
-<!-- ======================================================================= -->
-## general ideas
-
-**TODO**
-sectioning a tree (i.e. creating an outline for a tree)
-is like grouping nodes on a logical level -
-geographical (node tree) vs. political (sections) -
-elevate the nodes of a flat, two dimensional surface into the next dimension
-
-**TODO**
-"executing" an algorithm on a node sequence (event sequence)
-feels a lot like a turing machine
-
-**compilers** -
-headings <=> variable/parameter declarations -
-sections <=> scopes/blocks -
-
-**file systems** -
-issue with folder/file node types? -
-similar to browser bookmarks, etc -
-could allow a "different" view -
-similar to views in a database
-
-these act (display wise) more like unordered trees -
-with that in mind, folders are like type-1 sectioning nodes -
-type-2 sectioning nodes don't/can't exist
-
-the node order of the tree must be independent of the node types -
-in contrary to that, the view of a fs is ordered folders-first -
-but, folders are just files themselves (folder = list of files and folders)
-
-understand sections to be folders and nodes to be files? -
-meh, files are leaf nodes - they have no subordinate entities
 
 <!-- ======================================================================= -->
 ## tree of sectioning nodes
@@ -163,3 +151,35 @@ section. To which section does a subsequent node belong? That is, user/input
 errors must be taken into account.
 
 plot twist: see the "extensions" chapter
+
+<!-- ======================================================================= -->
+## general ideas
+
+**TODO**
+mobile - crib mobile -
+just a visual image
+
+**TODO**
+"executing" an algorithm on a node sequence (event sequence)
+feels a lot like a turing machine
+
+**compilers** -
+headings <=> variable/parameter declarations -
+sections <=> scopes/blocks -
+
+**file systems** -
+issue with folder/file node types? -
+similar to browser bookmarks, etc -
+could allow a "different" view -
+similar to views in a database
+
+these act (display wise) more like unordered trees -
+with that in mind, folders are like type-1 sectioning nodes -
+type-2 sectioning nodes don't/can't exist
+
+the node order of the tree must be independent of the node types -
+in contrary to that, the view of a fs is ordered folders-first -
+but, folders are just files themselves (folder = list of files and folders)
+
+understand sections to be folders and nodes to be files? -
+meh, files are leaf nodes - they have no subordinate entities

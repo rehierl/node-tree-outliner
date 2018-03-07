@@ -6,6 +6,11 @@ depth-value - absolute - top-down perspective
 close-n-value - absolute - bottom-up perspective
 rank-value - absolute or relative - eq. depth if absolute
 
+it is in principle possible to mix different types of close modifiers -
+the algorithm will treat each modifier as an isolated instruction -
+i.e. always with regards to the current path of sections -
+but, if relative, could depend on section properties? -
+
 <!-- ======================================================================= -->
 ## rank
 
@@ -41,4 +46,4 @@ rank only with regards to the outline depth -
 not a presequent rank-infected sectioning node? -
 what would be the difference if any?
 
-plot twist: the essence of a rank value is to close sections
+plot twist: the essence of a rank value is to instruct to close sections

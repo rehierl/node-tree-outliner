@@ -32,6 +32,10 @@ after all, each section does have its own close event -
 last child if closed by a parent container -
 previous sibling when closed by a t2 sectioning node -
 
+t2 -> t1 transformations must take into account, that
+they could be the cause for new first and/or last top-level nodes -
+the corresponding node references, if any, need to be updated
+
 <!-- ======================================================================= -->
 ## parent containers
 
@@ -151,25 +155,34 @@ n1 n2         n5
 
 * `n0` represents a type-1 sectioning node
 * `n1, n3-5` represent type-2 sectioning nodes
-* `n2` represents an inactive parent container
+* `n2` represents an inactive parent node
 
 Note that `s3` is, first and foremost due to its structural relationship, a
-subsection to `s1`. That is, even if a close modifier of `n3` would define `s3`
-to be independent of `s1`. Under these kind of circumstances, any non-default
-definition must be ignored. Which is, because structural relationships can not
-be undefined. Consequently, implicit associations have precedence over any
-non-default definition, if both sections have different parent containers
-(see `n0` vs. `n2`).
+subsection to `s1`. That is, even if `s3` would have a close modifier which
+would define `s3` to be independent of `s1`. Under these kind of circumstances,
+any non-default definition must be ignored. Which is, because structural
+relationships can not be undefined. Consequently, implicit associations have
+precedence over any non-default definition, if both sections have different
+parent containers (see `n0` vs. `n2`).
 
 ### basic means of detection
+
+**TODO**
+rephrase .. run an algorithm .. pause it at the next sectioning node .. what
+it knows is the current path of open sections .. focus on the parent containers
+of those sections .. these can be found in the current rooted path of nodes
 
 Because the parent containers of the involved sections all are located on the
 same rooted path of nodes that ends in the current sectioning node (e.g. `n3`),
 an outline algorithm will only encounter case-2 and case-4 (see extensions).
-That is, the node levels of those sectioning nodes that belong to open
-presequent sections all are lower or equal to the sectioning node being
-entered (i.e. never greater than the current node level).
 
+That is, because the node levels of those sectioning nodes that belong to open
+presequent sections all are lower or equal to the sectioning node being entered
+(i.e. never greater than the current node level). Which is, because no parent
+container of an ancestor section is a descendant of a subsection's parent
+container.
+
+*redo, open sections, current sectioning node*
 Note that the parent container of the current subsequent section will always be
 identical to the parent container of an initially open section (i.e. initially
 with regards to "being open before closing the first section"), or a descendant
@@ -178,12 +191,7 @@ ancestors of the subsequent section's parent container either belong to sections
 that are already closed, or to sections whose sectioning nodes have not even
 been reached yet (i.e. the latter nodes still have to be entered).
 
-Note that, with regards to such a rooted path of nodes, the parent containers
-of all open sections never are subsequent to the parent container of the section
-declared by the sectioning node being entered. That is, because no parent
-container of an ancestor section is a descendant of a subsection's parent
-container.
-
+*valid node references, reference lifetime*
 Note that all nodes in the current rooted path have been entered, but not yet
 exited. Hence, if an implementation has access to node references, then the
 references of those nodes remain valid at least until those nodes are exited.
@@ -191,13 +199,18 @@ This aspect could become an issue, if low-level (i.e. pointer-based, no garbage
 collection) programming languages or programming interfaces are used. Those
 might invalidate node references once the corresponding nodes have been exited.
 
+*parent containers, not sectioning nodes*
 Note that the corresponding sectioning nodes are, in contrary to parent
 containers, not necessarily part of the current rooted path (e.g. presequent
 type-2 sectioning nodes). Because of that, and in order to avoid issues
-with invalid node references, the focus of this consideration is on parent
-containers, rather than on sectioning nodes.
+with invalid node references, the focus of the current considerations are
+on parent containers, rather than on the sectioning nodes themselves.
 
 Note that the universal section has no existing parent container (i.e. virtual).
+This aspect needs to be taken into account, if a close modifier instructs the
+algorithm to close all open sections (including the root section). If it should
+be allowed to close the root section, is yet another aspect that needs to be
+looked at.
 
 Consequently, references (or the node level values) of the involved parent
 containers can be used in order to detect whether a subsequent section is,
