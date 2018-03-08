@@ -29,7 +29,7 @@ No two sections have identical first nodes.
 better terms for type-1/2 sectioning nodes? -
 sectioning container node (ok) -
 sectioning offset/open node (?) -
-sectioning end/close node, or end marker node -
+sectioning end/close node, or end-marker node -
 
 **TODO**
 explain superordinate/subordinate section -

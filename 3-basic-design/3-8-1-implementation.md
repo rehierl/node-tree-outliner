@@ -158,12 +158,12 @@ n1 n2         n5
 * `n2` represents an inactive parent node
 
 Note that `s3` is, first and foremost due to its structural relationship, a
-subsection to `s1`. That is, even if `s3` would have a close modifier which
-would define `s3` to be independent of `s1`. Under these kind of circumstances,
+subsection of `s1`. That is, even if `s3` would have a close modifier which
+defines `s3` to be independent of `s1`. Under these kind of circumstances,
 any non-default definition must be ignored. Which is, because structural
 relationships can not be undefined. Consequently, implicit associations have
 precedence over any non-default definition, if both sections have different
-parent containers (see `n0` vs. `n2`).
+parent containers (see `n0` vs. `n2`, see extensions).
 
 ### finding the declared section's parent section
 
@@ -182,36 +182,34 @@ all presequent type-2 sectioning nodes will have been exited by then.
 
 If the current sectioning node being entered had no close modifier, then the
 current section would have to become the parent section of the declared section.
-That case consequently reflects the default definitions, which are not part of
-this consideration. Because of that, it is assumed that the current sectioning
-node holds a close modifier which instructs the algorithm to close one or more
-sections.
+This case obviously represents the default definitions. Because of that, it is
+assumed that the current sectioning node holds a close modifier which instructs
+the algorithm to close one or more sections.
 
-Because of that, the first section that has to be closed always is the current
-section (i.e. the currently least significant section). That is, because no
-ancestor section can be closed before any of its subsections are closed. That
-is, all sections must be closed in an orderly, bottom-up fashion.
+And because no ancestor section can be closed before any of its subsections are
+closed (sections must be closed in an orderly, bottom-up fashion), the first
+section that will be closed always is the current least significant section.
 
-At some point, the algorithm therefore has to enter/continue the following loop:
+Therefore, the algorithm has to enter/continue the following loop:
 
 1. Evaluate the sectioning node's close modifier in order to determine,
    whether there (still) are sections that need to be closed.
 1. Exit the loop, if no sections need to be closed (i.e. break).
 1. Because sections can not be closed arbitrarily, the algorithm
-   has to verify next, that the declared section *is not* a forced
+   has to test next, if the declared section *is not* a forced
    subsection of the current section.
-1. If that verification failed (i.e. the declared section *is* such
-   a forced subsection), then the algorithm can not and must not close
+1. If that test failed (i.e. the declared section *is* such
+   a forced subsection), then the algorithm can not close
    the current section. The current loop must be exited (i.e. break).
-1. If that verification succeeded (i.e. the declared section *is not*
+1. If that test succeeded (i.e. the declared section *is not*
    a forced subsection), then the algorithm needs to close and pop the
-   current section, after which the current section's parent section
+   current section. After that, the current section's parent section
    is the new current section.
 1. (reenter/continue the loop)
 
 Finally, the declared section can be added as subsection to the current section
 (Note that this current section is not necessarily identical to the initial
-current section), after which the declared section is the final current section.
+current section). After that, the declared section is the new current section.
 
 **TODO**
 Note that it is not possible to skip this loop in order to improve performance.
@@ -224,85 +222,85 @@ Could a boolean `Section.isForcedSubsection` property be of any use?
 
 ### basic method of detection
 
-The question now is, how could an algorithm detect whether or not the declared
-subsequent section is a forced subsection of the current section?
+The question now is: How exactly can an algorithm detect whether or not the
+declared subsequent section is a forced subsection of the current section?
 
-Note that the parent container of an ancestor section *never* is a descendant
-of a subsection's parent container. Consequently, the parent container of a
-descendant section *never* is closer to the root node than the parent container
-of an ancestor section. Because of that, the node level of an ancestor section's
-parent container always is lower or equal to the node level of a subsection's
-parent container.
-
-Note that a running algorithm will neither encounter case-1 nor case-3 (see the
-extensions chapter). That is, because the corresponding presequent sections are
-already closed and can therefore no longer appear within the current path of
-sections. Hence, the remaining relevant cases are case-2 and case-4.
-
-
-
-**TODO**
-
-*redo, open sections, current sectioning node*
-Note that the parent container of the current subsequent section will always be
-identical to the parent container of an initially open section (i.e. initially
-with regards to "being open before closing the first section"), or a descendant
-of those parent containers. That is, because parent containers which are not
-ancestors of the subsequent section's parent container either belong to sections
-that are already closed, or to sections whose sectioning nodes have not even
-been reached yet (i.e. the latter nodes still have to be entered).
-
-*valid node references, reference lifetime*
-Note that all nodes in the current rooted path have been entered, but not yet
-exited. Hence, if an implementation has access to node references, then the
-references of those nodes remain valid at least until those nodes are exited.
-This aspect could become an issue, if low-level (i.e. pointer-based, no garbage
-collection) programming languages or programming interfaces are used. Those
-might invalidate node references once the corresponding nodes have been exited.
-
-*parent containers, not sectioning nodes*
-Note that the corresponding sectioning nodes are, in contrary to parent
-containers, not necessarily part of the current rooted path (e.g. presequent
-type-2 sectioning nodes). Because of that, and in order to avoid issues
-with invalid node references, the focus of the current considerations are
-on parent containers, rather than on the sectioning nodes themselves.
+As stated in the extensions chapter, an algorithm is free to close a presequent
+section if, and only if, it has the same parent container as the subsequent
+section. Because of that, multiple options are available, each with its own
+subtle advantages and disadvantages:
 
 Note that the universal section has no existing parent container (i.e. virtual).
-This aspect needs to be taken into account, if a close modifier instructs the
-algorithm to close all open sections (including the root section). If it should
-be allowed to close the root section, is yet another aspect that needs to be
-looked at.
+This aspect might have to be taken into account, if a close modifier instructs
+the algorithm to close all open sections (including the root section). Whether
+or not it should be allowed/possible to close the root section, or any type-1
+section for that matter, is an aspect that still needs to be investigated.
 
-Consequently, references (or the node level values) of the involved parent
-containers can be used in order to detect whether a subsequent section is,
-by structural relationship, a subsection to the current (least significant)
-section. If that is the case, then the close modifier of the sectioning node
-being entered must be ignored because the declared section is a subsection of
-the current section. Otherwise, the current section can be closed if that is
-what the close modifier instructs the outline algorithm to do.
+> Option 1: parent container references, node identifiers
 
-### option - node references, node ids
+Keeping a reference of a section's parent container (with each section object),
+set when creating a new section object, would be the obvious first choice.
+These node references can then be tested for reference equality. That is, the
+presequent section can be closed, if both references are equal. Otherwise, the
+subsequent section is a forced subsection.
 
-The most straight forward method to detect whether a subsequent section is, due
-to its structural relationship, a subsection of the current section, is by using 
-node references of the involved parent containers.
+Note that a running algorithm will neither encounter case-1 nor case-3 (see
+the extensions chapter). That is, because the corresponding presequent sections
+are already closed and will therefore no longer appear within the current path
+of sections. Because of that, the only relevant cases are case-2 and case-4.
+
+However, holding a node reference with each section object will obviously
+increase the memory footprint of the resulting outline. Not to mention the
+additional efforts related to documentation, update requirements, etc. Hence,
+these references can, but should not be used by implementations. That is,
+unless they have any additional use besides the outline algorithm.
 
 Note that node references are very similar to unique number identifier values.
-Because of that, and depending on a specific implementation, id values could
-be used instead of actual node references.
+Because of that, and depending on an implementation's specific environment
+(e.g. adjacency lists), node identifier values could be (or even have to be)
+used instead of object references.
 
-### option - node levels
+> Option 2: sectioning node references
 
-If an implementation can not rely upon node references, ...
+As a section's parent container can be derived from its sectioning node, the
+parent container references could be determined on the fly by taking advantage
+of the `Section.sectioningNode` properties (i.e. `sectioningNode` in case of a
+type-1, and `sectioningNode.parentNode` in case of a type-2 sectioning node).
+That is, if a specific environment provides the means to access a node's parent
+node (e.g. event driven parsers?).
 
-the node level of a parent container can be derived from the sectioning node -
-must know/calculate/have-access to a node level value -
-additional effort
+However, and depending on an implementation's specific environment (e.g.
+low-level implementations highly optimized to produce hierarchical listings of
+section properties on the fly), the node references of the sectioning nodes are
+neither required, nor guaranteed to be valid when the algorithm has to execute
+the above mentioned tests.
 
-note that case-3 will not be encountered -
-(level-1 == level-2) <=> (container-1 == container-2)
+Note that all nodes in the current rooted path of nodes have been entered,
+but not yet exited. Hence, if an implementation has access to node references
+(in contrary to pure node identifiers), the references of those nodes remain
+valid for at least until those nodes are exited. This aspect could however
+become an issue, if low-level (i.e. pointer-based, no garbage collection)
+programming languages or interfaces are used. Those have in general the option
+to destroy node references once the corresponding nodes have been exited (e.g.
+presequent type-2 sectioning nodes). Therefore, an attempt to retrieve a
+reference of a section's parent container via a reference of the section's
+sectioning node could result in access violation errors.
 
-### general implementation
+> Option 3: node level values
 
-Note that performance related improvements are hardly possible -
-must test all containers along the way
+A third option is the use of node level values. That is, the presequent section
+can be closed, if the node level of the subsequent section's parent container
+is equal to the node level of the presequent section's parent container.
+Otherwise, and because case-1 and case-3 never apply, the subsequent section
+is a forced subsection.
+
+**TODO**
+can sectioning nodes be used instead?
+
+**TODO**
+Note that the parent container of an ancestor section *never* is a descendant
+of a subsection's parent container. Because of that, the parent container of a
+descendant section is *never* closer to the root node than the parent containers
+of its ancestor sections. Consequently, the node level of an ancestor section's
+parent container always is lower or equal to the node level of a subsection's
+parent container.
