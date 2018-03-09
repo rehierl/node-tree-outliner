@@ -62,27 +62,6 @@ if shallow, then close just a few, if any -
 i.e. context-dependent - inconsistent?
 
 <!-- ======================================================================= -->
-## perspectives
-
-**TODO**
-overlay or embedded perspective?
-does the logical hierarchy act as a flat overlay on top of,
-or is it embedded into the node tree? -
-i.e. is the logical structure an integral part of the node tree? -
-similar to looking through a window
-
-**TODO**
-structural vs. logical perspective -
-node tree vs. section tree -
-recheck
-
-**TODO**
-sectioning a tree (i.e. creating an outline for a tree)
-is like grouping nodes on a logical level -
-geographical (node tree) vs. political (sections) -
-elevate the nodes of a flat, two dimensional surface into the next dimension
-
-<!-- ======================================================================= -->
 ## transformations
 
 (type-1 <=> type-2)
@@ -111,6 +90,27 @@ but that requires an additional type of object
 
 Note that this does not mean that a sectioning node is not allowed to hold
 a reference to the section it declares, which still is a single section only.
+
+<!-- ======================================================================= -->
+## perspectives
+
+**TODO**
+overlay or embedded perspective?
+does the logical hierarchy act as a flat overlay on top of,
+or is it embedded into the node tree? -
+i.e. is the logical structure an integral part of the node tree? -
+similar to looking through a window
+
+**TODO**
+structural vs. logical perspective -
+node tree vs. section tree -
+recheck
+
+**TODO**
+sectioning a tree (i.e. creating an outline for a tree)
+is like grouping nodes on a logical level -
+geographical (node tree) vs. political (sections) -
+elevate the nodes of a flat, two dimensional surface into the next dimension
 
 <!-- ======================================================================= -->
 ## tree of sectioning nodes
