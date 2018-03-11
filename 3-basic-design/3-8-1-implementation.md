@@ -19,7 +19,6 @@ and implicitly with the implicitly associated section (one section only)
 can an algorithm easily store references to all top-level nodes? -
 issue: associate with one section only (not that easy) -
 issue: subsequent t2 with equal or higher rank (tricky) -
-i.e. two levels of implicitness -
 
 when a section is being closed, or as an on demand feature? -
 is it possible to avoid having to determine them as a post-process
@@ -145,7 +144,7 @@ if `n1` is a descendant of a node that is associated with `s0`.
 
 In short: How to avoid conflicts due to implicit associations?
 
-### example
+### example fragment
 
 ```
       n0
@@ -161,13 +160,21 @@ n1 n2         n5
 
 Note that `s3` is, first and foremost due to its structural relationship, a
 subsection of `s1`. That is, even if `s3` would have a close modifier which
-defines `s3` to be independent of `s1`. Under these kind of circumstances,
+defined `s3` to be independent of `s1`. Under these kind of circumstances,
 any close modifier must be ignored. That is, because these structural
 dependencies can not be undefined. Consequently, implicit associations have
 precedence over any non-default definition, if both sections have different
 parent containers (see `n0` vs. `n2`, see extensions).
 
-### finding the parent section
+Note that `s4` has the same parent container as `s3` (i.e. `n2`). However, that
+is not the case between `s4` and `s1`. Because of that, `n4` may close `s3`,
+but not `s1`. Consequently, `s4` is like `s3` by structural relationship still
+a subsection to `s1`.
+
+Note that `n5` can close `s1` and, just like `n1`,
+may technically even close `s0`.
+
+### selecting the parent section
 
 In essence, an algorithm is executed on the tree's node sequence. That is, it
 enters one node after another and, at some point, enters the next subsequent
@@ -197,32 +204,46 @@ execute the following loop:
 
 1. Evaluate the sectioning node's close modifier in order to determine,
    whether there (still) are sections that need to be closed.
-1. Exit the loop, if no sections need to be closed (i.e. break).
-1. Because sections can not be closed arbitrarily, the algorithm
+2. Exit the loop, if no sections need to be closed (i.e. break).
+3. Because sections can not be closed arbitrarily, the algorithm
    has to test next, if the declared section *is not* a forced
    subsection of the current section.
-1. If that test failed (i.e. the declared section *is* a forced
+4. If that test failed (i.e. the declared section *is* a forced
    subsection), then the algorithm can not close the current section.
    The current loop must be exited (i.e. break).
-1. If that test succeeded (i.e. the declared section *is not*
+5. If that test succeeded (i.e. the declared section *is not*
    a forced subsection), then the algorithm needs to close and pop
    the current section. After that, the current section's parent
    section is the new current section.
-1. (reenter/continue the loop)
+6. (continue to loop)
 
 Finally, the declared section can be added as subsection to the current section
 (Note that this current section is not necessarily identical to the initial
 current section). After that, the declared section is the new current section.
 
-**TODO**
-Note that it is not possible to skip this loop in order to improve the
-performance by jumping directly to some ancestor section. That is, because
-any open section can be a forced subsection of its parent section. Entirely
-skipping the above loop, will therefore eventually produce a result that is
-in conflict with structural dependencies.
+Note that it is not possible to bypass this loop in order to improve the
+performance by "skipping some of the ancestor section". That is, because
+
+* (1) any open section can be a forced subsection of its parent section (e.g.
+  `s3` in case of entering `n4`). If there is even one such ancestor section,
+  then the declared section of the sectioning node being entered must become
+  a subsection of the least significant forced subsection. That is, if the
+  close modifier instructs to close the appropriate amount of sections.
+* (2) close operations could trigger custom event handlers. Because of that,
+  each section must be closed explicitly and in the right bottom-up order.
+
+Note that a `bool Section.isForcedSubsection` property (i.e. the property's
+section object is, with regards to its parent section, a forced subsection),
+set after executing step 6 can not be used to improve the performance. That
+is, because all tests only depend on the declared subsequent section and
+the corresponding current section. Consequently, they do not depend on the
+relationship between the already open sections. However, that property
+could however still prove useful for debugging purposes.
 
 **TODO**
-Could a boolean `Section.isForcedSubsection` property be of any use?
+need a proof-of-concept implementation to see whether that loop truly manages
+to properly deal with all possible cases - intermediate parent containers might
+require some adjustments? - don't see why, but you never know ...
 
 ### basic method of detection
 

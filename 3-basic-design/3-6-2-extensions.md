@@ -11,7 +11,7 @@ sectioning nodes by certain modifiers.
 Note that such modifiers are intended to alter the definition of sectioning
 nodes while being consistent with their default definitions. That is, it must
 be possible to transform any tree, which is defined based upon those extended
-definitions, into a tree that is solely based upon default definitions (and
+definitions, into a tree that is solely based upon the default definitions (and
 vice versa, i.e. extended description equivalent-to strict/default description).
 
 <!-- ======================================================================= -->
@@ -164,9 +164,9 @@ design by making it more convenient to express a specific section hierarchy.
 Because of that, extending the default definitions with close modifiers is
 in general reasonable.
 
-Note however, that the above considerations did not take into account, whether
+Note however, that the above considerations do not take into account, if
 a section can be closed in a given context. As it turns out (see below),
-sections can not be closed arbitrarily. The usefulness of such modifiers
+sections can not be closed arbitrarily. The usefulness of close modifiers
 therefore has its limits.
 
 <!-- ======================================================================= -->
@@ -416,12 +416,12 @@ Note that the above considerations have precedence over any extended definition.
 That is, such non-default definitions must be ignored, if they are in conflict
 with structural dependencies. Hence, the use of such definitions is limited.
 
-Note that this can be understood as an indication that, in principle, the
-default definitions have precedence over any non-default definition. That
-is, such modifications must not be in conflict with the default definitions.
+Note that this can be understood to indicate that, in principle, the default
+definitions have precedence over any non-default definition. That is, such
+definitions must in general not be in conflict with the default definitions.
 
 **CLARIFICATION**
-In order for non-default definitions to not yield any conflict, or an
+In order for non-default definitions to not yield any conflict, or an 
 unexpected result, type-2 sectioning nodes must have the same parent container.
 
 **Mind hook**

@@ -3,10 +3,17 @@
 
 ```
 Global begin
+  - the current node being entered/exited
+  Node currentNode
+
+  - the node level of currentNode
+  - maintained by the tree traversal algorithm
+  int currentNodeLevel
+
   - all currently open sections
   - the bottom section is the root section
   - the top-most section is the current section
-  - not needed -> currentSection.parentSection
+  - not needed -> currentSection.parentSection{+}
   Stack<Section> openSections
 
   - a reference to the current section
@@ -48,7 +55,7 @@ Section begin
   Section parentSection
 
   - the first content node of this section
-  - always a top-level node
+  - also the section's first top-level node
   Node firstContentNode
 Section end
 ```

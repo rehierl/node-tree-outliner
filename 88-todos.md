@@ -73,9 +73,13 @@ not quite -
 t1 sections are in general closed -
 t2 sections are in general open -
 
-**TODO**
 describe multistep transformations -
 already done ?
+
+usability perspective => use t2 over t1 -
+especially due to close modifiers -
+algorithmic perspective => use t1 over t2 -
+consistent transformations are a must have
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
@@ -151,6 +155,12 @@ section. To which section does a subsequent node belong? That is, user/input
 errors must be taken into account.
 
 plot twist: see the "extensions" chapter
+
+closing a subsection does not necesarily mean that ancestor sections are closed
+as well - in contrary to that, closing an ancestor section requires that all
+subections are closed as well - proof that those nodes must be associated with
+the parent section of the most signigicant section being closed? -
+wouldn't add up with close modifiers
 
 <!-- ======================================================================= -->
 ## general ideas

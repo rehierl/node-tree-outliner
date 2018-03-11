@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # Design - close modifiers
 
-depth-value - absolute - top-down perspective
 close-n-value - absolute - bottom-up perspective
+depth-value - absolute - top-down perspective
 rank-value - absolute or relative - eq. depth if absolute
 
 it is in principle possible to mix different types of close modifiers -
@@ -12,7 +12,24 @@ i.e. always with regards to the current path of sections -
 but, if relative, could depend on section properties? -
 
 <!-- ======================================================================= -->
-## rank
+## close N sections values
+
+> `<node close="N">`,
+> where `N in [0,*]`
+
+<!-- ======================================================================= -->
+## depth values
+
+> `<node depth="N">`,
+> where `N in [1,*]`
+
+<!-- ======================================================================= -->
+## rank values
+
+> `<node rank="N">`,
+> where `N in [1,*]`
+
+<!-- ======================================================================= -->
 
 **DEFINITION**
 The rank of a section is the number of its ancestor sections -
@@ -32,11 +49,11 @@ the former is more user friendly than the latter
 **type-1 sectioning nodes**
 they can in principle also have a rank value -
 however a subsequent t1 section can not become
-a subsection of a closed presequent section -
+a subsection of a closed presequent t1 section -
 rank values are with regards to open sections -
 a t1 rank can only refer to presequent t2 sections -
 
-plot twist: the rank in its original/natural form is a user-defined outline depth
+plot twist: a rank value is essentially a user-defined outline depth
 
 i.e. add the section to the tree such that it has the given outline depth -
 that is the top-down perspective - close the last couple of open section such

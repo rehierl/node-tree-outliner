@@ -31,7 +31,7 @@ result of an implicit lookup operation.
 Note that this lookup operation is completely based upon those nodes that have
 already been visited (i.e. presequent nodes). That is, an implementation could
 maintain such a listing while it is traversing the node tree. However, that
-list object must accurately represent the list of sections.
+list object must represent the list of sections as is.
 
 <!-- ======================================================================= -->
 ## list operations
@@ -221,6 +221,8 @@ which would always end with `s0`.
 The last/top-most section in the list/stack of open sections will be referred
 to as the "current section". A reference to this section, provided by the
 global `Section currentSection` variable, will be used to associate each node.
+This `currentSection` variable must be used to set the parent section of the
+subsequent node that is going to be entered entered next.
 
 Note that an explicit reference variable is optional, if an implementation
 chooses to maintain an explicit stack of open sections. That is, because the
@@ -231,19 +233,19 @@ to `stack.get()`.
 ## compared with the tree of sections
 
 Processing the above fragment will, according to the default
-definitions, will result in the following tree of sections:
+definitions, result in the following tree of sections:
 
 ```
 s0 - s1 - s2 - s3 - s4 -|- s6 - s7
                         |- s8 - s9
 ```
 
-If the above trace of section sequences is compared to that tree, then
-the following observation can be made right away:
+The following observation can be made,
+if the above trace of section sequences is compared to that tree:
 
 A section sequence represents a path in the tree of sections, which connects
-the root section with the current section (i.e. just another rooted path of
-nodes/sections).
+the root section with the current section. That is, the section sequence is
+just another rooted path of nodes.
 
 Note that the overall trace of lists has itself no particular order. That
 is, because any sequence may appear multiple times at different positions.
@@ -260,7 +262,7 @@ An implementation does not have to maintain an explicit list of sections
 because it is always implicitly provided by the `currentSection` variable.
 
 Beginning with a reference to the current section, one would just have to
-traverse upwards, using the `Section.parentSection` references, until the
+traverse upwards, using the `Section.parentSection` properties, until the
 root section is reached. However, this traversal will visit those sections
 in reversed/bottom-up order.
 
@@ -316,16 +318,16 @@ Consequently, the outline depth of any unassociated node is 0.
 
 **CLARIFICATION**
 The outline height of a section tree is the outline height of its root section.
-The outline height of a section is the distance to its furthest descendant
-(which always is a leaf section). That is, the most amount of jumps/edges 
-between that leaf and the corresponding section.
+The outline height of a section is the distance to its furthest descendant leaf
+section. That is, the most amount of jumps/edges between that leaf and the
+corresponding section.
 
 That is, the height of a leaf section is 0. The height of a section which only
 has a single and empty child section is 1. The height of a section that only
 has such a subtree (i.e. a child section that itself only has one empty child
 section) is 2.
 
-Note that, similar as above and in the context of a section tree, the term
+Note that, similar as above, and in the context of a section tree, the term
 "outline height of a section" is synonymous to the "height of a node".
 
 Note that a node in the node tree can not have an "outline height". That is,
