@@ -72,17 +72,18 @@ during the execution of one of the above mentioned events. These events are
 only allowed to change the state of a section.
 
 However, a single node event can still be used to execute multiple section
-events. A node event can still create, initialize and open a declared section.
-Also, a single node event could technically open and close a section. Obviously,
-and in the latter case, such a section would then always be empty.
+events. A node event can be used to create, initialize and open a declared
+section. Also, a single node event could technically open and close a section.
+Obviously, and in the latter case, such a section would then always be empty.
 
 **CLARIFICATION**
 A section that counts as being "initialized" is neither "open" nor "closed".
 
-The goal must be to have clear definitions, for each and every section, which
+The goal must be to have clear definitions, for each and every section, that
 state when a section has to be opened and when it has to closed. That is, it
 must count as an implementation, or even a design error, if an implementation
-would try to execute an undefined state transition.
+would try to execute an undefined state transition (e.g. re-open an already
+closed section).
 
 The contents of a section, that still counts as being "initialized", must be
 understood to be "undefined". As such, no statements can be made with regards
@@ -161,8 +162,10 @@ the initial requirements.
 In addition to that, the subsequent parts of a strictly suspended section can
 also be seen to represent sections of their own. Hence, the nodes that would
 be required to tell an algorithm that it has to resume a section can themselves
-be seen to represent additional sectioning nodes. The separate parts can thus
-be understood to represent separate sections.
+be seen to represent additional sectioning nodes. From that perspective, these
+nodes appear as sectioning nodes, but are not treated as such. Consequently,
+strict suspend-and-resume operations can be seen to add inconsistency to the
+design.
 
 In short: It does not seem to be reasonable to support
 strict suspend-and-resume operations.
@@ -197,7 +200,7 @@ node could end up having an effect on nodes that are presequent to it.
 All nodes entered in between a section's open and close events
 are said to represent the content nodes of a section.
 
-Note that this clarification is needed, because the descendants of a type-2
+Note that this clarification is necessary, because the descendants of a type-2
 sectioning node are not supposed to contribute to the content of such a section.
 This would otherwise be inconsistent with the initial requirement that it must
 be possible to treat a section as a whole. That is, because of not associating
@@ -220,5 +223,5 @@ A section is a subsequence of the tree's node sequence.
 
 Because a section is a sequence of subsequent nodes, and because a section has
 no gaps in between any two of its adjacent nodes, a section is a sequence of
-strictly subsequent nodes. As a direct consequence of this statement, a section
-is a subsequence of the tree's node sequence.
+strictly subsequent nodes. Consequently, a section is a subsequence of the
+tree's node sequence.

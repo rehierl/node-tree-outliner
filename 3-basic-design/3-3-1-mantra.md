@@ -15,11 +15,14 @@ R x N x ... x N x N x ... x N x N x ... x N x L
 
 A rooted path defined on a rooted tree begins with the tree's root node
 `r in R in N` and connects that root with one of its child nodes `c in N`.
-Any other hop connects a parent node `p in N` with one of its own child nodes
+Any other hop connects a parent node `p in N` with one of its child nodes
 `c in N` until that path ends in its final node `f in N`. This last node may
 itself have further child nodes, or none at all. In the latter case, node `f`
 is a leaf node `l in L in N`. In other words, such a path `p := (r,c,...,f)`
 is an element of `RD := RxN{+}`.
+
+Note that a rooted path that ends in a leaf node can be referred to as a RTL
+(i.e. root-to-leaf) path.
 
 ```
 R x N x ... x n x c1 x ... x N x L

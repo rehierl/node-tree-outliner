@@ -26,13 +26,17 @@ This `parent-of` relation will be referred to as the `NxN` relation of the tree.
 * `(pEc == true)`, if `(p,c) in E`
 * `(!pEc == true)`, if `(p,c) not in E`
 
+Note that a parent is said to be superordinate to its subordinate child.
+Because of that, the `parent-of` relation has a directed, top-down
+orientation (aka. direction).
+
 <!-- ======================================================================= -->
 ## (c child-of p)
 
 The directed and strict top-down orientation (i.e. away from the root node
 towards the leaf nodes) of the `parent-of` relation is necessary because the
 inverted set of edges `E'` defines a graph that contains multiple root nodes,
-but only a single leaf node.
+but only a single leaf node (the former root node).
 
 formal definition
 
@@ -45,10 +49,12 @@ simple definition
 * `(c child-of p)`, if `pEc`
 * node `c` is a child of node `p`
 
-As such, this `child-of` relation is said antonymous to the above `parent-of`
+As such, this `child-of` relation is antonymous to the above `parent-of`
 relation, i.e. `(R == ant(tree))`.
 
-* antonymous <=> inverted tuples/sequences and inverted semantics
+* antonymous <=> inverted tuples/sequences *and* inverted semantics
+
+Note that the `child-of` relation has a bottom-up orientation.
 
 <!-- ======================================================================= -->
 ## (a related-to b)
@@ -62,8 +68,8 @@ relationship with another node.
 
 However, there is no such strict relationship between two nodes `a` and `c`
 (i.e. `!aEc`) if `aEb` and `bEc` (if that were the case, then `c` would have
-two parent nodes `b` and `a`). Consequently, the parent-child relation of a
-tree is itself not transitive.
+two parent nodes `a` and `b`). Consequently, the `parent-of` relation of a
+tree is not transitive.
 
 Even if grandparents are not strictly related to their grandchildren, nodes `a`
 and `c` are nonetheless related with each other. That is because `E` allows to
@@ -75,6 +81,10 @@ define a path that connects both nodes (e.g. `p=(a,b,c)` if `aEb` and `bEc`).
 * i.e. an uni-directional path can be defined that connects both nodes
 * `(a loosely-related-to b) <=> (b loosely-related-to a)`
 
+Note that a path of nodes is said to be uni-directional, if (and only if) the
+same set of edges `E` was used to construct the whole path. A path is said to
+be multi-directional, if it is based upon two or more sets of edges.
+
 The strict and loose relationship can be generalized into:
 
 * `(a related-to b)`, if `(a strictly-related-to b)`
@@ -82,6 +92,9 @@ The strict and loose relationship can be generalized into:
 * `a` and `b` are related with each other
 * `(a related-to b) <=> (b related-to a)`
 * synonymous - `related-to`, `associated-with`
+
+Note that the `related-to` relation has no orientation.
+As such, it is understood to be un-directional.
 
 <!-- ======================================================================= -->
 ## (a ancestor-of n)
@@ -101,7 +114,7 @@ terms into "ancestor" and "descendant":
 
 Similar to ancestor and descendant nodes, a relationship does exist between
 two siblings `s` and `n`, even though there is no such edge in `E` (i.e. `!sEn`
-and `!nEs`). In additon to that, no uni-directional path can be defined that
+and `!nEs`). In addition to that, no uni-directional path can be defined that
 connects both nodes. That is, because the path would have to go up to the
 common parent node and then down to the corresponding sibling.
 
@@ -129,6 +142,16 @@ A node may have a previous and a next sibling:
   there is no other sibling `z` such that `(x < z < y)` -
   i.e. `z` is subsequent to `x` and presequent to `y`
 * `(y next-sibling-of x) <=> (x previous-sibling-of y)`
+
+Note that it is assumed that the overall order of nodes
+includes the relationship of parent and child nodes.
+
+* `(p < c)`, if `(p parent-of c)`
+
+Note also, that all nodes are ordered according to the same order, regardless
+of what entities these nodes represent. That is, the nodes of a tree are not
+split into one or more groups which are then ordered separately (e.g. the
+display of a file-system: folders, then files).
 
 <!-- ======================================================================= -->
 ## (p contains c)
@@ -159,6 +182,3 @@ In this pattern, node `A` is said to strictly contain node `B` and to loosely
 contain node `C`. Therefore, node `A` contains and is related to both nodes.
 Even though `C` is also related to `A` and `B`, node `C` does itself not contain
 any of those two nodes. However, `C` is said to be located inside of both nodes.
-
-As a result, the `related-to` relationship is undirectional, whereas the
-`contains`, `located-inside` and `element-of` relations are directional.

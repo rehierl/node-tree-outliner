@@ -14,30 +14,33 @@ like climbing a mountain by moving backwards
 <!-- ======================================================================= -->
 
 **TODO**
-find a term for type-2 sections that
-have an inactive node as parent container -
-inner sections: also applies if the parent container
-is a type-1 sectioning node -
-a description similar to "implied sections"
+loose/implicit section -
+need to think about the use of "implicit" -
+implicit not really equivalent to distant -
+distant subsection does not really make sense either -
+loose subsection seems fine though -
+-> recheck beginning with 3-5-0-subsection
 
 **TODO**
-No two sections within a single tree have identical
-complete or even reduced sequences. These are unique to a section. -
-No two sections have identical first nodes.
-
-**TODO**
-better terms for type-1/2 sectioning nodes? -
-sectioning container node (ok) -
-sectioning offset/open node (?) -
-sectioning end/close node, or end-marker node -
-
-**TODO**
-explain superordinate/subordinate section -
-already done ?
+two levels of implicitness -
+-> add to 3-5-1-associations?
 
 **TODO**
 we have an outline height/depth - define an outline width? -
 the maximum number of sections on a certain outline level? -
+-> add to 3-6-1-current-section?
+
+**TODO**
+top-level nodes -
+-> expand in 3-8-1-implementation
+
+**TODO**
+use/compare node levels of sectioning nodes
+-> expand in 3-8-1-implementation
+
+**TODO**
+is that loop sufficient? -
+-> in 3-8-1-implementation
 
 **TODO**
 implicit relationship -> descendants -
@@ -47,6 +50,7 @@ combine both levels of implicitness?
 **TODO**
 an algorithm can in principle start at any node -
 the root node must be treated as a type-1 sectioning node -
+could that type-switching even be implemented? -
 any node can be understood to have an outline -
 issue header element in combination with reusing heading elements -
 i.e. a 1st header element can not always be recognized to be with
@@ -108,7 +112,7 @@ similar to looking through a window
 **TODO**
 structural vs. logical perspective -
 node tree vs. section tree -
-recheck
+see "single-s"
 
 **TODO**
 sectioning a tree (i.e. creating an outline for a tree)

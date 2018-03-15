@@ -6,12 +6,11 @@ With regards to a tree of nodes, a section can initially be defined as a set of
 nodes `s := { n1, ..., nk }`, and `k in [0,#N]` (or simply `(s subset-of N)`).
 Hence, operators defined for sets also apply to sections:
 
-* `isEmpty(s)` is true, if `(#s == 0)`
-* put differently: `(s == {})`
+* `isEmpty(s)` is true, if `(#s == 0)`, put differently `(s == {})`
 * `(n in s)` is true, if node `n` is an element of section `s`
 
 Assumed that any number of sections is allowed, all sections of a tree can be
-seen to be an element of some set of all declared sections `S`:
+seen to be an element of some set of all-declared-sections `S`:
 
 * `(s in S)` is true for any section `s`
 
@@ -47,7 +46,7 @@ The only generalization currently possible is:
 * synonymous - `related-to`, `associated-with`
 
 <!-- ======================================================================= -->
-## summary
+## open questions
 
 The above definitions only allow to state if section `s`, that already contains
 node `n`, is strictly related to node `n`, or if node `n` strictly belongs to
@@ -57,9 +56,8 @@ between a section and its nodes must already exist.
 * So, why are nodes `n,x,y in N` related to sections `s,t in S`?
 * for `(n != x != y)` and `(s != t)`
 
-There is no definition that forces to establish any relationship between nodes
-and sections: So, under which circumstances must node `n` be associated with
-section `s`?
+There is no definition that clarifies under which circumstances certain nodes
+have to be associated with a given section.
 
 * `(s ??? y)`, if `(s related-to x)` and `(y related-to x)`
 

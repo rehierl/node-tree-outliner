@@ -2,10 +2,10 @@
 <!-- ======================================================================= -->
 # Derived statements
 
-The focus of the following statements is not to be overly accurate, but to have
-easy to understand and easy to remember statements. Because of that, these
-statements do no represent any definitions. They merely allow to loosely
-describe certain conditions.
+The focus of the following statements is not to be overly accurate, but
+to have easy to understand and easy to remember statements. Because of
+that, these statements do no represent any definitions. They merely allow
+to loosely describe certain conditions.
 
 **CLARIFICATION**
 A section can be understood to *end with an associated container*, if the
@@ -31,18 +31,16 @@ unassociated container.
 A section can be understood to *end with an unassociated node*, if the last node
 of a section is strictly presequent (e.g. previous sibling) to the unassociated
 node, or if the last top-level node of a section is the unassociated node's
-previous sibling. In the latter case, the section can also be understood to
-end with said top-level node.
+previous sibling.
 
 Note that this perspective is based upon the enter event of the corresponding
-unassociated node. Note also, that the unassociated node is not required to
-be a container node.
+unassociated node.
 
 **CLARIFICATION**
-Any section can always be understood to end with the next closest unassociated
+Any section can always be understood to end with the next unassociated
 container/node.
 
 Note that it depends on the distance between the event of the associated node
 and the event of the unassociated node whether a section can be understood to
-end with an unassociated container or an unassociated node: The closer the
+end with an unassociated container, or an unassociated node: The closer the
 corresponding events are, the more accurate the statement will be.

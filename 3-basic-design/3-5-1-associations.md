@@ -3,33 +3,35 @@
 # Associating nodes
 
 The following content is intended to clarify practical, implementation
-specific implications that result from the formal definitions.
+specific aspects that result from the formal definitions.
 
 <!-- ======================================================================= -->
 ## associate with one section only
-
-The following content is intended to clarify that, in accordance with the
-formal associations, any node can be associated with one section only.
 
 **CLARIFICATION**
 Each node can be associated with one section only, if (and only if) the node
 can also be understood to be (implicitly) associated with all ancestors of
 that section.
 
-Consequently, these implicit associations are used to condense the amount
-of associations required into a single reference per node. Such a reference
-is considered to be an explicit or strict (as in direct) association.
+Consequently, the implicit association with all ancestor sections is used to
+condense the amount of associations, which would otherwise be required by the
+formal definitions, into a single reference per node.
 
-Note that the only reason, why a node can be associated with a single section,
-is that the multiple associations of a node, which would be required by the
-formal definitions, can be derived from those implicit associations, that
-are defined by the relationships that the sections have with each other.
+Note that this reference will be referred to as the node's explicit or strict
+(as in direct) association.
+
+Note that the only reason, why a node can be associated with a single section
+is, that all formal associations (formal perspective) of a node can be derived
+from its explicit association (practical perspective). And, because of that,
+both perspectives are equivalent.
 
 **CLARIFICATION**
 A node must be associated with the closest open presequent section.
 
-That is, because this one explicit association must reflect all the formal
-associations that a node has with all open presequent sections.
+That is, because all other sections, with which that node would have to be
+associated, are the ancestor sections of that section. Consequently, the
+closest open presequent section is the only section that can be used to
+represent all the node's associations.
 
 **CLARIFICATION**
 The section, with which a node must be associated, is referred to as the
@@ -40,8 +42,9 @@ important, implementation specific property:
 Section Node.parentSection
 ```
 
-Because of this unique reference, a node's parent section defines
-the context/location of a node with regards to the sections of a tree.
+**CLARIFICATION**
+A node's parent section can be understood to define the location of a node
+with regards to the sections of a tree (i.e. its logical context).
 
 **CLARIFICATION**
 If each node is associated with one section only, then any ancestor section,
@@ -60,27 +63,16 @@ node sequence can be re-created by concatenating the nodes that are associated
 with it, and all those nodes that are associated with one of its subsections.
 That is, in the tree's node order.
 
-Consequently, a section still counts as a subsequence of the tree's
-node sequence. The single `parentSection` reference does not change that.
-
-**CLARIFICATION**
-If node `n` is strictly associated with section `sX`, and if the question is,
-whether node `n` is also associated with section `sY`, then the expression
-`(sX == sY)` needs to be tested first. If that test fails, then it needs to be
-tested whether section `sY` is an ancestor section of `sX`. Consequently, node
-`n` is not associated with section `sY`, if (and only if) all of the afore
-mentioned tests have failed.
-
-Note that an implicit association is not guaranteed to be verified correctly
-(i.e. false negatives are possible), if only the ancestor nodes of node `n`
-are tested. That is, because a type-2 section can be hidden by that rooted
-path of nodes.
+Consequently, a section still counts as a subsequence of the tree's node
+sequence. The single `parentSection` reference does not change that.
 
 <!-- ======================================================================= -->
-## top-level nodes
+## two levels of implicitness
 
-The following content is intended to clarify the definition of top-level
-nodes. That is, with regards to associating each node with one section only.
+
+
+<!-- ======================================================================= -->
+## clarified definition of top-level nodes
 
 Note that the initial definition of a top-level node (i.e. A node is a
 top-level node of a section, if it must be strictly associated with it)
@@ -110,11 +102,16 @@ loosely) associated with `s`, and if `n` has no ancestors that are already
 Note that the focus of this term is on the second part (i.e. has no ancestor
 that is (strictly or loosely) associated with the corresponding section).
 
-Note that a section's first content node still and always is a top-level node.
-A section can therefore still be loosely understood as a sequence of siblings.
+Note that any node can still be a top-level node to multiple sections. Because
+of that, any section can still be loosely described as a sequence of siblings.
 
 Applying this clarified definition, and associating each node with one
 section only, has the following effect: (1) Nodes `n1-9` all are top-level
 nodes of `s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.
 
-Note that any node can still be a top-level node to multiple sections.
+**CLARIFICATION**
+A section's first content node always is a strictly associated top-level node.
+
+That is, because the declared section will always be the new current, least
+significant section. And, because of that, the declared section will always
+be used to associate the section's first content node.

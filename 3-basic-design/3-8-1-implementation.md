@@ -36,6 +36,22 @@ they could be the cause for new first and/or last top-level nodes -
 the corresponding node references, if any, need to be updated
 
 <!-- ======================================================================= -->
+## test: is node 'n' associated with section 's'?
+
+If node `n` is strictly associated with section `sX` (one reference per node),
+and if the question is, whether node `n` is also associated with section `sY`,
+then the expression `(sX == sY)` needs to be tested first. If that test fails,
+then it needs to be tested whether section `sY` is an ancestor section of `sX`.
+
+Consequently, node `n` is not associated with section `sY`,
+if (and only if) all of the afore mentioned tests have failed.
+
+Note that an implicit association is not guaranteed to be verified correctly
+(i.e. false negatives are possible), if only the ancestor nodes of node `n`
+are tested. That is, because type-2 sections can be hidden by that rooted
+path of nodes.
+
+<!-- ======================================================================= -->
 ## parent containers
 
 (related to the implementation of sectioning nodes)
@@ -75,24 +91,24 @@ when exiting a parent container.
 
 As mentioned before, any parent node can in principle act as the parent
 container of one or more sections. The only exception to that rule are the
-type-1 sectioning nodes: These are always parent containers. Because of that,
-and when exiting any parent node, an implementation must always test whether
-inner sections need to be closed.
+type-1 sectioning nodes: These always are parent containers. Because of that,
+and when exiting any parent node, an implementation must test whether inner
+sections need to be closed.
 
 1. Inner sections may have parent containers that are descendants to `n0`.
    The inner sections of these parent containers will be closed before the
-   exit event of `n0` is reached (i.e. same issue, but with regards to inner
-   containers).
-2. `n0` is the parent container of inner sections, but some non-default
-   extended definition applies. These sections will be closed before the
-   exit event of `n0` is entered.
+   exit event of `n0` is reached (i.e. the same issue, but with regards to
+   inner containers).
+2. `n0` is the parent container of inner sections, but some subsequent,
+   non-default extended definition applies. These sections will be closed
+   before the exit event of `n0` is entered.
 3. `n0` is the parent container of inner sections, and no non-default rule
    applies. The exit event of `n0` must close these remaining open sections.
 
 In short, the exit event of a given parent container must only close those
 sections that remain to be open by the time the parent container is being
-exited. All other closed independent inner sections can and will be ignored
-(i.e those are no longer relevant).
+exited. All other closed inner sections can and will be ignored (i.e those
+are no longer relevant).
 
 Because of that, all relevant sections are part of the current section sequence.
 Furthermore, and because all those sections are subsections to the section, with
@@ -114,14 +130,14 @@ onExitParentContainer end
 
 Note that ...
 
-* any node is associated while it is being entered. Because of that, a parent
-  container's parent section reference is always set when the parent container
-  is being exited. Note that the root node must be associated with the universal
-  section.
+* all nodes are associated while they are being entered. Because of that, a
+  parent container's parent section reference is always set when the parent
+  container is being exited.
+* the root node must be associated with the universal section.
 * the remaining open inner sections will be closed in reverse order. That
   is, subsections will be closed before their ancestor sections are closed.
 * an implementation does not have to know how many sections need to be closed.
-* the close operation of an implementation could have unexpected side effects
+* the close operation of an implementation could have implicit side effects
   (e.g. due to releasing locked resources).
 
 With regards to efficiency, it does not appear to be possible to gain anything
@@ -135,14 +151,11 @@ is actually not a parent container).
 <!-- ======================================================================= -->
 ## implicit associations
 
-(related to the implementation of close modifiers)
+(related to the implementation of forced subsections)
 
 The focus of this part is on the implementation of:
-Section `s1`, which is declared by some sectioning node `n1`, is a forced
-(or structural) subsection of `s0` (i.e. regardless of any close modifier),
-if `n1` is a descendant of a node that is associated with `s0`.
-
-In short: How to avoid conflicts due to implicit associations?
+How to avoid conflicts due to implicit associations,
+if close modifiers had to be supported?
 
 ### example fragment
 
@@ -164,14 +177,14 @@ defined `s3` to be independent of `s1`. Under these kind of circumstances,
 any close modifier must be ignored. That is, because these structural
 dependencies can not be undefined. Consequently, implicit associations have
 precedence over any non-default definition, if both sections have different
-parent containers (see `n0` vs. `n2`, see extensions).
+parent containers (i.e. `n0` vs. `n2`, see extensions).
 
 Note that `s4` has the same parent container as `s3` (i.e. `n2`). However, that
 is not the case between `s4` and `s1`. Because of that, `n4` may close `s3`,
 but not `s1`. Consequently, `s4` is like `s3` by structural relationship still
 a subsection to `s1`.
 
-Note that `n5` can close `s1` and, just like `n1`,
+Note that `n5` may close `s1` and, just like `n1`,
 may technically even close `s0`.
 
 ### selecting the parent section
@@ -183,21 +196,15 @@ current rooted path of nodes (begins in the node tree's root and ends in the
 current sectioning node being entered) and the current path of sections
 (begins in the root section and ends in the current section).
 
-Note that the current path of nodes holds all parent containers of all sections
-in the current path of sections. That is, because otherwise those sections would
-no longer be open. In contrary to that, the current path of nodes does not
-necessarily hold all the corresponding sectioning nodes. That is, because all
-presequent type-2 sectioning nodes will have been exited by then.
-
-If the current sectioning node being entered had no close modifier, then the
+If the current sectioning node being entered had no close modifier, then its
 declared section would have to become the subsection of the current section.
 This case obviously represents the default definitions. Because of that, it is
 assumed that the current sectioning node holds a close modifier which instructs
-the algorithm to close at least one section.
+the algorithm to close one or more sections.
 
 And because no ancestor section can be closed before any of its subsections are
 closed (sections must be closed in an orderly, bottom-up fashion), the section
-that has to be closed first always is the current least significant section.
+that has to be closed first always is the current section.
 
 In order to avoid any conflict, the algorithm needs to
 execute the following loop:
@@ -217,20 +224,21 @@ execute the following loop:
    section is the new current section.
 6. (continue to loop)
 
-Finally, the declared section can be added as subsection to the current section
-(Note that this current section is not necessarily identical to the initial
-current section). After that, the declared section is the new current section.
+Finally, the declared section can be added as subsection to the (new)
+current section. After that, the declared section is the new current section.
 
 Note that it is not possible to bypass this loop in order to improve the
-performance by "skipping some of the ancestor section". That is, because
+performance by "skipping some of the ancestor section". That is, because ...
 
-* (1) any open section can be a forced subsection of its parent section (e.g.
-  `s3` in case of entering `n4`). If there is even one such ancestor section,
-  then the declared section of the sectioning node being entered must become
-  a subsection of the least significant forced subsection. That is, if the
-  close modifier instructs to close the appropriate amount of sections.
-* (2) close operations could trigger custom event handlers. Because of that,
-  each section must be closed explicitly and in the right bottom-up order.
+* (1) any open section can itself be a forced subsection of its ancestor
+  sections (e.g. `s3` in case of entering `n4`). If there is even one such
+  ancestor section, then the declared section of the sectioning node being
+  entered must become a subsection of the least significant forced subsection.
+  That is, if the close modifier instructs to close the appropriate amount
+  of sections.
+* (2) close operations could be used to trigger custom event handlers.
+  Because of that, each section must be closed explicitly and in the
+  right bottom-up order.
 
 Note that a `bool Section.isForcedSubsection` property (i.e. the property's
 section object is, with regards to its parent section, a forced subsection),
@@ -247,15 +255,15 @@ require some adjustments? - don't see why, but you never know ...
 
 ### basic method of detection
 
-The question now is: How exactly can an algorithm detect whether or not
-the declared subsequent section is a forced subsection of another section?
+The question therefore is: How exactly can an algorithm detect whether or not
+the declared subsequent section is a forced subsection of an open section?
 
 As stated in the extensions chapter, an algorithm is free to close a presequent
-section if, and only if, it has the same parent container as the subsequent
+section if (and only if) it has the same parent container as the subsequent
 section. Because of that, multiple options are available, each with its own
-subtle advantages and disadvantages:
+advantages and disadvantages:
 
-Note that the all options, except for the last one, technically allow to close
+Note that all options, except for the last one, technically allow to close
 type-1 sections. That is, if it would not be allowed to close certain sections,
 then additional, case dependent tests would be required.
 
@@ -269,9 +277,10 @@ investigated.
 
 Keeping a reference of a section's parent container with each section object,
 set when creating a new section object, would probably be the obvious first
-choice. That is, because these node references can be tested for reference
+choice. Which is, because these node references can be tested for reference
 equality. That is, the presequent section can be closed, if both references
-are equal. Otherwise, the subsequent section is a forced subsection.
+are equal. Otherwise, the subsequent section is identified to be a forced
+subsection.
 
 Note that a running algorithm will neither encounter case-1 nor case-3 (see
 the extensions chapter). That is, because the corresponding presequent sections
@@ -298,7 +307,7 @@ parent container references could be retrieved on the fly by taking advantage
 of the `Section.sectioningNode` properties (i.e. `sectioningNode` in case of a
 type-1, and `sectioningNode.parentNode` in case of a type-2 sectioning node).
 That is, if the algorithm's environment provides the means to access a node's
-parent (e.g. event driven parsers?).
+parent node (e.g. event driven parsers?).
 
 However, and depending on the environment (e.g. low-level implementations highly
 optimized to produce hierarchical listings of section properties on the fly),
@@ -328,29 +337,30 @@ Note that, in general, the parent container of an ancestor section *never* is
 a descendant of a subsection's parent container. Because of that, the parent
 container of a descendant section is *never* closer to the root node than the
 parent containers of its ancestor sections. Consequently, the node level of a
-subsection's parent container always is greater or equal to the node level of
-an ancestor section's parent container.
+subsection's parent container always is greater or equal than the node level
+of an ancestor section's parent container.
 
 In cases where an implementation environment does not provide the means to
 determine a node's node level, these values have to be determined "manually".
-However, the implementation of the tree traversal does provide the means to
-efficiently maintain a "current node level" value. That is, because it knows
-exactly when it enters a new node (+1) and when that node is being exited (-1).
+However, the implementation of the tree traversal algorithm does provide the
+means to efficiently maintain a "current node level" value. That is, because
+it knows exactly when it enters a new node (level+1) and when that node is
+being exited (level-1).
 
 The tree traversal algorithm can therefore pass the node level of the current
 node on to the corresponding event handler. Consequently, the node level of
 the current node does not have to be calculated from scratch by counting the
 number of its ancestors. In addition to that, and when creating a new section
 object while entering its sectioning node, the node level of its parent
-container can be determined and stored with the section object.
+container can be determined and stored inside of the new section object.
 
 **Option 4-1:** node levels of sectioning nodes
 (if it is allowed to close type-1 sections)
 
 Obviously, a test that is solely based upon the references of sectioning nodes
 can not work. That is, because each sectioning node declares one section only.
-Consequently, testing these node references for equality will always evaluate
-to `false`.
+Consequently, two subsequent sections will always have different references,
+which is why testing these for equality will always evaluate to `false`.
 
 ```
       n0
@@ -369,11 +379,13 @@ depend on the types of sectioning nodes involved.
 * (1) `n1` could technically close `s0` => test: `(level(n1) == level(n0) + 1)`
 * (2) `n2` could close `s1` => test: `(level(n2) == level(n1) + 0)`
 
-Obviously, test-1 is different to test-2, which is why case dependent testing
-would be required. That is, these node levels can not be used for a general
-purpose tests while being unaware of the involved types of sections. Note that,
-adjusting these node level values according to the section types beforehand,
-would essentially be equivalent to option 3.
+Obviously, test-1 is different to test-2, which is why case dependent tests
+would be required. That is, these node levels can not be used for general
+purpose tests while being unaware of the involved section types.
+
+Note that, the adjustment of these node level values according to the section
+types involved, would essentially be equivalent to option 3 (i.e. using the
+node levels of the corresponding parent containers).
 
 * (1) transformed test: `(level(n1) - 1 == level(n0))`
 * Note that `level(n0)` is the node level of `n0`'s parent container.
@@ -395,9 +407,8 @@ no additional, type dependent tests required? -
 node references could not be used
 
 * if tested for equality, then ...
-* t1 can not close t1
-* t2 can not close t1 (inner t2: different level)
-* t2 can not close t1 (outer t2: already closed)
+* t1/2 can not close t1 (inner t1/2: different node levels)
+* t1/2 can not close t1 (outer t1/2: presequent t1 is already closed)
 * t1 can close t2
 * t2 can close t2
 

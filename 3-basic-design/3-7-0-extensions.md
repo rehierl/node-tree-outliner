@@ -5,14 +5,14 @@
 The focus of the following considerations is not to define new types of nodes,
 but to investigate those options which allow to deviate from the default
 definitions. Hence, the first step is to take a look at those aspects which
-can be altered. These options, if any, then allow to extend the definition of
-sectioning nodes by certain modifiers.
+can be altered while maintaining consistency with the default definitions.
+These options, if any, then allow to extend the definition of sectioning nodes
+by certain modifiers.
 
-Note that such modifiers are intended to alter the definition of sectioning
-nodes while being consistent with their default definitions. That is, it must
-be possible to transform any tree, which is defined based upon those extended
-definitions, into a tree that is solely based upon the default definitions (and
-vice versa, i.e. extended description equivalent-to strict/default description).
+Note that it must be possible to transform any tree, which is defined based upon
+those extended definitions, into a tree that is solely based upon the default
+definitions (and vice versa, i.e. an extended description must be equivalent
+to a strict description).
 
 <!-- ======================================================================= -->
 ## available options
@@ -24,27 +24,24 @@ of all those nodes that it has already visited. Because of that, it knows about
 all those sections that are presequent to the current sectioning node (i.e. the
 closed and the open presequent sections). In contrary to that, an algorithm is
 unaware of any subsequent node. Those might, or might not exist (i.e. there is
-no guarantee that there are subsequent nodes/sections).
+no guarantee that there are further subsequent nodes or sections).
 
-As the closed presequent sections were closed even before the current subsequent
-sectioning node was entered, the declared subsequent section is by default
-independent to these sections. Hence, and with regards to closed sections, all
-that modifiers could do would be to define the subsequent section to be a
-subsection to them. But, as the `subsection-of` relationship is formally based
-upon multiple associations per node, any attempt to define a subsequent section
-to be a subsection to closed presequent sections would represent an attempt to
-alter closed sections and consequently be in conflict with the definition a
-section's "closed" state.
-
-Note that, because of the current path of open sections, an algorithm is by
-default even unaware of all closed presequent sections.
+As closed presequent sections are closed even before the current subsequent
+sectioning node will be entered, the declared subsequent section is by default
+independent to these presequent sections. Hence, and with regards to closed
+sections, all that modifiers could do would be to define the subsequent section
+to be a subsection to them. But, as the `subsection-of` relationship is formally
+based upon multiple associations per node, any attempt to define a subsequent
+section to be a subsection to closed presequent sections would represent an
+attempt to alter closed sections and consequently be in conflict with the
+definition a section's "closed" state.
 
 What remains therefore are the open presequent sections. But, because any
 subsequent section is by default a subsection to all open presequent sections,
 all that a modifier could do would be to close these sections and thus define
 the subsequent section to be independent to them. As such, the option to close
-open presequent sections allows to select a different parent section for section
-declared by the current sectioning node.
+open presequent sections allows to select a different parent section for the
+section that is declared by the current sectioning node.
 
 Note however that, as mentioned before, open sections can not be closed
 arbitrarily. That is, because any ancestor section must remain open for as long
@@ -52,7 +49,7 @@ as any of its subsections are open (i.e. close in an orderly/bottom-up fashion).
 
 Note that any other available option, besides closing presequent sections,
 is not relevant for the current considerations. That is, with regards to
-the definition of modifiers which define other section properties which are
+the definition of modifiers which define other section properties that are
 not relevant to the section hierarchy (e.g. a title).
 
 Note this option (i.e. close open sections) could also be used for the
@@ -65,7 +62,7 @@ most significant section which needs to be closed.
 Note that the same reasoning, with regards to closed presequent and all
 subsequent sections, also applies to the other two cases mentioned below.
 That is, these may also only close those sections that are presequent to
-the corresponding exit event.
+the corresponding event.
 
 > options when exiting a type-1 sectioning node
 
@@ -76,14 +73,14 @@ Note however, that a type-1 sectioning node also represents the parent container
 of the section it declares. That is, none of those sections that are declared
 inside of a type-1 sectioning node are allowed to reach past such a sectioning
 node. Consequently, those inner sections always have to be closed first,
-regardless of any modifier. And, because of that, such a modifier can only
-affect those open sections that are presequent to the type-1 sectioning node's
-enter event.
+regardless of any modifier. And, because of that, such a modifier can only have
+an effect on those open sections that are presequent to the type-1 sectioning
+node's enter event.
 
 However, and in contrary to the above case, the corresponding sectioning node,
 and all of its inner content nodes are already associated. That is, such a
 modifier can no longer change the association of the sectioning node (i.e.
-associate with a different parent section) or the association of its inner
+associate with a different parent section), or the association of its inner
 content nodes. Consequently, such a modifier can only affect subsequent nodes
 and sections.
 
@@ -99,8 +96,8 @@ sections they close).
 Note that this option has the same problematic as parent containers (i.e.
 presequent nodes must be edited in order to change the relationship of
 subsequent sections). Consequently, and depending on the specific notation
-of such modifiers, authors could have difficulties to notice the reasons
-behind the relationship between two subsequent sections.
+of such modifiers, authors could have difficulties to understand the reasons
+behind the relationship between two affected sections.
 
 > options when exiting a type-2 sectioning node
 
@@ -110,8 +107,8 @@ of a type-2 sectioning node is not an option.
 That is, because it would result in conflicting statements with regards to the
 logical location of such a sectioning node and the section's content nodes.
 Essentially, the sectioning node, which is associated while it is being entered,
-would then belong to a section that is independent to sections with which the
-content nodes of the declared section will be associated.
+would then belong to a section that is independent to those sections with which
+the content nodes of the declared section will be associated.
 
 Note that type-2 sectioning nodes are defined not to have any inner sectioning
 nodes themselves. Consequently, such an option could, by definition, only close
@@ -129,7 +126,7 @@ Note that the above considerations related to this option ...
   node may technically close open presequent type-1 or type-2 sections.
 * do not take into account, if it could even be allowed to close presequent
   sections in a given context. This option merely states that, from a technical
-  perspective, it would be possible.
+  perspective, it would be possible and could be allowed.
 
 As stated before, a subsequent sectioning node must be within the scope of a
 presequent section, if the declared section is supposed to become one of its
@@ -143,7 +140,7 @@ users always need to be aware that the definition of a section's relationship
 depends on presequent nodes. As such, the default definitions lack clarity when
 defining a section hierarchy. That is, because the information which defines a
 section's parent section is not strictly bound to the corresponding sectioning
-node.
+node itself.
 
 In principle, close modifiers allow to close one or more sections when a
 subsequent sectioning node is entered. Because of that, they provide the means
@@ -190,9 +187,9 @@ F              F </section>
 ```
 
 Note that in HTML-5, the first element of heading content (e.g. `<h1>`) inside
-of `<section>` elements is reused to define the section's heading. That is,
-the first such element does not represent a type-2 sectioning node. (It would
-be more appropriate to redefine the `<title>` element).
+of `<section>` elements is reused to define the section's heading. That is, the
+first such element does not represent a type-2 sectioning node. (It would be
+more appropriate to redefine the `<title>` element).
 
 Note that the rank of a heading content element is essentially a close modifier.
 As such, rank values instruct an outline algorithm to close sections. Because
@@ -201,21 +198,21 @@ of that, rank values are a mere matter of convenience.
 Note that both issues are sufficient to render any attempt to add dynamic
 support into a fruitless effort. That is, because the resulting node tree,
 after executing the necessary transformations, is not guaranteed to accurately
-represent the tree's initial contents (i.e. the `<div>` container would
-basically break apart).
+represent the tree's initial contents (e.g. a transformation would essentially
+tear the above the `<div>` container apart).
 
 
 ```
-HTML-4:        this approach:           table of contents:
-=======        ====================     ==================
-<h1>A</h1>     <section> <h1>A</h1>     1. A
-B              B                        1.1. D
-<div>          <div>
-  C              C
-  <h1>D</h1>     <section> <h1>D</h1>
-  E              E </section>
-</div>         </div>
-F              F </section>
+HTML-4:          this approach:             table of contents:
+=======          ====================       ==================
+<h1>A</h1>       <section> <h1>A</h1>       1. A
+B                B                          1.1. D
+<div>            <div>
+  C                C
+  <h1>D</h1>       <section> <h1>D</h1>
+  E                E </section>
+</div>           </div>
+F                F </section>
 ```
 
 From the perspective of this approach, issue (1) is due to implicit
@@ -224,6 +221,7 @@ a non-issue.
 
 Note that, in contrary to HTML's common practice, the container's inner section
 is a subsection to the presequent outer section (i.e. not a sibling section).
+That is, section `D` is a subsection to section `A`.
 
 Note that the default definitions have no rank (i.e. rank-less definitions).
 
@@ -255,11 +253,11 @@ The conflicting statements therefore are:
 
 In order to avoid such conflicts, any instruction to close `s0` must be ignored
 because `s1` is by structural relationship a subsection of `s0`. Under these
-kind of circumstances, `n1` can therefore not be allowed to close `s0`.
+kind of circumstances, `n1` can not be allowed to close `s0`.
 
 Note that these structural dependencies can not be undefined. Because of that,
-structural relationships override any modification. That is, those dependencies
-always have precedence over any close modifier.
+structural relationships override any modified definition. That is, those
+dependencies always have precedence over any close modifier.
 
 Note that these considerations are independent of where (inside of a node tree)
 such a subtree can be found. Such a subtree will always result in the afore
@@ -286,9 +284,8 @@ Note HTML's definition of sectioning content elements (an error).
 **CLARIFICATION**
 The default definitions of sectioning nodes are consistent with implicit
 associations. Therefore, implicit associations have no effect (i.e. are
-dormant) for as long as no changes or additions are made to the default
-definitions. That is, implicit associations will only surface in combination
-with close modifiers.
+dormant) for as long as no additions are made to these definitions. That is,
+implicit associations will only surface in combination with close modifiers.
 
 Note that, by default, any section still ends with its default scope. That is,
 because no sectioning node is defined to close a presequent section. Because of
@@ -304,7 +301,7 @@ support could otherwise not be guaranteed.
 
 Any parent node can therefore become a section's parent container, regardless
 of its specific definition. Because of that, such parent containers exist
-whether they are manually injected (explicit), or due to structural conditions
+whether they are manually injected (explicit), or due to structural dependencies
 (implicit).
 
 Note that a node can be defined to never be a section's parent container, if
@@ -367,6 +364,8 @@ statements, any instruction to close `s1` when `n3` is being entered, must be
 ignored. That is, `s3` can not be independent of `s1` (e.g. a sibling section
 to it).
 
+Note that `s3` is a forced subsection of `s1`.
+
 **case 3: (node level 1 == node level 2)**
 
 ```
@@ -386,8 +385,8 @@ to case 1: `s2` will be closed before `n4` is even entered.
 
 Note that the node levels of the corresponding sectioning nodes don't have
 to be equal for as long as both nodes are located within two different subtrees.
-The effect will still be covered by case 1: `s2` will be closed before `n4` is
-entered.
+The effect will still be covered by case 1 (i.e. `s2` is closed when `n4` is
+entered).
 
 **case 4: (same parent container)**
 
@@ -403,8 +402,8 @@ However, `n2` is in principle free to close the open presequent section `s1`,
 if (and only if) both type-2 sectioning nodes have the same parent node (i.e.
 the same parent container).
 
-Note that the parent section of `s2` can only be one of the remaining open
-sections, which all are ancestor sections of `s1`.
+Note that the parent section of `s2`, if `n2` is defined to close `s1`, can only
+be one of the remaining open sections, which all are ancestor sections of `s1`.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -414,15 +413,12 @@ Parent containers have significant impact on the use of close modifiers.
 
 Note that the above considerations have precedence over any extended definition.
 That is, such non-default definitions must be ignored, if they are in conflict
-with structural dependencies. Hence, the use of such definitions is limited.
+with structural dependencies. Hence, the use of extended definitions is limited.
 
 Note that this can be understood to indicate that, in principle, the default
 definitions have precedence over any non-default definition. That is, such
-definitions must in general not be in conflict with the default definitions.
-
-**CLARIFICATION**
-In order for non-default definitions to not yield any conflict, or an 
-unexpected result, type-2 sectioning nodes must have the same parent container.
+definitions must be made with regards to the default definitions. Consequently,
+they can not be in conflict with those default definitions.
 
 **Mind hook**
 The placement of sectioning nodes is significant.
