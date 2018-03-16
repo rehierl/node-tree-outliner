@@ -43,6 +43,19 @@ and if the question is, whether node `n` is also associated with section `sY`,
 then the expression `(sX == sY)` needs to be tested first. If that test fails,
 then it needs to be tested whether section `sY` is an ancestor section of `sX`.
 
+```
+isAssociatedWith(Node node, Section section) begin
+  parentSection = node.parentSection
+  
+  while(parentSection != null) begin
+    if(parentSection == section) return true
+    parentSection = parentSection.parentSection
+  end
+  
+  return false
+end
+```
+
 Consequently, node `n` is not associated with section `sY`,
 if (and only if) all of the afore mentioned tests have failed.
 
@@ -125,7 +138,7 @@ onExitParentContainer(Node container) begin
     currentSection.close()
     currentSection = parentSection
   end
-onExitParentContainer end
+end
 ```
 
 Note that ...
@@ -300,7 +313,7 @@ Because of that, and depending on an implementation's specific environment
 (e.g. adjacency lists), node identifiers could be (or even have to be) used
 instead of object references.
 
-**Option 2:** sectioning node references
+**Option 2:** sectioning node -> parent container references
 
 As a section's parent container can be determined from its sectioning node, the
 parent container references could be retrieved on the fly by taking advantage
@@ -383,7 +396,7 @@ Obviously, test-1 is different to test-2, which is why case dependent tests
 would be required. That is, these node levels can not be used for general
 purpose tests while being unaware of the involved section types.
 
-Note that, the adjustment of these node level values according to the section
+Note that, the adjustment of these node level values, according to the section
 types involved, would essentially be equivalent to option 3 (i.e. using the
 node levels of the corresponding parent containers).
 
@@ -399,7 +412,7 @@ node levels of the corresponding parent containers).
 (if it is prohibited to close any type-1 section)
 
 **TODO**
-plot twist: what if closing type-1 sections would not be allowed?
+plot twist: what if closing type-1 sections would/could not be allowed?
 
 can these node level values be used as general purpose filters? -
 effectively only t2 sections could be closed -
@@ -413,4 +426,6 @@ node references could not be used
 * t2 can close t2
 
 now that would be really type-independent -
-the node level values of sectioning nodes are type-dependent
+the node level values of parent containers are type-dependent -
+at some point, a section's type must be identified in order to
+determine the node level of the corresponding parent container -

@@ -64,3 +64,13 @@ not a presequent rank-infected sectioning node? -
 what would be the difference if any?
 
 plot twist: the essence of a rank value is to instruct to close sections
+
+<!-- ======================================================================= -->
+## conditional modifiers
+
+HTML's sectioning content nodes are defined as -
+subsection-of the nearest ... -
+if deep into the structure, then close multiple sections -
+if shallow, then close just a few, if any -
+i.e. context-dependent - inconsistent? -
+an implicit, constant, case-dependent close modifier? -

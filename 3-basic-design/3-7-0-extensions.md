@@ -9,10 +9,16 @@ can be altered while maintaining consistency with the default definitions.
 These options, if any, then allow to extend the definition of sectioning nodes
 by certain modifiers.
 
-Note that it must be possible to transform any tree, which is defined based upon
-those extended definitions, into a tree that is solely based upon the default
-definitions (and vice versa, i.e. an extended description must be equivalent
-to a strict description).
+Note that it must be possible to transform any description of a tree, which
+makes use of extended definitions, into an equivalent description of a tree
+that is solely based upon the strict definitions. Put differently, for each
+extended description, there must exist a semantically equivalent default
+description.
+
+**TODO**
+would that be an argument against closing a type-1 section? -
+don't allow to close a type-1 section if equivalent
+transformations are not possible? -
 
 <!-- ======================================================================= -->
 ## available options
@@ -279,7 +285,10 @@ Note that this statement applies whether sectioning node `n1` ...
 * is a type-1, or a type-2 sectioning node.
 * is associated with the section it declares (i.e. `s1`) or not.
 
-Note HTML's definition of sectioning content elements (an error).
+Note HTML's definition of sectioning content elements (an error):
+These are defined to close any section except for the next ancestor section of
+a sectioning content or a sectioning root element, regardless of intermediate,
+inactive ancestor nodes (i.e. ignores structural dependencies).
 
 **CLARIFICATION**
 The default definitions of sectioning nodes are consistent with implicit
@@ -383,8 +392,8 @@ Note that this case can be understood to contain two independent subtrees that
 have `n1` and `n3` as their root nodes. Because of that, this case is similar
 to case 1: `s2` will be closed before `n4` is even entered.
 
-Note that the node levels of the corresponding sectioning nodes don't have
-to be equal for as long as both nodes are located within two different subtrees.
+Note that the node levels of the corresponding sectioning nodes don't have to
+be equal for as long as both nodes are located within two different subtrees.
 The effect will still be covered by case 1 (i.e. `s2` is closed when `n4` is
 entered).
 
@@ -398,9 +407,9 @@ entered).
 
 * `n1, n2` are type-2 sectioning nodes
 
-However, `n2` is in principle free to close the open presequent section `s1`,
-if (and only if) both type-2 sectioning nodes have the same parent node (i.e.
-the same parent container).
+However, `n2` is in principle free to close the open presequent section `s1`, if
+(and only if) both type-2 sectioning nodes have the same parent node (i.e. the
+same parent container).
 
 Note that the parent section of `s2`, if `n2` is defined to close `s1`, can only
 be one of the remaining open sections, which all are ancestor sections of `s1`.

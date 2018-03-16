@@ -12,6 +12,7 @@ implement a general-purpose outliner for any rooted ordered tree of nodes.
 
 **upload log**
 
+* 2018-03-15 - commit 54580c1 - implementation aspect
 * 2018-03-05 - commit ea0b721 - hierarchy, close modifiers
 * 2018-02-19 - commit ef94c42 - current section
 * 2018-02-04 - commit 55cc8a7 - clarifications

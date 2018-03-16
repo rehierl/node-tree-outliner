@@ -14,15 +14,15 @@ like climbing a mountain by moving backwards
 <!-- ======================================================================= -->
 
 **TODO**
-loose/implicit section -
-need to think about the use of "implicit" -
-implicit not really equivalent to distant -
-distant subsection does not really make sense either -
-loose subsection seems fine though -
--> recheck beginning with 3-5-0-subsection
+can a section be a subsection to itself -
+issue: its sectioning node -
+so the answer is a clear no -
+technically no cycles in the section hierarchy possible -
 
 **TODO**
-two levels of implicitness -
+implicit relationship -> descendants -
+implicit associations -> one section only -
+combine levels of implicitness? -
 -> add to 3-5-1-associations?
 
 **TODO**
@@ -35,7 +35,8 @@ top-level nodes -
 -> expand in 3-8-1-implementation
 
 **TODO**
-use/compare node levels of sectioning nodes
+use/compare node levels of sectioning nodes -
+depends on: allow/disallow closing type-1 sections -
 -> expand in 3-8-1-implementation
 
 **TODO**
@@ -43,9 +44,12 @@ is that loop sufficient? -
 -> in 3-8-1-implementation
 
 **TODO**
-implicit relationship -> descendants -
-implicit associations -> one section only -
-combine both levels of implicitness?
+loose/implicit section -
+need to think about the use of "implicit" -
+implicit not really equivalent to distant -
+distant subsection does not really make sense either -
+loose subsection seems fine though -
+-> recheck beginning with 3-5-0-subsection
 
 **TODO**
 an algorithm can in principle start at any node -
@@ -56,14 +60,7 @@ issue header element in combination with reusing heading elements -
 i.e. a 1st header element can not always be recognized to be with
 regards to a presequent (possibly outside of corresponding subtree)
 type-1 sectioning node -
-not the case when reusing the title element
-
-**TODO**
-HTML's sectioning content nodes are defined as -
-subsection-of the nearest ... -
-if deep into the structure, then close multiple sections -
-if shallow, then close just a few, if any -
-i.e. context-dependent - inconsistent?
+not the case when reusing the title element -
 
 <!-- ======================================================================= -->
 ## transformations
@@ -118,7 +115,6 @@ see "single-s"
 sectioning a tree (i.e. creating an outline for a tree)
 is like grouping nodes on a logical level -
 geographical (node tree) vs. political (sections) -
-elevate the nodes of a flat, two dimensional surface into the next dimension
 
 <!-- ======================================================================= -->
 ## tree of sectioning nodes

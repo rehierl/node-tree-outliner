@@ -69,7 +69,7 @@ sequence. The single `parentSection` reference does not change that.
 <!-- ======================================================================= -->
 ## two levels of implicitness
 
-
+does that reveal anything?
 
 <!-- ======================================================================= -->
 ## clarified definition of top-level nodes
