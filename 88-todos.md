@@ -14,21 +14,10 @@ like climbing a mountain by moving backwards
 <!-- ======================================================================= -->
 
 **TODO**
-can a section be a subsection to itself -
-issue: its sectioning node -
-so the answer is a clear no -
-technically no cycles in the section hierarchy possible -
-
-**TODO**
 implicit relationship -> descendants -
 implicit associations -> one section only -
 combine levels of implicitness? -
 -> add to 3-5-1-associations?
-
-**TODO**
-we have an outline height/depth - define an outline width? -
-the maximum number of sections on a certain outline level? -
--> add to 3-6-1-current-section?
 
 **TODO**
 top-level nodes -
@@ -41,15 +30,8 @@ depends on: allow/disallow closing type-1 sections -
 
 **TODO**
 is that loop sufficient? -
+i.e. with regards to implicit associations -
 -> in 3-8-1-implementation
-
-**TODO**
-loose/implicit section -
-need to think about the use of "implicit" -
-implicit not really equivalent to distant -
-distant subsection does not really make sense either -
-loose subsection seems fine though -
--> recheck beginning with 3-5-0-subsection
 
 **TODO**
 an algorithm can in principle start at any node -

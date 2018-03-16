@@ -11,7 +11,7 @@ declares exactly one new section, a section always is presequent or subsequent
 to any other section.
 
 Note that these statements do not imply any structural relationship between
-two sections. The above statements only state which of these sections is
+two sections. The above statements merely state which of these sections is
 declared/entered first: A presequent section is declared before a subsequent
 section.
 
@@ -20,7 +20,7 @@ The default definitions of sectioning nodes do by themselves not include any
 effect on any presequent section. That is, because sectioning nodes are only
 defined to declare/open new sections. This obviously does not include the
 characteristic to close any presequent section. Because of that, the only
-option to close a section is by exiting its parent container.
+option to close a section so far is by exiting its parent container.
 
 Note that this does not imply that a (to be defined) sectioning node property
 can not result in such a characteristic. However, these additional properties
@@ -28,14 +28,14 @@ must be consistent with the default definitions described below.
 
 **CLARIFICATION**
 Two sections have one or more nodes in common, if nodes exist that are
-associated with both sections. This can obviously only be the case, if the
+associated with both sections. This will obviously only be the case, if the
 presequent section still counts as being open when the subsequent sectioning
 node is entered. If two sections have one or more nodes in common, then both
-sections are said to share content nodes.
+sections are said to share those content nodes.
 
 Note that a section's sectioning node and the section's content nodes must be
-strongly connected. That is, it must not be allowed to have a subsequent
-sectioning node belong to a presequent section, but not the content nodes of
+strongly connected. That is, it must not be possible to end up with a subsequent
+sectioning node belonging to a presequent section, but not the content nodes of
 the subsequent section. This would otherwise result in conflicting statements
 with regards to the logical location of the subsequent section.
 
@@ -59,7 +59,7 @@ related with each other.
 
 **CLARIFICATION**
 A section, which is subsequent to an open presequent section, is said to belong
-to the presequent section. In addition to that, the presequent section is said
+to that presequent section. In addition to that, the presequent section is said
 to contain the subsequent section. Both sections are therefore said to be
 related with each other.
 
@@ -71,7 +71,7 @@ Consequently, related sections are not required to share any content nodes. That
 is, because the subsequent sectioning node is a content node of the presequent,
 but not a content node of its own section. Also, the subsequent section is not
 required to have any content nodes of its own. That is, the subsequent section
-may even be empty.
+may be empty.
 
 <!-- ======================================================================= -->
 ## inner section
@@ -88,8 +88,8 @@ to all of its parent sections.
 
 Note that allowing multiple parent sections is merely a formal approach. The
 semantics will be clarified when the relationship between sections is clarified.
-For now, the expression "the parent section of" is only used to refer to the
-corresponding presequent section with regards to some specific context.
+For now, the expression "the parent section of" is only used in a given context
+to refer to a presequent section with regards to another subsequent section.
 
 At this point, the "an inner section of" reference only refers to a section
 which belongs to one or more other sections. That is, a reference without any
@@ -111,11 +111,29 @@ D:     n5 =====
 * nodes `n4` and `n5` represent type-2 sectioning nodes.
 
 **CLARIFICATION**
-The parent container of an inner section never is an ancestor
-of the parent section's parent container.
+The parent container of an inner section either is identical to the
+parent container of its parent section, or a descendant of that container.
 
-That is, because the parent container of an inner section either is the
-parent container of the parent section, or a descendant of said container.
+Put differently, the parent container of an inner section
+*never is* an ancestor of its parent section's parent container.
+
+That is, because ...
+
+* the parent section is still open when the inner section's sectioning node
+  is entered. In addition to that, the inner section's sectioning node is
+  not defined to close the parent section. Consequently, the inner section's
+  sectioning node is located inside of the parent section's default scope.
+* Case 1 (the parent section is a type-1 section): The inner section's
+  sectioning node always is a descendant of the parent section's sectioning
+  node. Because of that, the parent container of the inner section either
+  is identical to the parent section's parent container (inner type-2), or
+  a descendant of said container (inner type-1 or type-2).
+* Case 2 (the parent section is a type-2 section): The inner section's
+  sectioning node either is a sibling of the parent section's sectioning
+  node, or a descendant of such a sibling. Because of that, the parent
+  container of the inner section either is identical to the parent section's
+  parent container (inner type-2), or a descendant of said container (inner
+  type-1 or type-2).
 
 **CLARIFICATION**
 The default scope of an inner section begins and ends inside of,
@@ -194,6 +212,54 @@ belong to its parent section (hint: focus on the content nodes).
 <!-- ======================================================================= -->
 ## derived statements
 
+Note that the above considerations are
+with regards to the default scopes of the involved sections.
+
+**CLARIFICATION**
+No node can ever be allowed to close a parent section inside of one of the
+parent section's inner sections. That is, without closing all of the parent
+section's inner sections at the same time.
+
+Closing a parent section inside of one of its inner sections would obviously
+define all those nodes, that are subsequent to the parent section's close
+event and presequent to the inner section's close event, to not belong to the
+parent section. Consequently, such an operation would be in conflict with
+the formal definition of what a "subsection" is. That is, the inner section
+would then no longer be a subsection, it would be something else instead.
+
+Note that a subset is not a subset, if it contains even one element that does
+not also belong to its parent set.
+
+**CLARIFICATION**
+A section never is a subsection to itself.
+
+Note that the formal definition of the term "subsection" allows to state that
+a section is also a subsection to itself. In contrary to that, a section can
+technically never be detected to be one of its own subsections. For that to
+happen, a section would have to be opened before its sectioning node can even
+be entered. Obviously, that will never happen.
+
+Note that a section hierarchy will therefore not contain any cycles.
+That is, section hierarchies will always be acyclic.
+
+**CLARIFICATION**
+A subsequent sectioning node (type-1 or type-2), which is a sibling to a
+type-1 sectioning node, can never declare a subsection to that presequent
+type-1 section.
+
+That is, because the presequent section will be closed (because of its
+parent container) before the subsequent sectioning node can even be entered.
+Consequently, both sections can not share any content nodes. And, because
+of that, the very definition of the term "subsection" is not applicable.
+
+Note that the subsequent section can also not be redefined (e.g. via a rank
+value) to be an inner section of the closed presequent section. Any such
+redefinition would produce a conflict, as both sections are by structural
+relationship independent from each other.
+
+<!-- ======================================================================= -->
+## derived statements
+
 **CLARIFICATION**
 At any given point in time, during the traversal of the node tree,
 there always are one or more open sections.
@@ -246,21 +312,6 @@ sectioning node that is a previous sibling to some other sectioning node).
 Note that all of these independent and intermediate subsections will be
 ignored by the following considerations. That is, because the focus still
 is on multiple sections that all are related with each other.
-
-**CLARIFICATION**
-As obvious as it may be, a subsequent sectioning node (type-1 or type-2), which
-is a sibling to a type-1 sectioning node, can never declare a subsection to that
-presequent type-1 section.
-
-That is, because the presequent section will be closed before the subsequent
-sectioning node can be entered. Consequently, both sections will not share
-any content nodes. And, because of that, the very definition of the term
-"subsection" does not apply.
-
-Note that the subsequent section can also not be redefined (e.g. via a rank
-value) to be an inner section of the closed presequent section. Any such
-redefinition would produce a conflict, as both sections are by structural
-relationship independent from each other.
 
 <!-- ======================================================================= -->
 ## tree of sections

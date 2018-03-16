@@ -7,11 +7,11 @@ The default definitions allow to define any section hierarchy.
 
 Note that the "height" of a section hierarchy, if drawn onto a flat surface,
 can initially be understood as the section tree's vertical size (aka. outline
-height). In addition to that, the "width" of a section hierarchy refers to the
-tree's horizontal size (i.e. the largest number of sections on any outline
-level). Therefore, any section hierarchy can be defined, if both dimensions
-are unrestricted. Which is, because any section can be understood to represent
-its very own section hierarchy.
+height). In addition to that, the "width" of a section hierarchy can loosely be
+understood to refer to the tree's overall horizontal size (e.g. the largest
+number of sections on any outline level). Therefore, any section hierarchy can
+be defined, if both dimensions are unrestricted. Which is, because any section
+can be understood to represent its very own section hierarchy.
 
 * A section hierarchy of any height/depth can be defined.
 
@@ -273,5 +273,5 @@ all presequent ancestor sections must be widened in order to include the
 "new" subsequent descendant section.
 
 **CLARIFICATION**
-The definition of type-2 sectioning nodes, in combination with parent 
+The definition of type-2 sectioning nodes, in combination with parent
 containers, allows to define a section hierarchy of any width and height.

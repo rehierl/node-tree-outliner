@@ -1,5 +1,12 @@
 
-## global scope
+<!-- ======================================================================= -->
+# Objects and variables
+
+The following content is intended to provide
+an overview of global variables and object properties.
+
+<!-- ======================================================================= -->
+## Global scope
 
 ```
 Global begin
@@ -23,7 +30,8 @@ Global begin
 Global end
 ```
 
-## node object
+<!-- ======================================================================= -->
+## Node object
 
 ```
 Node begin
@@ -33,7 +41,8 @@ Node begin
 Node end
 ```
 
-## sectioning nodes
+<!-- ======================================================================= -->
+## SectioningNode object
 
 ```
 SectioningNode extends Node begin
@@ -42,7 +51,8 @@ SectioningNode extends Node begin
 SectioningNode end
 ```
 
-## section object
+<!-- ======================================================================= -->
+## Section object
 
 ```
 Section begin
