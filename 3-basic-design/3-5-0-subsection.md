@@ -447,22 +447,26 @@ tree's node sequence). Put differently, a section's parent section is the open
 presequent section which was declared last, before the corresponding subsequent
 sectioning node was entered.
 
+```
+Section Section.parentSection
+```
+
 **CLARIFICATION**
 A parent section is understood to be superordinate to its subordinate
-subsection. Because of that, a parent section is said to have higher
+subsection. Because of that, a parent section is said to have a higher
 significance than its subsections.
+
+(pattern: superordinate -> subordinate entity)
 
 * parent node -> child node
 * sectioning node -> declared section -> content nodes
 * parent section -> subsection
 
-(pattern: superordinate entity -> subordinate entity)
-
 **CLARIFICATION**
 A section, which is a child section of some other section, can be referred to
-as one of the other section's strict (or direct) subsections. In contrary to
-that, a section which is a descendant section, but not a child section, can
-be referred to as a loose (or ?implicit, distant?) subsection.
+as one of the other section's strict (or direct, immediate) subsections. In
+contrary to that, a section which is a descendant section, but not a child
+section, can be referred to as a loose (or ?implicit, distant?) subsection.
 
 That is, these or similar qualifiers (i.e. strict/direct vs. loose/implicit)
 may be used in cases where the relationship between two sections needs to be

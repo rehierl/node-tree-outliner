@@ -5,8 +5,7 @@
 In principle, any node, including all sectioning nodes, must be associated with
 all open presequent sections (formal approach). That is, even if each node is
 strictly associated with one section only (practical approach). Because of that,
-no sectioning node can be associated with a random/arbitrary section. That is,
-because the practical associations must correspond with the formal associations.
+no sectioning node can be associated with a random/arbitrary section.
 
 * No sectioning node can be associated with a section that is subsequent to
   it. That is, because these sections do not count as being open by the time
@@ -37,16 +36,16 @@ Fundamental considerations.
 
 * As stated before, all nodes must be associated while they are being entered.
 
-From the introduction to sectioning nodes:
+From the introduction of sectioning nodes:
 
 * If all sectioning nodes would have to be associated with their own
   section, then no section would ever be truly empty. That is, because
-  any section would then always begin with its sectioning node.
+  any section would then always begin with its own sectioning node.
 * Associating sectioning nodes with their own section adds a sectioning
   node to its own context, although no node is presequent to itself.
 * A section could then not be understood to be subsequent to its
-  sectioning node. That is, because a sectioning node is insequent
-  (i.e. neither pre- nor subsequent) to itself.
+  sectioning node. That is, because a sectioning node, like any other
+  node, is insequent (i.e. neither pre- nor subsequent) to itself.
 
 From the definition of section states/events:
 
@@ -122,8 +121,8 @@ If all sectioning nodes would have to be associated with their own section,
 then a parent section, which only contains a single subsection, but no actual
 content nodes of its own, would appear to have no meaningful content. Due to
 having no strict association of its own, it would appear to be empty. And,
-because of that, one would always have to explicitly check for the existence
-of possible subsections.
+because of that, one would always have to explicitly also test whether the
+section in question has any subsections or not.
 
 Note that the sectioning node of a subsection would then only be associated
 with the subsection it declares. That is, because each node can and will be
@@ -131,8 +130,8 @@ associated with one section only. Although a sectioning node would still
 count as being implicitly associated with all of its ancestor sections.
 
 With that in mind, the advantage of not associating a sectioning node with its
-own section therefore is that no parent section will ever appear to be empty. A
-parent section will always have one or more content nodes (i.e. the sectioning
+own section therefore is, that no parent section will ever appear to be empty.
+A parent section will always have one or more content nodes (i.e. the sectioning
 nodes of its subsections) and, because of that, can never be misunderstood to be
 empty.
 
@@ -150,19 +149,16 @@ associated with the corresponding section.
 
 **CLARIFICATION**
 A sectioning node does not belong to its own section:
-A consistent `Node.parentSection` reference.
-
-```
-Section Node.parentSection
-```
+A consistent `Node.parentSection` property.
 
 In general, a `parent` property has a clear orientation: from a subordinate
 entity towards an entity that is superordinate to it (hence the word "parent").
 In short: The general orientation of a `parent` property is "upwards".
 
-In this context, the direction which is consistent with this general
+In this context, the general direction which is consistent with this
 orientation is from a subsequent node towards a node that is presequent
-to it. To be more accurate: towards a node that is within its context.
+to it. To be more accurate: towards a node that is within the corresponding
+node's context.
 
 Note that no presequent node is considered to be subordinate to any node
 which is subsequent to it. A superordinate node (i.e. a parent node) always
@@ -216,7 +212,7 @@ with the surrounding nodes of their parent section, similar statements. As
 a result, the statements of its content nodes must correspond with the
 statement of the sectioning node. This consistency is however guaranteed as
 a section is strongly connected and because the default scope of a section
-must end with its parent container.
+ends with its parent container.
 
 Not associating a sectioning node with its own section therefore guarantees
 that all content nodes of a section can be extracted from the tree without
@@ -224,10 +220,10 @@ loosing an anchor-like node. A sectioning node can therefore be used to
 reintegrate a section at its exact location.
 
 Transformations would not be as straight forward, if sectioning nodes would
-have to be associated with their own section. That is, because these nodes
-would then count as content nodes. Consequently, after having extracted all
-content nodes, the information of where exactly the section was located
-would no longer be available.
+have to be associated with their own section. That is, because the sectioning
+nodes would then also count as content nodes. Consequently, after having
+extracted all content nodes, the information of where exactly the section was
+located would no longer be available.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -242,12 +238,11 @@ Binds a section to its parent section.
 (3) (section.parentSection === section.sectioningNode.parentSection)
 ```
 
-If all sectioning nodes would have to be associated with their own section,
-then a sectioning node counts as the first content node of the corresponding
-section. And, because of that, the above expression would be false for all
-sections. That is, because the second part would represent a self-reference,
-which obviously could never correspond with the `Section.parentSection`
-property.
+If all sectioning nodes would have to be associated with their own section, then
+any sectioning node counts as the first content node of the section it declares.
+And, because of that, the above expression would be false for all sections. That
+is, because the second part would represent a self-reference, which obviously
+could never correspond with the `Section.parentSection` property.
 
 With that in mind, not associating any sectioning node with its own section
 has the advantage, that the above expression would always be true. And, because
@@ -303,8 +298,8 @@ holds a reference to the corresponding non-empty section.
 
 That is, because if a non-empty section has no subsections, then it contains
 at least one inactive node that is strictly associated with it. If a non-empty
-section contains subsections, then such a parent section will (also) strictly
-contain the sectioning nodes of one or more subsections.
+section contains subsections, then such a parent section will (also) contain
+the strictly associated sectioning nodes of its immediate subsections.
 
 **CLARIFICATION**
 The very first node of a section always is strictly associated with it. Put
@@ -345,9 +340,3 @@ That is, because no such node is associated with the section it declares.
 Note that, if sectioning nodes would have to be associated with their
 own section, then the first part of the above expression would be a
 self-reference, if the node in question would be a sectioning node.
-
-<!-- ======================================================================= -->
-## todos
-
-**TODO**
-some sentences could be improved/rephrased

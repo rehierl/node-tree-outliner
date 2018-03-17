@@ -266,7 +266,7 @@ increased width), the default scopes of one or more open presequent sections
 need to be restricted. That is, those sections need to be closed before the
 subsequent section will be entered.
 
-In order to shift a subsequent section downwards in the section hierarchy
+In order to move a subsequent section downwards in the section hierarchy
 (i.e. increased height/depth), a subsequent section must be located within
 the scope of all of its presequent ancestor sections. That is, the scope of
 all presequent ancestor sections must be widened in order to include the

@@ -106,11 +106,11 @@ within the node sequence) and the y-axis the outline level of that node.
 As such, the outline level can be understood to shift a node into the next
 dimension by associating a height value with it. That is, the outline level
 allows to turn a one-dimensional (short: 1D) listing (i.e. the node list)
-into a 2D graph, which can be referred to as the tree's 2D height map.
+into a 2D graph, which can be referred to as the node tree's 2D height map.
 
 Note that the 2D height map could be displayed e.g. instead of a textual,
 low resolution overview which some editors allow to use in addition to,
-or instead of a scrollbar.
+or instead of a scrollbar (i.e. a self-contained representation).
 
 Note that, except for the root node, each node has a well defined (unique)
 outline level. Because of that, this relation (i.e. `R := "index x level`)
@@ -120,13 +120,12 @@ value of 0.
 Similar to that, and if the nodes of a node tree are drawn onto a flat, 2D
 surface (the node level on the x-axis, the node's level internal index on
 the y-axis), then the node's outline level can be used to shift the nodes
-into the 3rd dimension (the outline level on the z-axis). This can be
+into the 3rd dimension (the outline level on the z-axis). This can then be
 understood to represent the 3D height map of the corresponding node tree.
 
 Another way to display the outline depth, and therefore allow to visually
 indicate the associations, could be to indent the textual definition of the
-node tree by the display of a border. Note that this border represents the
-node tree's transposed 2D height map.
+node tree by the display of an inner border (i.e. an integrated representation):
 
 ```
 outline depth      node tree
@@ -146,6 +145,11 @@ outline depth      node tree
  | | |               <n9/>
                    </n0>
 ```
+
+Note that this border represents the node tree's transposed 2D height map.
+
+<!-- ======================================================================= -->
+## derived statements
 
 Question: Could a metric be defined in order to classify node trees?
 If so, this metric could be used to estimate a document's "quality".

@@ -11,8 +11,8 @@ Consequently, the implicit association with all ancestor sections is used to
 condense the amount of associations, which would otherwise be required by the
 formal definitions, into a single reference per node.
 
-Note that this reference will be referred to as the node's explicit or strict
-(as in direct) association.
+Note that this reference will be referred to as
+the node's strict (or explicit, direct) association.
 
 Note that the only reason, why a node can be associated with a single section
 is, that all formal associations (formal perspective) of a node can be derived
@@ -23,9 +23,10 @@ both perspectives are equivalent.
 A node must be associated with the closest open presequent section.
 
 That is, because all other sections, with which that node would have to be
-associated, are the ancestor sections of that section. Consequently, the
-closest open presequent section is the only section that can be used to
-represent all the node's associations.
+associated, are ancestor sections to that section. As such, the closest open
+section is the least significant section that is still open. Consequently, it
+is the only section that can be used to represent all the associations of the
+corresponding node.
 
 **CLARIFICATION**
 The section, with which a node must be associated, is referred to as the
@@ -38,13 +39,13 @@ Section Node.parentSection
 
 **CLARIFICATION**
 A node's parent section can be understood to define the location of a node
-with regards to the sections of a tree (i.e. its logical context).
+with regards to the section hierarchy (i.e. its logical context).
 
 **CLARIFICATION**
 If each node is associated with one section only, then any ancestor section,
 which is not the node's parent section, can be understood to be "loosely
-suspended". That is, because for as long as that parent section is open,
-no node will be strictly associated with those seemingly suspended sections.
+suspended". That is, because for as long as that parent section is open, no
+node will be strictly associated with such a seemingly suspended section.
 
 Note that, because a section can not be "strictly suspended" (see the state
 transitions), the term "suspended" must always be understood to be synonymous
@@ -61,9 +62,9 @@ Consequently, a section still counts as a subsequence of the tree's node
 sequence. The single `parentSection` reference does not change that.
 
 <!-- ======================================================================= -->
-## two levels of implicitness
+## levels of implicitness
 
-does that reveal anything?
+does that reveal/clarify anything?
 
 <!-- ======================================================================= -->
 ## clarified definition of top-level nodes
@@ -94,14 +95,16 @@ loosely) associated with `s`, and if `n` has no ancestors that are already
 (strictly or loosely) associated with `s`.
 
 Note that the focus of this term is on the second part (i.e. has no ancestor
-that is (strictly or loosely) associated with the corresponding section).
+which is already (strictly or loosely) associated with the corresponding
+section).
 
-Note that any node can still be a top-level node to multiple sections. Because
-of that, any section can still be loosely described as a sequence of siblings.
+Applying this clarified definition, and associating each node with one section
+only, has the following effect: (1) Nodes `n1-9` all are top-level nodes of
+`s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.
 
-Applying this clarified definition, and associating each node with one
-section only, has the following effect: (1) Nodes `n1-9` all are top-level
-nodes of `s0`, and (2) nodes `n2-9` all are top-level nodes of `s1`.
+Note that any node can still be a top-level node to one or more sections.
+Because of that, any section can still be loosely described as a sequence
+of siblings.
 
 **CLARIFICATION**
 A section's first content node always is a strictly associated top-level node.
