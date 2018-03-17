@@ -14,13 +14,20 @@ like climbing a mountain by moving backwards
 <!-- ======================================================================= -->
 
 **TODO**
+a heading that has a rank may act as an end-marker node
+
+**TODO**
 implicit relationship -> descendants -
 implicit associations -> one section only -
 combine levels of implicitness? -
 -> add to 3-5-1-associations?
 
+construction of a semantically consistent path
+section.parentSection property
+
 **TODO**
 top-level nodes -
+with regards to the support of transformations -
 -> expand in 3-8-1-implementation
 
 **TODO**

@@ -6,7 +6,7 @@ With regards to a tree of nodes, a section can initially be defined as a set of
 nodes `s := { n1, ..., nk }`, and `k in [0,#N]` (or simply `(s subset-of N)`).
 Hence, operators defined for sets also apply to sections:
 
-* `isEmpty(s)` is true, if `(#s == 0)`, put differently `(s == {})`
+* `isEmpty(s)` is true, if `(#s == 0)` (or `(s == {})`)
 * `(n in s)` is true, if node `n` is an element of section `s`
 
 Assumed that any number of sections is allowed, all sections of a tree can be
@@ -30,6 +30,10 @@ definition, a relation can be defined that is antonymous to it:
 * sem := node `n` is an element of section `s`
 * synonymous - `element-of`, `belongs-to`, `located-inside`
 
+Note that the direction of the `contains` relation is downwards (i.e. from a
+superordinate entity towards a subordinate entity) and that the `element-of`
+relation is antonymous to it.
+
 <!-- ======================================================================= -->
 ## (s related-to n)
 
@@ -44,6 +48,8 @@ The only generalization currently possible is:
 * `(s related-to n)`, if `(s strictly-related-to n)`
 * `(s related-to n) <=> (n related-to s)`
 * synonymous - `related-to`, `associated-with`
+
+Note that the `related-to` relation is undirectional.
 
 <!-- ======================================================================= -->
 ## open questions

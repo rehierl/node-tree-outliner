@@ -32,7 +32,7 @@ R x N x ... x n x c1 x ... x N x L
 At any non-leaf node `n`, a different path of any length may branch off: i.e.
 paths `p1 := (r,...,n,c1,...,L)` and `p2 := (r,...,n,c2,...,L)` both share
 the common prefix `pref := (r,...,n)`, but end in the different suffixes
-`s1 := suffixOf(p1,#p1-#p)` and `s2 := suffixOf(p2,#p2-#p)`.
+`s1 := (c1,...,L)` and `s2 := (c2,...,L)`.
 
 All nodes in `pref` are ancestors to any node in `s1` and `s2`.
 Also, any node in `s1` or `s2` is descendant to any node in `pref`.
@@ -42,6 +42,11 @@ If the corresponding tree of nodes is an ordered tree of nodes, then `c1` is
 the previous sibling of `c2`, and `c2` the next sibling of `c1`. This however
 depends on the order in which the paths are specified (e.g. upper paths are
 presequent to lower paths).
+
+Note that a rooted path `p1` can be understood to be presequent to another path
+`p2`, if the last node `f1` of `p1` is presequent to the last node `f2` of `p2`.
+That is, the order of rooted paths can be defined based on the order of the
+corresponding last nodes.
 
 ```
 R x N x ... x N x N x ... x N x N x ... x N x L

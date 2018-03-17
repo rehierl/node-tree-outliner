@@ -8,13 +8,15 @@ The edges as a whole define a parent-child relationship on top of all the nodes:
 * `Relation := (A,B,G)` => `Graph := (V,V,E)` => `Tree := (N,E)`
 * where `(A == B == V == N)`
 
+Note that a relation may have different sets of nodes (i.e. `(A != B)`).
+
 <!-- ======================================================================= -->
 ## (p parent-of c)
 
 The 1st node of each edge (i.e. `e := (p,c)`) refers to a parent node and the
 2nd node to a child node. Obviously, the parent node `p` is said to be a parent
-of the child node `c`. Therefore, all edges have a direction (aka. orientation)
-from a parent node towards the child node.
+of the child node `c`. Therefore, all edges have an orientation (aka. direction)
+from a parent node towards a child node.
 
 * `Tree := (N,E)` where `N` is the set of all nodes
 * `E := { (p,c) : (p in N), (c in N), (p parent-of c) }`
@@ -23,18 +25,17 @@ from a parent node towards the child node.
 This `parent-of` relation will be referred to as the `NxN` relation of the tree.
 
 * `sem(Tree)` refers to the semantics of the tree's relation
-* `(pEc == true)`, if `(p,c) in E`
-* `(!pEc == true)`, if `(p,c) not in E`
+* `pEc` is true, if `(p,c) in E`
+* `!pEc` is true, if `(p,c) not in E`
 
 Note that a parent is said to be superordinate to its subordinate child.
-Because of that, the `parent-of` relation has a directed, top-down
-orientation (aka. direction).
+Because of that, the `parent-of` relation has a top-down/downward direction.
 
 <!-- ======================================================================= -->
 ## (c child-of p)
 
 The directed and strict top-down orientation (i.e. away from the root node
-towards the leaf nodes) of the `parent-of` relation is necessary because the
+towards a leaf node) of the `parent-of` relation is necessary because the
 inverted set of edges `E'` defines a graph that contains multiple root nodes,
 but only a single leaf node (the former root node).
 
@@ -47,14 +48,14 @@ formal definition
 simple definition
 
 * `(c child-of p)`, if `pEc`
-* node `c` is a child of node `p`
+* in words: "node `c` is a child of node `p`"
 
-As such, this `child-of` relation is antonymous to the above `parent-of`
-relation, i.e. `(R == ant(tree))`.
+As such, this `child-of` relation is said to be antonymous to the above
+`parent-of` relation, i.e. `(R == ant(tree))`.
 
-* antonymous <=> inverted tuples/sequences *and* inverted semantics
+* antonymous <=> inverted edges/tuples/sequences *and* inverted semantics
 
-Note that the `child-of` relation has a bottom-up orientation.
+Note that the `child-of` relation has a bottom-up/upward direction.
 
 <!-- ======================================================================= -->
 ## (a related-to b)
@@ -72,8 +73,9 @@ two parent nodes `a` and `b`). Consequently, the `parent-of` relation of a
 tree is not transitive.
 
 Even if grandparents are not strictly related to their grandchildren, nodes `a`
-and `c` are nonetheless related with each other. That is because `E` allows to
-define a path that connects both nodes (e.g. `p=(a,b,c)` if `aEb` and `bEc`).
+and `c` are nonetheless considered to be related with each other. That is
+because `E` allows to define a path that connects both nodes (e.g. `p=(a,b,c)`
+if `aEb` and `bEc`).
 
 * `(a loosely-related-to b)`, if a path `p=(a,..,b)` or `p=(b,..,a)`
   exists such that `(#p > 2)` and all pairs `(pi,pi+1) in E`
@@ -83,7 +85,8 @@ define a path that connects both nodes (e.g. `p=(a,b,c)` if `aEb` and `bEc`).
 
 Note that a path of nodes is said to be uni-directional, if (and only if) the
 same set of edges `E` was used to construct the whole path. A path is said to
-be multi-directional, if it is based upon two or more sets of edges.
+be multi-directional, if it is based upon two or more sets of edges that differ
+in orientation (e.g. `E` and `E'`).
 
 The strict and loose relationship can be generalized into:
 
@@ -101,8 +104,8 @@ As such, it is understood to be un-directional.
 
 Without any relationship between a node and its grandparents and grandchildren,
 there would be no reason to have the dedicated terms "grand-parent" and
-"grand-child". Similarly, there would be no reason to generalize these two
-terms into "ancestor" and "descendant":
+"grand-child". Similarly, there would be no reason to generalize these terms
+into "ancestor" and "descendant":
 
 * `(a ancestor-of n)`, if a path `p=(a,...,n)` exists
   such that `(#p > 1)` and all pairs `(pi,pi+1) in E`
@@ -119,8 +122,9 @@ connects both nodes. That is, because the path would have to go up to the
 common parent node and then down to the corresponding sibling.
 
 * `(s sibling-of n)`, if `pEs` and `pEn`
-* i.e. `(p parent-of s) and (p parent-of n)`
+* i.e. `(p parent-of s)` and `(p parent-of n)`
 * `(s sibling-of n) <=> (n sibling-of s)`
+* Note that `(n sibling-of n)` is always true under that definition.
 
 In addition to that, an ordered tree requires that there is an order of
 sorts on the set of child nodes (i.e. `((s < n) or (n < s))` is always
@@ -149,7 +153,7 @@ includes the relationship of parent and child nodes.
 * `(p < c)`, if `(p parent-of c)`
 
 Note also, that all nodes are ordered according to the same order, regardless
-of what entities these nodes represent. That is, the nodes of a tree are not
+of which entities these nodes represent. That is, the nodes of a tree are not
 split into one or more groups which are then ordered separately (e.g. the
 display of a file-system: folders, then files).
 
@@ -163,7 +167,8 @@ relation can be defined as follows:
 * `G := { (p,c) : pEc }`
 * `sem(R) := (p contains c)`
 
-As such, the `contains` relation is identical to the `parent-of` relation.
+As such, the `contains` relation is equivalent to the `parent-of` relation.
+That is, the `contains` relation also has a top-down direction.
 
 * `(a strictly-contains b)`, if `aEb`
 * `(a loosely-contains b)`, if a path `p=(a,..,b)`
@@ -181,4 +186,5 @@ Example pattern: `<A> <B> C </B> </A>`
 In this pattern, node `A` is said to strictly contain node `B` and to loosely
 contain node `C`. Therefore, node `A` contains and is related to both nodes.
 Even though `C` is also related to `A` and `B`, node `C` does itself not contain
-any of those two nodes. However, `C` is said to be located inside of both nodes.
+any of these two nodes. However, `C` can be understood to be located inside of
+both nodes.

@@ -14,12 +14,13 @@ sequence" of the tree:
 * `ni` is entered after `ni-x` and before `ni+y`, `x,y in [1,k]`
 
 Note that `x,y in [1,k]` is not accurate because the range of numbers (i.e.
-`[1,k]`) is too large. In order to keep explanations simple, that range needs
-to be understood to only contain values that point to a node within `ns`.
+`[1,k]`) is too large. That is, because `(i-x)` could turn out to be less than
+`1` and `(i+y)` greater than `k`. In order to keep explanations simple, that
+range needs to be understood to only contain values that result in a valid node
+index.
 
 The length of a node sequence is identical to the number of nodes in the node
-tree. That is, because each node will be entered exactly once. Because of that,
-the node sequence contains each node exactly once.
+tree. That is, because each node will be entered exactly once.
 
 * `(ni+k subsequent-to ni)` is true, if `k in [1,*]`
 * `(ni+k strictly-subsequent-to ni)`, if `(k == 1)`
@@ -34,11 +35,11 @@ to the first and presequent to the last node. In addition to that, any node is
 said to be insequent (i.e. neither pre- nor subsequent) to itself.
 
 Note that the term "subsequent" can be seen to focus on possible future events.
-That is, because the node `ni+k`, which is referred to, is entered after the
-corresponding current node `ni`. In contrary to that, the term "presequent"
-needs to be understood to focus on known past events. This switch in perspective
-is critical because no algorithm, in the context of the following discussion,
-can execute any operation based nodes that still have to be entered.
+That is, because the node `ni+k` is entered after the current node `ni`. In
+contrary to that, the term "presequent" needs to be understood to focus on known
+past events. This switch in perspective is critical because no algorithm, in the
+context of the following discussion, can execute any operation based nodes that
+still have to be entered.
 
 ### order of nodes
 
@@ -58,7 +59,7 @@ about that) and that any parent is presequent to all of its descendants.
 
 In order to produce any result, an algorithm must execute certain operations,
 which it can only do while entering or exiting a node. Because of that, an
-algorithm in the context of this discussion implements an event-driven process.
+algorithm, in the context of this discussion, represents an event-driven process.
 
 Note that each enter and exit event is atomic. That is, nodes will neither be
 entered nor exited while another node is still in the process of being entered
@@ -79,10 +80,10 @@ ns := [n1,...,ni,...,nk]
 ```
 
 An algorithm has, when entering its current node `ni`, knowledge of any node
-within the subsequence `s1 := [n1,ni]`. That is, because it already came in
-contact with all the nodes in that sequence.
+within subsequence `s1 := [n1,ni]`. That is, because it already came in contact
+with all the nodes in that sequence.
 
-However, due to an algorithm's current node, an algorithm's current knowledge
+Note that, due to an algorithm's current node, an algorithm's current knowledge
 contains nodes that it will still have to exit at some later point in time.
 That is, because the algorithm will still have to exit the current node and
 all of its ancestor nodes.
@@ -100,9 +101,9 @@ Note that, even if such a guarantee would exist, relying on that kind of
 guarantee makes it necessary to add additional logic in order to deal with
 trees that do not comply with the corresponding rules (i.e. input/user errors).
 
-In addition to that, any operation executed while entering a node is intended
-to only have an effect on the node itself and/or on nodes that are subsequent
-to it. That is, if the exit events of its ancestors are ignored (technically,
+In addition to that, any operation executed while entering a node is allowed
+to have an effect on the node itself and/or on nodes that are subsequent to
+it. That is, if the exit events of its ancestors are ignored (technically,
 exit events allow to affect presequent nodes).
 
 ### exit events
@@ -149,10 +150,10 @@ If a section would only contain the above three nodes, then associating
 these while they are being entered would result in node sequence `s5` and
 associating them while they are being exited would result in sequence `s6`.
 
-Obviously, the node order in sequence `s6`, does not correspond with the node
-order of the tree, sequence `s5` however does. Because of that, and if those
-nodes would be the only nodes of a section, sequence `s6` can not be used to
-accurately represent the contents of that section.
+In contrary to `s5`, sequence `s6` does not correspond with the node order of
+the above fragment. Because of that, and if those nodes would be the only nodes
+of a section, sequence `s6` can not be used to accurately represent the contents
+of that section.
 
 Consequently, executing any operation while a node is being exited is in
 principle problematic. Exit events must be used to execute operations which
@@ -166,15 +167,15 @@ side effect on any node in `s3`.
 
 In general, the minimal set of data used by an operation can be referred to as
 the context of an operation. And because an operation can not function properly,
-if any data is taken away from its context (minimal set), the data within its
-context is considered to be significant to it (see en.wikipedia.org: Context
-(computing), Operational context, Operating context).
+if any data is taken away from its context (minimal set), any data within an
+operations context is considered to be significant to that operation (see
+en.wikipedia.org: Context (computing), Operational context, Operating context).
 
 **CLARIFICATION**
-Operations executed during an event are in general only allowed to have an
-effect on those nodes that are subsequent (forwards) to the corresponding
-event. In addition to that, operations can only rely on those nodes that
-are presequent (backwards) to the event in question.
+Operations executed during a node event are in general only allowed to have an
+effect on those nodes that are subsequent (forwards) to the corresponding event.
+In addition to that, operations can only rely on those nodes that are presequent
+(backwards) to the current event.
 
 Note that a node is presequent to its own exit event. That is, because the
 term "a node" refers in general to the node's enter event. Hence, exit events
@@ -197,10 +198,10 @@ executes operations based upon presequent siblings, is not guaranteed to
 be deterministic (i.e. repeated executions may yield different results).
 
 In an ordered tree, the context of a node may obviously contain presequent
-siblings. Note that the descendants of those siblings are not included as
-they need to be understood to be locked up (i.e. sandboxed) inside of those
-siblings. Note also that the context of a node may include those siblings
-that are presequent to one of the node's ancestors.
+siblings. Note that the descendants of those siblings are not included as they
+need to be understood to be locked up (i.e. sandboxed) inside of those siblings.
+Note also that the context of a node may also include those siblings that are
+presequent to one of the node's ancestors.
 
 Because of that, the current knowledge of an algorithm, is in general not
 identical to the context of the current node. That is, because the current
@@ -208,8 +209,8 @@ knowledge includes the context of a node and, in addition to that, nodes
 which are not part of it (i.e. not all nodes that are presequent to a node
 are allowed to have an effect on it).
 
-Note that even those nodes, which were exited, can be allowed to have an
-effect on subsequent nodes (e.g. presequent siblings).
+Note that even those nodes, which have already been exited, can be allowed to
+have an effect on subsequent nodes (e.g. presequent siblings).
 
 <!-- ======================================================================= -->
 ## look ahead
@@ -228,8 +229,8 @@ However, if it is possible to implement an operation without such an approach,
 a look ahead could be used for a more efficient implementation. The focus here
 is to not rely on the availability of a look a head.
 
-Despite of that, a look ahead is an attempt to bypass the current knowledge of
+Despite that, a look ahead is an attempt to bypass the current knowledge of
 what is guaranteed by the traversal of the tree. As such, a look ahead
 represents an attempt to bypass the context of a node (i.e. make an operation
 depend on subsequent nodes) and thus to predict future events. Because of that,
-a design must not use any kind of look ahead.
+a design must not rely on any kind of look ahead.
