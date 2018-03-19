@@ -10,7 +10,7 @@ Hence, operators defined for sets also apply to sections:
 * `(n in s)` is true, if node `n` is an element of section `s`
 
 Assumed that any number of sections is allowed, all sections of a tree can be
-seen to be an element of some set of all-declared-sections `S`:
+understood to be an element of some set of all-declared-sections `S`:
 
 * `(s in S)` is true for any section `s`
 
@@ -34,6 +34,11 @@ Note that the direction of the `contains` relation is downwards (i.e. from a
 superordinate entity towards a subordinate entity) and that the `element-of`
 relation is antonymous to it.
 
+Note that this relation does not yet define any specific structure. That is,
+the relation merely states which nodes belong to which section. In addition to
+that, any node may belong to one or more sections. However, any given section
+may contain a specific node no more than once.
+
 <!-- ======================================================================= -->
 ## (s related-to n)
 
@@ -49,27 +54,29 @@ The only generalization currently possible is:
 * `(s related-to n) <=> (n related-to s)`
 * synonymous - `related-to`, `associated-with`
 
-Note that the `related-to` relation is undirectional.
+Note that the `related-to` relation has no orientation (aka. is un-directional).
 
 <!-- ======================================================================= -->
-## open questions
+## questions
 
 The above definitions only allow to state if section `s`, that already contains
 node `n`, is strictly related to node `n`, or if node `n` strictly belongs to
 section `s`. This means that, in order to make a statement, the relationship
 between a section and its nodes must already exist.
 
-* So, why are nodes `n,x,y in N` related to sections `s,t in S`?
-* for `(n != x != y)` and `(s != t)`
+* So, why is node `n in N` related to section `s in S`?
 
 There is no definition that clarifies under which circumstances certain nodes
 have to be associated with a given section.
 
 * `(s ??? y)`, if `(s related-to x)` and `(y related-to x)`
+* for `x,y in N`, `s in S` and `(x != y)`
 
-There is no clarification of any relationship between a section
-and those nodes that are related to some other, already associated node.
+There is no clarification of any relationship between a section and those nodes
+that are related to some other, already associated node.
 
 * `(s ??? t)`, if `(s related-to x)`, `(t related-to y)` and `(x related-to y)`
+* for `x,y in N`, `s,t in S`, `(x != y)`, and `(s != t)`
 
-There is no clarification of any relationship between two different sections.
+There is no clarification of any relationship between two different sections,
+if all the content nodes of a section are also content nodes of another section.

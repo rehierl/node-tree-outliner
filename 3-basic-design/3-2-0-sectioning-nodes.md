@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design - sectioning nodes
+# Design - sectioning nodes (NxS)
 
 Because a section is a sequence of strictly subsequent nodes, the definition
 of a sectioning node only needs to tell an algorithm when to open and when

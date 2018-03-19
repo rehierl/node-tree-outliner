@@ -13,8 +13,15 @@ like climbing a mountain by moving backwards
 
 <!-- ======================================================================= -->
 
+Note that no definition, not even a modified definition, can close the
+theoretical, omnipresent universal section. Because of that, non-default
+definitions may be allowed to close the root section (which does not mean
+that that would be reasonable).
+
 **TODO**
-a heading that has a rank may act as an end-marker node
+a heading that has a rank may act as an end-marker node -
+that is, a rank adds an additional role to a heading element -
+could that be used to proof that no t1 section can be closed?
 
 **TODO**
 implicit relationship -> descendants -

@@ -1,37 +1,38 @@
 
 <!-- ======================================================================= -->
-# Associating nodes
+# Associating each node with one section only
 
 **CLARIFICATION**
 Each node can be associated with one section only, if (and only if) the node
 can also be understood to be (implicitly) associated with all ancestors of
 that section.
 
-Consequently, the implicit association with all ancestor sections is used to
-condense the amount of associations, which would otherwise be required by the
-formal definitions, into a single reference per node.
-
-Note that this reference will be referred to as
+Note that this section reference will be referred to as
 the node's strict (or explicit, direct) association.
 
-Note that the only reason, why a node can be associated with a single section
-is, that all formal associations (formal perspective) of a node can be derived
-from its explicit association (practical perspective). And, because of that,
-both perspectives are equivalent.
+Consequently, the implicit association with all ancestor sections is used to
+condense the amount of associations, which would otherwise be required by the
+formal definitions, into a single reference per node. That is, because all
+formal associations (formal perspective) of a node can be derived from its
+explicit association (practical perspective).
 
 **CLARIFICATION**
-A node must be associated with the closest open presequent section.
+The least significant presequent section, which is still open when a node is
+entered, will be referred to as *the (unique) parent section* of that node.
 
-That is, because all other sections, with which that node would have to be
-associated, are ancestor sections to that section. As such, the closest open
-section is the least significant section that is still open. Consequently, it
-is the only section that can be used to represent all the associations of the
-corresponding node.
+Note that this parent section is the nearest (i.e. closest according to the
+node sequence) open presequent section. Put differently, a node's (unique)
+parent section is the least significant open presequent section which was
+declared last, before the corresponding node was entered.
+
+Note that all other sections, with which that node would have to be associated
+according to the formal perspective, are ancestors of that section. And, because
+of that, this section is the only section which can be used to represent all
+the associations of the corresponding node.
 
 **CLARIFICATION**
-The section, with which a node must be associated, is referred to as the
-node's parent section. As such, a node's parent section defines the most
-important, implementation specific property:
+A node's unique parent section defines the following,
+implementation specific property:
 
 ```
 Section Node.parentSection
@@ -41,11 +42,15 @@ Section Node.parentSection
 A node's parent section can be understood to define the location of a node
 with regards to the section hierarchy (i.e. its logical context).
 
+<!-- ======================================================================= -->
+## derived statements
+
 **CLARIFICATION**
 If each node is associated with one section only, then any ancestor section,
-which is not the node's parent section, can be understood to be "loosely
-suspended". That is, because for as long as that parent section is open, no
-node will be strictly associated with such a seemingly suspended section.
+which is not the current node's parent section, can be understood to be
+"loosely suspended". That is, because for as long as that parent section is
+open, no node will be strictly associated with such a seemingly suspended
+section.
 
 Note that, because a section can not be "strictly suspended" (see the state
 transitions), the term "suspended" must always be understood to be synonymous
@@ -59,10 +64,19 @@ with it, and all those nodes that are associated with one of its subsections.
 That is, in the tree's node order.
 
 Consequently, a section still counts as a subsequence of the tree's node
-sequence. The single `parentSection` reference does not change that.
+sequence. The single `parentSection` reference won't change that.
 
 <!-- ======================================================================= -->
 ## levels of implicitness
+
+```
+NxN + SN => NxS, SxN, SxS
+-------------------------
+
+ ... x N x ... x N x ...
+       x         x
+       S x ... x S
+```
 
 does that reveal/clarify anything?
 

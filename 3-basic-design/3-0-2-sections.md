@@ -4,7 +4,7 @@
 
 In principle, an algorithm must traverse the node tree in order to visit and
 associate each node with at least one section. Because of that, a section can
-initially be understood as a logical group of nodes.
+initially be understood as a (logical) group of nodes.
 
 <!-- ======================================================================= -->
 ## set of sections (S), SxN
@@ -123,10 +123,10 @@ implementation specific object properties:
 A sectioning node does not belong to the section it declares.
 
 Even though a sectioning node is insequent and thus not subsequent to itself,
-it is technically still possible to associate a sectioning node with the section
-it declares. That is, because an algorithm knows about a section as soon as it
-enters the section's sectioning node. However, this does not imply that it would
-be reasonable to associate a sectioning node with its own section.
+it is technically still possible to associate a sectioning node with the
+section it declares. That is, because an algorithm knows about a section as
+soon as it enters the section's sectioning node. However, this does not imply
+that it would be reasonable to associate a sectioning node with its own section.
 
 Note that associating a sectioning node with its own section can be seen to
 add a node to its own context. That is, a sectioning node would consequently
@@ -175,8 +175,8 @@ statement is on nodes that are unassociated with the corresponding section.
 A section is said to be presequent to another section, if its
 sectioning node is presequent to the other section's sectioning node.
 
-Note that, except for a tree's first and last nodes, any node is presequent to
-the tree's last and subsequent to the tree's first node.
+Note that, except for a tree's first and last nodes, any node is presequent
+to the tree's last and subsequent to the tree's first node.
 
 **CLARIFICATION**
 A sectioning node can only be associated with a presequent section.
@@ -232,19 +232,19 @@ Any node always belongs to at least one section.
 
 Because a section can not exist without a presequent sectioning node, the root
 node, with which an algorithm has to begin, can not be associated with any
-predeclared section. That is, because there is no sectioning node presequent to
-it that could declare such a presequent section.
+predeclared section. That is, because there is no sectioning node presequent
+to it that could declare such a presequent section.
 
-However, the root node can be seen to be embedded into a theoretical universal
-section `u`. As such, this universal section must be understood to be declared
-by a virtual sectioning node that always is presequent to any node. This
-universal section must also be understood to never end. Because of that, the
-universal section can be understood to be omnipresent. That is, any node always
-is related to it (aka. global scope).
+However, the root node can be seen to be embedded into a theoretical
+universal section `u`. As such, this universal section must be understood
+to be declared by a virtual sectioning node that always is presequent to
+any node. This universal section must also be understood to never end.
+Because of that, the universal section can be understood to be omnipresent.
+That is, any node always is related to it (aka. global scope).
 
-Consequently, and because of this formal concept, any node within a tree always
-belongs to at least one section. Put differently, there is no node that does
-not belong to any section at all.
+Consequently, and because of this formal concept, any node within a tree
+always belongs to at least one section. Put differently, there is no node
+that does not belong to any section at all.
 
 **CLARIFICATION**
 The root node is a sectioning node
@@ -259,3 +259,12 @@ they would all appear lost inside of the global scope.
 Consequently, the root node of a tree must always be treated as a sectioning
 node. That is especially true, if the algorithm's initial node is the tree's
 absolute root node (e.g. the HTML `<body>` element).
+
+**CLARIFICATION**
+Any node sequence, in the context of an outline algorithm, always contains
+at least one sectioning node. Put differently, any node sequence always has
+a first and a last sectioning node. In addition to that, the first node of
+a node sequence always is a sectioning node.
+
+That is, because the node sequence's first node (i.e. the root node) must
+be treated as a sectioning node.

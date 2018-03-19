@@ -77,34 +77,40 @@ path is therefore said to be semantically consistent.
 <!-- ======================================================================= -->
 ## derived statements
 
-(downwards):
-Section `s` loosely contains any descendant of node `x`,
+**CLARIFICATION**
+(downwards): Section `s` loosely contains any descendant of node `x`,
 if section `s` strictly contains node `x`.
 
 * `(s strictly-contains x)` and `(s loosely-contains (x+i))`
 * `(s contains x)` and `(s contains (x+i))`
 
-(upwards):
-Any descendant of node `x` loosely belongs to section `s`,
+**Memory hook**
+Strictly associating a single node is therefore equivalent to associating
+a whole subtree of nodes. With the root of that subtree being the strictly
+associated node.
+
+**CLARIFICATION**
+(upwards): Any descendant of node `x` loosely belongs to section `s`,
 if node `x` strictly belongs to section `s`.
 
 * `(x strictly-belongs-to s)` and `((x+i) loosely-belongs-to s)`
 * `(x belongs-to s)` and `((x+i) belongs-to s)`
 
-(upwards, rephrased):
-Node `y` loosely belongs to section `t`, if `y` is a descendant of node `x`
-and if `x` strictly belongs to `t`:
+**CLARIFICATION**
+(upwards, rephrased): Node `y` loosely belongs to section `t`, if `y` is a
+descendant of node `x` and if `x` strictly belongs to `t`:
 
 * `(y loosely-belongs-to t)`, if some `x in N` exists
   such that `(x ancestor-of y)` and `(x strictly-belongs-to t)`
 
-Consequently, any node automatically loosely belongs to any section that
-strictly contains any of its ancestors. Each node can therefore belong to
-any number of sections.
+**Memory hook**
+Any node loosely belongs to any section that strictly contains any of its
+ancestors. Each node may therefore loosely belong to any number of sections.
 
 These loose relationships can not be undefined because they will be established
-automatically as soon as an ancestor is strictly associated with a section.
+automatically by the structure of the node tree as soon as an ancestor is
+strictly associated with a section.
 
-The only method to break up these loose relationships is to change the structure
-of the node tree. Obviously, that is not allowed because the purpose of these
+The only method to break up those loose relationships is to change the structure
+of the node tree. Obviously, that is not allowed because the purpose of the
 associations is ultimately to represent the tree's logical structure as is.

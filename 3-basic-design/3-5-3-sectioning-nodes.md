@@ -50,10 +50,17 @@ From the introduction of sectioning nodes:
 From the definition of section states/events:
 
 * Associating sectioning nodes with their own section can be seen to be in
-  conflict with the open event of a section. That is, because nodes would have
-  to be associated before a section can truly count as being open. However, a
-  section is guaranteed to exist by the time its sectioning node is being
-  entered.
+  conflict with the open event of a section. That is, because nodes would
+  have to be associated before a section can truly count as being open.
+  However, a section is guaranteed to exist by the time its sectioning node
+  is being entered.
+
+From the definition of inner sections:
+
+* Not associating sectioning nodes with their own sections guarantees that the
+  section hierarchy is acyclic. That is, because a section never is a subsection
+  to itself. Which is because a parent section always has more content nodes
+  than any of its inner sections.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
