@@ -39,11 +39,8 @@ Section Node.parentSection
 ```
 
 **CLARIFICATION**
-A node's parent section can be understood to define the location of a node
-with regards to the section hierarchy (i.e. its logical context).
-
-<!-- ======================================================================= -->
-## derived statements
+A node's parent section can be understood to define the location of a node with
+regards to the section hierarchy (i.e. its logical context).
 
 **CLARIFICATION**
 If each node is associated with one section only, then any ancestor section,
@@ -54,8 +51,8 @@ section.
 
 Note that, because a section can not be "strictly suspended" (see the state
 transitions), the term "suspended" must always be understood to be synonymous
-to "loosely or seemingly suspended". That is, because these sections still
-count as being "open".
+to "loosely or seemingly suspended". That is, because these sections are not
+closed (i.e. still open).
 
 **CLARIFICATION**
 If each node is associated with one section only, then a section's complete
@@ -65,20 +62,6 @@ That is, in the tree's node order.
 
 Consequently, a section still counts as a subsequence of the tree's node
 sequence. The single `parentSection` reference won't change that.
-
-<!-- ======================================================================= -->
-## levels of implicitness
-
-```
-NxN + SN => NxS, SxN, SxS
--------------------------
-
- ... x N x ... x N x ...
-       x         x
-       S x ... x S
-```
-
-does that reveal/clarify anything?
 
 <!-- ======================================================================= -->
 ## clarified definition of top-level nodes

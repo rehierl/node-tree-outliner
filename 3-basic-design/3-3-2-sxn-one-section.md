@@ -17,22 +17,22 @@ with it. That statement is however a direct result of the `SxN` relation and,
 as such, does not state anything new.
 
 <!-- ======================================================================= -->
-## pa: (n-k) -> s
+## pa: nk -> s
 
 ```
-r x ... x (n-k) x ... x (n-1) x (n:s) x ...
+r x ... x nk x ... x n1 x (n:s) x ...
 ```
 
 A path `pa` can be defined which connects
 the ancestors of node `n` with section `s`.
 
-*  `pa := (n-k,...,n,s) in N{+}S`
-* `(n-k) contains ... (n) belongs-to (s)`
+*  `pa := (nk,...,n,s) in N{+}S`
+* `nk contains ... n belongs-to s`
 
-The same applies, if such a path is inverted:
+These paths can be inverted:
 
-* `pa' := (s,n,...,n-k) in SN{+}`
-* `(s) contains (n) ... belongs-to (n-k)`
+* `pa' := (s,n,...,nk) in SN{+}`
+* `s contains n ... belongs-to nk`
 
 Here, the relations used to create such a path have antonymous semantics
 (i.e. `contains` vs. `belongs-to`) and, as such, different orientation.
@@ -46,29 +46,28 @@ The reason why no clear conclusion can be drawn is, that the ancestors of node
 are not ancestral (i.e. not in `prefixOf(pa)`) to it. Hence, a path `p` could
 be defined which connects some node `o` with section `s`
 
-* `p := (o,...,r,...,n-k,...,n,s) in N{+}S`
-* `(o) ... belongs-to ... (r) ... contains ... (nx) belongs-to s`
+* `p := (o,...,r,...,nk,...,n,s) in N{+}S`
+* `o belongs-to ... r contains ... nk belongs-to s`
 
 Obviously, such a path would be even more inconsistent.
 
 <!-- ======================================================================= -->
-## pd: s -> (n+k)
+## pd: s -> nk
 
 ```
-r x ... x (x:s) x (x+1) x ... x (x+k) x ...
-                x (y+1) x ... x (y+l) x ...
+r x ... x (n:s) x ... x nk x ...
 ```
 
 A path `pd` can be defined which connects
-section `s` with nodes that all are descendant to `n`:
+section `s` with all descendant nodes of `n`:
 
-* `pd .= (s,x,...,x+k) in SN{+}`
-* `(s) contains (x) ... contains (x+k)`
+* `pd .= (s,n,...,nk) in SN{+}`
+* `s contains n contains ... nk`
 
-The same applies, if such a path is inverted:
+These paths can be inverted:
 
-* `pd' := (x+k,...,x,s) in N{+}S`
-* `(x+k) belongs-to ... (x) belongs-to s`
+* `pd' := (nk,...,n,s) in N{+}S`
+* `nk belongs-to ... n belongs-to s`
 
 Here, the relations used to create such a path all have the same orientation
 (i.e. superordinate-to-subordinate, or subordinate-to-superordinate). Such a
@@ -78,34 +77,24 @@ path is therefore said to be semantically consistent.
 ## derived statements
 
 **CLARIFICATION**
-(downwards): Section `s` loosely contains any descendant of node `x`,
-if section `s` strictly contains node `x`.
+(downwards): Section `s` loosely contains descendant `y` of node `x`,
+if `s` strictly contains `x`.
 
-* `(s strictly-contains x)` and `(s loosely-contains (x+i))`
-* `(s contains x)` and `(s contains (x+i))`
+* `(s strictly-contains x)` and `(s loosely-contains y)`
+* `(s contains x)` and `(s contains y)`
 
-**Memory hook**
-Strictly associating a single node is therefore equivalent to associating
-a whole subtree of nodes. With the root of that subtree being the strictly
-associated node.
+Strictly associating a node is equivalent to associating a whole subtree of
+nodes. With the root of that subtree being the strictly associated node.
 
 **CLARIFICATION**
-(upwards): Any descendant of node `x` loosely belongs to section `s`,
-if node `x` strictly belongs to section `s`.
+(upwards): Descendant `y` of node `x` loosely belongs to section `s`,
+if `x` strictly belongs to `s`.
 
-* `(x strictly-belongs-to s)` and `((x+i) loosely-belongs-to s)`
-* `(x belongs-to s)` and `((x+i) belongs-to s)`
+* `(x strictly-belongs-to s)` and `(y loosely-belongs-to s)`
+* `(x belongs-to s)` and `(y belongs-to s)`
 
-**CLARIFICATION**
-(upwards, rephrased): Node `y` loosely belongs to section `t`, if `y` is a
-descendant of node `x` and if `x` strictly belongs to `t`:
-
-* `(y loosely-belongs-to t)`, if some `x in N` exists
-  such that `(x ancestor-of y)` and `(x strictly-belongs-to t)`
-
-**Memory hook**
-Any node loosely belongs to any section that strictly contains any of its
-ancestors. Each node may therefore loosely belong to any number of sections.
+A node belongs to any section that strictly contains any of its ancestor nodes.
+Each node may therefore loosely belong to any number of sections.
 
 These loose relationships can not be undefined because they will be established
 automatically by the structure of the node tree as soon as an ancestor is
