@@ -6,19 +6,20 @@
 The default definitions allow to define any section hierarchy.
 
 Note that the "height" of a section hierarchy, if drawn onto a flat surface,
-can initially be understood as the section tree's vertical size (aka. outline
-height). In addition to that, the "width" of a section hierarchy can loosely be
-understood to refer to the tree's overall horizontal size (e.g. the largest
-number of sections on any outline level). Therefore, any section hierarchy can
-be defined, if both dimensions are unrestricted. Which is, because any section
-can be understood to represent its very own section hierarchy.
+can initially be understood as the section tree's vertical dimension (e.g.
+outline height). In addition to that, the "width" of a section hierarchy can
+loosely be understood to refer to the tree's overall horizontal dimension
+(e.g. the largest number of sections on any outline level). Therefore, any
+section hierarchy can be defined, if both dimensions are unrestricted. Which
+is, because any section can be understood to represent its very own section
+hierarchy.
 
 * A section hierarchy of any height/depth can be defined.
 
 By default, no sectioning node has the characteristic to close a presequent
 section. Because of that, a subsequent section always is a subsection to all
 open presequent sections. Consequently, the default definitions allow to
-arbitrarily increase the height of any section hierarchy.
+increase the height of any section hierarchy.
 
 * A section hierarchy of any width can be defined.
 
@@ -26,7 +27,7 @@ By default, any section ends with its parent container (i.e. its default scope).
 Because of that, a subsequent section, whose sectioning node is entered after
 the parent container of a presequent section was exited, is independent of
 such a presequent section. Consequently, the default definitions allow to
-arbitrarily increase the width of any section hierarchy.
+increase the width of any section hierarchy.
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
@@ -57,12 +58,13 @@ height/depth of the section hierarchy.
 In addition to that, sectioning node `n5` is the next sibling of `n1`. Section
 `s5` is therefore independent to `s1` and all of its subsections. Because of
 that, `s5` is a subsection to the parent section of `s1` (i.e. a sibling
-section to `s1`). Consequently, any type-1 sectioning node that is independent
-to another type-1 section has the potential to increase the width of the overall
-section hierarchy.
+section to `s1`). Consequently, any type-1 sectioning node that is
+independent to another type-1 section potentially increases the width of
+the overall section hierarchy.
 
 Because similar statements can be made with regards to all other nodes in the
-above fragment, processing it will result in the following section hierarchy:
+above fragment, processing that fragment will result in the following section
+hierarchy:
 
 ```
 |------- x-axis (height)
@@ -79,7 +81,7 @@ y-axis (width)
 ```
 
 Note that the larger the last index on the x-axis, the higher the section
-hierarchy is. This dimension obviously corresponds with the node level/height
+hierarchy is. This dimension therefore corresponds with the node level/height
 (aka. outline height/depth) of a section.
 
 Note that the larger the last index on the y-axis, the wider the section
@@ -96,10 +98,10 @@ s0 -|- s1 -|- s2 - s3
     |- s9
 ```
 
-Note that the section hierarchy remains essentially the same, if sectioning node
-`n5` is replaced by an inactive container node. That is, because `n5` will still
-be associated with `s0`. And, because of that, `s6` and `s7` will still be
-descendant sections to `s0`.
+Note that the section hierarchy remains essentially the same, if sectioning
+node `n5` is replaced by an inactive container node. That is, because `n5`
+will still be associated with `s0`. And, because of that, `s6` and `s7` will
+still be descendant sections to `s0`.
 
 Note that the inactive container node `n5` does not act as the parent container
 of any section. That is, because each type-1 section has its own parent
@@ -238,7 +240,7 @@ n1            n5            n9
 Note that the injection of explicit inactive container nodes (aka. parent
 containers) allows to increase the width of a section hierarchy. Because
 of that, type-2 sectioning nodes, in combination with parent containers,
-can be used to define any section hierarchy.
+can be used to define a section hierarchy of any width.
 
 As a result, the tree of sections now contains four rtl-paths:
 `(s0,s3)`, `(s0,s4)`, `(s0,s6,s8)` and `(s0,s9)`.

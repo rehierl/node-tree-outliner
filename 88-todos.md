@@ -13,24 +13,16 @@ like climbing a mountain by moving backwards
 
 <!-- ======================================================================= -->
 
+(a misplaced note)
 Note that no definition, not even a modified definition, can close the
-theoretical, omnipresent universal section. Because of that, non-default
-definitions may be allowed to close the root section (which does not mean
-that that would be reasonable).
+theoretical, omnipresent universal section. However, non-default definitions
+may still be allowed to close the root section (which does not mean that that
+would be reasonable).
 
 **TODO**
-a heading that has a rank may act as an end-marker node -
+a heading that has a rank may/can act as an end-marker node -
 that is, a rank adds an additional role to a heading element -
 could that be used to proof that no t1 section can be closed?
-
-**TODO**
-implicit relationship -> descendants -
-implicit associations -> one section only -
-combine levels of implicitness? -
--> add to 3-5-1-associations?
-
-construction of a semantically consistent path
-section.parentSection property
 
 **TODO**
 top-level nodes -
@@ -46,6 +38,21 @@ depends on: allow/disallow closing type-1 sections -
 is that loop sufficient? -
 i.e. with regards to implicit associations -
 -> in 3-8-1-implementation
+
+**TODO**
+add the term "structural integrity"?
+
+**TODO**
+proof that a path in `SN{+}` exists for each path in `S{+}N` -
+and by that, proof that those paths allow to make the same statements -
+this would confirm the conclusions drawn from the initially defined
+`SN{+}` paths. that is, because the corresponding statements can then
+also be derived from the `S{+}N` paths -
+this would suggest/indicate that the design is in itself consistent -
+this would also serve as a formal basis for 2D/3D height maps -
+what is there to proof? -> each node is associate with a section -
+the root node is associated with the universal section -
+-> continue 3-5-3-levels-of-implicitness
 
 **TODO**
 an algorithm can in principle start at any node -

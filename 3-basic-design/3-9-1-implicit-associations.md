@@ -36,8 +36,7 @@ is not the case between `s4` and `s1`. Because of that, `n4` may close `s3`,
 but not `s1`. Consequently, `s4` is like `s3` by structural relationship still
 a subsection to `s1`.
 
-Note that `n5` may close `s1` and, just like `n1`,
-may technically even close `s0`.
+Note that `n5` may close `s1` and, just like `n1`, technically even `s0`.
 
 <!-- ======================================================================= -->
 ## selecting the parent section
@@ -66,7 +65,7 @@ execute the following loop:
    whether there (still) are sections that need to be closed.
 2. Exit the loop, if no sections need to be closed (i.e. break).
 3. Because sections can not be closed arbitrarily, the algorithm
-   has to test next, if the declared section *is not* a forced
+   has to ensure next, that the declared section *is not* a forced
    subsection of the current section.
 4. If that test failed (i.e. the declared section *is* a forced
    subsection), then the algorithm can not close the current section.
@@ -81,7 +80,7 @@ Finally, the declared section can be added as subsection to the (new)
 current section. After that, the declared section is the new current section.
 
 Note that it is not possible to bypass this loop in order to improve the
-performance by "skipping some of the ancestor section". That is, because ...
+performance by "skipping some of the ancestor sections". That is, because ...
 
 * (1) any open section can itself be a forced subsection of its ancestor
   sections (e.g. `s3` in case of entering `n4`). If there is even one such
@@ -118,14 +117,15 @@ section. Because of that, multiple options are available, each with its own
 advantages and disadvantages:
 
 Note that all options, except for the last one, technically allow to close
-type-1 sections. That is, if it would not be allowed to close certain sections,
-then additional, case dependent tests would be required.
+type-1 sections from within such a section. That is, if it would not be allowed
+to execute these kind of close operations, then additional, case dependent tests
+would be required.
 
 Note that the universal section has no existing parent container (i.e. virtual).
 This aspect might have to be taken into account, if a close modifier instructs
 the algorithm to close all open sections (including the root section). Whether
 or not this should even be allowed/possible is an aspect that still needs to be
-investigated.
+taken care of.
 
 **Option 1:** parent container references, node identifiers
 
@@ -147,7 +147,8 @@ increase the memory footprint of the resulting outline. Not to mention the
 additional efforts required related to documentation, update requirements,
 etc. Hence, these references can, but should not be used by implementations.
 That is, unless they have any additional use besides the outline algorithm
-itself.
+itself, there is no need to add such a permanent property to each section
+object.
 
 Note that node references are very similar to unique number identifier values.
 Because of that, and depending on an implementation's specific environment

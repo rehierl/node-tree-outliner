@@ -200,6 +200,23 @@ NxN + SN => NxS, SxN, SxS
 * `(s,n) in SxN` - section `s` contains node `n`
 * `(s1,s2) in SxS` - section `s1` contains section `s2`
 
+**CLARIFICATION**
+The node order of the section tree is defined by the node order of the node
+tree. In addition to that, the section tree will be created in the order in
+which its sections will be entered during the traversal of the section tree.
+
+That is, because due to the node order of the node tree, all parent sections
+will be entered/created/opened before any subsection is entered. In addition
+to that, the sectioning nodes of sibling sections are entered according to the
+node order of the node tree (i.e. in the sequence in which they appear in the
+node sequence, which is based upon the node order of the node tree).
+
+Note that not any tree data structure is suited to represent the tree of
+sections. That is, because an AVL tree, for example, will repeatedly trigger
+balancing operations, if entries are added in an orderly fashion (e.g. in
+ascending order). Consequently, a list-based data structure would be more
+appropriate.
+
 <!-- ======================================================================= -->
 ## a section's parent section
 

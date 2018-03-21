@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # Design - outline depth/height
 
-Note that there is no easy way to properly define the width of a node/section
+Note that there is no one way to properly define the width of a node/section
 tree. In addition to that, this metric does not seem to have any significant
-application.
+application. Hence, a proper definition is not available.
 
 <!-- ======================================================================= -->
 ## outline depth/height
@@ -28,7 +28,7 @@ Note that the node level of a node is defined as "1 + the number of edges in
 between the node and the tree's root" (In short: "1 + the number of ancestors
 that a node has"). Because of that, the term "outline depth" is, in the context
 of a section tree, synonymous to "node level". Consequently, the outline depth
-of a section can also be referred to as the section's "outline level".
+of a section can also be referred to as the section's "outline/node level".
 
 **CLARIFICATION**
 The outline depth (or level) of a node is the outline depth of its parent
@@ -43,18 +43,17 @@ The outline height of a section is the distance to its furthest descendant
 leaf section. That is, the most amount of jumps/edges between that leaf and
 the corresponding section.
 
-That is, the height of a leaf section is 0. The height of a section which only
-contains a single and empty child section is 1. The height of a section that
-only has such a subtree (i.e. a child section that itself only has one empty
-child section) is 2.
+That is, the height of a leaf (or empty) section is 0. The height of a section
+which only contains a single and empty child section is 1. The height of a
+section that only has such a subtree (i.e. a child section that itself only has
+one empty child section) is 2.
 
 Note that, similar as above, and in the context of a section tree, the term
 "outline height of a section" is synonymous to the "height of a node".
 
 Note that a node in the node tree can not have an "outline height". That is,
-because a node does in general not have any descendant sections (Although
-declared sections could be seen to be descendant to their sectioning nodes
-- i.e. "descendant" with regards to "subordinate").
+because a node never has a descendant section (Although declared sections can
+be understood to be descendant/subordinate to their sectioning nodes.
 
 **CLARIFICATION**
 The outline height of a section tree is the outline height of its root section.
@@ -105,11 +104,11 @@ within the node sequence) and the y-axis the outline level of that node.
 
 As such, the outline level can be understood to shift a node into the next
 dimension by associating a height value with it. That is, the outline level
-allows to turn a one-dimensional (short: 1D) listing (i.e. the node list)
-into a 2D graph, which can be referred to as the node tree's 2D height map.
+allows to turn a one-dimensional (short: 1D) listing of nodes into a 2D graph,
+which can be referred to as the node tree's 2D height map.
 
 Note that the 2D height map could be displayed e.g. instead of a textual,
-low resolution overview which some editors allow to use in addition to,
+low resolution overview, which some editors allow to use in addition to,
 or instead of a scrollbar (i.e. a self-contained representation).
 
 Note that, except for the root node, each node has a well defined (unique)
@@ -121,7 +120,7 @@ Similar to that, and if the nodes of a node tree are drawn onto a flat, 2D
 surface (the node level on the x-axis, the node's level internal index on
 the y-axis), then the node's outline level can be used to shift the nodes
 into the 3rd dimension (the outline level on the z-axis). This can then be
-understood to represent the 3D height map of the corresponding node tree.
+understood as the 3D height map of the corresponding node tree.
 
 Another way to display the outline depth, and therefore allow to visually
 indicate the associations, could be to indent the textual definition of the

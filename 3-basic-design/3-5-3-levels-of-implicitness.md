@@ -7,7 +7,7 @@
  -------------------------------
 
  R x ... x N x ... x N x ... x L
- x         x         x
+ x         x         x         x
  U x ... x S x ... x S x ... x S
 ```
 
@@ -17,21 +17,21 @@
 <!-- ======================================================================= -->
 ## SN{+}
 
-Recall the statements with regards to the descendants of an associated node.
+Recall the statements with regards to the descendants of associated nodes.
 
 **CLARIFICATION**
 (downwards): Section `s` loosely contains descendant `y` of node `x`,
 if `s` strictly contains `x`.
 
-Strictly associating a node is equivalent to associating a whole subtree of
-nodes. With the root of that subtree being the strictly associated node.
+Associating a node is equivalent to associating a whole subtree of nodes.
+With the root of that subtree being the strictly associated node.
 
 **CLARIFICATION**
 (upwards): Descendant `y` of node `x` loosely belongs to section `s`,
 if `x` strictly belongs to `s`.
 
-A node belongs to any section that strictly contains any of its ancestor nodes.
-Each node may therefore loosely belong to any number of sections.
+A node belongs to any section with which any of its ancestors is associated.
+Each node may belong to any number of sections.
 
 <!-- ======================================================================= -->
 ## S{+}N
@@ -41,7 +41,7 @@ be combined in order to define semantically consistent paths, which point from
 subordinate subsequent nodes into the direction of superordinate presequent
 (sectioning) nodes:
 
-```
+``` 
 u x ... x sk x ... x s x ...
 ```
 
@@ -80,14 +80,15 @@ A section contains all the nodes of its descendant sections.
 <!-- ======================================================================= -->
 ## derived statements
 
-Obviously, these paths are not limited to one section, or one node only.
-That is, path combinations combinations are possible: `p in S{+}N{+}`.
+**CLARIFICATION**
+For each path `p in SN{+}` there exists a path `q in S{+}N`.
 
-<!-- ======================================================================= -->
+Note that ...
 
-**TODO**
-proof that a path in `SN{+}` exists for each path in `S{+}N` -
-this proof would then confirm the conclusions drawn from the initially
-defined `SN{+}` paths. that is, because the corresponding statements can
-then also be derived from the `S{+}N` paths -
-it would also strongly indicate that the design is in itself consistent -
+* all nodes are organized inside of a rooted ordered tree of nodes
+* each node is associated with a section (the root with the universal section)
+* any section is a strict or loose subsection to the universal section.
+
+**CLARIFICATION**
+Obviously, these paths are not limited to one section, or one node.
+That is, path combinations are possible: `p in S{+}N{+}`.

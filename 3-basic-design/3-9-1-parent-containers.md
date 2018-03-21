@@ -34,8 +34,8 @@ trace of sequences:     -  node event:
 
 Note that the sequence of sections just before entering the parent container
 is identical to the sequence of sections just after exiting said container.
-Because of that, an implementation must restore the sequence of sections
-when exiting a parent container.
+Because of that, an implementation must basically restore the sequence of
+sections when exiting a parent container.
 
 As mentioned before, any parent node can in principle act as the parent
 container of one or more sections. The only exception to that rule are the
@@ -81,7 +81,8 @@ Note that ...
 * all nodes are associated while they are being entered. Because of that, a
   parent container's parent section reference is always set when the parent
   container is being exited.
-* the root node must be associated with the universal section.
+* the root node must be associated with the universal section. This edge
+  case is relevant when the algorithm is about to exit the root node.
 * the remaining open inner sections will be closed in reverse order. That
   is, subsections will be closed before their ancestor sections are closed.
 * an implementation does not have to know how many sections need to be closed.

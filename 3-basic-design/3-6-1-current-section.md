@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # Design - current section
 
-At any given point in time, one or more sections always count as being open.
-This set of open sections will be referred to as the current set of open
-sections (`cs` for "current-set").
+At any given point in time during the traversal of the node tree, one or more
+sections always count as being open. This set of open sections will be referred
+to as the current set of open sections (`cs` for "current-set").
 
 * `cs := { s0, s1, s2, ... }` and `(cs subset-of S)`
 * `S` is the set of all declared/known sections
@@ -26,7 +26,7 @@ list of (open) sections", or "the (current) sequence of (open) sections".
 Note that this list does by itself not represent an existing list object. It
 merely represents an ordered listing of sections that, at a given point in
 time, still count as being open. That is, this list can be understood as the
-result of an implicit lookup operation.
+result of a theoretical lookup operation.
 
 Note that this lookup operation is completely based upon those nodes that have
 already been visited (i.e. presequent nodes). That is, an implementation could
@@ -122,6 +122,12 @@ that no parent container of an ancestor section is a descendant to the
 parent container of any of its subsections.
 
 **CLARIFICATION**
+The above cases therefore are independent of which types of sectioning nodes
+are encountered. That is, if a section is declared, then that section will be
+added to the end of the list of sections. If one or more sections are closed,
+then these sections will be removed from the end of that list.
+
+**CLARIFICATION**
 If multiple sections need to be closed during the same node event, then those
 sections need to be closed in reverse order. That is, if `s6` was opened before
 `s7`, then `s7` needs to be closed before `s6` can be closed.
@@ -207,21 +213,20 @@ Note that the parent section of any node always is located at the end of
 the current sequence. That is, when being entered, a node will be associated
 with the last/top-most section of that sequence/stack.
 
-Note that it does not really matter, if `n0` is a type-1 sectioning node, or an
-inactive parent container. If `n0` would be such a container node, then `s0`
-would represent the section that was used to associate `n0`. Consequently, `s0`
-would not have to be created when entering, and closed when exiting `n0`. In
-addition to that, all section sequences would begin with some common prefix,
-which would always end in `s0`.
+Note that, if `n0` is a type-1 sectioning node, or an inactive parent container,
+then `s0` would represent the section that was used to associate `n0`. Because
+of that, `s0` would not have to be created when entering, and closed when
+exiting `n0`. In addition to that, all section sequences would begin with some
+common prefix, which would always end in `s0`.
 
 **DEFINITION**
 The last/top-most section in the list/stack of open sections will be referred
 to as the "current section". A reference to this section, provided by the
 global `Section currentSection` variable, will be used to associate each node.
 This `currentSection` variable must be used to set the `Node.parentSection`
-property of the subsequent node that is will be entered next.
+property of the subsequent node that will be entered next.
 
-In short: The "current section" is the current open, least significant section.
+In short: The "current section" is the current, least significant open section.
 
 Note that an explicit reference variable is optional, if an implementation
 chooses to maintain an explicit stack of open sections. That is, because the
@@ -246,7 +251,7 @@ A section sequence represents a path in the tree of sections, which connects
 the root section with the current section. That is, the section sequence is
 just another rooted path of nodes.
 
-Note that the overall trace of lists has itself no particular order. That
+Note that the overall trace of sequences has itself no particular order. That
 is, because any sequence may appear multiple times at different positions.
 In order to get a specific order, one would have to exclude those repetitions,
 which would require a clear definition of when to log a list of sections
@@ -264,23 +269,3 @@ Beginning with a reference to the current section, one would just have to
 traverse upwards, using the `Section.parentSection` properties, until the
 root section is reached. Note however that this traversal will visit those
 sections in reversed/bottom-up order.
-
-<!-- ======================================================================= -->
-## derived statements
-
-**CLARIFICATION**
-The node order of the section tree is defined by the node order of the node
-tree. In addition to that, the section tree will be created in the order in
-which its sections will be entered during the traversal of the section tree.
-
-That is, because due to the node order of the node tree, all parent sections
-will be entered/created/opened before any subsection is entered. In addition
-to that, the sectioning nodes of sibling sections are entered according to the
-node order of the node tree (i.e. in the sequence in which they appear in the
-node sequence, which is based upon the node order of the node tree).
-
-Note that not any tree data structure is suited to represent the tree of
-sections. That is, because an AVL tree, for example, will repeatedly trigger
-balancing operations, if entries are added in an orderly fashion (e.g. in
-ascending order). Consequently, a list-based data structure would be more
-appropriate.
