@@ -2,7 +2,8 @@
 <!-- ======================================================================= -->
 # List of things to do
 
-The ultimate goal is to leave no question unanswered.
+The ultimate goal is to leave no question unanswered -
+develop a design that can be used to explain all possible circumstances -
 
 A painfully slow and nerve wrecking process -
 It looks like, I'm just too darn stubborn to give up -
@@ -12,27 +13,7 @@ know where and how to continue -
 like climbing a mountain by moving backwards
 
 <!-- ======================================================================= -->
-
-(a misplaced note)
-Note that no definition, not even a modified definition, can close the
-theoretical, omnipresent universal section. However, non-default definitions
-may still be allowed to close the root section (which does not mean that that
-would be reasonable).
-
-**TODO**
-a heading that has a rank may/can act as an end-marker node -
-that is, a rank adds an additional role to a heading element -
-could that be used to proof that no t1 section can be closed?
-
-**TODO**
-top-level nodes -
-with regards to the support of transformations -
--> expand in 3-8-1-implementation
-
-**TODO**
-use/compare node levels of sectioning nodes -
-depends on: allow/disallow closing type-1 sections -
--> expand in 3-8-1-implementation
+## minor/isolated/mixed
 
 **TODO**
 is that loop sufficient? -
@@ -40,7 +21,8 @@ i.e. with regards to implicit associations -
 -> in 3-8-1-implementation
 
 **TODO**
-add the term "structural integrity"?
+coin the term "a design's structural integrity"? -
+i.e. a design must be in itself consistent -
 
 **TODO**
 proof that a path in `SN{+}` exists for each path in `S{+}N` -
@@ -66,81 +48,7 @@ type-1 sectioning node -
 not the case when reusing the title element -
 
 <!-- ======================================================================= -->
-## transformations
-
-(type-1 <=> type-2)
-
-interchangeable/synonymous under the default definitions? -
-if so, then the extended definitions must not deviate
-
-not quite -
-t1 sections are in general closed -
-t2 sections are in general open -
-
-describe multistep transformations -
-already done ?
-
-usability perspective => use t2 over t1 -
-especially due to close modifiers -
-algorithmic perspective => use t1 over t2 -
-consistent transformations are a must have
-
-<!-- ======================================================================= -->
-## type-1 sectioning nodes
-
-(close modifiers vs. type-1 sections)
-
-`Section SectioningNode.declaredSection` - singular, not plural -
-in conflict with "one or more (i.e. a list of) sections" -
-
-an outline object type (singular) can be used to represent such a list -
-but that requires an additional type of object
-
-Note that this does not mean that a sectioning node is not allowed to hold
-a reference to the section it declares, which still is a single section only.
-
-<!-- ======================================================================= -->
-## perspectives
-
-**TODO**
-overlay or embedded perspective?
-does the logical hierarchy act as a flat overlay on top of,
-or is it embedded into the node tree? -
-i.e. is the logical structure an integral part of the node tree? -
-similar to looking through a window
-
-**TODO**
-structural vs. logical perspective -
-node tree vs. section tree -
-see "single-s"
-
-**TODO**
-sectioning a tree (i.e. creating an outline for a tree)
-is like grouping nodes on a logical level -
-geographical (node tree) vs. political (sections) -
-
-<!-- ======================================================================= -->
-## tree of sectioning nodes
-
-In order to avoid unexpected results due to implicit associations,
-a node tree should contain a tree of sectioning nodes.
-
-Take a node tree and remove all inactive nodes and those edges that begin or
-end in such a node. The resulting relation should (A) contain the original
-root node, and (B) define a single rooted tree of sectioning nodes.
-
-the parent node of a type-1 sectioning node always is a type-1 -
-the parent node of a type-2 sectioning node always is a type-1 -
-a type-1 sectioning node can be a parent or a leaf -
-a type-2 sectioning node always is a leaf node - nope, data nodes -
-
-issue with tables -
-table/tr/td (sectioning root) -
-can only be a rule of thumb -
-all td-sections are subsections of the section with which a table is associated
-
-<!-- ======================================================================= -->
-## optional end marker nodes?
+## end marker nodes?
 
 The definition of optional end marker nodes (e.g. `<close/>`) must not define
 these nodes to be associated with the sections they are supposed close.
@@ -165,16 +73,112 @@ subections are closed as well - proof that those nodes must be associated with
 the parent section of the most signigicant section being closed? -
 wouldn't add up with close modifiers
 
+**TODO**
+a heading that has a rank may/can act as an end-marker node -
+that is, a rank adds an additional role to a heading element -
+could that be used to proof that no t1 section can be closed?
+
 <!-- ======================================================================= -->
-## general ideas
+## type-1 sectioning nodes
+
+(close modifiers vs. type-1 sections)
+
+`Section SectioningNode.declaredSection` - singular, not plural -
+in conflict with "one or more (i.e. a list of) sections" -
+
+an outline object type (singular) can be used to represent such a list -
+but that requires an additional type of object -
+there must be a good/solid reason for an additional type -
+
+Note that this does not mean that a sectioning node is not allowed to hold
+a reference to the section it declares, which still is a single section only.
 
 **TODO**
-mobile - crib mobile -
-just a visual image
+Note that no definition, not even a modified definition, can close the
+theoretical, omnipresent universal section. However, non-default definitions
+may still be allowed to close the root section (which does not mean that it
+would be reasonable).
+
+**TODO**
+could it be that the definition of sectioning content elements is unspecific -
+because the definition of heading content elements is unspecific -
+"a /parent b" - a heading's section contains "b" -
+so the section of a sectioning content element must also contain "b"? -
+an attempt to be consistent with old definitions? -
+indicates that transformations are not consistent (under these definitions)? -
+
+**TODO**
+Note that the `subsection-of` relationship does not support sibling sections
+at the very top. The underlying `subset-of` relationship does not support
+that. Feels like a solid/formal reason to not close type-1 sections.
+
+**TODO**
+use/compare node levels of sectioning nodes -
+depends on: allow/disallow closing type-1 sections -
+-> expand in 3-8-1-implementation
+
+<!-- ======================================================================= -->
+## tree of sectioning nodes
+
+In order to avoid unexpected results due to implicit associations,
+a node tree should contain a tree of sectioning nodes.
+
+Take a node tree and remove all inactive nodes and those edges that begin or
+end in such a node. The resulting relation should (A) contain the original
+root node, and (B) define a single rooted tree of sectioning nodes.
+
+the parent node of a type-1 sectioning node always is a type-1 -
+the parent node of a type-2 sectioning node always is a type-1 -
+a type-1 sectioning node can be a parent or a leaf -
+a type-2 sectioning node always is a leaf node - nope, data nodes -
+
+issue with tables -
+table/tr/td (sectioning root) -
+can only be a rule of thumb -
+all td-sections are subsections of the section with which a table is associated
+
+<!-- ======================================================================= -->
+## transformations
+
+(type-1 <=> type-2)
+
+interchangeable/synonymous under the default definitions? -
+if so, then the extended definitions must not deviate
+
+not quite -
+t1 sections are in general closed -
+t2 sections are in general open -
+
+describe multistep transformations -
+already done ?
+
+usability perspective => use t2 over t1 -
+especially due to close modifiers -
+algorithmic perspective => use t1 over t2 -
+consistent transformations are a must have
+
+**TODO**
+top-level nodes -
+with regards to the support of transformations -
+-> expand in 3-8-1-implementation
+
+<!-- ======================================================================= -->
+## general thoughts
+
+**TODO**
+overlay or embedded perspective?
+does the logical hierarchy act as a flat overlay on top of,
+or is it embedded into the node tree? -
+i.e. is the logical structure an integral part of the node tree? -
+similar to looking through a window
 
 **TODO**
 "executing" an algorithm on a node sequence (event sequence)
 feels a lot like a turing machine
+
+**TODO**
+mobile - crib mobile -
+just a visual image
 
 **compilers** -
 headings <=> variable/parameter declarations -

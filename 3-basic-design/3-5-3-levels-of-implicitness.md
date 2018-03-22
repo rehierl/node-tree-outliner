@@ -31,15 +31,15 @@ With the root of that subtree being the strictly associated node.
 if `x` strictly belongs to `s`.
 
 A node belongs to any section with which any of its ancestors is associated.
-Each node may belong to any number of sections.
+Each node may therefore belong to any number of different sections.
 
 <!-- ======================================================================= -->
 ## S{+}N
 
-Both `*.parentSection` object properties (i.e. `Node.*` and `Section.*`) can
-be combined in order to define semantically consistent paths, which point from
-subordinate subsequent nodes into the direction of superordinate presequent
-(sectioning) nodes:
+The `*.parentSection` object properties (i.e. `Node.*` and `Section.*`)
+combined define semantically consistent paths, which point from subordinate
+subsequent nodes into the direction of superordinate presequent (sectioning)
+nodes:
 
 ``` 
 u x ... x sk x ... x s x ...
@@ -49,7 +49,7 @@ u x ... x sk x ... x s x ...
 * section `sk` is an ancestor of `s`
 * `u` is the universal section
 
-The above object properties allow to define the following paths:
+Those properties allow to define the following paths:
 
 * `p := (n,s,...,sk) in NS{+}`
 * `n belongs-to s belongs-to ... sk`
@@ -60,8 +60,8 @@ These paths can be inverted:
 * `sk contains ... s contains n`
 
 **CLARIFICATION**
-(upwards): Node `n` loosely belongs to ancestor `t` of section `s`,
-if node `n` strictly belongs to section `s`.
+(upwards): Node `n` loosely belongs to section `t`,
+if `t` is an ancestor of `s`, and if `n` strictly belongs to `s`.
 
 * `(n strictly-belongs-to s)` and `(n loosely-belongs-to t)`
 * `(n belongs-to s)` and `(n belongs-to t)`
@@ -69,8 +69,8 @@ if node `n` strictly belongs to section `s`.
 A node belongs to all ancestors of the section with which it is associated.
 
 **CLARIFICATION**
-(downwards): Section `s` loosely contains node `n` in section `s`,
-if `s` is a descendant of `t`, and if `n` strictly belongs to `s`.
+(downwards): Section `t` loosely contains node `n`,
+if `s` is a descendant of `t`, and if `s` strictly contains `n`.
 
 * `(s strictly-contains n)` and `(t loosely-contains n)`
 * `(s contains n)` and `(t contains n)`
@@ -85,10 +85,10 @@ For each path `p in SN{+}` there exists a path `q in S{+}N`.
 
 Note that ...
 
-* all nodes are organized inside of a rooted ordered tree of nodes
+* all nodes are organized within a rooted ordered tree of nodes
 * each node is associated with a section (the root with the universal section)
-* any section is a strict or loose subsection to the universal section.
+* any section is a strict or loose subsection of the universal section.
 
 **CLARIFICATION**
-Obviously, these paths are not limited to one section, or one node.
+Obviously, these paths are not limited to one section, or one node only.
 That is, path combinations are possible: `p in S{+}N{+}`.

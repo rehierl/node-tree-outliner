@@ -6,6 +6,11 @@ In principle, an algorithm must traverse the node tree in order to visit and
 associate each node with at least one section. Because of that, a section can
 initially be understood as a (logical) group of nodes.
 
+Therefore, sections can be understood the define the logical relationship
+between nodes (logical perspective). Consequently, the node tree can be
+understood to define structural relationship between all nodes (structural
+perspective).
+
 <!-- ======================================================================= -->
 ## set of sections (S), SxN
 
@@ -36,11 +41,11 @@ relation which will be referred to as the "SxN relation".
 
 Note that the `contains` relation is said to be "directional" because the order
 of elements in the corresponding expressions does matter. In contrary to that,
-the `related-to` relation is said to be "undirectional".
+the `related-to` relation is said to be "un-directional".
 
 Note that the direction of the `contains` relation is downwards: A superordinate
-entity contains an entity which is subordinate to it. Obviously, the direction
-of the inverted `element-of` relation is upwards.
+entity contains an entity which is subordinate to it. And, because of that, the
+direction of the inverted `element-of` relation is upwards.
 
 **DEFINITION**
 A section is a sequence of nodes.
@@ -48,7 +53,7 @@ A section is a sequence of nodes.
 When the algorithm traverses the node tree, it adds each node to one or more
 sections, one after another, in a specific order. Because of that, a non-empty
 section has a first and a last node. Consequently, sections can also be defined
-as node sequences:
+as sequences of nodes:
 
 * `s := [n1,...,nk]`, `s in S`, `ni in N`
 * `n1` is the section's first node, `nk` is the section's last node
@@ -58,7 +63,7 @@ as node sequences:
 Both of these definitions (i.e. "set of nodes", "sequence of nodes") technically
 allow to associate any node with multiple sections. Rules are therefore required
 in order to uniquely determine a node's location with regards to the sections
-of its node tree.
+of its node tree (i.e. its logical location).
 
 Note that, because of this formal approach (i.e. associate each node with one
 or more sections), the relationship between sections can be ignored for the
@@ -106,7 +111,7 @@ of sectioning nodes.
 
 Note that a sectioning node can be understood to be superordinate to its
 subordinate section. That is, the `declares` relation is directed downwards
-and the `declared-by` relation is directed upwards.
+and its antonym `declared-by` relation is directed upwards.
 
 Note that there will be different types of sectioning nodes. For the time
 being, each type of sectioning node can be understood to group together all
@@ -194,6 +199,10 @@ has, still needs to be determined.
 The process of creating an outline for a given tree of nodes may be
 referred to as "sectioning the tree", or in general "to section a tree".
 
+Note that such a process can be understood to group the structurally related
+nodes (e.g. a geographical relationship) on a logical level (e.g. by political
+relationship).
+
 **CLARIFICATION**
 With regards to sectioning a tree, the sectioning nodes are said to be the
 tree's "active" nodes. Any other node is therefore said to be an "inactive",
@@ -264,7 +273,7 @@ absolute root node (e.g. the HTML `<body>` element).
 Any node sequence, in the context of an outline algorithm, always contains
 at least one sectioning node. Put differently, any node sequence always has
 a first and a last sectioning node. In addition to that, the first node of
-a node sequence always is a sectioning node.
+a node sequence is always (treated as) a sectioning node.
 
 That is, because the node sequence's first node (i.e. the root node) must
 be treated as a sectioning node.

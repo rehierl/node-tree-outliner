@@ -4,15 +4,15 @@
 
 **CLARIFICATION**
 At any given point in time, during the traversal of the node tree,
-there always are one or more open sections.
+there always need to be one or more open sections.
 
-That is, because each node in a node tree must be associated with at least one
-section. For that to happen, one or more sections must always be open when the
-next subsequent node is entered.
+That is, because each node in a node tree must be associated with at least
+one section. For that to happen, one or more sections must always be open
+when the next subsequent node is entered.
 
-Note that, when the root node is entered, the universal section is the only open
-section. When the root's first child is entered, the universal section and the
-root section (always a type-1 section) are open.
+Note that, when the root node is entered, the universal section is the only
+open section. When the root's first child is entered, the universal section
+and the root section (always a type-1 section) are open.
 
 **CLARIFICATION**
 The section of a subsequent sectioning node
@@ -23,9 +23,9 @@ subsection is open. Which is, because the default definitions do not include
 the characteristic to close a presequent section. Consequently, a subsequent
 section always is a subsection to all open presequent sections.
 
-Note that this is only intended to switch ones perspective from a pair of
-sections towards a subsequent inner section (aka. subsection) with regards
-to all open presequent sections.
+Note that the intention behind this statement is to switch one's perspective
+away from a pair of sections towards a subsequent section with regards to
+multiple open sections which all are presequent to it.
 
 **CLARIFICATION**
 Any sectioning node always declares a new subsection.
@@ -46,9 +46,9 @@ That is, because it is possible that the parent container of a presequent
 subsection is exited before a subsequent subsection is entered (e.g. a type-1
 sectioning node which is a previous sibling to some other sectioning node).
 
-Note that all of these independent and intermediate subsections will be
-ignored by the following considerations. That is, because the focus still
-is on multiple sections that all are related with each other.
+Note that all of these independent and intermediate subsections will be ignored
+by the following considerations. That is, because the focus is on multiple
+sections which all are related with each other.
 
 <!-- ======================================================================= -->
 ## tree of sections
@@ -141,27 +141,33 @@ different parent sections.
 **CLARIFICATION**
 By default, any sectioning node defines a rooted tree of sections.
 
-That is, because, based on the `subsection-of` relationship, a binary
-relation can be defined which itself defines a rooted tree of sections.
+That is, because based on the `subsection-of` relationship, a binary
+relation can be defined, which defines a rooted tree of sections.
 
 **CLARIFICATION**
 By default, any sectioning node defines a rooted ordered tree of sections.
 
 That is, because the node order of the node tree defines an order on the set
-of all sectioning nodes. Consequently, a node sequence defines the order on
-the set of all declared sections.
+of sectioning nodes. Consequently, the order of sections is defined by the
+node order of the node tree.
 
 Note that sibling sections are ordered because a presequent sibling section
 will be entered/created/opened before any of its subsequent sibling sections.
 In addition to that, any parent section will be entered before any of its
 descendant sections. That is, the node order of the node tree carries over
-onto the section hierarchy.
+onto the tree of sections. (Which indicates/supports that any parent node is
+presequent to its descendant nodes).
+
+Note that not any tree data structure is suited to represent a section tree.
+That is, because an AVL tree, for example, will repeatedly trigger balancing
+operations, if entries are added in an orderly fashion (e.g. in ascending
+order). Consequently, a list-based data structure would be more appropriate.
 
 **CLARIFICATION**
-Similar to parent and descendant nodes, a parent section is understood to be
-superordinate to its subordinate subsection. Because of that, a parent section
-can be understood to have a higher priority/significance than all of its
-subsections.
+Similar to parent and descendant nodes, a parent section is understood to
+be superordinate to its subordinate subsections. Because of that, a parent
+section can be understood to have a higher priority/significance than any
+of its subsections.
 
 * (pattern: superordinate -> subordinate entity)
 * parent node -> child node
@@ -169,26 +175,29 @@ subsections.
 * (parent) section -> subsection
 * (parent) section -> content nodes
 
-Note that, due to the section tree being just another specialized tree of nodes,
-any parent section is superordinate to its subordinate descendant sections.
+Note that, due to the section tree being a specialized tree of nodes, and
+because parent nodes are superordinate to their descendant nodes, any parent
+section is superordinate to its subordinate descendant sections. That is a
+matter of consistency/consequence.
 
 **CLARIFICATION**
-A section, which is a child section of some other section, can be referred to
-as one of the other section's strict (or direct, immediate) subsections. In
-contrary to that, a section which is a descendant section, but not a child
+A section, which is a child section of some other section, can be referred
+to as one of the other section's strict (or direct, immediate) subsections.
+In contrary to that, a section which is a descendant section, but not a child
 section, can be referred to as a loose (or ?implicit, distant?) subsection.
 
 These or similar qualifiers (i.e. strict/direct vs. loose/implicit/distant)
-may be used in cases where the relationship between two sections needs to be
-clarified. Consequently, similar qualifiers may be used to clarify the
-relationship between a parent node and its descendant nodes.
+may be used in cases where the relationship between two sections needs to
+be clarified.
+
+Similar qualifiers may be used to clarify the relationship between a parent
+node and its descendant nodes (that is with regards to any tree of nodes).
 
 **CLARIFICATION**
-The relation of the rooted ordered tree of nodes, in combination with the
-definition of sectioning nodes, defines the relationship between sections and
-nodes, and the relationship between the sections themselves. Consequently, the
-corresponding relations are a matter of consequence and therefore do not have
-to be defined explicitly.
+The `parent-of` relation (`NxN`) of a rooted ordered tree of nodes, in
+combination with the definition of sectioning nodes (`SN`), defines which
+sections exist (`NxS`), the relationship between sections and nodes (`SxN`),
+and the relationship between the sections themselves (`SxS`):
 
 ```
 NxN + SN => NxS, SxN, SxS
@@ -200,44 +209,31 @@ NxN + SN => NxS, SxN, SxS
 * `(s,n) in SxN` - section `s` contains node `n`
 * `(s1,s2) in SxS` - section `s1` contains section `s2`
 
-**CLARIFICATION**
-The node order of the section tree is defined by the node order of the node
-tree. In addition to that, the section tree will be created in the order in
-which its sections will be entered during the traversal of the section tree.
-
-That is, because due to the node order of the node tree, all parent sections
-will be entered/created/opened before any subsection is entered. In addition
-to that, the sectioning nodes of sibling sections are entered according to the
-node order of the node tree (i.e. in the sequence in which they appear in the
-node sequence, which is based upon the node order of the node tree).
-
-Note that not any tree data structure is suited to represent the tree of
-sections. That is, because an AVL tree, for example, will repeatedly trigger
-balancing operations, if entries are added in an orderly fashion (e.g. in
-ascending order). Consequently, a list-based data structure would be more
-appropriate.
+Because of that, the corresponding relations are a matter of consequence
+and therefore do not have to be defined explicitly.
 
 <!-- ======================================================================= -->
 ## a section's parent section
 
-Obviously, there now are two (seemingly) different definitions for the term
+Obviously, there now are two seemingly independent definitions for the term
 "parent section of a section": (1) a section is a parent section to all of its
 inner sections, and (2) a section is a parent section of an inner section, if
-it is the inner section's parent section in the corresponding tree of sections.
+it is the inner section's parent section in the corresponding section tree.
 
-Note that both definitions are not independent from each other. That is,
-because all parent sections of a subsection (1) are elements of the rooted path
+Note that both definitions are related with each other. That is, because all
+parent sections of a subsection (definition 1) are elements of the rooted path
 of sections which begins in the root section and ends in the subsection's parent
-section (2).
+section (definition 2). Which is, because any section *not* in that path is
+already closed, or its sectioning node still needs to be entered.
 
 **CLARIFICATION**
 The least significant ancestor section of a section will be referred to as
 *the (unique) parent section* of the corresponding subsection.
 
 Note that this parent section is the nearest (i.e. closest according to the
-node sequence) open presequent section. Put differently, a section's unique
-parent section is the least significant open presequent section which was
-declared last, before the corresponding subsection was entered.
+node tree's node sequence) open presequent section. Put differently, a section's
+unique parent section is the least significant open presequent section which
+was declared last, before the corresponding subsection was entered.
 
 Note that this settles the issue of sections having multiple different parent
 sections. That is, because any section always has, if the universal section is
@@ -253,8 +249,8 @@ section and loosely related to all other ancestor sections.
 A reference to a section's unique parent section can be used to represent
 all the parent/ancestor sections of a given subsection. If this practical
 representation would not be possible, then each subsection would have to
-hold references to all of its ancestor sections, which would otherwise
-be required by the formal definitions.
+hold references to all of its ancestor sections, which would otherwise be
+required by the formal definitions.
 
 **CLARIFICATION**
 A section's unique parent section defines the following,

@@ -2,29 +2,32 @@
 <!-- ======================================================================= -->
 # The NxN relation
 
-A tree of nodes can be defined by a set of nodes `N` and by a set of edges `E`.
-The edges as a whole define a parent-child relationship on top of all the nodes:
+A tree of nodes is defined by a set of nodes `N` and by a set of edges `E`. The
+edges as a whole define a parent-child relationship on top of all the nodes:
 
-* `Relation := (A,B,G)` => `Graph := (V,V,E)` => `Tree := (N,E)`
+* `R := (A,B,G)` => `G := (V,V,E)` => `T := (N,E)`
+* binary relation `R`, graph `G`, tree `T`
+* sets of elements `A,B`, set of vertices `V`, set of nodes `N`
 * where `(A == B == V == N)`
 
-Note that a relation may have different sets of nodes (i.e. `(A != B)`).
+Note that a binary relation `R` may in general have different sets of elements
+`A` and `B` (i.e. `(A != B)`).
 
 <!-- ======================================================================= -->
 ## (p parent-of c)
 
-The 1st node of each edge (i.e. `e := (p,c)`) refers to a parent node and the
-2nd node to a child node. Obviously, the parent node `p` is said to be a parent
-of the child node `c`. Therefore, all edges have an orientation (aka. direction)
+The 1st node of each edge (i.e. `e := (p,c) in E`) refers to a parent node and
+the 2nd node to a child node. Obviously, the parent node `p` is said to be the
+parent of child `c`. Therefore, all edges have an orientation (aka. direction)
 from a parent node towards a child node.
 
-* `Tree := (N,E)` where `N` is the set of all nodes
+* `T := (N,E)` where `N` is the set of all nodes
 * `E := { (p,c) : (p in N), (c in N), (p parent-of c) }`
-* `sem(Tree) := (p parent-of c)`
+* `sem(T) := (p parent-of c)`
 
 This `parent-of` relation will be referred to as the `NxN` relation of the tree.
 
-* `sem(Tree)` refers to the semantics of the tree's relation
+* `sem(T)` refers to the semantics of the tree's relation
 * `pEc` is true, if `(p,c) in E`
 * `!pEc` is true, if `(p,c) not in E`
 
@@ -36,8 +39,8 @@ Because of that, the `parent-of` relation has a top-down/downward direction.
 
 The directed and strict top-down orientation (i.e. away from the root node
 towards a leaf node) of the `parent-of` relation is necessary because the
-inverted set of edges `E'` defines a graph that contains multiple root nodes,
-but only a single leaf node (the former root node).
+inverted set of edges `E'` defines a graph that contains multiple root nodes
+(the former leaf nodes), but only a single leaf node (the former root node).
 
 formal definition
 
@@ -87,6 +90,11 @@ Note that a path of nodes is said to be uni-directional, if (and only if) the
 same set of edges `E` was used to construct the whole path. A path is said to
 be multi-directional, if it is based upon two or more sets of edges that differ
 in orientation (e.g. `E` and `E'`).
+
+To be more accurate, whether a path is uni- or multi-directional depends on the
+orientation of the sets of edges involved. If all sets involved have the same
+orientation, then a path is said to be uni-directional. Otherwise, a path is
+multi-directional.
 
 The strict and loose relationship can be generalized into:
 
@@ -147,15 +155,19 @@ A node may have a previous and a next sibling:
   i.e. `z` is subsequent to `x` and presequent to `y`
 * `(y next-sibling-of x) <=> (x previous-sibling-of y)`
 
-Note that it is assumed that the overall order of nodes
-includes the relationship of parent and child nodes.
+Note that it is assumed that the overall order of nodes also defines the order
+of parent nodes with regards to their child nodes:
 
 * `(p < c)`, if `(p parent-of c)`
 
+and consequently
+
+* `(p < d)`, if `(p descendant-of d)`
+
 Note also, that all nodes are ordered according to the same order, regardless
 of which entities these nodes represent. That is, the nodes of a tree are not
-split into one or more groups which are then ordered separately (e.g. the
-display of a file-system: folders, then files).
+split into one or more groups which are then ordered independent of each other
+(e.g. the display of a file-system: first the folders, then the files).
 
 <!-- ======================================================================= -->
 ## (p contains c)
@@ -168,7 +180,7 @@ relation can be defined as follows:
 * `sem(R) := (p contains c)`
 
 As such, the `contains` relation is equivalent to the `parent-of` relation.
-That is, the `contains` relation also has a top-down direction.
+That is, the `contains` relation also has a top-down orientation.
 
 * `(a strictly-contains b)`, if `aEb`
 * `(a loosely-contains b)`, if a path `p=(a,..,b)`
@@ -181,10 +193,10 @@ In addition to that:
 * `(b belongs-to a)` is antonymous to `(a contains b)`
 * synonymous - `belongs-to`, `element-of`, `located-inside`
 
-Example pattern: `<A> <B> C </B> </A>`
+Example pattern: `A  B  C  /B  /A`
 
 In this pattern, node `A` is said to strictly contain node `B` and to loosely
 contain node `C`. Therefore, node `A` contains and is related to both nodes.
 Even though `C` is also related to `A` and `B`, node `C` does itself not contain
-any of these two nodes. However, `C` can be understood to be located inside of
+any nodes. In addition to that, `C` can be understood to be located inside of
 both nodes.
