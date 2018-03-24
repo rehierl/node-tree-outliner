@@ -12,7 +12,7 @@ i.e. always with regards to the current path of sections -
 but, if relative, could depend on section properties? -
 
 <!-- ======================================================================= -->
-## close N sections values
+## close-n values
 
 > `<node close="N">`,
 > where `N in [0,*]`
@@ -28,8 +28,6 @@ but, if relative, could depend on section properties? -
 
 > `<node rank="N">`,
 > where `N in [1,*]`
-
-<!-- ======================================================================= -->
 
 **DEFINITION**
 The rank of a section is the number of its ancestor sections -
@@ -72,5 +70,5 @@ HTML's sectioning content nodes are defined as -
 subsection-of the nearest ... -
 if deep into the structure, then close multiple sections -
 if shallow, then close just a few, if any -
-i.e. context-dependent - inconsistent? -
+i.e. context-dependent ?=? inconsistent -
 an implicit, constant, case-dependent close modifier? -

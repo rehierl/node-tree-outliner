@@ -15,26 +15,18 @@ like climbing a mountain by moving backwards
 <!-- ======================================================================= -->
 ## minor/isolated/mixed
 
+a section tree is just another node tree -
+fundamental conclusions drawn based on the section tree,
+may also apply to any other node tree -
+
 **TODO**
 is that loop sufficient? -
-i.e. with regards to implicit associations -
+with regards to implicit associations -
 -> in 3-8-1-implementation
 
 **TODO**
 coin the term "a design's structural integrity"? -
 i.e. a design must be in itself consistent -
-
-**TODO**
-proof that a path in `SN{+}` exists for each path in `S{+}N` -
-and by that, proof that those paths allow to make the same statements -
-this would confirm the conclusions drawn from the initially defined
-`SN{+}` paths. that is, because the corresponding statements can then
-also be derived from the `S{+}N` paths -
-this would suggest/indicate that the design is in itself consistent -
-this would also serve as a formal basis for 2D/3D height maps -
-what is there to proof? -> each node is associate with a section -
-the root node is associated with the universal section -
--> continue 3-5-3-levels-of-implicitness
 
 **TODO**
 an algorithm can in principle start at any node -
@@ -48,94 +40,25 @@ type-1 sectioning node -
 not the case when reusing the title element -
 
 <!-- ======================================================================= -->
-## end marker nodes?
+## subset/subsequence <=> node tree/hierarchy
 
-The definition of optional end marker nodes (e.g. `<close/>`) must not define
-these nodes to be associated with the sections they are supposed close.
+set-subset => tree of sections -
+the set-subset relationship defines a tree of nodes/sections -
 
-That is, because it would be inconsistent with not associating sectioning
-nodes with the sections they declare. The subsection's "frame" belongs to
-the parent section.
+tree of nodes ?> set-subset relationship -
+question is, if a node tree defines a set-subset relationship -
 
-In addition to that, and if such an end marker would be allowed to close
-multiple sections at once, then there would be the issue to decide with
-which of the to-be closed sections it would have to be associated.
+each node in a tree can be understood to declare a subset of nodes? -
+equivalent with the contains relation? -
+hence the similarity with type-1 sectioning nodes -
 
-The issue with such nodes is that they could be placed inside of a type-1
-section. To which section does a subsequent node belong? That is, user/input
-errors must be taken into account.
+likewise, each node in a tree can be understood
+to declare a list/sequence of child nodes? -
 
-plot twist: see the "extensions" chapter
-
-closing a subsection does not necesarily mean that ancestor sections are closed
-as well - in contrary to that, closing an ancestor section requires that all
-subections are closed as well - proof that those nodes must be associated with
-the parent section of the most signigicant section being closed? -
-wouldn't add up with close modifiers
-
-**TODO**
-a heading that has a rank may/can act as an end-marker node -
-that is, a rank adds an additional role to a heading element -
-could that be used to proof that no t1 section can be closed?
-
-<!-- ======================================================================= -->
-## type-1 sectioning nodes
-
-(close modifiers vs. type-1 sections)
-
-`Section SectioningNode.declaredSection` - singular, not plural -
-in conflict with "one or more (i.e. a list of) sections" -
-
-an outline object type (singular) can be used to represent such a list -
-but that requires an additional type of object -
-there must be a good/solid reason for an additional type -
-
-Note that this does not mean that a sectioning node is not allowed to hold
-a reference to the section it declares, which still is a single section only.
-
-**TODO**
-Note that no definition, not even a modified definition, can close the
-theoretical, omnipresent universal section. However, non-default definitions
-may still be allowed to close the root section (which does not mean that it
-would be reasonable).
-
-**TODO**
-could it be that the definition of sectioning content elements is unspecific -
-because the definition of heading content elements is unspecific -
-"a /parent b" - a heading's section contains "b" -
-so the section of a sectioning content element must also contain "b"? -
-an attempt to be consistent with old definitions? -
-indicates that transformations are not consistent (under these definitions)? -
-
-**TODO**
-Note that the `subsection-of` relationship does not support sibling sections
-at the very top. The underlying `subset-of` relationship does not support
-that. Feels like a solid/formal reason to not close type-1 sections.
-
-**TODO**
-use/compare node levels of sectioning nodes -
-depends on: allow/disallow closing type-1 sections -
--> expand in 3-8-1-implementation
-
-<!-- ======================================================================= -->
-## tree of sectioning nodes
-
-In order to avoid unexpected results due to implicit associations,
-a node tree should contain a tree of sectioning nodes.
-
-Take a node tree and remove all inactive nodes and those edges that begin or
-end in such a node. The resulting relation should (A) contain the original
-root node, and (B) define a single rooted tree of sectioning nodes.
-
-the parent node of a type-1 sectioning node always is a type-1 -
-the parent node of a type-2 sectioning node always is a type-1 -
-a type-1 sectioning node can be a parent or a leaf -
-a type-2 sectioning node always is a leaf node - nope, data nodes -
-
-issue with tables -
-table/tr/td (sectioning root) -
-can only be a rule of thumb -
-all td-sections are subsections of the section with which a table is associated
+a bridge towards sectioning nodes not belonging
+to the sections they declare? -
+because a node is not an element of the set of nodes
+it can be understood to declare? -
 
 <!-- ======================================================================= -->
 ## transformations
@@ -163,14 +86,79 @@ with regards to the support of transformations -
 -> expand in 3-8-1-implementation
 
 <!-- ======================================================================= -->
+## type-1 sectioning nodes
+
+(close modifiers vs. type-1 sections)
+
+`Section SectioningNode.declaredSection` - singular, not plural -
+in conflict with "one or more (i.e. a list of) sections" -
+
+Note that this does not mean that a sectioning node is not allowed to hold
+a reference to the section it declares, which still is a single section only.
+
+an outline object type (singular) can be used to represent such a list -
+but that requires an additional type of object -
+thus, there must be a good/solid reason to justify an additional object type -
+
+**TODO**
+extended definitions must be consistent with the default definitions -
+would that be an argument against closing a type-1 section? -
+don't close type-1 sections if it is inconsistent with the default definitions? -
+are transformations possible? -
+
+**TODO**
+Note that no definition, not even a modified definition, can close the
+theoretical, omnipresent universal section. However, non-default definitions
+may still be allowed to close the root section (which does not mean that it
+would be reasonable).
+
+**TODO**
+could it be that the definition of sectioning content elements is unspecific -
+because the definition of heading content elements is unspecific -
+"a /parent b" - a heading's section contains "b" -
+so the section of a sectioning content element must also contain "b"? -
+an attempt to be consistent with old definitions? -
+indicates that transformations are not consistent (under these definitions)? -
+
+**TODO**
+Note that the `subsection-of` relationship does not support sibling sections
+at the very top. The underlying `subset-of` relationship does not support
+that. Feels like a solid/formal reason to not close type-1 sections.
+
+**TODO**
+use/compare node levels of sectioning nodes (not parent containers) -
+depends on: allow/disallow closing type-1 sections -
+-> expand in 3-8-1-implementation
+
+<!-- ======================================================================= -->
+## tree of sectioning nodes
+
+In order to avoid unexpected results due to implicit associations,
+a node tree should contain a tree of sectioning nodes.
+
+Take a node tree and remove all inactive nodes and those edges that begin or
+end in such a node. The resulting relation should (A) contain the original
+root node, and (B) define a single rooted tree of sectioning nodes.
+
+the parent node of a type-1 sectioning node always is a type-1 -
+the parent node of a type-2 sectioning node always is a type-1 -
+a type-1 sectioning node can be a parent or a leaf -
+a type-2 sectioning node always is a leaf node - nope, data nodes -
+
+issue with tables -
+table/tr/td (sectioning root) -
+can only be a rule of thumb -
+all td-sections are subsections of the section with which a table is associated
+
+<!-- ======================================================================= -->
 ## general thoughts
 
 **TODO**
 overlay or embedded perspective?
-does the logical hierarchy act as a flat overlay on top of,
-or is it embedded into the node tree? -
-i.e. is the logical structure an integral part of the node tree? -
-similar to looking through a window
+does the logical hierarchy act as a flat overlay on top of the node tree -
+is the logical hierarchy embedded into the node tree? -
+put differently, is the logical structure an integral part of the node tree? -
+the overlay perspective is similar to looking through a window -
 
 **TODO**
 "executing" an algorithm on a node sequence (event sequence)

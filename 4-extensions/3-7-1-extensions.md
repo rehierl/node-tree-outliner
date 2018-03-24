@@ -2,11 +2,13 @@
 <!-- ======================================================================= -->
 # Design - extending the default definitions
 
-The focus of the following considerations is not to define new types of nodes,
-but to investigate those options which allow to extend the default definitions.
-Hence, the first step is to take a look at those aspects which can be altered
-while maintaining consistency with the default definitions. These options, then
-allow to extend the definition of sectioning nodes by certain modifiers.
+The focus of the following considerations is to investigate those options which
+allow to extend the default definitions. The first step therefore is to take a
+look at those aspects that can be altered while maintaining consistency with
+the default definitions. These options, then allow to extend the definition of
+sectioning nodes by certain modifiers.
+
+> extended description => default description
 
 Note that it must be possible to transform any description of a tree, which
 makes use of extended definitions, into an equivalent description of a tree
@@ -15,46 +17,22 @@ extended description, there must exist a semantically equivalent default
 description.
 
 **TODO**
-would that be an argument against closing a type-1 section? -
-don't allow to close a type-1 section as it deviates from the default case? -
-transformations are not possible? -
+explain why consistency with the default definitions is a necessity -
+related to transformations -
+
+**TODO**
+What an algorithm can work with when the next node event is executed is
+the current sequence of open sections. But, because any subsequent section is
+by default a subsection to all open presequent sections, all that a modifier
+could do would be to close these sections and therefore define the subsequent
+section to be independent to them. As such, the option to close open presequent
+sections allows to select a different parent section for the section which is
+declared by the current sectioning node.
 
 <!-- ======================================================================= -->
 ## available options
 
 > option 1) when entering a sectioning node's enter event
-
-When a sectioning node is being entered, an algorithm has in principle knowledge
-of all those nodes that it has already visited. Because of that, it knows about
-all those sections that are presequent to the current sectioning node (i.e. the
-closed and the open presequent sections). In contrary to that, an algorithm is
-unaware of any subsequent node. Those might, or might not exist (i.e. there is
-no guarantee that there are further subsequent nodes or sections).
-
-As closed presequent sections were closed even before the current subsequent
-sectioning node was be entered, the declared subsequent section is by default
-independent to these presequent sections. Hence, and with regards to closed
-sections, all that modifiers could do would be to define the subsequent section
-to be a subsection to them. But, as the `subsection-of` relationship is formally
-based upon multiple associations per node (i.e. a node must be associated with
-both sections), any attempt to define a subsequent section to be a subsection to
-closed presequent sections would represent an attempt to alter closed sections
-and consequently be in conflict with the definition of a section's closed state.
-
-What remains therefore are the open presequent sections. But, because any
-subsequent section is by default a subsection to all open presequent sections,
-all that a modifier could do would be to close these sections and thus define
-the subsequent section to be independent to them. As such, the option to close
-open presequent sections allows to select a different parent section for the
-section which is declared by the current sectioning node.
-
-Note however that, as mentioned before, open sections can not be closed
-arbitrarily. That is, because any ancestor section must remain open for as long
-as any of its subsections are open (i.e. close in an orderly/bottom-up fashion).
-
-Note that any other available option, besides closing presequent sections,
-is not relevant for the current considerations (e.g. section properties that
-are not relevant to the section hierarchy, e.g. a section's title).
 
 Note this option (i.e. close open sections) could also be used for the
 definition of end-marker nodes (e.g. `<close />`, defined to close type-2
