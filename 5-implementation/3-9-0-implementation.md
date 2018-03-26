@@ -7,6 +7,7 @@ The following content is intended to clarify implementation specific aspects.
 <!-- ======================================================================= -->
 ## top-level nodes
 
+**TODO**
 (related to the support of transformations)
 
 associating a node (strict association) with a section is equivalent to
@@ -58,6 +59,9 @@ end
 
 Consequently, node `n` is not associated with section `sY`,
 if (and only if) all of the afore mentioned tests have failed.
+
+Note that the above fragment traverses the `S{+}N` path
+which ends in the given node.
 
 Note that an implicit association is not guaranteed to be verified correctly
 (i.e. false negatives are possible), if only the ancestor nodes of node `n`

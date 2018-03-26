@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # Design - current context
 
+**TODO**
+so far, only a list of notes
+
 the current section (represents the current path of sections),
 represents the algorithm's relevant current knowledge -
 
@@ -37,6 +40,13 @@ i.e. non-interruptable operations -
 
 <!-- ======================================================================= -->
 ##
+
+In essence, an algorithm is executed on the tree's node sequence. That is, it
+enters one node after another and, at some point, enters the next subsequent
+sectioning node. At that point, the algorithm's current context contains the
+current rooted path of nodes (begins in the node tree's root and ends in the
+current sectioning node being entered) and the current path of sections
+(begins in the root section and ends in the current section).
 
 need a current path of nodes - 
 essentially due to the current node's required node level -

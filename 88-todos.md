@@ -20,6 +20,12 @@ fundamental conclusions drawn based on the section tree,
 may also apply to any other node tree -
 
 **TODO**
+parent containers, a definition by choice? -
+is there a formal/mathematical reason why they are needed? -
+i.e. allow to find a contradiction in the statements that
+are related to those paths in `S{+}N{+}`? -
+
+**TODO**
 is that loop sufficient? -
 with regards to implicit associations -
 -> in 3-8-1-implementation
@@ -84,6 +90,11 @@ consistent transformations are a must have
 top-level nodes -
 with regards to the support of transformations -
 -> expand in 3-8-1-implementation
+
+**TODO**
+transformations require a null/sandbox-container -
+i.e. a container without a meaning other than to group nodes -
+e.g. HTML's `<div>` container element -
 
 <!-- ======================================================================= -->
 ## type-1 sectioning nodes
@@ -154,7 +165,7 @@ all td-sections are subsections of the section with which a table is associated
 ## general thoughts
 
 **TODO**
-overlay or embedded perspective?
+the outline, an overlay or an embedded perspective?
 does the logical hierarchy act as a flat overlay on top of the node tree -
 is the logical hierarchy embedded into the node tree? -
 put differently, is the logical structure an integral part of the node tree? -
@@ -166,7 +177,7 @@ feels a lot like a turing machine
 
 **TODO**
 mobile - crib mobile -
-just a visual image
+just a visual image for a node tree -
 
 **compilers** -
 headings <=> variable/parameter declarations -

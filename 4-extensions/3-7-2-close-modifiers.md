@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # Design - close modifiers
 
+**TODO**
+so far, only a list of notes
+
 close-n-value - absolute - bottom-up perspective
 depth-value - absolute - top-down perspective
 rank-value - absolute or relative - eq. depth if absolute

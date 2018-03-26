@@ -26,7 +26,7 @@ list of (open) sections", or "the (current) sequence of (open) sections".
 Note that this list does by itself not represent an existing list object. It
 merely represents an ordered listing of sections that, at a given point in
 time, still count as being open. That is, this list can be understood as the
-result of a theoretical lookup operation.
+result of a lookup operation.
 
 Note that this lookup operation is completely based upon those nodes that have
 already been visited (i.e. presequent nodes). That is, an implementation could
@@ -46,15 +46,15 @@ n1 n2 n3 n4 n5 n6 n7 n8 n9
 
 * `n0` declares the next outer type-1 section `s0`
 * nodes `n1-9` are all child nodes to `n0`
-* other descendant nodes will/can be ignored
+* other descendant nodes can and will be ignored
 * nodes `n1-9` represent type-2 sectioning nodes
 * nodes `n1-9` declare sections `s1-9`
 * obviously, section `s9` will always be empty
 
-If an implementation begins to enter `n5`, then the list of sections will be
+If an implementation begins to enter `n5`, then that list of sections will be
 `(s0,s1,s2,s3,s4)`. And because no open presequent section will be closed (i.e.
 `s5` is a subsection to `s4`), that list will change into `(s0,s1,s2,s3,s4,s5)`
-once section `s5` was opened.
+once section `s5` is open.
 
 **case 2:** `(s0,s1,s2,s3,s4,s6) => -{s6} => (s0,s1,s2,s3,s4)`
 
@@ -69,13 +69,13 @@ n1 n2 n3 n4 n5    n7 n8 n9
 * `n5` is an inactive parent node
 * `n6` is a child node to `n5`
 
-If an implementation exits `n6` (i.e. after opening `s6`), then the list of
+If an implementation exits `n6` (i.e. after opening `s6`), then that list of
 sections will be `(s0,s1,s2,s3,s4,s6)` (`s5` does not exist because `n5` is no
-longer a sectioning node). The next node event that will have to be processed
-will then be the exit event of `n5`. And because `n5` acts as the parent
-container of `s6`, `s6` will have to be closed during that event. Consequently,
-the list of sections will no longer contain `s6`, which is why that list will
-change into `(s0,s1,s2,s3,s4)`.
+longer a sectioning node). After that, the node event which will have to be
+executed next is going to be the exit event of `n5`. And because `n5` acts as
+the parent container of `s6`, `s6` will have to be closed during that event.
+Consequently, the list of sections will no longer contain `s6`, which is why
+that list will change into `(s0,s1,s2,s3,s4)`.
 
 **case 3:** `(s0,s1,s2,s3,s4,s6,s7) => -{s6,s7} => (s0,s1,s2,s3,s4)`
 
@@ -91,10 +91,10 @@ n1 n2 n3 n4 n5       n8 n9
 * `n6, n7` are both child nodes of `n5`
 
 In contrary to the previous case, `n5` now has two inner sections (i.e. `s6`
-and `s7`). Consequently, when exiting `n7` after opening `s7`, the list of
-sections will be `(s0,s1,s2,s3,s4,s6,s7)` (`s5` does not exist because `n5` is
-no longer a sectioning node). Similar as before, the exit event of `n5` has to
-close all remaining open inner sections. Consequently, and after `n5`'s exit
+and `s7`). Because of that, and when exiting `n7` after opening `s7`, the list
+of sections will be `(s0,s1,s2,s3,s4,s6,s7)` (`s5` does not exist because `n5`
+is no longer a sectioning node). Similar as before, the exit event of `n5` has
+to close all remaining open inner sections. Consequently, and after `n5`'s exit
 event, that list will change into `(s0,s1,s2,s3,s4)`.
 
 <!-- ======================================================================= -->
@@ -104,21 +104,22 @@ event, that list will change into `(s0,s1,s2,s3,s4)`.
 The list of sections will be extended by a new section,
 if the next node event results in opening a new section.
 
-Note that the new section will always appear at the end of the list (i.e.
+Note that the new section will always appear at the end of that list (i.e.
 not at some arbitrary position). That is, because the new section will be
-a subsection to all sections in the previous listing (formal perspective).
+a subsection to all sections which were part of the list just before opening
+the corresponding section (formal perspective).
 
 Note that any sectioning node can only declare a single new section. That
 is, no node event will extend the list of sections by more than one section.
 
 **CLARIFICATION**
 The list of sections will be reduced by one or more sections,
-if the next node event results in closing these sections.
+if the next node event results in closing those sections.
 
 Note that all of these sections will always be removed from the end of the
 list (i.e. not from an arbitrary position). That is, because any subsection
-must be closed before any of its ancestor sections can be closed. Recall
-that no parent container of an ancestor section is a descendant to the
+must be closed before any of its ancestor sections can be closed. Which is,
+because no parent container of an ancestor section is a descendant to the
 parent container of any of its subsections.
 
 **CLARIFICATION**
@@ -134,7 +135,8 @@ sections need to be closed in reverse order. That is, if `s6` was opened before
 
 That is, because `s7` is a subsection to `s6` and because no subsection can
 remain open if its parent section has to be closed. Put differently, any other
-close order would be in conflict with the definition of what a subsection is.
+close order would be in conflict with "a parent section is open for as long as
+any of its subsections are open".
 
 Note that it might not seem to be relevant in which order sections are closed.
 After all, they need to be closed during the same node event. However, the
@@ -204,29 +206,28 @@ any sequence. That is, because any other section is a subsection to it.
 
 As mentioned before, and in contrary to the formal perspective, each node
 will be associated with one section only (practical perspective). However,
-this single association does, based on implicit associations, represent all
+this single association must, based on implicit associations, represent all
 formal associations. And, because of that, each node must be associated with
-the closest presequent section that still counts as being open (i.e. the
-node's parent section).
-
-Note that the parent section of any node always is located at the end of
-the current sequence. That is, when being entered, a node will be associated
-with the last/top-most section of that sequence/stack.
+the closest open presequent section in that list. Consequently, the parent
+section of any node always is located at the very end of the current sequence.
 
 Note that, if `n0` is a type-1 sectioning node, or an inactive parent container,
 then `s0` would represent the section that was used to associate `n0`. Because
 of that, `s0` would not have to be created when entering, and closed when
 exiting `n0`. In addition to that, all section sequences would begin with some
-common prefix, which would always end in `s0`.
+common prefix, which would always end in `s0`. Replacing node `n0` with an
+associated inactive parent container will therefore not result in significant
+changes to the above trace of sequences.
 
 **DEFINITION**
 The last/top-most section in the list/stack of open sections will be referred
-to as the "current section". A reference to this section, provided by the
-global `Section currentSection` variable, will be used to associate each node.
-This `currentSection` variable must be used to set the `Node.parentSection`
-property of the subsequent node that will be entered next.
+to as the "current section". The "current section" therefore is the current,
+least significant open section.
 
-In short: The "current section" is the current, least significant open section.
+A reference to this section, provided by the global `Section currentSection`
+variable, will be used to associate each node. This `currentSection` variable
+must be used to set the `Node.parentSection` property of the subsequent node
+that will be entered next.
 
 Note that an explicit reference variable is optional, if an implementation
 chooses to maintain an explicit stack of open sections. That is, because the
@@ -236,24 +237,24 @@ to `stack.get()`.
 <!-- ======================================================================= -->
 ## list of sections vs. tree of sections
 
-Processing the above fragment will, according to the default
-definitions, result in the following tree of sections:
+Processing the above fragment according to the default definitions
+will result in the following section tree:
 
 ```
 s0 - s1 - s2 - s3 - s4 -|- s6 - s7
                         |- s8 - s9
 ```
 
-The following observation can be made,
-if the above trace of section sequences is compared to that tree:
+If the above trace of section sequences is compared to that tree,
+the following observations can be made:
 
-A section sequence represents a path in the tree of sections, which connects
-the root section with the current section. That is, the section sequence is
-just another rooted path of nodes.
+A section sequence represents a path in the section tree, that connects the
+root section with the current section. That is, the section sequence is just
+another rooted path of nodes.
 
 Note that the overall trace of sequences has itself no particular order. That
-is, because any sequence may appear multiple times at different positions.
-In order to get a specific order, one would have to exclude those repetitions,
+is, because any sequence may appear multiple times at different positions. In
+order to get a specific order, one would have to exclude those repetitions,
 which would require a clear definition of when to log a list of sections
 (e.g. based on the enter/open events).
 

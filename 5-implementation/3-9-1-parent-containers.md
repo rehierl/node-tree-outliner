@@ -34,7 +34,7 @@ trace of sequences:     -  node event:
 
 Note that the sequence of sections just before entering the parent container
 is identical to the sequence of sections just after exiting said container.
-Because of that, an implementation must basically restore the sequence of
+Because of that, an implementation must essentially restore the sequence of
 sections when exiting a parent container.
 
 As mentioned before, any parent node can in principle act as the parent
@@ -46,12 +46,14 @@ sections need to be closed.
 1. Inner sections may have parent containers that are descendants to `n0`.
    The inner sections of these parent containers will be closed before the
    exit event of `n0` is reached (i.e. the same issue, but with regards to
-   inner containers).
-2. `n0` is the parent container of inner sections, but some subsequent,
-   non-default extended definition applies. These sections will be closed
-   before the exit event of `n0` is entered.
-3. `n0` is the parent container of inner sections, and no non-default rule
-   applies. The exit event of `n0` must close these remaining open sections.
+   descendant parent containers, i.e. considered to be dealt with by the
+   time `n0` is being exited).
+2. `n0` is the parent container of inner sections, but some non-default
+   definition applies. These sections will be closed before the exit event
+   of `n0` is entered.
+3. `n0` is the parent container of inner sections, and no non-default
+   definition applies. The exit event of `n0` must close these remaining
+   open sections.
 
 In short, the exit event of a given parent container must only close those
 sections that remain to be open by the time the parent container is being
@@ -60,8 +62,8 @@ are no longer relevant).
 
 Because of that, all relevant sections are part of the current section sequence.
 Furthermore, and because all those sections are subsections to the section, with
-which the parent container is associated, the relevant sections are located at
-the very end of the current section sequence. Consequently, an implementation
+which the parent container is associated, the relevant sections all are located
+at the very end of the current section sequence. Consequently, an implementation
 must only pop and close the top-most sections from the section stack until the
 current section matches the parent container's parent section:
 
@@ -95,4 +97,4 @@ apart from gaining some amount of additional clarity, an implementation does
 not have to test beforehand (e.g. by the use of an `if-then` construct),
 whether the node in question is indeed a parent container. That is, one test
 must always be executed either way (i.e. even if the corresponding parent node
-is actually not a parent container).
+is actually not even a parent container).

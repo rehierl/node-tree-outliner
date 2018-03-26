@@ -2,6 +2,12 @@
 <!-- ======================================================================= -->
 # Design - end-marker nodes
 
+**TODO**
+so far, only a list of notes
+
+The most relevant option available, with regards to end-marker nodes is case 1:
+Close sections while the enter event of an end-marker node is being entered.
+
 The definition of optional end marker nodes (e.g. `<close/>`) must not define
 these nodes to be associated with the sections they are supposed close.
 
@@ -25,7 +31,6 @@ that all subsections are closed as well - proof that those nodes must be
 associated with the parent section of the most significant section being
 closed? - wouldn't add up with close modifiers
 
-**TODO**
 a heading that has a rank may/can act as an end-marker node -
 that is, a rank value adds an additional role to a heading element -
 could that be used to proof that no t1 section can be closed?

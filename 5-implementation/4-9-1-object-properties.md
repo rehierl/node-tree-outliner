@@ -5,6 +5,10 @@
 The following content is intended to provide
 an overview of global variables and object properties.
 
+Note that certain variables or object properties depend on the environment of
+an implementation. That is, given a specific environment, certain variables or
+properties can be omitted.
+
 <!-- ======================================================================= -->
 ## Global scope
 

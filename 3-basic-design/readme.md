@@ -1,4 +1,6 @@
 
+(Note the new subsequent chapters: 4-extensions, 5-implementation)
+
 <!-- ======================================================================= -->
 # Overview of conclusions and definitions
 
