@@ -57,10 +57,16 @@ From the definition of section states/events:
 
 From the definition of inner sections:
 
-* Not associating sectioning nodes with their own sections guarantees that the
-  section hierarchy is acyclic. That is, because a section never is a subsection
-  to itself. Which is because a parent section always has more content nodes
-  than any of its inner sections.
+* Not associating sectioning nodes with their own sections guarantees that
+  the section hierarchy is acyclic. That is, because a section never is a
+  subsection to itself. Which is because a parent section always has more
+  content nodes than any of its inner sections.
+
+From the definition of end-marker nodes (see extensions):
+
+* End-marker nodes will not be associated with the sections they close.
+  Because of that, inconsistencies would arise, if sectioning nodes would
+  have to be associated with the sections they declare.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -331,19 +337,3 @@ section's first top-level node (i.e. critical to transformations).
 **CLARIFICATION**
 Any sectioning node must be associated with the parent section
 of the section it declares. There is no room for any exception!
-
-**CLARIFICATION**
-The sectioning node of a node's parent section
-never is identical to the corresponding node itself.
-
-```
-(node.parentSection.sectioningNode !== node)
-```
-
-That is obviously true for any node which is not a sectioning node.
-However, this expression is also true if the node is a sectioning node.
-That is, because no such node is associated with the section it declares.
-
-Note that, if sectioning nodes would have to be associated with their
-own section, then the first part of the above expression would be a
-self-reference, if the node in question would be a sectioning node.

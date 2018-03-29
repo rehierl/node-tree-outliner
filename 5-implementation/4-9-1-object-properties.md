@@ -71,5 +71,8 @@ Section begin
   - the first content node of this section
   - also the section's first top-level node
   Node firstContentNode
+
+  - the section's last top-level node
+  Node lastTopLevelNode
 Section end
 ```

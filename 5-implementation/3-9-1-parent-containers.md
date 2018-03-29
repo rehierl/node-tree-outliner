@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# parent containers
+# Implementation - parent containers
 
 (related to the implementation of sectioning nodes)
 

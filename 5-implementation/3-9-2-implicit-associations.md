@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# implicit associations
+# Implementation - implicit associations
 
 (related to the implementation of forced subsections)
 
