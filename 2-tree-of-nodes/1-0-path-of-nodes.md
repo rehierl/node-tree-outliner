@@ -16,10 +16,10 @@ Any definition based on sequences also apply to paths:
 * `t suffix-of s`, `u suffix-of s,t`
 * (strictly|loosely)? pre-, sub-, in-sequent entries
 
-In general, paths `p1` and `p2` are not necessarily identical if they share a
-common prefix and a common suffix: `p1=(p1,...,pA,i1,...,iB,s1,...,sC)`, 
-`p2=(p1,...,pA,j1,...,jD,s1,...,sC)` for `B and D in [0,+Infinity)`. They might
-still contain different subsequences (i.e. `(B > 0)` and/or `(D > 0)`).
+In general, paths `p1` and `p2` are not necessarily identical if they share
+a common prefix and a common suffix: `p1=(p1,...,pA,i1,...,iB,s1,...,sC)`, 
+`p2=(p1,...,pA,j1,...,jD,s1,...,sC)` for `B and D in [0,+Infinity)`.
+They might still differ in an infix (i.e. `(B > 0)` and/or `(D > 0)`).
 
 <!-- ======================================================================= -->
 ## uni-directional paths
@@ -69,11 +69,12 @@ A path upon relation x
 
 * a path `p in TD` has loops, if `(p(i) == p(i+1))`
 * a path `p in TD` has cycles, if `(p(i) == p(j))` for some `i,j in [1,#p]`
+* i.e. a cyclic path may contain loops
 
 clarification
 
 * a tree is defined to not contain any loops or cycles
-* therefore, any uni-directional path contains any node once or not at all
+* therefore, any uni-directional path contains its nodes once, or not at all
 * this also applies to any path `p in BU`
 
 <!-- ======================================================================= -->
@@ -88,9 +89,9 @@ clarification
 
 in words:
 
-* strictly => connected, and there are no nodes in between
-* loosely => connected, but there are some nodes in between
-* (none) => a path exists such that both are nodes connected -
+* strictly -> connected, and there are no nodes in between
+* loosely -> connected, but there are some nodes in between
+* (none) -> a path exists such that both are nodes connected -
   with or without other nodes in between
 
 <!-- ======================================================================= -->

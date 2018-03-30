@@ -3,9 +3,8 @@
 # Tree traversal
 
 In order to create an outline that accurately represents a document's structure,
-the document's DOM tree must be traversed by visiting each node. In general,
-the traversal of such a node tree can be classified depending on certain
-characteristics - such as:
+the node tree must be traversed by visiting each node. In general, the traversal
+of a node tree can be classified depending on certain characteristics - such as:
 
 * When is a node visited in relation to its child nodes? -
   e.g. depth-first search (DFS), breadth-first search (BFS)
@@ -13,10 +12,13 @@ characteristics - such as:
   (aka. first-to-last (FTL)), right-to-left (RTL) (aka. last-to-first (LTF))
 
 <!-- ======================================================================= -->
-## Depth-first search (DFS)
+## depth-first search (DFS)
 
-The traversal of a tree is referred to as a depth-first (DFS) search, if all
-the nodes of a branch are visited before the nodes of any other branch.
+The traversal of a tree is referred to as a depth-first (DFS) search, if
+all the nodes of a branch are visited before the nodes of any other branch.
+
+Note that the `firstChild` and `nextSibling` node properties are needed.
+That is, the underlying node tree must be an ordered rooted tree of nodes.
 
 **FTL, DFS, Pre-order tree traversal**
 
@@ -32,7 +34,7 @@ end
 ```
 
 The `visitPreOrder()` operation marks the beginning of processing a node.
-It therefore represents a node's enter event.
+This operation represents a node's enter event.
 
 **FTL, DFS, Post-order tree traversal**
 
@@ -48,7 +50,7 @@ end
 ```
 
 The `visitPostOrder()` operation marks the end of processing a node.
-It therefore represents a node's exit event.
+This operation represents a node's exit event.
 
 **FTL, DFS, In-order**
 
@@ -61,9 +63,10 @@ end
 ```
 
 The in-order tree traversal of a binary tree is a strict tree traversal because
-each node is visited exactly once. Traversing a non-binary tree, that allows more
-than two child nodes per node (the DOM tree is such a generic tree), via in-order
-tree traversal would have to execute the visit operation multiple times per node:
+each node is visited exactly once. Traversing a non-binary tree, which allows
+more than two child nodes per node (the DOM tree is such a generic tree), via
+in-order tree traversal would have to execute the visit operation multiple
+times per node:
 
 ```
 traverseInOrder(node) begin
@@ -78,11 +81,11 @@ end
 ```
 
 It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`,
-or even both are used. Both will be executed multiple times per node. An
-in-order tree traversal of a generic tree is therefore no strict tree traversal.
+or even both are used. Both will be executed multiple times per node. Because of
+that, an in-order tree traversal of a generic tree is no strict tree traversal.
 
 <!-- ======================================================================= -->
-## Breadth-first (BFS) search
+## breadth-first (BFS) search
 
 A tree traversal is referred to as a breadth-first (BFS) search, if the nodes
 of a tree are visited one level at a time.
@@ -125,7 +128,7 @@ which only contains the specified node. Executing `traverseBFS(node, 2, 2)`
 immediate descendants (i.e. child nodes).
 
 <!-- ======================================================================= -->
-## Algorithm
+## an event-driven process
 
 ```
 traverseTree(node) begin
@@ -139,20 +142,24 @@ traverseTree(node) begin
 end
 ```
 
-In order to create the outline for a document, an algorithm needs to execute
-certain operations depending on which node is being visited.
+In order to create an outline for a document, an algorithm needs to execute
+certain operations depending on which node is being entered or exited.
 
-When a node is entered, an algorithm has to:
+Note that, because of the `onEnter()` and `onExit()` calls, the outline
+algorithm can be understood to be an event-driven process.
+
+When a node is entered, an algorithm might have to:
 
 * end outer sections
 * associate the node being entered with a section
 * suspend outer sections
 * create and initialize a new inner section
 
-When a node is exited, an algorithm has to:
+When a node is exited, an algorithm might have to:
 
 * end inner sections
 * reactivate a suspended outer section, or
 * create and initialize a new outer section
 
-Which of these operations need to be executed must be defined for each node type.
+Which operations need to be executed while an event is being executed, must
+be defined for each type of node.

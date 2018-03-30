@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Notation
+# Basics
 
 <!-- ======================================================================= -->
 ## assignment (=)
@@ -26,7 +26,7 @@ multi-definition
   i.e. `(a := b := c) => (a := b and b := c) => (a := c)`
 * `(a,b := c) <=> (b,a := c)`
 
-definition (:=,if)
+definition (:=, if)
 
 * `a := b`, (`if` -or- `for`) `<expression>{+}`
 * `a` is defined to be equal to `b` if, and only if, certain conditions hold
@@ -38,12 +38,12 @@ definition (:=,if)
 
 * `-Inf, -Infinity` := negative infinity
 * `+Inf, +Infinity` := positive infinity
-* `a:i, ai` := some value `a` that corresponds with identifier `i`
+* `a:i, ai` := some value `a` that corresponds with index/identifier `i`
 
 number intervals
 
 * `[a,*] := [a,+Inf)`, likewise `[*,b] := (-Inf,b]`
-* `i in [a,*]` := value `i` may have any value from `a` to `Infinity`
+* `i in [a,*]` := value `i` may have any value from `a` to `+Infinity`
 
 regular expression like patterns
 
@@ -58,14 +58,14 @@ regular expression like patterns
 <!-- ======================================================================= -->
 ## equal by value (==)
 
-* `(a == b), (a equal-to b)` := the values of `a` and `b` are tested for equality
+* `(a == b), (a equal-to b)` := values `a` and `b` are tested for equality
 * `true` if both values are equal, `false` otherwise
 * signature - (anything, anything) -> boolean
-* `(a == b)` is in general true, if `(a == b)` follows `a = b` or `a := b`
-* e.g. `true` if `b = 3`, but `false` if `b := +Inf`
+* `(a == b)` is in general true, if such an expression
+  appears after one of the following two expressions: `a = b` or `a := b`
 * `(a == b) <=> (b == a)`
 
-clarification (==,if)
+clarification (==, if)
 
 * `(a == b)`, (`if` -or- `for`) `<expression>{+}`
 * this pattern is used to clarify that `(a == b)` is true,
@@ -79,7 +79,7 @@ clarification (==,if)
 * references `a` and `b` are tested for in-equality by value
 * `(a != b) <=> (b != a)`
 
-clarification (!=,if)
+clarification (!=, if)
 
 * `(a != b)`, (`if` -or- `for`) `<expression>{+}`
 * this pattern is used to clarify that `(a != b)` is true,
@@ -108,6 +108,40 @@ clarification
 clarification
 
 * unequal by value => also unequal by reference
+* but not necessarily vice versa
+
+<!-- ======================================================================= -->
+## implication (=>), equivalence (<=>)
+
+* `a => b`
+* if `a` is true, then `b` is also true
+* if `a` is not true, then `b` may still be true
+* `!=>, !>, /=> := not(=>)`
+
+reversed implication
+
+* `(a <= b) <=> (b => a)`
+* `!<=, <!, </= := not(<=)`
+
+equivalence
+
+* `a <=> b`
+* if `a` is true, then `b` is also true
+* if `a` is not true, then `b` is also not true
+* `!<=>, <!>, </=>, </>, <> := not(<=>)`
+
+clarification
+
+* depending on the context in which the implication operator (=>) is used,
+  such an expression may express instead that `b` can be derived from `a`
+* i.e. the operator does not always represent a mathematical implication
+* `(a => b)` could mean instead that: (1) `b` is a consequence of `a`,
+  (2) `b` is a results from `a`, (3) `a` is transformed into `b`, etc.
+* if an expression needs to be understood with a "mathematical sense",
+  then the (<=,<=>,=>) operators should be used, if an expression's sense
+  is more "logical", then the (<-,<->,->) operators should be used instead
+* possible meanings of the (->) operators: is a consequence of, can be
+  derived from, can be transformed into, are similar, etc.
 
 <!-- ======================================================================= -->
 ## (n in N), (n !in N)
@@ -117,31 +151,12 @@ clarification
 
 clarification
 
-* in general, a boolean operator may be prefixed with the negation operator
-  to express an inverted statement
+* in general, any boolean operator may be prefixed with the negation operator
+  to express a logically inverted statement
 * e.g. `(V contains v)` => `(V !contains v)`
 
-<!-- ======================================================================= -->
-## equivalent - TODO
+clarification
 
-* `a <=> b`
-* if `a` is true, then `b` is also true
-* if `a` is not true, then `b` is also not true
-* does not always mean, that both are strictly equivalent
-* also used to clarify, that `a` and `b` have the same meaning
-* `!<=>, <!> := not(<=>)`
-* clarify that `a` and `b` do not have the same meaning
-
-implication
-
-* `a => b`
-* if `a` is true, then `b` is also true
-* if `a` is not true, then `b` may still be true
-* also clarify, that `b` is derived from `a`
-* `!=>, !> := not(=>)`
-* clarify that `a` does not imply `b`
-
-reversed implication
-
-* `(a <= b) <=> (b => a)`
-* `!<=, <! := not(<=)`
+* the `in` operator merely tests that `n` is an element of `N`
+* the `in` operator can not determine if `N` contains `n` multiple times
+* `N` appears as if it contains each value no more than once

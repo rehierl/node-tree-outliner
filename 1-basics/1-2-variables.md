@@ -3,17 +3,17 @@
 # Variables, Elements
 
 * a variable `var` (aka. element `e`) represents some value `v`
-* in contrary to values, the value of a variable may change over time
+* in contrary to actual values, the value of a variable may be changed
 
 <!-- ======================================================================= -->
-## value of e
+## value-of e
 
 * `e.value := v`, if value `v` was assigned to `e`
 * `(value-of e), valueOf(e) := e.value`
 * signature - (element) -> value
 
 <!-- ======================================================================= -->
-## v value of e
+## v value-of e
 
 * `(e == v), (v value-of e) := (valueOf(e) == v)`
 * `(ei == ej)`, if `(valueOf(ei) == valueOf(ej))`

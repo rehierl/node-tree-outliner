@@ -3,7 +3,7 @@
 # Types
 
 * a description for `X` is needed that allows to express `x in X`
-* `x in X` means that value/element `x` may represent any member in `X`
+* `x in X` means that value/element `x` may represent any element in `X`
 * occasionally, `X` can contain elements `y` for which `x` is not defined
 * there needs to be a balance between (domain := `X` contains no `y` element)
   and (type := `X` may contain `y` elements)
@@ -11,22 +11,25 @@
 domain
 
 * `domainOf(x)` := the set of all values for which `x` is defined
-* `D(X), dom(x), (domain-of x) := domainOf(x)`
+* `D(x), dom(x), (domain-of x) := domainOf(x)`
 * in general, `dom(x)` may be represented by `D`
+* that is, `x in D` <-> `x in dom(x)`
 
 type
 
-* `typeOf(x)` := the set of all values for which `x` is defined
+* `typeOf(x)` := the set of all values for which `x` is (usually) defined
 * `T(x), type(x), (type-of x) := typeOf(x)`
-* however, `type(x)` may contain values for which `x` is undefined
-* as such, `type(x)` is a best-effort description of `dom(x)`
+* `type(x)` may contain values for which `x` is undefined
+* `type(x)` may be understood as a best-effort description of `dom(x)`
 * a type is used as a loose/general description of its elements
 * in general, `type(x)` may be represented by `T`
+* that is, `x in T` <-> `x in type(x)`
 * `dom(x) subset-of type(x)`
 
 general syntax, universe type
 
-* `A : B` is a typing judgment, i.e. expression `A` has type/domain `B`
+* `A : B` is a typing judgment
+* i.e. expression `A` has type/domain `B`
 * i.e. `(type(A) == B)`
 * the universe type (in general `U`) contains all types, but not itself
 * i.e. `(A : B) <=> (A in B) and (B in U)`

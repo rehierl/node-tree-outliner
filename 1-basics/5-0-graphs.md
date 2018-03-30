@@ -4,14 +4,16 @@
 
 * used to model pairwise relations between objects
 * in general, sets of vertices/nodes that are connected by edges
-* a binary relation `R := (A,A,G)` defines a directed graph
+* a binary relation `R := (A,A,G)` defines a directed or undirected graph
 
 definition
 
 * `G := (V,E)` <=> `R := (A,B,G)` if `(A == B)`
 * `e := (a,b)` tuples are referred to as edges
 * `G` is in general assumed to not be empty, `E` may be empty
-* a vertex `a` may not be an end to any edge, i.e. there is no `aEb` or `bEa`
+* a vertex `a` may not be an end to any edge
+* i.e. `a` is not necessarily connected
+* i.e. there may be no `aEb` or `bEa`
 
 basic definitions
 
@@ -19,14 +21,14 @@ basic definitions
 * `size(G) := #E`
 * `in-degree(v) := #({ (a,v) : aEb })`
 * `out-degree(v) := #({ (v,b) : vEb })`
-* `degree(v) := in-degree(v) + out-degree(v)`,
-  i.e. loops on `v` are counted twice
+* `degree(v) := in-degree(v) + out-degree(v)`
+* note that loops on `v` (i.e. `(v,v) in E`) are counted twice
 * `degree(a,b) := #({ (a,b) : aEb }) + #({ (b,a) : bEa })`
-* symmetric => if `aEb`, then also `bEa`
-* loops => `aEa`
-* link => `aEb` for `(a != b)`
-* planar => can draw `G` without intersecting edges
-* tree => connected with no cycles
+* symmetric -> if `aEb`, then also `bEa`
+* loops -> `aEa`
+* link -> `aEb` for `(a != b)`
+* planar -> can draw `G` without intersecting edges
+* tree -> connected with no cycles
 
 <!-- ======================================================================= -->
 ## adjacent to (~)
@@ -40,7 +42,7 @@ adjacent vertices
 adjacent edges
 
 * e.g. `e1 := (a,b)` and `e2 := (b,c)`
-* adjacent/consecutive edges share the common vertex
+* two adjacent/consecutive edges share a common vertex
 
 <!-- ======================================================================= -->
 ## simple/multigraph
@@ -60,9 +62,9 @@ simple graph
 * undirected, no multi-edges and no loops
 
 <!-- ======================================================================= -->
-## directed/undirected
+## directed, undirected
 
-* directed/undirected is determined by the underlying semantics
+* directed/undirected graph is determined by the graph's semantics
 * similar for directed/undirected edges
 
 undirected
@@ -74,9 +76,9 @@ undirected
 
 directed, digraph
 
-* if `aEb` must be understood to not include `bEa`,
-  unless `bRa` is itself explicitly mentioned to be included
-* `(a,b)` is also referred to "arrow" from `a` to `b`
+* if `aEb` must be understood to not include `bEa`
+* that is, unless `bRa` is explicitly included
+* `(a,b)` is also referred to as "arrow" from `a` to `b`
 * `a` reflects the arrow's tail, and `b` the arrow's `head`
 * `b` is a direct successor of `a`
 * `a` is a direct predecessor of `b`
@@ -95,22 +97,24 @@ mixed
 <!-- ======================================================================= -->
 ## path
 
-* directed graph, digraph => directed path, dipath
-* dipath => all edges in the same direction
+* directed graph, digraph -> directed path, dipath
+* dipath -> all edges in the same direction
 
 common definition
 
 * `path := (v0,e0,v1,e2,v2,...,v(n-1),e(n-1),vn)`
+* i.e. an edge in between any two adjacent vertices
 * a path is a trail in which all vertices are distinct
+* i.e. no loops and cycles ?!?
 * a trail is a walk without repeated edges
 * a walk is an alternating sequence of vertices and edges
-* `G` is directed => `ei` connects `vi` with `v(i+1)`
+* `G` is directed -> `ei` connects `vi` with `v(i+1)`
 
 miscellaneous
 
 * vertex-independent paths := `p1` and `p2` have no vertex in common
 * edge-independent paths := `p1` and `p2` have no edge in common
-* vertex-independent => edge-independent
+* vertex-independent -> edge-independent
 * distance between vertices := length of shortest path `(p1,p2)`
 * diameter of a connected graph := length of longest path
 
@@ -123,7 +127,7 @@ vertices
   a path exists that leads from one vertex to the other
 * strongly connected vs. weakly connected -
   based upon directed/undirected edges
-* connected <=> not disconnected
+* connected <-> not disconnected
 
 strong vs. weak
 

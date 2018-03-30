@@ -9,8 +9,8 @@
 undirected tree
 
 * undirected graph
-* connected with no cycles
-* acyclic and a cycle is formed if any edge is added
+* connected, but no cycles
+* acyclic and a cycle is formed, if any edge is added
 * no longer connected, if any edge is removed
 
 rooted tree
@@ -25,7 +25,7 @@ rooted tree
 * except for the root, each node has a single parent node
 * each node may have any number of child nodes
 * any parent node, that can be reached beginning with an initial node,
-  is an ancestor to that node - only when moving upwards on a path only
+  is an ancestor to that node - when moving upwards on a path
 * any node is a descendant to its ancestor nodes
 * any child node is descendant to its parent node -
   i.e. `(node.children[i].parent == node)` is always true
@@ -33,7 +33,7 @@ rooted tree
   i.e. `node.level == (number of ancestors) + 1`.
 
 <!-- ======================================================================= -->
-## nodes <-> nodes
+## kinds of nodes
 
 * `n in N` is a node, `N` is the set of all nodes
 * a node may be a root - `r in R subset-of N`
@@ -55,7 +55,7 @@ the semantics of an edge `e := (p,c) in E` is such that ...
 * a parent always has one or more children
 * a child always has a single parent
 * a root has no parent, but may itself be one
-* a root is no child, but may itself have one or more children
+* a root is no child, but may itself have multiple children
 * a node is either a root or a child (i.e. parent-based view)
 * `(R == (N - C)) <=> (C == (N - R))`
 * a leaf is not a parent, but may itself have one

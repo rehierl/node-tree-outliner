@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # Relations
 
-* `S,S1,...,Sn` represent sets of sorts
-* `R = (S1,...,Sn,G)`
+* `S,S1,...,Sn` represent sets of some sorts
+* `R := (S1,...,Sn,G)`
 * e.g. `Si := Nat`, `G := {(1,2), (2,3), ...}`
 * `n` is the number of slots, places
 * `n` is the arity or dimension of relation `R`
@@ -14,17 +14,22 @@
 * `XSi <=> xSi` if all sets are sets of atomic values
 * `G(R) subset-of XS^n` if `Si := S` for any `i in [1,*]` -
   aka. an n-ary relation over `S`
+
+characteristic function
+
 * `chi(XSi), R(XSi) := (S1,...,Sn) -> boolean`
 * `R(XSi)` returns true, if `s in XSi` is in the relation `R`
 * `R(XSi)` is the characteristic function of `R` -
   aka. indicator function, n-place predicate
 * `s in R` is a tuple, aka. an individual
+* `s in R` is true, if `R(XSi)` returns true
 
 clarification
 
 * `Ra` denotes an unary relation, aka. a property
 * `Rab` or `aRb` a binary relation
 * `Rabc` a ternary relation
+* `Ra...` is true, if `(a,...) in R`
 
 definitions
 
@@ -38,14 +43,14 @@ definitions
 
 clarification
 
-* all sequences have the same length -
-  i.e. `(#r == N)` for any `r in R`
+* all sequences have the exact same length
+* i.e. `(#r == N)` for any `r in R`
 
 homogenous, heterogenous relation
 
-* homogenous <=> `(Si == Sj)` for any `i,j in [1,n]`
-* heterogenous <=> `(Si != Sj)` for some or any `i,j in [1,n]`
-* (not homogenous => heterogenous), but (not heterogenous !> homogenous)
+* homogenous <-> `(Si == Sj)` for any `i,j in [1,n]`
+* heterogenous <-> `(Si != Sj)` for some or any `i,j in [1,n]`
+* (not homogenous -> heterogenous), but (not heterogenous !> homogenous)
 
 <!-- ======================================================================= -->
 ## domain, type
@@ -63,9 +68,8 @@ homogenous, heterogenous relation
 semantics
 
 * `sem(R) := <statement>` or simply `R := <statement>`
-* these kind of expressions state, that
-  "statement" applies to all `r in R`
-* the relation has no meaning under a given statement, if
+* note that `<statement>` must apply to all `r in R`
+* a relation has no meaning under a given statement, if
   that statement does not apply to some `s in R`
 
 examples for `R in (A X B)`
@@ -104,6 +108,12 @@ clarification
 * this does not state anything about the semantics
 * it merely states that the tuples are turned upside down
 
+clarification
+
+* inverting a relation usually drops the initial semantics
+* i.e. the inverted relation has no meaning under the initial semantics
+* that is, because the order of elements is changed
+
 <!-- ======================================================================= -->
 ## palindromic relation
 
@@ -113,7 +123,7 @@ palindromic relation
 * `R` and `inv(R)` both have a the exact same semantics
 
 <!-- ======================================================================= -->
-## antonymous relations
+## antonymous relation
 
 relation `S` is antonymous to `R`
 
@@ -145,6 +155,9 @@ examples for `R,S in AxBxC` that have antonymous semantics
 * assume `R:=(A,B,C,G)` and `T:=(C,B,A,G):=inv(R)`
 * `R` := (set `c` is the intersection of sets `a` and `b`) =: `T`
 * where `R: (A,B) -> C` and `T: (C) -> (B,A)`
+
+clarification
+
 * an antonymous relation requires antonymous semantics
 
 <!-- ======================================================================= -->

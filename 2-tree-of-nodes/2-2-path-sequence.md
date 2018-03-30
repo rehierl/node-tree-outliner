@@ -48,13 +48,14 @@ end
 The sequence of paths generated this way is referred to as
 **the path sequence of** a given root.
 
-* the document's path sequence (PS) := `pathSequenceOf(body)`
-* the root will always be the first node in each path - i.e. `(p(1) == r)`
+* the tree's path sequence := `pathSequenceOf(root)`
+* the root node will be the first node in each path - i.e. `(p(1) == r)`
+* the first path in such a sequence has length 1 and only contains the root node
 * any path in this sequence is a rooted path
 
-The definitions for elements of sequences also apply to these paths.
+The definitions for elements of such sequences also apply to these paths.
 
-* `p1` is (strictly|loosely)? pre- or sub-sequent to `p2`
+* `p1` is (strictly|loosely)? pre-, in- or sub-sequent to `p2`
 * `p1 (<<|<|<>|>|>>) p2`
 
 The path sequence can also be defined by the corresponding node sequence:
@@ -66,7 +67,7 @@ The path sequence can also be defined by the corresponding node sequence:
 ## the (rooted) path of a node
 
 The path that connects a tree's root `r` with a node `n` is referred to as
-**the rooted path of node** `n`, or simply **the path of node** `n`.
+**the rooted path of node** `n`, or simply as **the path of node** `n`.
 
 * the path of a node will be referred to as `p(n)` or `pn`
 * e.g. `pn in RD`
@@ -83,8 +84,9 @@ and if `n` has no other child `d` such that `(pd < pc)`.
 Node `c` is **the last child of** node `n`, if `c` is a child of `n`
 and if `n` has no other child `d` such that `(pc < pd)`.
 
-Note - tree traversal requires a `firstChild` property -
-i.e. a clarification that is based upon its own definition.
+Note that these statements are limited to the child nodes of a node. As such,
+the latter two statements essentially only state that a node's first child
+will be entered first, and that a node's last child will be entered last.
 
 <!-- ======================================================================= -->
 ## siblings
@@ -93,15 +95,12 @@ Node `s` is **a sibling of** node `n`,
 if `(prefix(pn,#pn-1) prefix-of ps)` and `(#ps == #pn)`.
 
 Node `s` is **the previous sibling of** node `n`, if `s` is a sibling of `n`
-and there is no other sibling `t` such that `(ps < pt < pn)`.
+and if there is no other sibling `t` such that `(ps < pt < pn)`.
 
 Node `s` is **the next sibling of** node `n`, if `s` is a sibling of `n`
-and there is no other sibling `t` such that `(pn < pt < ps)`.
+and if there is no other sibling `t` such that `(pn < pt < ps)`.
 
-Note - tree traversal requires a `nextSibling` property -
-i.e. a clarification that is based upon its own definition.
-
-However, siblings are not strictly connected:
+Note however that siblings are not strictly connected:
 
 * there is no uni-directional path `p=(n,...,s) in TD or BU`
 * siblings all share common ancestors but are, other than that, unrelated

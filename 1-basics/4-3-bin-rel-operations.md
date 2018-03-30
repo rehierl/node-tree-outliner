@@ -9,6 +9,10 @@
 * `(R contained-in S)` := `aSb` for any `aRb`
 * signature - (relation,relation) -> boolean
 
+clarification
+
+* so similar to the definition of "subset"?
+
 <!-- ======================================================================= -->
 ## inverse (',inv)
 
@@ -21,13 +25,13 @@ clarification
 * `(R == R')` if `R` is symmetric
 
 <!-- ======================================================================= -->
-## union (+,or)
+## union (+, or)
 
 * `(R + S), (R or S) := { (a,b) : aRb or aSb }`
 * signature - (relation,relation) -> relation
 
 <!-- ======================================================================= -->
-## intersection (&,and)
+## intersection (&, and)
 
 * `(R & S), (R and B) := { (a,b) : aRb and aSb }`
 * signature - (relation,relation) -> relation
@@ -69,8 +73,8 @@ clarification
 
 clarification
 
-* `comp(parent-of,mother-of)` => `maternal-grandparent-of`
-* `comp(mother-of,parent-of)` => `grandmother-of`
+* `comp(parent-of, mother-of)` -> `maternal-grandparent-of`
+* `comp(mother-of, parent-of)` -> `grandmother-of`
 
 <!-- ======================================================================= -->
 ## complement

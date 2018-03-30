@@ -1,8 +1,8 @@
 
 <!-- ======================================================================= -->
-# Implementation specific aspects
+# Implementation
 
-The following content is intended to clarify implementation specific aspects.
+Minor or isolated implementation specific aspects:
 
 <!-- ======================================================================= -->
 ## general statements

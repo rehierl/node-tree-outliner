@@ -3,10 +3,10 @@
 # Values v
 
 * a value `v` (or a constant `c`) represents a specific abstract value
-* such values need to be seen as being atomic - i.e. a self-enclosed unit
-* `v` can not be changed to represent a different specific value
+* such values need to be seen to be atomic - i.e. self-enclosed units
+* `v` can not be changed to represent a different value
 * i.e. a `1:1` relationship between a value and its representative
-* e.g. the digit literal `2` represents the value of `2`
+* e.g. the digit literal `2` represents the number `2`
 
 number identifiers
 
@@ -24,7 +24,7 @@ letter identifiers
 clarification
 
 * `vi` is constant, `vi` can not be changed, `vi` is immutable
-* `vi` is not a variable, `vi` is not a reference of sorts
+* `vi` is not a variable, `vi` does not represent some reference
 * it is an error to attempt to assign any value to `vi` - e.g. `vi = 2`
 
 clarification

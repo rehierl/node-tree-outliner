@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Sequent
 
-* two elements of the same sequence are **sequent**
+* two elements of the same sequence are said to be **sequent**
 * any two elements appear **sequently** within the same sequence
 
 clarification
@@ -18,6 +18,7 @@ clarification
 ```
 indexOf(sequence,element) begin
   for i in 1 to sequence.length begin
+    //- note: test for reference equality
     if(sequence(i) === element) return i
   end
   throw new ElementNotFoundException()
@@ -35,21 +36,21 @@ isPreSequentTo(seq,e1,e2) begin
 end
 
 //- pre-sequent
-isPreSequentTo -> (distanceBetween > 0)
-isStrictlyPreSequentTo -> (distanceBetween == +1)
-isLooselyPreSequentTo -> (distanceBetween > +1)
+isPreSequentTo => (distanceBetween > 0)
+isStrictlyPreSequentTo => (distanceBetween == +1)
+isLooselyPreSequentTo => (distanceBetween > +1)
 
 //- sub-sequent
-isSubSequentTo -> (distanceBetween < 0)
-isStrictlySubSequentTo -> (distanceBetween == -1)
-isLooselySubSequentTo -> (distanceBetween < -1)
+isSubSequentTo => (distanceBetween < 0)
+isStrictlySubSequentTo => (distanceBetween == -1)
+isLooselySubSequentTo => (distanceBetween < -1)
 
 //- in-sequent
-isInSequentTo -> (distanceBetween == 0)
+isInSequentTo => (distanceBetween == 0)
 ```
 
 <!-- ======================================================================= -->
-## pre-sequent (<,<<)
+## pre-sequent (<, <<)
 
 * `e1` appears before `e2`
 * `e1` **precedes** `e2`
@@ -69,7 +70,7 @@ x is loosely presequent to y
 * i.e. there are other entries in between
 
 <!-- ======================================================================= -->
-## sub-sequent (>,>>)
+## sub-sequent (>, >>)
 
 * `e2` appears after `e1`
 * `e2` succeeds `e1`
@@ -105,8 +106,7 @@ x insequent to y (<>)
 
 * `e1` and `e2` are in the same sequence
 
-The following terms may be used, if the order of both elements is not relevant
-in a given context:
+if the order of elements is not relevant in a given context:
 
 * x is insequent to y <=> `(absDistance(x,y)) == 0)`
 * x is strictly sequent to y <=> `(absDistance(x,y) == 1)`

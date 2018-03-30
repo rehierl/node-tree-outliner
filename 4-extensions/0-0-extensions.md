@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Design - extending the default definitions
+# Design - extensions to the default definitions
 
 The focus of the following considerations is to evaluate those options which
 allow to extend the default definitions by the definition of nodes and/or

@@ -3,12 +3,18 @@
 # Concatenation
 
 * `x` represents the concatenation operator
+* note: the lower-case letter 'x'
 * synonymous - concatenate, add, append
 
 clarification
 
-* `x` operator definitions that are missing
-  are thought of as being defined in a similar fashion
+* cartesian product <!> concatenation
+* main difference: concatenation is associative, the cartesian product is not
+
+clarification
+
+* some `x` operator definitions that are missing
+* think of those as being defined in a similar fashion
 
 clarification
 

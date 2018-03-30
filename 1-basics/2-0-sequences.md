@@ -12,13 +12,14 @@ tuple vs. sequence
 * sequence - an ordered list of something - e.g. `(1, 2, 3, ...)`
 * in general, a rule exists such that subsequent elements in a sequence can be
   calculated from presequent ones - e.g. `an := a(n-2) + a(n-1)` (Fibonacci)
-* here, the notion of "sequence" will shift from the notion of a tuple towards
-  the notion of a mathematical sequence
+* here, the meaning of "sequence" will shift from the notion of a tuple towards
+  the notion of a mathematical sequence. that is, the term "sequence" will be
+  used for both constructs, regardless of their exact characteristics.
 
 clarification
 
 * `dom(ei) := Vi` - any element has its own domain
-* however, different elements may still belong to the same domain
+* different elements may belong to (1) the same domain, or (2) different domains
 * e.g. `dom(e2) := V2`, but `V2 := V1` is possible, as is `(e2 == e1)`
 
 clarification
@@ -44,20 +45,20 @@ set of sequences
 * `(#si != #sj)` may be true for any two sequences `(si !== sj)`
 
 <!-- ======================================================================= -->
-## is sequence
+## is-sequence
 
 * `(is-sequence s), isSequence(s)` are true, if `s` is a sequence
 * i.e. `s` has the characteristics of a sequence
 * signature - (anything) -> boolean
 
 <!-- ======================================================================= -->
-## length of
+## length-of
 
 * `#s, #(s), lengthOf(s), s.length, (length-of s) := N`
-* `(#s length-of s)` is always true
+* `(#s is-length-of s)` is always true
 
 <!-- ======================================================================= -->
-## is empty
+## is-empty
 
 * `(is-empty s), isEmpty(s) := (#s == 0)`
 * `()` and `[]` represent empty sequences
@@ -79,22 +80,22 @@ clarification
 
 * comparison with `s[i]` is done against the element's current value
 * `var = s[i]` assigns the value of element `ei` to the given variable
-* the elements of a sequence themselves cannot be changed or accessed -
-  i.e. sequences appear as sequences of values
+* the elements of a sequence themselves cannot be changed or accessed
+* i.e. sequences appear as sequences of values
 * the elements of a sequence and the values they have are used synonymously
 
 <!-- ======================================================================= -->
-## is unique
+## is-unique
 
 * `(is-unique s), isUnique(s)` are true, if `(s(i) != s(j))`
   for any combination of indexes `i,j in [1,#s]` such that `(i != j)`
-* `s` is itself unique, if all elements refer to different/unique values
+* `s` is itself unique, if all elements have different/unique values
 
 <!-- ======================================================================= -->
-## equality (==,!=)
+## equality (==, !=)
 
 * `(s == t)` is true, if `(#s == #t)` and `(s(i) == t(i))` for any `i in [1,#s]`
-* In general, the test for equality by value must also take the domains into
+* in general, the test for equality by value must also take the domains into
   account - e.g. `(+2 != +2.0)`
 * `(s != t)` => both differ in length and/or corresponding elements/values
 
@@ -106,7 +107,7 @@ clarification
 * synonymous - inverse, reversed, transposed, etc.
 * `inv(inv(s)) <=> s`
 
-inverse set of sequences (S')
+inverted set of sequences (S')
 
 * `S', (S)', inv(S) := { inv(s) : s in S }`
 * `inv(inv(S)) <=> S`
@@ -129,7 +130,7 @@ left-bound <=> right-bound
   for some `r in [1,N]`, `k in [1,r]` and `i in [1,k]` -
   `r` is the right border.
 
-Sequence `t` is **an infix of** sequence `s`
+sequence `t` is **an infix of** sequence `s`
 
 * `t infix-of s`, if `(s(o+j) = t(j))`
   for `o in [1,N]`, `k in [1,(N-o)]` and `j in [1,k]`
@@ -141,80 +142,82 @@ clarification
 * "subsequence" can have the following meaning:
 * `s = [1, (2, 3), 4]`, `t = [2, 3]` => `s = [1, t, 4]`
 * i.e. a single element of `s` has `t` as its value
-* here, "subsequence" has this meaning:
+* here, "subsequence" has the following meaning:
 * `s = [1, 2, 3, 4]`, `t = [2, 3]`
-* i.e. subsequent elements of `s` match sequence `t`
+* that is, based on `t infix-of s` being true
 
 clarification
 
-* A sequence is a subsequence to itself.
+* a sequence is a subsequence to itself
 * `(t == s)` => `t infix-of s` and `(#t = #s)`
-* An empty sequence has no subsequence.
-* `(s == s)` and `s infix-of s` are both always true.
+* an empty sequence has no subsequence (`s(i)` is undefined)
+* `(s == s)` and `s infix-of s` are both always true
 
 <!-- ======================================================================= -->
 ## prefix
 
-Sequence `t` is **a prefix of** sequence `s`
+sequence `t` is **a prefix of** sequence `s`
 
-* `t prefix-of s`, if `t infix-of s` and offset `(o = 1)` (digit)
+* `t prefix-of s`, if `t infix-of s` and offset `(o = 1)`
 * `t` is bound to the 1st entry of `s`
-* `s prefix-of s` is always true.
-* A sequence is a prefix to itself.
+* `s prefix-of s` is always true
+* a sequence is a prefix to itself
 
-Sequence `t` is **the n-th prefix of** sequence `s`
+sequence `t` is **the n-th prefix of** sequence `s`
 
 * `t n-prefix-of s`, if `t prefix-of s` and `(#t == n)`
 * `prefix(s,n) = t`, if `(t n-prefix-of s)`
-* The N-th prefix of a sequence is the sequence itself.
+* the n-th prefix of a sequence is the sequence itself
 
-Sequence `u` is **a common prefix of** sequence `s` and sequence `t`
+sequence `u` is **a common prefix of** sequence `s` and sequence `t`
 
 * `u prefix-of s,t`, if `(u prefix-of s)` and `(u prefix-of t)`
 * `s` and `t` share the common prefix `u`
 * `#u in [1,min(#s,#t)]`
-* For any common prefix `u`, there is a `n` such that `u n-prefix-of s,t`
+* for any common prefix `u`, there is a `n` such that `u n-prefix-of s,t`
 
-Sequence `u` is **the n-th common prefix of** sequences `s` and `t`
+sequence `u` is **the n-th common prefix of** sequences `s` and `t`
 
 * `u n-prefix-of s,t`, if `(u prefix-of s,t)` and `(#u = n)`
 * `n in [1,min(#s,#t)]`
 
-Sequence `u` is **the common prefix of** sequence `s` and sequence `t`
+sequence `u` is **the common prefix of** sequence `s` and sequence `t`
 
-* If there is no other common suffix `v` such that `(#v > #u)`
-* `u max-prefix-of s,t`
+* `u max-prefix-of s,t`, is true if ...
+* `u` is the longest common prefix of both sequences
+* if there is no other common prefix `v` such that `(#v > #u)`
 
 <!-- ======================================================================= -->
 ## suffix
 
-Sequence `t` is **a suffix of** sequence `s`
+sequence `t` is **a suffix of** sequence `s`
 
 * `t suffix-of s`, if `t subsequence-of s` and `(r == N)`
 * `t` is bound to the last entry of `s`
 * `t` and `s` have the same order (i.e. `t` is not reversed)
 * `s suffix-of s` is always true
-* Any sequence is a suffix to itself.
+* any sequence is a suffix to itself
 
-Sequence `t` is **the n-th suffix of** sequence `s`
+sequence `t` is **the n-th suffix of** sequence `s`
 
 * `t n-suffix-of s`, if `t suffix-of s` and `(#t == n)`
 * `suffix(s,n) = t`, if `(t n-suffix-of s)`
-* The N-th suffix of a sequence is the sequence itself.
+* the n-th suffix of a sequence is the sequence itself
 
-Sequence `u` is **a common suffix of** sequence `s` and sequence `t`
+sequence `u` is **a common suffix of** sequence `s` and sequence `t`
 
 * `u suffix-of s,t`, if `(u suffix-of s)` and `(u suffix-of t)`
 * `s` and `t` share the common suffix `u`
 * `#u in [1,min(#s,#t)]`
-* For any common suffix `u`, there is a `n` such that `u n-suffix-of s,t`
+* for any common suffix `u`, there is a `n` such that `u n-suffix-of s,t`
 
-Sequence `u` is **the n-th common suffix of** sequences `s` and `t`
+sequence `u` is **the n-th common suffix of** sequences `s` and `t`
 
 * `u n-suffix-of s,t`, if `(u suffix-of s,t)` and `(#u = n)`
 * `n in [1,min(#s,#t)]`
 
-Sequence `u` is **the common suffix of** sequence `s` and sequence `t`
+sequence `u` is **the common suffix of** sequence `s` and sequence `t`
 
-* If there is no other common suffix `v` such that `(#v > #u)`
-* `u max-suffix-of s,t`
+* `u max-suffix-of s,t`, is true if ...
+* `u` is the longest common suffix of both sequences
+* if there is no other common suffix `v` such that `(#v > #u)`

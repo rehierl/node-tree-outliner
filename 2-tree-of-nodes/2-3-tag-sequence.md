@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # Tag sequence
 
-Similar to generating the node sequence of a document, the tree traversal
-fragment can be used to produce **a document's tag sequence**:
+Similar to the generation of a tree's node sequence, the tree traversal
+fragment can be used to produce the tag sequence of a tree:
 
 ```
 tagSequenceOf(root) begin
@@ -33,12 +33,9 @@ tagSequenceOf(root) begin
 end
 ```
 
-Executing this pseudocode with the following example HTML fragment as input ...
+Executing this pseudocode on the following example fragment as input ...
 
 ```
-Example 1 (E-1):
-----------
-
 <body>
   A
   <h1>B</h1>
@@ -55,10 +52,11 @@ seq-0 := [body, #text, /#text, h1, #text, /#text, /h1, #text, /#text, h1, #text,
           /#text, /h1, #text, /#text, /body]
 ```
 
-Any tag in such a sequence corresponds with an enter or exit event: start tag
-`name` represents an enter and end tag `/name` an exit event. Any tag sequence
-therefore corresponds with the structure of one or more fragments that have the
-same, if not identical, structure.
+Any tag in such a sequence corresponds with the enter or the exit event of a
+node: start tag `name` represents a node's enter and end tag `/name` a node's
+exit event. Any tag sequence therefore corresponds with the structure of one
+or more fragments that have the same, if not identical, structure.
 
-Memory hook: Essentially, a document's tag sequence corresponds with an HTML
-file that was stripped of any content.
+**Memory hook**
+Essentially, a document's tag sequence corresponds with an HTML
+file that was stripped of its contents.
