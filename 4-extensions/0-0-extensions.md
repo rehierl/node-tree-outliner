@@ -7,7 +7,7 @@ allow to extend the default definitions by the definition of nodes and/or
 attributes. Note that these definitions will be referred to as "extended
 definitions", or simply as "extensions (to the default definitions)".
 
-> extended description => default description
+* extended description -> default description
 
 The first step is to take a look at those aspects which can be altered while
 maintaining consistency with the default definitions. That consistency is
@@ -16,9 +16,8 @@ which uses extended definitions, into a semantically equivalent description,
 which does not use such definitions. In short, for each extended description,
 there must exist an equivalent default description.
 
-As such, the definition of extensions is not intended to add entirely new
-features to the default definitions. These extensions will be a mere matter
-of convenience.
+Because of that, the definition of extensions is not intended to add
+entirely new features. These extensions are a mere matter of convenience.
 
 **TODO**
 Put differently, the use of extended definitions must be optional. That is,
@@ -29,28 +28,25 @@ default definitions allows to ...
 <!-- ======================================================================= -->
 ## close modifiers
 
-Obviously, extensions can only change an algorithm's current context.
-In addition to that, and because the creation of new sections is already
-dealt with by the definition of sectioning nodes, such extensions only
-allow to instruct an implementation to close presequent sections.
+Obviously, any extension can only change an algorithm's current context.
+In addition to that, and because the declaration of new sections is already
+covered by the definition of sectioning nodes, the closure of sections is
+the only option left that can be used to define such extensions.
 
 Note that already closed presequent sections are no longer relevant. That is,
 because sections can not be reopened, and because of that, no further nodes
-and/or subsections can be associated with sections that are already closed.
-Likewise, subsequent nodes and sections are not relevant. Which is, because
-those are not even guaranteed to exist. Consequently, extensions can only
-represent instructions to close presequent sections.
+and/or subsections can be associated with closed sections. Likewise, subsequent
+nodes and sections are not relevant. Which is, because those are not even
+guaranteed to exist. Consequently, extensions can only represent instructions
+to close presequent sections.
 
-Note that attributes, which instruct an implementation to close sections, will
-be referred to as "(close) modifiers". In addition to that, any node can be
-understood to always have a default (close) modifier associated with it (e.g.
-`<div close="0">`). Because of that, the term "close modifier" will be used
-instead of the terms "extended definition" or "extensions".
-
-Note that a node, which instructs to close a section (i.e. before the end of
-the section's default scope is reached), will be referred to as the "end-marker
-node" of the corresponding section. However, and due to a section's parent
-container, not every section will have an end-marker node.
+An attribute that instructs to close zero or more sections will be referred to
+as a "(close) modifier". In addition to that, any node can be understood to have
+a default (close) modifier associated with it (e.g. `<div close="0">`). Because
+of that, the term "close modifier" will be used instead of the terms "extended
+definition" or "extensions". Finally, a node which instructs to close a section
+before the end of the section's default scope is reached (i.e. a node that has
+such an attribute), will be referred to as the section's "end-marker node".
 
 <!-- ======================================================================= -->
 ## available options
@@ -68,27 +64,23 @@ container, not every section will have an end-marker node.
 * `1/0` - this case represents a viable option with regards to inactive
   nodes (`1`), but not with regards to sectioning nodes (`0`).
 
-```
-  ..., <node>, ..., </node>, ...
-       |1/1 |0/0    |0/0  |1/0
-cases   1,2, 3,4,    5,6,  7,8
-```
-
-Note that the only viable two cases are when entering a node's enter
-event, and when exiting its exit event. However, the latter case does
-not represent a viable option with regards to sectioning nodes.
+Note that the only viable cases are when entering a node's enter event (`1/1`),
+and when exiting a node's exit event (`1/0`). However, the latter case does not
+represent a viable option with regards to sectioning nodes.
 
 > case 1 - when entering a node's enter event - (1)
 
 If presequent sections are closed before the next subsequent node is associated,
-then that node and any other node subsequent to it, will be associated with an
-ancestor section of those to-be-closed sections. Because of that, this case can
-not result in any conflict. Consequently, this case represents a viable option.
+then that node, and any other node subsequent to it, will be associated with an
+ancestor section of those newly closed sections. Because of that, this case can
+not result in any conflict. Because of that, this case can be used to define
+close modifiers (i.e. a viable option).
 
-This case could therefore be used to define end-marker nodes (e.g. `<close />`).
-Note that the effect of such a definition would be to: (1) first close the (old)
-current section, and then (2) associate the node (and potentially any descendant
-nodes) with the (new) current section.
+Note that this case could be used to define end-marker nodes (e.g. `<close />`).
+If such a node would be defined to only close the current section, then the
+effect of these nodes would be to: (1) first close the (old) current section,
+and then (2) associate the node (and potentially any descendant nodes) with
+the (new) current section.
 
 > case 2 - when entering a sectioning node's enter event - (1)
 
@@ -97,9 +89,9 @@ being entered, is a viable option. That is, because it will not result in
 conflicting statements with regards to the logical location of a section:
 (1) the sectioning node will be associated with one of the current section's
 ancestor sections, and (2) the section's content nodes will be associated with
-the declared section, which will be a subsection to the sectioning node's parent
-section. That is, the declared section will be strongly connected with its
-sectioning node (as it should be).
+the declared section, which is going to be a subsection to the sectioning node's
+parent section. That is, the declared section will be strongly connected with
+its sectioning node (as it should be).
 
 > case 3 - when exiting a node's enter event - (0)
 
@@ -130,18 +122,19 @@ because the declared section, once it is open, will be the new current section.
 
 > case 5 - when entering a node's exit event - (0)
 
-As mentioned before, any node is a parent container, if the corresponding node 
-has type-2 sectioning nodes as its child nodes. Because of that, such inner
+As mentioned before, any node is a parent container, if the corresponding
+node has type-2 sectioning nodes as its child nodes. Because of that, inner
 sections must always be closed first, whether the node's close modifier
-instructs to close any sections or not. Consequently, case 5 can not be used.
+instructs to close any sections or not (i.e. regardless of the node's close
+modifier). Consequently, this case can not be used to define extensions.
 
 > case 6 - when entering a sectioning node's exit event - (0)
 
 As before, case 6 can not be used because inner sections must always be closed
-first, regardless of any potential close modifier.
+first, regardless of a sectioning node's close modifier.
 
 Note that a type-1 sectioning node is by definition the parent container of
-the section it declares. That is, if it is not allowed to close a type-1
+the section it declares. That is, if it would not allowed to close a type-1
 section before the end of its default scope is reached, then this node event
 will always have to close at least the declared type-1 section.
 
@@ -154,20 +147,20 @@ the parent container of any section. That is, if user/input errors are ignored.
 > case 7 - when exiting a node's exit event - (1)
 
 Due to case 5, and by the time a node's exit event will be exited, all the inner
-sections of the node being entered have been closed. Consequently, such a close
-modifier can only instruct to close sections that are still open by the time the
-corresponding node was entered.
+sections of the node being exited have already been closed. Consequently, such
+a close modifier can only instruct to close sections that are still open by the
+time the corresponding node was entered.
 
 In addition to that, all descendants of that node have already been associated.
 Which is why the close modifier of such a node can also no longer change these
 associations.
 
-However, such a modifier can still change the relationship of those nodes and
-sections that are subsequent to the node's exit event. Because of that, this
-case can only be used to mark the end of a branch of the section tree (i.e.
-end-marker nodes). As such, the effect of such a definition would be to: (1)
-first associate the node (and its descendants) with the current section, and
-(2) if necessary close one or more presequent sections.
+However, such a modifier can still change the relationship of those nodes
+and sections that are subsequent to the node's exit event. Because of that,
+this case could still be used to mark the end of a branch of the section
+tree (i.e. end-marker nodes). As such, the effect of such a definition would
+be to: (1) first associate the node (and its descendants) with the current
+section, and (2) if necessary close one or more presequent sections.
 
 Because of that, and if more than one section would have to be closed, it could
 be difficult to detect why sections had to be closed. That is, because such a
@@ -190,7 +183,8 @@ section's sectioning node. Consequently, and depending on the exact notation
 of close modifiers, authors could have difficulties to notice the reasons
 behind the relationship between two sections. As such, this case is, although
 technically possible, ill advised as it does not allow to express a more
-obvious section hierarchy (i.e. no real advantage over the default definitions).
+obvious section hierarchy (i.e. no significant advantage over the default
+definitions).
 
 Because the content nodes of a type-2 section have not been associated yet
 (i.e. in contrary to the sectioning node and its descendant nodes), closing
@@ -211,19 +205,19 @@ the scope of that section must end before the node is entered.
 Therefore, and in order to change the relationship of a node, the scope of
 one or more presequent sections must be altered. Because of that, the parent
 section of a node depends on presequent nodes. That is, the information which
-defines a node's location within the section tree is not directly bound to the
-node itself. Consequently, and if only the default definitions are used, the
-section hierarchy of a node tree is well defined, but not that obvious.
+defines a node's location within the section hierarchy is not directly bound
+to the node itself. Consequently, and if only the default definitions are used,
+the section hierarchy of a node tree is well defined, but not that obvious.
 
 As mentioned above, close modifiers allow to instruct an implementation to
-close presequent sections. As such they allow to explicitly limit the scope of
-presequent sections and therefore allow to select a different current section.
-Because of that, they allow to explicitly change the location of subsequent
-nodes within the section hierarchy.
+close presequent sections. As such they allow to explicitly end the scope
+of presequent sections and therefore allow to switch to a different current
+section. Because of that, close modifiers allow to explicitly change the
+location of subsequent nodes within the section hierarchy.
 
 Consequently, close modifiers can be used to express a more obvious section
-hierarchy. That is, (1) such modifiers are possible, and (2) they improve the
-overall design by making it more convenient to express a specific section
+hierarchy. That is, (1) such modifiers are possible, and (2) they improve
+the overall design by making it more convenient to express a specific section
 hierarchy.
 
 **CLARIFICATION**
@@ -245,8 +239,7 @@ to tag a node with a role (e.g. via attributes):
 * `<div roles="close:0">`, or `<div close="0">`
 
 Note that this close modifier role instructs to close "0" (i.e. no) sections,
-which corresponds with the current definition of inactive nodes and sectioning
-nodes.
+which corresponds with the default definition of active and inactive nodes.
 
 Therefore, and with the association of roles in mind, the definition of specific
 node types can be understood to implicitly tag all nodes of that type with the
@@ -267,7 +260,7 @@ at the same time:
 * `<h1> := <div roles="rank:1, type:2">`
 
 Note that rank values represent a specific notation for close modifiers
-(see the subsequent chapters).
+(see subsequent chapters).
 
 In addition to that, a role may implicitly include further roles. That is,
 tagging a node with one role may implicitly tag that node with even further
@@ -278,26 +271,26 @@ which itself (i.e. the group) does not necessarily have to act as a role:
 * `<h1> := <div roles="role_h1">`
 
 **CLARIFICATION**
-With regards to the outline algorithm, only two main roles are relevant:
+With regards to the outline algorithm, only the following roles are relevant:
 (1) inactive nodes and (2) active nodes. In addition to that, the set of
 active nodes consists of the (3) sectioning nodes and (4) end-marker nodes
-(aka. close modifiers). To be more accurate, active nodes are sectioning
-nodes and/or end-marker nodes.
+(aka. close modifiers). To be more clear, active nodes are sectioning nodes
+and/or end-marker nodes.
 
 Note that a "parent container" role does not exist. That is, because tagging
 a node with a role will always associate a node with that role. But, whether a
 node is a parent container or not, does not depend on the association of roles:
-(1) Even if a node would be associated with that role, such a node can not be
-a parent container if it does not have a type-2 sectioning node as one of its
-child nodes. (2) Even if a node is not associated with that role, such a node
-will act as a parent container if it does have such child nodes.
+(1) Even if a node would be associated with that role, such a node is not a
+parent container if it does not have a type-2 sectioning node as one of its
+child nodes. (2) Even if a node is not associated with that role, a node will
+be a parent container if it does have such child nodes.
 
 **CLARIFICATION**
-An implementation executes operations based on the roles of a node.
+An implementation must execute operations based on the roles of a node.
 
 As such, an implementation must have the ability to detect the roles of a node
-either by the node's definition, or by some commonly agreed-upon notation (e.g.
-via the node's attributes).
+either by the node's definition, or by some commonly agreed-upon notation that
+is used to tag nodes with roles (e.g. via the node's attributes).
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -309,17 +302,17 @@ cases 1,2, 3,4,    5,6,  7,8
 ```
 
 **CLARIFICATION**
-There is only one generic type of end-marker nodes. That is, the only option
-which allows to define conflict free close modifiers is, if presequent sections
-are closed when entering a node's enter event (i.e. cases 1 and 2).
+There is only one generic type of end-marker nodes. That is, the only viable
+option to define conflict free close modifiers is, if presequent sections are
+closed when entering a node's enter event (i.e. cases 1 and 2).
 
 That is, because there are initially only two types possible:
 
 * type-1 (cases 1,2): close sections before entering a node, and
 * type-2 (cases 7,8): close sections after exiting a node.
 
-And, because of that, the definition of close modifiers would have to allow to
-distinguish between those two types. For example by ...
+And, because of that, the definition of close modifiers would have
+to allow to distinguish between those two types. For example by ...
 
 * notation 1: `<div roles="close_enter:N">` vs. `<div roles="close_exit:N">`
 * notation 2: `<div roles="close:N">` vs. `</div roles="close:N">`
@@ -339,24 +332,24 @@ End-marker nodes do not belong to the sections they close.
 That is because due to case 8, a type-2 close modifier can not be generically
 defined (i.e. independently of the tagged node type). Hence, the only generic
 option available is a type-1 close modifier. And because of that, end-marker
-nodes will not be associated with the section's they close.
+nodes will never be associated with the section's they close.
 
-Note that this is yet another reason as to why not to associate sectioning
-nodes with the sections they declare: Because even sectioning nodes can be
-end marker nodes, associating sectioning nodes with the sections they declare
-would be inconsistent with the general "close modifier" role. That is, because
-these will be, by default, associated with the parent section of the most
-significant sections of the to-be-closed sections. Consequently, there would
-have to be a clear reason as to why such a deviation can not be avoided. The
-default case must apply, if there is no such reason.
+Note that this is yet another reason as to why not to associate sectioning nodes
+with the sections they declare: Because even sectioning nodes can be end marker
+nodes, associating sectioning nodes with the sections they declare would be
+inconsistent with the general "close modifier" role. That is, because end-marker
+nodes will be associated with the parent section of the most significant
+to-be-closed section. Consequently, there would have to be a clear reason as
+to why such an inconsistency can not be avoided. The default case has to apply,
+if such a reason does not exist.
 
 **CLARIFICATION**
-A section will be closed either by its parent container,
-or by a subsequent end-marker node.
+A section will either be closed by its parent container,
+or by an optional end-marker node.
 
 Consequently, if the section's last top-level node has no next sibling, then
 the corresponding section was closed by its parent container. Otherwise, this
-next sibling is the section's end-marker node.
+unassociated next sibling is the section's end-marker node.
 
 Note that this also allows to easily determine the last top-level node of a
 non-empty section: (1) the parent container's last child, or (2) the end-marker
@@ -367,3 +360,7 @@ Note that, because end-marker nodes do not belong to the sections they close,
 the end of a section is still always defined by exclusion (see "last nodes").
 With that regards, the definition of end-marker nodes is consistent with the
 definition of parent containers.
+
+**CLARIFICATION**
+a section either has an end-marker node, or it doesn't -
+never multiple such nodes

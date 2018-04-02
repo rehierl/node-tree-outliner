@@ -1,15 +1,19 @@
 
-(Note the new subsequent chapters: 4-extensions, 5-implementation)
+This chapter holds the basic design (i.e. default definitions)
+of the general purpose outliner.
+
+Note that most statements in that chapter are derived conclusions, or only
+introduce new names which are used to refer to specific entities/circumstances.
+There are very few definitions that choose one option out of multiple available
+options (i.e. not much room for political decisions or personal preferences).
 
 <!-- ======================================================================= -->
-# Overview of conclusions and definitions
+# an overview
+
+**TODO**
+begs to be updated ...
 
 This overview is not meant to be overly accurate: It's just a "short" summary.
-
-Note that most statements are derived conclusions, or only introduce new names
-which are used to refer to specific entities/circumstances. There are very few
-definitions that choose one option out of multiple available options (i.e. not
-much room for political decisions or personal preferences).
 
 node sequence
 
@@ -119,5 +123,3 @@ associating sectioning nodes
   section of the section it declares: There are multiple aspects involved.
 * The very first node of any section always is strictly associated with it,
   which is critical to transformations.
-
-**... to be continued ...**

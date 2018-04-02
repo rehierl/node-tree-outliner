@@ -20,14 +20,6 @@ fundamental conclusions drawn based on the section tree,
 may also apply to any other node tree -
 
 **TODO**
-a subsection is not just a subset of its parent section -
-a subsection is a strict subset of its parent section -
-see set-of-values
-
-**TODO**
-dipath -> a semantically consistent path
-
-**TODO**
 parent containers, a definition by choice? -
 is there a formal/mathematical reason why they are needed? -
 i.e. allow to find a contradiction in the statements that
@@ -60,7 +52,7 @@ set-subset => tree of sections -
 the set-subset relationship defines a tree of nodes/sections -
 
 tree of nodes ?> set-subset relationship -
-question is, if a node tree defines a set-subset relationship -
+question is: can a node tree be understood to define a set-subset relation? -
 
 each node in a tree can be understood to declare a subset of nodes? -
 equivalent with the contains relation? -

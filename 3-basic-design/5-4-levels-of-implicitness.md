@@ -115,6 +115,8 @@ Otherwise, the design can not be understood to be in itself consistent. That is,
 because the statements which can then be derived from such paths will contradict
 each other. Consequently, such paths allow to point out design errors.
 
+<!-- ======================================================================= -->
+
 **TODO**
 proof (by design?) that a path in `SN{+}` exists for each path in `S{+}N` -
 and by that, proof that those paths allow to make the same statements -
@@ -123,3 +125,36 @@ this would confirm the conclusions drawn from the initially defined
 also be derived from the `S{+}N` paths -
 this would suggest/indicate that the design is in itself consistent -
 this would also serve as a formal basis for 2D/3D height maps -
+
+**TODO**
+S{+}N -
+a node belongs to a section, which belongs to all of its ancestor sections -
+the root section contains all its descendant sections, one of which must
+contain the initial node (the latter is guaranteed by design to be true) -
+
+**TODO**
+the downwards direction contains t1 and t2 sections -
+like any other descendant of the root node, all the child nodes of the root
+node are strictly or loosely (s/l) associated with the root section -
+all the nodes in the downwards path are s/l associated with the root section -
+all the nodes in the downwards path are t1 or t2 sectioning nodes (the latter
+is not exactly relevant) and may be s/l associated with additional t2 sections,
+whose sectioning nodes are not in that path -
+if that path has a t2 sectioning node, then that path ends with,
+or inside of that sectioning node -
+
+**TODO**
+S{+}N -
+start with SN, continue with SSN, then SSSN (-> S...SN) -
+
+**TODO**
+is there an easier way? -
+e.g. via the definition of hierarchy -
+e.g. definition of "set" and "subset" -
+
+**TODO**
+SN{+} -
+a node belongs to a parent node,
+which belongs to its ancestor nodes -
+the root node contains all its descendant nodes,
+one of which has to contain the initial node

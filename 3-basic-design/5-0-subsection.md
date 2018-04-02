@@ -297,6 +297,10 @@ technically not be a subsection to itself. That is, because a sectioning node
 does not belong to its own section. And, because of that, a parent section
 can never be a subsection to itself.
 
+Note that a section is for the same reason technically a strict subset of its
+parent section. That is, because a parent section always has more content nodes
+than any of its subsections.
+
 Note that this prevents a section hierarchy from having loops and/or cycles.
 
 **CLARIFICATION**

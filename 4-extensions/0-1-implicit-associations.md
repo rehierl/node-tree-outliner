@@ -8,50 +8,49 @@
  n1  n2
 ```
 
-* `n0` is an inactive parent node (associated with `s0`)
-* `n1` is a node that has a close modifier associate with it
-* `n1`'s close modifier instructs to close `s0`
+* `n0` is an inactive node (associated with `s0`)
+* `n1` is an end-modifier node (defined to close `s0`)
+* `n2` is some inactive node
 
-Due to `n1`'s close modifier, `n2` would no longer be located inside of section
-`s0`. However, and because `n0` is still associated with `s0`, `n2` would still
-be implicitly associated with `s0` (i.e. located inside of `s0`).
+Due to `n1`'s close modifier, `n2` is defined to not be located inside of `s0`.
+However, and because `n0` is associated with `s0`, `n2` is still implicitly
+associated with `s0` and as such located inside of `s0`. That is, the modifier
+of `n1` results in contradictory statements. Consequently, any instruction to
+close a section under these kind of circumstances must be ignored.
 
-Note that, if `n1`'s close modifier would have to be applied when entering the
-node's enter event, then the conflicting statements would also apply to `n1`.
-
-In order to avoid such conflicts, any instruction to close `s0` must be ignored.
-That is, because `n2` belongs by structural relationship to `s0`. Consequently,
-and under these kind of circumstances, `n1` can not be allowed to close `s0`.
+Note that, because there is only one type of close modifiers, `n1`'s modifier
+will have to be applied when entering the `n1`'s enter event. And, because of
+that, the conflicting statements will also apply to `n1` itself.
 
 Note that these structural dependencies can not be undefined. Because of that,
-structural relationships override any extension. That is, such dependencies
+structural relationships override any such extension. That is, such dependencies
 always have precedence over any close modifier.
 
 Note that these considerations are independent of where (inside of a node tree)
 such a subtree can be found. Such a subtree will always result in the afore
-mentioned conflict.
+mentioned contradictory statements.
 
 **CLARIFICATION**
 Sections can not be closed arbitrarily.
 
 <!-- ======================================================================= -->
-## parent containers
+## means of detection
 
 Any parent node is a parent container, if it is a type-1 sectioning node, or
-if it has type-2 sectioning nodes as child nodes. That is, because sections
+if it has a type-2 sectioning node as child node. That is, because sections
 must not be allowed to reach past their parent containers. Consistent dynamic
 support could otherwise not be guaranteed.
 
 Any parent node can therefore become a section's parent container, regardless
-of its specific definition. Because of that, such parent containers exist
-whether they are manually injected (explicit), or due to structural dependencies
-(implicit).
+of the definitions associated with its node type. Because of that, such parent
+containers exist whether they are manually injected (explicit), or due to
+structural dependencies (implicit).
 
 Note that a node can be defined to never be a section's parent container, if
 (and only if) the node is not allowed to have type-2 sectioning nodes as child
 nodes (e.g. the type-2 sectioning nodes themselves). However, an implementation
 is in general unaware of these kind of additional definitions. That is, in
-case of input errors or redefinitions, such an implementation will still treat
+case of input errors or redefinitions, an implementation will still treat
 descendant sectioning nodes as actual sectioning nodes and the corresponding
 nodes as parent containers. Because of that, reusing sectioning nodes for
 purposes other than to declare new sections should be avoided.
@@ -61,30 +60,26 @@ purposes other than to declare new sections should be avoided.
 ```
       n0
  ------------
- n1        n2
+ n1        n3
 ----
- n3
+ n2
 ```
 
-* `n1` is an inactive parent node
-* `n2, n3` are type-2 sectioning nodes
+* `n0,n1` are an inactive nodes (associated with `s0`)
+* `n2` is a type-2 sectioning node (declares `s2`)
+* `n3` is an end-marker node (defined to close `s2`)
 
-If a presequent sectioning node `n3` has a higher node level than the next
-subsequent sectioning node `n2`, then the default scope of `s3` ends before
-`n2` is entered. That is, `s3` and `s2` are, by structural relationship,
-independent from each other. Consequently, `n2` can not have any effect on
-`s3`. That is, `s2` can not be a subsection to `s3` and `n2` can no longer
-close `s3` (as it is already closed when `n2` is being entered).
+If the presequent sectioning node `n2` has a higher node level than the next
+subsequent end-marker node `n3`, then the default scope of `s2` will be closed
+before `n3` is even entered. Consequently, `n3` can not close `s2`.
 
-Note that, from the perspective of an algorithm, this case is a non-issue.
-That is, because sections will be ignored by subsequent operations as soon
-as they are closed. Because of that, any modifier (`n2`) is *not* understood
-to be with regards to `n3/s3`, but with regards to some other open presequent
-section. Consequently, modifiers may yield unexpected results, if this
-structural aspect is not taken into account.
-
-However, certain conditions may still yield a seemingly identical result. If
-that is the case, the reasons for those matching results differ none the less.
+Note that, from the perspective of an algorithm, this case is a non-issue. That
+is, because closed sections will be ignored by subsequent operations. To be more
+accurate, an implementation, when entering `n3` does no longer have to be aware
+that `s2` even existed. Because of that, the close modifier of `n3` will not be
+understood to be with regards to `n2/s2`, but with regards to some other open
+presequent section (i.e. with regards to `n0:s0`). Consequently, modifiers may
+yield unexpected results, if this structural aspect is not taken into account.
 
 **case 2: (node level 1 << node level 2)**
 
@@ -96,18 +91,20 @@ that is the case, the reasons for those matching results differ none the less.
            n3
 ```
 
-* `n2` is an inactive parent node
-* `n1, n3` are type-2 sectioning nodes
+* `n0` is an inactive node (associated with `s0`)
+* `n1` is a type-2 sectioning node (associated with `s0`, declares `s1`)
+* `n2` is an inactive node (associated with `s1`)
+* `n3` is an end-marker node (defined to close `s1`)
 
-If, in contrary to that, the next subsequent sectioning node `n3` has a higher
-node level than a presequent sectioning node `n1`, then `n3` has an ancestor
-that is a top-level node of `s1`. Consequently, `s3` is by implicit association
-a subsection to `s1`. Because of that, and in order to avoid conflicting
-statements, any instruction to close `s1` when `n3` is being entered, must be
-ignored. That is, `s3` can not be independent of `s1` (e.g. a sibling section
-to it).
+If, in contrary to case 1, the next subsequent end-marker node `n3` has a higher
+node level than a presequent sectioning node `n1` (i.e. is located deeper within
+the node tree), then `n3` has an ancestor which is a top-level node of `s1`.
+Because of that, `n3` is implicitly associated with `s1`. Consequently, and in
+order to avoid conflicting statements, the close modifier of `n3` can not close
+`s1`.
 
-Note that `s3` is a forced subsection of `s1`.
+Note that, if `n3` would be a type-2 sectioning node that declared `s3`,
+then `s3` would be, by implicit association, a forced subsection of `s1`.
 
 **case 3: (node level 1 == node level 2)**
 
@@ -119,19 +116,19 @@ Note that `s3` is a forced subsection of `s1`.
  n2        n4
 ```
 
-* `n1, n3` are inactive container nodes
-* `n2, n4` are type-2 sectioning nodes
+* `n0,n1,n3` are inactive nodes (associated with `s0`)
+* `n2` is a type-2 sectioning node (declares `s2`)
+* `n4` is an end-marker node (defined to close `s2`)
 
 Note that this case can be understood to contain two independent subtrees that
 have `n1` and `n3` as their root nodes. Because of that, this case is similar
-to case 1: `s2` will be closed before `n4` is even entered.
+to case 1. That is, `s2` will be closed before `n4` is even entered.
 
-Note that the node levels of the corresponding sectioning nodes don't have to
-be equal for as long as both nodes are located within two different subtrees.
-The effect will still be covered by case 1 (i.e. `s2` is closed when `n4` is
-entered).
+Note that the node levels of the corresponding nodes (`n2` and `n4`) don't have
+to be equal. For as long as both nodes are located within two different subtrees,
+this case will be covered by case 1 (i.e. `s2` is closed before `n4` is entered).
 
-**case 4: (same parent container)**
+**case 4: (same parent nodes)**
 
 ```
       n0
@@ -139,21 +136,43 @@ entered).
  n1        n2
 ```
 
-* `n1, n2` are type-2 sectioning nodes
+* `n0` is an inactive node (associated with `s0`)
+* `n1` is a type-2 sectioning node (declares `s1`)
+* `n2` is an end-marker node (defined to close `s1`)
 
-However, `n2` is in principle free to close the open presequent section `s1`, if
-(and only if) both type-2 sectioning nodes have the same parent node (i.e. the
-same parent container).
-
-Note that the parent section of `s2`, if `n2` is defined to close `s1`, can only
-be one of the remaining open sections, which all are ancestor sections of `s1`.
+In this case, `n2` is in principle free to close the presequent section `s1`.
+That is, because the section is still open and because the end-marker node is
+not implicitly associated with it.
 
 <!-- ======================================================================= -->
 ## derived statements
 
 **CLARIFICATION**
-Parent containers have significant impact on the use of close modifiers.
+An end-marker node may close a section, if (and only if)
+the end-marker node is the next sibling of the section's last top-level node.
+
+That is, because ...
+
+* the section still needs to be open. Because of that, the end-marker node
+  must be subsequent to the section's sectioning node and presequent to the
+  exit event of the section's parent container. Consequently, the end-marker
+  node must be a descendant of the section's parent container.
+* the end-marker node must not be implicitly associated with the to-be-closed
+  section. Because of that, the end-marker node must be a child node of the
+  section's parent container. Put differently, the end-marker node must have
+  the same node level as the section's top-level nodes.
+* Note that the sectioning node's parent node is therefore not the section's
+  relevant node, the section's parent container is.
+
+Note that, if the end-marker node had no close modifier, i.e. if it would not
+be defined to close the section, then it would be one of the section's top-level
+nodes. Due to implicit associations, that node could otherwise not be allowed
+to close the corresponding section.
+
+Note that this technically puts end-marker nodes in the position to close type-1
+sections. However, the question whether that should even be allowed, still needs
+to be answered.
 
 Note that the above considerations have precedence over any extended definition.
-That is, such non-default definitions must be ignored, if they are in conflict
-with structural dependencies. Hence, the use of close modifiers is limited.
+That is, close modifiers must be ignored, if they would result in contradictory
+statements. Hence, the use of close modifiers is limited.

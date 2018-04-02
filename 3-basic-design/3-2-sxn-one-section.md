@@ -73,6 +73,9 @@ Here, the relations used to create such a path all have the same orientation
 (i.e. superordinate-to-subordinate, or subordinate-to-superordinate). Such a
 path is therefore said to be semantically consistent.
 
+Note that, if only one relation would be involved, such a path could be
+referred to as a "dipath", a directed path (see basics/graph).
+
 <!-- ======================================================================= -->
 ## derived statements
 
