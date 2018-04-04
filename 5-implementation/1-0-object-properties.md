@@ -40,7 +40,8 @@ Global end
 ```
 Node begin
   - the closest open presequent section
-  - needed for all nodes
+  - in principle required by/for any node,
+    e.g. "when exiting a parent container"
   Section parentSection
 Node end
 ```
@@ -60,19 +61,32 @@ SectioningNode end
 
 ```
 Section begin
+  - the closest open presequent section
+  - optional - due to sectioningNode.parentSection
+  Section parentSection
+
   - the sectioning node that declared this section
+  - not a content node - i.e. unassociated with that section
   - alternatively: declaredBy
   SectioningNode sectioningNode
-
-  - the closest open presequent section
-  - optional due to sectioningNode.parentSection
-  Section parentSection
 
   - the first content node of this section
   - also the section's first top-level node
   Node firstContentNode
 
-  - the section's last top-level node
+  - the node subsequent to 'sectioningNode' that
+    instructed to close this section object
+  - null, if the section ends with its parent container
+  - if set, the referenced node is the next sibling to
+    the section's last top-level node
+  - not a content node - i.e. unassociated with that section
+  Node endMarkerNode
+
+  - optional - in addition to .endMarkerNode
+  - the parent container's last child,
+    or the end-marker nodes previous sibling
+  - a content node - i.e. associated with that section
+  - not necessarily the section's last content node
   Node lastTopLevelNode
 Section end
 ```

@@ -15,9 +15,28 @@ like climbing a mountain by moving backwards
 <!-- ======================================================================= -->
 ## minor/isolated/mixed
 
+**TODO**
+with regards to `Node.parentSection` -
+maintain a global list of all sections -
+define `Node.parentSectionIndex` instead -
+i.e. use index values instead of node references -
+i.e. use index values to reduce the memory footprint -
+
+**TODO**
+transformations -
+replace multiple nodes with a single node -
+that contains the previous nodes as its descendants -
+and which acts as the representative of the replaced content -
+
+**TODO**
+a node represents a set of nodes (descendants) -
+of which it is itself not a part -
+consistent with leaf nodes (empty set) -
+
+**TODO**
 a section tree is just another node tree -
-fundamental conclusions drawn based on the section tree,
-may also apply to any other node tree -
+fundamental conclusions drawn based on the section tree
+will also have to apply to any other node tree -
 
 **TODO**
 parent containers, a definition by choice? -
