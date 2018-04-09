@@ -16,6 +16,36 @@ like climbing a mountain by moving backwards
 ## minor/isolated/mixed
 
 **TODO**
+The issue with end-marker nodes is that they can be placed inside of a type-1
+section. To which section does a subsequent node belong? What happens in
+case of user/input errors?
+
+**TODO**
+closing a subsection does not necessarily mean that ancestor sections are
+closed as well - in contrary to that, closing an ancestor section requires
+that all subsections are also closed -
+proof that those nodes must be associated with the parent section of the
+most significant section being closed? -
+wouldn't add up with close modifiers
+
+**TODO**
+a path of nodes is a rooted tree of nodes -
+the path as a single root and each node has a parent -
+in addition to that, each parent has a single child -
+the definition of the node order of a tree must also include such a tree -
+so yes, each parent *is presequent* to all of its descendants -
+that is, because it is independent of which rooted path was selected -
+then, add a sibling to one of the nodes in the path -
+the first child of a node is still presequent to the parent's last child -
+question is, are the descendants of a sibling
+presequent to its subsequent siblings? -
+if yes, then the series of enter events truly represents
+the node order of the corresponding node tree -
+start with the tag sequence of a node tree -
+then remove those start xor end tags of a node
+that do not represent a node's true position -
+
+**TODO**
 with regards to `Node.parentSection` -
 maintain a global list of all sections -
 define `Node.parentSectionIndex` instead -
@@ -27,6 +57,7 @@ transformations -
 replace multiple nodes with a single node -
 that contains the previous nodes as its descendants -
 and which acts as the representative of the replaced content -
+similar to that, a sectioning node acts as a representative -
 
 **TODO**
 a node represents a set of nodes (descendants) -
@@ -45,11 +76,6 @@ i.e. allow to find a contradiction in the statements that
 are related to those paths in `S{+}N{+}`? -
 
 **TODO**
-is that loop sufficient? -
-with regards to implicit associations -
--> in 3-8-1-implementation
-
-**TODO**
 coin the term "a design's structural integrity"? -
 i.e. a design must be in itself consistent -
 
@@ -57,6 +83,7 @@ i.e. a design must be in itself consistent -
 an algorithm can in principle start at any node -
 the root node must be treated as a type-1 sectioning node -
 could that type-switching even be implemented? -
+sure: if exiting at node level 1 -
 any node can be understood to have an outline -
 issue header element in combination with reusing heading elements -
 i.e. a 1st header element can not always be recognized to be with
@@ -190,6 +217,12 @@ is the logical hierarchy embedded into the node tree? -
 put differently, is the logical structure an integral part of the node tree? -
 the overlay perspective is similar to looking through a window -
 
+a different perspective -
+all sectioning nodes shifted to the top of the tree -
+so it seems that the logical layer can always be understood
+to be embedded into the node tree -
+the global scope is the content of the root node -
+
 **TODO**
 "executing" an algorithm on a node sequence (event sequence)
 feels a lot like a turing machine
@@ -203,6 +236,8 @@ headings <=> variable/parameter declarations -
 sections <=> scopes/blocks -
 
 **file systems** -
+alphabetical order vs. order of appearance
+
 issue with folder/file node types? -
 similar to browser bookmarks, etc -
 could allow a "different" view -

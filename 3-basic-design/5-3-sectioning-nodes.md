@@ -65,8 +65,8 @@ From the definition of inner sections:
 From the definition of end-marker nodes (see extensions):
 
 * End-marker nodes will not be associated with the sections they close.
-  Because of that, inconsistencies would arise, if sectioning nodes would
-  have to be associated with the sections they declare.
+  Because of that, case-dependent associations would have to be justified, if
+  sectioning nodes would have to be associated with the sections they declare.
 
 <!-- ======================================================================= -->
 ## sectioning nodes

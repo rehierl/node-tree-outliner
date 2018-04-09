@@ -311,6 +311,10 @@ sectioning node. That is, because the parent container is an ancestor of
 the sectioning node and, as such, will be entered before the sectioning
 node is entered.
 
+Note the switch in perspective: (1) a type-2 sectioning node with regards to
+its guaranteed-to-exist parent container, and (2) a parent node with regards
+to optional child type-2 sectioning nodes.
+
 Note that multiple type-2 sections may have the same parent container. In
 addition to that, the parent container of a type-2 section may even be the
 parent container of a type-1 section (i.e. a type-1 sectioning node).
@@ -321,6 +325,16 @@ sectioning node, even if that node is by definition a type-2 sectioning node.
 Consequently, any type-2 sectioning node, that will be treated as such, will
 always be a descendant of the root and, as such, will always have a parent
 node.
+
+**CLARIFICATION**
+No type-2 sectioning node will ever act as the parent container of another
+section.
+
+That is, because the type-2 sectioning nodes are defined to never have active
+nodes as their descendants. Put differently, active descendant nodes must be
+treated as inactive nodes, which is why a type-2 sectioning node will never
+have any inner sections. A type-2 sectioning node will therefore never act as
+the parent container of another section.
 
 **CLARIFICATION**
 Closing a type-2 section when its parent container is exited is a necessity,

@@ -126,6 +126,11 @@ A type-2 sectioning node must not contain any active nodes as its descendant
 nodes. The data defined by the descendants of a type-2 sectioning node must
 only be used to initialize the declared section (i.e. set section properties).
 
+Consequently, any inner node which is by its own definition an active node,
+must be treated as an inactive node. That is, if such a type-2 sectioning node
+had active nodes as its descendants, then those nodes must loose the "active"
+definitions that are associated with them.
+
 Note that an algorithm, that had to start with a type-2 sectioning node, will
 not visit the section's actual content nodes. In addition to that, a type-2
 sectioning node is defined to only contain passive nodes. Because of that,

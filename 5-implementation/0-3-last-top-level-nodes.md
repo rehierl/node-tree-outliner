@@ -5,6 +5,9 @@
 **TODO**
 (related to the support of transformations)
 
+each section will be closed either by its parent container,
+or by an end-marker node -> `Section.endMarkerNode`
+
 <!-- ======================================================================= -->
 
 add a similar note to "reduced sequences" -

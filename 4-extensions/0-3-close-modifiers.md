@@ -3,11 +3,14 @@
 # Design - close modifiers
 
 **TODO**
-so far, only a list of notes
+so far, only a list of notes -
+to be used in order to define specific notations for close modifers -
 
-close-n-value - absolute - bottom-up perspective
-depth-value - absolute - top-down perspective
-rank-value - absolute or relative - eq. depth if absolute
+examples:
+
+* close-n-value - absolute - bottom-up perspective
+* depth-value - absolute - top-down perspective
+* rank-value - absolute or relative - eq. depth if absolute
 
 it is in principle possible to mix different types of close modifiers -
 the algorithm will treat each modifier as an isolated instruction -

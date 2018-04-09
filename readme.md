@@ -28,7 +28,7 @@ Note that each folder should have a "readme" file.
 
 ## Upload log
 
-* 2018-04-04 - commit xxxxxxx - roles: sectioning-node, end-marker-node
+* 2018-04-04 - commit 1740f4f - roles: sectioning-node, end-marker-node
 * 2018-03-26 - commit c6729ba - overall revisions
 * 2018-03-15 - commit 54580c1 - implementation specific aspects
 * 2018-03-05 - commit ea0b721 - hierarchy, close modifiers

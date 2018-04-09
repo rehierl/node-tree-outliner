@@ -3,7 +3,8 @@
 # Design - current context
 
 **TODO**
-this is so far just a list of notes ...
+this is so far just a list of notes -
+intended to describe what an implementation can work with -
 
 the current section (represents the current path of sections),
 represents the algorithm's relevant current knowledge -

@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # Implementation - implicit associations
 
-The focus of the following content is on the implementation of extensions:
-How to avoid conflicts caused by implicit associations when closing sections
-due to end-marker nodes? In short: How to implement the end-marker role?
+The focus of the following content is on the implementation of extensions: How
+to avoid conflicts caused by implicit associations when closing sections due to
+end-marker nodes? In short: How to implement the end-marker role?
 
 <!-- ======================================================================= -->
 ## examples
@@ -78,7 +78,7 @@ node being entered) and the current path of sections (begins in the root section
 and ends in the current section).
 
 Note that there is only one generic type of close modifiers:
-Close presequent sections when entering an end-marker node.
+Close sections when entering an end-marker node's enter event.
 
 Note that, because no ancestor section can be closed before all of its
 subsections are closed (sections must be closed in an orderly fashion),
@@ -98,12 +98,12 @@ needs to execute the following loop when entering the next node:
    current section.
 6. (Continue the loop)
 
-After exiting that loop, the current node must be associated with the (new)
-current section (i.e. the node's parent section).
+After exiting that loop, the current (end-marker) node must be associated with
+the (new) current section (i.e. the node's parent section).
 
 Note that, if the current node is also a sectioning node, then the section it
 declares will be added as subsection to the (new) current section. After that,
-the declared section will then be next (new) current section.
+the declared section will be next (new) current section.
 
 <!-- ======================================================================= -->
 ## performance related aspects
@@ -114,8 +114,9 @@ That is, because ...
 
 * (1) one or more open sections can be forced subsections of their ancestors
   (e.g. when entering `n4`, `s3` is a forced subsection of `s1` and `s0`).
-* (2) one way or another, each section must be closed explicitly (the definition
-  of section states), in an orderly bottom-up fashion (close subsections first).
+* (2) one way or another, each section must be closed explicitly (see the
+  definition of section states), in an orderly bottom-up fashion (close
+  subsections first).
 
 **TODO**
 However, from a practical perspective (i.e. depending on the exact environment
@@ -135,17 +136,17 @@ might still have to close each section separately.
 **TODO**
 Note that a `bool Section.isForcedSubsection` property (i.e. `true` if the
 property's section object is a forced subsection of its parent section), set
-after exiting the loop, can not be used to improve the performance. That is,
-because all tests depend on the relationship between the end-marker node and
-the corresponding current section, not on the relationship between the current
-section and its parent section.
+after exiting the above loop, can not be used to improve the performance.
+That is, because all tests are with regards to the relationship between the
+end-marker node and the corresponding current section, not with regards to
+the relationship between the current section and its parent section.
 
 <!-- ======================================================================= -->
 ## means of detection
 
-The two most critical aspects of the above loop are: (1) based on the current
-node, determine how many sections need to be closed, and (2) detect if the
-current section can be closed without any conflict.
+The two most critical aspects of the above loop are: (1) starting with the
+current node, determine how many sections need to be closed, and (2) detect
+if the current section can be closed without any conflict.
 
 Note that aspect (1) is not part of these considerations. That is, because it
 depends on the specific notation used to specify close modifiers. In contrary
@@ -156,29 +157,29 @@ The question therefore is: How can an implementation decide, whether or not
 the current end-marker node can be allowed to close the current section?
 
 As stated in the "implicit associations" chapter, a node is free to close a
-presequent section, if (and only if) the node being entered is a sibling to
-the section's first content node. Because of that, several options are
-available, each with its own advantages and disadvantages.
+section, if (and only if) the node being entered is a sibling to the section's
+first content node. Because of that, several options are available, each with
+its own advantages and disadvantages.
 
 Note that, except for the last option, all other options technically allow to
-close type-1 sections from within such a section. That is, if it would not be
-allowed to close a type-1 section, then additional type-dependent tests would
-have to be included with these options. In contrary to that, and if it would
-not be allowed to close type-1 sections, then no additional type-dependent
-tests are required if (and only if) the last option is used instead. That is,
-the last option is truly type-independent (i.e. generic).
+close type-1 sections from within its sectioning node. That is, if it would not
+be allowed to close a type-1 section, then additional type-dependent tests would
+have to be included with these options. In contrary to that, and if it would not
+be allowed to close type-1 sections, then no additional type-dependent tests are
+required, if (and only if) the last option is used instead. That is, the last
+option is truly type-independent (i.e. generic).
 
 Note that the universal section has no existing parent container (i.e. virtual).
 This aspect might have to be taken into account, if a close modifier would
 instruct an implementation to close all open sections (i.e. up to and including
 the root section). Obviously, and because the root node must act as a type-1
-sectioning node, the question whether that should be allowed depends on the
-question whether it should be allowed to close type-1 sections in general.
+sectioning node, the question whether that should even be allowed depends on
+the question whether in general it should be allowed to close type-1 sections.
 
 Note that the root node can technically not act as an end-marker node. That is,
 because the universal section is not allowed to ever be closed, this section is
-defined to be omnipresent. Because of that, an implementation must always ignore
-the root node's close modifier.
+defined to be omnipresent. Because of that, and if the root node has a close
+modifier, an implementation must always ignore the root's modifier.
 
 <!-- ======================================================================= -->
 ## Option 1: parent container references, node identifiers
@@ -193,20 +194,20 @@ object (e.g. set when the corresponding section object is created):
 2. (node.parentNode === currentSection.parentContainer)
 ```
 
-Then, when a subsequent end-marker node is entered, an implementation could use
+When a subsequent end-marker node is entered, an implementation could then use
 that parent container reference to test whether the reference of the current
-node's parent node is identical to the section's container reference. If it is,
-then the corresponding section has to be closed. Otherwise, the end-marker node
-is identified to be implicitly associated, which is why the current section can
-not be closed.
+node's parent node is identical to the section's parent container reference.
+If that is the case, the corresponding section has to be closed. Otherwise,
+the end-marker node is identified to be implicitly associated, which is why
+the current node's close modifier must be ignored.
 
-Note that an implementation will neither encounter case-1 nor case-3 (see the
-"implicit associations" chapter). That is, because the corresponding presequent
-sections are already closed and will therefore no longer appear within the
-current path of sections. Because of that, the remaining relevant cases are
-case-2 and case-4. Consequently, an entered end-marker node either is a child
-node of the section's parent container, or one of the container's distant
-descendants.
+Note that an implementation will neither encounter case-1 nor case-3 with
+regards to type-2 sections (see the "implicit associations" chapter). That is,
+because the corresponding sections are already closed and will therefore no
+longer appear within the current path of sections. Because of that, the only
+relevant cases are case-2 and case-4. Consequently, an entered end-marker
+node either is a child node of the section's parent container, or one of the
+container's distant descendants.
 
 However, holding a node reference with each section object will increase the
 memory footprint of the resulting outline. Hence, these references can, but
@@ -297,15 +298,16 @@ subsequent end-marker node is entered.
 * `n1` is a type-2 sectioning node (declares `s1`, closes `s0`)
 * `n2` is an end-marker node (defined to close `s1`)
 
-For obvious reasons, testing the end-marker's own node reference for equality
-with the section's sectioning node reference (because a section object already
-has such a property), can not work. Such a test is guaranteed to always fail.
+For obvious reasons, testing the end-marker's own node reference and the
+section's sectioning node reference for equality (because a section object
+already has such a property), can not work. That test is guaranteed to always
+evaluate to `false`.
 
 However, one might hope that (option-4-1) the node level of the end-marker node
 could be compared with the node level of the section's sectioning node, instead
 of (option-3) comparing the node level of the end-marker node's parent node with
-the node level of the section's parent container (sloppy: the sectioning node vs.
-the section's parent container).
+the node level of the section's parent container (i.e. the section's sectioning
+node vs. the section's parent container).
 
 * test-1: `n1` may close `s0` => `if (level(n1) - 1 == level(n0))`
 * test-2: `n2` may close `s1` => `if (level(n2) - 0 == level(n1))`
@@ -323,9 +325,8 @@ generic, type-independent testing.
 Note that options 1-to-3 have a similar issue. That is, in cases 1 and 2, a
 reference of the section's type-dependent parent container must be determined
 at some point, regardless if that reference is stored with a section object,
-or discarded right after the comparison. Similar to that, and in case 3, the
-type-dependent node level of the section's parent container must be determined
-at some point.
+or determined on the fly. Similar to that, and in case 3, the type-dependent
+node level of the section's parent container must be determined at some point.
 
 <!-- ======================================================================= -->
 ## Option 4-2: node levels of sectioning nodes

@@ -7,6 +7,7 @@ Minor or isolated implementation specific aspects:
 <!-- ======================================================================= -->
 ## general statements
 
+**CLARIFICATION**
 The sectioning node of a node's parent section
 never is identical to the corresponding node itself.
 

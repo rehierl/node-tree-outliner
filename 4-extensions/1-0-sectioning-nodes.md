@@ -10,6 +10,11 @@ Note that the considerations of that case apply to type-1 and type-2 sectioning
 nodes alike. That is, a type-1 sectioning node could technically close type-1
 and type-2 sections.
 
+**TODO**
+a heading that has a rank may/can act as an end-marker node -
+that is, a rank value adds an additional role to a heading element -
+could that be used to proof that no t1 section can be closed?
+
 <!-- ======================================================================= -->
 ## HTML's current approach
 
