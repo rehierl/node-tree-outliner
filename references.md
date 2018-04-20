@@ -1,4 +1,10 @@
 
+<!-- ======================================================================= -->
+# References
+
+This is not intended as a complete listing.
+Just an overview to help people get started in finding further material.
+
 mixed
 
 * [wikipedia, boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)

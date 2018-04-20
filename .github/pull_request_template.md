@@ -3,5 +3,5 @@
   the focus is on developing the design itself; not so much on fixing errata
   or perfect phrasing. The latter needs to be understood in the context of
   making clear statements.
-* Please provide a short description to explain your changes.
+* Please add a clear description to explain your changes.
 * If applicable, add a reference to an existing issue.

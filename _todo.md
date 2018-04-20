@@ -16,6 +16,12 @@ like climbing a mountain by moving backwards
 ## minor/isolated/mixed
 
 **TODO**
+one node tree may have multiple different outlines at the same time -
+read the "red", or the "blue" outline -
+but also a hierarchical listing of outline -
+i.e. a tree of outlines within a document -
+
+**TODO**
 The issue with end-marker nodes is that they can be placed inside of a type-1
 section. To which section does a subsequent node belong? What happens in
 case of user/input errors?

@@ -1,13 +1,15 @@
 
-node-tree-outliner
-===============
+<!-- ======================================================================= -->
+# node-tree-outliner
 
 The purpose of this repository is to flesh out a design that can be used to
 implement a general-purpose outliner for any rooted ordered tree of nodes.
 
-Note that this repository is in a state of flux.
-It may still change considerably.
+This repository is **in a state of flux**.
+It may and will change considerably without further notice
+(Direct links to files within this repository may break at any time).
 
+<!-- ======================================================================= -->
 ## Overview
 
 * [0-introduction](./0-introduction): A general introduction.
@@ -23,19 +25,39 @@ It may still change considerably.
   perspective (sectioning-node, end-marker-node), ...
 * [5-implementation](./5-implementation): A discussion of how to implement
   certain critical aspects.
+* [6-the-bigger-picture](./6-the-bigger-picture): General thoughts targeted
+  at explaining the bigger picture.
 
-Note that each folder should have a "readme" file.
+**Note** (to self) -
+Each folder should contain a "readme" file.
 
-## Upload log
+<!-- ======================================================================= -->
+## Notes
 
-* 2018-04-04 - commit 1740f4f - roles: sectioning-node, end-marker-node
-* 2018-03-26 - commit c6729ba - overall revisions
-* 2018-03-15 - commit 54580c1 - implementation specific aspects
-* 2018-03-05 - commit ea0b721 - hierarchy, close modifiers
-* 2018-02-19 - commit ef94c42 - current section
-* 2018-02-04 - commit 55cc8a7 - clarifications
-* 2018-01-31 - commit 19abbd2 - first public upload
+**Note** -
+I can not guarantee that I didn't make an error. All I can do is to try to be a
+thorough as I can. So I need to ask this: If you spot a conceptual problem, then
+(by all means) please point it out.
 
+**Note** -
+The whole issue is quite abstract. It is anything but easy to wrap my head
+around certain aspects and derive even the simplest of conclusions without
+introducing a conflict. Until I have reached a state that I can call "stable",
+I will have to respectfully decline any offer for full-blown cooperation.
+
+**Note** -
+I write in pure text form. This means that I don't pay much attention to
+what it will look like, if the contents are displayed inside of a browser.
+If documents are hard, if not impossible to read in a browser, then try
+the source view.
+
+**Note** -
+I will most probably have to rename this repository in order to make place for
+a proof-of-concept implementation: "node-tree-outliner" may, at some point in
+the future, be used to hold a such an implementation and "note-tree-outliner-design",
+or something similar, will hold the future version of this design description.
+
+<!-- ======================================================================= -->
 ## PRELIMINARY LICENSE
 
 §1 Free for science and discussions.
@@ -52,6 +74,6 @@ Note that each folder should have a "readme" file.
 The ultimate goal is to end up with a royalty-free, free-for-all design.
 Any use that is in conflict with this general goal is prohibited.
 
-The reason for this restricted preliminary license is to have a clear, in
-itself consistent design, that is not in any conflict with any node tree.
-That is, in order to prevent widespread use of an "unfinished" design.
+The reason for this restricted preliminary license is to have a clear,
+in itself consistent design, that does not have any conflict whatsoever.
+This to prevent widespread use of an "unfinished" design.

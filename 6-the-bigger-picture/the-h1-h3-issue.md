@@ -1,0 +1,386 @@
+
+<!-- ======================================================================= -->
+# The h1-h3 issue
+
+With regards to stevefaulkner's and bkardell's question, and with regards to
+annevk's proposal: It would effectively build in a pattern that would create
+something we historically advise authors not to write manually.
+
+* [stevefaulnker's comment](https://github.com/whatwg/html/issues/83#issuecomment-360977496)
+* [bkardell's comment](https://github.com/whatwg/html/issues/83#issuecomment-369437548)
+* [annevk's comment](https://github.com/whatwg/html/issues/83#issuecomment-359871505)
+
+Note that this best-practice advice can be summarized to:
+Don't use "h1-h3", instead use "h1-h2-h3".
+
+The core problem of the whole discussion is that every argument essentially
+circles around some higher level of abstraction, but hardly anyone seems to
+take a look at the lower levels on which computers (have to) operate.
+
+```
+lines    fragment-1      fragment-2          toc-1     toc-2
+=====    ==========      ==========          =====     =====
+1:       <h1> A </h1>    <h1> A </h1>        1. A      1. A
+2:       <h3> C </h3>    <section>           1.1. C    1.1. Untitled/B
+3:                         <!-- h2:B -->               1.1.1. C
+4:                         <section>
+5:                           <h3> C </h3>
+6:                         </section>
+7:                       </section>
+```
+
+So, which listing best represents those fragments? Do they have the same
+listing, or are both listings different? If, out of some initial reaction,
+you chose a listing, then is that listing accurate, or some generally accepted
+simplification which was chosen based on some common practice (e.g. "reality")?
+
+If only for a moment, allow me to drag you down to the lower levels:
+
+Assume that some highly efficient web-crawler (short: WC - used as a name) would
+have to index a document and that, at some point, it encounters one of the above
+fragments.
+
+Note that the following content needs to be understood with regards to an
+existing concept of "sections". Note in addition to that, annevk's proposal
+essentially drops this very concept.
+
+<!-- ======================================================================= -->
+## How an implementation sees fragment-1
+
+**Line 1:**
+
+No issue here: The `h1` element instructs to create an object which needs to
+be understood to represent a top-level section. In addition to that, the
+section object will have to hold a title property with text content "A" and a
+rank property with a rank value of 1. Assume that, by now, WC has created the
+following object:
+
+```
+section: {name:"A", title:"A", rank:1}
+```
+
+Note that the "rank" property of the section objects does not actually exist.
+These properties are visual representation of the section object's outline depth.
+
+**Line 2:**
+
+WC then enters the next heading element and notices that it has "C" as title
+and a rank value of 3. Also, no issue here: WC simply creates another section
+object and initializes its properties:
+
+```
+section: {name:"C", title:"C", rank:3}
+```
+
+Now, and because WC has to connect both section objects, it grabs "A" and "C",
+and compares the values both of rank properties with each other. Obviously,
+there is a problem: `(A.rank < C.rank-1)` (Note `<` instead of `<=`). That is,
+WC does not know of any section that has a rank value of 2. The sequence of
+rank values is interrupted.
+
+**Option 1:** An input error.
+
+If WC would be implemented to be strict, then it would have to take each rank
+value as an absolute instruction which it has to execute by the letter. Because
+of that, it could not continue to process the current document.
+
+WC can not add "C" as subsection to a section that has rank 2. In WC's current
+context such a section does not exist. WC was never instructed to create such a
+section. Likewise, WC can not add "C" as subsection to "A" because both rank
+values don't add up (i.e. `(A.rank != C.rank-1)`). That is, the combination of
+both rank values are non-conformant under that pedantic perspective.
+
+And because the sequence of instructions, that the current fragment represents,
+has input errors, WC has no other option than to throw an exception. That is,
+WC can only cancel indexing the document. As a consequence, no one will be able
+to find that document by the use of WC's search engine.
+
+In essence, and if each web crawler would act the same pedantic way, then most
+of the World Wide Web would no longer be found. Poof, just like that.
+
+**Option 2:** It can not be resolved in time.
+
+Obviously, WC has no means to simply contact the document's author. WC's
+timescale is in milliseconds (if not in micro- or nanoseconds), it can not
+wait for any response. And even it could:
+
+WC: "Wait, what do you mean? The author is not responsible? The CMS is?"
+
+**Option 3:** Toc-1, an acceptable approximation.
+
+If WC sees the rank value of 3 as a relative instruction to add "C" as
+subsection to the next closest section which has a "higher rank", then all
+WC has to do is add "C" as subsection to "A".
+
+```
+section: {name:"A", title:"A", rank:1, subsections:[ C ]}
+section: {name:"C", title:"C", rank:2, subsections:[]}
+```
+
+Problem solved, the loose/relative way.
+
+Note that, in order to end up with a consistent result, WC needs to change "C"'s
+rank property from 3 to 2. Because of the deviation in rank, that solution is
+not accurate and a mere approximation.
+
+**Option 4:** Toc-2, an acceptable approximation.
+
+If WC sees "C"'s rank value of 3 as a strict and absolute instruction to create
+a section which truly has a rank value of 3, then WC will first have to create
+an implicit intermediate section with rank 2:
+
+```
+section: {name:"B", title:None, rank:2}
+```
+
+WC can now add "B" as subsection to "A" and "C" as subsection to "B":
+
+```
+section: {name:"A", title:"A", rank:1, subsections:[ B ]}
+section: {name:"B", title:None, rank:2, subsections:[ C ]}
+section: {name:"C", title:"C", rank:3, subsections:[]}
+```
+
+Problem solved, the strict/absolute way.
+
+Note again that the result of this option does not accurately represent the
+initial fragment as it has no `h2` element. Similar to the result of option 3,
+the result of this option is a mere approximation.
+
+**Option 3 or 4:** But which one?
+
+Because fragment-1 holds an input error, WC is simply not in the position to
+ever produce a result that accurately represents fragment-1. But, as WC has to
+choose an option in order to produce a best-effort result, and provided that
+there is no other option, WC can only choose between option 3 or 4.
+
+So here is the thing: Can WC freely choose between either of those? No, it can't:
+Both of these will yield different results. Although any result is better than
+no result at all, being able to freely choose which result to return under these
+kind of circumstances would be almost as bad: The very same document would end
+up getting indexed based on personal preferences.
+
+Note that HTML 3.2, 4.01, 5.0, 5.1 and 5.2 do not define heading element to hold
+absolute rank values. They always are expressed as relative values in terms of a
+"level of importance", or as "higher or lower rank values". That is, rank values
+were at no point defined to be absolute, but always as being relative.
+
+Unless there is irrefutable proof that option 3 will yield in an invalid result,
+if further aspects are taken into account, then option 3 is what WC must choose.
+That is, because option 4 would result in reinterpreting existing content.
+
+Option 3 it is ... until proven otherwise.
+
+**Summary:** fragment-1/toc-1
+
+Obviously, WC needs to produce a result. It can not reject a document just
+because it has input errors (i.e. is non-conformant). WC can only produce a
+best-effort result. Furthermore, WC can not freely choose which result it has
+to return. This would yield different results for the same content, which are
+based on personal preference. There must be agreement on what the best-effort
+result has to be.
+
+For historical reasons, and until proven otherwise if other aspects are taken
+into account, toc-1 is what WC must return in case of fragment-1. The point
+however is to never forget that fragment-1 represents an input error and that
+toc-1 is mere inaccurate, generally accepted, best-effort approximation.
+
+If issues arise with other fragments, then that fragment-1/toc-1 solution can
+not be used as basis to choose which result has to be returned. It depends on
+which approximations these other fragments support. That is, if they support
+only one solution, then that one solution is what it has to be. If however
+those fragments have no single solution, but offer multiple different solutions,
+then an agreement on which solution to return is needed.
+
+<!-- ======================================================================= -->
+## How an implementation sees fragment-2
+
+**Line 1:**
+
+As before, there is no issue here, which is why WC needs to create the
+following section object:
+
+```
+section: {name:"A", title:"A", rank:1}
+```
+
+**Line 2:**
+
+WC enters the section element and therefore has to create the following
+section object:
+
+```
+section: {name:"B", title:None, rank:2}
+```
+
+Note that I do consider, if no explicit rank is given, section elements to
+declare a new subsection to the current section. With regards to fragment-2,
+that perspective is not different to the current official definition of
+sectioning content elements.
+
+And because there is no explicit rank value associated with the section element,
+WC has to add "B" as subsection to "A" and set "B"'s rank value to 2:
+
+```
+section: {name:"A", title:"A", rank:1, subsections:[ B ]}
+section: {name:"B", title:None, rank:2, subsections:[]}
+```
+
+**Line 3:**
+
+Obviously, comments must not have any effect on semantics, which is why WC must
+ignore it: That is, WC must skip that line.
+
+**Line 4:**
+
+As before in line 2, WC has to create a new section object:
+
+```
+section: {name:"C", title:None, rank:3}
+```
+
+And, similar to before, WC must add "C" as subsection to "B":
+
+```
+section: {name:"A", title:"A", rank:1, subsections:[ B ]}
+section: {name:"B", title:None, rank:2, subsections:[ C ]}
+section: {name:"C", title:None, rank:3, subsections:[]}
+```
+
+**Line 5:**
+
+Now, WC processes the `h3` element. But, as that element is the very first
+element of heading content within the section element of "C", it is defined
+to be re-used for the definition of the section's title. WC must therefore
+change "C"'s title to "C":
+
+```
+section: {name:"A", title:"A", rank:1, subsections:[ B ]}
+section: {name:"B", title:None, rank:2, subsections:[ C ]}
+section: {name:"C", title:"C", rank:3, subsections:[]}
+```
+
+That's it, there is nothing more to do.
+
+Note however that, with regards to the official specification, the rank value
+specified by the `h3` element does have an internal effect: If that section
+element had another heading element with rank 1/2/or/3, then WC would,
+according to the specification, have to create a sibling section to "C". But,
+with regards to fragment-2, that aspect is a non-issue. Fragment-2 has no such
+inner subsequent heading content element.
+
+**Line 6:**
+
+In general, any number of operations, which WC would have to execute, may
+be associated with the enter and/or exit event of a node. However, and with
+regards to the "h1-h3" issue:
+
+WC can be understood to have nothing to do when exiting "C".
+
+**Line 7:**
+
+As before, WC has nothing to do when exiting "B".
+
+Note that there is no instruction to set or change "B"'s title. The author of
+that fragment did not specify a title for "B". WC therefore has no other option
+than to leave "B" as is (Again, we are at the abstraction level of a low-level
+and highly optimized web crawler).
+
+**Summary**
+
+So the answer with regards to fragment-2 is that toc-2 represents its contents.
+But, toc-2 is not just some approximation: toc-2 accurately represents the
+logical structure of fragment-2.
+
+You: Hold on a sec, what just happened?
+Me: Nothing, fragment-2 is by itself perfectly fine ...
+Me: ... There is no issue, none at all.
+
+Sure, it is bad practice to specify a section with no heading - just as it is
+bad practice to specify `<hX></hX>` fragments. But, there is nothing WC can do.
+Once WC could even realize that "B" has no title (e.g. when exiting "B"), it is
+already too late: All objects have been created and the section hierarchy is
+established. That issue can not be resolved on the abstraction level of a web
+crawler. It must be resolved on a higher abstraction level.
+
+<!-- ======================================================================= -->
+## Overall summary
+
+**The low-level perspective of (e.g.) a web crawler.**
+
+*fragment-1/toc-1:*
+The issue with this fragment is bound to an element that does not properly
+fit into the fragment's logical structure. And because of that, a low-level
+implementation can (and even has to) resolve the fragment's input error with
+a commonly accepted approximation.
+
+*fragment-2/toc-2:*
+The "issue" with this fragment consists of multiple elements, which combined do
+not even represent an input error. Because of that, a low-level implementation
+can and must return the only result possible. As bad-practice as it may be,
+toc-2 accurately represents the fragment's contents.
+
+**With regards to "building in a pattern we advise not to use".**
+
+The difference is that, in fragment-1, a low-level implementation can and must
+resolve the author's input error with an approximation. After all, it is better
+to return some result rather than no result at all. In contrary to that, and
+with regards to fragment-2, a low-level implementation has initially no other
+choice but to produce an accurate result.
+
+No, there is no built-in pattern we advise not to use. First, and fore-most,
+the algorithm's result (in terms of a structure of sections) must represent
+a document as is, even if it means that an author's bad-practice will become
+part of the output. That is not a choice, this is the outline algorithm's
+core function:
+
+Create a formal and accurate representation of the document's logical structure,
+which can then be used to (1) print a table of contents listing, (2) transform
+the document, (3) fold/unfold sections, (4) display bread-crumbs, ...
+
+**Any other "result" will add complexity to low-level implementations.**
+
+Again, both of the above considerations are with regards to the abstraction
+level of a low-level, highly optimized web crawler. Any attempt to re-define
+the, on a formal level perfectly fine result of fragment-2, by specification,
+will needlessly add complexity to the low-level layer of abstraction.
+
+A low-level implementation would for example have to include heuristics, which
+it would have to apply as an additional post-process, or post-section operation.
+That is, because there is an infinite number of combinations of sections with
+content and "seemingly empty" sections possible. How else could such an
+implementation determine which patterns it would have to replace?
+
+As a result, the "issue" with fragment-2 can only be resolved on a higher
+abstraction layer (e.g. via the means of "best practices" to authors, and/or
+transformation rules for implementors).
+
+**Questions that would have to be clearly answered ...**
+
+If, on a higher layer of abstraction, seemingly empty sections would have to
+be skipped, then there would have to be abundantly clear instructions of how
+an implementation could decide whether or not a given section would have to
+be included or not:
+
+* What does "empty" exactly mean? Does whitespace content count towards empty
+  or non-empty? (Note that parsers will implicitly generate these kind of
+  non-element nodes; e.g. in between the tags of lines 6 and 7 of fragment-2).
+  Do comments count? Does a hierarchy of `<div>` containers count?
+* What is supposed to happen in case of a whole hierarchies of "empty"
+  sections that have sparse non-empty inner subsections?
+* Won't the removal of "empty" sections change an intended logical layout?
+  (e.g. a structure intended for documentational purposes that gets filled
+  with content over time).
+
+In other words, many questions will have to be answered in order to clearly
+define how seemingly empty sections would have to be taken into account.
+
+**Information gathering and information display**
+
+One final aspect of the whole issue is that information gathering and display
+needs to be based upon the same perspective of a document's logical structure.
+Care must be taken that the data extracted by crawlers can also be located via
+a document's visual representation.
+
+Note that this aspect is similar to the issue mentioned in fragment-1 where a
+web crawler has to decide between two options that yield different results.
