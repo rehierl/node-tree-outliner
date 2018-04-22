@@ -18,24 +18,24 @@ anything about science (e.g. Thermodynamics, Physics, Chemistry, etc.), if all
 that a user wants to do is to hop in a car and use it to drive from A to B. The
 world we live in is simply too complex to know it all. So yes, to that I fully
 agree: It must be possible to use the end product without the requirement of
-several degrees in different fields of science.
+several degrees in several fields of science.
 
-With that in mind, and in regards to the issue at hand, there seems to be a
-fundamental misconception of what all of this involves:
+With that in mind, and with regards to the issue at hand, there seems to be a
+fundamental misconception of what this involves:
 
 ```
 users, authors, implementors                   => users
-authors of the specification as specifiers     => developers
+authors of the specification (aka. specifiers) => developers
 theoretical purity                             => science
 
 users <-> developers <-> science
 ```
 
-As a link in between users and science, it is the responsibility of developers
-to figure it all out: How is science involved? How can it be used to produce
-an easy-to-use end product? And, last but not least, how can we communicate
-whatever we come up with to end users? How do we teach them to properly use
-"it"?
+As a link between users and science (e.g. mathematics), it is the core
+responsibility of those developers to figure it all out: How is science
+involved? How can it be used to produce an easy-to-use end product? And,
+how can we communicate whatever we come up with to our users? How do we
+teach them to properly use "it"?
 
 Obviously, and in the context of this discussion, the end product is a
 seemingly minor aspect, which is none-the-less integral to HTML as a whole:
@@ -48,13 +48,15 @@ The ability to structure documents on a logical level.
 The problem with that is this: Spec developers can not break scientific rules.
 It really is that simple. Like everyone else, they are bound by scientific
 principles. And as such, all they can do is try to figure out how they can
-mediate between end users and those rules. However, and that is at the very
+mediate between those rules and the users. However, and that is at the very
 epicenter of the whole mess we are in: Users seem to keep asking developers
 to break those rules.
 
 Users and developers alike have to accept that any attempt to develop a design
-which is in conflict with scientific principles is (sooner or later) guaranteed
-to fail. Such a design can not, and never will do what it is supposed to do.
+which is in conflict with fundamental principles is (sooner or later) guaranteed
+to fail. Such a design can not, and will never do what it is supposed to do.
+
+No, and in this particular case, good enough is not good enough.
 
 * So, who is to blame? - Everyone and no one.
 

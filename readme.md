@@ -48,13 +48,13 @@ I will have to respectfully decline any offer for full-blown cooperation.
 **Note** -
 I write in pure text form. This means that I don't pay much attention to
 what it will look like, if the contents are displayed inside of a browser.
-If documents are hard, if not impossible to read in a browser, then try
-the source view.
+If documents are hard, if not impossible to read from within a browser,
+then please try the source view.
 
 **Note** -
 I will most probably have to rename this repository in order to make place for
 a proof-of-concept implementation: "node-tree-outliner" may, at some point in
-the future, be used to hold a such an implementation and "note-tree-outliner-design",
+the future, be used to hold such an implementation and "note-tree-outliner-design",
 or something similar, will hold the future version of this design description.
 
 <!-- ======================================================================= -->

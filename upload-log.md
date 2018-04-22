@@ -5,7 +5,7 @@
 Just a listing of commits which I have uploaded to github.
 Any other commit was a private (i.e. non-public) commit.
 
-* 2018-04-20 - commit ....... - the bigger picture
+* 2018-04-20 - commit 3c1e18f - the bigger picture
 * 2018-04-04 - commit 1740f4f - roles: sectioning-node, end-marker-node
 * 2018-03-26 - commit c6729ba - overall revisions
 * 2018-03-15 - commit 54580c1 - implementation specific aspects
