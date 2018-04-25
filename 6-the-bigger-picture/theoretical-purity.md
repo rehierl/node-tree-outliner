@@ -21,7 +21,7 @@ agree: It must be possible to use the end product without the requirement of
 several degrees in several fields of science.
 
 With that in mind, and with regards to the issue at hand, there seems to be a
-fundamental misconception of what this involves:
+fundamental misconception of what is involved:
 
 ```
 users, authors, implementors                   => users
@@ -31,14 +31,13 @@ theoretical purity                             => science
 users <-> developers <-> science
 ```
 
-As a link between users and science (e.g. mathematics), it is the core
-responsibility of those developers to figure it all out: How is science
-involved? How can it be used to produce an easy-to-use end product? And,
-how can we communicate whatever we come up with to our users? How do we
-teach them to properly use "it"?
+As a link between users and science (e.g. mathematics), it is the responsibility
+of developers (i.e. specifiers) to figure it all out: How is science involved?
+How can it be used to produce an easy-to-use end product? And, how can we
+communicate "it" to the users? How do we teach them to properly use "it"?
 
 Obviously, and in the context of this discussion, the end product is a
-seemingly minor aspect, which is none-the-less integral to HTML as a whole:
+seemingly minor aspect, which is none-the-less integral to documents:
 The ability to structure documents on a logical level.
 
 **TODO**
@@ -56,7 +55,7 @@ Users and developers alike have to accept that any attempt to develop a design
 which is in conflict with fundamental principles is (sooner or later) guaranteed
 to fail. Such a design can not, and will never do what it is supposed to do.
 
-No, and in this particular case, good enough is not good enough.
+No, and in this particular case, good enough is simply not good enough.
 
 * So, who is to blame? - Everyone and no one.
 
