@@ -320,27 +320,27 @@ accurately represents the fragment's structure.
 
 ### With regards to "building in a pattern we advise not to use".
 
-The difference is that, in fragment-1, a low-level implementation can and must
+The difference is that in fragment-1, a low-level implementation can and must
 resolve the author's input error with an approximation. After all, it is better
 to return some result rather than no result at all. In contrary to that, and
 with regards to fragment-2, a low-level implementation has no other choice but
 to return an accurate result.
 
 No, the response does not promote a pattern we advise not to use. It accurately
-reflects the author's input as is.
+reflects the author's fragment/document (i.e. the algorithm's input) as is.
 
-First, and fore-most, the algorithm's result (in terms of a structure of
-sections) must represent a document as is, even if it means that an author's
-bad-practice will become part of the output. That is not a choice, that is
-the outline algorithm's core function:
+First and foremost, the algorithm's result (in terms of a structure of sections)
+must represent a document as is, even if it means that an author's bad-practice
+will become part of the algorithm's output. That is not a choice, that is the
+outline algorithm's core purpose:
 
 Create a formal and accurate representation of the document's logical structure,
 which can be used to (1) print a table of contents listing, (2) transform the
 document, (3) fold/unfold sections, (4) display bread-crumbs, ...
 
-Note that this does not mean that the lack of a heading is promoted as good
-practice. A low-level implementation is just not in the position to do anything
-about it.
+Note that this does not mean that the lack of a heading will be promoted as
+good practice. A low-level implementation is simply not in the position to do
+anything about it.
 
 Yes, a section without a "heading" can and should still be declared as bad
 practice.
@@ -353,14 +353,14 @@ a formal level perfectly fine) result of fragment-2 by specification, will
 needlessly add complexity to the lower abstraction layer.
 
 A low-level implementation would for example have to include heuristics, which
-it would have to apply as an additional post-section, or even  post-process
-operation. That is, because there is an infinite number of combinations of
-sections with content and "seemingly empty" sections possible. How else could
-an implementation determine which results it has to return?
+it would have to apply as an additional post-section, or post-process operation.
+That is, because there is an infinite number of combinations of sections with
+content and "seemingly empty" sections possible. How else could an
+implementation determine which results it has to return?
 
-As a conclusion, the "issue" with fragment-2 can only be resolved on a higher
-abstraction layer (e.g. via the means of "best practices" to authors, and/or
-transformation rules addressed at implementors).
+The "issue" with fragment-2 can therefore only be resolved on a higher layer
+of abstraction; e.g. via the means of "best practices" guidelines targeted at
+authors, and/or transformation rules addressed at implementors of user agents.
 
 ### Questions that would have to be clearly answered ...
 
@@ -375,12 +375,12 @@ be included or not:
   Do comments count? Does a hierarchy that only consists of `<div>` containers
   count?
 * What is supposed to happen in case of whole hierarchies of "empty" sections
-  which still have sparse, deeply-nested but non-empty inner subsections?
+  which still have sparse, deeply-nested but still non-empty inner sections?
 * Won't the removal of "empty" sections change an intended logical layout?
   (e.g. a structure intended for documentational purposes that gets filled
   with content over time).
 
-In other words: There are many questions that need to be answered if seemingly
+In other words: There are many questions that need to be answered, if seemingly
 empty sections would have to be skipped.
 
 ### Information gathering and information display.
@@ -390,8 +390,11 @@ need to have the same perspective on a document's logical structure:
 
 Assumed that a search engine knows that the information a user seeks can be
 accessed via an in-document path A, and assumed that the in-document path to
-that data the user can follow via a visual display is path B, then it won't
+that data a user can follow via some visual display is path B, then it won't
 help much, if both path values (A and B) turn out to differ substantially.
 
-Note that this aspect is similar to the issue mentioned in fragment-1 where a
-web crawler has to decide between two options that yield different results.
+Note that this aspect is similar to the issue mentioned in fragment-1 where
+a web crawler has to decide between two options that yield different results.
+
+That is, different abstraction layers need to be able to operate on the same
+perspective of a document's logical structure.

@@ -67,41 +67,10 @@ in computer science: "Divide and conquer" (take a large problem, break it apart
 into similar smaller problems, and solve each one of them separately).
 
 ## And here is where it starts to get tricky.
+**TODO**
 
 What needs to be done first is therefore to figure out how the methods we use
 to organize content can be used in combination with the underlying node trees.
-
-In essence, we use headings to group content. That is, on a mental level, we
-associate headings with content and vice versa. In addition to that, we place
-a heading above the associated content, which means that some sort of order
-exists between headings and the content that is associated with it.
-
-Interestingly, the first observation already allows to derive the very first
-conclusions: On the abstraction level of node trees, content is represented by
-nodes. Furthermore, a node tree contains each node exactly once. Hence, the
-associated content can be, based on the mathematical definition of sets of
-elements, formalized into sets of nodes:
-
-**CONCLUSION** A section is a set of nodes which represents the content that
-is associated with a heading.
-
-> `(A subset-of B) := if, and only if, a in B for any a in A`
-
-Obviously, it doesn't end here because there is a mathematical definition for
-what the term "sub-set": Set `A` is a subset of set `B` if, and only if, all
-elements in `A` are also elements in `B`. But, and that is a critical bit of
-information, elements in `B` may exist, which don't also have to be elements
-in `A`. Put differently, `A` must be inside of `B`, and `B` may have more
-elements than `A`.
-
-**CONCLUSION** A sub-section is a sub-set of its parent section.
-
-In essence, we already the tools to define on a formal level what a section
-hierarchy is. And although that definition is itself trivial, the implications
-of that definition are not.
-
-In order to see where it starts to get complicated, we need another tool which
-is used to define what a ancestor and descendant nodes are: paths of nodes.
 
 ## The self-inflicted trust issue.
 **TODO**
