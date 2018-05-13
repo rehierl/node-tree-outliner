@@ -3,7 +3,7 @@
 # Tag sequence
 
 Similar to the generation of a tree's node sequence, the tree traversal
-fragment can be used to produce the tag sequence of a tree:
+fragment can be used to produce **the tag sequence of** a tree:
 
 ```
 tagSequenceOf(root) begin
