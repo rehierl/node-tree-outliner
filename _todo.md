@@ -2,15 +2,18 @@
 <!-- ======================================================================= -->
 # List of things to do
 
+I am trying to figure out what experts should have done in the first place.
+It is not my fault that they messed it up ... a decade ago.
+
 The ultimate goal is to leave no question unanswered -
 develop a design that can be used to explain all possible circumstances -
 
 A painfully slow and nerve wrecking process -
 It looks like, I'm just too darn stubborn to give up -
 
-always having to look/backwards in order to
-know where and how to continue -
-like climbing a mountain by moving backwards
+always having to look/backwards -
+in order to know where and how to continue -
+like crawling up a mountain by moving backwards
 
 <!-- ======================================================================= -->
 ## minor/isolated/mixed

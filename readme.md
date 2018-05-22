@@ -25,10 +25,9 @@ It may and will change considerably without further notice
   perspective (sectioning-node, end-marker-node), ...
 * [5-implementation](./5-implementation): A discussion of how to implement
   certain critical aspects.
-* [6-the-bigger-picture](./6-the-bigger-picture): General thoughts targeted
-  at explaining the bigger picture.
+* [6-bigger-picture](./6-bigger-picture): Thoughts on the bigger picture.
 
-**Note** (to self) -
+**Note (to self)** -
 Each folder should contain a "readme" file.
 
 <!-- ======================================================================= -->
