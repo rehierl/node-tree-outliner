@@ -24,18 +24,18 @@ lines    fragment-1      fragment-2          toc-1     toc-2
 
 The above mentioned advice can be summarized into: Don't use "h1-h3", instead
 use "h1-h2-h3". It essentially assumes that the table-of-contents listing of
-fragment-2 needs to be toc-1, but without answering the question whether toc-1
-best represents the fragment's structure.
+fragment-2 needs to be toc-1, but without answering the question whether or
+not toc-1 best represents the structure of that fragment.
 
 So, which listing best represents the above fragments? Do they have the same
 listing, or are both listings different? If, out of some initial reaction,
 you chose a listing, then is that listing accurate, or some generally accepted
-approximation that was chosen based on some common practice (e.g. "reality")?
+approximation that was chosen based on some common practice?
 
-If only for a moment, visit the lower levels: Assume that some highly efficient
-web-crawler (short: WC - will be used as a name) would be in the process of
-indexing a document and that, at some point, it encounters one of the above
-fragments.
+If only for a moment, visit the lower levels of abstraction: Assume that some
+highly efficient web-crawler (short: WC - will be used as a name) would be in
+the process of indexing a document and that, at some point, it encounters one
+of the above fragments.
 
 Note that the following content needs to be understood with regards to a concept
 of "sections". Also note that annevk's proposal completely drops this very
@@ -57,16 +57,15 @@ lines    fragment-1      toc-1     toc-2
 No issue here: The `h1` element instructs to create an object which needs to
 be understood to represent a top-level section. In addition to that, the
 section object has a title property with text content "A" and a rank-like
-property with a value of 1. Assume that, by now, WC has created the following
-object:
+property with a number value of 1. Assume that, by now, WC has created the
+following object:
 
 ```
 section: {name:"A", title:"A", rank:1}
 ```
 
 Note that the "rank" property of a section object does not exist as a "real
-thing". These properties act as a visual representation of the section's
-outline depth.
+thing". These properties act as an indication of a section's outline depth.
 
 ### Line 2:
 
@@ -98,10 +97,10 @@ under such a pedantic perspective.
 
 And because the sequence of instructions, which the current fragment represents,
 has input errors, WC has no other option than to throw an exception. That is, WC
-can only cancel to process the current document. As a consequence, no one will
+can only cancel to index the current document. As a consequence, no one will
 be able to find that document by using WC's search engine.
 
-In essence, and if each web crawler would act the same pedantic way, then most
+In essence, and if any web crawler would act the same pedantic way, then most
 of the World Wide Web could no longer be found. The World Wide Web as we know
 it would cease to exist. Poof, just like that.
 
@@ -113,7 +112,7 @@ WC can therefore not wait for any response. And even it could:
 
 WC: "Wait, what do you mean? The author is not responsible? The CMS is?"
 
-That is, WC must itself choose a way to resolve this issue during runtime.
+That is, WC must choose a method to resolve this issue during runtime.
 
 ### Option 3: Toc-1, an acceptable approximation.
 
@@ -161,47 +160,51 @@ the result of this option only represents a best-effort approximation.
 
 Because fragment-1 holds an input error, WC is not in the position to produce
 an accurate result for fragment-1. But, as WC has to choose an option in order
-to produce a result, and provided that there is no other option, WC can only
-choose between options 3 and 4.
+to produce a result, WC can only choose between options 3 and 4.
 
 So here is the thing: Can WC freely choose an option? No, it can't, because
-both of those will result in different results. Although any result is still
-better than no result at all, being able to freely choose an option would be
-just as bad: The very same document would end up getting indexed based on
-someone's personal preference.
+both of those will yield different results. Although any result is still better
+than no result at all, being able to freely choose an option would be just as
+bad: The very same document would end up getting indexed depending on someone's
+personal preference.
 
-The problem with option 4 is, that section "B" will end up having identical
-content as section "C". And because implementations tend to be inefficient if
-they need to support such redundancy, this aspect alone represents a reason
-not to choose option 4.
+The problem with option 4 is, that section "B" will end up to have the exact
+same content as section "C". And because implementations tend to be inefficient
+if they need to deal with such redundancy, this aspect alone represents a reason
+not to choose option 4. (Note that this option would end up producing even more
+implicit sections for different, but similar fragments - e.g. h1-h6).
 
-Furthermore, option 4 represents a fragment that is in conflict with "any
-section always has its own sectioning node". That is, there could not be a
-1:1 relationship between the set of sectioning nodes and the set of sections.
+Furthermore, option 4 represents a fragment that is in conflict with "a section
+should always have its own sectioning node". That is, there would no longer be
+a 1:1 relationship between the set of sectioning nodes and the set of sections.
 
-Note that this can be understood that the existence of sectioning nodes has
-in general precedence over rank values. This should not be too surprising as
-rank values can not exist without sectioning nodes because rank values can not
-be specified without a corresponding sectioning node.
+Note that this can be understood that the existence of sectioning nodes has in
+general precedence over rank values. This should not be too surprising as rank
+values can not be specified without a corresponding sectioning node. With that
+in mind, sectioning nodes may theoretically exist without a rank value.
 
-Note that HTML 3.2, 4.01, 5.0, 5.1 and 5.2 do not define heading content
-elements to hold absolute rank values. They always are introduced as relative
-values in terms of a "level of importance", or as "higher or lower rank values".
-That is, rank values were at no point defined to be absolute, but always as
-relative to one another.
+Note that the specifications of HTML 3.2, 4.01, 5.0, 5.1 and 5.2 do not define
+heading content elements to hold absolute rank values. They are always defined
+as relative values in terms of a "level of importance", or as "higher or lower
+rank values". That is, rank values were at no point defined to be absolute, but
+always as relative to one another.
 
-Unless there is irrefutable proof that option 3 will yield invalid results if
-additional aspects are taken into account, then option 3 is what WC must choose.
-That is, because option 4 would result in reinterpreting existing content.
+Unless there is irrefutable proof that option 3 will yield invalid results
+if additional aspects are taken into account, then option 3 is what WC must
+choose. In addition to that, option 3 represents the common practice to
+generate a listing for such fragments. Consequently, option 4 would result
+in reinterpreting existing content.
 
 ### Summary: fragment-1/toc-1
 
 Obviously, WC needs to produce a result. It can not reject a document just
 because it has input errors (i.e. is non-conformant). WC can therefore only
-produce a best-effort result. Furthermore, WC can not freely choose which
-result it has to return. Different implementations would otherwise end up
-producing different results for the same document. That is, there must be
-an agreement on what the result of such a fragment has to be.
+produce a best-effort result.
+
+Furthermore, WC can not freely choose which result it has to return. Different
+implementations would otherwise end up producing different results for the same
+document. That is, there must be an agreement on what the result for such a
+fragment has to be.
 
 For historical reasons, and until proven otherwise, toc-1 is what WC must
 return in case of fragment-1. The point however is to not forget that
@@ -241,8 +244,8 @@ section: {name:"A", title:"A", rank:1}
 
 ### Line 2:
 
-WC enters the section element and therefore has to next create the following
-section object:
+Next, WC enters the first section element and therefore has to create the
+following section object:
 
 ```
 section: {name:"B", title:None, rank:2}
@@ -297,18 +300,17 @@ section: {name:"C", title:"C", rank:3, subsections:[]}
 
 Note that, with regards to the official specification, the rank value specified
 by the `h3` element may have a section-internal effect: If that section element
-had another heading element with rank 1/2/or/3, then WC would, according to the
-official specification, have to create a sibling section to "C". But, with
-regards to fragment-2, that aspect is a non-issue. Fragment-2 has no such inner
-subsequent heading content element.
+had another descendant heading element with rank 1/2/or/3, then WC would,
+according to the official specification, have to create a sibling section to
+"C". But, with regards to fragment-2, that aspect is a non-issue. Fragment-2
+has no such inner subsequent heading content element.
 
 ### Line 6:
 
 In general, any number of operations, which WC would have to execute, may be
 associated with the enter and/or exit event of a node. However, and with regards
-to the "h1-h3" issue:
-
-WC can be understood to have nothing else to do when exiting "C".
+to this "h1-h3" issue, WC can be understood to have nothing to do when exiting
+section "C".
 
 ### Line 7:
 
@@ -328,7 +330,7 @@ You: Hold on a sec, what just happened?
 Me: Nothing, fragment-2 is by itself perfectly fine ...
 Me: ... There is no issue, none at all.
 
-Sure, it is bad practice to specify a section with no heading - just as it is
+Sure, it is bad practice to specify a section without a heading - just as it is
 bad practice to specify `<hX></hX>` (i.e. a heading with no content), or even
 `h1-h3` fragments. But, there is nothing WC can do. Once WC could even realize
 that "B" has no title (i.e. when exiting the section element of "B"), it is
@@ -371,7 +373,7 @@ anything about that "issue".
 Yes, a section without a "heading" can and should still be declared as being
 bad practice.
 
-### Any other "result" will add complexity to low-level implementations.
+### Any other "result" would add complexity to low-level implementations.
 
 Again, the above considerations are with regards to the abstraction level of
 a low-level, highly optimized web crawler. Any attempt to re-define the (on
@@ -397,8 +399,8 @@ be skipped:
 * What is the precise meaning of "empty"? Does whitespace content count towards
   empty or non-empty? (Note that parsers will implicitly generate these kind of
   non-element nodes; e.g. in between the tags of lines 6 and 7 in fragment-2).
-  Do comments count? Does a hierarchy that only consists of `<div>` containers
-  only count?
+  Do comments count towards "empty"? Does a hierarchy that only consists of
+  `<div>` containers and no other content?
 * What is supposed to happen in case of whole hierarchies of "empty" sections
   which still have sparse, deeply-nested but still non-empty inner sections?
 * Won't the removal of "empty" sections change an intended logical layout?
@@ -406,12 +408,12 @@ be skipped:
   with content over time).
 
 In other words: There are many questions that need to be answered, if seemingly
-empty sections would have to be left out.
+empty sections would have to be skipped.
 
 ### The big struggle.
 
-One aspect of the whole issue is that information gathering and display must
-use the same perspective on a document's logical structure:
+Another aspect of the whole issue is that information gathering and display
+must use the same perspective on a document's logical structure:
 
 Assumed that a search engine knows that the information a user seeks can be
 accessed via the in-document as-is logical path-of-sections "A", and assumed
