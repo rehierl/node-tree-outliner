@@ -2,9 +2,6 @@
 <!-- ======================================================================= -->
 # List of things to do
 
-I am trying to figure out what experts should have done in the first place.
-It is not my fault that they messed it up ... a decade ago.
-
 The ultimate goal is to leave no question unanswered -
 develop a design that can be used to explain all possible circumstances -
 
@@ -13,10 +10,34 @@ It looks like, I'm just too darn stubborn to give up -
 
 always having to look/backwards -
 in order to know where and how to continue -
-like crawling up a mountain by moving backwards
+like crawling up a mountain by moving butt first
 
 <!-- ======================================================================= -->
 ## minor/isolated/mixed
+
+- a section is a subset of the tree's set of nodes
+- a section is a strict subset of the root's outer set of nodes
+- a section is a subset of the root's inner set of nodes -
+  that is, a section may be identical to the root's inner set
+- a section either is identical to the inner set of a node,
+  or a union of the outer sets of one or more subsequent siblings
+- if a section is identical to the inner set of a node, then that section
+  is also the union of all of the outer sets of that node's child nodes
+
+conclusions
+- sections either have no nodes in common (e.g. sections B and C),
+  or one section is embedded within the other (e.g. sections B into A)
+- a section is a subset of another section, if it is embedded into it
+
+**TODO**
+the tree of sections will have identical structure to the initial node tree,
+if each node of the node tree is understood to represent a rank-less type-1
+sectioning node.
+
+**TODO**
+closing a section when the next heading was about to be entered did work for
+as long as our documents were flat. however, it no longer works because our
+documents are no longer flat (we now use node trees).
 
 **TODO**
 one node tree may have multiple different outlines at the same time -

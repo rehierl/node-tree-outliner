@@ -1,6 +1,7 @@
 
-This chapter holds the basic design (i.e. default definitions)
-of the general purpose outliner.
+This chapter holds the core design (i.e. default definitions) of the general
+purpose outliner. As such, it does not define any rank-related values (i.e.
+a rank-less design).
 
 Note that most statements in that chapter are derived conclusions, or only
 introduce new names which are used to refer to specific entities/circumstances.

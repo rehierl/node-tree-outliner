@@ -7,9 +7,9 @@ Each node can be associated with one section only, if (and only if) the node
 can also be understood to be (implicitly) associated with all ancestors of
 that section.
 
-Consequently, the implicit association with all ancestor sections is used to
-condense the amount of associations, which would otherwise be required by the
-formal definitions, into a single reference per node. That is, because all
+The implicit association with all ancestor sections is therefore used to
+condense the amount of associations into a single reference per node, which
+would otherwise be required by the formal definitions. That is, because all
 formal associations (formal perspective) of a node can be derived from its
 explicit association (practical perspective).
 
@@ -51,8 +51,8 @@ section.
 
 Note that, because a section can not be "strictly suspended" (see the state
 transitions), the term "suspended" must always be understood to be synonymous
-to "loosely (or seemingly) suspended". That is, because these sections are not
-closed (i.e. still open).
+to "loosely (or seemingly) suspended". That is, because these sections still
+count as being open.
 
 **CLARIFICATION**
 If each node is associated with one section only, then a section's complete
@@ -105,15 +105,15 @@ sections. Because of that, any section can still be loosely described as
 "a sequence of siblings".
 
 **CLARIFICATION**
-A section's first content node always is a strictly associated top-level node.
+A section's first content node is always a strictly associated top-level node.
 
 Put differently, a section's first content node will always be strictly
 associated with that section, never with one of the section's subsections.
 
-That is, because the declared section will always be the new current, least
-significant section when a section's first content node will be entered.
-Consequently, the declared section will always be used to associate its first
-content node.
+That is, because the declared section will always be the new current and
+least significant section when a section's first content node is entered.
+Consequently, the declared section will always be used to associate its
+first content node.
 
 Note again, that a section's first content node
-also is a section's first top-level node.
+is also a section's first top-level node.

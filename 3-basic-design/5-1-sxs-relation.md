@@ -4,11 +4,11 @@
 
 **CLARIFICATION**
 At any given point in time, during the traversal of the node tree,
-there always need to be one or more open sections.
+there always are one or more open sections.
 
-That is, because each node in a node tree must be associated with at least
-one section. For that to happen, one or more sections must always be open
-when the next subsequent node is entered.
+Again, no sectioning node thus far has the characteristic to close any open
+presequent sections. Because of that, any section always ends with its parent
+container.
 
 Note that, when the root node is entered, the universal section is the only
 open section. When the root's first child is entered, the universal section
@@ -19,13 +19,13 @@ The section of a subsequent sectioning node
 is a subsection to all open presequent sections.
 
 That is, because all presequent sections remain to be open for as long as a
-subsection is open. Which is, because the default definitions do not include
-the characteristic to close a presequent section. Consequently, a subsequent
+subsection is open. Which is, because no parent container of a subsection is
+an ancestor of a parent section's parent container. Consequently, a subsequent
 section always is a subsection to all open presequent sections.
 
 Note that the intention behind this statement is to switch one's perspective
-away from a pair of sections towards a subsequent section with regards to
-multiple open sections which all are presequent to it.
+away from a pair of sections towards a subsequent section with regards to all
+open presequent sections.
 
 **CLARIFICATION**
 Any sectioning node always declares a new subsection.
@@ -71,8 +71,13 @@ ordered. That is, because the set of their sectioning nodes is ordered according
 to the node sequence of the tree, which itself is based upon the tree's order
 of nodes. (Recall that any section is presequent or subsequent to any other
 section.) Consequently, and if that node order is taken into account, the
-above set of related sections `s` defines an ordered list of sections (i.e.
-`s := [ s0, s1, s2 ]`).
+above set of related sections `s` defines an ordered list of sections:
+
+```
+s := [ s0, s1, s2 ]
+       --------->     parent-section-of
+       <---------     subsection/subsequence-of, subsequent-to
+```
 
 As mentioned before, all sections are subsequences of the tree's node sequence.
 Consequently, any section is a subsequence to all of its parent sections. That
@@ -86,8 +91,8 @@ sections can be used to define a binary relation `R`:
 * `R := (S,G)`, and `G := { (s2,s1), (s2,s0), (s1,s0) }`
 
 Note that this relation is transitive. Also note, that no rooted tree of nodes
-is defined by a transitive relation. If a tree's relation would be transitive,
-then there would be nodes that had more than one parent node.
+is defined by a transitive relation. (If a tree's relation would be transitive,
+then there would be nodes that had more than one parent node).
 
 * transitive := if `aRb` and `bRc`, then also `aRc`
 * example: `(s2,s1)` and `(s1,s0)` and also `(s2,s0)`
@@ -106,25 +111,29 @@ As before, this (reduced) relation does not define a rooted tree.
 That is, because node `s1` has two parent nodes (i.e. `s2` and `s7`).
 
 Note that the semantics of a relation reflects the relation's orientation (i.e.
-superordinate-to-subordinate or vice versa). That is, the orientations of the
-above relation `R` and the relation of a node tree `T` are not consistent with
-each other. That is, `sem(R)` is not consistent with the semantics of a node
-tree's relation (i.e. `sem(T) := "parent-of"`). However, `sem(R)` matches the
-antonym semantics of a tree `sem(T') := "child-of"`.
+superordinate-to-subordinate or vice versa). That is, the orientation of the
+above relation `R` and that of a node tree `T` are not consistent with each
+other. That is, `sem(R)` is not consistent with the semantics of a node tree's
+relation (i.e. `sem(T) := "parent-of"`). However, `sem(R)` matches the antonym
+semantics of a tree `sem(T') := "child-of"`.
+
+Hence, a relation `R'` can be defined which represents the inversion of
+relation `R` (i.e. inverted edges *and* inverted/antonym semantics):
 
 * `R' := (S,G')`, and `G' := { (s0,s1), (s1,s2), (s1,s7) }`
 * `sem(R') := "parent-sequence-of"` or `"parent-section-of"`
 
-Note that nodes `s2` and `s7` now have the same parent node `s1`.
+Note that nodes `s2` and `s7` now have the same parent node `s1`. These nodes
+therefore are siblings to each other.
 
 Note that `R'` does define a tree of nodes/sections. Because of that, sections
 `s2` and `s7` can now be referred to as "sibling sections". Moreover, all terms
-(ancestor, descendant, etc.) that are defined for a tree of nodes also apply
-to a tree of sections.
+(ancestor, descendant, etc.) that are defined for a node tree also apply to a
+tree of sections.
 
 Note that sibling sections are said to be unrelated with each other, which is
 consistent with the relation of a node tree. That is, because there is no edge
-(i.e. an explicit relationship) that connects two siblings with each other.
+(i.e. an explicit relationship) that connects two siblings with one another.
 Under the relation of a tree, and although they share the same parent node (i.e.
 an implicit relationship), siblings are said to be unrelated with each other.
 
@@ -152,8 +161,8 @@ of sectioning nodes. Consequently, the order of sections is defined by the
 node order of the node tree.
 
 Note that sibling sections are ordered because a presequent sibling section
-will be entered/created/opened before any of its subsequent sibling sections.
-In addition to that, any parent section will be entered before any of its
+will be entered/created/opened before any of subsequent sibling section. In
+addition to that, any parent section will be entered before any of its
 descendant sections. That is, the node order of the node tree carries over
 onto the tree of sections. (Which indicates/supports that any parent node is
 presequent to its descendant nodes).
@@ -196,8 +205,8 @@ node and its descendant nodes (that is with regards to any tree of nodes).
 **CLARIFICATION**
 The `parent-of` relation (`NxN`) of a rooted ordered tree of nodes, in
 combination with the definition of sectioning nodes (`SN`), defines which
-sections exist (`NxS`), the relationship between sections and nodes (`SxN`),
-and the relationship between the sections themselves (`SxS`):
+sections exist (`SNxS` or `NxS`), the relationship between sections and
+nodes (`SxN`), and the relationship between the sections themselves (`SxS`):
 
 ```
 NxN + SN => NxS, SxN, SxS
@@ -222,9 +231,10 @@ it is the inner section's parent section in the corresponding section tree.
 
 Note that both definitions are related with each other. That is, because all
 parent sections of a subsection (definition 1) are elements of the rooted path
-of sections which begins in the root section and ends in the subsection's parent
-section (definition 2). Which is, because any section *not* in that path is
-already closed, or its sectioning node still needs to be entered.
+of sections which begins in the root section and ends in the subsection's
+parent section (definition 2). Which is, because any section *not* in that path
+is already closed, or its sectioning node was not reached by the time the
+subsequent subsection was entered.
 
 **CLARIFICATION**
 The least significant ancestor section of a section will be referred to as
@@ -246,11 +256,16 @@ a subsection can be understood to be strictly related to its unique parent
 section and loosely related to all other ancestor sections.
 
 **CLARIFICATION**
-A reference to a section's unique parent section can be used to represent
-all the parent/ancestor sections of a given subsection. If this practical
-representation would not be possible, then each subsection would have to
-hold references to all of its ancestor sections, which would otherwise be
-required by the formal definitions.
+A single reference to a section's unique parent section can be used
+to represent all the ancestor sections of a given subsection.
+
+That is, because all associations with a section's ancestor sections, which
+would otherwise be required by the formal definitions, can be derived from this
+unique parent section. That is, the ancestor sections of a subsection are those
+sections, which are located on the path that connects the root section with the
+subsection's unique parent section. (Recall that the default definitions define
+a single rooted ordered tree of sections which has only one most significant
+root section).
 
 **CLARIFICATION**
 A section's unique parent section defines the following,

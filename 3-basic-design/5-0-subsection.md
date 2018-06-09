@@ -14,7 +14,8 @@ declared/entered first. That is, a presequent section is declared before a
 subsequent section.
 
 **CLARIFICATION**
-A section always is presequent or subsequent to another section.
+A section always is presequent or subsequent to another section
+and insequent to itself.
 
 That is, because any sectioning node unconditionally declares exactly one new
 section. And because there is a 1:1 relationship between the set of sections
@@ -31,7 +32,7 @@ of a section therefore is the exit event of its parent container.
 
 Note that this does not imply that a (to be defined) sectioning node property
 can not result in such a characteristic. However, these additional properties
-must be consistent with the default definitions described below.
+must not break consistency with the default definitions described below.
 
 Note that the formal definitions treat any section as a separate entity. As
 such, no section is defined to have an effect on another section. This is
@@ -54,7 +55,7 @@ with regards to the logical location of the subsequent section.
 **CLARIFICATION**
 Two sections have no nodes in common, if the presequent section is closed
 before the sectioning node of the subsequent section is entered. Two such
-sections are said to be unrelated with, or independent from each other.
+sections are said to be unrelated with, or independent from one another.
 
 Note that all sections declared inside of the same node tree can be understood
 to always be, one way or another, related with each other. After all, they all
@@ -82,8 +83,7 @@ section.
 Note that related sections are not required to share any content nodes. That
 is, because the subsequent sectioning node is a content node of the presequent,
 but not a content node of its own section. Also, the subsequent section is not
-required to have any content nodes of its own. That is, the subsequent section
-may be empty.
+required to have any content nodes of its own - that section may be empty.
 
 <!-- ======================================================================= -->
 ## inner section
@@ -104,9 +104,9 @@ For now, the expression "the parent section of" is only used in a given context
 to refer to a presequent section with regards to another subsequent section.
 
 At this point, the "an inner section of" reference only refers to a section
-which belongs to one or more other sections. That is, a reference without any
-additional meaning. Likewise, the "a/the parent section of" references only
-refer to a section which has one or more inner sections.
+which belongs to one or more other sections. That is, a linguistic reference
+without any additional meaning. Likewise, the "a/the parent section of"
+references only refer to a section which has one or more inner sections.
 
 **A visual example**
 
@@ -147,14 +147,15 @@ That is, because ...
   parent container (inner type-2), or a descendant of said container (inner
   type-1 or type-2).
 
-Note that two sections have identical parent containers, if (and only if) the
-subsequent section is a type-2 section. In all other cases, the inner section's
-parent container is a descendant of the corresponding parent section.
+Note that two sections may have identical parent containers, if (and only if)
+the subsequent section is a type-2 section. In all other cases, the inner
+section's parent container is always a descendant of the parent section's
+parent container.
 
 **CLARIFICATION**
 The default scope of an inner section begins and ends inside of, or with the
-default scope of its parent section. Because of that, a parent section is open
-for as long as one of its inner sections is open.
+default scope of its parent section. Because of that, a parent section remains
+to be open for as long as one of its inner sections is still open.
 
 * An inner section always ends with, or inside of its parent section:
   That is, because the inner section's parent container never is an
@@ -169,10 +170,10 @@ for as long as one of its inner sections is open.
 
 Put differently:
 
-* No inner section can contain any nodes that do not also belong to its parent
+* An section can not contain any node that does not also belong to its parent
   section. That is, an inner section can not reach out of its parent section.
-* No parent section can end inside of one of its inner sections. That is, a
-  parent section either remains to be open when an inner section is closed,
+* A parent section can not end inside of one of its inner sections. That is,
+  a parent section either remains to be open when an inner section is closed,
   or both sections end at the same time (i.e. with the same event).
 
 **CLARIFICATION**
@@ -180,14 +181,14 @@ All content nodes of an inner section are
 also content nodes of its parent section.
 
 That is, because both sections are open for as long as the inner section
-is open. Because of that, all content nodes of an inner section must also
+is open. Consequently, all content nodes of an inner section must also
 be associated with the inner section's parent section.
 
 Note that this is just a formal requirement. That is, because the definitions
-treat all sections as separate entities. For practical reasons, and depending
-on the exact nature of the resulting structure of sections, it could still be
-allowed, based on implicit associations, to associate each node with one
-section only.
+treat all sections as separate entities. For practical reasons, based on
+implicit associations and depending on the exact nature of the resulting
+structure of sections, it could still be allowed to associate each node with
+one section only.
 
 **CLARIFICATION**
 The first content node of a parent section never is a content node of one of
@@ -209,23 +210,26 @@ belongs to its own section.
 * content node of an inner section => content node of a parent section
 * but not vice versa (i.e. not <=>)
 
-Note that this statement is with regards to two strictly related sections. That
-is, there are no other inner sections in between (i.e. ignore a proper section
-hierarchy).
+This means that, if a node is a content node of an inner section, then that
+node is also a content node of the inner section's parent section. (Note that
+an inner section always has a parent section. It would otherwise be no inner
+section). However, this does *not* mean that, if a node is a content node of a
+parent section, then that node is also a content node of one of the parent
+section's inner sections. (Note that this applies even if that parent section
+had one or more inner sections).
 
 **CLARIFICATION**
-A parent section can not be an inner section to itself.
+A section can not be a parent section, or an inner section to itself.
+The structure of sections therefore is acyclic.
 
 Because all non-empty sections have different first content nodes, an inner
 section can not begin with its parent section. And, because of that, a section
-can not be a subsection, or even an inner section to itself.
-
-Note that this guarantees that a section hierarchy
-can not have any loops and/or cycles.
+can not be an inner section to itself. Consequently, the structure of sections
+has no loops and/or cycles (i.e. acyclic).
 
 Note that one could still open Pandora's box, if one would associate a parent
-container with an inner section when that parent container is being exited
-(hint: due to implicit associations).
+container with an inner section while exiting that parent container (hint: due
+to implicit associations).
 
 <!-- ======================================================================= -->
 ## subsection
@@ -278,15 +282,14 @@ and presequent to the inner section's close event, to not belong to the parent
 section (although they would still belong to the corresponding "subsection").
 And, because of that, the definition of the term "subsection" no longer applies
 as that "subsection" would then contain nodes which the "parent section" would
-not contain. As a result of that, such an inner section is not a subsection to
-that parent section, it would be something else instead. That is, their
-relationship would change considerably.
+not contain. As a result, such an inner section is not a subsection to that
+parent section, it would be something else instead. That is, their relationship
+would change considerably.
 
 Note that a subset is not a subset, if it contains even one element that does
 not also belong to its parent set. Put differently, a subset is not a subset,
 if there is no guarantee that all elements of the subset are also elements of
-its parent set. That is, it must be guaranteed that such conditions can never
-occur.
+its parent set. That is, it must be guaranteed that such conditions never occur.
 
 **CLARIFICATION**
 A section never is a subsection to itself.
@@ -297,26 +300,24 @@ technically not be a subsection to itself. That is, because a sectioning node
 does not belong to its own section. And, because of that, a parent section
 can never be a subsection to itself.
 
-Note that a section is for the same reason technically a strict subset of its
+Note that a section is for the same reason technically a "strict subset" of its
 parent section. That is, because a parent section always has more content nodes
 than any of its subsections.
 
-Note that this prevents a section hierarchy from having loops and/or cycles.
-
 **CLARIFICATION**
-A subsequent sectioning node (type-1 or type-2), which is a sibling to a
-type-1 sectioning node, can never declare a subsection to that presequent
+A sectioning node (type-1 or type-2), which is a subsequent (or next) sibling
+of a type-1 sectioning node, can never declare a subsection to that presequent
 type-1 section.
 
 That is, because the presequent section will be closed (due to its parent
 container) before the subsequent sectioning node can even be entered.
 Consequently, both sections can not share any content nodes. And, because
-of that, the definition of the terms "inner section" and "subsection" are
-not applicable.
+of that, the definition of the terms "inner section" and "subsection" do
+not apply.
 
 Note that the subsequent section can also not be redefined (e.g. via a close
-modifier) to be an inner section of the closed presequent section. Any such
-definition would (seemingly) produce a conflict, as both sections are by
+modifier) to be an inner section of the already closed presequent section. Any
+such definition would (seemingly) produce a conflict, as both sections are by
 structural relationship independent from each other (seemingly, as all such
 modifiers are always understood to be with regards to open presequent sections,
 never with regards to closed presequent sections).

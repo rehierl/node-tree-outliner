@@ -3,21 +3,22 @@
 # node-tree-outliner
 
 The purpose of this repository is to flesh out a design that can be used to
-implement a general-purpose outliner for any rooted ordered tree of nodes.
+implement a general-purpose outline algorithm for any rooted ordered tree of
+nodes.
 
 This repository is **in a state of flux**.
-It may and will change considerably without further notice
+It may and will change considerably without further notice.
 (Direct links to files within this repository may break at any time).
 
 <!-- ======================================================================= -->
 ## Overview
 
 * [0-introduction](./0-introduction): A general introduction.
-* [1-basics](./1-basics): A recap of mathematical definitions.
-  (Skim it to get an impression of the contents and the style of notation)
+* [1-basics](./1-basics): A recap of basic mathematical definitions.
+  (Skim it to get an impression of its contents and my style of notation).
 * [2-tree-of-nodes](./2-tree-of-nodes): A recap of the formal definition of
   node trees. In addition to that, the definition of important sequences.
-  (Skim it to get an impression of the contents)
+  (Skim it to get an impression of its contents).
 * [3-basic-design](./3-basic-design): The designs default definitions:
   a tree's node sequence, sectioning nodes, parent containers, ...
 * [4-extensions](./4-extensions): The definition of extensions to the
@@ -25,7 +26,7 @@ It may and will change considerably without further notice
   perspective (sectioning-node, end-marker-node), ...
 * [5-implementation](./5-implementation): A discussion of how to implement
   certain critical aspects.
-* [6-bigger-picture](./6-bigger-picture): Thoughts on the bigger picture.
+* [6-bigger-picture](./6-bigger-picture): My thoughts on the bigger picture.
 
 **Note (to self)** -
 Each folder should contain a "readme" file.

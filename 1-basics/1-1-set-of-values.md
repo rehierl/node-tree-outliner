@@ -159,7 +159,7 @@ clarification
 
 ### union (+, or)
 
-* `(V + W), (V or W) := { x : (x in V) or (x in W) }`
+* `(V union W), (V + W), (V or W) := { x : (x in V) or (x in W) }`
 
 likewise
 

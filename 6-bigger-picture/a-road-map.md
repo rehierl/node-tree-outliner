@@ -23,40 +23,37 @@ However, in order to make better use of computers, we first need to figure
 out how we humans organize our content and then what we have to do in order
 to teach them what we have learned.
 
-And here is where it gets tricky: Computers are, at least for the time being,
-dumb by nature. The only language they understand is ... mathematics. And
-because mathematics is what it is, it will not change to make it easy for us.
-All we can do is formalize the methods we use to organize our content and try
-to translate those methods into a model which computers can process.
+And here is where it gets tricky: For the time being, the only language
+computers understand is ... mathematics. And because mathematics is what it is,
+it will not change to make it easy for us. All we can do is to formalize the
+methods we use to organize our content and try to translate those methods into
+a model which computers can process.
 
 It goes without saying that this step, will require changes. Which is because
 we developed our methods "the natural way" without formalizing them from the
-start. That is, there is no guarantee that we will be able to translate our
-methods into a formal model.
+start. There is no guarantee that we will be able to translate all of our
+methods into one consistent model because the different methods we use could
+turn out to be in conflict with each other.
 
-And, to make things even worse, the different methods we use could even turn
-out to be in conflict with each other. This will be the biggest challenge:
-Mathematics does not allow any conflict. If a model turns out to have conflicts
-which can not be resolved (i.e. the model is inconsistent), then that model has
-no value.
+And that will be the biggest challenge: Mathematics does not allow any
+contradictions. If a model turns out to have conflicts which can not be
+resolved (i.e. the model is inconsistent), then that model has no value.
 
-So no matter how hard you might want to try to find a solution,
-no matter how good your intentions might be, there is no easy way out.
-
-## Ironically, we are already half way there.
+## A design will have to build upon node trees as a formal basis.
 
 Since the very moment people chose to use the mathematical concept of node trees
 to store and transmit content, our documents no longer are what they used to be.
 Ever since, there is a discrepancy between what documents are and what we think
 they are. For whatever reason, the perception of what we think they are did not
-change with that transition ... And here we are, still trying to catch up.
+completely change with that transition ... And here we are, still trying to
+catch up.
 
 For the most part, we are used to seeing a document as a single "flat thing"
-where we should be seeing a "hierarchy of many things" because a node tree
-is by its very own definition a structure of "many things":
+where we should be seeing a "hierarchy of many things". That is because a node
+tree is by its very own definition a structure of "many things":
 
 A parent node may contain any number of child nodes. And, as a flat list of
-nodes, the combination of these child nodes represent a "thing". In essence,
+nodes, the combination of these child nodes represents a "thing". In essence,
 each parent node represents a "thing" that exists because of its child nodes.
 But, and that is at the very center of it all, each child node may itself be
 a parent node, which is why each child node may represent its own "thing" that
@@ -69,42 +66,27 @@ into similar smaller problems, and solve each one of them separately).
 As abstract as it might seem, that is what will allow us to find a solution
 because node trees are a construct of graph theory and graph theory is a
 discipline of mathematics. In other words, we already have a basis which
-computers understand and which we can build upon to formalize our methods.
+computers understand and which we can build upon to transform our methods
+into a model.
 
-Furthermore, graph theory comes with a set of tools which we can use to prove
-if the model we end up with is in conflict with the underlying node tree or not.
-These tools will allow us to prove that, in the end, our model is consistent.
+Furthermore, graph theory comes with a set of tools which we can use to see
+whether the model we end up with is in conflict with the underlying node tree.
+That is, these tools will allow us to prove that the final model is consistent.
 
-## And here is where it starts to get tricky.
-**TODO**
-
-What needs to be done first is to figure out how the methods we use to organize
-content can be used in combination with the underlying node trees.
-
-## The self-inflicted trust issue.
-**TODO**
-
-Even if you find a way to scientifically proof, beyond any shred of doubt,
-each and every single step from start to finish, a trust issue will still
-remain.
-
-- Trust takes years to build, seconds to break, and forever to fix.
-- Many years have already passed without any substantial improvement.
-
-So, why is anyone supposed to believe that what you end up with,
-is what it needs to be?
+The question that a design therefore needs to answer is:
+How do we get our methods to work with a document's node tree?
 
 ## We need a separate, officially maintained specification.
 
-No matter how good your intentions might be, if the design turns out to have
-the slightest issue, then no one will support it. Even worse, and even if you
-could end up solving all of the remaining issues and thus end up with *the
+No matter how good your intentions might be, if the new design turns out to
+have the slightest issue, then no one will support it. Even worse, and even if
+you could end up solving all of the remaining issues and thus end up with *the
 perfect design*, it could turn out to be almost impossible to recover from an
-unintentional mishap ... yes, the trust issue again.
+unintentional mishap.
 
-The next design therefore needs to be accompanied by explanations which
-describe in detail why the design is what it needs to be. That seems to be
-the only method to build up trust which can withstand some amount of friction.
+The next design therefore needs to be accompanied by detailed explanations
+which describe why the design is what it needs to be. That seems to be the only
+method available to build up trust which can withstand some amount of friction.
 
 In addition to that, these explanations will help to decide which future 
 changes and/or additions can be made, and which will have to be rejected.
@@ -125,15 +107,15 @@ anyone adopt, or even fix a single "issue" in an existing implementation?
 
 ## There won't be any change without an opt-in flag.
 
-(Assumed that implementations could support conflicting semantics by dynamically
-switching between different modes of operation ... The problem here is that the
+(Assumed that an implementation could even support conflicting semantics by
+dynamically switching between different modes of operation ... Even if, the
 results will still have to be combined/merged at some point.)
 
 And even if we could somehow manage to end up with *a perfect design*, there
 still is the issue of how we intend to resolve the situation we are in. It will
 certainly help to have a design everyone can agree with and proof-of-concept
-implementations which prove that it does indeed work. Unfortunately, there is
-no switch we can flip to make the whole issue simply disappear.
+implementations that do indeed work. Unfortunately, there is no switch we can
+flip to make the whole issue simply disappear.
 
 For quite some time, authors will continue to look at elements, which are
 critical to the design, how they are used to. That is, users have a certain
@@ -145,9 +127,8 @@ In addition to that, the options available to define new elements which (e.g.)
 can be used as headings are limited. The definition of new elements, that match
 the semantics which the design will need, is not feasible. The new design will
 have to reuse existing elements and therefore won't be able to read those as
-they are currently perceived. That is, the semantics of current elements will
-have to be clarified. This would, if the new semantics are applied to existing
-content, reinterpret that content and thus could yield different results.
+they are currently perceived. That is, the semantics of existing elements will
+have to change.
 
 Users therefore need to be informed and they need to learn how to use these
 elements according to the new design. The same goes with developers (of content
@@ -159,13 +140,13 @@ out to be sufficient. There always are those who simply can not, or don't even
 want to be convinced, because what we currently have does seem to work ...
 somehow. There is no way to force anyone to adopt short of invalidating the
 products (content, implementations, etc.) these people produce. For obvious
-reasons, that is not an option.
+reasons, that must be avoided if at all possible.
 
 As a matter of consequence, there does not seem to be any other way than to
 give users the means to tell implementations, that elements within a given
 context, need to be understood a certain way. Users will have to choose the
 appropriate set of semantics and store a message alongside with their content.
-That message will then allow implementations to detect how to read the
+That message will then allow implementations to detect how to deal with the
 corresponding elements.
 
 As a straightforward method, such a message could be represented by a simple

@@ -4,14 +4,14 @@
 
 The focus of the following considerations is on the introduction of modifier
 properties which allow to extend the default definitions. Attributes, as a
-form of notation, can then be defined that allow to specify such a property.
+form of notation, can then be defined that allow to specify such properties.
 In addition to that, the definition of an existing node type, in combination
 with such an attribute, then allows to define new dedicated nodes.
 
 Example:
 
 1. `close:N` -
-   A modifier property which instructs to close `N` sections.
+   A modifier property which instructs to close a number of (`N`) sections.
 2. `<node close="N">` -
    The "close" attribute allows to specify the "close" modifier property.
 3. `<close /> := <div close="1" />` -
