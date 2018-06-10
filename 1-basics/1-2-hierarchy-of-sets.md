@@ -113,7 +113,7 @@ Inconsistent: The borders of two or more sets cross each other.
 With regards to a consistent setup, the following references may be used:
 
 * The next outer set (S2) of another set (S1) will be
-  referred to as the initial set's parent set.
+  referred to as the initial set's (S1) parent set (S2).
 * The set to which another set is a parent set will be
   referred to as one of the parent set's child sets.
 * All inner sets of an outer set will be
@@ -125,6 +125,8 @@ With regards to a consistent setup, the following references may be used:
   referred to as a hierarchy of sets.
 * A set of sets that has more than one root set will be
   referred to as a forest of such hierarchies.
+* Two sets that have no elements in common are said to be
+  independent from one another.
 
 Note that a root set is no subset to another set.
 
@@ -143,5 +145,14 @@ Note that a root set is no subset to another set.
 
 * Root set A is the parent set of set B and C.
 * Set B is the parent set of set E.
-* Sets A and B both are outer or ancestor sets to set E.
+* Sets A and B both are outer or ancestor sets of set E.
 * Sets B, C and E all are inner or descendant sets to set A.
+* Sets B and C are independent from one another.
+
+**CONCLUSION**
+If set "a" is a subset of set "A", set "b" a subset of set "B", and if sets "A"
+and "B" are independent from one another, then "a" and "b" are also independent
+from one another.
+
+Put differently, any two subsets of two independent sets are also independent
+from one another.

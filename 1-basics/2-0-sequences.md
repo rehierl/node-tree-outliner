@@ -119,21 +119,32 @@ palindrome
 <!-- ======================================================================= -->
 ## infix, subsequence
 
+```
+t = [ t(1),     t(2),     ..., t(N-1),   t(N) ]     // default notation
+t = [ t(l),     t(l+1),   ..., t(l+k-2), t(l+k-1) ] // left-bound notation
+t = [ t(r-k+1), t(r-k+2), ..., t(r-1),   t(r) ]     // right-bound notation
+```
+
 left-bound <=> right-bound
 
 * (left-bound, offset-based notation)
   `t = [e(l),e(l+1),...,e(l+k-1)]`
-  for some `l in [1,N]` and `k in [1,(N-l)]` -
-  `l` is the left border,  offset `o = l` (letter).
+  for `l = 1` and `k in [1,(N-1)]` -
+  `l` is the (l)eft border,  (o)ffset `o = l`.
 * (right-bound notation)
-  `t = [e(r-k+1),...,e(r-k+i),...,e(r)]`
-  for some `r in [1,N]`, `k in [1,r]` and `i in [1,k]` -
-  `r` is the right border.
+  `t = [e(r-k+1),...,e(r-1),e(r)]`
+  for some `r = N` and `k in [1,N]` -
+  `r` is the (r)ight border.
+
+```
+s = [ s(1), s(2), ..., s(o), s(o+1), ..., s(o+n), s(o+n-1), ..., s(N) ]
+t = [                  t(1), t(2),   ..., t(n-1), t(n)                ]
+```
 
 sequence `t` is **an infix of** sequence `s`
 
-* `t infix-of s`, if `(s(o+j) = t(j))`
-  for `o in [1,N]`, `k in [1,(N-o)]` and `j in [1,k]`
+* `t infix-of s`, if `(s(o+j-1) = t(j))`
+  for `o in [1,N]`, `n in [1,(N-o+1)]` and `j in [1,n]`
 * `(t subsequence-of s) := (t infix-of s)`
 * signature - (sequence,sequence) -> boolean
 

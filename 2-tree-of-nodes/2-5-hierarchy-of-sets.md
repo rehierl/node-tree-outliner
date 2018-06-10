@@ -6,7 +6,7 @@
 sequence        node tree    (simplified)   set of nodes
 ============    =========    ============   =============
 
-<A>                 A             A         |-----------| <- S
+<A>                 A             A         |-----------| < S
   B                 |         =========     |     A     |
   <C> D </C>    =========     B   C   E     | ========= |
   E             |   |   |        ===        | B   C   E |
@@ -28,17 +28,17 @@ Note that this perspective of a tree does not focus on a tree's edges (E).
 ## The root's inner/outer set of nodes
 
 ```
-set of nodes             (extended)
-=============            =========================
+set of nodes            (extended)
+=============           =========================
 
-|-----------| <- S       |-----------------------| <- S1
-|     A     |            |  A                    |
-| ========= |            | |-------------| <- S2 |
-| B   C   E |            | | B    C    E |       |
-|    ===    |            | |     ===     |       |
-|     D     |            | |      D      |       |
-|-----------|            | |-------------|       |
-                         |-----------------------|
+|-----------| < S       |----------------------| < S1
+|     A     |           |  A                   |
+| ========= |           | |-------------| < S2 |
+| B   C   E |           | | B    C    E |      |
+|    ===    |           | |     ===     |      |
+|     D     |           | |      D      |      |
+|-----------|           | |-------------|      |
+                        |----------------------|
 ```
 
 Each rooted tree has exactly one most significant node, its root node (A).
@@ -120,16 +120,37 @@ Note the special case of an empty inner set of nodes. Also note that a node
 tree has a unique empty inner set for each of its leaf nodes. These empty
 sets can be identified via their defining leaf nodes.
 
-**CONCLUSION**
-Each node tree represents a hierarchy of sets of nodes.
+<!-- ======================================================================= -->
+## Equivalency between trees and hierarchies of sets
 
-Note that this hierarchy of sets of nodes is consistent with the mathematical
+```
+A hierarchy of sets           <=>   A tree of nodes
+===========================         ========================================
+
+ A                                       A                   <A>
+|-------------------------|         =============            | <B>
+|  B             C        |          B     H  C              | | D
+| |---------|   |-------| |         ======   ======          | | <E> G </E>
+| | D  E    |   |     F | |          D  E     I  F           | </B>
+| |   |---| |   |       | |   <=>      ===             <=>   | H
+| |   | G | | H | I     | |             G                    | <C>
+| |   |---| |   |       | |                                  | | I
+| |---------|   |-------| |                                  | | F
+|-------------------------|                                  | </C>
+                                                             </A>
+```
+
+**CONCLUSION**
+Each node tree represents a hierarchy of sets of elements, and
+each hierarchy of sets of elements represents a node tree.
+
+Note that these hierarchies of sets of elements are consistent with the
 definition of sets of elements. That is, none of these sets overlap: One set
 either is completely embedded into another set, or both sets have no nodes in
 common.
 
-Note that the sets of nodes of sibling nodes have no nodes in common. They are
-said to be independent from one another. The same applies to any two of sets
+Note that the sets of elements of sibling nodes have no nodes in common. They
+are said to be independent from one another. The same applies to any two sets
 that are located within (independent) sibling trees.
 
 **CONCLUSION**
