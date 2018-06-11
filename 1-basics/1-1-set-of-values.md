@@ -136,7 +136,7 @@ clarification
 <!-- ======================================================================= -->
 ## V strict-subset-of W
 
-* `(V strict-subset-of W) := (V subset-of W), but (V != W)`
+* `(V strict-subset-of W) := (V subset-of W) and (V != W)`
 * some `w in W` exists such that `w !in V`
 * `W` has at least one element more than `V` - i.e. `(#W > #V)`
 * synonymous - strict-subset, proper-subset, true-subset

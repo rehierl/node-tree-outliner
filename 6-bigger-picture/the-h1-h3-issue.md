@@ -174,6 +174,10 @@ if they need to deal with such redundancy, this aspect alone represents a reason
 not to choose option 4. (Note that this option would end up producing even more
 implicit sections for different, but similar fragments - e.g. h1-h6).
 
+Also note that, on a formal level, both sections ("B" and "C") would appear
+to be identical. That is, section "B" would be a subsection (that is, a subset
+or subsequence) of "C" and "C" a subsection of "B".
+
 Furthermore, option 4 represents a fragment that is in conflict with "a section
 should always have its own sectioning node". That is, there would no longer be
 a 1:1 relationship between the set of sectioning nodes and the set of sections.
@@ -190,7 +194,7 @@ rank values". That is, rank values were at no point defined to be absolute, but
 always as relative to one another.
 
 Unless there is irrefutable proof that option 3 will yield invalid results
-if additional aspects are taken into account, then option 3 is what WC must
+if further aspects are taken into account, then option 3 is what WC must
 choose. In addition to that, option 3 represents the common practice to
 generate a listing for such fragments. Consequently, option 4 would result
 in reinterpreting existing content.

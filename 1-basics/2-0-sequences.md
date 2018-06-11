@@ -144,7 +144,7 @@ t = [                  t(1), t(2),   ..., t(n-1), t(n)                ]
 sequence `t` is **an infix of** sequence `s`
 
 * `t infix-of s`, if `(s(o+j-1) = t(j))`
-  for `o in [1,N]`, `n in [1,(N-o+1)]` and `j in [1,n]`
+  for `o in [1,N]`, `n in [1,(N-o+1)]` and all `j in [1,n]`
 * `(t subsequence-of s) := (t infix-of s)`
 * signature - (sequence,sequence) -> boolean
 
