@@ -33,6 +33,10 @@ element of E. However, E can still be loosely said to contain D, if it is clear
 that the statement refers to the `subset-of` relationship.
 
 **CONCLUSION**
+Set A and B are said to be **independent** from one another,
+if both sets have no elements in common.
+
+**CONCLUSION**
 Set B is said to be **embedded** into set A,
 if B is a strict subset of A.
 
@@ -44,7 +48,7 @@ Note that neither of the two sets is embedded into the other. Set A therefore
 also overlaps set B. Both both sets can therefore be said to overlap each other.
 
 <!-- ======================================================================= -->
-## An equivalent visual definition
+## An equivalent visual representation
 
 ```
 A := { B, C, D, E, F, G, H }
@@ -99,13 +103,12 @@ Elements may belong to one or more sets of elements:
 * Element G belongs to set A, set B and set E.
 * Elements F and I belong to set A and set C.
 
-The relationships between those sets of elements:
+Some of the relationships between those sets are:
 
-* Set B is a subset of set A.
-* Set E is a subset of set B.
-* Set E is also a subset of set A.
-* Set C is a subset of set A.
-* Set B is not a subset of set C.
+* B is a subset of A.
+* E is a subset of A and B.
+* C is a subset of A.
+* B is independent of C.
 
 **CONCLUSION**
 A setup (i.e. a set of sets) is said to be consistent with the definition
@@ -168,8 +171,8 @@ Inconsistent: The borders of two or more sets cross each other.
 **CONCLUSION**
 With regards to a consistent setup, the following references may be used:
 
-* The next outer set (S2) of another set (S1) will be
-  referred to as the second set's (S1) parent set (S2).
+* The next outer set (S2) of a subset (S1) will be
+  referred to as the subset's (S1) parent set (S2).
 * The set to which another set is its parent set will be
   referred to as one of the parent set's child sets.
 * All inner sets of an outer set will be
@@ -181,20 +184,18 @@ With regards to a consistent setup, the following references may be used:
   referred to as a hierarchy of sets.
 * A set of sets that has more than one root set will be
   referred to as a forest of hierarchies.
-* Two sets that have no elements in common are said to be
-  independent from one another.
 
-Note that a root set is no subset to another set.
+Note that a root set is no subset to any other set.
 
 ```
  A
 |-------------------------|
 |  B             C        |
 | |---------|   |-------| |
-| | D  E    |   |     F | |
-| |   |---| |   |       | |
-| |   | G | | H | I     | |
-| |   |---| |   |       | |
+| | D  E    |   |  F    | |
+| |   |---| |   | |---| | |
+| |   | G | | H | | I | | |
+| |   |---| |   | |---| | |
 | |---------|   |-------| |
 |-------------------------|
 ```
@@ -206,9 +207,8 @@ Note that a root set is no subset to another set.
 * Sets B and C are independent from one another.
 
 **CONCLUSION**
-If set "a" is a subset of set "A", set "b" a subset of set "B", and if sets "A"
-and "B" are independent from one another, then "a" and "b" are also independent
-from one another.
+If set E is a subset of set B, set F a subset of set C, and if sets B and C are
+independent from one another, then E and F are also independent from one another.
 
 Put differently, any two subsets of two independent sets are also independent
 from one another.
