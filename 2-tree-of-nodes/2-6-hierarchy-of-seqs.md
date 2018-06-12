@@ -10,9 +10,9 @@ tag soup   node tree    node sequence
 </A>       ===
 ```
 
-If a document only has a single element, then the document's node tree only has
-that node as its root node. Because of that, the tree's node sequence has the
-tree's root node as its only element.
+If a document only has a single element, then the document's node tree only
+has that node as its root node. Because of that, the tree's node sequence has
+the tree's root node as its only element.
 
 ```
 tag soup   node tree    node sequence
@@ -104,30 +104,46 @@ The relationship between a node's inner and outer sequences:
 * There is no other distinct sequence in between S1 and S2.
 
 **CONCLUSION**
+The outer sequence of a node is unique to that node.
+No other node has the exact same outer sequence.
+
+They always differ in the defining node.
+
+**CONCLUSION**
+The inner sequence of a node is unique to that node.
+No other node has the exact same inner sequence.
+
+The reasoning is identical to the reasoning with regards to unique inner sets.
+that is, because the inner sequence of a node has the exact same elements as
+the inner set of that node.
+
+Note the special case of empty inner sequences of nodes.
+
+Note that the outer sequence of a node is identical to the inner sequence of
+its parent if, and only if, the node has no siblings.
+
+**CONCLUSION**
 Each node represents its inner and its outer sequence of nodes.
 
 One such sequence can be transformed into the other, if the defining node is
 added (or removed) to (or from) the beginning of the corresponding sequence.
 
-**CONCLUSION**
-Each node represents and contains all of its descendants.
-
 <!-- ======================================================================= -->
 ## Node trees as hierarchies of sequences
 
 ```
-tag soup        node tree           (inner) node sequences
+tag soup        node tree           outer sequences
 ========        ===============     =======================
 
-<A>              A                  [ A, B, C, D, E, F, G ] - NS
-  <B> C </B>    ===============         ==================  - A 
-  D              B   D   E   G             ===      ===     - B, E
-  <E> F </E>    ===     ===
+<A>              A                  A B C D E F G - NS
+  <B> C </B>    ===============     ============= - A 
+  D              B   D   E   G        === = === = - B, D, E, G
+  <E> F </E>    ===     ===             =     =   - C, F
   G              C       F
 </A>
 ```
 
-The hierarchy of all inner node sequences is:
+The hierarchy of all inner sequences is:
 
 ```
    |------------------------------------------|
@@ -164,34 +180,35 @@ sequences can be identified via their defining leaf node.
 ## Equivalency between trees and hierarchies of sequences
 
 ```
-A node tree                                A hierarchy of sequences
-====================================       ============================
+tag soup           node tree             outer sequences
+===============    =================     ============================
 
- <A>                   A                   A B D E G H C I F - NS
-   <B>             =================         =============== - A
-     D              B      H   C               =====     === - B, C
-     <E> G </E>    ======     ======               =         - E
-   </B>             D  E       I  F        
-   H                  ===                  
-   <C>                 G                   
-     I                                     
-     F                                     
-   </C>                                    
+ <A>                   A                 A B D E G H C I F - NS
+   <B>             =================     ================= - A
+     D              B      H   C           ======= = ===== - B, H, C
+     <E> G </E>    ======     ======         = ===     = = - D, E, I, F
+   </B>             D  E       I  F              =         - G
+   H                  ===
+   <C>                 G
+     I
+     F
+   </C>
  </A>
 ```
 
 **CONCLUSION**
 Each rooted ordered tree of nodes represents a hierarchy of sequences,
-and each hierarchy of sequences a rooted ordered node tree.
+and each hierarchy of sequences a rooted ordered tree of nodes.
 
 Note that these hierarchies of sequences are consistent with the definition of
 subsequences of elements. That is, none of these sequences overlap: One sequence
-either is embedded into another sequences, or both sequences share no nodes.
+either is embedded into another sequence, or both sequences have no nodes in
+common.
 
 Note that the sequences of sibling nodes have no nodes in common. They are said
 to be independent from one another. The same applies to any two sequences that
 are located within (independent) sibling trees.
 
 **CONCLUSION**
-A tree's hierarchy of sequences of a rooted ordered tree of nodes will be
+The hierarchy of sequences of a rooted ordered tree of nodes will be
 referred to as the tree's "sequence-based perspective".

@@ -5,7 +5,7 @@
 Just a listing of commits which I have uploaded to github.
 Any other commit was a private (i.e. non-public) commit.
 
-* 2018-06-11 - commit ******* - hierarchies of sets/sequences
+* 2018-06-11 - commit 1dcbe9a - hierarchies of sets/sequences
 * 2018-05-22 - commit 586ca80 - minor intermediate commits
 * 2018-04-20 - commit 3c1e18f - the bigger picture
 * 2018-04-04 - commit 1740f4f - roles: sectioning-node, end-marker-node

@@ -28,6 +28,8 @@ conclusions
 - sections either have no nodes in common (e.g. sections B and C),
   or one section is embedded within the other (e.g. sections B into A)
 - a section is a subset of another section, if it is embedded into it
+- the tree of sections must be consistent with the node tree's
+  hierarchy of sets/sequences- why?
 
 **TODO**
 the tree of sections will have identical structure to the initial node tree,
@@ -35,14 +37,17 @@ if each node of the node tree is understood to represent a rank-less type-1
 sectioning node.
 
 **TODO**
-closing a section when the next heading was about to be entered did work for
-as long as our documents were flat. however, it no longer works because our
-documents are no longer flat (we now use node trees).
+closing a section when the next heading was about to be entered did work
+for as long as our documents were flat. however, it no longer works because
+our documents are no longer flat (we now use node trees). - closing a section
+when the next heading is entered may be in conflict with a node tree's
+hierarchy of sets/sequences. some sections must be closed before the next
+heading is entered.
 
 **TODO**
 one node tree may have multiple different outlines at the same time -
 read the "red", or the "blue" outline -
-but also a hierarchical listing of outline -
+but may also have a hierarchical listing of outlines -
 i.e. a tree of outlines within a document -
 
 **TODO**

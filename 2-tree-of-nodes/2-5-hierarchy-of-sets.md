@@ -27,7 +27,7 @@ Note that this perspective does not focus on the edges (E) of a tree.
 ## The root's inner/outer set of nodes
 
 ```
-set of nodes            (extended)
+set of nodes            inner and outer sets of A
 =============           =========================
 
 |-----------| < S       |----------------------| < S1
@@ -73,30 +73,59 @@ The relationship between a node's inner and outer sets:
 * There is no other distinct set in between S1 and S2.
 
 **CONCLUSION**
+The outer set of a node is unique to that node.
+No other node has the exact same outer set.
+
+That is, because these sets always differ in the defining node.
+
+**CONCLUSION**
+The inner set of a node is unique to that node.
+No other node has the exact same inner set.
+
+If two nodes `n1` and `n2` are independent from one another (i.e. none of those
+is an ancestor of the other, then the inner sets of both nodes have no nodes in
+common. That is, they have completely different descendants.
+
+If node `n1` is an ancestor of `n2`, then `n1`'s inner set of nodes contains
+`n2`. Because of that, both inner sets are different because `n2`'s inner set
+does not contain `n2`. To be more accurate, the inner set of an ancestor always
+has more elements than the inner set of a descendant.
+
+Note the special case of empty inner sets of nodes. However, a node tree could
+be considered to have unique empty inner sets for each of its leaf nodes. These
+empty sets could be identified via the defining leaf nodes.
+
+Note that the outer set of a node is identical to the inner set of its parent
+if, and only if, the node has no siblings.
+
+**CONCLUSION**
 Each node represents its inner and its outer set of nodes.
 
 One such set can be transformed into the other, if the defining node is added
 (or removed) to (or from) the corresponding set.
 
 **CONCLUSION**
-Each node represents and contains all of its descendants.
+Each node can be said to contain all of its descendants.
+
+That is, because each node represents its inner set of nodes. Put differently,
+the subtree a node defines contains all of the node's descendants.
 
 <!-- ======================================================================= -->
 ## Node trees as hierarchies of sets
 
 ```
-set of nodes        (extended)          (complete)
-===============     ===============     ============================
+node tree           all inner sets
+===============     ========================
 
- A                   A                   A
-|-------------|     |-------------|     |--------------------------|
-| B    C    E |     | B   C     E |     |  B     C        |  E   | |
-|     ===     |     |    |---|    |     | |--|  |------|  | |--| | |
-|      D      |     |    | D |    |     | |--|  |  D   |  | |--| | |
-|-------------|     |    |---|    |     |       | |--| |  |------| |
-                    |-------------|     |       | |--| |           |
-                                        |       |------|           |
-                                        |--------------------------|
+       A             A
+ =============      |----------------------|
+  B    C    E       |  B     C         E   |
+      ===           | |--|  |------|  |--| |
+       D            | |--|  |  D   |  |--| |
+                    |       | |--| |       |
+                    |       | |--| |       |
+                    |       |------|       |
+                    |----------------------|
 ```
 
 * The outer set of a child is a subset of the inner set of its parent.
@@ -112,19 +141,13 @@ and as such also an element of an ancestor's set.
 
 * The inner set of a node is the union of the outer sets of its child nodes.
 * The inner set of a node is the union of all of the sets of its descendants.
-* The outer set of a child is identical to the inner set of its parent if,
-  and only if, the parent has no other child.
-
-Note the special case of an empty inner set of nodes. Also note that a node
-tree has a unique empty inner set for each of its leaf nodes. These empty
-sets can be identified via their defining leaf nodes.
 
 <!-- ======================================================================= -->
 ## Equivalency between trees and hierarchies of sets
 
 ```
-A node tree                                A hierarchy of sets
-====================================       ============================
+tag soup           node tree               all non-empty inner sets
+===============    =================       ============================
 
  <A>                   A                    A
    <B>             =================       |--------------------------|
