@@ -8,8 +8,9 @@ of a node tree can be classified depending on certain characteristics - such as:
 
 * When is a node visited in relation to its child nodes? -
   e.g. depth-first search (DFS), breadth-first search (BFS)
-* In which order are the child nodes visited? - e.g. left-to-right (LTR)
-  (aka. first-to-last (FTL)), right-to-left (RTL) (aka. last-to-first (LTF))
+* In which order are the child nodes visited? -
+  left-to-right (LTR) (aka. first-to-last (FTL)) or
+  right-to-left (RTL) (aka. last-to-first (LTF))
 
 <!-- ======================================================================= -->
 ## depth-first search (DFS)
@@ -33,8 +34,9 @@ traversePreOrder(node) begin
 end
 ```
 
-The `visitPreOrder()` operation marks the beginning of processing a node.
-This operation represents a node's enter event.
+The `visitPreOrder()` operation marks the beginning of processing a node. This
+operation represents a node's enter event which corresponds with a node's start
+tag.
 
 **FTL, DFS, Post-order tree traversal**
 
@@ -49,8 +51,9 @@ traversePostOrder(node) begin
 end
 ```
 
-The `visitPostOrder()` operation marks the end of processing a node.
-This operation represents a node's exit event.
+The `visitPostOrder()` operation marks the end of processing a node. This
+operation represents a node's exit event which corresponds with a node's end
+tag.
 
 **FTL, DFS, In-order**
 
@@ -63,10 +66,15 @@ end
 ```
 
 The in-order tree traversal of a binary tree is a strict tree traversal because
-each node is visited exactly once. Traversing a non-binary tree, which allows
-more than two child nodes per node (the DOM tree is such a generic tree), via
-in-order tree traversal would have to execute the visit operation multiple
-times per node:
+each node is visited exactly once.
+
+Traversing a non-binary tree, which allows more than two child nodes per node
+(the DOM tree is such a generic tree) via an in-order tree traversal, has the
+difficulty of generically defining when to visit each node independently of its
+inner structure.
+
+One way of solving this issue would be to execute a node's visit operation(s)
+once per child node:
 
 ```
 traverseInOrder(node) begin
@@ -82,7 +90,7 @@ end
 
 It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`,
 or even both are used. Both will be executed multiple times per node. Because of
-that, an in-order tree traversal of a generic tree is no strict tree traversal.
+that, the in-order tree traversal of a generic tree is no strict tree traversal.
 
 <!-- ======================================================================= -->
 ## breadth-first (BFS) search
@@ -94,8 +102,9 @@ of a tree are visited one level at a time.
 
 ```
 //- visit the nodes in a given range of (relative) levels
-//- node.level in [1,+Infinity] returns a node's (absolute) level
-//- the root node of a tree has a level value of 1
+//- node.level in [1,+Inf] returns a node's (absolute) node level
+//- the root node of a tree has a node level value of 1
+//- first visit all nodes at level n, then those at level n+1, etc.
 
 traverseBFS(root, min, max) begin
   assert((1 <= min) && (min <= max))
@@ -152,13 +161,13 @@ When a node is entered, an algorithm might have to:
 
 * end outer sections
 * associate the node being entered with a section
-* suspend outer sections
+* "suspend" outer sections
 * create and initialize a new inner section
 
 When a node is exited, an algorithm might have to:
 
 * end inner sections
-* reactivate a suspended outer section, or
+* reactivate a "suspended" outer section, or
 * create and initialize a new outer section
 
 Which operations need to be executed while an event is being executed, must

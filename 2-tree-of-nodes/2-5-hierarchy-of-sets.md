@@ -3,16 +3,16 @@
 # A set-based perspective
 
 ```
-tag soup        node tree    (simplified)   set of nodes
-============    =========    ============   =============
+tag soup        node tree    (simplified)    set of nodes
+============    =========    ============    =================
 
-<A>                 A             A         |-----------| < S
-  B                 |         =========     |     A     |
-  <C> D </C>    =========     B   C   E     | ========= |
-  E             |   |   |        ===        | B   C   E |
-</A>            B   C   E         D         |    ===    |
-                    |                       |     D     |
-                    D                       |-----------|
+<A>                 A             A          |-----------| < S
+  B                 |         =========      |     A     |
+  <C> D </C>    =========     B   C   E      | ========= |
+  E             |   |   |        ===         | B   C   E |
+</A>            B   C   E         D          |    ===    |
+                    |                        |     D     |
+                    D                        |-----------|
 ```
 
 Note the box (S) that surrounds all the nodes within the node tree,
@@ -27,17 +27,17 @@ Note that this perspective does not focus on the edges (E) of a tree.
 ## The root's inner/outer set of nodes
 
 ```
-set of nodes            inner and outer sets of A
-=============           =========================
+set of nodes         inner and outer sets of A
+=================    =============================
 
-|-----------| < S       |----------------------| < S1
-|     A     |           |  A                   |
-| ========= |           | |-------------| < S2 |
-| B   C   E |           | | B    C    E |      |
-|    ===    |           | |     ===     |      |
-|     D     |           | |      D      |      |
-|-----------|           | |-------------|      |
-                        |----------------------|
+|-----------| < S    |----------------------| < S1
+|     A     |        |  A                   |
+| ========= |        | |-------------| < S2 |
+| B   C   E |        | | B    C    E |      |
+|    ===    |        | |     ===     |      |
+|     D     |        | |      D      |      |
+|-----------|        | |-------------|      |
+                     |----------------------|
 ```
 
 Each rooted tree has exactly one most significant node, its root node (A).
@@ -114,18 +114,18 @@ the subtree a node defines contains all of the node's descendants.
 ## Node trees as hierarchies of sets
 
 ```
-node tree           all inner sets
-===============     ========================
+node tree        all inner sets
+=============    ========================
 
-       A             A
- =============      |----------------------|
-  B    C    E       |  B     C         E   |
-      ===           | |--|  |------|  |--| |
-       D            | |--|  |  D   |  |--| |
-                    |       | |--| |       |
-                    |       | |--| |       |
-                    |       |------|       |
-                    |----------------------|
+      A           A
+=============    |----------------------|
+ B    C    E     |  B     C         E   |
+     ===         | |--|  |------|  |--| |
+      D          | |--|  |  D   |  |--| |
+                 |       | |--| |       |
+                 |       | |--| |       |
+                 |       |------|       |
+                 |----------------------|
 ```
 
 * The outer set of a child is a subset of the inner set of its parent.
@@ -146,20 +146,20 @@ and as such also an element of an ancestor's set.
 ## Equivalency between trees and hierarchies of sets
 
 ```
-tag soup           node tree               all non-empty inner sets
-===============    =================       ============================
+tag soup          node tree            all non-empty inner sets
+==============    =================    ============================
 
- <A>                   A                    A
-   <B>             =================       |--------------------------|
-     D              B      H   C           |  B            H   C      |
-     <E> G </E>    ======     ======       | |----------|     |-----| |
-   </B>             D  E       I  F        | | D   E    |     | I F | |
-   H                  ===                  | |    |---| |     |-----| |
-   <C>                 G                   | |    | G | |             |
-     I                                     | |    |---| |             |
-     F                                     | |----------|             |
-   </C>                                    |--------------------------|
- </A>
+<A>                A                    A
+  <B>             =================    |--------------------------|
+    D              B      H   C        |  B            H   C      |
+    <E> G </E>    ======     ======    | |----------|     |-----| |
+  </B>             D  E       I  F     | | D   E    |     | I F | |
+  H                  ===               | |    |---| |     |-----| |
+  <C>                 G                | |    | G | |             |
+    I                                  | |    |---| |             |
+    F                                  | |----------|             |
+  </C>                                 |--------------------------|
+</A>
 ```
 
 **CONCLUSION**

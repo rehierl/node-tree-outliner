@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # The node sequence of a node tree
 
-The tree traversal fragment can be used to produce a sequence of nodes (i.e.
-a traversal trace) that contains the nodes of the tree in the order in which
-these nodes are entered:
+The tree traversal fragment can be used to produce a sequence of nodes
+(i.e. a traversal's trace of nodes) which contains the nodes of the tree
+being traversed in the order in which these were visited:
 
 ```
 nodeSequenceOf(root) begin
@@ -41,7 +41,7 @@ through the tree when entering each node.
 * the root node will always be the first node in this node sequence
 
 **Memory hook**
-The start tags of an HTML file have the exact same order.
+The node sequence of a tree corresponds with the order of start tags.
 
 <!-- ======================================================================= -->
 ## Subsequent nodes
@@ -58,7 +58,7 @@ end
 
 //- distanceBetween(n1, n2) := (indexOf(n2) - indexOf(n1))
 //- the result is negative, if n2 appears before n1
-//- the result is in [0,+Infinity] for any other pair of nodes
+//- the result is in [0,+Inf] for any other pair of nodes
 
 distanceBetween(sequence, n1, n2) begin
   i1 = indexOf(sequence, n1)
@@ -67,15 +67,15 @@ distanceBetween(sequence, n1, n2) begin
 end
 
 isSubsequentTo(sequence, n1, n2) begin
-  return (distanceBetween(sequence, n1, n2) >= 1)
+  return (distanceBetween(sequence, n1, n2) >= +1)
 end
 
 isStrictlySubsequentTo(sequence, n1, n2) begin
-  return (distanceBetween(sequence, n1, n2) == 1)
+  return (distanceBetween(sequence, n1, n2) == +1)
 end
 
 isLooselySubsequentTo(sequence, n1, n2) begin
-  return (distanceBetween(sequence, n1, n2) > 1)
+  return (distanceBetween(sequence, n1, n2) > +1)
 end
 ```
 
@@ -89,8 +89,9 @@ binary relation are:
 
 This relationship can be used to define a binary relation:
 
+* relation `R`, graph `G`, set of nodes `N`, edge `e`
 * `R := (N,N,G)` and `G in NxN`
-* where `(a,b) in G`, if `a` is subsequent to `b`
+* where `e := (a,b) in G`, if `a` is subsequent to `b`
 * `sem(R)` := "subsequent-to"
 
 Node `y` is **strictly subsequent to** `x`, if `y` appears directly after `x`
@@ -206,16 +207,16 @@ isLooselySubsequentTo(seq, n1, s2)
 * the non-empty sequence `s1` is a sequence of subsequent nodes
 * `n1` does itself not belong to `s1`
 
-A sequence `s1` is **a sequence that is subsequent to a node** `n1`,
-if the first node of that sequence is subsequent to that node
+The non-empty sequence `s1` is **a sequence that is subsequent to a node** `n1`,
+if the first node of `s1` is subsequent to `n1`
 (i.e. `(n1 < s1[0])` or simply `(n1 < s1)`).
 
-A sequence `s1` is **a sequence that is strictly subsequent to a node** `n1`,
-if the first node of that sequence is strictly subsequent to that node
+The non-empty sequence `s1` is **a sequence that is strictly subsequent to a
+node** `n1`, if the first node of `s1` is strictly subsequent to `n1`
 (i.e. `(n1 << s1[0])` or simply `(n1 << s1)`).
 
-A sequence `s1` is **a sequence that is loosely subsequent to a node** `n2`,
-if the first node of that sequence is loosely subsequent to that node
+The non-empty sequence `s1` is **a sequence that is loosely subsequent to a
+node** `n2`, if the first node of `s1` is loosely subsequent to `n1`
 (i.e. if there are one or more nodes in between).
 
 A sequence that is strictly subsequent to a node is also subsequent to it. In
@@ -224,6 +225,11 @@ strictly subsequent to it (there may one or more nodes in between).
 
 * strictly subsequent -> subsequent
 * subsequent !> strictly subsequent
+
+Note that these statements are not possible, if the corresponding sequence
+has no first node. In order to allow to make such statements, additional
+information would be required (e.g. with regards to the node that defines
+the empty sequence).
 
 <!-- ======================================================================= -->
 ## Sequences subsequent to a sequence
@@ -254,6 +260,11 @@ isLooselyRightSubsequentTo(ns, s1, s2)
 * `s2` begins after `s1` has ended, if `s2` is right subsequent to `s1`
 * "left" is the default perspective - i.e. in that context,
   "strictly subsequent" is equivalent to "strictly left subsequent"
+
+Note that, as before, the involved sequences have to be non-empty sequences.
+In order to allow similar statements with regards to empty sequences, further
+information would have to be included (e.g. with regards to the defining nodes
+of the corresponding sequences).
 
 ### left subsequent
 
@@ -294,5 +305,5 @@ to a sequence** `s1`, if `s2` is loosely subsequent to the last node of `s1`
   begins and may even end inside of it
 * a sequence that is right subsequent to another sequence
   is also left subsequent to it
-* a sequence right subsequent to another sequence
-  may even be strictly left subsequent to it
+* a sequence `s2` that is strictly right subsequent to sequence `s1` is
+  also strictly left subsequent to `s1` if, and only if, `(#s1 == +1)`

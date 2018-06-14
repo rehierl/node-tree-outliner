@@ -2,8 +2,9 @@
 <!-- ======================================================================= -->
 # Path sequence
 
-The tree traversal fragment can be used to produce a sequence of paths. This
-sequence contains the rooted path of each node in the order of the node sequence:
+The tree traversal fragment can be used to produce a sequence of paths.
+This sequence contains the rooted path of each node in the order of the
+node sequence:
 
 ```
 pathOf(node, sequence) begin
@@ -46,7 +47,7 @@ end
 ```
 
 The sequence of paths generated this way is referred to as
-**the path sequence of** a given root.
+**the path sequence of** a given root/tree.
 
 * the tree's path sequence := `pathSequenceOf(root)`
 * the root node will be the first node in each path - i.e. `(p(1) == r)`
@@ -60,8 +61,8 @@ The definitions for elements of such sequences also apply to these paths.
 
 The path sequence can also be defined by the corresponding node sequence:
 
-* `PS := (p1,...,pn)` where `pi := pathOf(ni)` for `ni in NS`
 * path sequence `PS`, node sequence `NS`
+* `PS := (p1,...,pn)` where `pi := pathOf(ni)` for `ni in NS`
 
 <!-- ======================================================================= -->
 ## the (rooted) path of a node

@@ -16,7 +16,7 @@ Any definition based on sequences also apply to paths:
 * `t suffix-of s`, `u suffix-of s,t`
 * (strictly|loosely)? pre-, sub-, in-sequent entries
 
-In general, paths `p1` and `p2` are not necessarily identical if they share
+Note that paths `p1` and `p2` are not necessarily identical if they share
 a common prefix and a common suffix: `p1=(p1,...,pA,i1,...,iB,s1,...,sC)`, 
 `p2=(p1,...,pA,j1,...,jD,s1,...,sC)` for `B and D in [0,+Infinity)`.
 They might still differ in an infix (i.e. `(B > 0)` and/or `(D > 0)`).
@@ -29,7 +29,7 @@ such that `ni parent-of ni+1` for `i in [1,#p-1]`.
 
 * `p` is a top-down/downwards oriented path
 * `ni` is an ancestor of `ni+j`, and `ni+j` is a descendant of `ni`
-* `TD` represents the set of all possible top-down paths
+* `TD` - represents the set of all possible top-down paths
 * `RD` - any such path that begins in a root (`n1 in R`), i.e. any rooted path
 * `TL` - any such path that ends in a leaf (`nk in L`)
 * `RL` or `RTL` - any such path that begins in a root and ends in a leaf
@@ -40,7 +40,7 @@ such that `ni child-of ni+1` for `i in [1,#p-1]`.
 
 * `p` is a bottom-up/upwards oriented path
 * `ni` is a descendant of `ni+j`, and `ni+j` is an ancestor of `ni`
-* `BU` represents the set of all possible bottom-up paths
+* `BU` - represents the set of all possible bottom-up paths
 * `BR` - any such path that ends in a root (`nk in R`)
 * `LU` - any such path that begins in a leaf (`n1 in L`)
 * `LR` or `LTR` - any such path that beings in a leaf and ends in a root
@@ -48,7 +48,9 @@ such that `ni child-of ni+1` for `i in [1,#p-1]`.
 
 clarification
 
-* `E in TD`, but `E not in BU`
+* `(p,c) in E in TD`, but `E not in BU`
+* the edges of a tree are top-down paths
+* i.e. `p parent-of c`, not `p child-of c`
 
 Any such path has one direction only!
 
@@ -58,18 +60,18 @@ Any such path has one direction only!
 * no `p in BU` has a pair of nodes `(ni, ni+1)` such that
   `ni parent-of ni+1`, or `ni ancestor-of ni+j`
 
-A path upon relation x
+A path based upon relation x
 
-* any path `p in TD` is said to be a path upon the `parent-of` relation
-* any path `p in BU` is said to be a path upon the `child-of` relation
-* one can also state "a path upon `E` (or `E'`)"
+* any path `p in TD` is said to be a path based upon the `parent-of` relation
+* any path `p in BU` is said to be a path based upon the `child-of` relation
+* one could also state "a path based upon `E` (or `E'`)"
 
 <!-- ======================================================================= -->
 ## loops, cycles
 
 * a path `p in TD` has loops, if `(p(i) == p(i+1))`
 * a path `p in TD` has cycles, if `(p(i) == p(j))` for some `i,j in [1,#p]`
-* i.e. a cyclic path may contain loops
+* i.e. a cyclic path may have loops
 
 clarification
 
@@ -83,7 +85,7 @@ clarification
 * `n1` is strictly related to `nk`,
   if `p=(n1,nk) in TD or BU`
 * `n1` is loosely related to `nk`,
-  if `p=(n1,...,nk) in TD or BU` and `k in [3,*)`
+  if `p=(n1,...,nk) in TD or BU` and `#p in [3,*)`
 * `n1` is related to `nk`, if `n1` is strictly or loosely related to `nk`
 * synonymous - related to, connected with, in relationship with, coupled with
 
@@ -106,7 +108,7 @@ away from the root, i.e. downwards
 towards the root, i.e. upwards
 
 * any path `p in BU` points upwards
-* `n1` is located inside `nk`, if `p=(n1,...,nk) in BU`
+* `n1` is located inside of `nk`, if `p=(n1,...,nk) in BU`
 * synonymous - located inside of, is descendant of
 
 <!-- ======================================================================= -->
