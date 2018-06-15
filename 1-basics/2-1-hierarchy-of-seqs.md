@@ -16,17 +16,14 @@ t = [                  t(1), t(2),   ..., t(n-1), t(n)                ]
 Note that there may be one or more offsets at which `t`'s pattern can be
 found within `s`. That is, `t` may be embedded into `s` several times.
 
-Note that `t` is said to be an infix of `s`, if `t` is a subsequence of `s`.
-
 Note that `t`'s offset (o) within `s` may be `1`. In that case, both sequences
-begin with the same element (i.e. `t` is said to be a prefix of `s`).
-
-Note that `t`'s offset may be such that `t` and `s` both sequences end with
-the same element (i.e. `t` is a suffix of `s`).
+begin with the same element (i.e. `t` is a prefix of `s`). Likewise, `t`'s
+offset may be such that `t` and `s` both end with the same element (i.e. `t`
+is a suffix of `s`).
 
 Note that, if `t` is a subsequence of `s`, then `s` may also be a subsequence of
-`t` (if both sequences are identical). However, if `t` is a strict subsequence
-of `s`, then `s` can not be a (strict) subsequence of `t` at the same time.
+`t` (i.e. both are identical). However, if `t` is a strict subsequence of `s`,
+then `s` can not also be a (strict) subsequence of `t`.
 
 ```
 s = [ 0, 0, 1, 1, 1, 4, 3, 2, 6, 7 ]
@@ -36,9 +33,9 @@ u = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
 * `s,t,u` all are sequences of elements/values
 * `a = [3, 2]` is a subsequence of `s` and `t`
-* `s,t` only share pattern `a = [3, 2]`
-* `t,u` only share pattern `b = [4, 5]`
-* `s,u` only share pattern `c = [6, 7]`
+* `s,t` only share the pattern `a = [3, 2]`
+* `t,u` only share the pattern `b = [4, 5]`
+* `s,u` only share the pattern `c = [6, 7]`
 * all sequences are different from one another
 * no sequence is a subsequence of another sequence
 
@@ -48,17 +45,17 @@ u = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 ```
 
 * sequences `t` and `u` contain no element more than once
-* `t` and `u` can be understood to represent **sets of values**
+* `t` and `u` can be said to represent **sets of values**
 * all of their values have an implicit order - e.g. `(2 < 3)`
-* `t` and `u` can be understood to represent **ordered sets of values**
-* that is regardless of where each value is located
+* `t` and `u` can be said to represent **ordered sets of values**
+* that is regardless of where each value is located within a sequence
 
 ```
 u = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 ```
 
 * the indices of each element within `u` corresponds with the order of elements
-* that is, `(u[i] < u[j])` if `(i < j)`
+* that is, if `(i < j)`, then also `(u[i] < u[j])`
 
 Note that sequences which represent ordered sets of elements/values *and* in
 which the positions of its elements correspond with the order of elements, are
@@ -74,7 +71,7 @@ e = [ 2, 4 ]
 ```
 
 * Sequence `a` is a strict subsequence of `b`.
-* Sequence `b` does not (strictly) contain `a` (as an element).
+* Sequence `b` does not contain `a`, but sequence `c` does.
 * Sequence `b` is not a subsequence of `c`, and `c` not a subsequence of `b`.
 
 Similar to sets of elements/values, from a strict perspective `b` does not
@@ -82,34 +79,43 @@ contain `a` because `a` is not an element of `b`. However, `b` may still be
 loosely said to contain `a`, if it is clear that the statement refers to the
 `subsequence-of` relationship.
 
-**CONCLUSION**
+**CLARIFICATION**
 Two sequences are said to be **independent** from one another,
-if these sequences don't share a common pattern.
+if both have no pattern in common.
 
-**CONCLUSION**
-Sequence `a` is said to be **embedded** into `b`,
-if `a` is a strict subsequence of `b`.
+Note that this includes not having even one element in common. That is, because
+an element can be understood to represent a pattern of length `1`.
 
-**CONCLUSION**
-Sequence `d` is said to **overlap** `b`, if both share a common pattern and if
-both sequences contain patterns that the other sequence does not have.
+**CLARIFICATION**
+Sequence `a` is said to be **embedded** into `b`.
+
+Which is because `a` is a strict subsequence of `b`.
+
+**CLARIFICATION**
+Sequence `d` is said to **overlap** `b`.
+
+Which is because both share a common pattern, and because both have one or more
+patterns that the other sequence does not have.
 
 Note that neither of the two sequences is embedded into the other. Sequence `b`
-therefore also overlaps `d`. Both sequences can therefore be said to overlap
+therefore also overlaps `d`, which is why both sequences can be said to overlap
 each other.
 
-In addition to that, and due to the order of the elements, `b` can be said to
-reach into `d` and `d` can be said to reach out of `b`.
+In addition to that, and due to the order of the elements,
+`b` is said to reach into `d`, and `d` to reach out of `b`.
 
-**CONCLUSION**
+Also note that `b` ends with a prefix of `d`, and `d` begins with a suffix of
+`b`. That is, a suffix of one sequence is a prefix of the other.
+
+**CLARIFICATION**
 Sequence `d` is said to be **continuous** with regards to `u` as it is a
-subsequence of `u`. In contrary to that, `4` is said to have a **gap** with
-regards to `u` as it does not contain `3`. As such, `e` isn't a subsequence
+subsequence of `u`. In contrary to that, `e` is said to have a **gap** with
+regards to `u` as it does not contain `3`. As such, `e` is no subsequence
 of `u`. That is, in order to be continuous, a sequence must contain all
 available elements within a given **range**.
 
 <!-- ======================================================================= -->
-## Equivalent visual representations
+## Visual representations
 
 ```
 s = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
@@ -143,6 +149,13 @@ An even more compact representation is:
     ===   =====     - u,v
 ```
 
+Note that the left-to-right order of identifiers corresponds with the order
+of sequence definitions: The range of sequence `t` begins with `1` and ends
+with `6`.
+
+Note that the last visual representation only allows to accurately represent
+non-empty sequences.
+
 <!-- ======================================================================= -->
 ## A consistent setup
 
@@ -158,7 +171,7 @@ An even more compact representation is:
 * Sequence `u` contains the elements `2` and `3`.
 * Sequence `v` contains the elements `5` and `6`.
 
-Elements may belong to one or more sequences:
+Elements may belong to more than one sequence:
 
 * Elements `1` and `4` belong to `s` and `t`.
 * Elements `8` and `9` belong to `s` and `w`.
@@ -167,11 +180,11 @@ Elements may belong to one or more sequences:
 
 Some of the relationships between those sequences are:
 
-* `t` and `w` are subsequences of `s`.
-* `u,v` are subsequences of `s` and `t`.
+* `t` and `w` both are subsequences of `s`.
+* `u` and `v` both are subsequences of `s` and `t`.
 * `u` is independent of `v` and `w`.
 
-**CONCLUSION**
+**CLARIFICATION**
 A setup (i.e. a set of sequences) is said to be consistent with the definition
 of the `subsequence-of` operator, if the following is true: If two sequences
 have one or more patterns in common, then one sequence is a subsequence of
@@ -181,6 +194,8 @@ Note that this kind of consistency does not require that for each sequence (S1)
 another sequence (S2) exists with which the first set (S1) has any pattern in
 common. A sequence may exist that does not share any elements/patterns with any
 other sequence (hint: a forest).
+
+Note that such a setup does not have two sequences that overlap each other.
 
 **Memory hook**
 Consistent: None of the borders of any two of the sequences cross each other.
@@ -207,35 +222,37 @@ Inconsistency 2
 * Sequence `v` is not a subsequence of `u`.
 * Sequence `v` contains `8`, but `u` does not.
 
-**CONCLUSION**
+**CLARIFICATION**
 A setup is said to be inconsistent with the definition of the `subsequence-of`
 operator, if the following is true: Two sequences exist that have one or more
 elements in common, but none of those two is a subsequence of the other.
 
+Note that such a setup has at least two sequences that overlap each other.
+
 **Memory hook**
-Sequences must be continuous and must not overlap each other.
+Consistent: Sequences must be continuous and must not overlap each other.
 
 <!-- ======================================================================= -->
 ## derived statements
 
-**CONCLUSION**
+**CLARIFICATION**
 With regards to a consistent setup, the following references may be used:
 
-* The next outer sequence (S2) of a subsequence (S1) will be
-  referred to as the subsequence's (S1) parent sequence (S2).
-* The sequence to which another sequence is its parent sequence
-  will be referred to as one of the parent sequence's child sequence.
-* All inner sequences of an outer sequence will be referred
-  to as the outer sequence's inner or descendant sequences.
-* All sequences to which a sequence is a descendant sequence will
-  be referred to as the sequence's outer or ancestor sequences.
-* A sequence that has no outer sequence will be referred to as a root sequence.
-* A set of sequences that has no more than one root sequence will be
-  referred to as a hierarchy of sequences.
-* A set of sequences that has more than one root sequence will be
-  referred to as a forest of sequences.
+* The next outer sequence (S2) of a subsequence (S1)
+  is said to be the subsequence's (S1) parent sequence (S2).
+* The sequence, to which another sequence is its parent sequence,
+  is said to be one of the parent sequence's child sequences.
+* All the subsequences of a sequence
+  are said to be the sequence's inner or descendant sequences.
+* A sequence to which another sequence is a descendant sequence
+  is said to be one of the sequence's outer or ancestor sequences.
+* A sequence that has no outer sequence is said to be a root sequence.
+* A set of sequences that has no more than one root sequence
+  is said to be a hierarchy of sequences.
+* A set of sequences that has more than one root sequence
+  is said to be a forest of hierarchies.
 
-Note that a root sequence is no subsequence to any other sequence.
+Note that a root sequence is no subsequence of any other sequence.
 
 ```
 |s-------------------------------------------------|
@@ -247,16 +264,16 @@ Note that a root sequence is no subsequence to any other sequence.
 |--------------------------------------------------|
 ```
 
-* Root sequence `s` is the parent sequence of `t` and `w`.
+* Root sequence `s` is the parent sequence of sequences `t` and `w`.
 * Sequence `t` is the parent sequence of `u` and `v`.
 * Sequences `s` and `t` are both outer or ancestor sequences of `u` and `v`.
 * Sequences `u` and `v` are both inner or descendant sequences of `s` and `t`.
-* Sequences `u`, `v` and `w` are all independent from one another.
+* Sequences `u`, `v` and `w` are independent from one another.
 
-**CONCLUSION**
-If sequence `u` is a subsequence of `t`, sequence `x` a subsequence of `w`,
-and if sequences `t` and `w` are independent from one another, then `u` and `x`
+**CLARIFICATION**
+If sequence `u` is a subsequence of `t`, sequence `x` a subsequence of `w`, and
+if sequences `t` and `w` are independent from one another, then both sequences
+(`u` and `x`) are also independent from one another.
+
+In general, any two subsequences of two independent sequences
 are also independent from one another.
-
-Put differently, any two subsequences of two independent sequences are also
-independent from one another.

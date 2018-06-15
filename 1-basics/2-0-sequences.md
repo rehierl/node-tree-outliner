@@ -141,12 +141,17 @@ s = [ s(1), s(2), ..., s(o), s(o+1), ..., s(o+n), s(o+n-1), ..., s(N) ]
 t = [                  t(1), t(2),   ..., t(n-1), t(n)                ]
 ```
 
-sequence `t` is **an infix of** sequence `s`
+sequence `t` is **an infix/subsequence of** sequence `s`
 
 * `t infix-of s`, if `(s(o+j-1) = t(j))`
   for `o in [1,N]`, `n in [1,(N-o+1)]` and all `j in [1,n]`
 * `(t subsequence-of s) := (t infix-of s)`
 * signature - (sequence,sequence) -> boolean
+
+sequence `t` is **a strict infix/subsequence of** sequence `s`
+
+* `t strict-infix-of s`, if `(t infix-of s)` and `(t != s)`
+* `(t strict-subsequence-of s) := (t strict-infix-of s)`
 
 clarification
 
@@ -159,7 +164,7 @@ clarification
 
 clarification
 
-* a sequence is a subsequence to itself
+* a sequence is a subsequence, but not a strict subsequence to itself
 * `(t == s)` => `t infix-of s` and `(#t = #s)`
 * an empty sequence has no subsequence (`s(i)` is undefined)
 * `(s == s)` and `s infix-of s` are both always true
@@ -173,6 +178,10 @@ sequence `t` is **a prefix of** sequence `s`
 * `t` is bound to the 1st entry of `s`
 * `s prefix-of s` is always true
 * a sequence is a prefix to itself
+
+sequence `t` is **a strict prefix of** sequence `s`
+
+* `t strict-prefix-of s`, if `(t prefix-of s)` and `(t != s)`
 
 sequence `t` is **the n-th prefix of** sequence `s`
 
@@ -208,6 +217,10 @@ sequence `t` is **a suffix of** sequence `s`
 * `t` and `s` have the same order (i.e. `t` is not reversed)
 * `s suffix-of s` is always true
 * any sequence is a suffix to itself
+
+sequence `t` is **a strict suffix of** sequence `s`
+
+* `t strict-suffix-of s`, if `(t suffix-of s)` and `(t != s)`
 
 sequence `t` is **the n-th suffix of** sequence `s`
 
