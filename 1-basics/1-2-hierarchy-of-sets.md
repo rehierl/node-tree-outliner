@@ -13,16 +13,12 @@ D = { {2}, 3 }
 E = { 3, 4 }
 ```
 
-* Like any other set, set A is a subset to itself.
+* Any set (e.g. A) is a subset to itself.
 * Set B is a (strict) subset of set A, but A is not a subset of B.
 * Set C is not a subset of set A, and A not a subset of C.
 * Number 2 is a common element of sets A and C, but not of set D.
 * Set C does not contain set B as an element, set D however does.
 * Set C is not a subset of set D, and D not a subset of C.
-
-Note that from a strict perspective C does not contain B, because B is itself
-not an element of C. However, C can still be loosely said to contain B, if it
-is clear that the statement refers to the `subset-of` relationship.
 
 **CLARIFICATION**
 Set A and E are said to be **independent** from one another
@@ -51,16 +47,16 @@ In contrary to that, A neither contains C nor E.
 Set B is said to be **(loosely) embedded** into set A
 because B is a strict subset of A.
 
-Note that, similar to the "contains" definition, this "embedded" definition
-needs to be understood to represent a loose definition. As before, qualifiers
-can be used in order to distinguish both notions. However, "strict subset"
-means "has more elements than" and "strictly embedded into"
-means "is an element of" in addition to "strict subset".
+Note that similar as before, the "loose" definition is with regards to B being
+a subset of A and A having one or more additional elements. In contrary to that,
+the "strict" counterpart is that B would have to be an element of A in addition
+to A having one or more additional elements.
 
 * B is loosely embedded into A.
 * B is strictly embedded into D.
 
 Note that A can not be said to be embedded into itself.
+That is, A is neither loosely nor strictly embedded into itself.
 
 **CLARIFICATION**
 Set C is said to **overlap** set E.
@@ -77,12 +73,15 @@ Note that neither of those two sets is embedded into the other.
 ## Visual representations
 
 ```
-A = { 1, 2, 3, 4, 5 }
-B = { 2 }
-C = { 3, 4 }
+set-of-sets = {
+  A = { 1, 2, 3, 4, 5 },
+  B = { 2 },
+  C = { 3, 4 }
+}
 ```
 
-These definitions could be visualized as follows:
+This set-of-sets could be visualized using the following
+box-based representation:
 
 ```
 |-A-----------------|
@@ -141,8 +140,8 @@ Note that each set is by definition a subset to itself.
 
 Note that this kind of consistency does not require that for each set (S1)
 another set (S2) exists with which the first set (S1) has any elements in
-common. For example, set J has no elements in common with any of the other
-sets (hint: a forest).
+common. Put differently, such a setup may have more than one root set
+(see below).
 
 **Memory hook**
 Consistent: None of the borders of any two sets cross each other.
@@ -170,20 +169,9 @@ Inconsistency
 * Set B contains 1 and 2, both of which do not belong to set D.
 * Set B is also not a subset of set D.
 * Sets B and D overlap each other.
+* The borders of B and D cross each other.
 
 Note that a similar inconsistency exists between sets C and D.
-
-**CLARIFICATION**
-A setup is said to be inconsistent (with regards to the definition of the
-`subset-of` operator), if the following is true:
-
-* Two sets exist that have one or more elements in common,
-  but none of those two is a subset of the other.
-
-Note that such a setup has at least two sets that overlap each other.
-
-**Memory hook**
-Inconsistent: The borders of two or more sets cross each other.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -201,6 +189,10 @@ With regards to a consistent setup, the following references may be used:
   are said to be the set's inner or descendant sets.
 * A set to which another set is a descendant set
   is said to be one of the set's outer or ancestor sets.
+* Any ancestor set is said to be super-ordinate to
+  (or more significant than) any of its descendant sets.
+* Any descendant set is said to be sub-ordinate to
+  (or less significant than) any of its ancestor sets.
 * A set that has no outer set is said to be a root set.
 * Two sets that have the same parent set
   are said to be sibling sets.
@@ -220,10 +212,11 @@ strict hierarchies:
   operator instead of the "simple" `subset-of` operator.
 * A strict hierarchy is a hierarchy in which each set has
   one or more elements that none of its strict subsets has.
-* A strict forest of hierarchies is a forest
+* A strict forest of hierarchies is a forest of hierarchies
   in which each hierarchy is strict.
 
-Note that a root set is no strict subset to any other set.
+Note that a root set is no strict subset to any set,
+including itself.
 
 ```
 |-A---------------------| |-E-|

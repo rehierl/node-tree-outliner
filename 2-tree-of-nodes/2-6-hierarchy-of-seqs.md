@@ -2,165 +2,154 @@
 <!-- ======================================================================= -->
 # A sequence-based perspective
 
-```
-tag soup    node tree    node sequence
-========    =========    =============
-
-<A>          A           [ A ]
-</A>        ===
-```
-
-If a document only has a single element, then the document's node tree only
-consists of that root element/node. Consequently, the tree's node sequence has
-the tree's root node as its only element.
+Note that the following discussion is based upon rooted ordered trees.
 
 ```
-tag soup    node tree    node sequence
-========    =========    =============
+tag soup      node tree      node sequence
+========  =>  =========  =>  =============
 
-<A>          A           [ A, B ]
-  B         ===
-</A>         B 
+<A>            A             [ A ]
+</A>          ===
 ```
 
-Element A will be entered before B is entered. Hence, and with regards to the
-tree's node sequence, B is subsequent to A.
+If a document has a single element, then the document's node tree has that
+element as its only node. The tree's node sequence therefore has the tree's
+root node as its only element.
 
 ```
-tag soup    node tree    node sequence
-========    =========    =============
+tag soup      node tree      node sequence
+========  =>  =========  =>  =============
 
-<A>          A           [ A, B, D ]
-  B         ======
-  D          B  D
+<A>            A             [ A, B ]
+  B           ===
+</A>           B 
+```
+
+A tree's root node will be entered first. Node A is therefore entered before
+B. Because of that, B is subsequent to A.
+
+```
+tag soup      node tree      node sequence
+========  =>  =========  =>  =============
+
+<A>            A             [ A, B, D ]
+  B           ======
+  D            B  D
 </A> 
 ```
 
-B is entered before D.
-The next sibling (D) of a node (B) is therefore subsequent to that node.
+B is entered before D. The next sibling D of node B is therefore subsequent
+to its previous sibling B.
 
 ```
-tag soup        node tree    node sequence
-============    =========    ==============
+tag soup          node tree      node sequence
+============  =>  =========  =>  ==============
 
-<A>              A           [ A, B, C, D ]
-  <B> C </B>    ======
-  D              B  D
-</A>            ===
-                 C
+<A>                A             [ A, B, C, D ]
+  <B> C </B>      =======
+  D                B   D
+</A>              ===
+                   C
 ```
 
 B is entered before C, and C before D. C therefore appears in between B and D.
-The next sibling (D) of a node (B) is therefore subsequent to that node and to
-all of the descendants of that node.
+The next sibling D of node B is consequently subsequent to its previous sibling
+B and all of its descendants.
+
+Note that each node sequence generated as above represents an ordered set of
+nodes. That is, because any node within such a sequence appears exactly once.
+In addition to that, the position of each node is consistent with the
+corresponding node order (e.g. enter-order).
+
+**CLARIFICATION**
+A sequence of nodes is said to be in **enter-order**, if all of its nodes
+are added (i.e. appended) to the sequence when entering each node. Similar
+to that, sequences are said to be in **exit-order**, if the nodes are added
+when exiting each node.
+
+Note that any sequence mentioned in the course of this discussion is by
+default in enter-order.
 
 <!-- ======================================================================= -->
 ## The root's inner/outer sequence of nodes
 
 ```
-tag soup        node tree          node sequences of A (in enter-order)
-============    ===============    ====================================
+tag soup          node tree            node sequences of A
+============  =>  ===============  =>  ============================
 
-<A>              A                 [ A, B, C, D, E, F, G ] - NS
-  <B> C </B>    ===============     =====================  - S1
-  D              B   D   E   G         ==================  - S2
-  <E> F </E>    ===     ===
-  G              C       F
+<A>                A                   [ A, B, C, D, E, F, G ] - NS
+  <B> C </B>      ===============       =====================  - S1
+  D                B   D   E   G           ==================  - S2
+  <E> F </E>      ===     ===
+  G                C       F
 </A>
 ```
 
-Each rooted ordered tree of nodes has one most significant node,
-its root node (A).
+Each tree has its root as its most significant node.
 
-* A root node can be understood to represent two sequences of nodes.
-* The root's outer sequence (S1) is its complete node sequence.
-* The root's inner sequence (S2) is the concatenation of the complete node
-  sequences of its child nodes (concatenated in the order of its child nodes).
-* `S1 := ([root] append S2)`
-* S1 always begins with the root node.
-* S2 always begins with the root's first child.
+* Root A can be understood to define two sequences of nodes.
+* The root's outer sequence (S1) is the root's complete node sequence.
+* The root's inner sequence (S2) is its node sequence without the root itself.
 * The node sequence of a tree is identical to the outer sequence of its root.
 
 Note that the definitions of the inner and outer sequences are based upon mere
 observations. They do not define anything new other than names/references for
 these particular sequences of nodes. Both sequences exist either way.
 
-**CLARIFICATION**
-A node sequence is said to be in enter-order, if all of its nodes are added
-(i.e. appended) when entering the nodes. Similar to that, sequences are said
-to be in exit-order, if the nodes are added when exiting the nodes.
-
 <!-- ======================================================================= -->
 ## The inner/outer sequence of a node
 
 Each node within a tree is understood to represent the root of a subtree.
-And, because of that, any node can be understood to represent two sequences
-of nodes: (S1) the node sequence that begins with the given node (i.e. its
-outer sequence), and (S2) the concatenation of the node sequences of its
-child nodes (i.e. its inner sequence).
+And, because of that, any node can be understood to define two sequences of
+nodes: (1) A node's outer sequence S1 is the node sequence of the subtree
+that has the node as its root. (2) A node's inner sequence S2 is the node's
+outer sequence S2 without the node itself.
 
-* No outer sequence of a node is ever empty.
-* An outer sequence always begins with its defining node.
-* An inner sequence is empty if, and only if, its defining node is a leaf.
+* `S1 := (node append S2)`
+* An outer sequence always begins with its defining node (i.e. never empty).
+* An inner sequence is empty if (and only if) its defining node is a leaf.
+* A non-empty inner sequence contains all child nodes of the defining node.
+* A non-empty inner sequence begins with the node's first child.
 * An empty tree has no node and consequently no outer and no inner sequence.
 
-The relationship between a node's inner and outer sequences:
+The relationship between both sequences:
 
 * S2 is a strict suffix of S1.
+* A node's inner sequence is embedded into its outer sequence.
+* S1 is super-ordinate to S2 and S2 sub-ordinate to S1.
 * S1 is the parent (i.e. an ancestor) sequence of S2.
 * S2 is the only child (i.e. a descendant) sequence of S1.
 * There is no other (distinct) sequence in between S1 and S2.
 
-**CLARIFICATION**
-The outer sequence of a node is unique to that node.
-No other node has the exact same outer sequence.
-
-That is, because they always differ in the defining node.
+Note that each sequence can be transformed into the other,
+if the defining node is added to (or removed from) the other sequence.
 
 **CLARIFICATION**
-The inner sequence of a node is unique to that node.
-No other node has the exact same inner sequence.
+Each node can be said to contain all of its descendants.
 
-The inner sequences of two nodes are always different
-because no two nodes can have identical inner *sets*.
-
-Note that the outer sequence of a node is identical to the inner sequence
-of its parent if, and only if, the node has no siblings.
-
-**CLARIFICATION**
-A 1:1 relationship exists between a node and its inner and outer sequences.
-
-Note the special case of empty inner sequences of nodes. However, a node tree
-could be considered to have unique empty inner sequences for each of its leaf
-nodes. These can be distinguished from one another via their defining node.
-
-**CLARIFICATION**
-Each node represents its inner and its outer sequence of nodes.
-
-One such sequence can be transformed into the other, if the defining node is
-added (or removed) to (or from) the corresponding sequence.
+Other ways to express that statement would be: (1) node `n1` contains node `n2`,
+if (and only if) `n2` is an element of the node sequence that `n1` defines. Or
+(2) `n1`'s outer sequence contains `n2`.
 
 <!-- ======================================================================= -->
-## Node trees as hierarchies of sequences
+## Relationship between sequences of different nodes
 
 ```
-tag soup        node tree          outer sequences (in enter-order)
-============    ===============    ================================
+node tree            outer sequences
+===============  =>  ==========================
 
-<A>              A                 A B C D E F G - NS
-  <B> C </B>    ===============    ============= - A 
-  D              B   D   E   G       === = === = - B, D, E, G
-  <E> F </E>    ===     ===            =     =   - C, F
-  G              C       F
-</A>
+ A                   A B C D E F G - NS
+===============      ============= - A 
+ B   D   E   G         === = === = - B, D, E, G
+===     ===              =     =   - C, F
+ C       F
 ```
 
-Note that the above visual representation of sequences can not adequately
-represent empty inner sequences. It can not be used to accurately represent
-empty inner sequences. Such visual representations can therefore only be
-used to define a hierarchy of outer sequences.
+Recall that the line-based visualization can not accurately represent empty
+inner sequences. Such visual representations can therefore only be used to
+represent a tree's hierarchy of outer sequences.
 
-The hierarchy of all inner sequences is:
+The tree's hierarchy of inner sequences:
 
 ```
    |------------------------------------------|
@@ -172,29 +161,71 @@ A, | B, | C, | | | D, | | E, | F, | | | G | | |
    |------------------------------------------|
 ```
 
-* The outer sequence of a child is a subsequence
-  to the inner sequence of its parent.
+* The outer sequence of a child
+  is a subsequence to the inner sequence of its parent.
+* the outer sequence of a child
+  is sub-ordinate to the inner sequence of its parent.
+
+Note that, even though both sequences have different defining nodes, the outer
+sequence of a child is identical to the inner sequence of its parent, if (and
+only if) the parent has no other child. That is, the child has no siblings.
+
 * Both sequences of a node are subsequences
-  to any of the sequences of the node's ancestors.
-
-With regards to the nodes within such sequences:
-
-* Each node within the two sequences of a node is also
-  an element within any of the sequences of the node's ancestors.
-* No such sequence contains a node that an ancestor sequence does not contain.
+  to any sequence of any of the node's ancestors.
+* None of those contains a node that an ancestor sequence does not contain.
+* The inner sequence of a node is the concatenation of
+  all of the outer sequences of its child nodes.
 
 The above statements should be fairly obvious because any descendant of a
 node is also a descendant of the node's ancestors and as such an element of
 all of the sequences of the node's ancestors.
 
-* The node sequences (inner and outer) of all of a node's descendants
-  are subsequences to the sequences of that node.
-* The outer sequence of a child is identical to the inner sequence
-  of its parent if, and only if, the parent has no other child.
-* The outer sequence of a node never has the outer sequence of a
-  descendant as its prefix.
-* In contrary to that, the outer/inner sequence of a node always
-  has the outer/inner sequence of its last child as its suffix.
+* The outer/inner sequence of a node never has
+  the outer/inner sequence of its first child as its prefix.
+* The outer/inner sequence of a node always has
+  the outer/inner sequence of its last child as its suffix.
+
+That is, if the empty inner sequences of leaf nodes are ignored, then the root
+sequence of such a hierarchy has a suffix, but no prefix within the hierarchy.
+Put differently, there never are two sequences within a hierarchy that begin
+with the same node, but there always are two or more sequences that end with
+the same node.
+
+**CLARIFICATION**
+The outer sequence of a node is unique to that node.
+No other node has the exact same outer sequence.
+
+The outer sequences of two nodes are always different
+because no two nodes have identical *outer sets*.
+
+**CLARIFICATION**
+The inner sequence of a node is unique to that node.
+No other node has the exact same inner sequence.
+
+The inner sequences of two nodes are always different
+because no two nodes have identical *inner sets*.
+
+**CLARIFICATION**
+Each node defines its very own inner and outer sequences of nodes.
+
+Note the special case of empty inner sequences of nodes. However, a node tree
+could be considered to have unique empty inner sequences for each of its leaf
+nodes. These can be distinguished from one another via their defining node.
+
+**CLARIFICATION**
+The inner sequence of a node is identical to the outer sequence of its
+*only child*.
+
+That is, because the outer sequence of a descendant is in general only a simple
+subsequence (not a strict subsequence) of the inner sequence of an ancestor.
+
+Note that, if the parent has more than one child, this identity does not exist.
+
+<!-- ======================================================================= -->
+## Node trees as hierarchies of sequences
+
+<!-- ======================================================================= -->
+## Node trees as hierarchies of sequences
 
 **CLARIFICATION**
 All the inner and outer sequences of all the nodes within an ordered tree

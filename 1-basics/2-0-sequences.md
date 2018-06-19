@@ -141,6 +141,11 @@ s = [ s(1), s(2), ..., s(o), s(o+1), ..., s(o+n), s(o+n-1), ..., s(N) ]
 t = [                  t(1), t(2),   ..., t(n-1), t(n)                ]
 ```
 
+Note that this definition of "subsequence" deviates from the mathematical
+definition in such a way that a subsequence must represent an exact pattern
+within the other sequence (i.e. no gaps allowed). As such this definition
+is more strict and needs to be understood with the notion of "substring".
+
 sequence `t` is **an infix/subsequence of** sequence `s`
 
 * `t infix-of s`, if `(s(o+j-1) = t(j))`
