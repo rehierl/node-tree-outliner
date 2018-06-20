@@ -138,10 +138,10 @@ if (and only if) `n2` is an element of the node sequence that `n1` defines. Or
 node tree            outer sequences
 ===============  =>  ==========================
 
- A                   A B C D E F G - NS
-===============      ============= - A 
- B   D   E   G         === = === = - B, D, E, G
-===     ===              =     =   - C, F
+ A                   A B C D E F G - A
+===============        === = === = - B, D, E, G
+ B   D   E   G           =     =   - C, F
+===     === 
  C       F
 ```
 
@@ -180,6 +180,7 @@ The above statements should be fairly obvious because any descendant of a
 node is also a descendant of the node's ancestors and as such an element of
 all of the sequences of the node's ancestors.
 
+* (if empty inner sequences are ignored, then ...)
 * The outer/inner sequence of a node never has
   the outer/inner sequence of its first child as its prefix.
 * The outer/inner sequence of a node always has
@@ -224,26 +225,101 @@ Note that, if the parent has more than one child, this identity does not exist.
 <!-- ======================================================================= -->
 ## Node trees as hierarchies of sequences
 
-<!-- ======================================================================= -->
-## Node trees as hierarchies of sequences
-
 **CLARIFICATION**
-All the inner and outer sequences of all the nodes within an ordered tree
-of nodes represents a hierarchy of sequences of nodes.
+The set of sequences (H0), that holds all the inner and all the outer sequences
+of all of the nodes within a tree, represents a hierarchy of sequences.
 
 That is, the set of sequences is consistent with the `subsequence-of` operator
 because there are no two sequences that overlap each other. For each pair of
 sequences, it can be determined that they are either independent from one
 another, or that one sequence is a subsequence of the other.
 
-Note that each rooted ordered tree represents exactly one such hierarchy.
+Note that the same applies to the set of sequences (H1), which only contains
+the outer sequences of all the nodes, and the set of sequences (H2), which
+only contains the inner sequences of these nodes (i.e. `H0 = (H1 union H2)`).
+
+Note that even though H0 is only a (simple) hierarchy of sequences, H1 and H2
+both are on their own strict hierarchies of sequences. That is, because any
+ancestor inner/outer sequence has more elements than any of its descendant
+inner/outer sequences.
+
+**CLARIFICATION**
+The complete hierarchy of a tree (H0) is considered to hold two sequences per
+node, which can be distinguished via their defining nodes and some boolean
+`isOuterSequence` property. That is, the following two expressions are both
+considered to hold: (A) `(#H2 = #N)` and (B) `#H0 = (#H1 + #H2) = #N*2`.
+
+Note however that, from a strict mathematical perspective, both expressions are
+wrong. That is, because (1) the inner sequence of a child may be identical to
+the outer sequence of its parent, and because (2) the inner sequence of any leaf
+is the empty sequence. With that in mind, the `=` operator within the above two
+expressions would have to be replaced by the `<=` operator for both expressions
+to evaluate to `true` under that strict perspective.
+
+**CLARIFICATION**
+A node tree represents a hierarchy of sequences (H0).
+
+Note that any subset of H0 represents a forest of such hierarchies. However,
+and under certain circumstances, such a subset may still represent a single
+hierarchy (e.g. H1 and H2).
+
+Note that the node sequence of any rooted ordered tree represents an ordered
+set of values. H0, and any subset of it, automatically represent distinct setups
+(see - consistent set of sequences / requirement 1). However, this can only be
+guaranteed if (and only if) the initial tree has neither loops nor cycles.
+
+<!-- ======================================================================= -->
+## Hierarchies as node trees
+
+```
+hierarchy of sequences           node tree
+===========================  =>  ============
+
+0 1 2 3 4 5 6 7 8 9 - A           A
+=========   =====   - B,C        ============
+  =   ===     ===   - D,E,F       B        C
+        =     =     - G,H        =======  ===
+                                  D   E    F
+                                     ===  ===
+                                      G    H
+```
+
+Note that the above hierarchy neither represents a hierarchy of inner (H2),
+nor a hierarchy of outer (H1) sequences. That is, because root sequence A
+has a prefix and no suffix.
+
+**CLARIFICATION**
+A hierarchy of sequences defines the structure of a rooted (ordered) tree.
+
+* The tree's structure has one node per set (i.e. `#H = #N`).
+* The tree's structure is not defined by the elements the sequences
+  contain (i.e. `(#{e | (e in s)  and (s in H)} != #N)` may be true).
+* What counts is what relationship a sequence has with all the other sequences.
+
+Note that, from a strict perspective, the resulting tree has loops because each
+sequence is by definition a subsequence to itself. With that in mind, and except
+for the root node, each node within the structure that such a hierarchy defines
+has exactly two parent nodes: (1) the node itself, and (2) another node.
+However, and even under that strict perspective, the structure minus all the
+loops is that of a rooted (ordered) tree.
+
+Note that the structure such a hierarchy defines has no cycles. In order to
+have cycles, a parent sequence would also have to be a subsequence to one of
+its descendant sequences. That however is not possible because (1) any ancestor
+sequence always has more elements than any of its descendant sequences, and
+because (2) the hierarchy is still a set of sequences (i.e. it can not contain
+two identical elements/sequences).
+
+**TODO**
+Given a sequence of elements, (1) how many such hierarchies are possible and/or
+(2) what is the maximum number of nodes the resulting tree can possibly have?
+(hint: resource management).
 
 <!-- ======================================================================= -->
 ## Equivalency between trees and hierarchies of sequences
 
 ```
-outer sequences
-enter-order                       node tree
+outer sequences                   node tree
 ==============================    =================
 
 A B D G E H C I F - NS             A               

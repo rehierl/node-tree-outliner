@@ -172,7 +172,7 @@ Note that, if the parent has more than one child, this identity does not exist.
 
 **CLARIFICATION**
 The set of sets (H0), that holds all the inner and all the outer sets
-of all of the nodes within a node tree, represents a hierarchy of sets.
+of all of the nodes within a tree, represents a hierarchy of sets.
 
 That is, the set of sets is consistent with the `subset-of` operator because
 there are no two sets that overlap each other. For each pair of sets, it can
@@ -180,8 +180,8 @@ be determined that they are either independent from one another, or that one
 set is a subset of the other.
 
 Note that the same applies to the set of sets (H1), which only contains the
-outer sets of all the nodes, and the set of sets (H2) which only contains the
-inner sets of these nodes (i.e. `H0 = (H1 union H2)`).
+outer sets of all the nodes, and the set of sets (H2), which only contains
+the inner sets of these nodes (i.e. `H0 = (H1 union H2)`).
 
 Note that even though H0 is only a (simple) hierarchy of sets, H1 and H2 both
 are on their own strict hierarchies of sets. That is, because any ancestor
@@ -204,7 +204,7 @@ to `true` under that strict perspective.
 A node tree represents a hierarchy of sets of nodes (H0).
 
 Note that any subset of H0 represents a forest of such hierarchies. However,
-under certain circumstances, that forest may represent a single hierarchy
+and under certain circumstances, a subset may represent a single hierarchy
 (e.g. H1 and H2).
 
 **Memory hook**
@@ -230,30 +230,59 @@ a hierarchy of sets                                node tree
 |-------------------------------------------|
 ```
 
+Note that the above hierarchy neither represents a hierarchy of inner (H2),
+nor a hierarchy of outer (H1) sets. That is, because the identifying subset
+(see below) of root sequence A is empty.
+
 **CLARIFICATION**
 A hierarchy of sets defines the structure of a rooted (unordered) tree.
 
 * The tree's structure has one node per set (i.e. `#H = #N`).
-* The tree's structure is not defined by the actual elements that the sets
-  within the hierarchy contain (i.e. `(#{e | (e in h) and (h in H)} != #N)`).
-* What counts is what relationship a set has with another set.
+* The tree's structure is not defined by the elements the sets
+  contain (i.e. `(#{e | (e in s) and (s in H)} != #N)` may be true).
+* What counts is what relationship a set has with all the other sets.
 
-Note that, from a strict perspective, the node tree has loops because each
-set is by definition a subset to itself. With that in mind, and except for
-the root node, each node within the structure that such a hierarchy defines
-has exactly two parent nodes: (1) the node itself, and (2) another node.
-However, and even under a strict perspective, that structure minus all the
-loops is a rooted (unordered) tree.
+Note that, from a strict perspective, the resulting tree has loops because each
+set is by definition a subset to itself. With that in mind, and except for the
+root node, each node within the structure that such a hierarchy defines has
+exactly two parent nodes: (1) the node itself, and (2) another node. However,
+and even under that strict perspective, the structure minus all the loops is
+that of a rooted (unordered) tree.
 
-Note that the structure such a hierarchy defines has no cycles. In order
-to have cycles, a parent set would also have to be a subset to one of its
-descendant sets. That however is impossible because (1) any ancestor set
-always has more elements than any of its descendant sets, and (2) the
-hierarchy is still a set of sets (i.e. it can not contain two completely
-different sets that have identical content).
+Note that the structure such a hierarchy defines has no cycles. In order to have
+cycles, a parent set would also have to be a subset to one of its descendant
+sets. That however is not possible because (1) any ancestor set always has more
+elements than any of its descendant sets, and because (2) the hierarchy is still
+a set of sets (i.e. it can not contain two identical elements/sets).
+
+**TODO**
+Given a set of elements, (1) how many such hierarchies are possible and/or
+(2) what is the maximum number of nodes the resulting tree can possibly have?
+(hint: resource management).
 
 <!-- ======================================================================= -->
 ## Identifying subsets of nodes
+
+**CLARIFICATION**
+If N refers to the corresponding set of a node, and Ni to the set of its
+i-th child node, then **the identifying subset** (ISS) is the result of
+the following set operations:
+
+* `ISS, identifying-subset := N - { n | n in any Ni }`
+* `(#ISS = 1)`, if N is an outer set.
+* `(#ISS >= 1)`, if N is the inner set of a parent.
+* `(#ISS = 0)`, if N is the empty inner set of a leaf.
+
+Note that the outer set of a node is the set of nodes of the subtree that has
+the node as its root (hint: a rooted tree of nodes). In contrary to that, the
+inner set of a node is the union of the outer sets of those subtrees that have
+the node's child nodes as their root (hint: a forest).
+
+**CLARIFICATION**
+Each inner/outer set of nodes contains a non-empty subset of nodes which none
+of its descendant inner/outer sets have. In addition to that, the corresponding
+inner/outer set is the least significant inner/outer set that still contains
+this non-empty subset.
 
 With regards to H1:
 
@@ -273,19 +302,9 @@ With regards to H2:
   child nodes as an element.
 
 **CLARIFICATION**
-Each inner/outer set of nodes contains a non-empty subset of nodes which none
-of its descendant inner/outer sets have. In addition to that, the corresponding
-inner/outer set is the least significant inner/outer set that still contains
-this non-empty subset.
-
-**CLARIFICATION**
 Both characteristics combined allow to use such a non-empty subset in order to
-identify each inner/outer set within the corresponding hierarchy (H1 or H2).
-
-Note that the outer set of a node is the set of nodes of the subtree that has
-the node as its root (hint: a rooted tree of nodes). In contrary to that, the
-inner set of a node is the union of the outer sets of those subtrees that have
-the node's child nodes as their root (hint: a forest).
+identify a non-empty inner/outer set within the corresponding hierarchy (H1 or
+H2).
 
 <!-- ======================================================================= -->
 ## In search for equivalency
@@ -386,7 +405,8 @@ also an element of any of the outer set's descendant sets. Consequently, the
 hierarchy of outer sets also satisfies req-3.
 
 **CLARIFICATION**
-From a strict perspective, only H1 allows to recreate an unordered node tree.
+From a strict perspective, an unordered node tree can be recreated,
+if the tree's hierarchy of outer sets (H1) is available.
 
 <!-- ======================================================================= -->
 ## Equivalency between trees and hierarchies of sets

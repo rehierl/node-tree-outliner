@@ -25,6 +25,10 @@ Set A and E are said to be **independent** from one another
 because both sets have no elements in common.
 
 **CLARIFICATION**
+A set of sets is said to be **disjoint**,
+if each set within that super-set is independent to all other sets.
+
+**CLARIFICATION**
 Set A is said to **(loosely) contain** set B
 because B is a subset of A.
 
@@ -93,7 +97,7 @@ box-based representation:
 ```
 
 <!-- ======================================================================= -->
-## A consistent setup
+## Consistent setup
 
 ```
 |-A---------------------| |-E-|
@@ -131,10 +135,11 @@ Note that there are no two sets that overlap each other.
 
 **CLARIFICATION**
 A setup (i.e. a set of sets) is said to be consistent (with regards to the
-definition of the `subset-of` operator), if the following is true:
+definition of the `subset-of` operator), if the following requirements are
+satisfied:
 
-* If two sets have one or more elements in common,
-  then one set is a subset of the other.
+1. If two sets have one or more elements in common,
+   then one set is a subset of the other.
 
 Note that each set is by definition a subset to itself.
 
@@ -147,7 +152,7 @@ common. Put differently, such a setup may have more than one root set
 Consistent: None of the borders of any two sets cross each other.
 
 <!-- ======================================================================= -->
-## An inconsistent setup
+## Inconsistent setup
 
 ```
 |-A---------------------| |-E-|
@@ -217,6 +222,8 @@ strict hierarchies:
 
 Note that a root set is no strict subset to any set,
 including itself.
+
+Note that a strict hierarchy is also a simple hierarchy.
 
 ```
 |-A---------------------| |-E-|

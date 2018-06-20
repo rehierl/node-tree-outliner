@@ -2,29 +2,31 @@
 <!-- ======================================================================= -->
 # Subsequences of elements
 
-* `(t subsequence-of s) := (t infix-of s)`
-* `t` is a subsequence of `s`, if `t` can be located within `s`
-* `t infix-of s`, if `(s(o+j-1) = t(j))` for some offset `o in [1,N]`,
-  `t`'s length `n in [1,(N-o+1)]` and all indices `j in [1,n]`
-* `(t strict-subsequence-of s) := (t subsequence-of s) and (t != s)`
-* `t` can only be a strict subsequence of `s`, if (and only if) `(#t < #s)`
-
 ```
 s, A = [ s(1), s(2), ..., s(o), s(o+1), ..., s(o+n), s(o+n-1), ..., s(N) ]
 t, B = [                  t(1), t(2),   ..., t(n-1), t(n)                ]
 ```
+
+* `(t subsequence-of s) := (t infix-of s)`
+* `t` is a subsequence of `s`, if `t` can be located within `s`
+* `t infix-of s`, if `(s(o+j-1) = t(j))` for some offset `o in [1,N]`,
+  `t`'s length `n in [1,(N-o+1)]` and all indexes `j in [1,n]`
 
 Note that this definition of "subsequence" deviates from the mathematical
 definition in such a way that a subsequence must represent an exact pattern
 within the other sequence (i.e. no gaps allowed). As such this definition
 is more strict and needs to be understood with the notion of "substring".
 
-Note that there may be one or more offsets in A beginning with which the pattern
-of B can be found. That is, B may be "embedded into" A more than once.
+Note that there may be one or more offsets beginning with which the pattern
+of B can be found in A. That is, B may be "embedded into" A more than once.
 
 Note that B's offset within A may be 1. In that case, both sequences begin with
 the same element (i.e. B is a prefix of A). Likewise, B's offset may be such
 that B and A both end with the same element (i.e. B is a suffix of A).
+
+* `(t strict-subsequence-of s) := (t subsequence-of s) and (t != s)`
+* if `(t strict-subsequence-of s)`, then `(#t < #s)`
+* if `(t strict-subsequence-of s)`, then `t` is not a prefix and/or a suffix
 
 Note that, if B is a subsequence of A, then A may also be a subsequence of B
 (i.e. both are identical). That is, similar to the `subset-of` operator, each
@@ -44,9 +46,10 @@ X = [3,2], Y = [4,5], Z = [6,7]
 * A, B and C all are sequences of elements/values.
 * X is a subsequence of A and B.
 * A and B share the (common) pattern X.
-* B and C only share the pattern Y.
-* A and C only share the pattern Z.
-* All sequences are different from one another.
+* B and C share pattern Y.
+* A and C share pattern Z.
+* All sequences are different from one another
+  i.e. they differ in elements and/or length.
 * No sequence (in `{A,B,C}`) is a subsequence of another sequence.
 
 ```
@@ -98,6 +101,10 @@ sequence X exists such that: `(X subsequence-of A)` and `(X subsequence-of E)`
 
 Note that this includes not having even one element in common. That is,
 because each element can be understood to represent a pattern of length 1.
+
+**CLARIFICATION**
+A set of sequences is said to be **disjoint**,
+if each sequence within that set is independent to all other sequences.
 
 **CLARIFICATION**
 Sequence A is said to **(loosely) contain** sequence B
@@ -232,7 +239,7 @@ sequence with all the other sequences. Because of that, line-based "images"
 will only be used in combination with non-empty sequences.
 
 <!-- ======================================================================= -->
-## A consistent setup
+## Consistent setup
 
 ```
 0 1 2 3 4 5 6 7 8 9 - A
@@ -260,11 +267,13 @@ Some of the relationships between those sequences are:
 * E is independent of B, C and D.
 
 **CLARIFICATION**
-A setup (i.e. a set of sequences) is said to be consistent with the definition
-of the `subsequence-of` operator, if the following is true:
+A setup (i.e. a set of sequences) is said to be consistent (with regards to the
+definition of the `subsequence-of` operator), if the following requirements are
+satisfied:
 
-* If two sequences have one or more elements in common,
-  then one sequence is a subsequence of the other.
+1. Each sequence represents a set of values (see below: distinct)
+2. If two sequences have one or more elements in common,
+   then one sequence is a subsequence of the other.
 
 Note that this kind of consistency does not require that for each sequence (S1)
 another sequence (S2) exists with which the first sequence (S1) has any pattern
@@ -278,26 +287,31 @@ Note that there is no pair of sequences that overlap each other.
 Consistent: None of the borders of any two of the sequences cross each other.
 
 <!-- ======================================================================= -->
-## An inconsistent setup
+## Inconsistent setup
+
+Inconsistency 1
 
 ```
 0 1 2 3 4 5 6 7 8 9 - A
   =======   ===     - B
-    ===========     - C
-            =====   - D
 ```
 
-Inconsistency 1
-
+* Sequence B is defined as `B = [1,2,3,4,6,7]`
 * Sequence B is not continuous with regards to A.
 * Sequence B has a gap because it does not contain `5`.
 * Sequence B is not a subsequence of A.
 
 Inconsistency 2
 
-* Sequences C and D overlap each other.
-* Both have the common pattern `[6,7]`.
-* However, none is a subsequence of the other.
+```
+0 1 2 3 4 5 6 7 8 9 - A
+    ===========     - C
+            =====   - D
+```
+
+* Sequences C and D share the pattern `[6,7]`.
+* Both sequences overlap each other.
+* None of those two is a subsequence of the other.
 * The borders of C and D cross each other.
 
 <!-- ======================================================================= -->
@@ -343,6 +357,8 @@ strict hierarchies:
 Note that a root sequence is no strict subsequence to any sequence,
 including itself.
 
+Note that a strict hierarchy is also a simple hierarchy.
+
 ```
 |-A------------------------------------------------|
 |    |-B-------------------------|    |-E--------| |
@@ -366,3 +382,67 @@ sequences B and F are independent from one another, then both sequences
 
 In general, any two subsequences of two independent sequences
 are also independent from one another.
+
+<!-- ======================================================================= -->
+## Distinct setup
+
+```
+0 1 2 3 4 5 2 3 8 9 - A
+  ======= =======   - C, D
+```
+
+* Sequences B and C share the pattern `B = [2,3]`.
+* Both are not independent from one another.
+* Both sequences do not overlap each other.
+* C is not a subsequence of D and D not a subsequence of C.
+* The consistency requirement is violated.
+
+Note that there are similar issues, if B is a suffix xor prefix of C xor D.
+
+```
+0 1 2 3 4 5 2 3 8 9 - A
+    ===     ===     - B, B
+```
+
+* Sequences A and B share the pattern `[2,3]`.
+* Sequence B is a (strict) subsequence to A.
+* The consistency requirement is satisfied.
+
+Even though the above setup is consistent and therefore counts as a hierarchy,
+sequence B has no definite position within A. And because there are two offsets
+at which B can be located, B can be said to have A twice as parent sequence.
+Because of that, the hierarchy can be understood to be broken.
+
+```
+0 1 2 3 4 5 2 3 8 9 - A
+    ===   =======   - B, D
+            ===     - B
+```
+
+* Sequences A, B and C share the pattern `[2,3]`.
+* Sequence B is a subsequence of A and C.
+* The consistency requirement is satisfied.
+
+From a strict perspective, B's parent sequence (shortest next outer) is B.
+However, from a less strict perspective, A could also be considered to be B's
+parent sequence, which is why B could be considered to have two unique parent
+sequences. Consequently, the hierarchy is broken.
+
+```
+0 1 2 3 4 5 6 3 8 9 - A
+      =       =     - B
+```
+
+Note that similar issues arise, if B is a sequence of length 1.
+
+**CLARIFICATION**
+A setup is said to be **a distinct setup** if (and only if) each sequence
+within the setup represents a set of values.
+
+Note that distinct setups are the main object of discussion. Because of that,
+it is an implicit requirement that every setup needs to be distinct.
+
+Note that a setup, which is not distinct, does not necessarily have any issues.
+Nothing bad will happen, if repeated patterns appear within a single sequence
+but nowhere else. To be more accurate, repeated patterns may only appear within
+root sequences.
