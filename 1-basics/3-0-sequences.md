@@ -4,7 +4,7 @@
 
 * `s` represents a sequence of elements (aka. slots)
 * `s = [si] = [e1,e2,...,eN] = [e:1,...,e:N]` for `N in [0,*]`
-* or, alternatively `s = (si) = (e1,e2,...,eN)`
+* or the more mathematical notation `s = (si) = (e1,e2,...,eN)`
 
 tuple vs. sequence
 

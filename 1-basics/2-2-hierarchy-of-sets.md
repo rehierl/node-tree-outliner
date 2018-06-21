@@ -80,6 +80,7 @@ That is, A is neither loosely nor strictly embedded into itself.
 
 * contains - i.e. (simple) subset
 * embedded - i.e. strict subset
+* embedded => contains
 * if "embedded", then also "contains", but not vice versa
 * loosely contains/embedded - i.e. resolved/merged into
 * strictly contains/embedded - i.e. an element of
@@ -88,12 +89,11 @@ Note that the "contains" vs. "embedded" distinction is used to tell
 whether or not an ancestor set has more elements than a descendant set.
 
 Note that the "loosely" vs. "strictly" distinction could be used
-with regards to content injection.
+in combination with content injection.
 
 **CLARIFICATION**
-Set D is said to **overlap** set A.
-
-Which is because both sets have elements in common,
+Set D is said to **overlap** set A
+because both sets have elements in common,
 and because both have elements which the other set does not have.
 
 Note that set A also overlaps set D.
@@ -193,8 +193,9 @@ However, not every simple setup is also a strict setup:
 * strict setup => simple setup
 
 Note that the above setup is a strict and therefore also a simple setup.
-If set A would not have element 5, then that setup would still be a simple
-setup, but no longer a strict setup.
+If set A would not have element 5, then that setup would still be a
+strict setup. That is, because B would still be a strict subset of A,
+which contains all the elements in C that B does not contain.
 
 **Memory hook**
 Consistent: None of the borders of any two sets cross each other.
@@ -224,7 +225,7 @@ Note the crossing borders of sets B and D.
 * Sets B and D overlap each other.
 * The borders of B and D cross each other.
 
-Note that a similar inconsistency exists between sets C and D.
+Note the similar inconsistency between sets C and D.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -234,28 +235,31 @@ With regards to simple/strict setups, the following references may be used:
 
 * All (strict) subsets of a set
   are said to be the set's **inner** sets.
-* All sets to which a set is a (strict) subset
+* All sets to which a set is an inner set
   are said to be the set's **outer** sets.
 
-With regards to a simple setup, and because any set is a subset to itself, any
-set can be understood to be an inner and an outer set to itself. In contrary
-to that, and with regards to a strict setup, no set is a strict subset and
-therefore neither an inner, nor an outer set to itself.
+With regards to a simple setup, and because any set is a subset to itself,
+any set can be understood to be an inner and an outer set to itself (loops).
+In contrary to that, and with regards to a strict setup, no set is a strict
+subset and therefore neither an inner, nor an outer set to itself (no loops).
 
 Note that two sets, which are independent from each other, are not understood
 to be outside of each other, not even if both sets have the same parent set
-(i.e. siblings). That is, "outside" and "not inside" are not equivalent.
+(siblings). That is, "outside" and "not inside" are not equivalent.
 
 * Any outer set of set S (except for S itself) is an **ancestor set**
-  and as such **super-ordinate** to (or **more significant** than) S.
+  and as such **super-ordinate** to, or **more significant** than S.
 * Any inner set of set S (except for S itself) is a **descendant set**
-  and as such **sub-ordinate** to (or **less significant** than) S.
+  and as such **sub-ordinate** to, or **less significant** than S.
 
 Note that no set is understood to be an ancestor
 and/or a descendant set to itself.
 
-Note that the empty set is a descendant set to any other set.
-Because of that, a hierarchy (see below) must not contain the empty set.
+Note that the empty set is a strict subset to any non-empty set. And, because
+of that, any non-empty set is an ancestor to the empty set. The empty set is
+therefore the only set possible that may have ancestors that are independent
+from one another. Consequently, a hierarchy (see below) must not contain the
+empty set. From this point on, all sets are therefore assumed to be non-empty.
 
 * A set, that has no ancestor set, is said to be a **root set**.
 * The least significant ancestor set of set S
@@ -265,14 +269,15 @@ Because of that, a hierarchy (see below) must not contain the empty set.
 * Two sets that have the same parent set
   are said to be **siblings** to each other.
 
-Note that a simple/strict setup of non-empty sets (i.e. no crossing borders)
-does not allow its sets to have more than one parent set. Because any ancestor
-set is a descendant set to its own ancestor sets, outer sets are not independent
-from one another. Consequently, any set that has ancestor sets also has exactly
-one least significant ancestor set (i.e. its parent set).
+Note that none of the ancestors of a non-empty set are independent from one
+another. They always have at least all the elements of the non-empty set in
+common. Consequently, a consistent setup of non-empty sets (i.e. no crossing
+borders) does not allow its sets to have more than one parent set. That is, if
+a set has ancestors, then it always has exactly one least significant ancestor
+and therefore exactly one parent set.
 
-Note that a set is not a parent set to itself (no loops). That is, because a
-set is not understood to be an ancestor set to itself. Consequently, each set
+Note that a set is not a parent set to itself (no loops). That is, because
+a set is not understood to be an ancestor to itself. Consequently, each set
 either has no parent set (e.g. a root set), or exactly one parent set.
 
 Note that a set can not be an ancestor set to itself (no cycles). Likewise,
