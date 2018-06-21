@@ -11,6 +11,7 @@ t, B = [                  t(1), t(2),   ..., t(n-1), t(n)                ]
 * `t` is a subsequence of `s`, if `t` can be located within `s`
 * `t infix-of s`, if `(s(o+j-1) = t(j))` for some offset `o in [1,N]`,
   `t`'s length `n in [1,(N-o+1)]` and all indexes `j in [1,n]`
+* Note that any sequence is a subsequence to itself.
 
 Note that this definition of "subsequence" deviates from the mathematical
 definition in such a way that a subsequence must represent an exact pattern
@@ -27,6 +28,7 @@ that B and A both end with the same element (i.e. B is a suffix of A).
 * `(t strict-subsequence-of s) := (t subsequence-of s) and (t != s)`
 * if `(t strict-subsequence-of s)`, then `(#t < #s)`
 * if `(t strict-subsequence-of s)`, then `t` is not a prefix and/or a suffix
+* Note that no sequence is a strict subsequence to itself.
 
 Note that, if B is a subsequence of A, then A may also be a subsequence of B
 (i.e. both are identical). That is, similar to the `subset-of` operator, each
