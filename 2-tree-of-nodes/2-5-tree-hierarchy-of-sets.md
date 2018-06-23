@@ -2,8 +2,7 @@
 <!-- ======================================================================= -->
 # A set-based perspective
 
-Note that the following discussion is based upon rooted unordered trees
-(i.e. has no loops and no cycles).
+Note that the following discussion is based upon rooted un-ordered trees.
 
 ```
 tag soup          node tree      (simplified)      set of nodes
@@ -18,17 +17,18 @@ tag soup          node tree      (simplified)      set of nodes
                       4                            |-----------|
 ```
 
-Note the outer box S0, which contains all the nodes of the node tree.
+Note the outer box S0, which contains all the nodes of the tree.
 It contains the tree's root node and all of its descendants.
 
 **CLARIFICATION**
-A rooted tree `T := (N,E)` can be understood to define its set of nodes N.
+A rooted tree `T := (N,E)` can be understood to represent its set of nodes N.
 
-Note that the following discussion focuses on the tree's set of nodes and
-on some subsets of that set. The set of edges E is therefore only taken into
-account as the formal basis that defines these sets via "all the nodes that
-are connect". As such, the following (sub-)sets are understood to be identified
-and defined by a node that acts as the starting point of a formal definition.
+Note that the following discussion focuses on the tree's set of nodes and on
+subsets of that set. The set of edges E is therefore only taken into account
+as a formal basis that defines these sets via "all the nodes that are connected
+in a certain way". As such, the following (sub-)sets are understood to be
+identified and defined by a node that acts as the starting point of a formal
+definition.
 
 <!-- ======================================================================= -->
 ## The root's inner/outer set of nodes
@@ -58,38 +58,47 @@ Each tree has its root as its most significant node.
 Note that the definitions of the inner and outer sets are based upon mere
 observations. They do not define anything new other than names/references
 for these particular sets of nodes. Both (sub-)sets exist either way.
+(Not as separate entities, but as a part of the tree's set of nodes).
 
 <!-- ======================================================================= -->
 ## The inner/outer set of a node
 
 Each node within a tree can be understood to represent the root of a subtree.
-Any node can therefore be understood to define two sets of nodes: (1) The inner
-set S2 of a node contains only the node's descendants, and (2) the outer set S1
-of a node combines the node's inner set with the node itself.
+Any node can therefore be understood to define two sets of nodes: (1) The
+inner set S2 of a node contains only the descendants of that node, and (2)
+the outer set S1 of a node combines the node's inner set with the node itself.
 
 * `S1 = (node union S2)`
 * An outer set always contains its defining node (i.e. never empty).
-* An inner set is empty if (and only if) its defining node is a leaf.
+* An inner set is empty if its defining node is a leaf.
 * An empty tree has no node and consequently no outer and no inner set.
 
 The relationship between both sets:
 
 * As a strict subset, S2 is embedded into S1.
-* S1 and S2 are not independent from one another.
 * S1 is super-ordinate to S2 and S2 sub-ordinate to S1.
 * S1 is the parent (i.e. an ancestor) set of S2.
 * S2 is the only child (i.e. a descendant) set of S1.
-* There is no other (distinct) set in between S1 and S2.
 
 Note that each set can be transformed into the other,
 if the defining node is added to (or removed from) the other set.
 
 **CLARIFICATION**
-Each node can be said to contain its descendants.
+Each node can be said to contain itself and its descendants.
 
 Other ways to express that statement would be: (1) node `n1` contains node
-`n2` if (and only if) `n2` is a node of the subtree that has `n1` as its
-root. Or (2) `n1`'s outer set contains `n2`.
+`n2`, if `n2` is a node of the subtree that has `n1` as its root. Or (2)
+`n1`'s outer set contains `n2`.
+
+**CLARIFICATION**
+Node `n1` is said to be **disjoint** from `n2`,
+if the outer sets of both nodes have no node in common.
+
+* The subtrees of both nodes have no node in common.
+* `n1` does not contain `n2`, and `n2` does not contain `n1`.
+
+Note that, if two nodes are disjoint,
+then none of those is an ancestor of the other.
 
 <!-- ======================================================================= -->
 ## Relationship between the sets of different nodes
@@ -115,10 +124,10 @@ node tree          set of outer sets
   is sub-ordinate to the inner set of its parent node.
 
 Note that, even though both sets have different defining nodes, the outer set 
-of a child is identical to the inner set of its parent, if (and only if) the
-parent has no other child.
+of a child is identical to the inner set of its parent, if the parent has no
+other child.
 
-* Both sets of a node are a subsets to any set of any of the node's ancestors.
+* Both sets of a node are subsets to any set of any of the node's ancestors.
 * None of those sets contains a node that an ancestor set does not contain.
 * The inner set of a node is the union of the outer sets of its child nodes.
 
@@ -126,120 +135,149 @@ The above statements should be fairly obvious because any descendant of a node
 is also a descendant of the node's ancestors and, as such, also an element of
 any set of any of the node's ancestors.
 
-**CLARIFICATION**
-The inner and outer sets of two nodes are either independent from one another,
-or one node is an ancestor of the other.
+<!-- ======================================================================= -->
+### Outer sets of different nodes
 
-That is, because two sets are said to be independent from one another, if
-both sets have no elements in common. And because the descendant of a node is
-also a descendant of the node's ancestors, none of the defining nodes of two
-independent sets can be an ancestor of the other. Consequently, two sets can
-not be independent from one another, if the defining node of one set is an
-ancestor of the other set's defining node.
+**CLARIFICATION**
+The outer sets of two distinct nodes are either disjoint from one another,
+ex-or one outer set is a strict subset of the other.
+
+(0) If node `n1` is an ancestor of `n2`, then the outer set of `n1` has `n1`
+as an element, but the outer set of `n2` does not. The outer set of an ancestor
+always has more elements than the outer set of a descendant. (Note that the
+outer set of a leaf node is not empty).
+
+(1) If node `n1` is an ancestor of `n2`, then any descendant of `n2` is also a
+descendant of `n1`. The outer set of `n2` is therefore a strict subset of the
+outer set of `n1`. That is, the outer set of `n2` does not have any node that
+is not also an element of the outer set of `n1`. The outer set of a descendant
+therefore never overlaps the outer set of an ancestor.
+
+(2) If node `n1` is not an ancestor of `n2`, then the outer sets of both nodes
+have no nodes in common: the outer sets of both nodes are disjoint.
 
 **CLARIFICATION**
 The outer set of a node is unique to a node.
 No other node has the exact same outer set.
 
-If the outer sets of two nodes are independent from one another, then the outer
-sets of both nodes have no nodes in common. That is, if one node is not an
-ancestor of the other node, then the outer sets of both nodes are different.
+If the outer sets of two nodes are disjoint, then the outer sets of both nodes
+have no nodes in common. That is, if one node is not an ancestor of the other,
+then the outer sets of both nodes are different.
 
-If node `n1` is an ancestor of `n2`, then `n1`'s outer set contains `n1`. And
-because `n2` is a descendant of `n1`, `n2`'s outer set does not contain `n1`.
-The outer sets of both nodes are therefore different. Put differently, the outer
-set of an ancestor always has more nodes than the outer set of a descendant.
+If node `n1` is an ancestor of `n2`, then `n1`'s outer set contains `n1`, but
+`n2`'s outer set does not. The outer sets of both nodes are therefore different.
+
+<!-- ======================================================================= -->
+### Inner sets of different nodes
+
+Note that the arguments needed to proof the following statements are largely
+the same as those needed to proof the statements with regards to outer sets.
+
+Note that the inner sets of leaf nodes are empty and that: (a) an empty sets
+is disjoint from any other set - (b) an empty set is a subset to any other
+set - (c) an empty set is a strict subset to any non-empty set.
+
+**CLARIFICATION**
+The non-empty inner sets of two distinct nodes are either disjoint,
+ex-or one inner set is a strict subset of the other.
+
+(0) If node `n1` is an ancestor of `n2`, then the inner set of `n1` has
+`n2` as an element, but the inner set of `n2` does not. The inner set of an
+ancestor always has more elements than the inner set of a descendant. (Note
+that the inner set of a leaf node is empty).
+
+(1) If node `n1` is an ancestor of `n2`, then the inner set of `n2` is a strict
+subset of the inner set of `n1`. (Note that this is true, even if `n2` is a leaf
+node: `n1` has a non-empty inner set, `n2` has an empty inner set).
+
+(2) If node `n1` is not an ancestor of `n2`, then the inner sets of both nodes
+have no nodes in common: the inner sets of both nodes are disjoint. (Note that
+this is true, even if `n1` and/or `n2` are leaf nodes: an empty inner set is
+disjoint from any other set).
+
+Note that the "ex-or" part of the above statement is therefore not true,
+if one node is an ancestor of a leaf.
 
 **CLARIFICATION**
 The non-empty inner set of a node is unique to a node.
-No other node has the exact same inner set.
+No other node has the exact same non-empty inner set.
 
-If the inner sets of two non-leaf nodes are independent from one another, then
-the inner sets of both nodes have no nodes in common. That is, if one node is
-not an ancestor of the other node, then the inner sets of both nodes are
-different.
+If the inner sets of two non-leaf nodes are disjoint, then the inner sets of
+both nodes have no nodes in common. That is, if one node is not an ancestor of
+the other, then the inner sets of both nodes are different.
 
-If node `n1` is an ancestor of `n2`, then `n1`'s inner set contains `n2`. And
-because `n2`'s inner set does not contain `n2`, the inner sets of both nodes
-are different. Put differently, the inner set of an ancestor always has more
-nodes than the inner set of a descendant.
+If node `n1` is an ancestor of `n2`, then `n1`'s inner set contains `n2`, but
+`n2`'s inner set does not. The inner sets of both nodes are different.
 
-Note that the inner sets of leaf nodes are all empty.
-The inner sets of two leaf nodes are therefore not unique.
+**Memory hook**
+Take a piece of paper and use it to draw a rooted node tree. After that, draw
+a border around that node tree. Then, draw a border around each subtree. When
+done, the set of borders represents the tree's hierarchy of outer sets.
 
 <!-- ======================================================================= -->
 ## Node trees as hierarchies of sets
+
+Assumed that a tree is non-empty (i.e. has a root) ...
 
 * H1 - The set of sets that only contains
        the outer sets of all the nodes of a tree.
 * H2 - The set of set that only contains
        the inner sets of all the nodes of a tree.
-* H0 - `H0 := (H1 union H2)`
+* H2' - `H2' := (H2 - {})`
+* H0  - `H0 := (H1 union H2)`
+* H0' - `H0' := (H1 union H2')`
 
 ```
-       | setup          | hierarchy               |
--------|----------------|-------------------------|-
-simple | +H0  +H1  +H2  | -H0/+H0*  +H1  -H2/+H2* |
--------|----------------|-------------------------|-
-strict | +H0  +H1  +H2  | -H0/+H0*  +H1  -H2/+H2* |
+          \  Hx  |   |   |   |   |
+construct  \     | 1 | 2 | 2'| 0 | 0'
+-----------------|---|---|---|---|---
+consistent setup | + | + | + | + | + 
+-----------------|---|---|---|---|---
+hierarchy        | + | - | - | - | + 
 ```
 
-* H0, H1 and H2 all are simple setups.
-* H1 is a strict setup because each outer set contains its defining
-  node, which is not an element of any of the set's child sets.
-* H2 is a strict setup because each ancestor inner set contains the
-  defining nodes of any of the descendant inner sets.
-* H0 is a strict setup: (1) the inner set of a node is always a strict
-  subset of the node's outer set, (2) if a node has one child node only,
-  then the node's inner set is identical to the child's outer set (which
-  is a strict subset of the parent's outer set), and (3) if a node has
-  more than one child node, then the parent's inner set always has more
-  nodes than any of the outer sets of its child nodes (it is the outer
-  sets of its siblings that distinguishes the outer set of a child from
-  the inner set of its parent).
-* H0, H1 and H2 always have one root set: (1) the root's outer set in
-  case of H0 and H1, or (2) the root's inner set in case of H2.
-* H1 is a strict hierarchy because no outer set is ever empty.
-  Consequently, H1 is also a simple hierarchy.
-* H2 is neither a strict, nor a simple hierarchy because H2
-  always contains the empty set. That is, because any non-empty tree
-  always has one or more leaf nodes (i.e. empty inner sets).
-* H0 is neither a strict, nor a simple hierarchy because the empty
-  set is an element of H2.
-
-Note that H0 and H2 without the empty inner set(s) of leaf nodes are
-(just like H1) strict hierarchies.
-
-* H2* - `H2* := (H2 - {})`
-* H0* - `H0* := (H1 union H2*)`
+* H0, H1 and H2 all are consistent setups.
+* H0: (1) the inner set of a node is a strict subset of the node's outer set,
+  (2) if a node has one child node only, then the node's inner set is identical
+  to the child's outer set (which is a strict subset of the parent's outer set),
+  and (3) if a node has more than one child node, then the parent's inner set
+  always has more nodes than any of the outer sets of its child nodes (it is
+  the outer sets of its siblings that distinguishes the outer set of a child
+  from the inner set of its parent).
+* H0, H1 and H2 always have one root set: (1) the root's outer set in case
+  of H0 and H1, or (2) the root's inner set in case of H2.
+* H2 is not a hierarchy because H2 always contains the empty set. That is,
+  because any non-empty tree always has one or more leaf nodes (i.e. empty
+  inner sets). Note that the root set of H2 may be empty.
+* H2' is not a hierarchy, because if the node tree only has a single node,
+  then H2 only contains the empty set. And because H2' is created from H2 by
+  removing the empty set, H2' will itself be the empty set (i.e. no root set).
+* H0 is not a hierarchy because the empty set is an element of H2. The empty
+  set is therefore also an element of H0.
+* In contrary to H2', H0' will always have the outer set of the tree's root
+  as its root set. Because of that, H0' is a hierarchy of sets.
 
 **CLARIFICATION**
-Any node tree can be transformed into a strict hierarchy of sets.
+A hierarchy can be created for any node tree (e.g. H1, H0').
 
-Note that any subset of H0* represents a forest of strict hierarchies.
-However, and under certain circumstances, such a subset may have a single
-root set (e.g. H1 and H2*).
+Note that H1 is a subset of H0*.
 
 **CLARIFICATION**
-H1 always has one set per node (i.e. `(#H1 = #N)` is true). In contrary to that,
-H2 has one set per node if (and only if) the tree only has a single leaf (i.e.
-`(#H2 <= #N)` is true for linear trees). Likewise, H0 has two sets per node if
-(and only if) the tree only has a single node (i.e. `(#H0 <= #N*2)` is true).
+The following expressions are always true:
 
-* If a tree has one node (only a root), then `(#H0 = #N*2)` is true.
-* If a tree has two nodes (a root and a leaf), then `(#H0 < #N*2)` is true.
-* Note that no set of elements can contain an element more than once.
+* `(#H1 = #N)`, `(#H2 <= #N)`, `(#H0 <= #N*2)`
+* `(#H2' < #N)`, `(#H0' < #N*2)`
+
+Note that ...
+
+* H2 will only have one set per node, if the tree has a single leaf.
+* If a tree has more than one leaf, then there is more than one node whose
+  inner set is empty.
+* H0 will only have two sets per node, if the tree has a single (root) node.
+* Even H0 of a linear tree (a single path of nodes) will have less than two
+  sets per node.
 * Note that a node's inner set is identical to the outer set of its only child.
-* Note that the same applies to linear trees (a single path of nodes).
-* Regardless of whether each parent has two or more child nodes, if a tree has
-  more than one leaf, then there are two or more nodes whose inner sets are
-  empty. Consequently, `(#H0 < #N*2)` is true.
-
-**Memory hook**
-Take a piece of paper and use it to draw a rooted node tree. After that, draw
-a border around that node tree. Then, draw a border around each subtree. When
-done, the set of borders represents the tree's strict hierarchy of outer sets
-(H1).
+* Note that no set of elements/sets can contain an element/set more than once.
 
 <!-- ======================================================================= -->
 ## Hierarchies as node trees
@@ -281,11 +319,11 @@ a hierarchy defines has exactly two parent nodes: (1) the node itself, and (2)
 another node. However, and even under that strict perspective, the structure
 minus all the loops is that of a rooted (unordered) tree.
 
-Note that the structure such a hierarchy defines has no cycles. In order to have
-cycles, a parent set would also have to be a subset to one of its distinct inner
-sets. That however is not possible because (1) any ancestor set always has more
-elements than any of its descendant sets, and because (2) the hierarchy is still
-a set of sets (i.e. it can not contain two identical elements/sets).
+Note that the structure such a hierarchy defines has no cycles. In order to
+have cycles, a parent set would also have to be a subset to one of its distinct
+inner sets. That however is not possible because (1) any ancestor set always
+has more elements than any of its descendant sets, and because (2) the hierarchy
+is still a set of sets (i.e. it can not contain two identical elements/sets).
 
 **TODO**
 Given a set of elements, (1) how many such hierarchies are possible and/or

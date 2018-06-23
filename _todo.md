@@ -32,6 +32,23 @@ conclusions
   hierarchy of sets/sequences- why?
 
 **TODO**
+executing the outline algorithm is like -
+playing an audio track -
+and pushing multiple start/stop buttons -
+i.e. a turing machine
+
+**TODO**
+add a definition for "disjoint nodes" -
+two nodes are disjoint, if their subtrees are disjoint -
+two nodes are disjoint, if none is an ancestor of the other -
+
+**TODO**
+replace "independent" with "disjoint" -
+"independent" implies "no relationship whatsoever" -
+"disjoint" only states "no common elements" -
+sibling sets are disjoint, but still loosely related
+
+**TODO**
 the tree of sections will have identical structure to the initial node tree,
 if each node of the node tree is understood to represent a rank-less type-1
 sectioning node.

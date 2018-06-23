@@ -21,6 +21,7 @@ syntax specifications
 
 sets
 
+* [wikipedia, multiset](https://en.wikipedia.org/wiki/Multiset)
 * [wikipedia, set theory](https://en.wikipedia.org/wiki/Set_theory)
 * [wikipedia, power set](https://en.wikipedia.org/wiki/Power_set)
 * [wikipedia, class, set theory](https://en.wikipedia.org/wiki/Class_%28set_theory%29)

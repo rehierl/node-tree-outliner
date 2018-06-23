@@ -50,3 +50,13 @@ clarification
 
 * "component" could be used as counterpart to "distinct element"
 * `ms1` has 3 components, but 2 (distinct) elements
+
+labels, a visual aid
+
+* `ms1 := < a:v1, b:v2, c:v1 >`
+* labels `a` to `c` allow to refer to a specific component
+* labels are not limited to letters
+* anything that allows to identify a component can be used
+* if numbers are used, they act as id values, not indexes
+* labels are not part of a multiset, they can not be used to access a component
+* a multiset is still not a dictionary
