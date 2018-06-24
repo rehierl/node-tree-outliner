@@ -113,7 +113,7 @@ clarification
 <!-- ======================================================================= -->
 ## implication (=>), equivalence (<=>)
 
-* `a => b`
+* `(a => b) := (!a or b)`
 * if `a` is true, then `b` is also true
 * if `a` is not true, then `b` may still be true
 * `!=>, !>, /=> := not(=>)`
@@ -125,7 +125,7 @@ reversed implication
 
 equivalence
 
-* `a <=> b`
+* `(a <=> b) := (a and b) or (!a and !b)`
 * if `a` is true, then `b` is also true
 * if `a` is not true, then `b` is also not true
 * `!<=>, <!>, </=>, </>, <> := not(<=>)`
