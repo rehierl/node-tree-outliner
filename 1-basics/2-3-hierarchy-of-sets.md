@@ -1,5 +1,25 @@
 
 <!-- ======================================================================= -->
+## TODOs
+
+**TODO** -
+define sub-hierarchy? -
+as counterpart to sub-tree?
+
+**TODO** -
+go super-meta with forests? -
+a forest is itself a set of elements -
+a hierarchy of forests? -
+"an outline of an outline"? -
+an unordered/ordered forest?
+
+**TODO** -
+Given a set of elements `E` -
+how many hierarchies are theoretically possible? -
+what is the max possible number of sets in `P` (hint: powerset)? -
+hint: resource management
+
+<!-- ======================================================================= -->
 # Hierarchy of sets
 
 ```
@@ -96,21 +116,19 @@ a strict setup has the following properties:
 * No set has more than one root set as an ancestor.
 
 **CLARIFICATION**
-Each set `s in P` within a strict setup `S := (E,P)`
+Each set `s in P` in a strict setup `S := (V,P)`
 has a unique rooted path `p := (s1,...,sk)` such that ...
 
-* `si in P` and `(si parent-set-of s(i+1))`
+* `p(i) = s(i) = si`
+* `s(i) in P` and `(s(i) parent-set-of s(i+1))`
 * `s1` is a root set, and `(s == sk)`
 
-Note that there are several, less formal notations possible to denote such a
-rooted path. If needed, the following notation will be used:
+Note that there are several, less formal notations possible to denote the
+rooted path of a set. The notation that will be used here is a follows:
 
 * `/s1` - the rooted path of a root set `s1`.
-* `/s1/.../sk` - the rooted path of set `sk`.
-* `#p` will be used to refer to the length of such a path.
-
-<!-- ======================================================================= -->
-## Hierarchies and forests
+* `/s1/.../sk` - the rooted path of set `sk` begins with root set `s1`.
+* `#p` will be used to refer to the length of the rooted path `p`.
 
 ```
 |-A-------|   |-B-----------|
@@ -121,56 +139,59 @@ rooted path. If needed, the following notation will be used:
 ```
 
 * Root sets A and B both represent separate hierarchies.
-* Inner set A/A is a strict subset of root set A.
-* Inner sets B/A and B/B are both strict subsets of root set B.
-* The union of all the sets represent a forest.
+* Set /A/A is a strict subset of root set A.
+* Sets /B/A and /B/B are both strict subsets of root set B.
+
+<!-- ======================================================================= -->
+## Hierarchies and forests
 
 **CLARIFICATION**
-A multiset (of sets) is said to be **a hierarchy (of sets)**,
+A multiset (of sets) is said to be **a (simple) hierarchy (of sets)**,
 if the following requirements are met:
 
+0. `H := (V,P)`
 1. The multiset is a non-empty strict setup.
 2. The setup has exactly one root set.
 
 Some of the properties of a hierarchy are:
 
 * A hierarchy has no loops and no cycles.
-* A hierarchy does not contain overlapping sets.
+* A hierarchy has no overlapping sets.
 * Two distinct sets are either disjoint,
   ex-or one is a strict subset of the other.
 * Each set either has no, ex-or exactly one parent set.
 * Each set has a distinct rooted path (i.e. /root/to/set).
 * Ancestor sets have more elements than their descendant sets.
 
-Note that the formal definition of a hierarchy (`H := (E,P)`)
-is equivalent to that of a simple setup (`S := (E,P)`).
-
 **CLARIFICATION**
 Two hierarchies are said to be disjoint, if their root sets are disjoint.
 
-Note that the subsets of two disjoint sets are also disjoint.
+Note that, if set `r1` is disjoint from `r2`,
+then any subset `s1` of `r1` is disjoint to any subset `s2` of `r2`.
 
 **CLARIFICATION**
-A multiset (of sets) is said to be **a forest (of hierarchies)**,
-if the following requirements are met:
+A multiset (of sets) is said to be **a (simple) forest (of hierarchies)**
+or "a forest of simple hierarchies", if the following requirements are met:
 
+0. `F := (V,P)`
 1. The multiset is a strict setup.
 2. The setup has zero, one or more root sets.
 
 Note that a strict setup is automatically a forest of hierarchies. That is, a
 forest is not "a set of sets of sets" (i.e. "a set of hierarchies"). A forest
-is like a hierarchy, a set of sets. Because of that, any operation defined on
-a set of sets can be used in combination with forests.
+is like a hierarchy, a single set of sets. Because of that, any operation
+defined on a set of sets can be used in combination with forests.
 
 * strict setup <=> a forest of hierarchies
 * a hierarchy => a forest of hierarchies
 
 Note that, in contrary to a hierarchy, a forest may be empty.
-That is, a forest is not required to contain even a single root/hierarchy.
+That is, a forest is not required to contain even a single root set.
 
-Note that any two hierarchies within a forest of N hierarchies are disjoint.
-That is, because the forest would otherwise have less than N hierarchies,
-or it would not even be a strict setup.
+Note that any two hierarchies in a forest of N hierarchies are disjoint. That
+is, because the forest would otherwise either have less than N hierarchies, or
+it would not even be a strict setup. From a loose perspective, a forest is
+a set of disjoint hierarchies.
 
 **CLARIFICATION**
 Any subset of a hierarchy is a forest of hierarchies.
@@ -179,60 +200,76 @@ Note that, under certain circumstances (i.e. the hierarchy's root set
 is included), the subset will itself be a hierarchy.
 
 <!-- ======================================================================= -->
-## TODOs
-
-**TODO** -
-define sub-hierarchy? -
-as counterpart to sub-tree?
-
-**TODO** -
-go super-meta with forests? -
-a forest is itself a set of elements -
-a hierarchy of forests? -
-"an outline of an outline"? -
-an unordered/ordered forest?
-
-**TODO** -
-Given a set of elements `E` -
-how many hierarchies are theoretically possible? -
-what is the max possible number of sets in `P` (hint: powerset)? -
-hint: resource management
-
-<!-- ======================================================================= -->
 ## Characteristic subset (CSS)
-## Identifying subset (ISS)
-
-* `ISS(s, H) := s - (union of all descendant sets of s)`
-* `s in H`, where `H` is a simple or strict hierarchy
-
-```
-Hierarchy A: ISS(A,A)={}, ISS(B,A)={1}
-Hierarchy B: ISS(B,B)={1}, ISS(A,B)={2}
-Hierarchy C: ISS(C,C)={}, ISS(A,C)={1}, ISS(B,C)={2}
-```
-
-Note that the identifying subset of a set, taken from a strict hierarchy,
-is mpty, if the corresponding set is the union of its descendant sets (e.g.
-`ISS(C,C)`). That is, a strict hierarchy does not guarantee that all its
-inner identifying subsets are non-empty.
 
 **CLARIFICATION**
-The identifying subset `ISS(s,H)` of set `s`, which is taken from a simple or
-strict hierarchy `H`, is a potentially empty subset of `s`, such that none of
-the elements in `ISS(s,H)` is also an element of any of the descendants of `s`.
+The **characteristic subset** of a set `s` in a forest `F`
+is defined as follows:
 
-In addition to that, `s` is the parent set of `ISS(s,H)`. Put differently,
-`s` is the least significant set in `H` that still contains all the elements
-in `ISS(s,H)`.
+* `CSS(s,F) := s - (union of all descendant sets of s)`
+* `s in P`, where `F := (V,P)` is some forest.
+
+The characteristic subset `CSS(s,F)` of set `s` in forest `F`, is a potentially
+empty subset of `s`, such that none of the elements in `CSS(s,F)` is also an
+element of any of the descendants of `s`.
+
+In addition to that, `s` is the parent set of `CSS(s,F)`. Put differently, `s`
+is the least significant set in `F` that contains all elements in `CSS(s,F)`.
+
+Note that a CSS is only an implicit subset. That is, a forest does not contain
+any CSS as an explicit element in its set of sets `P`.
+
+```
+|-A-------|   |-B-----------|
+| 1 |-A-| |   | |-A-| |-B-| |
+|   | 2 | |   | | 1 | | 2 | |
+|   |---| |   | |---| |---| |
+|---------|   |-------------|
+
+CSS(/A)={1}, CSS(/A/A)={2}
+CSS(/B)={}, CSS(/B/A)={1}, CSS(/B/B)={2}
+```
+
+Note that the CSS of a set is empty, if the corresponding set is the union of
+its descendant sets (e.g. `CSS(/B)`). That is, a forest does not guarantee that
+a CSS of its sets is non-empty.
 
 **CLARIFICATION**
-Given a non-empty identifying subset ISS and the corresponding hierarchy of
-sets H, the parent set of ISS in H can be uniquely identified. Hence the name.
+Given a non-empty CSS, and the corresponding forest of sets F, the parent set
+of the CSS in F can be uniquely identified (hence the name):
 
-1. Determine all the sets in H that contain ISS as a subset.
+1. Determine all the sets in F that contain all the elements of the given CSS.
 2. Determine the least significant set of those sets.
 
+Note that, in order to identify each set in `F`, the CSS of each set must
+non-empty. That is, each set must contain one or more elements that none
+of its descendant sets contain. Furthermore, and in order to identify each
+set in `F` with a single element, the CSS of each set must contain exactly
+one element.
+
 **CLARIFICATION**
-In order to guarantee that each identifying subset within a hierarchy is
-non-empty, every set within a hierarchy must have one or more elements that
-none of its descendant sets have.
+A multiset (of sets) is said to be **a strict hierarchy (of sets)**,
+if the following requirements are met:
+
+0. `H := (V,P)`
+1. The multiset is a simple hierarchy.
+2. `(#CSS(s,P) == 1)` for each set `s in P`
+
+Note that ...
+
+* strict hierarchy => simple hierarchy
+* Each set `s in P` can be identified by a single value `v in V`.
+
+**CLARIFICATION**
+A multiset (of sets) is said to be **a strict forest (of hierarchies)**
+or "a forest of strict hierarchies", if the following requirements are met:
+
+0. `F := (V,P)`
+1. The multiset is a simple forest.
+2. Each hierarchy `h in P` is strict.
+
+Note that
+
+* strict forest => simple forest
+* All hierarchies within a forest are disjoint.
+* Each set `s in P` can be identified by a single value `v in V`.

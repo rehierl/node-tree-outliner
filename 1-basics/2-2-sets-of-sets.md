@@ -1,5 +1,16 @@
 
 <!-- ======================================================================= -->
+## TODOs
+
+**TODO** -
+a node loosely contains a distant descendant -
+a node strictly contains a child -
+a set loosely contains a child set -
+a set strictly contains a distant set -
+both notions are "inverse" to each other -
+needs to be fixed before we focus on content injection
+
+<!-- ======================================================================= -->
 # Sets of sets
 
 subset-of
@@ -125,14 +136,6 @@ or not a super-set is known to have more elements than a sub-set.
 Note that the "loosely" vs. "strictly" distinction could be used to clarify how
 content was injected into some other content.
 
-**TODO** -
-a node loosely contains a distant descendant -
-a node strictly contains a child -
-a set loosely contains a child set -
-a set strictly contains a distant set -
-both notions are "inverse" to each other -
-this needs to be fixed once we focus on content injection
-
 <!-- ======================================================================= -->
 ## Visual representations
 
@@ -215,23 +218,20 @@ their respective super-sets.
 **CLARIFICATION**
 A set of sets is said to be **a (simple) setup**.
 
+* `S := (V,P)`.
+* `V` is a set of values/elements.
+* `P` is a set of subsets over `V`.
+
+Note that `P` is a subset of `V`'s power-set (i.e. `P subset-of P(V)`).
+That is, the elements in `P` are elements in `P(V)`.
+
+Note that `V` is the union of all sets in `P` (i.e. `V` may be empty). That is,
+a (simple) setup is completely specified by its set-of-sets `P`.
+
 Note that the above example is a setup. The example would however no longer be
 a setup, if number 3 would be removed from sets A and C. That is, because this
 example would then turn into a multiset of sets (i.e. sets C and F would then
 be identical, but distinct elements).
-
-**CLARIFICATION**
-A setup is a binary tuple defined as follows:
-
-* `S := (E,P)`.
-* `E` is a set of elements.
-* `P` is a set of subsets over `E`.
-
-Note that `P` is a subset of `E`'s power-set (i.e. `P subset-of P(E)`).
-That is, the elements in `P` are elements in `P(E)`.
-
-Note that `E` is the union of all sets in `P`.
-That is, `E` may even be empty.
 
 **CLARIFICATION**
 A setup is said to be **a consistent setup**,
@@ -248,7 +248,7 @@ consistent. That is, because it does not contain two distinct sets that
 could be in conflict with the above requirement. Likewise, a setup that
 contains one set only, is also considered to be consistent.
 
-Note that, a consistent setup, that contains the empty set as an element,
+Note that, a consistent setup, which contains the empty set as an element,
 is still consistent. That is, because the above requirement only needs to be
 satisfied by sets that are not disjoint from one another. The empty set is
 however disjoint to any set, and as such not required to be a subset of the
