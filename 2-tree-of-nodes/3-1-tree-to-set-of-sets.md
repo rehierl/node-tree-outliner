@@ -247,6 +247,10 @@ Assumed that a tree is non-empty (i.e. has a root node) ...
 * H0  - `H0 := (H1 union H2)`
 * H0* - `H0* := (H1 union H2*)`
 
+Note that in H0 (a set of sets), the inner set of a parent is merged with the
+outer set of its single child. That is, H0 contains one set which represents
+the parent's inner set and the child's outer set.
+
 **CLARIFICATION**
 Unordered trees define (simple) hierarchies of sets: H1, (H2*), H0*.
 
@@ -278,9 +282,41 @@ simple hierarchy:
 * H2* is not a hierarchy, because if the node tree only has a single node,
   then H2* will be an empty set of sets. If however the node tree has two
   or more nodes, then H2* will also always have exactly one root set.
-* H1 and H0* always represent simple hierarchies, H2* only if `(N > 1)`.
+* H1 and H0* always represent simple hierarchies.
+* H2* represents a simple hierarchy only if `(#N > 1)`.
 
 **Memory hook**
 Take a piece of paper and use it to draw a rooted node tree. After that, draw
 a border around that node tree. Then, draw a border around each subtree. When
 done, the set of borders represents the tree's hierarchy of outer sets H1.
+
+<!-- ======================================================================= -->
+
+H1
+
+* the defining node of an outer set is an element of the outer set
+  and an element of all outer sets that are ancestral to it
+* the defining node of an outer set is not an element of any
+  descendant outer set
+* the CSS of an outer set is never empty,
+  it always contains the defining node as its only element
+* `(css(s) = 1)` is guaranteed for any `s in P`
+* H1 is by design a strict hierarchy
+
+H2*
+
+* the CSS of the inner set of a parent node
+  has one or more nodes, i.e. the parent's child nodes
+* H2* does not contain the empty inner set of a leaf node
+* H2* is not a strict hierarchy
+
+H0*
+
+* the CSS of the inner set of a parent node,
+  that has one child only, contains the child node
+* the CSS of the inner set of a parent node,
+  that has more than one child, is empty because
+  H0* still contains the outer sets of these child nodes
+* the CSS of the outer set of a leaf node contains the leaf node
+* H* does not contain the inner set of a leaf node (empty set)
+* H0* is not a strict hierarchy

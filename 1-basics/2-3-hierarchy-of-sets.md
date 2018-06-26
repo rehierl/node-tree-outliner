@@ -1,25 +1,5 @@
 
 <!-- ======================================================================= -->
-## TODOs
-
-**TODO** -
-define sub-hierarchy? -
-as counterpart to sub-tree?
-
-**TODO** -
-go super-meta with forests? -
-a forest is itself a set of elements -
-a hierarchy of forests? -
-"an outline of an outline"? -
-an unordered/ordered forest?
-
-**TODO** -
-Given a set of elements `E` -
-how many hierarchies are theoretically possible? -
-what is the max possible number of sets in `P` (hint: powerset)? -
-hint: resource management
-
-<!-- ======================================================================= -->
 # Hierarchy of sets
 
 ```
@@ -117,18 +97,25 @@ a strict setup has the following properties:
 
 **CLARIFICATION**
 Each set `s in P` in a strict setup `S := (V,P)`
-has a unique rooted path `p := (s1,...,sk)` such that ...
+has a unique **rooted path** `p := (s0,s1,...,sk)` such that ...
 
 * `p(i) = s(i) = si`
 * `s(i) in P` and `(s(i) parent-set-of s(i+1))`
-* `s1` is a root set, and `(s == sk)`
+* `s0` is the universal set
+* `s0` is a virtual parent set that contains
+  all sets possible root sets as its child sets
+* `s1 in P` is a root set, and `(s == sk)`
 
 Note that there are several, less formal notations possible to denote the
-rooted path of a set. The notation that will be used here is a follows:
+rooted path of a set. The notation that will be used below is a follows:
 
+* note that `s0/...` <=> `/...`
 * `/s1` - the rooted path of a root set `s1`.
 * `/s1/.../sk` - the rooted path of set `sk` begins with root set `s1`.
 * `#p` will be used to refer to the length of the rooted path `p`.
+
+Note that each element within a rooted path is a set of possibly infinitely
+many elements.
 
 ```
 |-A-------|   |-B-----------|
@@ -143,7 +130,7 @@ rooted path of a set. The notation that will be used here is a follows:
 * Sets /B/A and /B/B are both strict subsets of root set B.
 
 <!-- ======================================================================= -->
-## Hierarchies and forests
+## Hierarchies, Forests
 
 **CLARIFICATION**
 A multiset (of sets) is said to be **a (simple) hierarchy (of sets)**,
@@ -202,50 +189,129 @@ is included), the subset will itself be a hierarchy.
 <!-- ======================================================================= -->
 ## Characteristic subset (CSS)
 
-**CLARIFICATION**
-The **characteristic subset** of a set `s` in a forest `F`
-is defined as follows:
-
-* `CSS(s,F) := s - (union of all descendant sets of s)`
-* `s in P`, where `F := (V,P)` is some forest.
-
-The characteristic subset `CSS(s,F)` of set `s` in forest `F`, is a potentially
-empty subset of `s`, such that none of the elements in `CSS(s,F)` is also an
-element of any of the descendants of `s`.
-
-In addition to that, `s` is the parent set of `CSS(s,F)`. Put differently, `s`
-is the least significant set in `F` that contains all elements in `CSS(s,F)`.
-
-Note that a CSS is only an implicit subset. That is, a forest does not contain
-any CSS as an explicit element in its set of sets `P`.
-
 ```
 |-A-------|   |-B-----------|
 | 1 |-A-| |   | |-A-| |-B-| |
 |   | 2 | |   | | 1 | | 2 | |
 |   |---| |   | |---| |---| |
 |---------|   |-------------|
-
-CSS(/A)={1}, CSS(/A/A)={2}
-CSS(/B)={}, CSS(/B/A)={1}, CSS(/B/B)={2}
 ```
 
-Note that the CSS of a set is empty, if the corresponding set is the union of
-its descendant sets (e.g. `CSS(/B)`). That is, a forest does not guarantee that
-a CSS of its sets is non-empty.
+* CSS(/A)={1}, CSS(/A/A)={2}
+* CSS(/B)={}, CSS(/B/A)={1}, CSS(/B/B)={2}
 
 **CLARIFICATION**
-Given a non-empty CSS, and the corresponding forest of sets F, the parent set
-of the CSS in F can be uniquely identified (hence the name):
+The **characteristic subset** CSS of set `s` in hierarchy `H := (V,P)`
+is defined as follows:
 
-1. Determine all the sets in F that contain all the elements of the given CSS.
-2. Determine the least significant set of those sets.
+* `css(s), css(s,H) := css-of-set(s,H)`
+* `css-of-set(s,H) := s - (union of all descendant sets of s in P)`
+* signature: (P,H) -> P(V)
 
-Note that, in order to identify each set in `F`, the CSS of each set must
-non-empty. That is, each set must contain one or more elements that none
-of its descendant sets contain. Furthermore, and in order to identify each
-set in `F` with a single element, the CSS of each set must contain exactly
-one element.
+Note that ...
+
+* Each set has exactly one CSS.
+* The CSS of a set is an element of the powerset `P(V)`.
+* A CSS is not an element in `P` (i.e. implicit, not explicit).
+
+The characteristic subset `css(s)` of set `s` in hierarchy `H`, is a potentially
+empty subset of `s`, such that none of the elements in `css(s)` is also an
+element of any of the descendants of `s`.
+
+Consequently, set `s` and all of its ancestor sets must contain all the elements
+in the set's characteristic subset. Otherwise, hierarchy `H` would not be a
+consistent setup (i.e. in conflict with `subset-of`) and therefore also not a
+hierarchy. Put differently, `s` is the least significant set that contains all
+the elements in `css(s)`. That is, set `s` is the parent set of `css(s)`.
+
+Note that the CSS of a set is empty, if the corresponding set is the union of
+its descendant sets (e.g. CSS(/B)). That is, a (simple) hierarchy does not
+guarantee that all the characteristic subsets of its sets are non-empty.
+
+**CLARIFICATION**
+Given a non-empty CSS, and the corresponding hierarchy `H := (V,P)`,
+the parent set of the CSS can be identified as follows:
+
+1. Determine all the sets in H to which the CSS is a subset.
+2. Return the least significant set of these sets.
+
+Note that this operation will be referred to as the `set-of-css()` operation:
+
+* `set-of-css(css,H)` := "the parent set of `css` in `H`"
+* signature: (P(V),H) -> P
+
+Note that ...
+
+* The set of a CSS can not be determined, if the supplied CSS is empty.
+* The CSS of each set must be non-empty in order to identify each set.
+
+<!-- ======================================================================= -->
+## Relationship between the elements in V and P
+
+(warning - not sure, if the following is error-free
+or even if it covers all possible cases)
+
+Note that this section is with regards to the requirements
+which a given set of sets P thrusts upon the set of elements V.
+
+```
+|-A-------|   |-B-----------|   |-C---------------------|
+| 1 |-A-| |   | |-A-| |-B-| |   | |-A-| |-B-----------| |
+|   | 2 | |   | | 1 | | 2 | |   | | 1 | | |-C-| |-D-| | |
+|   |---| |   | |---| |---| |   | |---| | | 2 | | 3 | | |
+|---------|   |-------------|   |       | |---| |---| | |
+                                |       |-------------| |
+                                |-----------------------|
+```
+
+(if each set is only allowed to hold a single element)
+
+A hierarchy is minimal, if none of the elements in V can be removed without
+changing the structure of the hierarchy and/or without violating any of the
+hierarchy's requirements (e.g. no empty set, one root set).
+
+(1) V must have one (unique) element per leaf set `l in L`
+
+* `L := { l | (l in P) and (l is a leaf set) }`
+* because H is not allowed to contain empty sets
+* each leaf set `l` must have a unique element in V
+* because it would otherwise not be possible
+  to distinguish the leaf sets from one another
+* `(#L <= #V)` must be true
+
+(2) V must have one (unique?) element per parent `p in P1`
+
+* `P1 := { p | (p in P) and (p is a parent) and (p has one child only) }`
+* because it would otherwise not be possible to distinguish
+  such a parent `p` from parent `q in P1` if `(p != q)`
+* `(#L + #P1 <= #V)` must be true
+
+<!-- ======================================================================= -->
+
+In order for `set-of-css()` to be inverse to `css-of-set()` (and vice versa),
+each set within a hierarchy `H := (V,P)` must have a non-empty CSS.
+
+Because of that requirement, each set must have one or more elements, which
+none of its descendant sets is allowed to have. Consequently, such a
+hierarchy must have at least as many elements in V as it has sets in P
+(i.e. `(#P <= #V)`).
+
+The CSS of a set can obviously be considered to represent data which is "unique"
+to that set. That is, because there is always exactly one least significant set
+which holds all the elements in that CSS. As such, the non-empty CSS of a set
+can be understood to further characterize the corresponding set.
+
+Note however, that the elements within the CSS of a set has an effect on the
+relationship a set has with all the other sets in a hierarchy. After all, the
+elements of a CSS are also elements of its ancestor sets (including the CSS's
+parent set). That is, the elements within a CSS are not independent of the
+relationships within a hierarchy (and vice versa).
+
+* Recall that a root set `r in P` is the union of all of its descendant sets:
+  i.e. `(#r == #V)`.
+
+<!-- ======================================================================= -->
+## strict hierarchy/forest
 
 **CLARIFICATION**
 A multiset (of sets) is said to be **a strict hierarchy (of sets)**,
@@ -253,12 +319,13 @@ if the following requirements are met:
 
 0. `H := (V,P)`
 1. The multiset is a simple hierarchy.
-2. `(#CSS(s,P) == 1)` for each set `s in P`
+2. `(#css(s) == 1)` for each set `s in P`
 
 Note that ...
 
 * strict hierarchy => simple hierarchy
-* Each set `s in P` can be identified by a single value `v in V`.
+* The CSS of each set consists of a single element in `V`.
+* Each set `s in P` can be identified by a single element in `V`.
 
 **CLARIFICATION**
 A multiset (of sets) is said to be **a strict forest (of hierarchies)**
@@ -266,7 +333,7 @@ or "a forest of strict hierarchies", if the following requirements are met:
 
 0. `F := (V,P)`
 1. The multiset is a simple forest.
-2. Each hierarchy `h in P` is strict.
+2. Each hierarchy in `F` is a strict hierarchy.
 
 Note that
 
