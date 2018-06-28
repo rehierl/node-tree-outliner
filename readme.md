@@ -13,23 +13,45 @@ It may and will change considerably without further notice.
 <!-- ======================================================================= -->
 ## Overview
 
-* [0-introduction](./0-introduction): A general introduction.
-* [1-basics](./1-basics): A recap of basic mathematical definitions.
+* [introduction](./0-introduction): A general introduction.
+* [basics](./1-basics): A recap of basic mathematical definitions.
   (Skim it to get an impression of its contents and my style of notation).
-* [2-tree-of-nodes](./2-tree-of-nodes): A recap of the formal definition of
+* [tree-of-nodes](./2-tree-of-nodes): A recap of the formal definition of
   node trees. In addition to that, the definition of important sequences.
   (Skim it to get an impression of its contents).
-* [3-basic-design](./3-basic-design): The designs default definitions:
+* [basic-design](./3-basic-design): The designs default definitions:
   a tree's node sequence, sectioning nodes, parent containers, ...
-* [4-extensions](./4-extensions): The definition of extensions to the
+* [extensions](./4-extensions): The definition of extensions to the
   default definitions: close modifiers (such as rank values), a role-based
   perspective (sectioning-node, end-marker-node), ...
-* [5-implementation](./5-implementation): A discussion of how to implement
+* [implementation](./5-implementation): A discussion of how to implement
   certain critical aspects.
-* [6-bigger-picture](./6-bigger-picture): My thoughts on the bigger picture.
+* [bigger-picture](./6-bigger-picture): My thoughts on the bigger picture.
 
 **Note (to self)** -
 Each folder should contain a "readme" file.
+
+<!-- ======================================================================= -->
+## Hierarchies
+
+Hierarchy of sets
+
+* [sets-of-sets](./1-basics/2-2-sets-of-sets):
+  Various fundamental definitions (e.g. setup of sets).
+* [hierarchy-of-sets](./1-basics/2-3-hierarchy-of-sets):
+  Definitions related to hierarchies (e.g. strict hierarchy of sets).
+* [tree-to-set-of-sets](./2-tree-of-nodes/3-1-tree-to-set-of-sets):
+  Transforming a node tree into a strict hierarchy of sets.
+* [set-of-sets-to-tree](./2-tree-of-nodes/3-2-set-of-sets-to-tree):
+  Transforming a strict hierarchy of sets into a node tree.
+* unordered tree <=> hierarchy of sets
+
+Hierarchy of sequences ( **todo**: flesh out )
+
+* [hierarchy-of-seqs](./1-basics/3-1-hierarchy-of-seqs):
+  Various fundamental definitions (e.g. setup of sequences).
+* ordered tree <=> hierarchy of sequences
+* ordered tree => hierarchy of sets <=> unordered tree
 
 <!-- ======================================================================= -->
 ## Notes

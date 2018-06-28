@@ -1,25 +1,5 @@
 
 <!-- ======================================================================= -->
-## TODOs
-
-**TODO** -
-define sub-hierarchy? -
-as counterpart to sub-tree?
-
-**TODO** -
-go meta with forests? -
-a forest is itself a set of elements -
-a hierarchy of forests? -
-"an outline of an outline"? -
-an unordered/ordered forest?
-
-**TODO** -
-given a set of elements E -
-how many hierarchies are theoretically possible? -
-what is the max possible number of sets in P (hint: powerset)? -
-with regards to: resource management, allocation of resources
-
-<!-- ======================================================================= -->
 ## One or more elements per CSS (???)
 
 * a set of elements E allows to create subsets in P(E)

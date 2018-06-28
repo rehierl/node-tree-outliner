@@ -1,4 +1,6 @@
 
+* are length values similar to rank values?
+
 <!-- ======================================================================= -->
 
 **CLARIFICATION**
@@ -168,9 +170,9 @@ With regards to H2:
   child nodes as an element.
 
 **CLARIFICATION**
-Both characteristics combined allow to use such a non-empty subset in order to
-identify a non-empty inner/outer set within the corresponding hierarchy (H1 or
-H2).
+Both characteristics combined allow to use such a non-empty subset in order
+to identify a non-empty inner/outer set within the corresponding hierarchy
+(H1 or H2).
 
 <!-- ======================================================================= -->
 ## Equivalency between trees and hierarchies of sets

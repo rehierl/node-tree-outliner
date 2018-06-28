@@ -41,13 +41,23 @@ clarification
 ## iteration
 
 ```
-for v in V begin
-  //- do something
+traceOfValues(setOfValues) begin
+  seq = new sequence()
+  for v in setOfValues begin
+    seq.append(v)
+  end
+  return seq
 end
+
+set = {1, 2}
+s1 = traceOfValues(set)
+s2 = traceOfValues(set)
 ```
 
 * any set of values allows to visit each of its values
-* however, any iteration may visit the values in any order!
+* any iteration may visit the values in any order
+* subsequent iterations may visit the values differently
+* i.e. `s1` is not guaranteed to be identical to `s2`
 * synonymous - iterate, visit
 
 <!-- ======================================================================= -->
@@ -177,9 +187,10 @@ clarification
 
 * `(A & B), (A and B) := { x : (x in A) and (x in B) }`
 
-### symmetric difference (xor)
+### symmetric difference (xor, ex-or)
 
-* `(A xor B) := {x : (x in (A\B or B\A)) }`
+* `(A xor B) := {x | x in (A\B or B\A) }`
+* `(A xor B) := (A \ B) or (B \ A) = (A or B) \ (A & B)`
 
 <!-- ======================================================================= -->
 ## power set
@@ -187,6 +198,11 @@ clarification
 * `A := {1,2}`
 * `P(A) := { {}, {1}, {2}, {1,2} }`
 * `P(A)` is the set of all subsets of `A`
+
+clarification
+
+* `P(A)` always contains the empty set `{}`
+* `#P(A) = 2^N = 8`, if `#A = N = 3`
 
 <!-- ======================================================================= -->
 ## V contains W

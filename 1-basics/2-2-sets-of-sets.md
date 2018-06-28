@@ -31,10 +31,13 @@ strict-subset-of
 Note that, if `(V subset-of W) or (V strict-subset-of W)` is true,
 then `V` may be referred to as the "subset" and `W` as the "super-set".
 
-Note that the empty set has no element that could be in conflict with the
-requirement of the `subset-of` definition. Hence, "all the elements of the
-empty set are elements of the super-set" is understood to be true. That is,
-because the requirement does not have a "must have an element" part.
+Note that the empty set `{}` has no element that could be in conflict with the
+requirement of the `subset-of` definition. Because of that, "all the elements
+of the empty set are elements of the super-set" is understood to be true. That
+is, because the definition of the `subset-of` operator merely states that, for
+`(V subset-of W)` to be true, any element in `V` must also be an element of set
+`W`. Obviously, there is no element in the empty set which could be in conflict
+with that requirement.
 
 (Don't think too much about empty sets, exclude them if possible.)
 
@@ -57,19 +60,21 @@ multiset-of-sets = <
 
 **CLARIFICATION**
 Set A and D share the **common element** 2.
-Both sets can be understood to be **coupled** with each other.
 
-Note that two or more sets have one or more elements in common,
-if the intersection of all sets is non-empty.
+Note that two or more sets have one or more elements in common, if the
+intersection of all sets involved is non-empty. That is, an element which
+is common to two or more sets must be an element of all those sets.
 
-Note that a common element has to be an element of all the sets involved.
+Note that common elements act as "links" between sets. These kind of links
+can be understood to connect sets with each other, which is why those sets
+can be understood to be "connected" or "coupled" with each other.
 
 **CLARIFICATION**
 Set A is **disjoint** from set E
 because both sets have no elements in common.
 
-* disjoint <=> not coupled
-* coupled <=> not disjoint
+* disjoint <=> not connected
+* connected <=> not disjoint
 
 Note that two or more sets are disjoint from one another,
 if the intersection of all sets is empty.
@@ -82,8 +87,13 @@ Set D is said to **overlap** set A
 because both sets have one or more elements in common,
 and because both have elements which the other set does not have.
 
+* `common := (A and D)` (e.g. `{2}`)
+* `diffAD := (A \ D)` (e.g. `{1}`)
+* `diffDA := (D \ A)` (e.g. `{3}`)
+* `overlap(A,D) := (#common > 0) and (#diffAD > 0) and (#diffDA > 0)`
+
 Note that set A also overlaps set D.
-Both sets can therefore be said to overlap each other.
+Both sets can be said to overlap each other.
 
 Note that none of the two sets is a subset of the other.
 
@@ -169,8 +179,10 @@ Note that the following fragments are equivalent:
               |-------|      |-------|
 ```
 
-Sets C and D are therefore identical. Consequently, there is also no
-distinct order that could be derived based on `subset-of` operator.
+Sets C and D are identical, which is because there is no element that would
+allow to distinguish set C from D (or vice versa). Consequently, there is no
+distinct order (inside vs. outside) that could be derived from the `subset-of`
+operator.
 
 <!-- ======================================================================= -->
 ## Consistent setup
@@ -216,25 +228,31 @@ another. That is because otherwise, both subsets would not be subsets to
 their respective super-sets.
 
 **CLARIFICATION**
-A set of sets is said to be **a (simple) setup**.
+A set of sets is said to be **a (simple) setup (of sets)**.
 
 * `S := (V,P)`.
+* i.e. a two-element tuple of sets.
 * `V` is a set of values/elements.
 * `P` is a set of subsets over `V`.
 
-Note that `P` is a subset of `V`'s power-set (i.e. `P subset-of P(V)`).
-That is, the elements in `P` are elements in `P(V)`.
+Note that the expression "s in S" is a simplification which needs to be
+understood as: s is a set of elements, and as such, an element of the
+set of sets P of the corresponding setup (i.e. "s in P").
 
-Note that `V` is the union of all sets in `P` (i.e. `V` may be empty). That is,
-a (simple) setup is completely specified by its set-of-sets `P`.
+Note that `P` is a subset of `V`'s power-set (i.e. `P subset-of P(V)`).
+That is, all elements in `P` are elements of `P(V)`.
+
+Note that `V` is the union of all sets in `P` (i.e. `V` may be empty).
+That is, a (simple) setup is completely defined by its set-of-sets `P`.
 
 Note that the above example is a setup. The example would however no longer be
-a setup, if number 3 would be removed from sets A and C. That is, because this
-example would then turn into a multiset of sets (i.e. sets C and F would then
-be identical, but distinct elements).
+a setup, if number 3 would be removed from set C. That is, because this example
+would then turn into a multiset of sets (i.e. sets C and F would be identical,
+but still distinct sets - think in terms of distinct objects that represent the
+same "thing").
 
 **CLARIFICATION**
-A setup is said to be **a consistent setup**,
+A setup is said to be **a consistent setup (of sets)**,
 if the following requirement is met:
 
 * If two distinct sets have one or more elements in common,
@@ -243,10 +261,10 @@ if the following requirement is met:
 Note that this characteristic is understood as
 "consistent with regards to the `subset-of` operator".
 
-Note that an empty setup (i.e. an empty set of sets) is considered to be 
-consistent. That is, because it does not contain two distinct sets that
-could be in conflict with the above requirement. Likewise, a setup that
-contains one set only, is also considered to be consistent.
+Note that an empty setup (i.e. an empty set of sets) is consistent. That is,
+because it does not contain two distinct sets that could be in conflict with
+the above requirement. The same reason allows to state that a setup, which
+contains one set only, is consistent.
 
 Note that, a consistent setup, which contains the empty set as an element,
 is still consistent. That is, because the above requirement only needs to be
@@ -254,8 +272,11 @@ satisfied by sets that are not disjoint from one another. The empty set is
 however disjoint to any set, and as such not required to be a subset of the
 other set (even though the empty set is a subset to any set). It can therefore
 not be stated that "two sets within a consistent setup are either disjoint,
-ex-or one set is a subset of the other", because the empty set always fulfills
-both aspects at the same time (i.e. a singularity).
+ex-or one set is a subset of the other". That is, because the empty set always
+fulfills both aspects at the same time (i.e. a singularity).
+
+* If two distinct sets have one or more elements in common,
+  then one set is a strict subset of the other.
 
 Note that, because a consistent setup is still a set of sets, each set in such
 a setup is unique. Because of that, and if two distinct sets in a consistent
@@ -266,19 +287,29 @@ also consistent with regards to the `strict-subset-of` operator.
 
 Note that this kind of consistency does not require that for each set (S1)
 another set (S2) exists with which the first set (S1) has any elements in
-common (e.g. set E, the empty set).
+common (e.g. set E, the empty set). That is, an extreme case of a consistent
+setup would be one in which all the sets within it are disjoint.
 
 **CLARIFICATION**
-A setup is said to be **a strict setup**,
-if the following requirement is met:
+A setup is said to be **a strict setup (of sets)**,
+if the following requirements are met:
 
-* The setup is a consistent setup.
-* The setup does not contain the empty set `{}`.
+0. `S := (V,P)`.
+1. The setup is consistent.
+2. The setup does not contain the empty set `{}`.
 
-Note that a strict setup allows to make the following statement:
+Note that ...
 
 * Two distinct sets in a strict setup are either disjoint,
   ex-or one set is a strict subset of the other.
+* (#P < #P(V)) is always true
+
+That is, because two non-empty sets either are disjoint from one another, ex-or
+they have one or more elements in common. Furthermore, the "consistent setup"
+requirement states that, if two non-empty sets have common elements, then one
+set must be a subset of the other. Because of that, two distinct sets within
+a strict setup are either disjoint, ex-or one set is a strict subset of the
+other.
 
 <!-- ======================================================================= -->
 ## Inconsistent setup

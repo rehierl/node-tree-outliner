@@ -2,10 +2,11 @@
 <!-- ======================================================================= -->
 # Node Tree <=> Strict Hierarchy
 
-heavily builds upon
+heavily builds upon setups/hierarchies of sets/sequences
 
-* basics / hierarchy of sets
-* basics / hierarchy of sequences
+* [basics / sets of sets](../1-basics/2-2-sets-of-sets)
+* [basics / hierarchy of sets](../1-basics/2-3-hierarchy-of-sets)
+* [basics / hierarchy of seqs](../1-basics/3-1-hierarchy-of-seqs)
 
 unordered tree <=> hierarchy of sets
 
