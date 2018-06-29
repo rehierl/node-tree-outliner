@@ -29,62 +29,27 @@ Note that ...
 * css(s) is an element of powerset P(V).
 * (css(l) == l) is true for any leaf set.
 
-Note that, because `s` is a strict subset to any of its ancestors, any element
-in `css(s)` is an element of `s` and an element of ancestor set of `s`.
+Note that, because `s` is a strict subset to any of its ancestors, any
+element in `css(s)` is an element of `s` and an element of any ancestor of `s`.
 Consequently, `s` is the least significant set in `H` which contains all the
 elements in `css(s)`. That is, set `s` acts as the parent set of `css(s)`.
 
 Note that the CSS of a set is empty, if the corresponding set is the union
 of its descendant sets (e.g. CSS(/B)). That is, a (simple) hierarchy does
-not guarantee that all the sets in P have non-empty characteristic subsets.
+not guarantee that all the sets in `P` have non-empty characteristic subsets.
+Furthermore, not every CSS is necessarily an element in `P`.
 
 Note that the characteristic subset could also be defined for strict setups.
 The advantage of a hierarchy over a strict setup is however, that a hierarchy
 always has a root set (i.e. a hierarchy is never empty).
 
 **CLARIFICATION**
-The parent set of a CSS can be identified as follows:
-
-* `set-of-css(css,H)` := "the parent set of css in H"
-* signature: (P(V),H) -> P
-
-Note that this operation will be referred to as the `set-of-css()` operation.
-It can be implemented as follows:
-
-```
-set-of-css(css,H) begin
-1: S = { s | (s in H) and (css subset-of s) }
-2: assert(#S > 0)
-3: s = least significant set in S
-4: assert(css-of-set(s) === css)
-5: return s
-end
-```
-
-Note that the result of this operation is undefined, if (1) the supplied CSS is
-empty, or (2) if there is no set `s` in H such that `(css(s) == css)` is true.
-
-* An empty input css may have no distinct parent set.
-* Set s can not be identified, if css(s) is empty.
-* The input css might contain elements that are not in V (see step 2).
-
-Note that, if the input css is a subset to V, a matching s in P is still not
-guaranteed to exist. That is, because similar to any set within a hierarchy,
-css either needs to be disjoint to a set in H, ex-or a subset of such a set.
-(e.g. css contains all elements of css(s) and one or more elements that are
-elements of a descendant of s - see step 4).
-
-Note that, because a hierarchy (like any other strict setup), does not contain
-the empty set (i.e. `({} not in P)`), the empty set could be used to represent
-a "not found" reply. That is, because the empty set never is a valid result as
-the input set would have to be empty.
-
-**CLARIFICATION**
 The set of all characteristic subsets `CSS(H)` is defined as follows:
 
-* `CSS(H) := { css(s,H) | (s in P) where (H := (V,P)) }`
+* `CSS(H) := { css(s,H) | for any (s in P) and (H := (V,P)) }`
 
 Note that CSS(H) is never empty.
+That is because any hierarchy always has a root set.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -93,15 +58,12 @@ Note that CSS(H) is never empty.
 In general, css(s) is an element in P(V).
 That is, css(s) is not necessarily an element in P.
 
-* css-of-set: (P,H) -> P(V)
-* set-of-css: (P(V),H) -> P
+The question is, whether or not the image/range of the `css-of-set(s)`
+operation can be reduced from P(V) to P? That is, would it be possible to
+change the signature from "(P,H) -> P(V)" to "(P,H) -> P"? For that to be
+possible, any CSS of a set would itself always have to be an element in P.
 
-The question is whether or not the image/range of the `css-of-set(s)` operation
-can be reduced from P(V) to P? That is, would it be possible to change the
-signature from "(P,H) -> P(V)" to "(P,H) -> P"? For that to be allowed, any
-CSS of a set in P would itself always have to be an element in P.
-
-(1) The CSS of leaf set `l` is identical to `l` (i.e. (css(l) == l)).
+(1) The CSS of leaf set l is identical to l (i.e. (css(l) == l)).
 That is, (CSS(H) & P) is guaranteed to be non-empty for any hierarchy.
 
 Note that a leaf set is never empty because H is by definition not allowed to
@@ -114,7 +76,7 @@ than leaf set l. Finally, any hierarchy always has one or more leaf sets.
 That is, (CSS(H) - P) is not necessarily empty.
 
 Note that the CSS of a parent set will be empty,
-if the parent set is the union of its descendant sets.
+if the parent set is identical to the union of its descendant sets.
 
 Note that H can by definition not contain the empty set.
 Consequently, CSS(H) may contain one or more elements that are not in P.
@@ -128,23 +90,21 @@ in css(s) are also elements of s, any element in css(s) is also an element of
 any ancestor of s. That is because s, as a set within a hierarchy, is still a
 strict subset to its ancestors.
 
-And because s, as a parent set in a hierarchy, has one or more non-empty child
-sets, css(s) is guaranteed to have fewer elements than s itself. Consequently,
-and in order for (css(s) in P) to be true, css(s) would have to be a descendant
-set of s. That however is not possible because css(s) would then be empty.
-Obviously, css(s) can not be empty and non-empty at the same time, which is why
-(css(s) not in P) is true.
+And because s, as a parent set in a hierarchy, has one or more child sets,
+css(s) is guaranteed to have fewer elements than s itself. Consequently, and
+in order for (css(s) in P) to be true, css(s) would also have to exist as a
+separate descendant set of s. That however is not possible because css(s) would
+then have to be empty. Obviously, css(s) can not be empty and non-empty at the
+same time, which is why (css(s) in P) is false in this particular case.
 
 (Summary) Set (CSS(H) & P) is guaranteed to be non-empty for any hierarchy, and
 set (CSS(H) - P) is guaranteed to be non-empty if (#PS > 0). Consequently, the
-signatures of both operations can not be restricted to P.
+signature of `css-of-set()` can not be restricted to P.
 
 Note that ...
 
 * (s in LS) <=> (css(s) in P)
 * (s in PS) <=> (css(s) not in P)
-* a set in (P - P(V)) is not necessarily a CSS
-* a set in (P(V) - P) is not necessarily a CSS
 
 **CLARIFICATION**
 Any CSS is disjoint to any other CSS.
@@ -162,9 +122,9 @@ one set is a strict subset of the other, set t is assumed to be a descendant of
 set s.
 
 (3) However, if t would indeed be a descendant of s, then css(s) could not
-contain any element in t and therefore also not any element in css(t). That
-is due to the definition of a CSS. Consequently, no two distinct characteristic
-subsets exist within the same hierarchy that have even one element in common.
+contain any element in t and therefore also not any element in css(t).
+Consequently, no two distinct characteristic subsets can exist that have
+one or more elements in common.
 
 Note that ...
 
@@ -175,13 +135,54 @@ Note that ...
 Any element in css(s) allows to identify its parent set s.
 
 Because all characteristic subsets are disjoint, no two such subsets can exist
-within the same hierarchy that have even one element in common. Because of that,
-any element in css(s) is sufficient to identify parent set s.
+that have even one or more elements in common. Because of that, any element in
+css(s) is sufficient to identify parent set s.
 
 Note that, in order to identify every set within a hierarchy, the CSS of each
 set must have one or more elements (i.e. non-empty).
 
 <!-- ======================================================================= -->
+## derived statements
+
+**CLARIFICATION**
+The parent set of a CSS can be identified as follows:
+
+* `set-of-css(css,H)` := "the parent set of css in P"
+* signature: (P(V),H) -> P
+
+An implementation of this operation could be:
+
+```
+set-of-css(css,H) begin
+1: S = < s | (s in H) and (css(s) === css) >
+2: assert(#S > 0)
+3: assert(#S < 1)
+4: return oneElementOf(S)
+end
+```
+
+Note that ...
+
+* The result may be undefined because if `(css == {})` is true,
+  then H could contain more than one parent set that is identical
+  to the union of its descendants (step 3 could trigger).
+* The result will be undefined, if `(css - V)` is non-empty.
+  That is, because no set `s` can exist such that `(css(s) === css)`.
+  As such, `css` would represent an input error.
+* The result may be undefined if `(css - V)` is empty.
+  That is, because `(css not in CSS(H))` will be true
+  if `(css(s) strict-subset-of css)` and `(css subset-of s)`.
+* The result is unique for any `(css in (CSS(H) - {}))`.
+  That is because any CSS is disjoint to any other CSS.
+
+Note that, because a hierarchy (like any other strict setup), does not contain
+the empty set (i.e. `({} not in P)`), the empty set could be used to represent
+a "does not exist" reply.
+
+<!-- ======================================================================= -->
+
+* what does a CSS allow to do?
+* characteristic element
 
 **CLARIFICATION**
 
