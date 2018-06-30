@@ -19,7 +19,7 @@ letter identifiers
 * `vi, v:i` := some value `v` identified by `i in [1,N]`
 * number ids may be generalized into letter ids
 * `vi` represents one of the available values
-* e.g. `(vi = v2)` for `i = 2`
+* e.g. `(vi == v2)` for `i = 2`
 
 clarification
 

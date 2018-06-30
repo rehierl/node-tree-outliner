@@ -14,9 +14,9 @@
 * CSS(/B)={}, CSS(/B/A)={1}, CSS(/B/B)={2}
 
 **CLARIFICATION**
-The **characteristic subset** `css(s)` of set `s` in hierarchy `H := (V,P)`,
-is a potentially empty subset of `s` such that no element in `css(s)` is also
-an element of any of the descendants of `s`.
+The **characteristic subset (CSS)** `css(s)` of set `s` in hierarchy
+`H := (V,P)`, is a potentially empty subset of `s` such that no element
+in `css(s)` is also an element of any of the descendants of `s`.
 
 * `css(s), css(s,H) := css-of-set(s,H)`
 * `css-of-set(s,H) := s - (union of all descendant sets of s)`
@@ -24,8 +24,8 @@ an element of any of the descendants of `s`.
 
 Note that ...
 
-* Each set always has exactly one CSS.
 * The result of css(s) is defined for any set in H.
+* Each set always has exactly one CSS.
 * css(s) is an element of powerset P(V).
 * (css(l) == l) is true for any leaf set.
 
@@ -103,46 +103,44 @@ signature of `css-of-set()` can not be restricted to P.
 
 Note that ...
 
+* (s in LS) => (css(s) != {})
+* (css(s) == {}) => (s in PS)
 * (s in LS) <=> (css(s) in P)
 * (s in PS) <=> (css(s) not in P)
 
 **CLARIFICATION**
+A CSS is understood to be an existing part of a hierarchy.
+
+Even though a CSS is not necessarily an element in P (i.e. not an explicit
+set in H), any CSS is understood as an existing subset and consequently as
+a distinct element. That is, because a hierarchy allows to extract any CSS
+within it.
+
+**CLARIFICATION**
 Any CSS is disjoint to any other CSS.
 
-(0) For this statement to not be true, it would have to be possible that two
-distinct characteristic subsets could exist (within the same hierarchy), which
-have one or more elements in common. That is, both subsets could not be empty.
+(1) For both subsets css(s) and css(t) to not be disjoint, sets s and t must
+have one or more elements in common. That is, because css(s) is still a subset
+of s, and css(t) is still a subset of t.
 
-(1) For both subsets css(s) and css(t) to not be disjoint, sets s and t would
-have to share one or more common elements. That is, because css(s) is still a
-subset of s, and css(t) is still a subset of t.
+(2) In order for s and t to share one or more elements, t must be a strict
+subset (i.e. descendant) of s (or vice versa). That is, because in a hierarchy,
+two distinct sets are either disjoint, ex-or one set is a strict subset of the
+other.
 
-(2) And because two distinct sets within a hierarchy are either disjoint, ex-or
-one set is a strict subset of the other, set t is assumed to be a descendant of
-set s.
-
-(3) However, if t would indeed be a descendant of s, then css(s) could not
-contain any element in t and therefore also not any element in css(t).
-Consequently, no two distinct characteristic subsets can exist that have
-one or more elements in common.
+(3) If t would indeed be a descendant of s, then css(s) could (by definition)
+not contain any element in t and therefore also not any element in css(t).
+Consequently, no two distinct characteristic subsets can exist that have one
+or more elements in common. That is, two distinct characteristic subsets are
+always disjoint.
 
 Note that ...
 
 * css(s) and css(t) are disjoint, for any (s,t in P) and if (s != t)
 * css(s) and css(t) can not have even one element in common
 
-**CLARIFICATION**
-Any element in css(s) allows to identify its parent set s.
-
-Because all characteristic subsets are disjoint, no two such subsets can exist
-that have even one or more elements in common. Because of that, any element in
-css(s) is sufficient to identify parent set s.
-
-Note that, in order to identify every set within a hierarchy, the CSS of each
-set must have one or more elements (i.e. non-empty).
-
 <!-- ======================================================================= -->
-## derived statements
+## set-of-css()
 
 **CLARIFICATION**
 The parent set of a CSS can be identified as follows:
@@ -157,83 +155,80 @@ set-of-css(css,H) begin
 1: S = < s | (s in H) and (css(s) === css) >
 2: assert(#S > 0)
 3: assert(#S < 1)
-4: return oneElementOf(S)
+4: return anElementOutOf(S)
 end
 ```
 
 Note that ...
 
-* The result may be undefined because if `(css == {})` is true,
-  then H could contain more than one parent set that is identical
-  to the union of its descendants (step 3 could trigger).
-* The result will be undefined, if `(css - V)` is non-empty.
-  That is, because no set `s` can exist such that `(css(s) === css)`.
-  As such, `css` would represent an input error.
-* The result may be undefined if `(css - V)` is empty.
-  That is, because `(css not in CSS(H))` will be true
-  if `(css(s) strict-subset-of css)` and `(css subset-of s)`.
-* The result is unique for any `(css in (CSS(H) - {}))`.
+* The result may be undefined if `(css == {})` is true. That is,
+  because H could contain more than one parent set which is
+  identical to the union of its descendants (will trigger step 3).
+* The result will be undefined if `(css - V)` is non-empty.
+  That is, because no set `s` can then exist such that `(css(s) === css)`.
+* The result may be undefined even if `(css - V)` is empty.
+  (e.g. if `css` is a parent set in H).
+* The result is defined and unique for any `(css in (CSS(H) - {}))`.
   That is because any CSS is disjoint to any other CSS.
 
 Note that, because a hierarchy (like any other strict setup), does not contain
 the empty set (i.e. `({} not in P)`), the empty set could be used to represent
-a "does not exist" reply.
-
-<!-- ======================================================================= -->
-
-* what does a CSS allow to do?
-* characteristic element
+a "does not exist" response.
 
 **CLARIFICATION**
+The result of `set-of-css()` is defined and unique,
+if the following requirements are met:
 
+* `(css in CSS(H))` is true (i.e. no input error).
+* Each CSS in the hierarchy has one or more elements.
+
+In such a case, `set-of-css()` is inverse to `css-of-set()`:
+
+* `(set-of-css( css-of-set(s) ) == s)` is true for any `s in H`
+* `(css-of-set( set-of-css(css) ) == css)` is true for any `css in CSS(H)`
+
+<!-- ======================================================================= -->
+## derived statements
+
+**CLARIFICATION**
+Even a single element in css(s) is sufficient to uniquely identify set s.
+
+Because a CSS is disjoint to any other CSS, no two such subsets can exist
+that have even one element in common. Consequently, any element in css(s)
+is sufficient to uniquely identify the parent set s of css(s).
+
+Note that these kind of elements are obviously not "unique" to s in a strict
+sense. That is, because s may have one or more ancestor sets and because css(s)
+is also a subset to all of these ancestors. However, these elements are "unique"
+to s in such a way that s is the least significant set of those sets. No other
+set contains these elements in that particular "unique" way.
+
+**CLARIFICATION**
+A unique point of view: The elements within a CSS are no "object properties",
+they are "object identifiers". That is, any element within a CSS can be seen as
+a reference to data that is unique to a set. This allows to associate a property
+with a set that may hold the same value as the property of another set (e.g. a
+tag name).
+
+**CLARIFICATION**
+Any non-empty CSS can be minimized to hold one element only.
+
+A non-empty CSS does not need to have more than one element. Additional elements
+do not add substantial information to a hierarchy. They merely increase the
+storage requirement of a hierarchy (hint: ancestor sets). That is, instead of
+having multiple distinct objects per set, each of which holds a single property,
+a set may and should contain only one reference to an object that combines all
+the properties of that set.
+
+<!-- ======================================================================= -->
+## TODO
+
+* a tree of references
+* what does a CSS allow to do?
+* characteristic element
+* allow to verify that a hierarchy of sets corresponds with a node tree
 * not every s in P is a CSS of some other set in P
 * `(P - CSS(H))` - if non-empty, then not every set in P is a CSS
-
-<!-- ======================================================================= -->
-## Relationship between the elements in V and P
-
-(warning - not sure, if the following is error-free
-or even if it covers all possible cases)
-
-Note that this section is with regards to the requirements
-which a given set of sets P thrusts upon the set of elements V.
-
-```
-|-A-------|   |-B-----------|   |-C---------------------|
-| 1 |-A-| |   | |-A-| |-B-| |   | |-A-| |-B-----------| |
-|   | 2 | |   | | 1 | | 2 | |   | | 1 | | |-C-| |-D-| | |
-|   |---| |   | |---| |---| |   | |---| | | 2 | | 3 | | |
-|---------|   |-------------|   |       | |---| |---| | |
-                                |       |-------------| |
-                                |-----------------------|
-```
-
-(if each set is only allowed to hold a single element)
-
-A hierarchy is minimal, if none of the elements in V can be removed without
-changing the structure of the hierarchy and/or without violating any of the
-hierarchy's requirements (e.g. no empty set, one root set).
-
-(1) V must have one (unique) element per leaf set `l in L`
-
-* `L := { l | (l in P) and (l is a leaf set) }`
-* because H is not allowed to contain empty sets
-* each leaf set `l` must have a unique element in V
-* because it would otherwise not be possible
-  to distinguish the leaf sets from one another
-* `(#L <= #V)` must be true
-
-(2) V must have one (unique?) element per parent `p in P1`
-
-* `P1 := { p | (p in P) and (p is a parent) and (p has one child only) }`
-* because it would otherwise not be possible to distinguish
-  such a parent `p` from parent `q in P1` if `(p != q)`
-* `(#L + #P1 <= #V)` must be true
-
-<!-- ======================================================================= -->
-
-In order for `set-of-css()` to be inverse to `css-of-set()` (and vice versa),
-each set within a hierarchy `H := (V,P)` must have a non-empty CSS.
 
 Because of that requirement, each set must have one or more elements, which
 none of its descendant sets is allowed to have. Consequently, such a

@@ -1,4 +1,5 @@
 
+* strict hierarchy => (#V == #P)?
 * are length values similar to rank values?
 
 <!-- ======================================================================= -->
@@ -22,6 +23,47 @@ Note that ...
 * H0* always holds less than `#N*2` sets.
 * Note that a node's inner set is identical to the outer set of its only child.
 * Note that no set of elements/sets can contain an element/set more than once.
+
+<!-- ======================================================================= -->
+## Relationship between the elements in V and P
+
+(warning - not sure, if the following is error-free
+or even if it covers all possible cases)
+
+Note that this section is with regards to the requirements
+which a given set of sets P thrusts upon the set of elements V.
+
+```
+|-A-------|   |-B-----------|   |-C---------------------|
+| 1 |-A-| |   | |-A-| |-B-| |   | |-A-| |-B-----------| |
+|   | 2 | |   | | 1 | | 2 | |   | | 1 | | |-C-| |-D-| | |
+|   |---| |   | |---| |---| |   | |---| | | 2 | | 3 | | |
+|---------|   |-------------|   |       | |---| |---| | |
+                                |       |-------------| |
+                                |-----------------------|
+```
+
+(if each set is only allowed to hold a single element)
+
+A hierarchy is minimal, if none of the elements in V can be removed without
+changing the structure of the hierarchy and/or without violating any of the
+hierarchy's requirements (e.g. no empty set, one root set).
+
+(1) V must have one (unique) element per leaf set `l in L`
+
+* `L := { l | (l in P) and (l is a leaf set) }`
+* because H is not allowed to contain empty sets
+* each leaf set `l` must have a unique element in V
+* because it would otherwise not be possible
+  to distinguish the leaf sets from one another
+* `(#L <= #V)` must be true
+
+(2) V must have one (unique?) element per parent `p in P1`
+
+* `P1 := { p | (p in P) and (p is a parent) and (p has one child only) }`
+* because it would otherwise not be possible to distinguish
+  such a parent `p` from parent `q in P1` if `(p != q)`
+* `(#L + #P1 <= #V)` must be true
 
 <!-- ======================================================================= -->
 ## In search for equivalency
@@ -214,3 +256,4 @@ still be a hierarchy after the addition, it would no longer be possible to
 determine the node each set represents. That is, because the one two-element
 CSS does not allow to determine whether the node or the new element it contains
 is the node the corresponding set represents.
+

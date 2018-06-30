@@ -16,9 +16,11 @@ It may and will change considerably without further notice.
 * [introduction](./0-introduction): A general introduction.
 * [basics](./1-basics): A recap of basic mathematical definitions.
   (Skim it to get an impression of its contents and my style of notation).
-* [tree-of-nodes](./2-tree-of-nodes): A recap of the formal definition of
+* [node-trees](./2-0-node-trees): A recap of the formal definition of
   node trees. In addition to that, the definition of important sequences.
   (Skim it to get an impression of its contents).
+* [hierarchies](./2-1-hierarchies): About the equivalency between node trees
+  and hierarchies of sets and sequences.
 * [basic-design](./3-basic-design): The designs default definitions:
   a tree's node sequence, sectioning nodes, parent containers, ...
 * [extensions](./4-extensions): The definition of extensions to the
@@ -30,28 +32,6 @@ It may and will change considerably without further notice.
 
 **Note (to self)** -
 Each folder should contain a "readme" file.
-
-<!-- ======================================================================= -->
-## Hierarchies
-
-Hierarchy of sets
-
-* [sets-of-sets](./1-basics/2-2-sets-of-sets):
-  Various fundamental definitions (e.g. setup of sets).
-* [hierarchy-of-sets](./1-basics/2-3-hierarchy-of-sets):
-  Definitions related to hierarchies (e.g. strict hierarchy of sets).
-* [tree-to-set-of-sets](./2-tree-of-nodes/3-1-tree-to-set-of-sets):
-  Transforming a node tree into a strict hierarchy of sets.
-* [set-of-sets-to-tree](./2-tree-of-nodes/3-2-set-of-sets-to-tree):
-  Transforming a strict hierarchy of sets into a node tree.
-* unordered tree <=> hierarchy of sets
-
-Hierarchy of sequences ( **todo**: flesh out )
-
-* [hierarchy-of-seqs](./1-basics/3-1-hierarchy-of-seqs):
-  Various fundamental definitions (e.g. setup of sequences).
-* ordered tree <=> hierarchy of sequences
-* ordered tree => hierarchy of sets <=> unordered tree
 
 <!-- ======================================================================= -->
 ## Notes
