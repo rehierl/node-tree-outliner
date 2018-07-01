@@ -1,10 +1,16 @@
 
-* the issue - sequences based upon an ordered set
-* each element within such a sequence appears once, and once only
+the issue
+
+* sequences based upon an ordered set
+* each element within such a sequence appears no more than once
 * the order of elements in such a sequence corresponds with the ordered set
 
+clarification
+
+* poset (partially ordered set) - not every pair needs to be comparable
+
 <!-- ======================================================================= -->
-# Ordered sets of values
+# Ordered sets
 
 simple sets of values
 

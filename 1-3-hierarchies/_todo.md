@@ -1,4 +1,7 @@
 
+<!-- ======================================================================= -->
+# TODOs
+
 * strict hierarchy => (#V == #P)?
 * are length values similar to rank values?
 

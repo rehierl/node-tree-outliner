@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# List of things to do
+# TODOs
 
 The ultimate goal is to leave no question unanswered -
 develop a design that can be used to explain all possible circumstances -

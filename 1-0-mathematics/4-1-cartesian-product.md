@@ -7,7 +7,7 @@
 
 clarification
 
-* cartesian product <!> concatenation
+* cartesian product <=!=> concatenation
 * main difference: concatenation is associative, the cartesian product is not
 
 <!-- ======================================================================= -->
@@ -34,7 +34,9 @@ clarification
 
 clarification
 
-* `A X B X C X ...` is essentially undefined
+* `A X B X C X ...` is undefined
+* unless an implicit order is assumed - e.g. left-to-right
+* furthermore, each intermediate operation will produce a nested sequence
 
 <!-- ======================================================================= -->
 ## multi cartesian product
