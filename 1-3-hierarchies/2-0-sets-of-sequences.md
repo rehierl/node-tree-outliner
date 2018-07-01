@@ -1,4 +1,14 @@
 
+* a set of sequences `S` contains sequences only
+* `(is-sequence s)` is true for any `s in S`
+* any sequence `s in S` may have any length - i.e. `#s in [0,*]`
+* `(#si != #sj)` may be true for any two sequences `(si !== sj)`
+
+inverted set of sequences (S')
+
+* `S', inv(S) := { inv(s) : s in S }`
+* `inv(inv(S)) <-> S`
+
 <!-- ======================================================================= -->
 # Subsequences of elements
 

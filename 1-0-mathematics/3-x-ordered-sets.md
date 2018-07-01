@@ -1,4 +1,8 @@
 
+* the issue - sequences based upon an ordered set
+* each element within such a sequence appears once, and once only
+* the order of elements in such a sequence corresponds with the ordered set
+
 <!-- ======================================================================= -->
 # Ordered sets of values
 

@@ -37,35 +37,43 @@ Each folder should contain a "readme" file.
 ## Notes
 
 **Note** -
-I can not guarantee that I didn't make an error. All I can do is to try to be as
-thorough as I can. So I need to ask this: If you spot a conceptual problem, then
-(by all means) please point it out.
+Most links (if not all) in this repository reference pages on
+[en.wikipedia.org](https://en.wikipedia.org/).
+The main intention behind these links is to provide pointers to further
+reading material, which is literally available to anyone on this planet.
+
+**Note** -
+I write in pure text form. This means that I currently do not pay much attention
+to what it will look like, if the contents are displayed (e.g. inside of a web
+browser). If documents are difficult, if not impossible to read, then try the
+source view.
 
 **Note** -
 The whole issue is quite abstract. It is anything but easy to wrap my head
 around certain aspects and derive even the simplest of conclusions without
-introducing a conflict. Until I have reached a state that I can call "stable",
-I will have to respectfully decline any offer for full-blown cooperation.
+introducing a conflict. Because of that, my focus is on the overall content,
+rather than on flawless notation.
 
 **Note** -
-I write in pure text form. This means that I don't pay much attention to
-what it will look like, if the contents are displayed inside of a browser.
-If documents are hard, if not impossible to read from within a browser,
-then please try the source view.
+I can not guarantee that I did not make any mistake. All I can do is to try to
+be as thorough as I can. If you spot a conceptual problem, then (by all means)
+please point it out.
 
 **Note** -
 I use **CLARIFICATION** markers to mark important statements. These statements
-can be clarifications and/or definitions. That is, once the time has come,
-these kind of markers will have to be revised to properly reflect what kind of
-statement the corresponding subsections contain. Until then, they should be read
+can be clarifications and even definitions. That is, once the time has come,
+these kind of markers will have to be edited to properly reflect what kind of
+statement the corresponding sections contain. Until then, they should be read
 as "something important" and understood to only support visual navigation from
 one important statement to another.
 
 **Note** -
-I will most probably have to rename this repository in order to make place for
-a proof-of-concept implementation: "node-tree-outliner" may, at some point in
-the future, be used to hold such an implementation and "note-tree-outliner-design",
-or something similar, will hold the future version of this design description.
+In the end, I will most probably have to rename this repository in order to
+make place for a proof-of-concept implementation: "node-tree-outliner" may,
+at some point in the future, be used to hold such an implementation and
+"note-tree-outliner-design", or something similar, will hold the future
+version of this design description. If that happens, links will be added that
+point to the new location.
 
 <!-- ======================================================================= -->
 ## PRELIMINARY LICENSE

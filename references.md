@@ -5,20 +5,6 @@
 This is not intended as a complete listing.
 Just an overview to help people get started in finding further material.
 
-mixed
-
-* [wikipedia, boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)
-* [wikipedia, arity](https://en.wikipedia.org/wiki/Arity)
-* [wikipedia, type theory](https://en.wikipedia.org/wiki/Type_theory)
-* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
-
-syntax specifications
-
-* [wikipedia, backus-naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
-* [wikipedia, augmented backus-naur form](https://en.wikipedia.org/wiki/Augmented_Backus%E2%80%93Naur_form)
-* [ietf, (augmented) backus-naur form](https://tools.ietf.org/html/rfc5234)
-* [wikipedia, regular expressions](https://en.wikipedia.org/wiki/Regular_expression)
-
 sets
 
 * [wikipedia, multiset](https://en.wikipedia.org/wiki/Multiset)

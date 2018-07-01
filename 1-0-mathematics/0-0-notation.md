@@ -1,8 +1,9 @@
 
 <!-- ======================================================================= -->
-# Basics
+# Notation
 
-The following content is intended to provide an overview of notational aspects.
+The main intention behind the following content is to provide an
+overview of the notational style used throughout this repository.
 
 <!-- ======================================================================= -->
 ## not, or, and
@@ -29,7 +30,7 @@ a b | a not b |
 1 1 | 1 0 | 0 |
 ```
 
-* `(a not b) := (a and !b)`
+* `(a ! b), (a not b) := (a and !b)`
 * in set-based speech, (a not b) is equivalent to (A \ B)
 
 <!-- ======================================================================= -->

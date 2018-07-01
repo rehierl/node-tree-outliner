@@ -52,8 +52,9 @@ clarification
 a set of values
 
 * `V := { vi | vi in S }`
-* `S` contains primitive values only
-* `S` contains no strings, no sets, etc.
+* `S` contains primitive/atomic values only
+* no value is complex - no strings, no sets, etc.
+* i.e. "a set of atomic values"
 
 a set of sets
 
