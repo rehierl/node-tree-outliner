@@ -17,7 +17,7 @@ clarification
 clarification
 
 * any sequence is itself a value
-* the patterns `(e = s)`, `{ s }`, `[ s ]` are all allowed
+* the expressions `(e = s)`, `{ s }`, `[ s ]` are all valid
 
 <!-- ======================================================================= -->
 ## is-sequence
@@ -91,11 +91,21 @@ clarification
 * `(s != t)` is true, if both sequences differ in length and/or values
 
 <!-- ======================================================================= -->
-## is-unique
+## distinct sequence
 
-* `(is-unique s), isUnique(s)` are true, if `(s[i] != s[j])`
-  for any indexes `i,j in [1,#s]` such that `(i != j)`
-* `s` is itself unique, if all elements have different/unique values
+* `(is-distinct s), (is-unique s) := isDistinct(s)`
+* `isDistinct(s)` := `(s[i] != s[j])` for any `i,j in [1,#s]` and `(i != j)`
+
+Note that a sequence is said to be a **distinct sequence**, if the sequence
+consists of unique/distinct elements/values only. That is, a distinct sequence
+contains none of its elements/values more than once. As such, a distinct
+sequence can be understood to define a set of elements/values.
+
+Note that a distinct sequence defines an ordered set (see relations), if the
+order of the elements within that sequence is understood to define the order
+of elements/values within the corresponding ordered set. Depending on the
+respective context, the semantics of the element order may therefore be:
+e.g. `(s[i+1] subsequent-to s[i])`.
 
 <!-- ======================================================================= -->
 ## inverse sequence (s')

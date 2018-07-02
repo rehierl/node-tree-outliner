@@ -6,29 +6,35 @@ The purpose of this repository is to flesh out a design that can be used to
 implement a general-purpose outline algorithm for any rooted ordered tree of
 nodes.
 
-This repository is **in a state of flux**.
-It may and will change considerably without further notice.
-(Direct links to files within this repository may break at any time).
+This repository is **in a state of flux**. It may and will change considerably
+over time. (Direct links to files within this repository will break without
+further notice).
 
 <!-- ======================================================================= -->
 ## Overview
 
-* [introduction](./0-introduction): A general introduction.
-* [basics](./1-basics): A recap of basic mathematical definitions.
-  (Skim it to get an impression of its contents and my style of notation).
-* [node-trees](./2-0-node-trees): A recap of the formal definition of
-  node trees. In addition to that, the definition of important sequences.
-  (Skim it to get an impression of its contents).
-* [hierarchies](./2-1-hierarchies): About the equivalency between node trees
-  and hierarchies of sets and sequences.
-* [basic-design](./3-basic-design): The designs default definitions:
-  a tree's node sequence, sectioning nodes, parent containers, ...
-* [extensions](./4-extensions): The definition of extensions to the
-  default definitions: close modifiers (such as rank values), a role-based
-  perspective (sectioning-node, end-marker-node), ...
-* [implementation](./5-implementation): A discussion of how to implement
-  certain critical aspects.
-* [bigger-picture](./6-bigger-picture): My thoughts on the bigger picture.
+[0. about](./0-0-about): This folder holds general background information.
+
+[1. mathematics](./1-0-mathematics) - Basic mathematical definitions:
+values, variables, sets, sequences, types/domains, etc.
+
+* [1.1. relations](./1-1-relations) - Definitions with regards to relations
+  and ordered sets.
+* [1.2. node trees](./1-2-node-trees) - Definitions related to node trees:
+  paths, traversal, sequences of (nodes, paths, tags, tokens).
+* [1.3. hierarchies](./1-3-hierarchies) - Hierarchies of sets/sequences
+  and their meaning with regards to node trees.
+* [1.4. computing](./1-4-computing) - Aspects related to computer science:
+  (currently in its infant stages).
+
+[2. core design](./2-0-core-design) - The designs default definitions:
+a tree's node sequence, sectioning nodes, parent containers, ...
+
+* [2.1. extensions](./2-1-extensions) - The definition of extensions to the
+  default design: close modifiers (rank values), a role-based perspective
+  (sectioning-node, end-marker-node), ...
+* [2.2. implementation](./2-2-implementation) - A discussion of critical,
+  implementation-specific aspects.
 
 **Note (to self)** -
 Each folder should contain a "readme" file.

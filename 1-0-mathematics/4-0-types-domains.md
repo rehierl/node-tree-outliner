@@ -2,23 +2,23 @@
 <!-- ======================================================================= -->
 # Types/Domains
 
-a type/domain-based view on "x in X"
+"x in X"
 
 * `x in X` means that value/element `x` may represent any element in `X`
 * `X` however might contain element `y` for which `x` is not defined,
   or which will trigger an error if `x` evaluates to `y`
 
-domain-based view
+a domain-based view on "x in X"
 
+* "X", or `D(x), dom(x), (domain-of x) := domainOf(x)`
 * `domainOf(x)` := a set of values for which `x` is defined
-* `D(x), dom(x), (domain-of x) := domainOf(x)`
 * a domain is a strict definition of the values x may have
 * it is however not always possible to exactly specify all valid values
 
-type-based view
+a type-based view on "x in X"
 
+* "X", or `T(x), type(x), (type-of x) := typeOf(x)`
 * `typeOf(x)` := a set of values for which `x` is (usually) defined
-* `T(x), type(x), (type-of x) := typeOf(x)`
 * `type(x)` may contain values for which `x` is undefined
 * a type may be seen as the upper boundary (best effort) of a domain
 * a type is used as a less strict definition of the values x may have
@@ -27,7 +27,7 @@ type-based view
 general syntax, universe type
 
 * `A : B` => `(type(A) == B)` => a typing judgment
-* a typing judgment is used to express that `A` has type/domain `B`
+* a typing judgment is used to express that `A` has the type/domain `B`
 * the universal type (`U`) contains all types, but not itself
 * `(A : B)` => `(A in B) and (B in U)`
 
@@ -59,7 +59,7 @@ clarification
 <!-- ======================================================================= -->
 ## set of values
 
-* in general, any set represents a type/domain
+* in general, any set can be understood to represent a type/domain
 * the type of a set is however a set of sets
 * hint: `subset-of <=!=> element-of`
 
@@ -73,6 +73,21 @@ clarification
 * `type(t)` := `xTi` or `xT^n`
 
 <!-- ======================================================================= -->
+## n-ary types/domains
+
+* `T1 x ... x Tn` represents some type `xTi`
+* `xTi` represents an unary type, if `(n == 1)`
+* binary type, if `(n == 2)`
+* ternary type, if `(n == 3)`
+* `xTi` represents in general an n-ary type
+
+clarification
+
+* note that `xTi` represents a set of (possibly nested) sequences
+* in which all sequences have the exact same length
+* in mathematics, this is in general true
+
+<!-- ======================================================================= -->
 ## set of sequences
 
 * given a set of sequences `S`
@@ -83,15 +98,4 @@ clarification
 clarification (???)
 
 * sequences in `S` all have the same length?
-* in mathematics in general true
-* but, that is not what we need
-* e.g. a set of node sequences of any length
-
-<!-- ======================================================================= -->
-## n-ary types/domains
-
-* `T1 x ... x Tn` represents some type `xTi`
-* `xTi` represents an unary type, if `(n == 1)`
-* binary type, if `(n == 2)`
-* ternary type, if `(n == 3)`
-* `xTi` represents in general an n-ary type
+* that is not what we need - e.g. a set of node sequences of any length

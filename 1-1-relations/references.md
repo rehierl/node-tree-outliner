@@ -6,7 +6,6 @@ mixed
 
 * [wikipedia, arity](https://en.wikipedia.org/wiki/Arity)
 * [wikipedia, finitary relation](https://en.wikipedia.org/wiki/Finitary_relation)
-* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
 
 relations
 
@@ -24,3 +23,9 @@ order
 * [wikipedia, partially ordered set](https://en.wikipedia.org/wiki/Partially_ordered_set)
 * [wikipedia, domain theory](https://en.wikipedia.org/wiki/Domain_theory)
 * [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
+* [wikipedia, total order](https://en.wikipedia.org/wiki/Total_order)
+
+functions
+
+* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
+* [wikipedai, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)

@@ -2,6 +2,16 @@
 <!-- ======================================================================= -->
 # References - computing
 
+mixed
+
+* [wikipedia, det fin automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
+
+substrings
+
+* [wikipedia, substring](https://en.wikipedia.org/wiki/Substring)
+* [wikipedia, string searching algorithm](https://en.wikipedia.org/wiki/String_searching_algorithm)
+* [wikipedia, longest common substring](https://en.wikipedia.org/wiki/Longest_common_substring_problem)
+
 context
 
 * [wikipedia, context (computing)](https://en.wikipedia.org/wiki/Context_%28computing%29)

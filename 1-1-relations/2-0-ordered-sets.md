@@ -8,6 +8,8 @@ the issue
 clarification
 
 * poset (partially ordered set) - not every pair needs to be comparable
+* unique/distinct elements in sequences
+* ordered according to the elements of a set
 
 <!-- ======================================================================= -->
 # Ordered sets
@@ -44,6 +46,8 @@ pre-sequent, in-sequent, sub-sequent
 * note the issue of using `{` and `}` for simple and ordered sets
 * both symbols don't allow to distinguish a simple from an ordered set
 * use (`{[`, `]}`) or (`[{`, `}]`) instead of (`{`, `}`) ?!?
+* `{[]}` - a set of sequences
+* `[{}]` - a sequence of sets
 
 `V1 := { +, 1, @, a }`
 
