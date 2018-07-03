@@ -5,27 +5,39 @@
 mixed
 
 * [wikipedia, arity](https://en.wikipedia.org/wiki/Arity)
-* [wikipedia, finitary relation](https://en.wikipedia.org/wiki/Finitary_relation)
 
 relations
 
 * [wikipedia, finitary relation](https://en.wikipedia.org/wiki/Finitary_relation)
+* [wikipedia, relation algebra](https://en.wikipedia.org/wiki/Relation_algebra)
 * [wikipedia, binary relation](https://en.wikipedia.org/wiki/Binary_relation)
-* [wikipedia, relational algebra](https://en.wikipedia.org/wiki/Relational_algebra)
+
+properties, operations
+
+* [wikipedia, euclidean relation](https://en.wikipedia.org/wiki/Euclidean_relation)
 * [wikipedia, inverse relation](https://en.wikipedia.org/wiki/Inverse_relation)
-* [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
 * [wikipedia, equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation)
+* [wikipedia, tolerance relation](https://en.wikipedia.org/wiki/Tolerance_relation)
+* [wikipedia, kinship relations](https://en.wikipedia.org/wiki/Kinship)
+* [wikipedia, converse relation](https://en.wikipedia.org/wiki/Converse_relation)
+* [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
+
+functions
+
+* [wikipedia, function](https://en.wikipedia.org/wiki/Function_%28mathematics%29)
+* [wikipedia, predicate](https://en.wikipedia.org/wiki/Predicate_%28mathematical_logic%29)
+* [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
+* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
+* [wikipedai, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
 
 order
 
 * [wikipedia, order theory](https://en.wikipedia.org/wiki/Order_theory)
 * [wikipedia, list of order structures](https://en.wikipedia.org/wiki/List_of_order_structures_in_mathematics)
+* [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
 * [wikipedia, partially ordered set](https://en.wikipedia.org/wiki/Partially_ordered_set)
 * [wikipedia, domain theory](https://en.wikipedia.org/wiki/Domain_theory)
 * [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
 * [wikipedia, total order](https://en.wikipedia.org/wiki/Total_order)
-
-functions
-
-* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
-* [wikipedai, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
+* [wikipedia, hasse diagram](https://en.wikipedia.org/wiki/Hasse_diagram)
+* [wikipedia, weak ordering](https://en.wikipedia.org/wiki/Weak_ordering)

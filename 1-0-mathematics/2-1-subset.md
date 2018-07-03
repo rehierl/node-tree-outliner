@@ -22,12 +22,12 @@ clarification
   would need to have all the elements in `W` plus one additional element.
   Because of that, `(V subset-of W)` could no longer be true. That would be a
   conflict as `(V subset-of W)` can not be true and false at the same time.
-* `subset-of` implies an order (`<=`)
+* `subset-of` implies an order (<=)
 
 clarification
 
-* Any set, including the empty set `{}`, is a subset to itself.
 * The empty set `{}` is a subset to any set.
+* Any set, including `{}`, is a subset to itself.
 
 clarification
 
@@ -79,9 +79,9 @@ and `W` as "(strict) super-set".
 clarification
 
 * `(V strict-subset-of W) -> (#V < #W)`
-* `strict-subset-of` implies an order (`<`)
+* `strict-subset-of` implies an order (<)
 
 clarification
 
-* No set, including the empty set, is a strict subset to itself.
 * The empty set `{}` is a strict subset to any non-empty set.
+* No set, including `{}`, is a strict subset to itself.

@@ -46,6 +46,7 @@ subsequence
 * [wikipedia, interval](https://en.wikipedia.org/wiki/Interval_%28mathematics%29)
 * [wikipedia, region](https://en.wikipedia.org/wiki/Region_%28mathematics%29)
 * [wikipedia, range](https://en.wikipedia.org/wiki/Range_%28mathematics%29)
+* [wikipedia, subsequence](https://en.wikipedia.org/wiki/Subsequence)
 
 types
 

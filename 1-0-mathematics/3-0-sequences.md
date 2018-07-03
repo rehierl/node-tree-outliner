@@ -7,10 +7,13 @@
 * or the more mathematical notation `s = (si) = (e1,e2,...,eN)`
 * the array-oriented notation is used throughout this discussion
 
+Note that, with regards to sequences, there are no operators similar to
+the set-based operators (i.e. union, intersection, etc).
+
 clarification
 
 * throughout the course of this discussion, the term "sequence" refers to
-* a constant list of elements (fixed in length and values)
+* a constant list of elements (fixed in length and values, immutable)
 * a list of elements/values of the same kind
 * a list of any length (finite or infinite)
 

@@ -5,6 +5,14 @@
 * strict hierarchy => (#V == #P)?
 * are length values similar to rank values?
 
+element-of vs. subsequence-of
+
+* `s = [1, [2, 3], 4]`, `t = [2, 3]`
+* `t` is an element of `s = [1, t, 4]`
+* that is, an element in `s` has `t` as its value
+* `s = [1, 2, 3, 4]`, `t = [2, 3]`
+* `t` is an infix/subsequence of `s`
+
 <!-- ======================================================================= -->
 
 **CLARIFICATION**
@@ -259,4 +267,3 @@ still be a hierarchy after the addition, it would no longer be possible to
 determine the node each set represents. That is, because the one two-element
 CSS does not allow to determine whether the node or the new element it contains
 is the node the corresponding set represents.
-
