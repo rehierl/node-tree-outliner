@@ -2,6 +2,16 @@
 <!-- ======================================================================= -->
 # Properties of binary relations
 
+* transitive, symmetric, serial -> reflexive
+
+a relation has only on set of tuples `G` and only one "semantics"
+
+* tuples represent the semantics of relation `R`
+* a relation has one semantics/statement only
+* e.g. "<=" xor "==" xor ">="
+* an order under "<=" is left-total, iif tuples exist
+  for each element `a` such that `a` is the 1st operand
+
 <!-- ======================================================================= -->
 ## types
 
@@ -66,7 +76,7 @@ left-unique   right-unique   left-total   right-total
 
 * `!aRa` for any `a`
 * i.e. there is no `a` such that `aRa`
-* i.e. no `a` is strictly related to itself
+* i.e. no `a` is related to itself
 * e.g. "greater than"
 
 clarification
@@ -93,6 +103,7 @@ clarification
 * if `aRb` for `(a != b)`, then `!bRa`
 * if `aRb` and `bRa`, then `(a == b)`
 * note - `aRa` is not necessarily required
+* note - `aRa` does not count as `aRb` and `bRa`
 * e.g. "greater or equal"
 
 ### a-symmetric
@@ -121,29 +132,12 @@ clarification
 ### serial
 
 * for any `a`, there is a `b` such that `aRb`
-* i.e. similar to left-total ?!?
 * e.g. intervals (open or closed) combined with (<) or (<=)
+* e.g. in `[*,1]` there is no `n` such that `(1 < n)`
+* e.g. in `[1,*]` there is no `n` such that `(n < 1)` - not required?
 
 <!-- ======================================================================= -->
-## derived statements
-
-* if (transitive, symmetric, serial), then also reflexive
-* total/simple/linear/chain order - partial order, total
-
-order-related
-
-* note that all are (transitive (=x) + y)
-* strict weak order - x + irreflexive, antisymmetric
-* (total) preorder - x + reflexive
-* partial order - x + reflexive, antisymmetric
-* partial equivalence - x + symmetric
-* equivalence relation - x + symmetric, reflexive
-* strict partial order - x + irreflexive, antisymmetric
-
-note - a "strict weak order" is a "strict partial order" plus more properties.
-
-<!-- ======================================================================= -->
-## euclidean relation
+## "euclidean" property
 
 ```
 right-euclidean   left-euclidean

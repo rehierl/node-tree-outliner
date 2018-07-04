@@ -2,14 +2,9 @@
 the issue
 
 * sequences based upon an ordered set
-* each element within such a sequence appears no more than once
-* the order of elements in such a sequence corresponds with the ordered set
-
-clarification
-
-* poset (partially ordered set) - not every pair needs to be comparable
-* unique/distinct elements in sequences
-* ordered according to the elements of a set
+* each element within a sequence appears no more than once (a set)
+* the order of elements in such a sequence corresponds with some order
+* the indexes of those elements reflects that order (subsequent)
 
 <!-- ======================================================================= -->
 # Ordered sets
@@ -17,19 +12,19 @@ clarification
 simple sets of values
 
 * a set is a group of values in which all values are different
-* the values in a (simple) set have no order
+* the values in a (simple) set have no order whatsoever
 * a (simple) set has no first, no last, and no n-th value
 * a set can essentially only answer the "element-of" question
 * due to "no order" and the "in" operator, a set appears as a black box
 
 ordered sets of values
 
-* an ordered set of values is a simple set of values
-* the values in an ordered set of values have an order
+* a (simple) set of elements that has some order associated with it
+* the order relation defines the relationship between the elements
 
 order-related properties
 
-* an ordered set has a first, a last, and an n-th value
+* an (finite) ordered set has a first, a last, and an n-th value
 * every value `v(n)` has a previous `v(n-1)` and a next `v(n+1)` sibling
 * an ordered set of values can respond with the index of a given value
 * e.g. `-1` if does not contain a value, `1` if it's the first value, etc.
@@ -39,6 +34,12 @@ pre-sequent, in-sequent, sub-sequent
 * `v(n)` is subsequent to `v(n-1)`
 * `v(n)` is presequent to `v(n+1)`
 * `v(n)` is insequent to itself
+
+clarification
+
+* preordered set, proset - set + preorder
+* partially ordered set, poset - set + partial order
+* every set is a class - a preordered class, etc.
 
 <!-- ======================================================================= -->
 ## Examples

@@ -5,6 +5,7 @@
 mixed
 
 * [wikipedia, arity](https://en.wikipedia.org/wiki/Arity)
+* [wikipedia, domain theory](https://en.wikipedia.org/wiki/Domain_theory)
 
 relations
 
@@ -33,11 +34,28 @@ functions
 order
 
 * [wikipedia, order theory](https://en.wikipedia.org/wiki/Order_theory)
-* [wikipedia, list of order structures](https://en.wikipedia.org/wiki/List_of_order_structures_in_mathematics)
-* [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
+* [wikipedia, order theory glossary](https://en.wikipedia.org/wiki/Order_theory_glossary)
 * [wikipedia, partially ordered set](https://en.wikipedia.org/wiki/Partially_ordered_set)
-* [wikipedia, domain theory](https://en.wikipedia.org/wiki/Domain_theory)
-* [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
 * [wikipedia, total order](https://en.wikipedia.org/wiki/Total_order)
 * [wikipedia, hasse diagram](https://en.wikipedia.org/wiki/Hasse_diagram)
+* [wikipedia, duality in order theory](https://en.wikipedia.org/wiki/Duality_%28order_theory%29)
+* [wikipedia, product order](https://en.wikipedia.org/wiki/Product_order)
+* [wikipedia, order embedding](https://en.wikipedia.org/wiki/Order_embedding)
+
+order structures/types
+
+* [wikipedia, list of order structures](https://en.wikipedia.org/wiki/List_of_order_structures_in_mathematics)
+* [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
 * [wikipedia, weak ordering](https://en.wikipedia.org/wiki/Weak_ordering)
+
+-
+
+* [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
+* [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
+* [wikipedia, total order](https://en.wikipedia.org/wiki/Total_order)
+
+set-related
+
+* [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)
+* [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
+* [wikipedia, ranking](https://en.wikipedia.org/wiki/Ranking)

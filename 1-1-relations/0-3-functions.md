@@ -20,7 +20,17 @@ clarification
 
 <!-- ======================================================================= -->
 
-* some relation `R` can be seen to define a function
+monotonic function
+
+* a function between ordered sets
+* such that it preserves or reverses the given order
+* if `(x <= y)`, then `f(x) <= f(y)` - increasing
+* if `(x <= y)`, then `f(x) >= f(y)` - decreasing
+* monotonically increasing/decreasing
+
+<!-- ======================================================================= -->
+
+* relations can be seen to define functions
 * e.g. `G(R) = (A X B)` => `f : A -> B`
 * e.g. `G(R) = xT^n` => `f: xT^(n-1) -> Tn`
 * a function `f` is a special kind of relation

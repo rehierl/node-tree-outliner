@@ -2,8 +2,9 @@
 <!-- ======================================================================= -->
 # Semantics of a relation
 
-* without any meaning, a relation is just another set of sequences
+* without any meaning, a relation is just another set of sequences/tuples
 * the semantics of a relation defines its orientation/direction and meaning
+* put differently, the semantics of a relation adds meaning to its tuples
 
 examples
 

@@ -119,7 +119,7 @@ v belongs-to V
 
 V contains v
 
-* `(V contains v) := (v in V)`
+* `V(v), (V contains v) := (v in V)`
 * set `V` contains value `v`, if `v` is an element of `V`
 
 <!-- ======================================================================= -->

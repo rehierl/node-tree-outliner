@@ -19,11 +19,12 @@
 
 graph `G` of relation `R`
 
+* `G` is the relation's set of tuples/sequences
 * `X` is the Cartesian product of all sets involved
 * `G(R) subset-of XSi` is the graph of `R`
 * `G(R) subset-of XS^n` if `Si := S` for any `i in [2,*]`
 * an "n-ary relation over `S`", or an "n-ary relation over a set"
-* note that - all tuples in `G` have the exact same length
+* note - all tuples in `G` have the exact same length
 
 characteristic function
 
