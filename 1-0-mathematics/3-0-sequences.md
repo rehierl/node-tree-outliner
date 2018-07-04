@@ -94,21 +94,24 @@ clarification
 * `(s != t)` is true, if both sequences differ in length and/or values
 
 <!-- ======================================================================= -->
-## distinct sequence
+## linear sequence
 
-* `(is-distinct s), (is-unique s) := isDistinct(s)`
-* `isDistinct(s)` := `(s[i] != s[j])` for any `i,j in [1,#s]` and `(i != j)`
+* `(is-linear s), (is-linear s) := isLinear(s)`
+* `isLinear(s)` := `(s[i] != s[j])` for any `i,j in [1,#s]` and `(i != j)`
 
-Note that a sequence is said to be a **distinct sequence**, if the sequence
-consists of unique/distinct elements/values only. That is, a distinct sequence
-contains none of its elements/values more than once. As such, a distinct
-sequence can be understood to define a set of elements/values.
+Note that a sequence is said to be linear, if the sequence holds unique/distinct
+elements/values only. That is, a linear sequence contains none of its elements
+more than once. As such, a linear sequence can be understood to define a simple
+set of elements.
 
-Note that a distinct sequence defines an ordered set (see relations), if the
+Note that a linear sequence defines an ordered set (see relations), if the
 order of the elements within that sequence is understood to define the order
 of elements/values within the corresponding ordered set. Depending on the
 respective context, the semantics of the element order may therefore be:
-e.g. `(s[i+1] subsequent-to s[i])`.
+e.g. `(s[i+1] subsequent-to s[i])` or `(s[i] presequent-to s[i+1])`.
+
+Note that the word "linear" needs to be understood
+in the context of a "linearly ordered set".
 
 <!-- ======================================================================= -->
 ## inverse sequence (s')

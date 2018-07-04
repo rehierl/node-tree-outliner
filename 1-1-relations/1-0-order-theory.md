@@ -2,11 +2,11 @@
 <!-- ======================================================================= -->
 # Order Theory
 
-* the goal is to try to grasp the meaning of "order"
+* the goal is to grasp the meaning of "order"
 * i.e. what exactly is "order"?
 
 <!-- ======================================================================= -->
-## wikipedia - order theory
+## notes from - wikipedia, order theory
 
 * examine the notion of order using binary relations
 * subset-of - captures a notion of containment/specialization

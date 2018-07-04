@@ -2,15 +2,28 @@
 <!-- ======================================================================= -->
 # Properties of binary relations
 
+* note - "a, b" is short for "a and b"
+
+implications
+
+* strict <-> irreflexive
 * transitive, symmetric, serial -> reflexive
+* transitive, asymmetric -> irreflexive
+* transitive, irreflexive -> asymmetric
 
-a relation has only on set of tuples `G` and only one "semantics"
+a-symmetric vs. irreflexive, anti-symmetric
 
-* tuples represent the semantics of relation `R`
+* a-symmetric -> irreflexive, anti-symmetric
+* a-symmetric <?- irreflexive, anti-symmetric
+* i.e. (<->) or only (->) ?
+
+a relation has only on set of tuples and one "semantics" only
+
+* tuples manifest the semantics of relation `R`
 * a relation has one semantics/statement only
-* e.g. "<=" xor "==" xor ">="
-* an order under "<=" is left-total, iif tuples exist
-  for each element `a` such that `a` is the 1st operand
+* e.g. "<" xor "<=" xor "==" xor ">=" xor ">"
+* if (sem(R) := "<") and ((a,b) !in R), then (a,b) is undecided - a tie
+* i.e. not automatically ">=" - in that R, ">=" is "undefined"
 
 <!-- ======================================================================= -->
 ## types
@@ -102,25 +115,25 @@ clarification
 
 * if `aRb` for `(a != b)`, then `!bRa`
 * if `aRb` and `bRa`, then `(a == b)`
-* note - `aRa` is not necessarily required
-* note - `aRa` does not count as `aRb` and `bRa`
+* note - `aRa` is allowed, but not required
+* note - `aRa` does not count towards `aRb` and `bRa`
 * e.g. "greater or equal"
 
 ### a-symmetric
 
 * if `aRb`, then `!bRa`
-* i.e. asymmetric -> antisymmetric, irreflexive
 * e.g. "greater than"
 
 ### transitive
 
 * if `aRb` and `bRc`, then also `aRc`
-* transitive, asymmetric -> irreflexive
 * e.g. "is ancestor of"
 
 ### connex
 
 * if `aRb` or `bRa` or both
+* i.e. any pair is comparable (i.e. total?)
+* also implies reflexivity
 
 ### trichotomous
 

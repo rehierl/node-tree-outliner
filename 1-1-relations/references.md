@@ -47,12 +47,9 @@ order structures/types
 * [wikipedia, list of order structures](https://en.wikipedia.org/wiki/List_of_order_structures_in_mathematics)
 * [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
 * [wikipedia, weak ordering](https://en.wikipedia.org/wiki/Weak_ordering)
-
--
-
-* [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
-* [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
 * [wikipedia, total order](https://en.wikipedia.org/wiki/Total_order)
+* [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
+* [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
 
 set-related
 
