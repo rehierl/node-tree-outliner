@@ -30,7 +30,7 @@ in the context of this discussion ...
 ## definitions
 
 * `order(G) := #V`, `size(G) := #E`
-* symmetric -> if `aEb`, then also `bEa` (!= undirected)
+* symmetric := if `aEb`, then also `bEa`
 * link := `aEb` if `(a != b)`, loop := `aEa`
 
 degree
@@ -193,10 +193,13 @@ mixed
 * simple graph - undirected and `E` is a set (no multiset)
 * regular graph - each vertex has the same degree
 * complete graph - `E` has an edge for each pair of vertices
+* dense graph - #E is close to the maximum number of edges possible
+* sparse graph - #E is opposite to dense
 * finite graph - sets `V` and `E` are both finite in size
 * network - vertices and/or edges have attributes
 * planar - can draw `G` on a plane without intersecting edges
 * directed acyclic graph (DAG) - finite, directed, no cycles
+* polytree - a DAG whose undirected graph is a tree
 * tree - connected, no cycles
 * forest - a disjoint union of trees
 * cyclic - has one or more cycles
@@ -209,13 +212,15 @@ bipartite graph
 
 path/linear graph
 
-* the vertices can be "linearized"
+* all vertices on one path, such that ...
 * the degree of all but two vertices is 2
+* i.e. one big path
 
 cycle/circular graph
 
-* the vertices can be "linearized"
+* all vertices on one path, such that ...
 * the degree of all vertices is 2
+* i.e. one big cycle/loop
 
 aboresence
 
@@ -224,7 +229,7 @@ aboresence
 * aborecence -> directed acyclic graph (DAG)
 
 <!-- ======================================================================= -->
-## graph data structures
+## graph data structure
 
 * an abstract data type meant to implement a graph
 * may represent vertices by references (i.e. external)

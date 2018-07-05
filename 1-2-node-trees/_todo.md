@@ -3,6 +3,6 @@
 # TODOs
 
 scientific knowledge is invaluable to all as a whole,
-but has almost no value to one or some
+but has almost no value to a few
 
-consecutive used synonymously to strictly subsequent
+"consecutive" used with same meaning as "strictly subsequent"

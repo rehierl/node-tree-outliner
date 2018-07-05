@@ -2,118 +2,132 @@
 <!-- ======================================================================= -->
 # Tree of nodes
 
-* a tree data structure represents a tree structure using nodes and edges
-* a tree is a connected graph
-* a forest is a disjoint union of trees
+* represents the hierarchical nature of a structure
 
-undirected tree
+<!-- ======================================================================= -->
+## tree/hierarchy structure
 
-* undirected graph
-* connected, but no cycles
-* a tree is acyclic - a cycle is formed, if even one edge is added
-* no longer connected, if even one edge is removed
+* nodes- the vertices of the tree's graph
+* branches - the edges of the tree's graph
+* leaf/end nodes - nodes without children
+* root/starting node - has no superior
+* parent node - closest superior on the rooted path
+* siblings - share the same parent node
+* uncles - siblings of the parent
+* ancestor - connected to all lower-level nodes
+* descendant - the connected lower-level nodes
+
+visualized as
+
+* classical node-link diagrams
+* nested sets - use enclosure/containment to show parenthood (!!!)
+* layered "icicle" diagrams - stacked rectangles
+* outlines, tree views - lists that use indentation
+* nested parenthesis
+
+notes
+
+* each finite tree has a root
+* an infinite tree may have a root
+
+<!-- ======================================================================= -->
+## tree, set theory
+
+<!-- ======================================================================= -->
+## tree, graph theory
+
+* an undirected graph
+* any two vertices are connected by exactly one path
+* a tree <-> an acyclic connected graph
+* a tree - may have more than one root
+* a forest - a disjoint union of trees
+* a forest - an acyclic graph, not necessarily connected
+* rooted tree - has one root only
+* directed tree - only has directed edges
+* directed rooted tree - a directed tree that has one root only
+* arborescence, branching, out-tree - all edges point away from the root
+* anti-arborescence, in-tree - all edges point towards the root
+
+tree if one of these equivalent conditions hold
+
+* connected, no cycles
+* acyclic, a cycle is formed if any edge is added
+* connected, but disconnected, if a single edge is removed
+* any two vertices can be connected by a unique simple path
+* connected, (#V-1) edges
+* no simple cycles and (#V-1) edges
+
+and some more definitions
+
+* internal/inner/branch vertex - `(degree(v) >= 2)`
+* external/outer/terminal vertex - `(degree(v) == 1)`
+* leaf - a terminal vertex
+* forest - connected components are trees
+* forest - a disjoint union of trees
+* forest - an undirected acyclic graph
+* discrete graph - vertices only, no edges
+* polytree - a DAG whose undirected graph is a tree
 
 rooted tree
 
-* one node is designated as the root
-* directed rooted tree - all edges point away from the root - an arboresence
-* if an arboresence, then also referred to as branching or out-tree
-* if the edges point towards the root - anti-aboresence or in-tree
-* e.g. `parent-of` vs. `child-of`
+* one vertex is designated as "the root"
+* edges are either oriented away from the root ex-or towards the root
+* free tree - has no designated root
+* labeled tree - each vertex has a unique label (e.g. an id number)
+* recursive tree - labeled rooted tree where labels respect the tree order
+* parent of v - `p` in the rooted path `rp := [r,..,p,v]`
+* except for the root, every vertex has a unique parent
+* child of v - `c` in the rooted path `rp := [r,..,v,c]`
+* descendant of v - `d` in the rooted path `rp := [r,..,v,..,d]`
+* a child is a descendant to its parent
+* ancestor of v - `a` in the rooted path `rp := [r,..,a,..,v]`
+* the root is an ancestor to any other vertex
+* sibling vertices have the same parent
+* root is external, if it has one child
+* note - the degree-based definition of "external"
+* height of a vertex - length of the longest downward path `p := [v,..,l]`
+* height of the tree - is the height of its root
+* height of a leaf - is zero
+* depth of a vertex - length of its rooted path `p := [r,..,v]`
+* depth of the root - is zero
 
-rooted tree
+**tree-order**
 
-* except for the root, each node has a one parent node
-* each node may have any number of child nodes
-* any parent node, that can be reached beginning with an initial node,
-  is an ancestor to that node - when moving upwards on a path
-* a node is a descendant to its ancestor nodes
-* a child node is a descendant to its parent node
-* `(node.children[i].parent == node)` is always true
-* each node has a level value associated with it
-* `node.level = (number of ancestors) + 1`.
+* the partial ordering on the vertices
+* `(v < w)` if there is a rooted path such that `[r,..,v,..,w]`
 
-<!-- ======================================================================= -->
-## kinds of nodes
+**ordered/plane tree**
 
-* `n in N` is a node, `N` is the set of all nodes
-* a node may be a root - `r in R subset-of N`
-* a node may be a parent - `p in P subset-of N`
-* a node may be a child - `c in C subset-of N`
-* a node may be a leaf - `l in L subset-of N`
-* edge `e := (p,c) in E subset-of PxC subset-of NxN`
-
-the semantics of an edge `e := (p,c) in E` is such that ...
-
-* node `p` is the parent of node `c` - i.e. `p parent-of c`
-* node `c` is a child of node `p` - i.e. `c child-of p`
-* `pEc <=> (p parent-of c) <=> (c child-of p)`
+* a rooted tree that has an ordering for its child vertices
+* an ordering of children is equivalent to embedding the tree in the plane
 
 <!-- ======================================================================= -->
-## root, parent, child, leaf
-
-* `(#R,#P,#C and #L) <= #N`
-* a parent always has one or more children
-* a child always has a single parent
-* a root has no parent, but may itself be one
-* a root is no child, but may itself have multiple children
-* a root may be a leaf (e.g. `(#N == 1)`)
-
-with regards to a node's parent, a parent-based view
-
-* a node is either a root or a child
-* `(R == (N - C)) <=> (C == (N - R))`
-* a leaf is not a parent, but may itself have one
-* a leaf has no child, but may itself be one
-
-with regards to a node's children, a child-based view
-
-* a node is either a parent or a leaf
-* `(L == (N - P)) <=> (P == (N - L))`
-* a child is either a parent or a leaf
+## tree, data structure
 
 <!-- ======================================================================= -->
-## ordered tree
+## subgraph, subtree
 
-the edges `e` of a directed, rooted and ordered tree can be thought of as
-being elements of a sequence `s` such that ...
+subgraph
 
-* `(a,b) < (b,cx)`
-* the in-coming edge of a node (b)
-  is presequent to its out-going edges
-* i.e. a parent is presequent to its descendants
-* `(b,cx) < (b,cy)` for `(x < y)`
-* the incoming edge of a node (cx)
-  is presequent to the incoming edge of its next sibling (cy)
-* i.e. a previous sibling is presequent to its next sibling
+* subgraph - subsets of vertices and subset of edges
+* spanning subgraph - same vertices, fewer edges
+* induced subgraph - vertex subset and all edges in that subset
 
-first/last child
+subtree
 
-* `cy` first child of `p` := there is no `cx` such that `(p,cx) < (p,cy)`
-* `cx` last child of `p` := there is no `cy` such that `(p,cx) < (p,cy)`
+* subtree - a connected subgraph of a tree
+* subtree of a rooted tree - all edges and vertices descendant to a vertex
 
-sibling
+<!-- ======================================================================= -->
+## Recursive tree
 
-* `x` is a sibling of `y`, if `xEy` and `yEx` (???)
-* not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
-* `(x sibling-of y) <=> (y sibling-of x)`
+* an unordered, non-planar labeled rooted tree
+* nodes are labeled using integers in `[1,n]`
+* labels increase with distance from the root
+* non-planar - children have no order
 
-clarification
+<!-- ======================================================================= -->
+## Normal/Trémaux tree
 
-* e.g. `s := [a,...,e,f,g,...,k]`
-* all nodes within `s` are child nodes of some parent node `p` -
-  i.e. `(p,s(i)) in E` for any `i in [1,n]` and `(n == #s)`
-* `s1` represents the first child and `sn` the last child `p`
-
-previous/next sibling
-
-* `si` is the previous sibling of `sj`,
-  if (`si` is sequent to `sj`), and there is no other sibling `sk` such that
-  (`sk` subsequent to `si`) and (presequent to `sj`) - i.e. `(si < sk < sj)`
-* `(x previous-sibling-of y) <=> (y next-sibling-of x)`
-
-presequent/subsequent sibling
-
-* `sj` is a subsequent sibling of `si`,
-  if (`si` is sequent to `sj`) and `(si < sj)`
-* `(si presequent-sibling-of sj) <=> (sj subsequent-sibling-of si)`
+<!-- ======================================================================= -->
+## Spanning tree
