@@ -6,6 +6,9 @@ The purpose of this repository is to flesh out a design that can be used to
 implement a general-purpose outline algorithm for any rooted ordered tree of
 nodes.
 
+This repository does not represent a "scientific paper". Its main intention is
+to document in detail the reasons that will (hopefully) lead to a proper design.
+
 This repository is **in a state of flux**. It may and will change considerably
 over time. (Direct links to files within this repository will break without
 further notice).

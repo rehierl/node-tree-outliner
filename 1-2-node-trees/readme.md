@@ -1,3 +1,3 @@
 
 This chapter is intended to communicate fundamental aspects:
-trees of nodes, definition of various types of sequences, etc.
+node trees, definition of certain types of sequences, etc.

@@ -2,9 +2,10 @@
 <!-- ======================================================================= -->
 # Tree traversal
 
-In order to create an outline that accurately represents a document's structure,
-the node tree must be traversed by visiting each node. In general, the traversal
-of a node tree can be classified depending on certain characteristics - such as:
+In order to create an outline that accurately represents a document's logical
+structure, the node tree must be traversed by visiting each node. In general,
+the traversal of a tree can be classified depending on certain characteristics
+- such as:
 
 * When is a node visited in relation to its child nodes? -
   e.g. depth-first search (DFS), breadth-first search (BFS)

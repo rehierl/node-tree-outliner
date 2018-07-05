@@ -29,3 +29,4 @@ complexity
 * [wikipedia, computational complexity theory](https://en.wikipedia.org/wiki/Computational_complexity_theory)
 * [wikipedia, p vs. np problem](https://en.wikipedia.org/wiki/P_versus_NP_problem)
 * [wikipedia, np-completeness](https://en.wikipedia.org/wiki/NP-completeness)
+* [wikipedia, time complexity](https://en.wikipedia.org/wiki/Time_complexity)

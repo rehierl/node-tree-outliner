@@ -40,8 +40,13 @@ through the tree when entering each node.
 * the tree's node sequence := `nodeSequenceOf(root)`
 * the root node will always be the first node in this node sequence
 
+Note that the node sequence is said to be in **enter-order** if the nodes added
+while the nodes are being entered. The node sequence is in **exit-order**, if
+the nodes are added while exiting them.
+
 **Memory hook**
-The node sequence of a tree corresponds with the order of start tags.
+The node sequence of a tree (in enter-order)
+corresponds with the order of all start tags.
 
 <!-- ======================================================================= -->
 ## Subsequent nodes
