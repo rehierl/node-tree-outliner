@@ -5,6 +5,23 @@
 Algorithms related to graphs and trees.
 
 <!-- ======================================================================= -->
+## Hamilton path
+
+* aka. traceable path
+* a path in an undirected/directed graph that visits each vertex
+* assumed - to visit each vertex once only
+
+hamiltonian-connected graph
+
+* for every pair of vertices,
+* there is a hamilton path between both
+
+comment
+
+* presumably uses only the edges in the given graph
+* i.e. does not add new ones
+
+<!-- ======================================================================= -->
 ## Prüfer sequence (tree)
 
 * iteratively remove vertices from a tree until two remain

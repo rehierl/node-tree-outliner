@@ -29,7 +29,15 @@ functions
 * [wikipedia, predicate](https://en.wikipedia.org/wiki/Predicate_%28mathematical_logic%29)
 * [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
 * [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
-* [wikipedai, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
+
+<!-- ======================================================================= -->
+## References - order
+
+mixed, set-related
+
+* [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)
+* [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
+* [wikipedia, ranking](https://en.wikipedia.org/wiki/Ranking)
 
 order
 
@@ -51,8 +59,10 @@ order structures/types
 * [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
 * [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
 
-set-related
+order isomorphism
 
-* [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)
-* [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
-* [wikipedia, ranking](https://en.wikipedia.org/wiki/Ranking)
+* [wikipedia, isomorphism](https://en.wikipedia.org/wiki/Isomorphism)
+* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
+* [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
+* [wikipedia, order type](https://en.wikipedia.org/wiki/Order_type)
+* [wikipedia, ordinal number](https://en.wikipedia.org/wiki/Ordinal_number)

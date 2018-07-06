@@ -1,2 +1,2 @@
 
-Content on computer science related aspects.
+General aspects related to computer science.

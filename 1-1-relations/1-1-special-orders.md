@@ -106,6 +106,6 @@ axiomatized/formalized
 definition
 
 * well-order, well-ordering, well-order relation
-* on a set S is a total order on S in which
+* a well-order on a set S is a total order on S in which
 * every non-empty subset of S has a least element
 * least element - smaller than every other element

@@ -33,6 +33,13 @@ notes
 <!-- ======================================================================= -->
 ## tree, set theory
 
+* tree - a partially ordered set `(T,<)`
+* such that - `{ s in T | (s < t) for each (t in T) }` is well-ordered
+* frequently only one root - minimal element
+* each well-ordered set `(T,<)` is a tree
+* trees grow downward - root is the greatest node
+* a subtree is downward closed - i.e. subset
+
 <!-- ======================================================================= -->
 ## tree, graph theory
 
@@ -57,11 +64,11 @@ tree if one of these equivalent conditions hold
 * connected, (#V-1) edges
 * no simple cycles and (#V-1) edges
 
-and some more definitions
+more definitions
 
 * internal/inner/branch vertex - `(degree(v) >= 2)`
 * external/outer/terminal vertex - `(degree(v) == 1)`
-* leaf - a terminal vertex
+* leaf - a terminal vertex (!!!)
 * forest - connected components are trees
 * forest - a disjoint union of trees
 * forest - an undirected acyclic graph
@@ -75,59 +82,89 @@ rooted tree
 * free tree - has no designated root
 * labeled tree - each vertex has a unique label (e.g. an id number)
 * recursive tree - labeled rooted tree where labels respect the tree order
-* parent of v - `p` in the rooted path `rp := [r,..,p,v]`
+* parent of v - `p` in the rooted path `rp := [r..p,v]`
 * except for the root, every vertex has a unique parent
-* child of v - `c` in the rooted path `rp := [r,..,v,c]`
-* descendant of v - `d` in the rooted path `rp := [r,..,v,..,d]`
+* child of v - `c` in the rooted path `rp := [r..v,c]`
+* descendant of v - `d` in the rooted path `rp := [r..v..d]`
 * a child is a descendant to its parent
-* ancestor of v - `a` in the rooted path `rp := [r,..,a,..,v]`
+* ancestor of v - `a` in the rooted path `rp := [r..a..v]`
 * the root is an ancestor to any other vertex
 * sibling vertices have the same parent
 * root is external, if it has one child
 * note - the degree-based definition of "external"
-* height of a vertex - length of the longest downward path `p := [v,..,l]`
+* height of a vertex - length of the longest downward path `p := [v..l]`
 * height of the tree - is the height of its root
 * height of a leaf - is zero
-* depth of a vertex - length of its rooted path `p := [r,..,v]`
+* depth of a vertex - length of its rooted path `p := [r..v]`
 * depth of the root - is zero
 
-**tree-order**
+tree-order (!!!)
 
 * the partial ordering on the vertices
-* `(v < w)` if there is a rooted path such that `[r,..,v,..,w]`
+* `(v < w)` if there is a rooted path such that `[r..v..w]`
 
-**ordered/plane tree**
+ordered/plane tree (!!!)
 
 * a rooted tree that has an ordering for its child vertices
 * an ordering of children is equivalent to embedding the tree in the plane
 
 <!-- ======================================================================= -->
-## tree, data structure
+## tree, computer science
 
-<!-- ======================================================================= -->
-## subgraph, subtree
+* a tree is an abstract data type which represents hierarchical structure
 
-subgraph
+basic definitions
 
-* subgraph - subsets of vertices and subset of edges
-* spanning subgraph - same vertices, fewer edges
-* induced subgraph - vertex subset and all edges in that subset
+* empty tree - a "tree" with no nodes
+* root - the top node
+* parent `p` - `rp := [r..p,c]`
+* child `c` - `rp := [r..p,c]`
+* siblings - have the same parent
+* descendant to `n` - `rp := [r..n..d]`
+* ancestor to `n` - `rp := [r..a..n]`
+* leaf - a node with no child nodes
+* branch/internal node - a node with children
+* degree - number of child nodes
+* edge - connection between nodes
+* path - sequence of nodes and edges
+* depth of node - length of its rooted path
+* depth of node - #edges in path(r,n)
+* level of node - (1 + depth of node)
+* height of node - length of longest downward path
+* height of node - is-leaf ? 0 : (1 + max-height(children))
+* height of tree - height of its root
+* forest - a set of disjoint trees
+* subtree - a node and all of its descendants
+* subtree - a proper subtree - a proper subset
 
-subtree
+global definition
 
-* subtree - a connected subgraph of a tree
-* subtree of a rooted tree - all edges and vertices descendant to a vertex
+* allows to treat the tree as a whole
+* e.g. adjacency matrix
 
-<!-- ======================================================================= -->
-## Recursive tree
+recursive definition
 
-* an unordered, non-planar labeled rooted tree
-* nodes are labeled using integers in `[1,n]`
-* labels increase with distance from the root
-* non-planar - children have no order
+* a node that points towards its descendants (out-tree)
+* does not necessarily need to have a parent reference
+* does not guarantee tree characteristics (!!!)
+* e.g. adjacency lists
 
-<!-- ======================================================================= -->
-## Normal/Trémaux tree
+tree traversal
 
-<!-- ======================================================================= -->
-## Spanning tree
+* walk, walking the tree - visit the nodes one after another
+* pre-order - visit parents before their children
+* postorder - visit children before their parents
+* in-order - left-child, node, right-child
+* level-order - a level-by-level breadth-first search
+
+additional statements
+
+* branching factor - #children per node (i.e. each node)
+* except for the root, each node has a parent
+* no node has more than one parent
+* empty trees - affect the complexity of definitions
+* trees are drawn growing downwards
+* every node can be seen as the root of a subtree
+* each node corresponds to a subtree
+* clockwise/counterclockwise view on plane trees
+* trees are special cases of digraphs
