@@ -2,10 +2,12 @@
 <!-- ======================================================================= -->
 # Special types of orders
 
-* ... read with caution ...
-* this is me trying to wrap my head around the classification of orders
-* pick an order, determine its properties, and let others do the classification
-* we will most likely end up with a "linear order of nodes"
+This is me trying to wrap my head around the classification of orders. The best
+course of action seems to be to (1) pick an order, (2) determine its properties,
+and (3) let others do the proper classification ...
+
+Note that, in the course of this whole discussion, the focus will be on "linear
+orders of nodes" which are the result of some previous tree traversal.
 
 ```
 (note                - all are transitive (=x), y)
@@ -95,7 +97,7 @@ axiomatized/formalized
 * a partially ordered set, in which every two elements
   have a unique supremum and a unique infimum
 * supremum - least upper bound, join
-* infimum - greatest lower bound, meeet
+* infimum - greatest lower bound, meet
 
 <!-- ======================================================================= -->
 ## Well-order

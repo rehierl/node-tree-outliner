@@ -4,12 +4,16 @@
 
 * two elements of the same sequence are **sequent**
 * two elements of different sequences are **not sequent**
+* not sequent <=!=> in-sequent
 
-clarification
+Note that, from now on, the terms "elements" and "values" are used synonymously:
+e.g. the values of a sequence are sequent => they appear sequently.
 
-* note the synonymous use of "elements" and "values"
-* e.g. the values of a sequence are sequent => they appear sequently
-* confusion is inevitable, if a sequence contains a value more than once
+Note that the notion of the term "consecutive" is the same as that of
+"strictly presequent" and "strictly subsequent" (see below).
+
+Note that confusion is inevitable, if a sequence contains an element more than
+once.
 
 <!-- ======================================================================= -->
 ## pseudocode definitions
@@ -17,12 +21,12 @@ clarification
 ```
 indexOf(sequence,element) begin
   for i in 1 to sequence.length begin
-    //- note: test for reference equality
-    if(sequence(i) === element) return i
+    if(sequence[i] === element) return i
   end
   throw new ElementNotFoundException()
 end
 
+//- returns an (pos|neg) integer value
 distanceBetween(seq,e1,e2) begin
   i1 = indexOf(seq,e1)
   i2 = indexOf(seq,e2)
@@ -51,14 +55,14 @@ isInSequentTo => (distanceBetween == 0)
 <!-- ======================================================================= -->
 ## sequent
 
-* `e1` and `e2` are in the same sequence
+* `e1` and `e2` are elements of the same sequence
 
 if the order of elements is not relevant in a given context:
 
 * `absDistance(x,y) := abs(distanceBetween(x,y))`
-* x is insequent to y <=> `(absDistance(x,y)) == 0)`
-* x is strictly sequent to y <=> `(absDistance(x,y) == 1)`
-* x is loosely sequent to y <=> `(absDistance(x,y) > 1)`
+* `(x insequent-to y) := (absDistance(x,y)) == 0)`
+* `(x strictly-sequent-to y) := (absDistance(x,y) == 1)`
+* `(x loosely-sequent-to y) := (absDistance(x,y) > 1)`
 
 <!-- ======================================================================= -->
 ## pre-sequent (<, <<)

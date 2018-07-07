@@ -58,7 +58,7 @@ left-to-right), the result of `A X B X C X ...` is in general undefined.
 <!-- ======================================================================= -->
 ## multi cartesian-product
 
-Note that the definitions below extend the default definitions. That is,
+Note that the definitions below extend the base definition. That is,
 `A X B X C X ...` is defined not because an implicit order of operations is
 selected, but because the definitions below define a single operation for
 such "sequences".

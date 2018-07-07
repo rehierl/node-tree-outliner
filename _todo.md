@@ -12,6 +12,13 @@ always having to look/backwards -
 in order to know where and how to continue -
 like crawling up a mountain by moving butt first
 
+gists could be used to publish a result
+- use a gist to publish a summary
+- use issues as pointers/invitation
+
+scientific knowledge is invaluable to all as a whole,
+but has almost no value to a few
+
 <!-- ======================================================================= -->
 ## minor/isolated/mixed
 

@@ -242,7 +242,7 @@ adjacency list
 
 adjacency matrix
 
-* a square matrix of size/dimensions (#V X #V)
+* a square matrix of size/dimensions `[#V, #V]`
 * elements indicate whether two vertices are adjacent
 * symmetric in case of undirected graphs
 * empty diagonal if no loops

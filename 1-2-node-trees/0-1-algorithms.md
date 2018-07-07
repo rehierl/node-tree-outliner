@@ -7,9 +7,9 @@ Algorithms related to graphs and trees.
 <!-- ======================================================================= -->
 ## Hamilton path
 
-* aka. traceable path
+* aka. a traceable path
 * a path in an undirected/directed graph that visits each vertex
-* assumed - to visit each vertex once only
+* assumed to visit each vertex only once
 
 hamiltonian-connected graph
 
@@ -19,20 +19,21 @@ hamiltonian-connected graph
 comment
 
 * presumably uses only the edges in the given graph
-* i.e. does not add new ones
+* i.e. does not add new ones, which would make no sense anyways
 
 <!-- ======================================================================= -->
 ## Prüfer sequence (tree)
 
-* iteratively remove vertices from a tree until two remain
+* iteratively remove vertices from a tree until two vertices remain
 * set i: remove the leaf with the smallest label and add i to the sequence
-* the sequence has length (n-2) and is unique to the tree
+* the resulting sequence has length (n-2) and is unique to the tree
 * i.e. prüfer-sequence <-> tree
 
 comment
 
 * x is "unique to a tree"
 * i.e. tree -> x -> same tree
+* the prüfer sequence of a tree can be used to re-create that tree
 
 <!-- ======================================================================= -->
 ## Graph rewriting
@@ -42,16 +43,11 @@ comment
 example
 
 * represent the state of a computation/process as a graph
+* as a result of graph rewrite rules
 * further execution is understood to transform that graph
-* via graph rewrite rules
-
-comment
-
-* "graph rewriting" a generalization of "topological sort"?
-* i.e. produce a linear graph
 
 <!-- ======================================================================= -->
-## Topological sorting
+## Topological sort
 
 * topological sort/ordering
 * a linear ordering of vertices
@@ -63,8 +59,8 @@ notes
 * any DAG has one or more topological orderings (i.e. min one)
 * most used in "scheduling"
 * basis for linear-time algorithms
-* find the critical path of a project
-* allows to find shortest paths
+* used to find the critical path of a project
+* used to find shortest paths
 
 algorithms
 
@@ -73,9 +69,17 @@ algorithms
 
 comments
 
-* "topological sorting" a generalization of "graph traversal"?
-* a descendant is subsequent to its ancestors
-* related to linear extensions of partial orders
+* seems related to linear extensions of partial orders
+
+comments
+
+* a "topological sort" could be understood to be rewriting a graph
+* i.e. produce a "linear graph"
+
+comments
+
+* a graph traversal can be understood to visit the vertices
+* according to some pre-executed topological sort
 
 <!-- ======================================================================= -->
 ## Graph traversal/search

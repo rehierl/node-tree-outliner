@@ -23,6 +23,37 @@ clarification
 * the expressions `(e = s)`, `{ s }`, `[ s ]` are all valid
 
 <!-- ======================================================================= -->
+## which term is to use?
+
+tuples
+
+* `t := [1, 'a']`
+* an ordered list of "anything"
+* in general of finite length
+
+sequences
+
+* `s := [1, 2, 3, ...]`
+* an enumerated collection of "something"
+* of finite or infinite length
+* in general a rule exists such that subsequent elements
+  in a sequence can be calculated from presequent ones
+* e.g. `an := a(n-2) + a(n-1)` (Fibonacci)
+
+strings
+
+* `s := ['a', 'b', 'a', 'c', ...]`
+* traditionally a sequence of characters
+* elements are selected from an alphabet
+* in computing generalized into a sequence of binary data of sorts
+* depending on the context, a mutable/immutable sequence
+
+vectors
+
+* `v := [1.0, 2.0, 3.0]`
+* in general an element of the real coordinate space (R^n)
+
+<!-- ======================================================================= -->
 ## is-sequence
 
 * `(is-sequence s), isSequence(s)` are true, if `s` is a sequence
@@ -40,6 +71,15 @@ clarification
 * `(is-empty s), isEmpty(s) := (#s == 0)`
 * `[]` represents the empty sequence
 * `isEmpty([])` are always true
+
+<!-- ======================================================================= -->
+## index-of
+
+* `indexOf(s,e)` := the 1-based index of element `e` in sequence `s`
+* `idx(s,e), index(s,e) := indexOf(s,e)`
+
+Note that the index of an element is undefined, if that element turns out to
+be not an element of the input sequence.
 
 <!-- ======================================================================= -->
 ## n-th element of
@@ -94,26 +134,6 @@ clarification
 * `(s != t)` is true, if both sequences differ in length and/or values
 
 <!-- ======================================================================= -->
-## linear sequence
-
-* `(is-linear s), (is-linear s) := isLinear(s)`
-* `isLinear(s)` := `(s[i] != s[j])` for any `i,j in [1,#s]` and `(i != j)`
-
-Note that a sequence is said to be linear, if the sequence holds unique/distinct
-elements/values only. That is, a linear sequence contains none of its elements
-more than once. As such, a linear sequence can be understood to define a simple
-set of elements.
-
-Note that a linear sequence defines an ordered set (see relations), if the
-order of the elements within that sequence is understood to define the order
-of elements/values within the corresponding ordered set. Depending on the
-respective context, the semantics of the element order may therefore be:
-e.g. `(s[i+1] subsequent-to s[i])` or `(s[i] presequent-to s[i+1])`.
-
-Note that the word "linear" needs to be understood
-in the context of a "linearly ordered set".
-
-<!-- ======================================================================= -->
 ## inverse sequence (s')
 
 * `s', inv(s) := [f1=eN,...,fN=e1]`, if `s = [e1,...,eN]`
@@ -126,31 +146,24 @@ palindrome
 * `s` is a palindromic sequence, if `(s == inv(s))`
 
 <!-- ======================================================================= -->
-## which term is appropriate?
+## linear sequence
 
-tuples
+* `(is-linear s), (is-linear s) := isLinear(s)`
+* `isLinear(s)` := `(s[i] != s[j])` for any `i,j in [1,#s]` and `(i != j)`
 
-* `t := [1, 'a']`
-* an ordered list of "anything"
-* in general, of finite length
+A sequence is said to be linear, if the sequence holds unique/distinct elements
+only. That is, a linear sequence contains none of its elements more than once.
+As such, a linear sequence can be understood to define a simple set of elements.
 
-sequences
+In addition to that, a linear sequence defines an ordered set (see relations),
+if the order of positions is understood to correspond with the set's order of
+elements. Depending on the respective context, the semantics of the element
+order may therefore be:
 
-* `s := [1, 2, 3, ...]`
-* an enumerated collection of "something"
-* of finite or infinite length
-* in general, a rule exists such that subsequent elements
-  in a sequence can be calculated from presequent ones
-* e.g. `an := a(n-2) + a(n-1)` (Fibonacci)
+* `(s[i] before s[i+1])`, `(s[i] presequent-to s[i+1])`
+* `(s[i+1] after s[i])`, `(s[i+1] subsequent-to s[i])`
 
-strings
+The word "linear" therefore needs to be understood
+with regards to the "linear order" it defines.
 
-* `s := ['a', 'b', 'a', 'c', ...]`
-* traditionally a sequence of characters
-* elements are selected from an alphabet
-* fixed, or allows to change its elements
-
-vectors
-
-* `v := [1.0, 2.0, 3.0]`
-* in general, an element of the real coordinate space (R^n)
+Note that set-based operators can be used in combination with linear sequences.

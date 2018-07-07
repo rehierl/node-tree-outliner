@@ -2,10 +2,20 @@
 <!-- ======================================================================= -->
 # Tree of nodes
 
-* represents the hierarchical nature of a structure
+* a tree represents the hierarchical nature of a structure
+
+summary
+
+* trees may be visualized as "nested sets"
+* the definition of parent/leaf should be child-based, not degree-based
+* a degree-based definition is problematic regards to the tree's root
+* a tree should not be allowed to be empty - affects definitions
+* a forest (may be empty) is a disjoint union of trees
+* tree-order := descendants are subsequent to ancestors
+* ordered tree := each node has an ordered set of child nodes
 
 <!-- ======================================================================= -->
-## tree/hierarchy structure
+## wikipedia, tree structure
 
 * nodes- the vertices of the tree's graph
 * branches - the edges of the tree's graph
@@ -31,7 +41,7 @@ notes
 * an infinite tree may have a root
 
 <!-- ======================================================================= -->
-## tree, set theory
+## wikipedia, tree (set theory)
 
 * tree - a partially ordered set `(T,<)`
 * such that - `{ s in T | (s < t) for each (t in T) }` is well-ordered
@@ -41,7 +51,7 @@ notes
 * a subtree is downward closed - i.e. subset
 
 <!-- ======================================================================= -->
-## tree, graph theory
+## wikipedia, tree (graph theory)
 
 * an undirected graph
 * any two vertices are connected by exactly one path
@@ -100,16 +110,17 @@ rooted tree
 
 tree-order (!!!)
 
-* the partial ordering on the vertices
-* `(v < w)` if there is a rooted path such that `[r..v..w]`
+* a partial ordering on the vertices, such that ...
+  `(v < w)` if there is a rooted path `rp := [r..v..w]`
 
 ordered/plane tree (!!!)
 
-* a rooted tree that has an ordering for its child vertices
+* an ordered tree is a rooted tree, such that ...
+  each parent node has a first and a last child
 * an ordering of children is equivalent to embedding the tree in the plane
 
 <!-- ======================================================================= -->
-## tree, computer science
+## wikipedia, tree (data structure)
 
 * a tree is an abstract data type which represents hierarchical structure
 

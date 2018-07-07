@@ -33,6 +33,10 @@ functions
 <!-- ======================================================================= -->
 ## References - order
 
+mixed
+
+* [wikipedia, lexicographical order](https://en.wikipedia.org/wiki/Lexicographical_order)
+
 mixed, set-related
 
 * [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)

@@ -12,14 +12,17 @@ Note that any sequence is in principle the concatenation of its elements.
 
 Note that the result of the concatenation operation is in general a set of
 sequences. Depending on the input parameters, all sequences within the result
-set are "flat sequences" (i.e. no additional nesting).
+of the concatenation operation is in principle **a set of flat sequences** (i.e.
+no added nesting). That is in contrast to the base definition of the Cartesian
+product.
 
 Note that, in general, there is no statement possible about the lengths of the
 sequences in the resulting set-of-sequences. Likewise, the number of sequences
 in the resulting set can not be determined in general. However, such statements
-can be made in special cases: If no input set is a set of sequences, then the
-length of each sequence within the resulting set is identical to the number of
-sets involved.
+still can be made under special circumstances: If no input set is a set of
+sequences, then the length of each sequence within the resulting set is
+identical to the number of sets involved. In contrary to that, the sequences
+in the result set of the Cartesian product always have the exact same length.
 
 Note that, because the result of the concatenation is in general a set of
 sequences, the concatenation operation can be used to specify types/domains.

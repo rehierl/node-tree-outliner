@@ -2,11 +2,14 @@
 <!-- ======================================================================= -->
 # Order Theory
 
-* the goal is to grasp the meaning of "order"
-* i.e. what exactly is "order"?
+What exactly is "order"?
+
+An "order" is by its own a relation that defines the relationship the elements
+of a set have with each other. Order theory examines the common characteristics
+of different order relations.
 
 <!-- ======================================================================= -->
-## notes from - wikipedia, order theory
+## wikipedia, order theory
 
 * examine the notion of order using binary relations
 * subset-of - captures a notion of containment/specialization

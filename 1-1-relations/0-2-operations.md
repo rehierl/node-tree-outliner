@@ -106,4 +106,3 @@ clarification
 * ..., trichotomous, partial order, total order, strict weak order, ...
 * ..., total preorder (weak order), equivalence relation,
 * then `limit(R)` is too
- 

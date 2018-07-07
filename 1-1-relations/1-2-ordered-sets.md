@@ -12,17 +12,19 @@ simple sets of values
 
 ordered sets of values
 
-* a (simple) set of elements paired with some order
+* a (simple) set of elements that is paired with some order
 * the order relation defines the relationship between the elements
 
 <!-- ======================================================================= -->
-## Linear set/sequence (`[{...}]`)
+## Linear set/sequence
 
 * the focus is on sequences derived from sets of elements
 * each element within a sequence appears no more than once (a set)
 * the order of elements in such a sequence corresponds with some order
 * the indexes of those elements reflects that order (subsequent)
 * referred to as a "distinct sequence", or as a "linear set/sequence"
+* the notation used in the context of this discussion is: **[{..}]**
+* as it denotes "a sequentialized set of elements"
 
 order-related properties
 

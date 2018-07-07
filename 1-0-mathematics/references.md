@@ -6,6 +6,7 @@ mixed
 
 * [wikipedia, combinatorics](https://en.wikipedia.org/wiki/Combinatorics)
 * [wikipedia, interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)
+* [wikipedia, lexicographical order](https://en.wikipedia.org/wiki/Lexicographical_order)
 
 syntax related
 

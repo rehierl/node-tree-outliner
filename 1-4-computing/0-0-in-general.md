@@ -1,3 +1,3 @@
 
 <!-- ======================================================================= -->
-# Tree structures in computing
+# General aspects in computing

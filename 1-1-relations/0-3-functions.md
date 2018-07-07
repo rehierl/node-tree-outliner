@@ -2,9 +2,19 @@
 <!-- ======================================================================= -->
 # A functional perspective
 
-* functions looked at as being "ordered pairs with unique first components"
+A functional perspective or relations:
 
-function-based view
+* some relations can be understood to define functions
+* e.g. `G(R) = (A X B)` => `f : A -> B`
+* e.g. `G(R) = xT^n` => `f: xT^(n-1) -> Tn`
+* a function `f` is a special kind of relation
+* however, this perspective is of no interest here
+* of interest is, that `R` represents a set of tuples/sequences
+
+<!-- ======================================================================= -->
+## characteristics
+
+clarification
 
 * function - right-unique and left-total
 * injective function - unique and left-total
@@ -18,38 +28,28 @@ clarification
 * if partial, then total with regards to some strict-subset-of `A`
 * not surjective -> `img(f) strict-subset-of B`, i.e. (image != codomain)
 
-<!-- ======================================================================= -->
-
 monotonic function
 
-* a function between ordered sets
+* a function between ordered sets ...
 * such that it preserves or reverses the given order
 * if `(x <= y)`, then `f(x) <= f(y)` - increasing
 * if `(x <= y)`, then `f(x) >= f(y)` - decreasing
 * monotonically increasing/decreasing
 
 <!-- ======================================================================= -->
-
-* relations can be seen to define functions
-* e.g. `G(R) = (A X B)` => `f : A -> B`
-* e.g. `G(R) = xT^n` => `f: xT^(n-1) -> Tn`
-* a function `f` is a special kind of relation
-* however, this perspective is of no interest here
-* of interest is, that `R` represents a set of tuples/sequences
-
-standard perspective
+## sets related to functions
 
 * `f : A -> B`
 * `A` is said to be the function's domain
 * `B` is said to be the function's codomain, aka. target set
 * `f(a) = b`, `(a in A) and (b in B)`, `f(a)` evaluates to `b`
-* here, `a` represents the function's argument and
-  `f(a)` the function's value for argument `a`
+* `a` represents the function's argument
+* `f(a)` the function's value for argument `a`
 
 domain
 
-* the domain of a function `dom(f)` is
-  the set of input/argument values for which the function is defined
+* the domain of a function `dom(f)` is ...
+* the set of input/argument values for which the function is defined
 * for each `a in dom(f)`, `f(a)` evaluates to some `b in B`
 * `a` is mapped onto `b` under `f`
 * `b` is `a`'s image under `f`
@@ -66,16 +66,10 @@ codomain
 
 image
 
-* `img(X,f) = { f(a) : (a in X), (X subset-of A) }` -
+* `img(X,f) = { f(a) | (a in X), (X subset-of A) }` -
   i.e. the set of values that contains all possible output/result values
 * subset `X` of `A` => image of `X` under `f`
 * `img(f) := img(dom(f),f)` is referred to as the function's image
-
-inverse image
-
-* `img(Y,f) = { a : (f(a) == b), (a in A), (b in Y), (Y subset-of B) }` -
-  i.e. all elements in `A` that are mapped into `Y`
-* synonymous - inverse image, pre-image
 
 range
 
@@ -83,3 +77,9 @@ range
 * the latter is the more strict use of the word "range"
 * codomain > range > image
 * `f : dom(f) -> rng(f)`
+
+inverse image
+
+* `img(Y,f) = { a : (f(a) == b), (a in A), (b in Y), (Y subset-of B) }`
+* i.e. all elements in `A` that are mapped into `Y`
+* synonymous - inverse image, pre-image
