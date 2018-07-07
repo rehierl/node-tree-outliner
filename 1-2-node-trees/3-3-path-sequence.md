@@ -7,21 +7,21 @@ This sequence contains the rooted path of each node in the order of the
 node sequence:
 
 ```
-pathOf(node, sequence) begin
-  if(node.parent != null) begin
-    pathOf(node.parent, sequence)
-  end
-  sequence.add(node)
-end
-
-pathOf(node) begin
-  sequence = new Array()
-  pathOf(node, sequence)
-  return sequence
-end
-
 pathSequenceOf(root) begin
   sequence = new Array()
+
+  pathOf(node, sequence) begin
+    if(node.parent != null) begin
+      pathOf(node.parent, sequence)
+    end
+    sequence.add(node)
+  end
+
+  pathOf(node) begin
+    sequence = new Array()
+    pathOf(node, sequence)
+    return sequence
+  end
 
   onEnter(node) begin
     path = pathOf(node)
@@ -34,10 +34,8 @@ pathSequenceOf(root) begin
 
   traverseTree(node) begin
     onEnter(node)
-    child = node.firstChild
-    while(child != null) begin
+    for (child in node.childNodes) begin
       traverseTree(child)
-      child = child.nextSibling
     end
     onExit(node)
   end
@@ -46,7 +44,7 @@ pathSequenceOf(root) begin
 end
 ```
 
-The sequence of paths generated this way is referred to as
+The sequence of paths generated this way will be referred to as
 **the path sequence of** a given root/tree.
 
 * the tree's path sequence := `pathSequenceOf(root)`
@@ -67,14 +65,14 @@ The path sequence can also be defined by the corresponding node sequence:
 <!-- ======================================================================= -->
 ## the (rooted) path of a node
 
-The path that connects a tree's root `r` with a node `n` is referred to as
+The path that connects a tree's root `r` with node `n` is referred to as
 **the rooted path of node** `n`, or simply as **the path of node** `n`.
 
 * the path of a node will be referred to as `p(n)` or `pn`
 * e.g. `pn in RD`
 
 <!-- ======================================================================= -->
-## children
+## child nodes
 
 Node `c` is **a child of** node `n`,
 if `(prefix(pc,#pc-1) == pn)`.
@@ -103,5 +101,5 @@ and if there is no other sibling `t` such that `(pn < pt < ps)`.
 
 Note however that siblings are not strictly connected:
 
-* there is no uni-directional path `p=(n,...,s) in TD or BU`
+* there is no uni-directional path `p=(n,...,s) in (TD or BU)`
 * siblings all share common ancestors but are, other than that, unrelated

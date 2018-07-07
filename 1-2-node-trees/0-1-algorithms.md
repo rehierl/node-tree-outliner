@@ -79,7 +79,7 @@ comments
 comments
 
 * a graph traversal can be understood to visit the vertices
-* according to some pre-executed topological sort
+* according to some pre-calculated topological sort order
 
 <!-- ======================================================================= -->
 ## Graph traversal/search

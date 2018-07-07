@@ -187,11 +187,11 @@ to as the enter-order.
 
 * `level(n) := (#rp(n) - 1)` - the node level of a node
 * `depth(n) := (#rp(n) - 1)` - the depth of a node
-* i.e. `(level/depth(r) == 0)`
+* i.e. `(level/depth(root) == 0)`
 
 height of a node/tree
 
 * `height(n) := maxIn({ #p | (p in path(n,L)) }) - 1`
 * i.e. the length of the longest node-to-leaf path, minus one
 * `height(tree) := height(r)` - the height of a tree is the height of its root
-* i.e. `(height(l) == 0)` for `(l in L)`
+* i.e. `(height(leaf) == 0)`

@@ -4,8 +4,7 @@
 
 In order to create an outline that accurately represents a document's logical
 structure, the node tree must be traversed by visiting each node. In general,
-the traversal of a tree can be classified depending on certain characteristics
-- such as:
+the traversal of a tree can be classified depending on certain characteristics:
 
 * When is a node visited in relation to its child nodes? -
   e.g. depth-first search (DFS), breadth-first search (BFS)
@@ -16,47 +15,48 @@ the traversal of a tree can be classified depending on certain characteristics
 <!-- ======================================================================= -->
 ## depth-first search (DFS)
 
-The traversal of a tree is referred to as a depth-first (DFS) search, if
-all the nodes of a branch are visited before the nodes of any other branch.
+The traversal of a tree is referred to as a depth-first (DFS) search, if all
+the nodes of a branch are visited before the nodes of any other branch.
 
-Note that the `firstChild` and `nextSibling` node properties are needed.
-That is, the underlying node tree must be an ordered rooted tree of nodes.
+Note that `for (child in node.childNodes) begin`, depending on the given tree,
+will visit the child nodes of a node in first-to-last, or some random order:
 
-**FTL, DFS, Pre-order tree traversal**
+* If the tree is an ordered tree, then the child nodes of each node are visited
+  in the exact same order (i.e. first-to-last, left-to-right).
+* If the tree is an unordered tree, then subsequent executions may result in
+  visiting the nodes in a different order (i.e. seemingly random).
+
+**DFS, Pre-order tree traversal**
 
 ```
 traversePreOrder(node) begin
   visitPreOrder(node)
-  child = node.firstChild
-  while(child != null) begin
+  for (child in node.childNodes) begin
     traversePreOrder(child)
-    child = child.nextSibling
   end
 end
 ```
 
-The `visitPreOrder()` operation marks the beginning of processing a node. This
-operation represents a node's enter event which corresponds with a node's start
-tag.
+The `visitPreOrder()` operation marks the beginning of processing a node.
+This operation represents a node's enter event, which corresponds with the
+start tag of a node.
 
-**FTL, DFS, Post-order tree traversal**
+**DFS, Post-order tree traversal**
 
 ```
 traversePostOrder(node) begin
-  child = node.firstChild
-  while(child != null) begin
+  for (child in node.childNodes) begin
     traversePostOrder(child)
-    child = child.nextSibling
   end
   visitPostOrder(node)
 end
 ```
 
 The `visitPostOrder()` operation marks the end of processing a node. This
-operation represents a node's exit event which corresponds with a node's end
-tag.
+operation represents a node's exit event, which corresponds with the end
+tag of a node.
 
-**FTL, DFS, In-order**
+**DFS, In-order**
 
 ```
 traverseInOrderBin(node) begin
@@ -69,29 +69,30 @@ end
 The in-order tree traversal of a binary tree is a strict tree traversal because
 each node is visited exactly once.
 
-Traversing a non-binary tree, which allows more than two child nodes per node
-(the DOM tree is such a generic tree) via an in-order tree traversal, has the
-difficulty of generically defining when to visit each node independently of its
-inner structure.
+Traversing a non-binary tree, which allows any number of child nodes per node
+(the DOM tree is such a generic tree) via an in-order tree traversal, adds the
+difficulty of having to generically define when to visit each node independently
+of the tree's inner structure.
 
 One way of solving this issue would be to execute a node's visit operation(s)
 once per child node:
 
 ```
 traverseInOrder(node) begin
-  child = node.firstChild
-  while(child != null) begin
+  visitPreOrder(node)
+  for (child in node.childNodes) begin
     visitInOrderBefore(node)
     traverseInOrder(child)
     visitInOrderAfter(node)
-    child = child.nextSibling
   end
+  visitPostOrder(node)
 end
 ```
 
 It does not matter if either `visitInOrderBefore()`, or `visitInOrderAfter()`,
-or even both are used. Both will be executed multiple times per node. Because of
-that, the in-order tree traversal of a generic tree is no strict tree traversal.
+or even both are used. Both will be executed multiple times per node. Because
+of that, the in-order tree traversal of a generic tree is no strict tree
+traversal.
 
 <!-- ======================================================================= -->
 ## breadth-first (BFS) search
@@ -99,16 +100,20 @@ that, the in-order tree traversal of a generic tree is no strict tree traversal.
 A tree traversal is referred to as a breadth-first (BFS) search, if the nodes
 of a tree are visited one level at a time.
 
-**FTL, BFS**
+**BFS**
 
 ```
 //- visit the nodes in a given range of (relative) levels
-//- node.level in [1,+Inf] returns a node's (absolute) node level
-//- the root node of a tree has a node level value of 1
-//- first visit all nodes at level n, then those at level n+1, etc.
+//- the node.level property (in [0,+Inf]) is assumed to be
+//  defined to return a node's absolute node level
+//- the root node of a tree has a node level value of 0
+//- first visit all nodes at level n,
+//  then continue to visit all node at level n+1, etc.
+//- note that the "root" input parameter is not necessarily
+//  identical to the tree's root node
 
 traverseBFS(root, min, max) begin
-  assert((1 <= min) && (min <= max))
+  assert((0 <= min) && (min <= max))
 
   queue = new Queue()
   queue.enqueue(root)
@@ -117,25 +122,25 @@ traverseBFS(root, min, max) begin
     node = queue.dequeue()
 
     //- the node's relative level
-    level = 1 + (node.level - root.level)
+    level = (node.level - root.level)
 
     if(level in [min,max]) begin
       visitBFS(node)
     end
 
-    child = node.firstChild
-    while(child != null) begin
+    for (child in node.childNodes) begin
       queue.enqueue(child)
-      child = child.nextSibling
     end
   end
 end
 ```
 
-Executing `traverseBFS(node, 1, 1)` (= **BFS-1**) will only visit the 1st level,
-which only contains the specified node. Executing `traverseBFS(node, 2, 2)`
-(= **BFS-2**) will only visit the 2nd level, which only contains a node's
-immediate descendants (i.e. child nodes).
+* `BFS, BFS(node) := traverseBFS(node,-Inf,+Inf)`
+* `BFS-N, BFS(node,N) := traverseBFS(node,N,N)`
+
+Executing **BFS-0** will only visit the 1st level of the given node, which only
+contains the specified node itself. Executing **BFS-1** will only visit the 1st
+actual level, which only contains the child nodes of the root input parameter.
 
 <!-- ======================================================================= -->
 ## an event-driven process
@@ -143,10 +148,8 @@ immediate descendants (i.e. child nodes).
 ```
 traverseTree(node) begin
   onEnter(node)
-  child = node.firstChild
-  while(child != null) begin
+  for (child in node.childNodes) begin
     traverseTree(child)
-    child = child.nextSibling
   end
   onExit(node)
 end
@@ -158,18 +161,18 @@ certain operations depending on which node is being entered or exited.
 Note that, because of the `onEnter()` and `onExit()` calls, the outline
 algorithm can be understood to be an event-driven process.
 
-When a node is entered, an algorithm might have to:
+When a node is being entered, an algorithm might have to:
 
 * end outer sections
 * associate the node being entered with a section
 * "suspend" outer sections
 * create and initialize a new inner section
 
-When a node is exited, an algorithm might have to:
+When a node is being exited, an algorithm might have to:
 
 * end inner sections
 * reactivate a "suspended" outer section, or
 * create and initialize a new outer section
 
-Which operations need to be executed while an event is being executed, must
-be defined for each type of node.
+Which operations will have to be executed while an event is being executed,
+must be defined for each type of node.

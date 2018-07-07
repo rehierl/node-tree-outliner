@@ -18,8 +18,12 @@ once.
 <!-- ======================================================================= -->
 ## pseudocode definitions
 
+Note that the naming convention is such that the name of a binary operation
+refers to the 1st parameter, which needs to be tested against the 2nd parameter
+(i.e. the context of the corresponding operation).
+
 ```
-indexOf(sequence,element) begin
+indexOf(element, sequence) begin
   for i in 1 to sequence.length begin
     if(sequence[i] === element) return i
   end
@@ -27,23 +31,28 @@ indexOf(sequence,element) begin
 end
 
 //- returns an (pos|neg) integer value
-distanceBetween(seq,e1,e2) begin
-  i1 = indexOf(seq,e1)
-  i2 = indexOf(seq,e2)
+//- the result is >0, if e1 comes before e2
+//- the result is <0, if e1 comes after e2
+//- the order is upside-down, if the result is <0
+distanceBetween(e1,e2,seq) begin
+  i1 = indexOf(e1,seq)
+  i2 = indexOf(e2,seq)
   return (i2 - i1)
 end
 
-//- in short: (i1 < i2)
-isPreSequentTo(seq,e1,e2) begin
-  return (distanceBetween(seq,e1,e2) > 0)
+//- basic pattern of an extended definition
+//- the below short definitions use the same pattern
+//- the below definitions replace the name and operator
+isPreSequentTo(e1,e2,seq) begin
+  return (distanceBetween(e1,e2,seq) > 0)
 end
 
-//- pre-sequent
+//- pre-sequent (i1 < i2)
 isPreSequentTo => (distanceBetween > 0)
 isStrictlyPreSequentTo => (distanceBetween == +1)
 isLooselyPreSequentTo => (distanceBetween > +1)
 
-//- sub-sequent
+//- sub-sequent (i1 > i2)
 isSubSequentTo => (distanceBetween < 0)
 isStrictlySubSequentTo => (distanceBetween == -1)
 isLooselySubSequentTo => (distanceBetween < -1)
