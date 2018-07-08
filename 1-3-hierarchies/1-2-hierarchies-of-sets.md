@@ -1,25 +1,5 @@
 
 <!-- ======================================================================= -->
-# TODOs
-
-**TODO** -
-define sub-hierarchy? -
-as counterpart to sub-tree?
-
-**TODO** -
-go meta with forests? -
-a forest is itself a set of elements -
-a hierarchy of forests? -
-"an outline of an outline"? -
-an unordered/ordered forest?
-
-**TODO** -
-given a set of elements E -
-how many hierarchies are theoretically possible? -
-what is the max possible number of sets in P (hint: powerset)? -
-with regards to: resource management, allocation of resources
-
-<!-- ======================================================================= -->
 # Hierarchy/Forest of sets
 
 ```
@@ -53,41 +33,42 @@ to itself (no loops).
 
 Note that two sets, which are disjoint from each other, are not understood
 to be outside of each other, not even if both sets have the same parent set
-(i.e. siblings). That is, "outside" and "not inside" are not equivalent.
+(i.e. siblings). "outside" and "not inside" are therefore not equivalent.
 
-* Any strict outer set of set S is an **ancestor set**
-  and as such **super-ordinate** to, or **more significant** than S.
-* Any strict inner set of set S is a **descendant set**
-  and as such **sub-ordinate** to, or **less significant** than S.
+* Any strict outer set of set `s` is an **ancestor set**
+  and as such **super-ordinate** to, or **more significant** than `s`.
+* Any strict inner set of set `s` is a **descendant set**
+  and as such **sub-ordinate** to, or **less significant** than `s`.
 
 Note that no set is understood to be an ancestor
 and/or a descendant set to itself (no loops).
 
-Note that the empty set is a strict subset to any non-empty set. Because of
-that, any non-empty set is an ancestor set to the empty set. The empty set
+Note that the empty set `{}` is a strict subset to any non-empty set. Because
+of that, any non-empty set is an ancestor set to the empty set. The empty set
 is therefore the only set that may have disjoint ancestors. Consequently, a
-strict setup must not contain the empty set. From this point forwards, all
-sets are considered to be non-empty.
+strict setup must not contain the empty set. From this point forward, all sets
+need to be understood to be non-empty.
 
-* A set, that has no ancestor set (other than the universal set),
+* A set, that has no ancestor set
+  (other than the universal set),
   is said to be a **root set**.
-* The least significant ancestor set of set S
-  is said to be the **parent set** of S.
-* (The most significant ancestor set of set S
-  is said to be the **root set of** S).
-* Set S1 is said to be a **child set**
-  of set S2, if S2 is the parent set of S1.
+* The least significant ancestor set of set `s`
+  is said to be the **parent set** of `s`.
+* The most significant ancestor set of set `s`
+  is said to be the **root set of** set `s`.
+* Set `s` is said to be a **child set**
+  of set `t`, if `t` is the parent set of `s`.
 * Two sets which have the same parent set
   are said to be **siblings**.
-* Set S1 is said to be a **leaf set**
-  if there is no set descendant to S1.
+* A set is said to be a **leaf set**,
+  if it has no descendant sets.
 
 Note that none of the ancestors of a descendant set are disjoint from one
 another. They always have at least all the elements of the descendant set
 in common. Consequently, a strict setup does not allow its sets to have more
 than one parent set. That is, each non-root set always has exactly one least
 significant ancestor and therefore exactly one parent set. Likewise, each
-non-root set always has exactly one root set as an ancestor.
+non-root set always has exactly one root set as its most significant ancestor.
 
 Note that a set is not a parent set to itself (no loops). That is, because a
 set is not an ancestor to itself. Consequently, each set within a strict setup
@@ -120,7 +101,7 @@ A strict setup has the following properties:
 * A set either has a parent set, ex-or the set is a root set.
 * A strict setup has no loops and no cycles.
 * A non-empty strict setup always has one or more root sets.
-* A set that has a parent set also has one root set as an ancestor.
+* A set that has a parent set also has a root set.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -128,24 +109,21 @@ A strict setup has the following properties:
 **CLARIFICATION**
 The following definitions may be used to clarify discussions:
 
-* RS := all sets that have no ancestor set - set of root sets
-* LS := all sets that have no descendant set - set of leaf sets
-* PS := all sets that are parent to some child set
-* CS := all sets that are child to some parent set
+* `r in RS` - the set of all root sets (no ancestors)
+* `p in PS` - the set of all parent sets (one or more child sets)
+* `c in CS` - the set of all child sets (have a parent set)
+* `l in LS` - the set of all leaf sets (no descendants)
 
 Note that ...
 
-* RS, PS, CS and LS all are subsets of P
-* RS and LS are only empty if `(#P == 0)` is true
+* (hint: compare with the core definitions of node trees)
+* `(#RS, #PS, #CS and #LS) <= #P`
+* `RS` and `LS` are only empty if `(#P == 0)`
 * i.e. a non-empty strict setup always has a root and a leaf
-* (RS & CS) and (PS & LS) are both always empty
-* i.e. RS and CS are disjoint, as are PS and LS
-* i.e. a root isn't a child, and a parent isn't a leaf
-* ((RS + CS) == P == (PS + LS)) is true
+* `(RS == (P - CS))` and `(PS == (P - LS))` are both true
 * i.e. each set is either a root ex-or a child
 * i.e. each set is either a parent ex-or a leaf
-* i.e. RS and CS are "inverse" to each other, as are PS and LS
-* PS and CS are both empty if `(#RS == #P)` is true
+* `PS` and `CS` are both empty if `(#RS == #P)`
 
 **CLARIFICATION**
 Each set `s in P` in a strict setup `S := (V,P)`
@@ -154,19 +132,19 @@ has a unique **rooted path** `p := (s0,s1,...,sk)` such that ...
 * `p(i) = s(i) = si`
 * `s(i) in P` and `(s(i) parent-set-of s(i+1))`
 * `s0` is the universal set
-* `s0` is a virtual ancestor set of all possible sets
+* `s0` is a theoretical ancestor set of all possible sets
 * any root set is a child set of the universal set
 * `s1 in P` is a root set, and `(s == sk)`
 
 Note that there are several, less formal notations possible to denote the
 rooted path of a set. The notation that will be used below is a follows:
 
-* note that `/...` is meant to be equivalent to `s0/...`
+* `/...` is meant to be equivalent to `s0/...`
 * `/s1` - the rooted path of a root set `s1`.
-* `/s1/.../sk` - the rooted path of set `sk` begins with root set `s1`.
+* `/s1/.../sk` - the rooted path of set `sk` begins with its root set `s1`.
 * `#p` refers to the length of the rooted path `p`.
 
-Note that each element within such a rooted path is a set of possibly
+Note that each element in such a rooted path is a set of possibly
 infinitely many elements.
 
 ```
@@ -177,9 +155,9 @@ infinitely many elements.
 |---------|   |-------------|
 ```
 
-* Root sets A and B both represent separate hierarchies.
-* Set /A/A is a strict subset of root set A.
-* Sets /B/A and /B/B are both strict subsets of root set B.
+* Root sets /A and /B both represent separate hierarchies.
+* Set /A/A is a strict subset of root set /A.
+* Sets /B/A and /B/B are both strict subsets of root set /B.
 
 <!-- ======================================================================= -->
 ## (simple) Hierarchy/Forest of sets
@@ -196,7 +174,7 @@ Some of the properties of a hierarchy are:
 
 * A hierarchy is not empty (one root set).
 * A hierarchy has no loops and no cycles.
-* A hierarchy has no sets that overlap each other.
+* A hierarchy has no overlapping sets.
 * Two distinct sets are either disjoint,
   ex-or one is a strict subset of the other.
 * Each set either has no, ex-or exactly one parent set.
@@ -218,15 +196,15 @@ That is, a forest is not required to contain even a single root set.
 * strict setup <=> a forest of hierarchies
 * a hierarchy => a forest of hierarchies
 
-Note that any strict setup is a forest of hierarchies. That is, a forest is not
-strictly "a set of sets of sets" (i.e. "a set of hierarchies"). A forest is like
-a hierarchy, a single set of sets. Because of that, any operation defined on a
-set of sets can be used in combination with forests.
+Note that any strict setup is a forest of hierarchies. That is, a forest is
+not strictly "a set of sets of sets" (i.e. "a set of hierarchies"). A forest
+is like a hierarchy, one big set of sets. Because of that, any operation
+defined on a set of sets can be used in combination with forests.
 
 Note that any two hierarchies in a forest of N hierarchies are disjoint. That
 is, because the forest would otherwise either have less than N hierarchies, or
-it would not even be a strict setup. From a loose perspective, a forest is a
-set of disjoint hierarchies.
+it would not even be a strict setup. A forest is therefore a set of disjoint
+hierarchies.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -274,3 +252,23 @@ Note that
 * strict forest => simple forest
 * All hierarchies within a forest are disjoint.
 * Each set `s in P` can be identified by a single value `v in V`.
+
+<!-- ======================================================================= -->
+# TODOs
+
+**TODO** -
+define sub-hierarchy? -
+as counterpart to sub-tree?
+
+**TODO** -
+go meta with forests? -
+a forest is itself a set of elements -
+a hierarchy of forests? -
+"an outline of an outline"? -
+an unordered/ordered forest?
+
+**TODO** -
+given a set of elements E -
+how many hierarchies are theoretically possible? -
+what is the max possible number of sets in P (hint: powerset)? -
+with regards to: resource management, allocation of resources

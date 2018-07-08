@@ -84,7 +84,7 @@ clarification
 
 clarification
 
-* `(a <-> b) := (a xnor b)`
+* `(a <-> b) := (a !xor b)`
 * `(a <-> b) := (a -> b) and (a <- b)`
 * (A iff B), (A if and only if B) := (A <-> B)
 

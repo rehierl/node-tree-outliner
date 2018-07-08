@@ -8,8 +8,8 @@ mixed
 * [wikipedia, kinship terminology](https://en.wikipedia.org/wiki/Kinship_terminology)
 * [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)
 
-preorder
+order-related
 
 * [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
-* preorder, parital order <=> (acyclic) graphs
-* order relation
+* [wikipedia, partially ordered set](https://en.wikipedia.org/wiki/Partially_ordered_set)
+* hint: preorder, parital order <=> (acyclic) graphs

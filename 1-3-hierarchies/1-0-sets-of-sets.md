@@ -11,8 +11,8 @@ multiset-of-sets = <
 >
 ```
 
-This multiset-of-sets could be visualized using the following
-box/border-based representation:
+This multiset-of-sets could be visualized using nested sets
+(i.e. a box/border-based representation):
 
 ```
 |-A-----------------|
@@ -21,6 +21,10 @@ box/border-based representation:
 |   |---| |-----|   |
 |-------------------|
 ```
+
+Note that sets A and B are distinct. They differ in size and in the elements
+they contain. Likewise, sets B and C are distinct. Even though both sets have
+the same amount of elements, both sets differ in the element(s) they contain.
 
 Note that the following fragments are equivalent:
 
@@ -32,9 +36,14 @@ Note that the following fragments are equivalent:
               |-------|      |-------|
 ```
 
-Sets C and D are identical, which is because there is no element that would
-allow to distinguish set C from D (or vice versa). Consequently, there is
-no distinct order (e.g. inside vs. outside) between those two sets.
+Sets C and D are equivalent, which is because there is no element that would
+allow to distinguish both sets from one another. Because of that, there is
+**no distinct order** (i.e. inside vs. outside) between those two sets.
+
+Note that, in order to avoid these kind of circumstances, each set needs to
+have elements which allow to **distinguish** a set from all the other sets.
+That is, **sets must be distinct**, which is why a set of sets would be
+required (instead of a multiset of sets).
 
 ```
 |-E-----|           |-F-----|  
@@ -44,63 +53,67 @@ no distinct order (e.g. inside vs. outside) between those two sets.
 |-------|           |-------| 
 ```
 
-Set E contains the elements 1 and 2, and set F the elements 2 and 3.
-That is, E does not contain 3, and F does not contain 1.
+Set E contains elements 1 and 2, and set F elements 2 and 3. That is, both sets
+contain 2, but E does not contain 3 and F does not contain 1. As before, there
+is no distinct order (i.e. inside vs. outside) between those two sets.
 
-Note that the borders of both sets cross each other.
+Note that, due to the **crossing borders**, both sets are said to **overlap**
+each other. Also note that both sets need to have elements in common (they
+would otherwise be disjoint) and elements that the other set does not have
+(one set would otherwise be a subset of the other).
+
+Note that, even though A is distinct from B, and B distinct is from C, the
+borders of those sets do not cross each other.
 
 <!-- ======================================================================= -->
-## fundamental definitions
+## subset, strict subset
 
 subset-of
 
 * `(V subset-of W), (V simple-subset-of W) := (v in W) for any (v in V)`
-* `(V subset-of W) and (W subset-of V)` is true iff `(V == W)`
 * Any set, including the empty set `{}`, is a subset to itself.
 * The empty set `{}` is a subset to any set.
+* `(V subset-of W) -> (#V <= #W)`
 
 strict-subset-of
 
 * `(V strict-subset-of W) := (V subset-of W) and (V != W)`
-* `(V strict-subset-of W)` can only be true if `(#V < #W)`
-* `(V strict-subset-of W) and (W strict-subset-of V)` is always false
-* `(V strict-subset-of W) => not (W strict-subset-of V)`
 * No set, including the empty set, is a strict subset to itself.
 * The empty set `{}` is a strict subset to any non-empty set.
+* `(V strict-subset-of W) -> (#V < #W)`
+
+<!-- ======================================================================= -->
+## related, strictly related
 
 related-to
 
 * `(V related-to W) := (V subset-of W) or (W subset-of V)`
-* `(V related-to W) <=> (W related-to V)`
+* `(V related-to W) <-> (W related-to V)`
 
 strictly-related-to
 
 * `(V strictly-related-to W) := (V related-to W) and (V != W)`
-* `(V strictly-related-to W) <=> (W strictly-related-to V)`
-* `(V strictly-related-to W) => (V related-to W)`
+* `(V strictly-related-to W) <-> (W strictly-related-to V)`
+* `(V strictly-related-to W) -> (V related-to W)`
 
 unrelated-to
 
 * `(V unrelated-to W) := not (V related-to W)`
-* `(V unrelated-to W) <=> (W unrelated-to V)`
+* `(V unrelated-to W) <-> (W unrelated-to V)`
 
-Note that the empty set `{}` has no element that could be in conflict with the
-requirement of the `subset-of` definition. Because of that, "any element in the
-subset is an element of the super-set" is understood to be true if the subset
-is the empty set. That is, because the definition of the `subset-of` operator
-merely states that, for `(V subset-of W)` to be true, any element in `V` must
-also be an element of set `W`. Obviously, there is no element in the empty set
-which could be in conflict with that requirement.
+Note that the definition of the "(un-|strictly-)related-to" terms is intended
+to shift ones focus away from the elements the sets contain. That is, the focus
+is shifted towards the relationships the sets have with each other.
 
 <!-- ======================================================================= -->
-## fundamental definitions
+## disjoint, coupled, overlap
 
 ```
 multiset-of-sets = <
   A: { 1, 2 },
   B: { 1, {2} },
   C: { 2 },
-  D: { 2, 3 },      
+  D: { 2, 3 },
   E: { 3, 4 }
 >
 ```
@@ -109,56 +122,50 @@ multiset-of-sets = <
 * 2 is not a common element of sets A, B and D.
 * Sets A and E have no common element.
 * Set C is a (strict) subset of A, but A is not a subset of C.
-* Set A does not contain set C as an element, set B however does.
-* Set A is not a subset of D, and D not a subset of A.
+* Set A does not contain set C (as an element), set B however does.
+* Set A is not a subset of D, and D is not a subset of A.
 
 **CLARIFICATION**
-Sets A and D share the **common element** 2.
-
-* `(V coupled-with W) := ((V & W) != {})`
-* `(V coupled-with W) <=> (W coupled-with V)`
-
-Note that two or more sets have one or more elements in common, if the
-intersection of all sets involved is non-empty. That is, an element which
-is common to two or more sets must be an element of all those sets.
-
-* `(V related-to W) <=!=> (V coupled-with W)`
-
-It is important to note that, due to the empty set `{}`, two related sets are
-not necessarily coupled with each other. That is, because the empty set is a
-subset to any set.
-
-Note that common elements can be understood to act as a "link" between the
-sets involved. These kind of links can be understood to connect such sets with
-each other, which is why those sets can be said to be "connected" or "coupled".
-
-**CLARIFICATION**
-Set A is **disjoint** from set E
+Set A is **disjoint** to/from set E
 because both sets have no elements in common.
 
 * `(V disjoint-to W) := ((V & W) == {})`
-* `(V disjoint-to W) <=> not (V coupled-with W)`
+* `(V disjoint-to W) <-> (W disjoint-to V)`
 
-Note that two or more sets are disjoint from one another,
-if the intersection of all sets is empty.
+Note that any two subsets of two disjoint sets are also disjoint from one
+another. That is because otherwise, both subsets would not be subsets to
+their respective super-sets.
 
-* `(V related-to W) => (V coupled-with W) or (V disjoint-to W)`
-* `not (V related-to W) => (V coupled-with W) or (V disjoint-to W)`
+**CLARIFICATION**
+Set A is **coupled** with set D
+because both sets have the common element 2.
 
-Note that the empty `{}` set is disjoint to any set (including itself).
-In contrary to that, no non-empty set is disjoint to itself.
+* `(V coupled-with W) := ((V & W) != {})`
+* `(V coupled-with W) <-> (W coupled-with V)`
+* `(V coupled-with W) <-> not (V disjoint-to W)`
+* `(V coupled-with W) -> ((V != {}) and (W != {}))`
+
+Note that `disjoint-to` and `coupled-with` are exclusive.
+That is, two sets are either disjoint ex-or coupled with each other.
+
+* `(disjoint <-> !coupled) <-> (disjoint ex-or coupled)`
+* `( (V coupled-with W) or (V disjoint-to W) )` is always true
+
+Note that common elements can be understood to act as a "link" between the
+sets involved. These links can be understood to bind such sets together,
+which is why those sets can be said to be "connected" or "coupled".
 
 **CLARIFICATION**
 Set D is said to **overlap** set A
-because both sets have one or more elements in common,
-and because both have elements the other set does not have.
+because both sets are coupled with each other,
+and because both sets contain elements that the other set does not have.
 
 * `common := (A & D)` (e.g. `{2}`)
 * `diffAD := (A - D)` (e.g. `{1}`)
 * `diffDA := (D - A)` (e.g. `{3}`)
 * `overlap(A,D) := (#common > 0) and (#diffAD > 0) and (#diffDA > 0)`
 
-in general
+Generalized definition:
 
 * `(V overlaps W) := (V coupled-with W) and (V unrelated-to W)`
 * `(V overlaps W) <=> (W overlaps V)`
@@ -167,92 +174,47 @@ Note that, if set V overlaps W, then W also overlaps V.
 Both sets can be said to overlap each other.
 
 Note that none of two overlapping sets is a subset of the other.
+Both sets are therefore unrelated to each other.
 
 **CLARIFICATION**
-Set A is said to **(loosely) contain** set C
-because C is a subset of A.
+The empty set `{}` is disjoint to any set (including itself). In contrary
+to that, any non-empty set is coupled with itself. However, any non-empty
+set is either coupled with (C) ex-or disjoint to (D) any other non-empty set.
 
-Note that this "contains" definition is with regards to the `subset-of` operator
-and therefore needs to be understood as "contains the elements of" instead of
-"contains as an element". In order to distinguish both notions, one could use
-qualifiers similar to "loosely contains" (i.e. contains the elements of) and
-"strictly contains" (i.e. contains as an element):
-
-* A (loosely) contains C => C has no border in A.
-* synonymous - resolved-into, merged-into
-* B strictly contains C => C has a border in B.
-* synonymous - an element of
-
-Note that set A can be said to contain itself.
-In contrary to that, set A neither contains D nor E.
-
-**CLARIFICATION**
-Set C is said to be **(loosely) embedded** into set A
-because C is a strict subset of A.
-
-Note that similar as before, the "loose" definition is with regards to C
-being a subset of A and A having one or more additional elements. In contrary
-to that, the "strict" counterpart would be if set C would be an element of A
-in addition to A having one or more additional elements.
-
-* C is (loosely) embedded into A => C has no border in A.
-* C is strictly embedded into B => C has a border in B.
-
-Note that set A can not be said to be embedded into itself.
-That is, A is neither loosely nor strictly embedded into itself.
-
-**CLARIFICATION**
-"(strictly/loosely) contains" vs. "(strictly/loosely) embedded into":
-
-* contains <=> (simple) subset
-* embedded <=> strict subset
-* embedded => contains
-* if "embedded", then also "contains", but not necessarily vice versa
-* loosely contains/embedded -> resolved/merged into
-* strictly contains/embedded -> an element of
-
-Note that the "contains" vs. "embedded" distinction is used to clarify whether
-or not a super-set is known to have more elements than a sub-set.
-
-Note that the "loosely" vs. "strictly" distinction could be used to clarify how
-content was injected into some other content.
-
-<!-- ======================================================================= -->
-## Inconsistent setup
 
 ```
-|-A-----------------|
-| |-B---|   |-C---| |
-| | 1 2 |   | 3   | |
-| | |-D-|---|---| | |
-| | | 4 | 5 | 6 | | |
-| | |---|---|---| | |
-| |-----|   |-----| |
-|-------------------|
+     \ set-2 |          | same      | distinct
+set-1 \      | empty {} | non-empty | non-empty
+------------------------------------------------
+empty {}     |    D     |    D      |    D      
+------------------------------------------------
+non-empty    |    D     |    C      | C xor D   
 ```
 
-Note the crossing borders of sets B and D.
+**CLARIFICATION**
+Two disjoint sets are not necessarily distinct from one another. The empty
+set is the only existing counter-example. Likewise, two coupled sets are not
+necessarily distinct from one another. That is, because both sets may be
+identical.
 
-* Sets B and D both contain 4.
-* Set D contains 5 and 6, both of which do not belong to set B.
-* Set D is not a subset of set B.
-* Set B contains 1 and 2, both of which do not belong to set D.
-* Set B is also not a subset of set D.
-* Sets B and D overlap each other.
-* The borders of B and D cross each other.
+* `disjoint/coupled =!> distinct`
 
-Note the similar inconsistency between sets C and D.
+**CLARIFICATION**
+Due to the empty set `{}`, two distinct but related sets are not necessarily
+coupled with each other (=!>). That is, because the empty set is a subset to
+(and therefore related to) any set. However, two non-empty distinct and related
+sets are always coupled with reach other (=>). In contrary to that, two distinct
+coupled sets are not necessarily related to each other (<!=).
 
-**Memory hook**
-In a consistent setup, borders do not cross each other.
+* `(V related-to W) <=!=> (V coupled-with W)`
 
 <!-- ======================================================================= -->
-## TODOs
+# TODO - extend disjoint/coupled definitions for (N > 2)?
 
-**TODO** -
-a node loosely contains a distant descendant -
-a node strictly contains a child -
-a set loosely contains a child set -
-a set strictly contains a distant set -
-both notions are "inverse" to each other -
-needs to be fixed before we focus on content injection
+Note that two or more sets have one or more elements in common, if the
+intersection of all sets involved is non-empty. That is, an element which
+is common to two or more sets must be an element of all those sets.
+
+Note that two or more sets are disjoint from one another, if any two distinct
+sets are disjoint. Put differently, there are no two sets within such a set of
+sets that have even one element in common.
