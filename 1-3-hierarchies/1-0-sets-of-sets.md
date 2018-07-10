@@ -95,6 +95,7 @@ strictly-related-to
 * `(V strictly-related-to W) := (V related-to W) and (V != W)`
 * `(V strictly-related-to W) <-> (W strictly-related-to V)`
 * `(V strictly-related-to W) -> (V related-to W)`
+* `(V strictly-related-to W) := (V strict-subset-of W) xor (W strict-subset-of V)`
 
 unrelated-to
 
@@ -176,37 +177,55 @@ Both sets can be said to overlap each other.
 Note that none of two overlapping sets is a subset of the other.
 Both sets are therefore unrelated to each other.
 
-**CLARIFICATION**
-The empty set `{}` is disjoint to any set (including itself). In contrary
-to that, any non-empty set is coupled with itself. However, any non-empty
-set is either coupled with (C) ex-or disjoint to (D) any other non-empty set.
+<!-- ======================================================================= -->
+## derived statements
 
+**CLARIFICATION**
+The empty set is disjoint and related to any set, but not distinct to itself.
+A non-empty set is coupled with and related to itself. Two distinct non-empty
+sets may be coupled. Two distinct non-empty and coupled sets are not necessarily
+related.
 
 ```
-     \ set-2 |          | same      | distinct
-set-1 \      | empty {} | non-empty | non-empty
-------------------------------------------------
-empty {}     |    D     |    D      |    D      
-------------------------------------------------
-non-empty    |    D     |    C      | C xor D   
+     \ set-2 |          |          |
+set-1 \      | E        | A        | B
+-----------------------------------------------------
+ E           | !C and R | !C and R | !C and R
+-----------------------------------------------------
+ A           | !C and R | C and R  | !C or (!R or R)
 ```
 
-**CLARIFICATION**
-Two disjoint sets are not necessarily distinct from one another. The empty
-set is the only existing counter-example. Likewise, two coupled sets are not
-necessarily distinct from one another. That is, because both sets may be
-identical.
-
-* `disjoint/coupled =!> distinct`
+* `E` is the empty set
+* `A` and `B` are non-empty sets - i.e. `(A,B != E)`
+* `A` and `B` are distinct - i.e. `(A != B)`
+* two sets are coupled (`C`) or disjoint (`!C`)
+* two sets are related (`R`) or unrelated (`!R`)
 
 **CLARIFICATION**
-Due to the empty set `{}`, two distinct but related sets are not necessarily
-coupled with each other (=!>). That is, because the empty set is a subset to
-(and therefore related to) any set. However, two non-empty distinct and related
-sets are always coupled with reach other (=>). In contrary to that, two distinct
-coupled sets are not necessarily related to each other (<!=).
+Two disjoint sets are not necessarily distinct.
+Likewise, two distinct sets are not necessarily disjoint.
 
-* `(V related-to W) <=!=> (V coupled-with W)`
+* `disjoint <=!=> distinct`
+* (=!>) `{}` is disjoint to any set, but not distinct to itself.
+* (<!=) both sets may overlap each other.
+* (<!=) both sets may be strictly related.
+
+**CLARIFICATION**
+Two disjoint sets are not necessarily unrelated.
+Likewise, two unrelated sets are not necessarily disjoint.
+
+* `disjoint <=!=> unrelated`
+* (=!>) `{}` is disjoint and related to any set.
+* (<!=) both sets may overlap each other.
+
+**CLARIFICATION**
+Two coupled sets are not necessarily related.
+Likewise, two related sets are not necessarily coupled.
+
+* `coupled <=!=> related`
+* (=!>) both sets may overlap each other.
+* (<!=) `{}` is disjoint and related to any set.
+* hint: `(a <-> b) <-> (!a <-> !b)`
 
 <!-- ======================================================================= -->
 # TODO - extend disjoint/coupled definitions for (N > 2)?

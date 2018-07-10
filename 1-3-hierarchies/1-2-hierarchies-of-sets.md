@@ -21,10 +21,10 @@
 
 With regards to a strict setup, the following references may be used:
 
-* All (strict) subsets of a set
-  are said to be the set's **(strict) inner** sets.
-* All sets to which a set is an (strict) inner set
-  are said to be the set's **(strict) outer** sets.
+* All strict subsets of a set
+  are said to be the set's **inner** sets.
+* All sets to which a set is an inner set
+  are said to be the set's **outer** sets.
 
 Because any set is a subset to itself, any set can be understood to be an
 inner and an outer set to itself (loops). In contrary to that no set is a
@@ -33,11 +33,11 @@ to itself (no loops).
 
 Note that two sets, which are disjoint from each other, are not understood
 to be outside of each other, not even if both sets have the same parent set
-(i.e. siblings). "outside" and "not inside" are therefore not equivalent.
+(i.e. siblings). "outside" and "not inside" are therefore not the same.
 
-* Any strict outer set of set `s` is an **ancestor set**
+* Any outer set of set `s` is an **ancestor set**
   and as such **super-ordinate** to, or **more significant** than `s`.
-* Any strict inner set of set `s` is a **descendant set**
+* Any inner set of set `s` is a **descendant set**
   and as such **sub-ordinate** to, or **less significant** than `s`.
 
 Note that no set is understood to be an ancestor
@@ -45,9 +45,9 @@ and/or a descendant set to itself (no loops).
 
 Note that the empty set `{}` is a strict subset to any non-empty set. Because
 of that, any non-empty set is an ancestor set to the empty set. The empty set
-is therefore the only set that may have disjoint ancestors. Consequently, a
-strict setup must not contain the empty set. From this point forward, all sets
-need to be understood to be non-empty.
+is therefore the only set that could have disjoint ancestors. Consequently, a
+strict setup must not contain the empty set, which it does not. From this point
+forward, all sets need to be understood to be non-empty.
 
 * A set, that has no ancestor set
   (other than the universal set),
@@ -61,7 +61,7 @@ need to be understood to be non-empty.
 * Two sets which have the same parent set
   are said to be **siblings**.
 * A set is said to be a **leaf set**,
-  if it has no descendant sets.
+  if it has no descendant set.
 
 Note that none of the ancestors of a descendant set are disjoint from one
 another. They always have at least all the elements of the descendant set
@@ -72,30 +72,36 @@ non-root set always has exactly one root set as its most significant ancestor.
 
 Note that a set is not a parent set to itself (no loops). That is, because a
 set is not an ancestor to itself. Consequently, each set within a strict setup
-either has no parent set (e.g. a root set), ex-or exactly one parent set.
+either has no parent set (e.g. a root set) ex-or exactly one parent set.
 
 Note that an ancestor set always has more elements than any of its descendant
 sets. Likewise, a descendant set always has fewer elements than any of its
-ancestor sets. That is a direct consequence of the `strict-subset-of` operator.
+ancestors. That is a direct consequence of the strict relationship between
+ancestor and descendant sets.
 
 Note that a set can not be an ancestor set to itself (no cycles). That is,
-because a set can not be a subset to one of its strict subsets. Likewise,
-a set can not be a descendant set to itself. That is, because a set can not
-be a strict subset to itself.
+because a set can not be an outer set to itself. Likewise, a set can not be
+a descendant set to itself. That is, because a set can not be an inner set
+to itself.
 
 Note that a non-empty strict setup always has one or more root sets. That is,
 because (1) a strict setup that only contains a single set has that set as its
-only root set. That is, because in such a case, the setup does not have a set
-which could be an ancestor to that set. Furthermore, (2) the addition of a set
-to a strict setup, in such a way that the setup remains to be strict, will
-either add a new root set (in case that new set is disjoint to any pre-existing
-set), ex-or a new descendant set (i.e. a non-root set) to one or more existing
-sets.
+only root set. Furthermore, (2) the addition of a set to a strict setup, in
+such a way that the setup remains to be strict, will (2.1) add a new root set
+(in case that new set is disjoint to any pre-existing set), (2.2) turn one or
+more existing root sets into non-root sets (in case these root sets are
+descendant to the new set), or (2.3) add the new set as a descendant set to an
+existing root set.
 
-**CLARIFICATION**
+That is, if a new set is added to a strict setup, the number of root sets
+is increased by one (`#RS = #RS+1`, cases 1 and 2.1), remains unchanged
+(`#RS = #RS`, cases 2.2 and 2.3) or is decreased by a certain amount
+(`#RS = #RS-N` for `N in [0,#RS-1]`, case 2.2).
+
+**SUMMARY**
 A strict setup has the following properties:
 
-* A set is a strict subset to all of its ancestors.
+* Any set is a strict subset to all of its ancestors.
 * The ancestors of a set are not disjoint from one another.
 * A set either has one or more ancestors, ex-or none at all.
 * A set either has a parent set, ex-or the set is a root set.
@@ -113,6 +119,8 @@ The following definitions may be used to clarify discussions:
 * `p in PS` - the set of all parent sets (one or more child sets)
 * `c in CS` - the set of all child sets (have a parent set)
 * `l in LS` - the set of all leaf sets (no descendants)
+* `a in AS` - the set of all ancestor sets
+* `d in DS` - the set of all descendant sets
 
 Note that ...
 
@@ -170,13 +178,14 @@ if the following requirements are met:
 1. The setup is strict.
 2. The setup has exactly one root set.
 
-Some of the properties of a hierarchy are:
+A simple hierarchy has the following properties:
 
 * A hierarchy is not empty (one root set).
+* A hierarchy does not contain the empty set - `{} !in P`.
 * A hierarchy has no loops and no cycles.
-* A hierarchy has no overlapping sets.
-* Two distinct sets are either disjoint,
-  ex-or one is a strict subset of the other.
+* A hierarchy has no overlapping sets (req-2).
+* Two sets are either disjoint ex-or related.
+* Two distinct sets are either disjoint ex-or strictly related.
 * Each set either has no, ex-or exactly one parent set.
 * A hierarchy always has one or more leaf sets.
 * Ancestor sets have more elements than their descendant sets.
@@ -188,7 +197,7 @@ or "a forest of simple hierarchies", if the following requirements are met:
 
 0. `F := (V,P)`
 1. The setup is a strict.
-2. The setup has zero, one or more root sets.
+2. The setup has zero, one or more than one root sets.
 
 Note that, in contrary to a hierarchy, a forest may be empty.
 That is, a forest is not required to contain even a single root set.
@@ -198,7 +207,7 @@ That is, a forest is not required to contain even a single root set.
 
 Note that any strict setup is a forest of hierarchies. That is, a forest is
 not strictly "a set of sets of sets" (i.e. "a set of hierarchies"). A forest
-is like a hierarchy, one big set of sets. Because of that, any operation
+is like a hierarchy, one set of "flat" sets. Because of that, any operation
 defined on a set of sets can be used in combination with forests.
 
 Note that any two hierarchies in a forest of N hierarchies are disjoint. That
@@ -218,11 +227,11 @@ then any subset `s1` of `r1` is disjoint to any subset `s2` of `r2`.
 **CLARIFICATION**
 Any subset of a hierarchy is a forest of hierarchies.
 
-Note that, under certain circumstances (i.e. the hierarchy's root set
-is included), the subset will itself be a hierarchy.
+Note however that, under certain circumstances (i.e. the hierarchy's
+root set is included), the subset will itself be a hierarchy.
 
 <!-- ======================================================================= -->
-## strict Hierarchy/Forest of sets
+## TODO - strict Hierarchy/Forest of sets
 
 **CLARIFICATION**
 A setup is said to be **a strict hierarchy (of sets)**,
@@ -254,7 +263,7 @@ Note that
 * Each set `s in P` can be identified by a single value `v in V`.
 
 <!-- ======================================================================= -->
-# TODOs
+## TODOs
 
 **TODO** -
 define sub-hierarchy? -

@@ -13,6 +13,9 @@
 * CSS(/A)={1}, CSS(/A/A)={2}
 * CSS(/B)={}, CSS(/B/A)={1}, CSS(/B/B)={2}
 
+<!-- ======================================================================= -->
+## css-of-set()
+
 **CLARIFICATION**
 The **characteristic subset (CSS)** `css(s)` of set `s` in hierarchy
 `H := (V,P)`, is a potentially empty subset of `s` such that no element
