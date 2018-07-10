@@ -66,6 +66,19 @@ Note that, even though A is distinct from B, and B distinct is from C, the
 borders of those sets do not cross each other.
 
 <!-- ======================================================================= -->
+## E(), set-of-elements
+
+**CLARIFICATION**
+The set of elements `E(S)` is said to be **the set of elements** of the
+corresponding multiset/set of sets `S`, if it is identical to the union
+of all the sets in `S`:
+
+* `E(S) := { e | (e in s) and (s in S) }`
+
+Note that `E(S)` is empty if `S` is itself empty,
+or if `S` contains no other set than the empty set `{}`.
+
+<!-- ======================================================================= -->
 ## subset, strict subset
 
 subset-of

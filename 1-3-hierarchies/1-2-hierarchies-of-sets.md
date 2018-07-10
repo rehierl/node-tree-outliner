@@ -132,6 +132,8 @@ Note that ...
 * i.e. each set is either a root ex-or a child
 * i.e. each set is either a parent ex-or a leaf
 * `PS` and `CS` are both empty if `(#RS == #P)`
+* `A(s), A(s,h) := { a | (a ancestor-of s) }, (A(s) subset-of AS)`
+* `D(s), D(s,h) := { d | (d descendant-of s) }, (D(s) subset-of DS)`
 
 **CLARIFICATION**
 Each set `s in P` in a strict setup `S := (V,P)`
@@ -208,12 +210,25 @@ That is, a forest is not required to contain even a single root set.
 Note that any strict setup is a forest of hierarchies. That is, a forest is
 not strictly "a set of sets of sets" (i.e. "a set of hierarchies"). A forest
 is like a hierarchy, one set of "flat" sets. Because of that, any operation
-defined on a set of sets can be used in combination with forests.
+defined on a set of sets (e.g. union, subset, etc) can be used in combination
+with forests.
 
 Note that any two hierarchies in a forest of N hierarchies are disjoint. That
 is, because the forest would otherwise either have less than N hierarchies, or
 it would not even be a strict setup. A forest is therefore a set of disjoint
 hierarchies.
+
+**CLARIFICATION**
+The upper-case letter `H` may be used to refer to the theoretical set of all
+possible hierarchies and `F` to refer to the the theoretical set of all possible
+forests:
+
+* `H := { h | "h is a hierarchy" }`
+* `F := { f | "f is a forest of hierarchies" }`
+
+Because of that `(h in H)` states that `h` is must have the characteristics
+of a hierarchy. Likewise, `(f in F)` states that `f` is expected to be a valid
+forest of hierarchies.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -231,38 +246,6 @@ Note however that, under certain circumstances (i.e. the hierarchy's
 root set is included), the subset will itself be a hierarchy.
 
 <!-- ======================================================================= -->
-## TODO - strict Hierarchy/Forest of sets
-
-**CLARIFICATION**
-A setup is said to be **a strict hierarchy (of sets)**,
-if the following requirements are met:
-
-0. `H := (V,P)`
-1. The setup is a (simple) hierarchy.
-2. `(#css(s) == 1)` for each set `s in P`
-
-Note that ...
-
-* strict hierarchy => simple hierarchy
-* The characteristic subset of each set `css(s)`
-  consists of a single element in `V`.
-* Each set `s in P` can be identified by a single element in `V`.
-
-**CLARIFICATION**
-A setup is said to be **a strict forest (of hierarchies)**
-or "a forest of strict hierarchies", if the following requirements are met:
-
-0. `F := (V,P)`
-1. The setup is a simple forest.
-2. Each hierarchy in `F` is strict.
-
-Note that
-
-* strict forest => simple forest
-* All hierarchies within a forest are disjoint.
-* Each set `s in P` can be identified by a single value `v in V`.
-
-<!-- ======================================================================= -->
 ## TODOs
 
 **TODO** -
@@ -277,7 +260,7 @@ a hierarchy of forests? -
 an unordered/ordered forest?
 
 **TODO** -
-given a set of elements E -
+given a set of elements V -
 how many hierarchies are theoretically possible? -
 what is the max possible number of sets in P (hint: powerset)? -
 with regards to: resource management, allocation of resources

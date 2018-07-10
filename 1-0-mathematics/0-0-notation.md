@@ -153,7 +153,7 @@ clarification
 ## (n in N), (n !in N)
 
 * `n in N` is true, if `n` is an element of `N`
-* `(n !in N), (n not in N) := not (n in N)`
+* `(n !in N), (n not-in N), (n not in N) := not (n in N)`
 
 clarification
 

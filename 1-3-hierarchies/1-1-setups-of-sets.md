@@ -53,7 +53,7 @@ clarifications
 
 * No set `s in P` is allowed to be empty - i.e. `({} !in P)`
 * `S` is a two-element tuple of possibly empty sets.
-* `(p subset-of V)` for any `(p in P)`
+* `(s subset-of V)` for any `(s in P)`
 * `(P strict-subset-of P(V))`
 
 Note that `P` is a subset of `V`'s power-set `P(V)`. That is, all elements in
@@ -62,8 +62,9 @@ Note that `P` is a subset of `V`'s power-set `P(V)`. That is, all elements in
 * `(0 <= #P < #P(V))`
 
 Note that `V` is empty if only if `P` is empty. That is, because even though
-no `p in P` may be empty, `P` itself is still allowed to be empty.
+no `(p in P)` may be empty, `P` itself is still allowed to be empty.
 
+* `(V == E(P))`
 * `(#P = 0) <-> (#V = 0)`
 * `(#P > 0) <-> (#V > 0)`
 
@@ -79,8 +80,7 @@ of sets `P` of setup `S`. That is, the accurate expression would have to be
 `(s in P) and (P in S)`.
 
 **CLARIFICATION**
-Two distinct sets in a setup may be coupled with each other.
-Two distinct coupled sets in a setup are however not necessarily related.
+Two distinct coupled sets in a setup are not necessarily related.
 
 ```
      \ set-2 |          |

@@ -9,12 +9,12 @@
 
 * `N` is the set of all nodes
 * the following sets are all subsets of `N`
-* `r in R` - the set of all root nodes
-* `p in P` - the set of all parent nodes
-* `c in C` - the set of all child nodes
-* `l in L` - the set of all leaf nodes
-* `a in A` - the set of all ancestor nodes
-* `d in D` - the set of all descendant nodes
+* `r in RN` - the set of all root nodes
+* `p in PN` - the set of all parent nodes
+* `c in CN` - the set of all child nodes
+* `l in LN` - the set of all leaf nodes
+* `a in AN` - the set of all ancestor nodes
+* `d in DN` - the set of all descendant nodes
 
 <!-- ======================================================================= -->
 ## tree, forest
@@ -23,7 +23,7 @@
   i.e. a parent is a node that has one or more child nodes
 * a tree has no loops and no cycles (i.e. acyclic)
 * a tree always has exactly one root node -
-  i.e. `(#R == 1)`, `(#N >= 1)`
+  i.e. `(#RN == 1)`, `(#N >= 1)`
 * a tree always has one or more nodes - i.e. never empty
 * a forest is the union of disjoint trees
 
@@ -51,7 +51,7 @@ clarification
 <!-- ======================================================================= -->
 ## root, parent, child, leaf
 
-* `(#R,#P,#C and #L) <= #N`
+* `(#RN, #PN, #CN and #LN) <= #N`
 * a parent always has one or more child nodes
 * a child has one parent only
 * a root has no parent, but may itself be one
@@ -60,15 +60,15 @@ clarification
 
 a child-based view - i.e. with regards to a node's children
 
-* `P := (N - L)`
-* i.e. `P` and `L` are disjoint
+* `PN := (N - LN)`
+* i.e. `PN` and `LN` are disjoint
 * a node is either a parent ex-or a leaf
 * a parent has child nodes, a leaf does not
 
 a parent-based view - i.e. with regards to a node's parent
 
-* `R := (N - C)`
-* i.e. `R` and `C` are disjoint
+* `RN := (N - CN)`
+* i.e. `RN` and `CN` are disjoint
 * a node is either a root ex-or a child
 * a leaf is not a parent, but may itself have one
 * a leaf has no child, but may itself be one
@@ -76,12 +76,12 @@ a parent-based view - i.e. with regards to a node's parent
 <!-- ======================================================================= -->
 ## ancestors, descendants
 
-* `(#A and #D) <= #N`
+* `(#AN and #DN) <= #N`
 
 the set of all ancestors
 
-* `A := (N - L)`
-* i.e. `A` and `L` are disjoint
+* `AN := (N - LN)`
+* i.e. `AN` and `LN` are disjoint
 * a parent is an ancestor to its child nodes
 * a parent may itself have one or more ancestors
 * an ancestor is no leaf
@@ -93,8 +93,8 @@ ancestors of a node
 
 the set of all descendants
 
-* `D := (N - R)`
-* i.e. `D` and `R` are disjoint
+* `DN := (N - RN)`
+* i.e. `DN` and `RN` are disjoint
 * a child is a descendant to its parent node
 * a child may itself have one or more descendants
 * `(node.children[i].parent == node)` is always true
