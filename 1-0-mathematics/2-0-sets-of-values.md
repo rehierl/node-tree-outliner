@@ -100,6 +100,16 @@ s2 = traceOfValues(set)
 * `(V == {}) <-> (#V == 0)`
 
 <!-- ======================================================================= -->
+## one-element-of
+
+* `oneElementOf(S)` := returns a random element from the given set
+
+clarification
+
+* the element returned remains to be an element of the set
+* subsequent calls may result in different elements being returned
+
+<!-- ======================================================================= -->
 ## (v in V), element-of
 
 * `(v in V), (v element-of V)` := true, if `v` is an element of `V`

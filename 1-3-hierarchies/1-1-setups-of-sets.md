@@ -69,6 +69,12 @@ no `(p in P)` may be empty, `P` itself is still allowed to be empty.
 * `(#P = 0) <-> (#V = 0)`
 * `(#P > 0) <-> (#V > 0)`
 
+Note that `V` may hold elements of any kind. That is, there is no requirement
+of what kind of elements `V` must hold. The only restriction there is, is that
+all elements within `V` must be distinct from any other element in `V`. Other
+than that, `V` may hold elements of one kind (homogenous), or elements of
+different kinds (heterogenous).
+
 **Memory hook**
 A (simple) setup is a set of non-empty sets.
 

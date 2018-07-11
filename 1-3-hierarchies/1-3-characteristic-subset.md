@@ -27,10 +27,8 @@ an element of any descendant of `s`.
 
 Note that ...
 
-* `css(s)` is defined for any set in `P`.
-* For any set `(s in P)`, `css(s)` returns one result only.
+* css(s) is defined for any (s in P).
 * `(css(l) == l)` is true for any leaf set `(l in LS)`.
-* `(css(s) in P(V))` for any `(s in P)`.
 * `A(s) := { a | (a ancestor-of s) }`.
 * `D(s) := { d | (d descendant-of s) }`.
 * `V, E(h) := { e | (e in s) and (s in P) }`.
@@ -55,29 +53,16 @@ Even though a CSS is not necessarily an element in P (i.e. not an explicit
 entity), any CSS is understood to exist within the corresponding hierarchy.
 That is, because the CSS of any set in P can be determined at any time.
 
-<!-- ======================================================================= -->
-## CSS(), CE()
-
 **CLARIFICATION**
 The **set of all characteristic subsets (CSS)** is defined as follows:
 
 * `CSS(h) := { css(s,h) | for any (s in P) and (h in H) }`
+* `css-of-set(): (P,H) -> CSS(h)`
 
 Note that `CSS(h)` is never empty, which is because no hierarchy is empty.
 
-**CLARIFICATION**
-The union of all characteristic subsets within a given hierarchy is said to
-be **the set of characteristic elements (CE) of** the corresponding hierarchy.
-Similar definitions are possible with regards to any CSS and any (s in P):
-
-* `CE(h) := E(CSS(h))` for any hierarchy `h`
-* `CE(s) := E({ css(s) })` for any `(s in P)`
-* `CE(css) := css` for any `(css in CSS(h))`
-
-Note that any element within a CSS is said to be **a characteristic element**.
-
 <!-- ======================================================================= -->
-## derived statements
+## css(s) in P(V)
 
 In general, `css(s)` is an element in `P(V)`.
 That is, `css(s)` is not necessarily an element in `P`.
@@ -122,21 +107,38 @@ be a set in D(p). That however is not possible because css(p) would then have
 to be empty. Obviously, css(p) can not be empty and non-empty at the same time,
 which is why (css(p) in P) can not be true.
 
-**CLARIFICATION**
 The codomain of `css-of-set()` can not be changed (from `P(V)` to `P`)
 because `(CSS(h) - P)` is guaranteed to be non-empty if `(#PS > 0)`.
 
+**CLARIFICATION**
 Note that ...
 
 * `(s in LS) -> (css(s) != {})`
 * `(css(s) == {}) -> (s in PS)`
+* `(css(s) in P(V))` for any `(s in P)`.
 * `(l in LS) <-> (css(l) in P)`
 * `(p in PS) <-> (css(p) not-in P)`
 
-Note that css(p) may be empty (i.e. {}) for more than one (p in PS).
+**CLARIFICATION**
+Note that ...
+
+* css(p) may be empty (i.e. {}) for more than one (p in PS)
+* not every set (s in P) is a CSS, if (#PS > 0) - i.e. (P - CSS(h)) is non-empty
+* (s in P) is the CSS of set (t in P) iff (s == t) and (t in LS)
+* no (s in P) is a CSS of some other set (t in P)
 
 <!-- ======================================================================= -->
-## derived statements
+## disjoint, unique
+
+```
+        |----------------|
+P:      | p1    p2    p3 |
+        |--\----/-----|--|
+            \  /      |
+        |----\/-------|--|
+CSS(h): | c1=c2={}    c3 |
+        |----------------|
+```
 
 **CLARIFICATION**
 Any CSS is disjoint to any other CSS.
@@ -149,35 +151,41 @@ still a subset of (s), and css(t) is still a subset of (t).
 strictly related. That is, because two distinct sets in a hierarchy are
 either disjoint ex-or strictly related.
 
-(3) If (t) would be a descendant of (s), then css(s) could by definition
-not contain any element in (t) and therefore also not any element in css(t).
-Consequently, two distinct characteristic subsets can not have even one
-element in common.
+(3) If (t) would be a descendant of (s), then css(s) could by definition not
+contain any element in (t) and therefore also not any element in css(t). Put
+differently, the link between both subsets would break. Consequently, two
+distinct characteristic subsets can not be coupled.
 
 * `(css(s) disjoint-to css(t))`, if `(s != t)`
-* `CSS(h)` is a set of disjoint sets.
+* `CSS(h)` is a set of disjoint sets
 
 **CLARIFICATION**
-Two distinct sets in P may still have the same CSS - i.e. N:1.
+Two distinct sets in P may have the same CSS.
 Which is, because css(p) may be empty for more than one (p in PS).
 
-* `P-to-CSS` is a `N:1` relationship.
+* `P-to-CSS` is a `N:1` relationship
 * `(s != t) and (css(s) == css(t)) -> (css(s) == {}) or (css(t) == {})`
 * `(css(s) != css(t)) -> (s != t)`
 * `(#CSS(h) <= #P)`
 
 **CLARIFICATION**
-Any non-empty CSS is unique to its parent set - i.e. 1:1.
-No other set in P has the exact same non-empty CSS.
+Any non-empty CSS is unique to its parent set.
+No other set (s in P) has the exact same non-empty CSS.
 
+(1) That is, because for two distinct sets (s,t in P) to have the same
+non-empty CSS (i.e. (css(s) == css(t)), (s & t) would have to be non-empty.
+
+(2) As before, both sets (s) and (t) would have to be strictly related,
+which is why both sets can not have the exact same non-empty CSS.
+
+* `P-to-CSS` is a `1:1` relationship, if `(css(s) != {})`
 * `(s != t) <-> (css(s) != css(t))`, if `(css(s) != {})`
 
-**CLARIFICATION**
-Any characteristic element (CE) is unique to its characteristic subset (CSS).
-Any CE is an element to exactly one CSS - i.e. 1:N.
-
-* `CSS-to-CE` is a `1:N` relationship.
-* `(CSS(h) - {})` is a partition of `CE(h)` into disjoint sets.
+Note that a CSS is obviously not "unique" to its parent set (s) in a strict
+sense. That is, because #A(s) may be non-empty and because css(s) is also a
+subset to all of these ancestors. However, a CSS is "unique" to (s) in such
+a way that (s) is the least significant set of those sets. No other set
+"contains" a given CSS in that particular "unique" way.
 
 <!-- ======================================================================= -->
 ## set-of-css()
@@ -195,44 +203,40 @@ set-of-css(css,h) begin
 1: S = < s | (s in P) and (css(s) == css) >
 2: assert(#S > 0)
 3: assert(#S < 1)
-4: return oneElementIn(S)
+4: return oneElementOf(S)
 end
 ```
 
 **CLARIFICATION**
 The possible outcomes of `set-of-css()` are:
 
+(0) The result is undefined, if no (s in P) exists
+such that (css(s) == css) - i.e. triggers step-2.
+
 (1) If the input css is empty.
+That is, (css(p) == {}) is true for some (p in PS).
 
-(1.1) The result is undefined if no (p in PS) exists
-such that (css(p) == {}) - i.e. triggers step 2.
+(1.1) The result is unclear if more than one (p in PS) exists
+such that (css(p) == {}) - i.e. triggers step-3.
 
-(1.2) The result is unclear if more than one (p in PS) exists
-such that (css(p) == {}) - i.e. triggers step 3.
-
-(1.3) The result is (p), if exactly one (p in PS) exists
+(1.2) The result is (p), if exactly one (p in PS) exists
 such that (css(p) == {}).
 
 (2) If the input css is non-empty.
+That is, (css(s) != {}) is true for some (s in P).
 
-(2.1) The result is undefined if (css - V) is non-empty.
-That is, because (css !in CSS(h) - i.e. triggers step 2.
-
-(2.2) The result is undefined if (css !in CSS(h))
-- e.g. if (css in PS) - i.e. triggers step 2.
-
-(2.3) The result is a unique (s in P).
+(2.1) The result is a unique (s in P).
 That is, because css is then guaranteed to be in CSS(h).
 
 Note that each hierarchy always has at least one non-empty CSS.
 That is, because each hierarchy always has at least one leaf set.
 
-Note that there is only one case possible (i.e. case 1.2) such that no unique
+Note that there is only one case possible (i.e. case-1.1) such that no unique
 result can be returned, even though the input (css in CSS(h)) is valid (i.e.
-no input error). In contrary to that, the result in case 2.3 is guaranteed to
-be unique because any CSS is disjoint to any other CSS.
+no input error). In contrary to that, the result in case-2.1 is guaranteed
+to be unique because no two sets can have the exact same non-empty CSS.
 
-Note that, because a hierarchy (like any other strict setup), does not contain
+Note that, because a hierarchy, like any other strict setup, does not contain
 the empty set (i.e. ({} not-in P)), the empty set could be used to represent a
 "does not exist" error response.
 
@@ -248,9 +252,5 @@ if the following requirements are met:
 If the above requirements are met,
 then `set-of-css()` is inverse to `css-of-set()`.
 
-* `(set-of-css( css-of-set(s) ) == s)` is true for any `s in P`
-* `(css-of-set( set-of-css(css) ) == css)` is true for any `css in CSS(h)`
-
-<!-- ======================================================================= -->
-## derived statements
-
+* `(set-of-css( css-of-set(s) ) == s)` is true for any (s in P)
+* `(css-of-set( set-of-css(css) ) == css)` is true for any (css in CSS(h))
