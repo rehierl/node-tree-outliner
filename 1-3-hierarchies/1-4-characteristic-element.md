@@ -1,19 +1,16 @@
 
 <!-- ======================================================================= -->
-# Characteristic elements, strict hierarchies
+# Characteristic element (CE)
 
+
+**TODO**
+
+* relationship between #CE and #V
+* is any (v in V) a CE?
+* ce(), ce-of-set(), set-of-ce()
 
 <!-- ======================================================================= -->
 ## ce(), set-of-ce()
-
-**CLARIFICATION**
-Any element will be referred to as **a characteristic element (CE)**,
-if it is an element in a CSS - i.e. `ce in E(CSS(h))`.
-
-Note that a CSS may still be empty.
-
-**CLARIFICATION**
-
 
 **CLARIFICATION**
 Any single CE is sufficient to uniquely identify the corresponding parent set
@@ -46,6 +43,35 @@ may and should contain only one reference to an object that combines all the
 properties of that set.
 
 <!-- ======================================================================= -->
+## TODO
+
+* a tree of references
+* what does a CSS allow to do?
+* characteristic element
+* allow to verify that a hierarchy of sets corresponds with a node tree
+* not every s in P is a CSS of some other set in P
+* `(P - CSS(H))` - if non-empty, then not every set in P is a CSS
+
+Because of that requirement, each set must have one or more elements, which
+none of its descendant sets is allowed to have. Consequently, such a
+hierarchy must have at least as many elements in V as it has sets in P
+(i.e. `(#P <= #V)`).
+
+The CSS of a set can obviously be considered to represent data which is "unique"
+to that set. That is, because there is always exactly one least significant set
+which holds all the elements in that CSS. As such, the non-empty CSS of a set
+can be understood to further characterize the corresponding set.
+
+Note however, that the elements within the CSS of a set has an effect on the
+relationship a set has with all the other sets in a hierarchy. After all, the
+elements of a CSS are also elements of its ancestor sets (including the CSS's
+parent set). That is, the elements within a CSS are not independent of the
+relationships within a hierarchy (and vice versa).
+
+* Recall that a root set `r in P` is the union of all of its descendant sets:
+  i.e. `(#r == #V)`.
+
+<!-- ======================================================================= -->
 ## TODO - strict Hierarchy/Forest of sets
 
 **CLARIFICATION**
@@ -76,32 +102,3 @@ Note that
 * strict forest => simple forest
 * All hierarchies within a forest are disjoint.
 * Each set `s in P` can be identified by a single value `v in V`.
-
-<!-- ======================================================================= -->
-## TODO
-
-* a tree of references
-* what does a CSS allow to do?
-* characteristic element
-* allow to verify that a hierarchy of sets corresponds with a node tree
-* not every s in P is a CSS of some other set in P
-* `(P - CSS(H))` - if non-empty, then not every set in P is a CSS
-
-Because of that requirement, each set must have one or more elements, which
-none of its descendant sets is allowed to have. Consequently, such a
-hierarchy must have at least as many elements in V as it has sets in P
-(i.e. `(#P <= #V)`).
-
-The CSS of a set can obviously be considered to represent data which is "unique"
-to that set. That is, because there is always exactly one least significant set
-which holds all the elements in that CSS. As such, the non-empty CSS of a set
-can be understood to further characterize the corresponding set.
-
-Note however, that the elements within the CSS of a set has an effect on the
-relationship a set has with all the other sets in a hierarchy. After all, the
-elements of a CSS are also elements of its ancestor sets (including the CSS's
-parent set). That is, the elements within a CSS are not independent of the
-relationships within a hierarchy (and vice versa).
-
-* Recall that a root set `r in P` is the union of all of its descendant sets:
-  i.e. `(#r == #V)`.

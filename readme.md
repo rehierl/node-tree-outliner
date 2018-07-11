@@ -10,7 +10,7 @@ This repository is **in a state of flux**. It may and will change considerably
 over time. (Direct links to files within this repository will break without
 further notice).
 
-This repository does not represent a "scientific paper". Its main intention
+This repository is not intended to be a "scientific paper". Its main intention
 is to help me develop and document in detail the reasons of the to-be design.
 As it is, this repository contains notes/definitions taken from wikipedia pages
 and conclusions/definitions that were derived from these notes.

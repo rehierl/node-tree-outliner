@@ -48,23 +48,24 @@ if it does not contain the empty set `{}` as an element.
 * `S := (V,P)`.
 * `V` is a set of elements.
 * `P` is a set of sets of elements.
+* `V := E(P)` := "the union of all sets (s in P)"
 
 clarifications
 
-* No set `s in P` is allowed to be empty - i.e. `({} !in P)`
+* No set `(s in P)` is allowed to be empty - i.e. `({} !in P)`
 * `S` is a two-element tuple of possibly empty sets.
 * `(s subset-of V)` for any `(s in P)`
 * `(P strict-subset-of P(V))`
 
-Note that `P` is a subset of `V`'s power-set `P(V)`. That is, all elements in
-`P` are elements of `P(V)`. However, no element in `P` is allowed to be empty.
+Note that `P` is a strict subset of `V`'s power-set `P(V)`. That is, all
+elements in `P` are elements of `P(V)`. However, no element in `P` is allowed
+to be empty.
 
 * `(0 <= #P < #P(V))`
 
 Note that `V` is empty if only if `P` is empty. That is, because even though
 no `(p in P)` may be empty, `P` itself is still allowed to be empty.
 
-* `(V == E(P))`
 * `(#P = 0) <-> (#V = 0)`
 * `(#P > 0) <-> (#V > 0)`
 
@@ -74,9 +75,9 @@ A (simple) setup is a set of non-empty sets.
 <!-- ======================================================================= -->
 ## derived statements
 
-Note that the expression `s in S` is a simplification, which needs to be
+Note that the expression `(s in S)` is a simplification, which needs to be
 understood as: `s` is a set of elements, and as such an element of the set
-of sets `P` of setup `S`. That is, the accurate expression would have to be
+of sets `P` of setup `S`. That is, a more accurate expression would be:
 `(s in P) and (P in S)`.
 
 **CLARIFICATION**
@@ -124,7 +125,7 @@ A set of sets `S` is said to be **a consistent setup (of sets)**,
 if the following requirements are met:
 
 0. `S := (V,P)`
-1. The `S` is a simple setup.
+1. `S` is a (simple) setup.
 2. If two distinct sets in `S` have one or more elements in common,
    then one set is a subset of the other.
 
@@ -280,19 +281,24 @@ A setup is said to be **a strict setup (of sets)**,
 if the following requirements are met:
 
 0. `S := (V,P)`.
-1. The setup is consistent.
+1. `S` is a consistent setup.
 
-Note that a consistent setup is therefore equivalent to a strict setup. That
-is, there are no additional requirements which need to be satisfied. This
-definition therefore only stresses the consequences of the initial requirement:
+Note that a consistent setup is therefore equivalent to a strict setup.
+That is, there are no additional requirements which need to be satisfied:
+A consistent setup is equivalent to a strict setup.
+
+This definition therefore stresses the consequences of the initial requirement
+(req-2) of a consistent setup:
 
 * Any two sets are either disjoint ex-or related.
 * `(s disjoint-to t) ex-or (s related-to t)`, for any two `s,t in P`
 * Two distinct sets are either disjoint ex-or strictly related.
 * `(s disjoint-to t) ex-or (s strictly-related-to t)`, if `(s != t)`
 
-Also note that the following statements are true:
+Also note that, in the context of a strict setup, the following "statements"
+related to any two sets in P are true:
 
+* disjoint <!=> distinct
 * disjoint <=> unrelated
 * coupled <=> (strictly) related
 

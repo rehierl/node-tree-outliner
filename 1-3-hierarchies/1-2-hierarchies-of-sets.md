@@ -19,6 +19,12 @@
 * Sets B, C and D all are inner or descendant sets of set A.
 * Sets B and C are sibling sets and independent from one another.
 
+<!-- ======================================================================= -->
+## core definitions
+
+( Note that the following definitions are very
+similar to those in "node trees / core definitions" )
+
 With regards to a strict setup, the following references may be used:
 
 * All strict subsets of a set
@@ -113,7 +119,7 @@ A strict setup has the following properties:
 ## derived statements
 
 **CLARIFICATION**
-The following definitions may be used to clarify discussions:
+The following definitions may be used to clarify discussions
 
 * `r in RS` - the set of all root sets (no ancestors)
 * `p in PS` - the set of all parent sets (one or more child sets)
@@ -124,7 +130,6 @@ The following definitions may be used to clarify discussions:
 
 Note that ...
 
-* (hint: compare with the core definitions of node trees)
 * `(#RS, #PS, #CS and #LS) <= #P`
 * `RS` and `LS` are only empty if `(#P == 0)`
 * i.e. a non-empty strict setup always has a root and a leaf
@@ -132,8 +137,9 @@ Note that ...
 * i.e. each set is either a root ex-or a child
 * i.e. each set is either a parent ex-or a leaf
 * `PS` and `CS` are both empty if `(#RS == #P)`
-* `A(s), A(s,h) := { a | (a ancestor-of s) }, (A(s) subset-of AS)`
-* `D(s), D(s,h) := { d | (d descendant-of s) }, (D(s) subset-of DS)`
+* `A(s), A(s,h) := { a | (a ancestor-of s) }`
+* `D(s), D(s,h) := { d | (d descendant-of s) }`
+* `(A(s) subset-of AS)` and `(D(s) subset-of DS)`
 
 **CLARIFICATION**
 Each set `s in P` in a strict setup `S := (V,P)`
@@ -154,8 +160,7 @@ rooted path of a set. The notation that will be used below is a follows:
 * `/s1/.../sk` - the rooted path of set `sk` begins with its root set `s1`.
 * `#p` refers to the length of the rooted path `p`.
 
-Note that each element in such a rooted path is a set of possibly
-infinitely many elements.
+Note that each element in such a rooted path is a set of elements.
 
 ```
 |-A-------|   |-B-----------|
@@ -219,9 +224,8 @@ it would not even be a strict setup. A forest is therefore a set of disjoint
 hierarchies.
 
 **CLARIFICATION**
-The upper-case letter `H` may be used to refer to the theoretical set of all
-possible hierarchies and `F` to refer to the the theoretical set of all possible
-forests:
+The theoretical **set of all possible hierarchies (H)** and the theoretical
+**set of all possible forests (F)** are defined as follows:
 
 * `H := { h | "h is a hierarchy" }`
 * `F := { f | "f is a forest of hierarchies" }`
@@ -234,7 +238,7 @@ forest of hierarchies.
 ## derived statements
 
 **CLARIFICATION**
-Two hierarchies are disjoint, if their root sets are disjoint.
+Two distinct hierarchies are disjoint, if their root sets are disjoint.
 
 Note that, if root set `r1` is disjoint from `r2`,
 then any subset `s1` of `r1` is disjoint to any subset `s2` of `r2`.

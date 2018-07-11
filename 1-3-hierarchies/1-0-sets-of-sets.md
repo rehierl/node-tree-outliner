@@ -69,10 +69,10 @@ borders of those sets do not cross each other.
 ## E(), set-of-elements
 
 **CLARIFICATION**
-The set of elements `E(S)` is said to be **the set of elements** of the
-corresponding multiset/set of sets `S`, if it is identical to the union
-of all the sets in `S`:
+The **set of elements** `E(S)` is
+the union of all the sets in a set/multiset of sets `S`.
 
+* `E(S)` := "the union of all sets (s in S)"
 * `E(S) := { e | (e in s) and (s in S) }`
 
 Note that `E(S)` is empty if `S` is itself empty,
@@ -208,7 +208,7 @@ set-1 \      | E        | A        | B
  A           | !C and R | C and R  | !C or (!R or R)
 ```
 
-* `E` is the empty set
+* `E` is the empty set `{}`
 * `A` and `B` are non-empty sets - i.e. `(A,B != E)`
 * `A` and `B` are distinct - i.e. `(A != B)`
 * two sets are coupled (`C`) or disjoint (`!C`)
