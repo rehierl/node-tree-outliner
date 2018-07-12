@@ -43,7 +43,7 @@ Because of that, set `s` will be referred to as **the parent set of** `css(s)`.
 
 Note that the CSS of a set is empty, if the corresponding set is the union
 of its descendant sets (e.g. CSS(/C)). That is, a hierarchy does not guarantee
-that all the sets `(s in P)` have a non-empty CSS (i.e. `(css(s) == {})` is
+that all the sets `(s in P)` have a non-empty CSS (i.e. (css(s) == {}) is
 possible).
 
 **CLARIFICATION**
@@ -131,13 +131,13 @@ Note that ...
 ## disjoint, unique
 
 ```
-        |----------------|
-P:      | p1    p2    p3 |
-        |--\----/-----|--|
-            \  /      |
-        |----\/-------|--|
-CSS(h): | c1=c2={}    c3 |
-        |----------------|
+|----------------|
+| p1    p2    p3 | - P
+|--\----/-----|--|
+    \  /      |
+|----\/-------|--|
+| c1=c2={}    c3 | - CSS(h)
+|----------------|
 ```
 
 **CLARIFICATION**
@@ -173,7 +173,7 @@ Any non-empty CSS is unique to its parent set.
 No other set (s in P) has the exact same non-empty CSS.
 
 (1) That is, because for two distinct sets (s,t in P) to have the same
-non-empty CSS (i.e. (css(s) == css(t)), (s & t) would have to be non-empty.
+non-empty CSS (i.e. css(s) == css(t)), (s & t) would have to be non-empty.
 
 (2) As before, both sets (s) and (t) would have to be strictly related,
 which is why both sets can not have the exact same non-empty CSS.
@@ -237,7 +237,7 @@ no input error). In contrary to that, the result in case-2.1 is guaranteed
 to be unique because no two sets can have the exact same non-empty CSS.
 
 Note that, because a hierarchy, like any other strict setup, does not contain
-the empty set (i.e. ({} not-in P)), the empty set could be used to represent a
+the empty set (i.e. {} not-in P), the empty set could be used to represent a
 "does not exist" error response.
 
 **CLARIFICATION**

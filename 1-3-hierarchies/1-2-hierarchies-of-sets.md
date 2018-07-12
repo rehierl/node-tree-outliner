@@ -1,4 +1,6 @@
 
+**TODO** - (has open aspects)
+
 <!-- ======================================================================= -->
 # Hierarchy/Forest of sets
 
@@ -238,6 +240,12 @@ forest of hierarchies.
 ## derived statements
 
 **CLARIFICATION**
+The root set (r in P) of a hierarchy is equal to V.
+
+That is, because (1) V is the union of all sets in P (i.e. V := E(P)),
+and (2) any other set (s in P) is a strict subset to (r in P).
+
+**CLARIFICATION**
 Two distinct hierarchies are disjoint, if their root sets are disjoint.
 
 Note that, if root set `r1` is disjoint from `r2`,
@@ -254,6 +262,7 @@ root set is included), the subset will itself be a hierarchy.
 
 **TODO** -
 define sub-hierarchy? -
+required to proof (CE(h) == V) -
 as counterpart to sub-tree?
 
 **TODO** -
