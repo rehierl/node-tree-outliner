@@ -192,7 +192,7 @@ The following is true, iff each CSS holds exactly one CE:
 * `set-of-ce()` allows to identify any (s in P)
 
 **CLARIFICATION**
-`(#V == #P)` is true, iff each CSS holds exactly one CE.
+(#V == #P) is true, iff each CSS holds exactly one CE.
 
 (1) (#CSS(h) == #P) -
 That is, because each CSS is now required to be non-empty.

@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Node Tree <=> Strict Hierarchy
+# Directed Node Tree <=> Strict Hierarchy
 
 unordered tree <=> hierarchy of sets
 

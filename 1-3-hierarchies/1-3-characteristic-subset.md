@@ -22,7 +22,7 @@ is a potentially empty subset of `s` such that no element in CSS is also
 an element of any descendant of `s`.
 
 * `css(s), css(s,h) := css-of-set(s,h)`
-* `css-of-set(s,h) := s - D(s,h)`
+* `css-of-set(s,h) := s - E(D(s,h))`
 * signature: (P,H) -> P(V)
 
 Note that ...

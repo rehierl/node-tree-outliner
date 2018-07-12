@@ -1,35 +1,61 @@
 
-preorder => directed graph
-
-* "To every preorder, there corresponds a directed graph, ..." (wikipedia)
-* this is more general than the equivalency between trees and hierarchies
-* what kind of "special order" does the equivalency require?
-
-draw non-crossing borders around subtrees
-
-* in an unordered tree, the subtrees are ordered only if
-* one subtree is a subtree of the other
-* in an ordered tree, the subtrees have an additional order
-* ordered according to the order of their root nodes
-
-towers of hanoi
-
-* a wood stacking game
-* allows to visualize trees
+**TODO** - (open aspects)
 
 <!-- ======================================================================= -->
 # TODOs
 
-* strict hierarchy => (#V == #P)?
-* are length values similar to rank values?
+are length values similar to rank values?
 
-element-of vs. subsequence-of
+preorder => directed graph -
+"To every preorder, there corresponds a directed graph, ..." (wikipedia) -
+this is more general than the equivalency between trees and hierarchies -
+what kind of "special order" does the equivalency require? -
 
-* `s = [1, [2, 3], 4]`, `t = [2, 3]`
-* `t` is an element of `s = [1, t, 4]`
-* that is, an element in `s` has `t` as its value
-* `s = [1, 2, 3, 4]`, `t = [2, 3]`
-* `t` is an infix/subsequence of `s`
+draw non-crossing borders around subtrees -
+in an unordered tree, the subtrees are ordered only if
+one subtree is a subtree of the other -
+in an ordered tree, the subtrees have an additional order -
+i.e. ordered according to the order of their root nodes -
+
+towers of hanoi -
+a wood stacking game -
+allows to visualize trees -
+
+define "related nodes" -
+instead of "one is an ancestor of the other"
+
+a tree of references -
+what does a CSS allow to do? -
+verify that a hierarchy of sets corresponds with a node tree -
+
+element-of vs. subsequence-of -
+similar to contains vs. embedded -
+only with regards to sequences -
+`s = [1, [2, 3], 4]`, `t = [2, 3]` -
+`t` is an element of `s = [1, t, 4]` -
+that is, an element in `s` has `t` as its value -
+`s = [1, 2, 3, 4]`, `t = [2, 3]` -
+`t` is an infix/subsequence of `s`
+
+<!-- ======================================================================= -->
+## derived statements => move to core definitions
+
+**CLARIFICATION**
+Node `n1` is said to be **disjoint** from `n2`,
+if the outer sets of both nodes are disjoint.
+
+* The subtrees of both nodes have no nodes in common.
+* `n1` does not contain `n2`, and `n2` does not contain `n1`.
+* `n1` is not an ancestor of `n2`, and `n2` not an ancestor of `n1`.
+
+Note that two nodes in a tree are either disjoint,
+ex-or one node is an ancestor of the other.
+
+**CLARIFICATION**
+Node `n1` is said to be **coupled** with `n2`,
+if the outer sets of both nodes are not disjoint.
+
+* coupled <=> not disjoint
 
 <!-- ======================================================================= -->
 
@@ -244,44 +270,3 @@ With regards to H2:
 Both characteristics combined allow to use such a non-empty subset in order
 to identify a non-empty inner/outer set within the corresponding hierarchy
 (H1 or H2).
-
-<!-- ======================================================================= -->
-## Equivalency between trees and hierarchies of sets
-
-```
-node tree         hierarchy of outer sets         node tree
-===========  <=>  =========================  <=>  ===========
-
-     1            |-1---------------------|            1     
-===========       | |-2-| |-3-----| |-5-| |       ===========         
- 2   3   5        | |---| | |-4-| | |---| |        2   3   5
-    ===           |       | |---| |       |           ===
-     4            |       |-------|       |            4
-                  |-----------------------|
-```
-
-**CLARIFICATION**
-Each rooted (unordered) node tree defines a strict hierarchy (H1),
-which uniquely describes the rooted (unordered) node tree.
-
-Note that this equivalency will be referred to as
-the **set-based perspective** of a tree.
-
-**CLARIFICATION**
-For each unordered tree of nodes, only one hierarchy of sets
-can be created that allows to recreate the initial node tree.
-
-That is, because ...
-
-1) The hierarchy must have one set per node.
-2) The CSS of each set must have one element only.
-3) The CSS of each set must hold the node the set represents.
-4) Each node in the initial tree has one parent only.
-5) The set of each node must be connected with the appropriate parent set.
-
-Note that any other element added to one or more sets will break the hierarchy
-and/or change the CSS of one set. Therefore, and even if the hierarchy would
-still be a hierarchy after the addition, it would no longer be possible to
-determine the node each set represents. That is, because the one two-element
-CSS does not allow to determine whether the node or the new element it contains
-is the node the corresponding set represents.

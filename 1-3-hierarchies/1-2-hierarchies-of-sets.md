@@ -1,5 +1,5 @@
 
-**TODO** - (has open aspects)
+**TODO** - (open aspects)
 
 <!-- ======================================================================= -->
 # Hierarchy/Forest of sets
@@ -180,7 +180,7 @@ Note that each element in such a rooted path is a set of elements.
 ## (simple) Hierarchy/Forest of sets
 
 **CLARIFICATION**
-A setup is said to be **a (simple) hierarchy (of sets)**,
+A setup is said to be **a (simple) hierarchy (of nested sets)**,
 if the following requirements are met:
 
 0. `H := (V,P)`
