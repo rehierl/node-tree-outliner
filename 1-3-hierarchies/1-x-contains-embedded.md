@@ -1,6 +1,8 @@
 
 **TODO** - (open aspects)
 
+* currently just a "summary" of thoughts
+
 <!-- ======================================================================= -->
 ## sets - contains, embedded
 

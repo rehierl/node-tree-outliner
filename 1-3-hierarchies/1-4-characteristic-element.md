@@ -44,7 +44,7 @@ The parent set of a CSS is the least significant set which contains all the
 characteristic elements in that CSS.
 
 <!-- ======================================================================= -->
-## (CE(h) == V)
+## Always (CE(h) == V)
 
 **CLARIFICATION**
 Any CE, as an element of one or more (s in P), is an element in V.
@@ -62,23 +62,24 @@ is why such CEs, if added to disjoint sets, would break the hierarchy.
 **CLARIFICATION**
 Any element (v in V) is a characteristic element (ce in CE(h)).
 
-(1) Any hierarchy has exactly one root set (r in P). In addition to that,
+(1) Any hierarchy (h) has exactly one root set (r in P). In addition to that,
 the root set holds all the elements in V. That is, because any other set
-(s in P) is a strict subset of (r). After all, it would not be the only
-root set, if the hierarchy had even one set disjoint to it.
+(s in P) is a strict subset of (r). If there would be even one set disjoint
+to (r), then (h) would not be a hierarchy because that set would then be an
+additional root set.
 
-(2) If an element (v in V) is an element such that it does not belong to
-any other set (s in P) other than the root set (r), then that element (v)
-is a CE of (r). This obviously includes the case in which the root set is
-itself a leaf set (i.e. has no child set).
+(2) If an element (v in V) is an element such that it does not belong to any
+other set (s in P) other than the root set (r), then that element (v) is a CE
+of (r). This obviously includes the case in which the root set is itself a leaf
+set (i.e. has no descendants).
 
 (3) If element (v) is no such element, then it can only belong to one child
-set of (r). That is, because the child sets of a set are disjoint to one
-another (i.e. disjoint ex-or strictly related).
+set of (r). That is, because the child sets of a parent set are disjoint to
+one another; they would otherwise not have the same parent set.
 
-(4) Child set (c in P), which holds (v in V), can now be understood to
-represent the root set (r) of a sub-hierarchy. The iteration therefore
-has to continue with step-2 and (c) as the corresponding root (r).
+(4) Child set (c in P), which holds (v in V), can now be understood to represent
+the root set (r) of a sub-hierarchy. The iteration therefore has to recursively
+continue with step-2.
 
 Note that (v) will either be the CE of a parent set ex-or the CE of a leaf set.
 
@@ -168,7 +169,7 @@ can be retrieved by the above functions because there is no CE that would allow
 to identify those sets.
 
 <!-- ======================================================================= -->
-## (#CE(s) == 1)
+## Iff (#CE(s) == 1)
 
 ```
 |----------------|
@@ -192,11 +193,11 @@ The following is true, iff each CSS holds exactly one CE:
 * `set-of-ce()` allows to identify any (s in P)
 
 **CLARIFICATION**
-(#V == #P) is true, iff each CSS holds exactly one CE.
+(#V == #P) is true, iff (#CE(s) == 1).
 
 (1) (#CSS(h) == #P) -
 That is, because each CSS is now required to be non-empty.
-In addition to that, any non-empty CSS is distinct to any other CSS.
+In addition to that, any non-empty CSS is disjoint to any other CSS.
 
 (2) (#CE(h) == #P) -
 That is, because each CSS is required to hold exactly one CE.
@@ -205,16 +206,7 @@ That is, because each CSS is required to hold exactly one CE.
 That is, because (CE(h) == V).
 
 **CLARIFICATION**
-`ce-of-set()` is inverse to `set-of-ce()` iff each CSS holds exactly one CE.
+`ce-of-set()` is inverse to `set-of-ce()` iff (#CE(s) == 1).
 
 * `(set-of-ce( ce-of-set(s) ) == s)` is true for any (s in P)
 * `(ce-of-set( set-of-ce(ce) ) == ce)` is true for any (ce in CE(h))
-
-**CLARIFICATION**
-Any non-empty CSS can be minimized to hold exactly one CE.
-
-Additional CEs do not add substantial information to a hierarchy. They merely
-increase the storage requirement of a hierarchy (hint: ancestor sets). That is,
-instead of having multiple distinct CEs per set, each of which can be understood
-to represent a bit of information which is unique to a set, a set should hold
-only one reference to the combined information of that set.

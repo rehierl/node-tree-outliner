@@ -59,16 +59,16 @@ forward, all sets need to be understood to be non-empty.
 
 * A set, that has no ancestor set
   (other than the universal set),
-  is said to be a **root set**.
+  is said to be a **root (set)**.
 * The least significant ancestor set of set `s`
-  is said to be the **parent set** of `s`.
+  is said to be the **parent (set)** of `s`.
 * The most significant ancestor set of set `s`
-  is said to be the **root set of** set `s`.
-* Set `s` is said to be a **child set**
+  is said to be the **root (set) of** set `s`.
+* Set `s` is said to be a **child (set)**
   of set `t`, if `t` is the parent set of `s`.
 * Two sets which have the same parent set
   are said to be **siblings**.
-* A set is said to be a **leaf set**,
+* A set is said to be a **leaf (set)**,
   if it has no descendant set.
 
 Note that none of the ancestors of a descendant set are disjoint from one
@@ -191,10 +191,20 @@ Note that each element in such a rooted path is a set of elements.
 ## (Simple) Hierarchy/Forest of sets
 
 **CLARIFICATION**
+Any strict setup of nested sets represents a forest of directed unordered
+node trees. The following relation can be defined for any strict setup:
+
+* `R := (P,G)` where `(G subset-of PxP)`
+* `e := (p1,p2)` such that `(e in G)`,
+  iff (`p1` is the parent set of `p2`)
+* `P` is the hierarchy's set of sets
+* `G` is the graph (aka. set of edges)
+
+**CLARIFICATION**
 A setup is said to be **a (simple) hierarchy (of nested sets)**,
 if the following requirements are met:
 
-0. `H := (V,P)`
+0. `H := (V,P,G)`
 1. The setup is strict.
 2. The setup has exactly one root set.
 
@@ -215,7 +225,7 @@ A simple hierarchy has the following properties:
 A setup is said to be **a (simple) forest (of hierarchies)**
 or "a forest of simple hierarchies", if the following requirements are met:
 
-0. `F := (V,P)`
+0. `F := (V,P,G)`
 1. The setup is a strict.
 2. The setup has zero, one or more than one root sets.
 
@@ -243,9 +253,8 @@ The theoretical **set of all possible hierarchies (H)** and the theoretical
 * `H := { h | "h is a hierarchy" }`
 * `F := { f | "f is a forest of hierarchies" }`
 
-Because of that `(h in H)` states that `h` is must have the characteristics
-of a hierarchy. Likewise, `(f in F)` states that `f` is expected to be a valid
-forest of hierarchies.
+Because of that `(h in H)` states that `h` must be a hierarchy.
+Likewise, `(f in F)` states that `f` must be a forest of hierarchies.
 
 <!-- ======================================================================= -->
 ## derived statements

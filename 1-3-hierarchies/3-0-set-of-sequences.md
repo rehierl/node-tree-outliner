@@ -1,4 +1,8 @@
 
+**TODO** - (open aspects)
+
+<!-- ======================================================================= -->
+
 * a set of sequences `S` contains sequences only
 * `(is-sequence s)` is true for any `s in S`
 * any sequence `s in S` may have any length - i.e. `#s in [0,*]`

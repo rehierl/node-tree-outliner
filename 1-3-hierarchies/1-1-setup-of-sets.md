@@ -127,7 +127,7 @@ However, two coupled sets are still not necessarily related.
 ## Consistent setup (of sets)
 
 **CLARIFICATION**
-A set of sets `S` is said to be **a consistent setup (of sets)**,
+A set of sets `S` is said to be **a (consistent) setup (of nested sets)**,
 if the following requirements are met:
 
 0. `S := (V,P)`
@@ -283,7 +283,7 @@ Is a valid transformation because `(!a <-> b) <-> (a xor b)`.
 ## Strict setup (of sets)
 
 **CLARIFICATION**
-A setup is said to be **a strict setup (of sets)**,
+A setup is said to be **a (strict) setup (of nested sets)**,
 if the following requirements are met:
 
 0. `S := (V,P)`.

@@ -1,6 +1,8 @@
 
+**TODO** - (open aspects)
+
 <!-- ======================================================================= -->
-## Equivalency between trees and hierarchies of sets
+# Equivalency between trees and hierarchies of sets
 
 ```
 node tree         hierarchy of outer sets         node tree
@@ -13,13 +15,6 @@ node tree         hierarchy of outer sets         node tree
      4            |       |-------|       |            4
                   |-----------------------|
 ```
-
-**CLARIFICATION**
-Each rooted (unordered) node tree defines a strict hierarchy (H1),
-which uniquely describes the rooted (unordered) node tree.
-
-Note that this equivalency will be referred to as
-the **set-based perspective** of a tree.
 
 **CLARIFICATION**
 For each unordered tree of nodes, only one hierarchy of sets
@@ -39,3 +34,26 @@ still be a hierarchy after the addition, it would no longer be possible to
 determine the node each set represents. That is, because the one two-element
 CSS does not allow to determine whether the node or the new element it contains
 is the node the corresponding set represents.
+
+**CLARIFICATION**
+Any unordered tree of nodes represents a strict hierarchy of outer sets,
+which uniquely defines the corresponding node tree.
+
+Note that this equivalency will be referred to as
+the **set-based perspective** of a tree.
+
+<!-- ======================================================================= -->
+## TODO
+
+verify that a hierarchy of sets corresponds with a node tree -
+
+**TODO** -
+show that the tree created from a tree's hierarchy -
+is identical/equivalent to the initial tree -
+(n1,n2) in E => (s1,s2) in G -
+generalize uniqueness -
+must poof: (rel-of-set == rel-of-node) -
+
+**TODO** -
+most likely the only such set-of-sets possible -
+can that be proven? -

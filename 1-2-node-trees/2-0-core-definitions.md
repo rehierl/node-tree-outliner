@@ -1,4 +1,9 @@
 
+**TODO** - (open aspects)
+
+* align with the definitions in hierarchy-of-sets
+* including `T := (N,E)`
+
 <!-- ======================================================================= -->
 # Node tree definitions
 
