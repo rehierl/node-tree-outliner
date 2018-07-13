@@ -314,7 +314,7 @@ of the corresponding sequence.
 * right => (left and right)
 
 Note that a sequence's last node is not considered to be right-subsequent to
-its sequence. That is, because the last node is considered to be within the
+its sequence. That is because the last node is considered to be within the
 boundaries of its sequence.
 
 <!-- ======================================================================= -->

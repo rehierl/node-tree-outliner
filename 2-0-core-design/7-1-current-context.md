@@ -24,9 +24,9 @@ current sectioning node being entered) and the current path of sections
 (begins in the root section and ends in the current section).
 
 Note that the current path of nodes holds all parent containers of all sections
-in the current path of sections. That is, because otherwise those sections
+in the current path of sections. That is because otherwise those sections
 would no longer be open. In contrary to that, the current path of nodes does
-not necessarily hold all the corresponding sectioning nodes. That is, because
+not necessarily hold all the corresponding sectioning nodes. That is because
 all presequent type-2 sectioning nodes will have been exited by then.
 
 Note that all nodes in the current rooted path of nodes have been entered,
@@ -77,6 +77,6 @@ are not relevant to the section hierarchy, e.g. a section's title).
 <!-- ======================================================================= -->
 ##
 
-Note that open sections can not be closed arbitrarily. That is, because any
+Note that open sections can not be closed arbitrarily. That is because any
 ancestor section must remain open for as long as any of its subsections are
 open. Open sections must therefore be closed in an orderly, bottom-up fashion.

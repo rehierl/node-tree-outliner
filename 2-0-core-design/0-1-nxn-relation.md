@@ -126,7 +126,7 @@ into "ancestor" and "descendant":
 Similar to ancestor and descendant nodes, a relationship does exist between
 two siblings `s` and `n`, even though there is no such edge in `E` (i.e. `!sEn`
 and `!nEs`). In addition to that, no uni-directional path can be defined that
-connects both nodes. That is, because the path would have to go up to the
+connects both nodes. That is because the path would have to go up to the
 common parent node and then down to the corresponding sibling.
 
 * `(s sibling-of n)`, if `pEs` and `pEn`

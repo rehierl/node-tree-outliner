@@ -16,7 +16,7 @@ never is identical to the corresponding node itself.
 ```
 
 That is obviously true for any node which is not a sectioning node. However,
-this expression is also true for sectioning nodes. That is, because no such
+this expression is also true for sectioning nodes. That is because no such
 node is associated with the section it declares.
 
 Note that, if a sectioning node would have to be associated with the section it

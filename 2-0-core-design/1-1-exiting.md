@@ -37,7 +37,7 @@ belongs to section `F`.
 The above example therefore has multiple conflicts ...
 
 * The `div` container is associated with a section that is undefined
-  in the `div` container's context. That is, because section `F` is
+  in the `div` container's context. That is because section `F` is
   declared by a subsequent sectioning node (i.e. heading `F`).
 * Nodes `C` through `E` are obviously affected in a similar fashion.
 * Heading `F` is implicitly associated with its own section.

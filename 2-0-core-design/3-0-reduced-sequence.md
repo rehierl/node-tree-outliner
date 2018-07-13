@@ -13,7 +13,7 @@ structure of the node tree. Because of that, these associations can not be
 undefined and they can not be ignored (i.e. they must be taken into account).
 
 Note that, if the above statement would not be true, then there would
-consequently be no definition for the term "descendant". That is, because the
+consequently be no definition for the term "descendant". That is because the
 definition of "descendant" is also based upon the definition of semantically
 consistent paths. In addition to that, the term "descendant" is used to define
 the term "ancestor".
@@ -41,7 +41,7 @@ be semantically equivalent. From this forward, that equivalence is a
 necessity/requirement.
 
 Consequently, any rooted path in this context can be reduced to a path which
-ends in a strictly associated node. That is, because the remainder of a path,
+ends in a strictly associated node. That is because the remainder of a path,
 that passes through such a node, will not change the path's characteristics
 (in terms of associations with the given section) any further.
 
@@ -62,7 +62,7 @@ first node's top-most relevant ancestor (i.e. the algorithm's root node).
 Here, node `A` can be understood to represent the first node of section `s`.
 
 The next node, that must be strictly associated with section `s` is node `C`.
-That is, because unlike with descendant nodes, an association does not carry
+That is because unlike with descendant nodes, an association does not carry
 over to subsequent siblings. Which is, because based upon the `parent-of`
 relation of a tree, no semantically consistent path can be defined that
 connects a node with its next sibling.
@@ -73,7 +73,7 @@ associated with it or not. Consequently, section `s` can not end with node `D`
 and, because of that, section `s` does not end inside of node `C`.
 
 However, section `s` can intuitively be understood to end with node `C`.
-That is, because node `F` is unrelated to section `s`.
+That is because node `F` is unrelated to section `s`.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -110,7 +110,7 @@ explicit relationship.
 **CLARIFICATION**
 Node `n` must be strictly associated with section `s`, if `n` is intended to
 be in relationship with `s`, and if `n` is not already loosely related to it.
-That is, because `n` would otherwise remain unrelated with regards to `s`.
+That is because `n` would otherwise remain unrelated with regards to `s`.
 
 After all, an algorithm must reflect the relationship of any node with its
 sections by establishing strict or loose connections between the sections
@@ -171,16 +171,16 @@ as the section's "characteristic node sequence".
 * A non-empty section always has exactly one complete
   and exactly one reduced sequence.
 * The first node of a reduced sequence is identical to the first
-  node. That is, because the first node always is a top-level node.
+  node. That is because the first node always is a top-level node.
 * The last node of a reduced sequence is not necessarily identical
-  to the last node of a section. That is, because a section's last
+  to the last node of a section. That is because a section's last
   node can be a descendant of its last top-level node.
 
 **CLARIFICATION**
 No two non-empty sections within a node tree have identical complete
 or even reduced node sequences. These are unique to a section.
 
-That is, because no two such sections have identical first nodes and therefore
+That is because no two such sections have identical first nodes and therefore
 also different first top-level nodes. Consequently, it does not matter what
 other nodes those sections have.
 
@@ -195,7 +195,7 @@ section. That is, the definitions so far do not include this aspect.
 
 The definition of a section's reduced sequence allows to describe the general
 pattern of a section. Note that the following description is independent of
-any particular sectioning node. That is, because the relevant nodes of a
+any particular sectioning node. That is because the relevant nodes of a
 section are its content nodes and because no sectioning node is a content
 node of the section it declares.
 
@@ -257,7 +257,7 @@ parent of a subsequent subsequence is an ancestor of the parent of a presequent
 subsequence.
 
 Note that a next sibling is not necessarily strictly subsequent to its previous
-sibling. That is, because the previous sibling could have child nodes. Hence,
+sibling. That is because the previous sibling could have child nodes. Hence,
 "subsequences of subsequent siblings" and not "of strictly subsequent siblings".
 
 **Memory hook**
@@ -355,7 +355,7 @@ node associated is *not*  guaranteed to be the section's last top-level node.
 ## reduced sequence
 
 Not all the nodes of a section are relevant to support transformations (dynamic
-support needs to be able to execute transformations). That is, because only
+support needs to be able to execute transformations). That is because only
 the top-level nodes of a section are needed to group the contents of a section.
 Each subsequence in a section's reduced sequence of nodes can be grouped by
 placing its nodes inside of a container. Because of that, a section can be
@@ -407,7 +407,7 @@ It is not required to have knowledge of all the nodes of a section. If needed,
 this information can be regained by traversing the top-level nodes.
 
 (2) It is preferable, if an algorithm could start directly with a top-level
-node. That is, because the search for the initial top-level node would then be
+node. That is because the search for the initial top-level node would then be
 a non-issue. Each section object should therefore hold one or more references
 to a section's top-level nodes.
 
@@ -418,7 +418,7 @@ first (top-level) node (hint: associate all nodes while entering).
 
 **CLARIFICATION**
 A section object does not have to store any reference to any of the section's
-nodes. That is, because a section's first node always is a top-level node, and
+nodes. That is because a section's first node always is a top-level node, and
 because the first node of a section can be determined from the section's type.
 
 Note that, in order to allow sections to not store any node references at all,

@@ -93,7 +93,7 @@ the path as a single root and each node has a parent -
 in addition to that, each parent has a single child -
 the definition of the node order of a tree must also include such a tree -
 so yes, each parent *is presequent* to all of its descendants -
-that is, because it is independent of which rooted path was selected -
+that is because it is independent of which rooted path was selected -
 then, add a sibling to one of the nodes in the path -
 the first child of a node is still presequent to the parent's last child -
 question is, are the descendants of a sibling

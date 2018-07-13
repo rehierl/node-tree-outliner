@@ -34,7 +34,7 @@ Some of the relationships between those sets are:
 * Set B is disjoint from set C.
 
 Note that the above example of nested sets would turn into a multiset of sets,
-if number 3 would be removed from set C. That is, because sets C and F would
+if number 3 would be removed from set C. That is because sets C and F would
 then be distinct sets that hold identical content (i.e. distinct objects that
 represent the same set).
 
@@ -63,7 +63,7 @@ to be empty.
 
 * `(0 <= #P < #P(V))`
 
-Note that `V` is empty if only if `P` is empty. That is, because even though
+Note that `V` is empty if only if `P` is empty. That is because even though
 no `(p in P)` may be empty, `P` itself is still allowed to be empty.
 
 * `(#P = 0) <-> (#V = 0)`
@@ -171,8 +171,8 @@ That statement is true, because ...
 
 (1) `(s coupled-with t) <-> (s related-to t)` is true if `(s == t)` is true.
 That is because, in the context of a setup, and by the definition of the
-corresponding operators, that statement is always true. That is, because
-any non-empty set is always coupled-with and related-to itself.
+corresponding operators, that statement is always true. That is because any
+non-empty set is always coupled-with and related-to itself.
 
 (2) `(s coupled-with t) -> (s related-to t)` is true if `(s != t)` is true.
 That is because that statement is required to be always true (i.e. req-2).

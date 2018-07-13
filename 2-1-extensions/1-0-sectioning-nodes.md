@@ -45,7 +45,7 @@ Because of that, rank values are more or less a mere matter of convenience.
 That is, if HTML had a rank-less heading element (i.e. the `<h>` element).
 
 Note that both issues are sufficient to render any attempt to add dynamic
-support into a fruitless effort. That is, because transformations would end
+support into a fruitless effort. That is because transformations would end
 up tearing the above `<div>` container apart. Consequently, the result of such
 operations is not guaranteed to be semantically equivalent to the initial node
 tree.

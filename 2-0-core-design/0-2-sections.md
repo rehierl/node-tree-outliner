@@ -100,13 +100,13 @@ to as the tree's "NxS relation".
 * for any `sn in SN subset-of N` and for any `s in S`
 
 An algorithm has knowledge of a section as soon as its sectioning node is being
-entered. That is, because a sectioning node always and unconditionally declares
+entered. That is because a sectioning node always and unconditionally declares
 a new section. Because of that, any new section must be added to the set of
 known sections as soon as its sectioning node is being entered.
 
 In general, and from that point on, any subsequent node must be associated with
 that new and any other known section. Consequently, any node potentially belongs
-to multiple sections. That is, because any node can be subsequent to any number
+to multiple sections. That is because any node can be subsequent to any number
 of sectioning nodes.
 
 Note that a sectioning node can be understood to be superordinate to its
@@ -129,7 +129,7 @@ A sectioning node does not belong to the section it declares.
 
 Even though a sectioning node is insequent and thus not subsequent to itself,
 it is technically still possible to associate a sectioning node with the
-section it declares. That is, because an algorithm knows about a section as
+section it declares. That is because an algorithm knows about a section as
 soon as it enters the section's sectioning node. However, this does not imply
 that it would be reasonable to associate a sectioning node with its own section.
 
@@ -140,13 +140,13 @@ corresponding property of the sectioning node.
 
 Obviously, and as far as possible, an algorithm needs to be able to treat all
 sectioning nodes alike. (Note that this will be referred to as "consistent
-association across all types of sectioning nodes".) That is, because associating
+association across all types of sectioning nodes".) That is because associating
 one type of sectioning nodes with their own section, but not the sectioning
 nodes of another type, would make it necessary to add additional logic with
 regards to the different types of sectioning nodes.
 
 If all sectioning nodes would have to be associated with their own section,
-then no section could ever be empty. That is, because any section would then
+then no section could ever be empty. That is because any section would then
 always begin with its own sectioning node. And because of that, additional
 logic would be required in order to determine if a section contains any
 meaningful content or not.
@@ -160,7 +160,7 @@ sections and why that rule can not have any exceptions.
 
 **CLARIFICATION**
 A node sequence of length `N` can declare no more than `N` sections.
-That is, because each sectioning node always declares a single section only.
+That is because each sectioning node always declares a single section only.
 
 **CLARIFICATION**
 A section is said to be subsequent to its sectioning node.
@@ -186,7 +186,7 @@ to the tree's last and subsequent to the tree's first node.
 **CLARIFICATION**
 A sectioning node can only be associated with a presequent section.
 
-That is, because a sectioning node does not belong to its own section.
+That is because a sectioning node does not belong to its own section.
 
 **CLARIFICATION**
 The structure of all sections is referred to as a tree's "outline".
@@ -241,7 +241,7 @@ Any node always belongs to at least one section.
 
 Because a section can not exist without a presequent sectioning node, the root
 node, with which an algorithm has to begin, can not be associated with any
-predeclared section. That is, because there is no sectioning node presequent
+predeclared section. That is because there is no sectioning node presequent
 to it that could declare such a presequent section.
 
 However, the root node can be seen to be embedded into a theoretical
@@ -275,5 +275,5 @@ at least one sectioning node. Put differently, any node sequence always has
 a first and a last sectioning node. In addition to that, the first node of
 a node sequence is always (treated as) a sectioning node.
 
-That is, because the node sequence's first node (i.e. the root node) must
+That is because the node sequence's first node (i.e. the root node) must
 be treated as a sectioning node.

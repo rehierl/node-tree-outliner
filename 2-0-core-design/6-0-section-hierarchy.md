@@ -98,12 +98,12 @@ s0 -|- s1 -|- s2 - s3
 ```
 
 Note that the section hierarchy remains essentially the same, if sectioning
-node `n5` is replaced by an inactive container node. That is, because `n5`
+node `n5` is replaced by an inactive container node. That is because `n5`
 will still be associated with `s0`. And, because of that, `s6` and `s7` will
 still be descendant sections to `s0`.
 
 Note that the inactive container node `n5` does not act as the parent container
-of any section. That is, because each type-1 section has its own parent
+of any section. That is because each type-1 section has its own parent
 container (i.e its sectioning node).
 
 **CLARIFICATION**
@@ -119,7 +119,7 @@ a type-2 section depends upon an additional node that is presequent to its
 sectioning node.
 
 Note that any type-2 sectioning node will always have at least one type-1
-sectioning node as its (not necessarily direct) ancestor. That is, because
+sectioning node as its (not necessarily direct) ancestor. That is because
 the root node will always be treated as a type-1 sectioning node, regardless
 of the root's specific definition.
 

@@ -36,7 +36,7 @@ A node belongs to any section with which any of its ancestors is associated.
 Each node may therefore belong to any number of different sections.
 
 Note that the sections to which a node belongs, all are related with each other.
-That is, because all sections are open (due to 1) when the descendant node has
+That is because all sections are open (due to 1) when the descendant node has
 to associated. Put differently, no section `s1` in the set of sections `S`, to
 which a node belongs, is independent to section `s2 in S`, if `(s1 != s2)`.
 
@@ -121,7 +121,7 @@ each other. Consequently, such paths allow to point out design errors.
 proof (by design?) that a path in `SN{+}` exists for each path in `S{+}N` -
 and by that, proof that those paths allow to make the same statements -
 this would confirm the conclusions drawn from the initially defined
-`SN{+}` paths. that is, because the corresponding statements can then
+`SN{+}` paths. that is because the corresponding statements can then
 also be derived from the `S{+}N` paths -
 this would suggest/indicate that the design is in itself consistent -
 this would also serve as a formal basis for 2D/3D height maps -

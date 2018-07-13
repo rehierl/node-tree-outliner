@@ -34,7 +34,7 @@ of a section can also be referred to as the section's "outline/node level".
 The outline depth (or level) of a node is the outline depth of its parent
 section (with regards to one association per node).
 
-Note that the outline depth of the root node is 0. That is, because the root
+Note that the outline depth of the root node is 0. That is because the root
 node does not have such a parent section (not counting the universal section).
 Likewise, the outline depth of any unassociated node is 0.
 
@@ -52,7 +52,7 @@ Note that, similar as above, and in the context of a section tree, the term
 "outline height of a section" is synonymous to the "height of a node".
 
 Note that, in contrary to the outline depth of a node, a node in the node tree
-can not have an "outline height". That is, because a node does not strictly
+can not have an "outline height". That is because a node does not strictly
 have a descendant section (although declared sections can be understood to be
 subordinate to their sectioning nodes).
 

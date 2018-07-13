@@ -44,7 +44,7 @@ examples).
 * `0, [empty]` := `ni` *can not* close section `sj`
 
 Note that, if `n0` would be a type-1 sectioning node that declared section `s0`,
-then `n1,n2,n5` could technically be allowed to close `s0`. That is, because
+then `n1,n2,n5` could technically be allowed to close `s0`. That is because
 due to the definition of type-1 sectioning nodes, `n0` would not be associated
 with `s0`.
 
@@ -110,7 +110,7 @@ the declared section will be next (new) current section.
 
 In general, and from a formal perspective, "skipping some or most of the open
 sections", by directly jumping to the next new current section, is not allowed.
-That is, because ...
+That is because ...
 
 * (1) one or more open sections can be forced subsections of their ancestors
   (e.g. when entering `n4`, `s3` is a forced subsection of `s1` and `s0`).
@@ -137,7 +137,7 @@ might still have to close each section separately.
 Note that a `bool Section.isForcedSubsection` property (i.e. `true` if the
 property's section object is a forced subsection of its parent section), set
 after exiting the above loop, can not be used to improve the performance.
-That is, because all tests are with regards to the relationship between the
+That is because all tests are with regards to the relationship between the
 end-marker node and the corresponding current section, not with regards to
 the relationship between the current section and its parent section.
 
@@ -148,7 +148,7 @@ The two most critical aspects of the above loop are: (1) starting with the
 current node, determine how many sections need to be closed, and (2) detect
 if the current section can be closed without any conflict.
 
-Note that aspect (1) is not part of these considerations. That is, because it
+Note that aspect (1) is not part of these considerations. That is because it
 depends on the specific notation used to specify close modifiers. In contrary
 to that, aspect (2) is generic to all close modifiers and will be dealt with
 by the following considerations.
@@ -258,7 +258,7 @@ case-1 and case-3 never apply, the end-marker node is implicitly associated.
 In cases where the environment of an implementation does not provide the means
 to determine a node's node level, these values have to be determined "manually".
 However, the implementation of the tree traversal algorithm does provide the
-means to efficiently maintain a "current node level" value. That is, because
+means to efficiently maintain a "current node level" value. That is because
 it knows exactly when it enters the next node (level+1) and when that node is
 being exited (level-1).
 

@@ -78,7 +78,7 @@ than one parent set. That is, each non-root set always has exactly one least
 significant ancestor and therefore exactly one parent set. Likewise, each
 non-root set always has exactly one root set as its most significant ancestor.
 
-Note that a set is not a parent set to itself (no loops). That is, because a
+Note that a set is not a parent set to itself (no loops). That is because a
 set is not an ancestor to itself. Consequently, each set within a strict setup
 either has no parent set (e.g. a root set) ex-or exactly one parent set.
 
@@ -89,8 +89,8 @@ ancestor and descendant sets.
 
 Note that a set can not be an ancestor set to itself (no cycles). That is,
 because a set can not be an outer set to itself. Likewise, a set can not be
-a descendant set to itself. That is, because a set can not be an inner set
-to itself.
+a descendant set to itself. That is because a set can not be an inner set to
+itself.
 
 Note that a non-empty strict setup always has one or more root sets. That is,
 because (1) a strict setup that only contains a single set has that set as its
@@ -262,7 +262,7 @@ Likewise, `(f in F)` states that `f` must be a forest of hierarchies.
 **CLARIFICATION**
 The root set (r in P) of a hierarchy is equal to V.
 
-That is, because (1) V is the union of all sets in P (i.e. V := E(P)),
+That is because (1) V is the union of all sets in P (i.e. V := E(P)),
 and (2) any other set (s in P) is a strict subset to (r in P).
 
 **CLARIFICATION**

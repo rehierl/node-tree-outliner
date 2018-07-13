@@ -10,7 +10,7 @@ Note that the following considerations are based upon the association of two
 sectioning nodes. That is, if all of the below mentioned associations result
 in conflicts, then such an "option" can not be allowed. However, if certain
 associations would seem to support such an "option", then that "option" might
-still not be free of conflicts. That is, because such conflicts could still
+still not be free of conflicts. That is because such conflicts could still
 be caused based on reasons that are unrelated to the associations mentioned
 below.
 
@@ -69,18 +69,18 @@ node would have the very same characteristic.
 > Based on optional subsequent nodes.
 
 Such an option will obviously have to depend on optional subsequent descendant
-nodes. That is, because the definition of a type-1 sectioning node is only able
+nodes. That is because the definition of a type-1 sectioning node is only able
 to cover a single default case (i.e. there is no such inner node). And, because
 of that, a type-1 section will by default still have to end with its default
 scope.
 
 Note that this should not be understood as an argument against such an option.
-That is, because there is no other way to deviate from default definitions.
+That is because there is no other way to deviate from default definitions.
 
 > Structural relationship
 
 Placing section `s5` inside of node `n1` by itself states that sections `s1`
-and `s5` are structurally related with each other. That is, because nodes
+and `s5` are structurally related with each other. That is because nodes
 `n2-9` all have `n1` as an ancestor node.
 
 Note that this relationship can not be undefined.
@@ -102,7 +102,7 @@ prior to such an operation could not be avoided.
 > Node `n5` must be a child node of `n1`.
 
 If `n5` is some other descendant of `n1` (i.e. not a child node), then the
-parent container of `s5` will be associated with `s1`. That is, because it
+parent container of `s5` will be associated with `s1`. That is because it
 will be associated before `n5` is entered and thus before `s1` can even be
 closed.
 
@@ -277,7 +277,7 @@ of the optional subsequent section `s5`.
 ## preliminary summary
 
 With regards to associations, only case "n1:s0, n5:s0" does not seem to
-result in any conflict. That is, because the associations are consistent
+result in any conflict. That is because the associations are consistent
 with the default association of sectioning nodes.
 
 Note that when entering `n5` and closing `s1`, the `currentSection` variable

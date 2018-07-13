@@ -26,7 +26,7 @@ These labels only serve as a visual aid, intended to support discussions.
 
 Note that the only information available, which can be used to reliably create
 a node tree based on a given hierarchy, are the relationships the sets have
-with each other. That is, because the definition of a hierarchy has no
+with each other. That is because the definition of a hierarchy has no
 characteristics with regards to the elements in `V`. Consequently, the node
 tree to the right has one node per set `(s in P)`, not one node per element
 `(v in V)` (i.e. 8 nodes, not 5).
@@ -45,7 +45,7 @@ the following steps must be executed:
 
 Even though the relationship of a set (with all the other sets) is defined by
 the elements a set holds, the creation of the nodes and the association of a
-set with a node is unrelated to these elements. That is, because a hierarchy
+set with a node is unrelated to these elements. That is because a hierarchy
 does not reliably hold the information that would allow to determine which
 node a set represents. In general, a hierarchy only states what relationship
 a set has with all the other sets.
@@ -56,7 +56,7 @@ Note that ...
 * The addition of further elements to the above sets, without changing
   the relationship a set has with all the other sets, will not change
   the structure of the node tree.
-* The resulting graph will be a directed graph. That is, because
+* The resulting graph will be a directed graph. That is because
   the relationship a set has with all the other sets is directed.
 * A set is no ancestor to itself. That is, the resulting graph will
   have one root, no loops and no cycles (i.e. a node tree).

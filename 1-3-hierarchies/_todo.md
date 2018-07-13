@@ -4,7 +4,8 @@
 <!-- ======================================================================= -->
 # TODOs
 
-* "That is, because" => "That is because"
+* "That is because" => "That is because"
+
 * are length values similar to rank values?
 
 preorder => directed graph -

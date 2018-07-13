@@ -9,7 +9,7 @@ that section.
 
 The implicit association with all ancestor sections is therefore used to
 condense the amount of associations into a single reference per node, which
-would otherwise be required by the formal definitions. That is, because all
+would otherwise be required by the formal definitions. That is because all
 formal associations (formal perspective) of a node can be derived from its
 explicit association (practical perspective).
 
@@ -45,13 +45,13 @@ regards to the section hierarchy (i.e. its logical context).
 **CLARIFICATION**
 If each node is associated with one section only, then any ancestor section,
 which is not the current node's parent section, can be understood to be
-"loosely suspended". That is, because for as long as that parent section is
+"loosely suspended". That is because for as long as that parent section is
 open, no node will be strictly associated with such a seemingly suspended
 section.
 
 Note that, because a section can not be "strictly suspended" (see the state
 transitions), the term "suspended" must always be understood to be synonymous
-to "loosely (or seemingly) suspended". That is, because these sections still
+to "loosely (or seemingly) suspended". That is because these sections still
 count as being open.
 
 **CLARIFICATION**
@@ -110,7 +110,7 @@ A section's first content node is always a strictly associated top-level node.
 Put differently, a section's first content node will always be strictly
 associated with that section, never with one of the section's subsections.
 
-That is, because the declared section will always be the new current and
+That is because the declared section will always be the new current and
 least significant section when a section's first content node is entered.
 Consequently, the declared section will always be used to associate its
 first content node.

@@ -7,7 +7,7 @@ Would it be reasonable to allow a subsequent type-2 sectioning node to close an
 open presequent type-2 section before the end of its default scope is reached?
 
 Note that the injection of inactive parent containers can not answer that
-question. That is, because only the default scope of an affected section is
+question. That is because only the default scope of an affected section is
 changed, which is why any section will still end with its default scope and
 not any sooner. In addition to that, the subsequent type-2 sectioning node
 won't be the node that closes the corresponding presequent section.

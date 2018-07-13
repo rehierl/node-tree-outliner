@@ -38,7 +38,7 @@ if its current state is "initialized".
 ## closed state
 
 Any section must eventually end at some point. By default, that point is
-reached when the root node of the tree is being exited. That is, because
+reached when the root node of the tree is being exited. That is because
 the root node has no node that is subsequent to it.
 
 This default case is obviously insufficient, because the very last node of
@@ -87,7 +87,7 @@ closed section).
 
 The contents of a section, that still counts as being "initialized", must be
 understood to be "undefined". As such, no statements can be made with regards
-to the contents of such a section. That is, because the section's "open" event
+to the contents of such a section. That is because the section's "open" event
 was never executed. Consequently, a section that was never opened can also not
 be understood to be "empty". After all, an "initialized" section can still be
 opened, and nodes can still be associated with it. Any attempt to close an
@@ -113,7 +113,7 @@ The set of ...
 * closed sections `CS`.
 
 With regards to associations, a section's "initialized" and "closed" states
-appear to be equivalent. That is, because no associations are allowed unless
+appear to be equivalent. That is because no associations are allowed unless
 a section's state is "open".
 
 <!-- ======================================================================= -->
@@ -177,7 +177,7 @@ Because of that, any node belongs to a section, if it is subsequent
 to the section's open and presequent to the section's close event.
 
 **CLARIFICATION**
-Once closed, a section is fully defined/specified. That is, because no
+Once closed, a section is fully defined/specified. That is because no
 subsequent node will, by definition, have any further effect on it.
 
 <!-- ======================================================================= -->
@@ -204,13 +204,13 @@ are said to be the content nodes of a section.
 Note that this clarification is necessary, because the descendants of a type-2
 sectioning node are not supposed to contribute to the content of such a section.
 This would otherwise be inconsistent with the initial requirement that it must
-be possible to treat a section as a whole. That is, because of not associating
+be possible to treat a section as a whole. That is because of not associating
 sectioning nodes with their own section.
 
 **CLARIFICATION**
 A section is a sequence of subsequent nodes.
 
-That is, because any node must be associated with a section while it is being
+That is because any node must be associated with a section while it is being
 entered. Consequently, the node order of a section corresponds with the node
 order of the tree.
 

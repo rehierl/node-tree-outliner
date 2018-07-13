@@ -386,7 +386,7 @@ needlessly add complexity to low-level implementations.
 
 A low-level implementation would for example have to include heuristics, which
 it would have to apply as an additional post-section, or post-process operation.
-That is, because there is an infinite number of combinations of sections with
+That is because there is an infinite number of combinations of sections with
 content and "seemingly empty" sections possible.
 
 The "issue" with fragment-2 can therefore only be resolved on a higher level

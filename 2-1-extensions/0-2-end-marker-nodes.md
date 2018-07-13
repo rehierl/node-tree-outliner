@@ -16,7 +16,7 @@ Consistency with the association of sectioning nodes.
 
 Because sectioning nodes can be tagged with the end-marker role, associating
 sectioning nodes with the sections they declare would be inconsistent with that
-role. That is, because (1) end-marker nodes are by definition associated with
+role. That is because (1) end-marker nodes are by definition associated with
 the parent section of the most significant to-be-closed section (i.e. the new
 current section). In addition to that, (2) sectioning nodes are defined to be
 associated with the parent section of the section they declare.
@@ -44,7 +44,7 @@ partially to the subsection itself (end-marker node).
 
 In contrary to that, and if a section would end with its parent container (i.e.
 no end-marker node), then a subsection's frame would have no contact with the
-subsection itself. That is, because a section's parent container either belongs
+subsection itself. That is because a section's parent container either belongs
 to a section's parent section, or to one of its ancestor sections.
 
 Consequently, the most "accurate" statement that can be made with regards to a
@@ -73,7 +73,7 @@ The descendants of an end-marker node can not have a meaning with regards to
 those sections that will be closed by it. These nodes can only have a meaning
 with regards to an end-marker node's parent section.
 
-That is, because in contrary to type-2 sectioning nodes, the descendants of
+That is because in contrary to type-2 sectioning nodes, the descendants of
 such a (type-1 end-marker) node will be entered after closing the corresponding
 sections. And, because of that, those descendant nodes can no longer be used
 to change any property (e.g. footer) of the then-already closed sections. This
@@ -97,5 +97,5 @@ In order to avoid confusion, dedicated end-marker nodes should in general be
 defined to be empty (i.e. have no descendants).
 
 Note that it is not possible to define that the descendants of end-marker nodes
-must be treated as inactive nodes. That is, because type-1 sectioning nodes may
+must be treated as inactive nodes. That is because type-1 sectioning nodes may
 very well be tagged with the end-marker role.

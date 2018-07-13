@@ -33,7 +33,7 @@ of what kind of elements these sets hold.
 
 **CLARIFICATION**
 Any characteristic element (CE) is unique to its characteristic subset (CSS)
-and therefore also unique to the parent set of its CSS. That is, because any
+and therefore also unique to the parent set of its CSS. That is because any
 CSS is disjoint to any other CSS.
 
 * `CSS-to-CE` is a `1:N` relationship.
@@ -63,10 +63,10 @@ is why such CEs, if added to disjoint sets, would break the hierarchy.
 Any element (v in V) is a characteristic element (ce in CE(h)).
 
 (1) Any hierarchy (h) has exactly one root set (r in P). In addition to that,
-the root set holds all the elements in V. That is, because any other set
-(s in P) is a strict subset of (r). If there would be even one set disjoint
-to (r), then (h) would not be a hierarchy because that set would then be an
-additional root set.
+the root set holds all the elements in V. That is because any other set (s in P)
+is a strict subset of (r). If there would be even one set disjoint to (r), then
+(h) would not be a hierarchy because that set would then be an additional root
+set.
 
 (2) If an element (v in V) is an element such that it does not belong to any
 other set (s in P) other than the root set (r), then that element (v) is a CE
@@ -74,7 +74,7 @@ of (r). This obviously includes the case in which the root set is itself a leaf
 set (i.e. has no descendants).
 
 (3) If element (v) is no such element, then it can only belong to one child
-set of (r). That is, because the child sets of a parent set are disjoint to
+set of (r). That is because the child sets of a parent set are disjoint to
 one another; they would otherwise not have the same parent set.
 
 (4) Child set (c in P), which holds (v in V), can now be understood to represent
@@ -159,9 +159,8 @@ set-of-ce(ce,h) begin
 end
 ```
 
-Note that, provided the input (ce) does not represent an input error, the
-result is defined and unique. That is, because the corresponding CSS will
-never be empty.
+Note that, provided the input (ce) does not represent an input error, the result
+is defined and unique. That is because the corresponding CSS will never be empty.
 
 Note that neither `css-of-ce()` nor `set-of-ce()` allow to retrieve the empty
 CSS of a parent set, or a parent set that has an empty CSS. None of those sets
@@ -196,14 +195,14 @@ The following is true, iff each CSS holds exactly one CE:
 (#V == #P) is true, iff (#CE(s) == 1).
 
 (1) (#CSS(h) == #P) -
-That is, because each CSS is now required to be non-empty.
+That is because each CSS is now required to be non-empty.
 In addition to that, any non-empty CSS is disjoint to any other CSS.
 
 (2) (#CE(h) == #P) -
-That is, because each CSS is required to hold exactly one CE.
+That is because each CSS is required to hold exactly one CE.
 
 (3) (#V == #P) -
-That is, because (CE(h) == V).
+That is because (CE(h) == V).
 
 **CLARIFICATION**
 `ce-of-set()` is inverse to `set-of-ce()` iff (#CE(s) == 1).

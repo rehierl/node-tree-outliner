@@ -15,7 +15,7 @@ section's last node is the last subsequent descendant of that container.
 A section can be understood to *end inside of an associated container*,
 if the section ends with the last subsequent descendant of that container.
 
-Note that this perspective can be misleading. That is, because in order
+Note that this perspective can be misleading. That is because in order
 for that statement to be true, a section must end with the last subsequent
 descendant (i.e. not some arbitrary descendant).
 

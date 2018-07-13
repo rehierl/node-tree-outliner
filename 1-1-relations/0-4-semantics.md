@@ -30,7 +30,7 @@ clarification
 
 * inverting a relation usually drops the initial semantics
 * the inverted relation has no meaning under the initial semantics
-* that is, because the order of elements has changed
+* that is because the order of elements has changed
 
 <!-- ======================================================================= -->
 ## palindromic

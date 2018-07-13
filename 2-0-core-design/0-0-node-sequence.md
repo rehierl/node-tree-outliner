@@ -14,13 +14,13 @@ sequence" of the tree:
 * `ni` is entered after `ni-x` and before `ni+y`, `x,y in [1,k]`
 
 Note that `x,y in [1,k]` is not accurate because the range of numbers (i.e.
-`[1,k]`) is too large. That is, because `(i-x)` could turn out to be less than
+`[1,k]`) is too large. That is because `(i-x)` could turn out to be less than
 `1` and `(i+y)` greater than `k`. In order to keep explanations simple, that
 range needs to be understood to only contain values that result in a valid node
 index.
 
 The length of a node sequence is identical to the number of nodes in the node
-tree. That is, because each node will be entered exactly once.
+tree. That is because each node will be entered exactly once.
 
 * `(ni+k subsequent-to ni)` is true, if `k in [1,*]`
 * `(ni+k strictly-subsequent-to ni)`, if `(k == 1)`
@@ -35,7 +35,7 @@ to the first and presequent to the last node. In addition to that, any node is
 said to be insequent (i.e. neither pre- nor subsequent) to itself.
 
 Note that the term "subsequent" can be seen to focus on possible future events.
-That is, because node `ni+k` is entered after the current node `ni`. In contrary
+That is because node `ni+k` is entered after the current node `ni`. In contrary
 to that, the term "presequent" needs to be understood to focus on known past
 events. This switch in perspective is critical because no algorithm, in the
 context of the following discussion, can execute any operation based nodes that
@@ -80,12 +80,12 @@ ns := [n1,...,ni,...,nk]
 ```
 
 An algorithm has, when entering its current node `ni`, knowledge of any node
-within subsequence `s1 := [n1,ni]`. That is, because it already came in contact
+within subsequence `s1 := [n1,ni]`. That is because it already came in contact
 with all the nodes in that sequence.
 
 Note that, due to an algorithm's current node, an algorithm's current knowledge
 contains nodes that it will still have to exit at some later point in time.
-That is, because the algorithm will still have to exit the current node and
+That is because the algorithm will still have to exit the current node and
 therefore also all of its ancestors.
 
 In addition to that, the existence of those nodes in `s1` is guaranteed.
@@ -123,7 +123,7 @@ and exited after `ni` was exited. Consequently, `ni` will be exited in between
 the exit event of `nj` and the enter event of `nj+1`.
 
 Because of that, any node in `s3` can technically have an effect on its
-presequent ancestor `ni`. That is, because a process will have knowledge
+presequent ancestor `ni`. That is because a process will have knowledge
 of any node within `s3` by the time `ni` is being exited.
 
 However, such delayed knowledge must not be used to execute any operation that
@@ -182,7 +182,7 @@ in general only allowed to have an effect on those nodes that are subsequent
 (forwards) to the current event. In addition to that, operations can only rely
 on those nodes that are presequent (backwards) to the current event.
 
-Note that a node is presequent to its own exit event. That is, because the
+Note that a node is presequent to its own exit event. That is because the
 term "a node" refers in general to the node's enter event. Exit events are
 therefore considered to be secondary (but not unimportant) events.
 
@@ -197,7 +197,7 @@ The question is, whether that would even be reasonable.
 The semantics of a node depends on its context.
 
 In an unordered tree, the context of a node can only contain the ancestors
-of a node. That is, because there is no guarantee that certain nodes will
+of a node. That is because there is no guarantee that certain nodes will
 always be presequent to a given node. The result of an algorithm, which
 executes operations based upon presequent siblings, is not guaranteed to
 be deterministic (i.e. repeated executions may yield different results).
@@ -209,7 +209,7 @@ siblings. Note that the context of a node may also include those siblings
 that are presequent to one of the node's ancestors.
 
 Because of that, the current knowledge of an algorithm, is in general not
-identical to the context of the current node. That is, because the current
+identical to the context of the current node. That is because the current
 knowledge includes the context of a node and, in addition to that, nodes
 which are not part of that context (i.e. not all nodes that are presequent
 to a node are allowed to have an effect on it).

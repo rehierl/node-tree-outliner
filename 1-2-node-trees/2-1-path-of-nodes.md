@@ -102,7 +102,7 @@ always has exactly one non-empty rooted path.
 **CLARIFICATION**
 Any unidirectional path in a tree of nodes represents a linear sequence.
 
-That is, because a tree has by definition neither loops nor cycles.
+That is because a tree has by definition neither loops nor cycles.
 
 <!-- ======================================================================= -->
 ## undirected definitions

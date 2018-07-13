@@ -8,11 +8,11 @@ strictly associated with one section only (practical approach). Because of that,
 no sectioning node can be associated with a random/arbitrary section.
 
 * No sectioning node can be associated with a section that is subsequent to
-  it. That is, because these sections do not count as being open by the time
+  it. That is because these sections do not count as being open by the time
   the sectioning node is being entered. Despite that, such an association
   would also be in conflict with the context of the sectioning node.
 * No sectioning node can be associated with a presequent section that is
-  already closed when the sectioning node is being entered. That is, because
+  already closed when the sectioning node is being entered. That is because
   it would be in conflict with the closed state of a section as it would add
   that sectioning node to the closed section.
 
@@ -39,18 +39,18 @@ Fundamental considerations.
 From the introduction of sectioning nodes:
 
 * If all sectioning nodes would have to be associated with their own
-  section, then no section would ever be truly empty. That is, because
+  section, then no section would ever be truly empty. That is because
   any section would then always begin with its own sectioning node.
 * Associating sectioning nodes with their own section adds a sectioning
   node to its own context, although no node is presequent to itself.
 * A section could then not be understood to be subsequent to its
-  sectioning node. That is, because a sectioning node, like any other
+  sectioning node. That is because a sectioning node, like any other
   node, is insequent (i.e. neither pre- nor subsequent) to itself.
 
 From the definition of section states/events:
 
 * Associating sectioning nodes with their own section can be seen to be in
-  conflict with the open event of a section. That is, because nodes would
+  conflict with the open event of a section. That is because nodes would
   have to be associated before a section can truly count as being open.
   However, a section is guaranteed to exist by the time its sectioning node
   is being entered.
@@ -58,7 +58,7 @@ From the definition of section states/events:
 From the definition of inner sections:
 
 * Not associating sectioning nodes with their own sections guarantees that
-  the section hierarchy is acyclic. That is, because a section never is a
+  the section hierarchy is acyclic. That is because a section never is a
   subsection to itself. Which is because a parent section always has more
   content nodes than any of its inner sections.
 
@@ -96,7 +96,7 @@ the declared section and therefore also to its node sequence. Consequently. it
 would not be possible to describe the general properties of a section's node
 sequence (see: reduced sequence) independently of its sectioning node.
 
-That is, because the index of the first actual content node within the section's
+That is because the index of the first actual content node within the section's
 node sequence would then not be the same for all section types. Which is,
 because a section's node sequence would then always begin with the section's
 sectioning node, which could then be followed by one or more intermediate data
@@ -138,7 +138,7 @@ because of that, one would always have to explicitly also test whether the
 section in question has any subsections or not.
 
 Note that the sectioning node of a subsection would then only be associated
-with the subsection it declares. That is, because each node can and will be
+with the subsection it declares. That is because each node can and will be
 associated with one section only. Although a sectioning node would still
 count as being implicitly associated with all of its ancestor sections.
 
@@ -178,7 +178,7 @@ which is subsequent to it. A superordinate node (i.e. a parent node) always
 is presequent to those that are subordinate to it (i.e. its descendants).
 
 Associating a sectioning node with its own section will obviously be in
-conflict with this general orientation. That is, because it would connect a
+conflict with this general orientation. That is because it would connect a
 superordinate entity (i.e. the sectioning node) with one that is subordinate
 to it (i.e. the declared section). Because of that, and with regards to a
 sectioning node, the property's direction would be turned upside-down as it
@@ -190,7 +190,7 @@ entering and exiting the sections, i.e. when traversing through sections).
 
 Note that the direction of the parent property, with regards to all other
 nodes, is guaranteed to be consistent with the afore mentioned orientation.
-That is, because they will always be associated with the section of a
+That is because they will always be associated with the section of a
 presequent sectioning node.
 
 Not associating any sectioning node with its own section guarantees that
@@ -201,7 +201,7 @@ always point "upwards".
 Note that this parent property, with regards to the descendants of a type-2
 sectioning node, obviously needs to be consistent with its ancestor (i.e.
 the sectioning node), regardless if sectioning nodes are associated with
-their own sections or not. That is, because of descendant nodes being
+their own sections or not. That is because of descendant nodes being
 implicitly associated with the sections of their ancestors.
 
 <!-- ======================================================================= -->
@@ -233,7 +233,7 @@ loosing an anchor-like node. A sectioning node can therefore be used to
 reintegrate a section at its exact location.
 
 Transformations would not be as straight forward, if sectioning nodes would
-have to be associated with their own section. That is, because the sectioning
+have to be associated with their own section. That is because the sectioning
 nodes would then also count as content nodes. Consequently, after having
 extracted all content nodes, the information of where exactly the section was
 located would no longer be available.
@@ -309,7 +309,7 @@ Any non-empty section always has one or more strictly associated nodes.
 That is, the `parentSection` property of these strictly associated nodes
 holds a reference to the corresponding non-empty section.
 
-That is, because if a non-empty section has no subsections, then it contains
+That is because if a non-empty section has no subsections, then it contains
 at least one inactive node that is strictly associated with it. If a non-empty
 section contains subsections, then such a parent section will (also) contain
 the strictly associated sectioning nodes of its immediate subsections.

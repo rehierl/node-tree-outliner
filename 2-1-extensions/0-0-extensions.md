@@ -64,7 +64,7 @@ covered by the definition of sectioning nodes, the closure of sections is
 the only option left that can be used to define any extension. Consequently,
 extensions can only represent instructions to close presequent sections.
 
-Note that already closed sections are no longer relevant. That is, because
+Note that already closed sections are no longer relevant. That is because
 sections can not be reopened, and because of that, no further nodes and/or
 subsections can be associated with closed sections. Likewise, subsequent nodes
 and sections must be ignored. Which is, because these are not even guaranteed
@@ -178,7 +178,7 @@ not be used for the definition of extensions (i.e. not a viable option).
 > case 4 - when exiting a sectioning node's enter event - (0)
 
 In addition to case 3, this case will also trigger conflicting statements with
-regards to the logical location of a section. That is, because regardless of
+regards to the logical location of a section. That is because regardless of
 what type of section is declared, the conflicting statements then are: (1) the
 section is, due to the association of the sectioning node, located inside of
 the to-be-closed sections, and (2) the section is, because of the association
@@ -190,7 +190,7 @@ the declared section is not strongly connected.
 Note that, with regards to type-1 sectioning nodes, the sections must be
 closed before the declared section is opened (i.e. an issue related to the node
 event's order of operations). Otherwise, the declared section will be closed by
-the sectioning node's close modifier. That is, because the declared section, as
+the sectioning node's close modifier. That is because the declared section, as
 soon as it is open, will become the new current section. 
 
 > case 5 - when entering a node's exit event - (0)
@@ -241,7 +241,7 @@ all other closed and still open ancestor sections.
 
 Because of that, and if more than one section would have to be closed, it could
 be difficult to detect (by humans and/or implementations) why sections had to
-be closed. That is, because such a node would then be located "deep inside" of
+be closed. That is because such a node would then be located "deep inside" of
 a subsection and will therefore not necessarily be easily accessible to its
 ancestor sections (Note that this can be understood too represent a reason as
 to why not to associate end-marker nodes with the sections they close).
@@ -360,7 +360,7 @@ is defined by the roles it includes:
 * `h(i) := (rank:i, type:2)`
 * `<h1> := <div roles="h:1">`
 
-Note that a "parent-container" role does not exist. That is, because tagging
+Note that a "parent-container" role does not exist. That is because tagging
 a node with a role will always associate a node with that role. But, whether a
 node is a parent container or not, does not depend on the association of roles:
 
@@ -388,7 +388,7 @@ That is, active nodes are sectioning nodes and/or end-marker nodes.
 
 **CLARIFICATION**
 An implementation will have to execute operations based on the roles that a node
-has. That is, because any node, even type-1 and type-2 sectioning nodes, can be
+has. That is because any node, even type-1 and type-2 sectioning nodes, can be
 tagged with a close modifier.
 
 Because of that, an implementation must have the means to detect all the roles

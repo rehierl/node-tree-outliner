@@ -105,7 +105,7 @@ The list of sections will be extended by a new section,
 if the next node event results in opening a new section.
 
 Note that the new section will always appear at the end of that list (i.e.
-not at some arbitrary position). That is, because the new section will be
+not at some arbitrary position). That is because the new section will be
 a subsection to all sections which were part of the list just before opening
 the corresponding section (formal perspective).
 
@@ -117,7 +117,7 @@ The list of sections will be reduced by one or more sections,
 if the next node event results in closing those sections.
 
 Note that all of these sections will always be removed from the end of the
-list (i.e. not from an arbitrary position). That is, because any subsection
+list (i.e. not from an arbitrary position). That is because any subsection
 must be closed before any of its ancestor sections can be closed. Which is,
 because no parent container of an ancestor section is a descendant to the
 parent container of any of its subsections.
@@ -133,7 +133,7 @@ If multiple sections need to be closed during the same node event, then those
 sections need to be closed in reverse order. That is, if `s6` was opened before
 `s7`, then `s7` needs to be closed before `s6` can be closed.
 
-That is, because `s7` is a subsection to `s6` and because no subsection can
+That is because `s7` is a subsection to `s6` and because no subsection can
 remain open if its parent section has to be closed. Put differently, any other
 close order would be in conflict with "a parent section is open for as long as
 any of its subsections are open".
@@ -202,7 +202,7 @@ trace of sequences:     -  node event:
 ```
 
 Note that the root section `s0` is always located at the beginning of
-any sequence. That is, because any other section is a subsection to it.
+any sequence. That is because any other section is a subsection to it.
 
 As mentioned before, and in contrary to the formal perspective, each node
 will be associated with one section only (practical perspective). However,
@@ -230,7 +230,7 @@ must be used to set the `Node.parentSection` property of the subsequent node
 that will be entered next.
 
 Note that an explicit reference variable is optional, if an implementation
-chooses to maintain an explicit stack of open sections. That is, because the
+chooses to maintain an explicit stack of open sections. That is because the
 corresponding reference can always be retrieved from that stack via a call
 to `stack.get()`.
 

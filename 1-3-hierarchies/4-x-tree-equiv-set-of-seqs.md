@@ -59,7 +59,7 @@ The next sibling D of node B is consequently subsequent to its previous sibling
 B and all of its descendants.
 
 Note that each node sequence generated as above represents an ordered set of
-nodes. That is, because any node within such a sequence appears exactly once.
+nodes. That is because any node within such a sequence appears exactly once.
 In addition to that, the position of each node is consistent with the
 corresponding node order (e.g. enter-order).
 
@@ -219,7 +219,7 @@ nodes. These can be distinguished from one another via their defining node.
 The inner sequence of a node is identical to the outer sequence of its
 *only child*.
 
-That is, because the outer sequence of a descendant is in general only a simple
+That is because the outer sequence of a descendant is in general only a simple
 subsequence (not a strict subsequence) of the inner sequence of an ancestor.
 
 Note that, if the parent has more than one child, this identity does not exist.
@@ -241,7 +241,7 @@ the outer sequences of all the nodes, and the set of sequences (H2), which
 only contains the inner sequences of these nodes (i.e. `H0 = (H1 union H2)`).
 
 Note that even though H0 is only a (simple) hierarchy of sequences, H1 and H2
-both are on their own strict hierarchies of sequences. That is, because any
+both are on their own strict hierarchies of sequences. That is because any
 ancestor inner/outer sequence has more elements than any of its descendant
 inner/outer sequences.
 
@@ -252,9 +252,9 @@ node, which can be distinguished via their defining nodes and some boolean
 considered to hold: (A) `(#H2 = #N)` and (B) `#H0 = (#H1 + #H2) = #N*2`.
 
 Note however that, from a strict mathematical perspective, both expressions are
-wrong. That is, because (1) the inner sequence of a child may be identical to
-the outer sequence of its parent, and because (2) the inner sequence of any leaf
-is the empty sequence. With that in mind, the `=` operator within the above two
+wrong. That is because (1) the inner sequence of a child may be identical to the
+outer sequence of its parent, and because (2) the inner sequence of any leaf is
+the empty sequence. With that in mind, the `=` operator within the above two
 expressions would have to be replaced by the `<=` operator for both expressions
 to evaluate to `true` under that strict perspective.
 
@@ -287,8 +287,8 @@ hierarchy of sequences           node tree
 ```
 
 Note that the above hierarchy neither represents a hierarchy of inner (H2),
-nor a hierarchy of outer (H1) sequences. That is, because root sequence A
-has a prefix and no suffix.
+nor a hierarchy of outer (H1) sequences. That is because root sequence A has
+a prefix and no suffix.
 
 **CLARIFICATION**
 A hierarchy of sequences defines the structure of a rooted (ordered) tree.

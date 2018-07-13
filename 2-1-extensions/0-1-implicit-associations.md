@@ -64,7 +64,7 @@ are descendants of a node that is (strictly or loosely) associated with `s0`.
 ## means of detection
 
 Any parent node is a parent container, if it is a type-1 sectioning node, or if
-it has a type-2 sectioning node as child node. That is, because sections must
+it has a type-2 sectioning node as child node. That is because sections must
 not be allowed to reach past their parent containers. Otherwise, consistent
 dynamic support could not be guaranteed.
 
@@ -99,7 +99,7 @@ avoided.
 * `n2` is some other inactive node (a child of `n1`)
 * `n3` is an end-marker node (a child of `n2`, defined to close `s1`)
 
-In this case, the close modifier of `n3` must be ignored. That is, because `n3`,
+In this case, the close modifier of `n3` must be ignored. That is because `n3`,
 and potentially any other descendant subsequent to it, is via `n2:s1` implicitly
 associated with `s1`. That is, allowing `n3` to close `s1` would result in
 conflicting statements with regards to the location (inside `s1` vs. outside of
@@ -120,7 +120,7 @@ container of the type-1 section it is supposed to close.
 * `n2` is an end-marker node (defined to close `s1`)
 * `n3` is some other inactive node
 
-In this case, `n2` is in principle free to close `s1`. That is, because `n2`
+In this case, `n2` is in principle free to close `s1`. That is because `n2`
 is not implicitly associated with `s1`. The closure of `s1` will therefore
 not result in contradictory statements with regards to the locations of the
 corresponding nodes.
@@ -155,7 +155,7 @@ before `n3` is entered. Consequently, `n3` can no longer close `s2` as that
 section will already be closed by the time `n3` is being entered.
 
 Note that, from the perspective of an implementation, this case is a non-issue.
-That is, because closed sections will be ignored by subsequent operations. To
+That is because closed sections will be ignored by subsequent operations. To
 be more accurate, when entering `n3`, an implementation is no longer required
 to know that `s2` ever existed. Because of that, the close modifier of `n3`
 will not be understood by an implementation to be with regards to `n2/s2`, but
@@ -222,7 +222,7 @@ of independent subtrees (i.e. `s2` will be closed before `n4` is entered).
 * `n1` is a type-2 sectioning node (declares `s1`)
 * `n2` is an end-marker node (defined to close `s1`)
 
-In this case, `n2` is in principle free to close section `s1`. That is, because
+In this case, `n2` is in principle free to close section `s1`. That is because
 `s1` is still open by the time `n2` is being entered, and because `n2` is not
 already implicitly associated with `s1`.
 
@@ -236,7 +236,7 @@ container of the type-2 section it is supposed to close.
 An end-marker node can be allowed to close a section, if (and only if) the
 end-marker node is a sibling of the section's first content node.
 
-That is, because ...
+That is because ...
 
 * (1) the section still needs to be open: That is, the end-marker node must be
   subsequent to the section's open event and presequent to the exit event of
@@ -261,7 +261,7 @@ even be allowed, still needs to be answered.
 A section will either be closed by its parent container,
 or by an optional end-marker node.
 
-That is, because if there is no end-marker node before the end of a section's
+That is because if there is no end-marker node before the end of a section's
 default scope is reached, then that section ends with its parent container. If
 however an end-marker node is reached before its default scope is exited, then
 that section ends with the unassociated end-marker node.
@@ -274,7 +274,7 @@ definition of parent containers.
 **CLARIFICATION**
 A section either has an (i.e. one) end-marker node, or it doesn't.
 
-That is, because if a subsequent end-marker node results in the closure of a
+That is because if a subsequent end-marker node results in the closure of a
 section, then that section is no longer relevant to any further subsequent
 end-marker node. Put differently, only the first relevant subsequent end-marker
 node can have a "close" effect on a section. And, because of that, no section

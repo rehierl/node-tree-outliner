@@ -51,7 +51,7 @@ Any CSS is understood to exist as a distinct (implicit) entity.
 
 Even though a CSS is not necessarily an element in P (i.e. not an explicit
 entity), any CSS is understood to exist within the corresponding hierarchy.
-That is, because the CSS of any set in P can be determined at any time.
+That is because the CSS of any set in P can be determined at any time.
 
 **CLARIFICATION**
 The **set of all characteristic subsets (CSS)** is defined as follows:
@@ -144,11 +144,11 @@ Note that ...
 Any CSS is disjoint to any other CSS.
 
 (1) For css(s) and css(t) to not be disjoint, (s & t) would have to be
-non-empty for two distinct sets (s,t in P). That is, because css(s) is
+non-empty for two distinct sets (s,t in P). That is because css(s) is
 still a subset of (s), and css(t) is still a subset of (t).
 
 (2) In order for (s & t) to be non-empty, both sets would have to be
-strictly related. That is, because two distinct sets in a hierarchy are
+strictly related. That is because two distinct sets in a hierarchy are
 either disjoint ex-or strictly related.
 
 (3) If (t) would be a descendant of (s), then css(s) could by definition not
@@ -172,7 +172,7 @@ Which is, because css(p) may be empty for more than one (p in PS).
 Any non-empty CSS is unique to its parent set.
 No other set (s in P) has the exact same non-empty CSS.
 
-(1) That is, because for two distinct sets (s,t in P) to have the same
+(1) That is because for two distinct sets (s,t in P) to have the same
 non-empty CSS (i.e. css(s) == css(t)), (s & t) would have to be non-empty.
 
 (2) As before, both sets (s) and (t) would have to be strictly related,
@@ -182,7 +182,7 @@ which is why both sets can not have the exact same non-empty CSS.
 * `(s != t) <-> (css(s) != css(t))`, if `(css(s) != {})`
 
 Note that a CSS is obviously not "unique" to its parent set (s) in a strict
-sense. That is, because #A(s) may be non-empty and because css(s) is also a
+sense. That is because #A(s) may be non-empty and because css(s) is also a
 subset to all of these ancestors. However, a CSS is "unique" to (s) in such
 a way that (s) is the least significant set of those sets. No other set
 "contains" a given CSS in that particular "unique" way.
@@ -226,10 +226,10 @@ such that (css(p) == {}).
 That is, (css(s) != {}) is true for some (s in P).
 
 (2.1) The result is a unique (s in P).
-That is, because css is then guaranteed to be in CSS(h).
+That is because css is then guaranteed to be in CSS(h).
 
 Note that each hierarchy always has at least one non-empty CSS.
-That is, because each hierarchy always has at least one leaf set.
+That is because each hierarchy always has at least one leaf set.
 
 Note that there is only one case possible (i.e. case-1.1) such that no unique
 result can be returned, even though the input (css in CSS(h)) is valid (i.e.
