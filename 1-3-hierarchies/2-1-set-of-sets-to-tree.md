@@ -69,7 +69,7 @@ that, the elements the sets hold provide no further information that could be
 relied upon.
 
 <!-- ======================================================================= -->
-## Additional characteristics
+## Required characteristics
 
 Because a simple hierarchy `H := (V,P)` has no characteristics that could
 be used in order to consistently create the nodes of a tree `T := (N,E)`,

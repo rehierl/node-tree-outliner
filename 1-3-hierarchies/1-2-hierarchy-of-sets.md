@@ -2,7 +2,7 @@
 **TODO** - (open aspects)
 
 <!-- ======================================================================= -->
-# Hierarchy/Forest of sets
+# (Simple) Hierarchy/Forest of sets
 
 ```
 |-A---------------------| |-E-|
@@ -121,27 +121,38 @@ A strict setup has the following properties:
 ## derived statements
 
 **CLARIFICATION**
+The sets of ancestors/descendants may be defined as follows:
+
+* `A(s), A(s,h) := { a | (s strict-subset-of a) for any (a in P) }`
+* `D(s), D(s,h) := { d | (d strict-subset-of s) for any (d in P) }`
+* `AS(h) := { a | (a in A(s,h)) for any (s in P) }`
+* `DS(h) := { d | (d in D(s,h)) for any (s in P) }`
+
+Note that ...
+
+* `PS := AS`, `CS := DS`
+* i.e. each parent has a descendant
+* i.e. each child has an ancestor
+* `RS := (P - CS)`, `LS := (P - PS)`
+* i.e. each set is either a root ex-or a child
+* i.e. each set is either a leaf ex-or a parent
+
+**CLARIFICATION**
 The following definitions may be used to clarify discussions
 
-* `r in RS` - the set of all root sets (no ancestors)
-* `p in PS` - the set of all parent sets (one or more child sets)
-* `c in CS` - the set of all child sets (have a parent set)
-* `l in LS` - the set of all leaf sets (no descendants)
 * `a in AS` - the set of all ancestor sets
 * `d in DS` - the set of all descendant sets
+* `r in RS` - the set of all root sets
+* `p in PS` - the set of all parent sets
+* `c in CS` - the set of all child sets
+* `l in LS` - the set of all leaf sets
 
 Note that ...
 
 * `(#RS, #PS, #CS and #LS) <= #P`
-* `RS` and `LS` are only empty if `(#P == 0)`
+* `RS` and `LS` are empty iff `(#P == 0)`
 * i.e. a non-empty strict setup always has a root and a leaf
-* `(RS == (P - CS))` and `(PS == (P - LS))` are both true
-* i.e. each set is either a root ex-or a child
-* i.e. each set is either a parent ex-or a leaf
-* `PS` and `CS` are both empty if `(#RS == #P)`
-* `A(s), A(s,h) := { a | (a ancestor-of s) }`
-* `D(s), D(s,h) := { d | (d descendant-of s) }`
-* `(A(s) subset-of AS)` and `(D(s) subset-of DS)`
+* `PS` and `CS` are both empty if `(#RS == #LS)`
 
 **CLARIFICATION**
 Each set `s in P` in a strict setup `S := (V,P)`
@@ -177,7 +188,7 @@ Note that each element in such a rooted path is a set of elements.
 * Sets /B/A and /B/B are both strict subsets of root set /B.
 
 <!-- ======================================================================= -->
-## (simple) Hierarchy/Forest of sets
+## (Simple) Hierarchy/Forest of sets
 
 **CLARIFICATION**
 A setup is said to be **a (simple) hierarchy (of nested sets)**,
@@ -277,3 +288,9 @@ given a set of elements V -
 how many hierarchies are theoretically possible? -
 what is the max possible number of sets in P (hint: powerset)? -
 with regards to: resource management, allocation of resources
+
+**TODO** -
+`(css(l) in P)` iff `(l in LS)` -
+reduces the number of possible hierarchies -
+it requires that (css(p) !in P) for (p in PS) -
+i.e. each parent set removes a possible set in P -

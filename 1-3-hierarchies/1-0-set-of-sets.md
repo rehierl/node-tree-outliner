@@ -2,7 +2,7 @@
 **TODO** - (open aspects)
 
 <!-- ======================================================================= -->
-# Sets of sets
+# Set of sets
 
 ```
 multiset-of-sets = <

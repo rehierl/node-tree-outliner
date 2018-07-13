@@ -17,13 +17,13 @@ Any set in a strict hierarchy `H := (V,P)` is the union of disjoint sets:
 * `iss(s) := E(D(s))` - the set's **inner subset**
 * `css(s) := (s - iss(s))` - the set's **characteristic subset**
 
-Note that any set is the union of its css(s) with its iss(s). Both subsets
-are obviously disjoint by definition. Furthermore, css(s) binds (s) to its
-ancestors in A(s) and iss(s) binds (s) to its descendants in D(s).
+Note that any set is the union of its css(s) with its iss(s). Both subsets are
+disjoint by definition. Furthermore, css(s) binds (s) to its ancestors in A(s)
+and iss(s) binds (s) to its descendants in D(s).
 
-* `(iss(s) != {})` if `(s in LS)`
-* `(css(s) in P)` iff `(s in LS)`
-* `(iss(s) == {})` if `(s in LS)`
+* `(css(s) != {})` if `(s in LS)`
+* `(css(l) in P)` iff `(l in LS)`
+* `(iss(l) == {})` iff `(l in LS)`
 
 In contrary to CSS(h), ISS(h) is a union of related sets. However, ISS(h) is
 not a hierarchy of sets because iss(l) is empty for any leaf set (l in LS).

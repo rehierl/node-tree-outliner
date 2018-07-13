@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Unordered tree => Strict hierarchy of sets
+# Unordered tree => Hierarchy of sets
 
 ```
 tag soup          node tree      (simplified)      set of nodes
