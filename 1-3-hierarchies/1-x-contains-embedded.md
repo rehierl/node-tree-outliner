@@ -1,10 +1,16 @@
 
 **TODO** - (open aspects)
 
-* currently just a "summary" of thoughts
-
 <!-- ======================================================================= -->
-## sets - contains, embedded
+# (loosely) contains/embedded
+
+**TODO** -
+a node loosely contains a distant descendant -
+a node strictly contains a child -
+a set loosely contains a child set -
+a set strictly contains a distant set -
+both notions are "inverse" to each other -
+needs to be fixed before we move on to content injection
 
 **CLARIFICATION**
 Set A is said to **(loosely) contain** set C
@@ -54,13 +60,3 @@ or not a super-set is known to have more elements than a sub-set.
 
 Note that the "loosely" vs. "strictly" distinction could be used to clarify how
 content was injected into some other content.
-
-<!-- ======================================================================= -->
-
-**TODO** -
-a node loosely contains a distant descendant -
-a node strictly contains a child -
-a set loosely contains a child set -
-a set strictly contains a distant set -
-both notions are "inverse" to each other -
-needs to be fixed before we move on to content injection

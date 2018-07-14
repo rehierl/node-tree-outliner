@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Node tree <-> Hierarchy of sets
+# Unordered tree <=> Hierarchy of sets
 
 ```
 node tree         hierarchy of outer sets         node tree

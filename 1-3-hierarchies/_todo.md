@@ -5,7 +5,6 @@
 # TODOs
 
 * "That is because" => "That is because"
-
 * are length values similar to rank values?
 
 preorder => directed graph -
@@ -22,15 +21,6 @@ i.e. ordered according to the order of their root nodes -
 towers of hanoi -
 a wood stacking game -
 allows to visualize trees -
-
-element-of vs. subsequence-of -
-similar to contains vs. embedded -
-only with regards to sequences -
-`s = [1, [2, 3], 4]`, `t = [2, 3]` -
-`t` is an element of `s = [1, t, 4]` -
-that is, an element in `s` has `t` as its value -
-`s = [1, 2, 3, 4]`, `t = [2, 3]` -
-`t` is an infix/subsequence of `s`
 
 <!-- ======================================================================= -->
 ## add to core definitions

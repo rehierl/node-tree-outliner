@@ -2,7 +2,10 @@
 **TODO** - (open aspects)
 
 <!-- ======================================================================= -->
-# A sequence-based perspective
+# Ordered tree => Hierarchy of sequences
+
+<!-- ======================================================================= -->
+## A sequence-based perspective
 
 Note that the following discussion is based upon rooted ordered trees.
 
@@ -269,109 +272,3 @@ Note that the node sequence of any rooted ordered tree represents an ordered
 set of values. H0, and any subset of it, automatically represent distinct setups
 (see - consistent set of sequences / requirement 1). However, this can only be
 guaranteed if (and only if) the initial tree has neither loops nor cycles.
-
-<!-- ======================================================================= -->
-## Hierarchies as node trees
-
-```
-hierarchy of sequences           node tree
-===========================  =>  ============
-
-0 1 2 3 4 5 6 7 8 9 - A           A
-=========   =====   - B,C        ============
-  =   ===     ===   - D,E,F       B        C
-        =     =     - G,H        =======  ===
-                                  D   E    F
-                                     ===  ===
-                                      G    H
-```
-
-Note that the above hierarchy neither represents a hierarchy of inner (H2),
-nor a hierarchy of outer (H1) sequences. That is because root sequence A has
-a prefix and no suffix.
-
-**CLARIFICATION**
-A hierarchy of sequences defines the structure of a rooted (ordered) tree.
-
-* The tree's structure has one node per set (i.e. `#H = #N`).
-* The tree's structure is not defined by the elements the sequences
-  contain (i.e. `(#{e | (e in s)  and (s in H)} != #N)` may be true).
-* What counts is what relationship a sequence has with all the other sequences.
-
-Note that, from a strict perspective, the resulting tree has loops because each
-sequence is by definition a subsequence to itself. With that in mind, and except
-for the root node, each node within the structure that such a hierarchy defines
-has exactly two parent nodes: (1) the node itself, and (2) another node.
-However, and even under that strict perspective, the structure minus all the
-loops is that of a rooted (ordered) tree.
-
-Note that the structure such a hierarchy defines has no cycles. In order to
-have cycles, a parent sequence would also have to be a subsequence to one of
-its descendant sequences. That however is not possible because (1) any ancestor
-sequence always has more elements than any of its descendant sequences, and
-because (2) the hierarchy is still a set of sequences (i.e. it can not contain
-two identical elements/sequences).
-
-**TODO**
-Given a sequence of elements, (1) how many such hierarchies are possible and/or
-(2) what is the maximum number of nodes the resulting tree can possibly have?
-(hint: resource management).
-
-<!-- ======================================================================= -->
-## Equivalency between trees and hierarchies of sequences
-
-```
-outer sequences                   node tree
-==============================    =================
-
-A B D G E H C I F - NS             A               
-================= - A             =================
-  ======= = ===== - B, H, C        B      H   C    
-    === =     = = - D, E, I, F    ======     ======
-      =           - G              D  E       I  F 
-                                  ===
-                                   G
-```
-
-Given the above set of sequences, and without any additional information (i.e.
-which node within a sequence is its defining node), the initial node tree can
-be reconstructed. In order to reconstruct the initial tree, one has to know
-(1) the parent sequence and (2) the next/previous sibling of each sequence.
-
-The relevant steps to read a tree from such a hierarchy are:
-
-* (1) Determine the root sequence.
-* Note that the root sequence alone is not sufficient to reconstruct the tree.
-* (2) Determine the parent sequence of each sequence.
-* Note that each sequence is shorter than its parent sequence.
-* (3) Determine the node order based on the starting position of each sequence.
-* Note that each sequence has a unique position within the root sequence.
-* Note that the position of each sequence corresponds with the node order.
-* Note that this step fixes the order of child nodes within each parent.
-
-Note that, in order to create a rooted ordered tree of nodes from a hierarchy
-of sequences, that hierarchy must fulfill certain requirements. For example:
-
-* A hierarchy of N sequences always has one root sequence of length N.
-* The longest sequence therefore is the root sequence.
-* All other (N-1) sequences have less than N elements.
-* Each of the (N-1) subsequences have unique offsets within the root sequence.
-* Note that there is one sequence per node.
-
-**CLARIFICATION**
-A rooted ordered tree can be created based on a hierarchy of outer sequences,
-if the hierarchy contains one sequence per node.
-
-Note that each hierarchy of sequences
-represents exactly one rooted ordered node tree.
-
-<!-- ======================================================================= -->
-## derived statements
-
-**CLARIFICATION**
-Each rooted ordered tree of nodes represents a hierarchy of sequences,
-and each hierarchy of sequences represents a rooted ordered tree of nodes.
-
-**CLARIFICATION**
-The hierarchy of sequences of a rooted ordered tree of nodes will be
-referred to as the tree's "sequence-based perspective".
