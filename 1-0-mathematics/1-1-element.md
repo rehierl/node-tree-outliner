@@ -1,26 +1,27 @@
 
 <!-- ======================================================================= -->
-# Variables, Elements
+# Elements
 
-* a variable `var` (aka. element `e`) represents some value `v`
-* in contrary to actual values, the value of a variable may change
+* an element represents the bearer of a value
+* elements are used to group values into complex values
+* i.e. elements act as containers/slots of values
 
 clarification
 
-* `ms := < e1, e2 >`
-* variables/elements are values
+* the value of an element is set during the creation of a complex value
+* after that, the value of an element can not be changed (immutable)
 
 <!-- ======================================================================= -->
 ## value-of e
 
-* `(e.value == v)`, if value `v` was assigned to `e`
+* `(e.value == v)` is true, if value `v` was assigned to `e`
 * `(value-of e), valueOf(e) := e.value`
 
 <!-- ======================================================================= -->
 ## v value-of e
 
-* `(e == v), (v value-of e) := (valueOf(e) == v)`
-* `(ei == ej)`, if `(valueOf(ei) == valueOf(ej))`
+* `(e == v), (v value-of e) := (e.value == v)`
+* `(ei == ej)`, if `(ei.value == ej.value)`
 
 clarification
 
@@ -35,5 +36,5 @@ clarification
 clarification
 
 * an element can not hold multiple values at the same time
-* different elements are needed to store different values
-* different elements may hold the same value
+* different elements are needed to hold different values
+* different elements may however hold the same value

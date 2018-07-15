@@ -2,10 +2,22 @@
 <!-- ======================================================================= -->
 # Sequences
 
-* `s` represents a sequence of elements/slots
-* `s = [si] = [e1,e2,...,eN] = [e:1,...,e:N]` for `N in [0,*]`
-* or the more mathematical notation `s = (si) = (e1,e2,...,eN)`
+* values may be grouped into sequences of values
+* sequences are complex values
+
+`s = [si] = [v1,v2,...,vN]` for `N in [0,*]`
+
+* or the more mathematical notation `s = (si) = (v1,v2,...,vN)`
 * the array-oriented notation is used throughout this discussion
+
+`s := [e1,e2,...,eN]`
+
+* a sequence can be understood to hold one element/slot per value
+* the number of elements in a sequence is referred to as its "length"
+* the elements within a sequence are ordered - has first/last element/value
+* any element may hold the value of another element
+* i.e. a `1:N` relationship between values and elements
+* `(vi != vj) -> (ei !== ej)`
 
 Note that, with regards to sequences, there are no operators similar to
 the set-based operators (i.e. union, intersection, etc).
@@ -13,7 +25,7 @@ the set-based operators (i.e. union, intersection, etc).
 clarification
 
 * throughout the course of this discussion, the term "sequence" refers to
-* a constant list of elements (fixed in length and values, immutable)
+* a constant/immutable list of values - i.e. fixed in length and values
 * a list of elements/values of the same kind
 * a list of any length (finite or infinite)
 
@@ -23,7 +35,7 @@ clarification
 * the expressions `(e = s)`, `{ s }`, `[ s ]` are all valid
 
 <!-- ======================================================================= -->
-## which term is to use?
+## which term to use?
 
 tuples
 
@@ -42,7 +54,7 @@ sequences
 
 strings
 
-* `s := ['a', 'b', 'a', 'c', ...]`
+* `s := ['a', 'b', 'a', 'c', ...] := "abac..."`
 * traditionally a sequence of characters
 * elements are selected from an alphabet
 * in computing generalized into a sequence of binary data of sorts
@@ -62,7 +74,8 @@ vectors
 <!-- ======================================================================= -->
 ## length-of
 
-* `#s, #(s), lengthOf(s), s.length, (length-of s) := N`
+* `s := [e1,e2,...,eN]`, `lengthOf(s) := N`
+* `#s, #(s), s.length, (length-of s) := lengthOf(s)`
 * `(#s is-length-of s)` is always true
 
 <!-- ======================================================================= -->
@@ -78,8 +91,8 @@ vectors
 * `indexOf(s,e)` := the 1-based index of element `e` in sequence `s`
 * `idx(s,e), index(s,e) := indexOf(s,e)`
 
-Note that the index of an element is undefined, if that element turns out to
-be not an element of the input sequence.
+Note that the index of an element is undefined, if that element is not an
+element of the input sequence.
 
 <!-- ======================================================================= -->
 ## n-th element of
@@ -101,17 +114,17 @@ clarification
 <!-- ======================================================================= -->
 ## get/set access
 
-get: (sequence, index) -> value
+get: (sequence, index) -> element
 
 * `x = s[i]` assigns the value of element `si` to `x`
 * it is in general not possible to directly "access/extract" any element
 * i.e. `s[i]` implicitly dereferences element `si`
 
-set: (sequence, index, value) -> sequence
+set: (sequence, index, value) -> new-sequence
 
 * `s[i] = x` changes the value of element `si` to hold `x` as its value
 * it is in general not possible to "change/replace/remove" any element
-* the set-operation must be understood to create a new sequence
+* the set-operation must be understood to return a new sequence
 * i.e. `set(s,i,v) := prefix(s,1,i-1) & [v] & suffix(s,i+1,#s)`
 
 clarification
@@ -144,26 +157,3 @@ clarification
 palindrome
 
 * `s` is a palindromic sequence, if `(s == inv(s))`
-
-<!-- ======================================================================= -->
-## linear sequence
-
-* `(is-linear s), (is-linear s) := isLinear(s)`
-* `isLinear(s)` := `(s[i] != s[j])` for any `i,j in [1,#s]` and `(i != j)`
-
-A sequence is said to be linear, if the sequence holds unique/distinct elements
-only. That is, a linear sequence contains none of its elements more than once.
-As such, a linear sequence can be understood to define a simple set of elements.
-
-In addition to that, a linear sequence defines an ordered set (see relations),
-if the order of positions is understood to correspond with the set's order of
-elements. Depending on the respective context, the semantics of the element
-order may therefore be:
-
-* `(s[i] before s[i+1])`, `(s[i] presequent-to s[i+1])`
-* `(s[i+1] after s[i])`, `(s[i+1] subsequent-to s[i])`
-
-The word "linear" therefore needs to be understood
-with regards to the "linear order" it defines.
-
-Note that set-based operators can be used in combination with linear sequences.

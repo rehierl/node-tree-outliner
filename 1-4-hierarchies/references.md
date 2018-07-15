@@ -12,4 +12,4 @@ order-related
 
 * [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
 * [wikipedia, partially ordered set](https://en.wikipedia.org/wiki/Partially_ordered_set)
-* hint: preorder, parital order <=> (acyclic) graphs
+* hint: preorder, partial order <=> (acyclic) graphs

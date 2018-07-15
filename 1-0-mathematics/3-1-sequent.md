@@ -10,16 +10,16 @@ Note that, from now on, the terms "elements" and "values" are used synonymously:
 e.g. the values of a sequence are sequent => they appear sequently.
 
 Note that the notion of the term "consecutive" is the same as that of
-"strictly presequent" and "strictly subsequent" (see below).
+"strictly presequent" or "strictly subsequent" (see below).
 
-Note that confusion is inevitable, if a sequence contains an element more than
-once.
+Note that confusion is inevitable,
+if a sequence contains an element more than once.
 
 <!-- ======================================================================= -->
 ## pseudocode definitions
 
 Note that the naming convention is such that the name of a binary operation
-refers to the 1st parameter, which needs to be tested against the 2nd parameter
+refers to the 1st parameter, which will be tested against the 2nd parameter
 (i.e. the context of the corresponding operation).
 
 ```

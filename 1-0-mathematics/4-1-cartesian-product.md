@@ -58,10 +58,9 @@ left-to-right), the result of `A X B X C X ...` is in general undefined.
 <!-- ======================================================================= -->
 ## multi cartesian-product
 
-Note that the definitions below extend the base definition. That is,
-`A X B X C X ...` is defined not because an implicit order of operations is
-selected, but because the definitions below define a single operation for
-such "sequences".
+The definitions below extend the base definition. That is, `A X B X C X ...` is
+defined not because an implicit order of operations is selected, but because the
+definitions below define a single operation for such expressions.
 
 n-ary cartesian product (XAi)
 
@@ -71,7 +70,7 @@ n-ary cartesian product (XAi)
 
 Note that the result of the Cartesian product is now defined to be "flat".
 However, if one or more `Ai` is a set of sequences, then each sequence within
-`XAi` will have a sequences as one or more of its elements (i.e. still nested).
+`XAi` will have sequences as one or more of its elements (i.e. still nested).
 
 n-ary cartesian power (XA^N)
 

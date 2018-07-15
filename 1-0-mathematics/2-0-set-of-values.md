@@ -1,24 +1,32 @@
 
 <!-- ======================================================================= -->
-# (Simple-) set (ss)
+# A (simple) set of values (ss)
 
-* `V := {v1, v2}`
-* different values may be grouped into sets of values
-* each set contains a value no more than once - each value is unique
-* `V := {v1, v2}`, `W := {v1, v3, v4}`
-* the same values may be grouped into different sets of values
-* `V1 := V`, `V2 := W`
-* sets of values may be identified by number ids
-* `Vi := V2` for `i = 2`
-* similar to values, number ids may be generalized into letter ids
+* values may be grouped into (simple) sets of values
+* hint: "simple" because "not ordered"
+* sets of values are complex values
+
+`V := { v1, v2 }`
+
+* each set contains a value no more than once
+* i.e. each value must be unique
+
+`V := { e1:v1, e2:v3 }`
+
+* a set of values can be understood to hold one element/slot per value
+* the number of elements in a sequence is referred to as its "size"
+* the elements within a set have no order - no first/last element/value
+* no element is allowed to hold the value of another element
+* i.e. a `1:1` relationship between values and elements
+* i.e. "values" and "elements" can be used synonymously
+* `(vi != vj) <-> (ei !== ej)`
 
 definition
 
 * `V := { vi | vi holds an odd integer }`
-* instead of listing each value/element,
-  a set can be defined by a condition
-  which must be satisfied by each value/element
-* alternate notations - `{:}`, `{;}`, `{,}`, etc.
+* instead of listing each value, sets can be defined by
+  specifying a condition that must be satisfied by each value
+* alternative notations - `{:}`, `{;}`, `{,}`, etc.
 
 clarification
 
@@ -28,12 +36,9 @@ clarification
 
 clarification
 
-* `V3 := {V1, V2}`, `V4 := <V2, V2>`
-* any set of values is itself a value
-* V4 is a multiset, not a set
-* `V := {e1, e2}`, `(e1 == e2)`
-* sets may contain different elements that hold the same value
-* what matters in such a case are the entities, not their values
+* `V1 := { V }`, `V2 := < V, V >`
+* simple sets are themselves values
+* `V2` is a multiset, not a simple set
 
 <!-- ======================================================================= -->
 ## is-set
@@ -44,17 +49,21 @@ clarification
 <!-- ======================================================================= -->
 ## set-of
 
-* `V5 := { 1, 2, 3 }`, `V6 := { 'a', 'b', 'c' }`
-* a set may contain values that have similar characteristics
-* `V7 := { 1, 2.0, 0xab, 'a', "abc", {5} }`
-* a set may however also contain arbitrary values
+a homogenous set of values
 
-a set of values
+* `V5 := { 1, 2, 3 }`, `V6 := { 'a', 'b', 'c' }`
+* a set may only contain values that have similar characteristics
+
+a heterogenous set of values
+
+* `V7 := { 1, 2.0, 0xab, 'a', "abc", {5} }`
+* a set may also contain values that have distinct characteristics
+
+a set of atomic values
 
 * `V := { vi | vi in S }`
-* `S` contains primitive/atomic values only
+* `S` contains primitive values only
 * no value is complex - no strings, no sets, etc.
-* i.e. "a set of atomic values"
 
 a set of sets
 
@@ -80,9 +89,9 @@ s2 = traceOfValues(set)
 ```
 
 * any set of values allows to visit each of its values
-* any iteration may visit the values in any order
+* an iteration may visit the values in any order
 * subsequent iterations may visit the values in different order
-* that is, `s1` is not guaranteed to be identical to `s2`
+* i.e. `s1` is not guaranteed to be identical to `s2`
 * synonymous - iterate, visit
 
 <!-- ======================================================================= -->
@@ -112,7 +121,7 @@ clarification
 <!-- ======================================================================= -->
 ## (v in V), element-of
 
-* `(v in V), (v element-of V)` := true, if `v` is an element of `V`
+* `(v in V), (v element-of V)` := true, if `v` is an element in `V`
 * value `v` is in set `V`, if `v` is an element of `V`
 
 clarification
@@ -144,12 +153,7 @@ clarification
 * subset-of <=!=> element-of
 
 <!-- ======================================================================= -->
-## operations on sets
-
-* in this context, the addition of values is of no interest
-* the (+) operator is therefore used as the union operator for sets
-
-### union (|, or, +)
+## union (|, +, or)
 
 * `(V union W) := { x | (x in V) or (x in W) }`
 * `(V | W), (V or W), (V + W) := (V union W)`
@@ -165,17 +169,20 @@ clarification
 * `((U + V) + W) <-> (U + (V + W))`
 * `((u + v) + w) <-> (u + (v + w))`
 
-### intersection (&, and)
+<!-- ======================================================================= -->
+## intersection (&, and)
 
 * `(A isect B) := { x | (x in A) and (x in B) }`
 * `(A & B), (A and B) := (A isect B)`
 
-### set difference (\, -, sub)
+<!-- ======================================================================= -->
+## set difference (\, -, sub)
 
 * `(A diff B):= { x | (x in A) and (x !in B) }`
 * `(A \ B), (A ! B), (A - B), (A sub B) := (A diff B)`
 
-### symmetric difference (^, xor, ex-or)
+<!-- ======================================================================= -->
+## symmetric difference (^, xor)
 
 * `(A ex-or B) := {x | x in (A\B or B\A) }`
 * `(A ^ B), (A xor B) := (A ex-or B)`
@@ -184,15 +191,3 @@ clarification
 
 * `(A xor B) := (A \ B) or (B \ A)`
 * `(A xor B) := (A or B) \ (A & B)`
-
-<!-- ======================================================================= -->
-## power set
-
-* `A := {1,2}`
-* `P(A) := { {}, {1}, {2}, {1,2} }`
-* `P(A)` is the set of all subsets in `A`
-
-clarification
-
-* `P(A)` always contains the empty set `{}`
-* `#P(A) = 2^N = 8`, if `#A = N = 3`
