@@ -187,3 +187,18 @@ right-euclidean, euclidean
 left-euclidean
 
 * if `aRc` and `bRc`, then also `aRb`
+
+<!-- ======================================================================= -->
+## set-like/local relation
+
+* relation over a set X
+* for every (x in X), the class of all (y in X) such that yRx is a set
+* e.g. the usual ordering < on the class of ordinal numbers is set-like
+
+<!-- ======================================================================= -->
+## well-founded relation
+
+* relation over a set X
+* a well-founded relation on a class X is a binary relation R
+* if every non-empty subset (S subset-of X) has a minimal element in R
+* i.e. an element m not related by sRm

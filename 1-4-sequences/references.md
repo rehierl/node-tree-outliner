@@ -3,6 +3,7 @@
 # References - sequences
 
 * [wikipedia, interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)
+* [wikipedia, indexed family](https://en.wikipedia.org/wiki/Indexed_family)
 
 sequences
 

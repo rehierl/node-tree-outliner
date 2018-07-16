@@ -1,9 +1,14 @@
 
 <!-- ======================================================================= -->
-# References - computing
+# References - computer science
 
 * [ietf, (augmented) backus-naur form](https://tools.ietf.org/html/rfc5234)
 * [wikipedia, det fin automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
+
+sets
+
+* [wikipedia, disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+* [wikipedia, partition refinment](https://en.wikipedia.org/wiki/Partition_refinement)
 
 substrings
 

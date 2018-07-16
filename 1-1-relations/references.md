@@ -11,19 +11,24 @@ relations
 * [wikipedia, relation algebra](https://en.wikipedia.org/wiki/Relation_algebra)
 * [wikipedia, binary relation](https://en.wikipedia.org/wiki/Binary_relation)
 
-properties, operations
+properties
 
 * [wikipedia, euclidean relation](https://en.wikipedia.org/wiki/Euclidean_relation)
-* [wikipedia, inverse relation](https://en.wikipedia.org/wiki/Inverse_relation)
 * [wikipedia, equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation)
 * [wikipedia, tolerance relation](https://en.wikipedia.org/wiki/Tolerance_relation)
-* [wikipedia, converse relation](https://en.wikipedia.org/wiki/Converse_relation)
 * [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
+* [wikipedia, well-founded relation](https://en.wikipedia.org/wiki/Well-founded_relation)
+
+operations
+
+* [wikipedia, inverse relation](https://en.wikipedia.org/wiki/Inverse_relation)
+* [wikipedia, converse relation](https://en.wikipedia.org/wiki/Converse_relation)
 
 <!-- ======================================================================= -->
 ## References - order
 
 * [wikipedia, ranking](https://en.wikipedia.org/wiki/Ranking)
+* [wikipedia, min/max elements](https://en.wikipedia.org/wiki/Maximal_and_minimal_elements)
 
 order
 
@@ -57,6 +62,8 @@ order isomorphism
 
 <!-- ======================================================================= -->
 ## References - category theory
+
+* [wikipedia, coproduct](https://en.wikipedia.org/wiki/Coproduct)
 
 category theory
 
