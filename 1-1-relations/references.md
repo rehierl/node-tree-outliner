@@ -2,8 +2,6 @@
 <!-- ======================================================================= -->
 # References - relations
 
-mixed
-
 * [wikipedia, arity](https://en.wikipedia.org/wiki/Arity)
 * [wikipedia, domain theory](https://en.wikipedia.org/wiki/Domain_theory)
 
@@ -26,9 +24,7 @@ properties, operations
 <!-- ======================================================================= -->
 ## References - functions
 
-elements
-
-* [wikipedia, idempotent](https://en.wikipedia.org/wiki/Idempotence)
+* [wikipedia, magma](https://en.wikipedia.org/wiki/Magma_%28algebra%29)
 
 functions
 
@@ -37,10 +33,14 @@ functions
 * [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
 * [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
 
+particular elements
+
+* [wikipedia, idempotence](https://en.wikipedia.org/wiki/Idempotence)
+* [wikipedia, identity element](https://en.wikipedia.org/wiki/Identity_element)
+* [wikipedia, absorbing element](https://en.wikipedia.org/wiki/Absorbing_element)
+
 <!-- ======================================================================= -->
 ## References - order
-
-mixed, set-related
 
 * [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)
 * [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)

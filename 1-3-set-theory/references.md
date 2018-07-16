@@ -2,8 +2,6 @@
 <!-- ======================================================================= -->
 # References - hierarchies
 
-mixed
-
 * [wikipedia, hierarchy](https://en.wikipedia.org/wiki/Hierarchy)
 * [wikipedia, kinship terminology](https://en.wikipedia.org/wiki/Kinship_terminology)
 * [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)

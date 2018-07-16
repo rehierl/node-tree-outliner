@@ -2,8 +2,6 @@
 <!-- ======================================================================= -->
 # References - sequences
 
-mixed
-
 * [wikipedia, interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)
 
 sequences

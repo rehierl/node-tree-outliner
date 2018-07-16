@@ -2,8 +2,6 @@
 <!-- ======================================================================= -->
 # References - graph theory
 
-mixed
-
 * [wikipedia, discrete mathematics](https://en.wikipedia.org/wiki/Discrete_mathematics)
 * [wikipedia, list of algorithms](https://en.wikipedia.org/wiki/List_of_algorithms)
 * [wikipedia, linear extension](https://en.wikipedia.org/wiki/Linear_extension)

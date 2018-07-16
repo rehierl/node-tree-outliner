@@ -2,8 +2,6 @@
 <!-- ======================================================================= -->
 # References - mathematics
 
-mixed
-
 * [wikipedia, combinatorics](https://en.wikipedia.org/wiki/Combinatorics)
 
 syntax related
