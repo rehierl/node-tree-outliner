@@ -6,11 +6,11 @@
 ## wikipedia, classes in set theory
 
 * a collection of sets that can be unambiguously
-  defined by a property that all its members share
+  defined by a property that all its set members share
 * proper class - a class that is not a set
 * e.g. class of all ordinal numbers, class of all sets
 * small class - a class that is a set
-* sometimes "class" is used synonymous to "set"
+* sometimes "class" is used synonymously to "set"
 
 <!-- ======================================================================= -->
 ## wikipedia, equivalence classes

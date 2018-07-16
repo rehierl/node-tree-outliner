@@ -25,6 +25,24 @@ operations
 * [wikipedia, converse relation](https://en.wikipedia.org/wiki/Converse_relation)
 
 <!-- ======================================================================= -->
+## References - functions
+
+* [wikipedia, magma](https://en.wikipedia.org/wiki/Magma_%28algebra%29)
+
+functions
+
+* [wikipedia, function](https://en.wikipedia.org/wiki/Function_%28mathematics%29)
+* [wikipedia, predicate](https://en.wikipedia.org/wiki/Predicate_%28mathematical_logic%29)
+* [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
+* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
+
+particular elements
+
+* [wikipedia, idempotence](https://en.wikipedia.org/wiki/Idempotence)
+* [wikipedia, identity element](https://en.wikipedia.org/wiki/Identity_element)
+* [wikipedia, absorbing element](https://en.wikipedia.org/wiki/Absorbing_element)
+
+<!-- ======================================================================= -->
 ## References - order
 
 * [wikipedia, ranking](https://en.wikipedia.org/wiki/Ranking)
@@ -54,7 +72,6 @@ order structures/types
 
 order isomorphism
 
-* [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
 * [wikipedia, order type](https://en.wikipedia.org/wiki/Order_type)
 * [wikipedia, ordinal number](https://en.wikipedia.org/wiki/Ordinal_number)
 * [wikipedia, lexicographical order](https://en.wikipedia.org/wiki/Lexicographical_order)
@@ -68,29 +85,28 @@ order isomorphism
 category theory
 
 * [wikipedia, category theory](https://en.wikipedia.org/wiki/Category_theory)
-* [wikipedia, category](https://en.wikipedia.org/wiki/Category_%28mathematics%29)
-* [wikipedia, category of sets](https://en.wikipedia.org/wiki/Category_of_sets)
-* [wikipedia, functor](https://en.wikipedia.org/wiki/Functor)
+* [wikipedia, (abstract) category](https://en.wikipedia.org/wiki/Category_%28mathematics%29)
+* [wikipedia, concrete category](https://en.wikipedia.org/wiki/Concrete_category)
 
 morphism
 
 * [wikipedia, morphism](https://en.wikipedia.org/wiki/Morphism)
+* [wikipedia, monomorphism](https://en.wikipedia.org/wiki/Monomorphism)
 * [wikipedia, isomorphism](https://en.wikipedia.org/wiki/Isomorphism)
+* [wikipedia, automorphism](https://en.wikipedia.org/wiki/Automorphism)
+* [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
+* [wikipedia, graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism)
 
-<!-- ======================================================================= -->
-## References - functions
+particular categories
 
-* [wikipedia, magma](https://en.wikipedia.org/wiki/Magma_%28algebra%29)
+* [wikipedia, category of sets](https://en.wikipedia.org/wiki/Category_of_sets)
+* [wikipedia, category of relations](https://en.wikipedia.org/wiki/Category_of_relations)
+* [wikipedia, category of preordered sets](https://en.wikipedia.org/wiki/Category_of_preordered_sets)
+* [wikipedia, category of groups](https://en.wikipedia.org/wiki/Category_of_groups)
+* [wikipedia, category of topological spaces](https://en.wikipedia.org/wiki/Category_of_topological_spaces)
 
-functions
+functors
 
-* [wikipedia, function](https://en.wikipedia.org/wiki/Function_%28mathematics%29)
-* [wikipedia, predicate](https://en.wikipedia.org/wiki/Predicate_%28mathematical_logic%29)
-* [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
-* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
-
-particular elements
-
-* [wikipedia, idempotence](https://en.wikipedia.org/wiki/Idempotence)
-* [wikipedia, identity element](https://en.wikipedia.org/wiki/Identity_element)
-* [wikipedia, absorbing element](https://en.wikipedia.org/wiki/Absorbing_element)
+* [wikipedia, functor](https://en.wikipedia.org/wiki/Functor)
+* [wikipedia, forgetful functor](https://en.wikipedia.org/wiki/Forgetful_functor)
+* [wikipedia, fiathful functor](https://en.wikipedia.org/wiki/Full_and_faithful_functors)

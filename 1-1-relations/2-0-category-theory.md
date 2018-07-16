@@ -2,20 +2,17 @@
 <!-- ======================================================================= -->
 # Category Theory
 
+* ( highly abstract and unfinished content )
 * (x) is used as the composition operator
-
-<!-- ======================================================================= -->
-## wikipedia, category
-
-* category theory provides an alternative foundation for mathematics
-* objects and arrows may be abstract entities of any kind
 
 <!-- ======================================================================= -->
 ## wikipedia, category theory
 
 * category - structures in terms of labeled directed graphs
-* nodes represent objects and edges morphisms
-* compose arrows associatively, identity arrow exists
+* vertices represent objects and the arrows between them morphisms
+* category theory - also used as an axiomatic foundation for mathematics
+* the arrows can be composed associatively
+* the identity arrow exists
 
 basic concept
 
@@ -35,22 +32,19 @@ categories, objects, morphisms
 * a class is a collection of sets
 * obj(C) - a class whose elements are objects
 * hom(C) - a class whose elements are morphisms
-* (x) - an associative composition of morphisms
 
 morphisms
 
-* (f: a -> b)
-* (ab: a -> b), (ba: b -> a)
-* (ca: c -> a), (bc: b -> c)
+* (f: a -> b), (ab: a -> b), (ba: b -> a), (ca: c -> a), (bc: b -> c)
 * 1x - identity in x - i.e. yields the same x
 * mono-morphism - (f x ca1 = f x ca2) => (ca1 = ca2)
 * epi-morphism - (bc1 x f = bc2 x f) => (bc1 = bc2)
 * bi-morphism - a morphism that is a mono- and epi-morphism
-* iso-morphism - ba exists such that (f x ba = 1b) and (ba x f = 1a)
+* iso-morphism - a ba exists such that (f x ba = 1b) and (ba x f = 1a)
 * endo-morphism - (f: a -> a)
 * auto-morphism - morphism that is a endo- and iso-morphism
-* retraction - ba exists such that (f x g = 1b) - right inverse
-* section - ba exists such that (g x f = 1a) - left inverse
+* retraction - a ba exists such that (f x ba = 1b) - right inverse
+* section - a ba exists such that (ba x f = 1a) - left inverse
 
 clarification
 
