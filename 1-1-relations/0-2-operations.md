@@ -61,7 +61,7 @@ clarification
 clarification
 
 * reflexive transitive closure - smallest preorder containing `R`
-* i.e. transitive closure, then reflexive closure
+* note - first the transitive closure, then the reflexive closure
 * reflexive transitive symmetric closure - smallest equivalence relation
 
 <!-- ======================================================================= -->
@@ -96,7 +96,7 @@ clarification, if `(A == B)`
 ## restriction
 
 * `restrict(R), limit(R) := (R) -> S`
-* `limit(R) := (B,B,G)` such that `aRb` where `a, in B`
+* `limit(R) := (B,B,G)` such that `aRb` where `a in B`
 * i.e. restrict `R := (A,A,G)` to `B subset-of A`
 
 clarification

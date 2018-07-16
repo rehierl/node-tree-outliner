@@ -48,13 +48,15 @@ left-unique   right-unique   left-total   right-total
 
 * if `aRc` and `bRc`, then `(a == b)`
 * i.e. there is no `c` such that `aRc` and `bRc` for `(a != b)`
-* i.e. only one income - only one way to get to `c`
+* i.e. no two elements have the same outcome `y`
+* i.e. each `y` has no more than one income `x`
 
 ### right-unique, functional
 
 * if `aRc` and `aRd`, then `(c == d)`
 * i.e. there is no `a` such that `aRc` and `aRd` for `(c != d)`
-* i.e. only one outcome
+* i.e. no two elements that have the same income `x`
+* i.e. each `x` has no more than one outcome `y`
 
 ### left-total
 
@@ -77,29 +79,37 @@ left-unique   right-unique   left-total   right-total
 * `R := (A,A,G)`
 * must be homogenous?
 * endo-relation - binary and homogeneous
+* universal relation U - `(A x A)` or `{ aRb | (a,b in A) }`
+* identity relation I - `{ aRa | (a in A) }`
 
 ### reflexive
 
-* `aRa` for all `a in A`
+* `aRa` for all `(a in A)`
 * i.e. there is no `a` such that `!aRa`
 * i.e. any `a` is strictly related to itself
 * e.g. "is equal to"
 
 ### irreflexive, strict
 
-* `!aRa` for any `a`
+* no `aRa` for any `(a in A)`
 * i.e. there is no `a` such that `aRa`
-* i.e. no `a` is related to itself
 * e.g. "greater than"
 
 clarification
 
-* if `aRa` xor `!aRa` for some, but not all `a`
+* if `aRa` or `!aRa` for some `(a in A)`,
 * then neither reflexive nor irreflexive
 
 ### coreflexive
 
 * if `aRb`, then `(a == b)`
+* i.e. no `aRb` such that `(a != b)`
+* `(R subset-of I)` if `R` is coreflexive
+* e.g. "identical to"
+
+### quasi-reflexive
+
+* if `aRb`, then `aRa` and `bRb`
 
 ### symmetric
 
@@ -113,15 +123,15 @@ clarification
 
 ### anti-symmetric
 
-* if `aRb` for `(a != b)`, then `!bRa`
 * if `aRb` and `bRa`, then `(a == b)`
-* note - `aRa` is allowed, but not required
-* note - `aRa` does not count towards `aRb` and `bRa`
+* `aRa` is allowed, but not required
+* if `aRb` and `(a != b)`, then `!bRa`
 * e.g. "greater or equal"
 
 ### a-symmetric
 
 * if `aRb`, then `!bRa`
+* `aRa` is no longer allowed
 * e.g. "greater than"
 
 ### transitive
@@ -131,9 +141,16 @@ clarification
 
 ### connex
 
-* if `aRb` or `bRa` or both
-* i.e. any pair is comparable (i.e. total?)
-* also implies reflexivity
+* for any pair it holds that `aRb` or `bRa` or both
+* i.e. any pair is related/comparable - i.e. total ?
+* also, any connex relation is reflexive
+* originates from order theory
+
+### semi-connex
+
+* for any pair `(a != b)` it holds that `aRb` or `bRa`
+* note - `(!a -> b)` <=> `(a or b)` <=!=> `(a -> !b)`
+* `aRa` is allowed, but not required
 
 ### trichotomous
 
@@ -162,13 +179,11 @@ a |               | c
   d               b
 ```
 
-### right-euclidean, euclidean
+right-euclidean, euclidean
 
 * if `aRc` and `aRd`, then also `cRd`
-* unclear - and also `bRa` ?
 * e.g. "equality"
 
-### left-euclidean
+left-euclidean
 
 * if `aRc` and `bRc`, then also `aRb`
-* unclear - and also `bRa` ?

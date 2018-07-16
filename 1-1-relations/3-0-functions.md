@@ -2,14 +2,12 @@
 <!-- ======================================================================= -->
 # A functional perspective
 
-A functional perspective or relations:
+A functional perspective of relations:
 
 * some relations can be understood to define functions
 * e.g. `G(R) = (A X B)` => `f : A -> B`
-* e.g. `G(R) = xT^n` => `f: xT^(n-1) -> Tn`
-* a function `f` is a special kind of relation
-* however, this perspective is of no interest here
-* of interest is, that `R` represents a set of tuples/sequences
+* e.g. `G(R) = XT^n` => (e.g.) `f: XT^(n-1) -> Tn`
+* functions `f` are special kinds of relations
 
 <!-- ======================================================================= -->
 ## characteristics
@@ -17,8 +15,8 @@ A functional perspective or relations:
 clarification
 
 * function - right-unique and left-total
-* injective function - unique and left-total
-* surjective function - right-unique and total
+* injective - unique and left-total
+* surjective - right-unique and total
 * bijection - unique and total
 
 clarification
@@ -26,7 +24,7 @@ clarification
 * partial function - `f` is undefined for some `a in A`
 * total function - `f` is defined for any `a in A`
 * if partial, then total with regards to some strict-subset-of `A`
-* not surjective -> `img(f) strict-subset-of B`, i.e. (image != codomain)
+* surjective -> (image == codomain)
 
 monotonic function
 

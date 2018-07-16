@@ -23,6 +23,13 @@ properties, operations
 * [wikipedia, converse relation](https://en.wikipedia.org/wiki/Converse_relation)
 * [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
 
+<!-- ======================================================================= -->
+## References - functions
+
+elements
+
+* [wikipedia, idempotent](https://en.wikipedia.org/wiki/Idempotence)
+
 functions
 
 * [wikipedia, function](https://en.wikipedia.org/wiki/Function_%28mathematics%29)
@@ -32,10 +39,6 @@ functions
 
 <!-- ======================================================================= -->
 ## References - order
-
-mixed
-
-* [wikipedia, lexicographical order](https://en.wikipedia.org/wiki/Lexicographical_order)
 
 mixed, set-related
 
@@ -67,8 +70,23 @@ order structures/types
 
 order isomorphism
 
-* [wikipedia, isomorphism](https://en.wikipedia.org/wiki/Isomorphism)
-* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
 * [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
 * [wikipedia, order type](https://en.wikipedia.org/wiki/Order_type)
 * [wikipedia, ordinal number](https://en.wikipedia.org/wiki/Ordinal_number)
+* [wikipedia, lexicographical order](https://en.wikipedia.org/wiki/Lexicographical_order)
+* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
+
+<!-- ======================================================================= -->
+## References - category theory
+
+category theory
+
+* [wikipedia, category theory](https://en.wikipedia.org/wiki/Category_theory)
+* [wikipedia, category](https://en.wikipedia.org/wiki/Category_%28mathematics%29)
+* [wikipedia, category of sets](https://en.wikipedia.org/wiki/Category_of_sets)
+* [wikipedia, functor](https://en.wikipedia.org/wiki/Functor)
+
+morphism
+
+* [wikipedia, morphism](https://en.wikipedia.org/wiki/Morphism)
+* [wikipedia, isomorphism](https://en.wikipedia.org/wiki/Isomorphism)

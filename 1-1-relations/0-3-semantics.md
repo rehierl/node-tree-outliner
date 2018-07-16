@@ -8,10 +8,10 @@
 
 examples
 
-* `parent-of` <=> `child-of`
-* `contains` <=> `element-of`
-* `superset-of` <=> `subset-of`
-* `supersequence-of` <=> `subsequence-of`
+* parent-of <=> child-of
+* contains <=> element-of
+* super-set-of <=> sub-set-of
+* super-sequence-of <=> sub-sequence-of
 
 <!-- ======================================================================= -->
 ## inverse (',inv)
@@ -54,7 +54,7 @@ examples for `R in (A X B)`
 
 * `a` knows `b`
 * `a` is smaller than `b`
-* `a` is presequent to `b`
+* `a` is pre-sequent to `b`
 * `a` contains `b`
 * `a` is an element of `b`
 * `a` is a subset of `b`

@@ -4,8 +4,7 @@
 
 isomorphism (A -> B)
 
-* a mathematical mapping that can be reversed
-* reversed by an inverse morphism
+* a mapping that can be reversed by an inverse morphism
 * objects are isomorphic, if an isomorphism exists
 * isomorphic objects appear to be "essentially equal"
 * automorphism - (A -> A)
