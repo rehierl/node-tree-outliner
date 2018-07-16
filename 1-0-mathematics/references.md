@@ -9,7 +9,6 @@ syntax related
 * [wikipedia, backus-naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
 * [wikipedia, augmented backus-naur form](https://en.wikipedia.org/wiki/Augmented_Backus%E2%80%93Naur_form)
 * [wikipedia, regular expressions](https://en.wikipedia.org/wiki/Regular_expression)
-* [ietf, (augmented) backus-naur form](https://tools.ietf.org/html/rfc5234)
 
 logic/boolean
 
@@ -23,11 +22,7 @@ sets/multisets
 
 * [wikipedia, multiset](https://en.wikipedia.org/wiki/Multiset)
 * [wikipedia, set](https://en.wikipedia.org/wiki/Set_%28mathematics%29)
-* [wikipedia, set theory](https://en.wikipedia.org/wiki/Set_theory)
 * [wikipedia, subset](https://en.wikipedia.org/wiki/Subset)
-* [wikipedia, power set](https://en.wikipedia.org/wiki/Power_set)
-* [wikipedia, venn diagram](https://en.wikipedia.org/wiki/Venn_diagram)
-* [wikipedia, euler diagram](https://en.wikipedia.org/wiki/Euler_diagram)
 
 sequences
 

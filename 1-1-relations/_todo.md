@@ -1,5 +1,5 @@
 
 <!-- ======================================================================= -->
-# TODOs
+# TODO
 
-a connex partial order is total
+* a connex partial order is total

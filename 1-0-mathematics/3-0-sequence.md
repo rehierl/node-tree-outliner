@@ -2,6 +2,11 @@
 <!-- ======================================================================= -->
 # Sequences
 
+( See "sequences" for in-depth discussions on sequences ) 
+
+<!-- ======================================================================= -->
+## core concept
+
 * values may be grouped into sequences of values
 * sequences are complex values
 

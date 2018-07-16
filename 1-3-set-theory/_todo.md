@@ -1,8 +1,6 @@
 
-**TODO** - (open aspects)
-
 <!-- ======================================================================= -->
-# TODOs
+# TODO
 
 * "That is because" => "That is because"
 * are length values similar to rank values?

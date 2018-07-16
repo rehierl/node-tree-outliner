@@ -1,6 +1,11 @@
 
 <!-- ======================================================================= -->
-# A (simple) set of values (ss)
+# A (simple) set of values
+
+( For in-depth discussions on sets, see "set theory" )
+
+<!-- ======================================================================= -->
+## core concept
 
 * values may be grouped into (simple) sets of values
 * hint: "simple" because "not ordered"

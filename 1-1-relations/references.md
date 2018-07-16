@@ -17,33 +17,12 @@ properties, operations
 * [wikipedia, inverse relation](https://en.wikipedia.org/wiki/Inverse_relation)
 * [wikipedia, equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation)
 * [wikipedia, tolerance relation](https://en.wikipedia.org/wiki/Tolerance_relation)
-* [wikipedia, kinship relations](https://en.wikipedia.org/wiki/Kinship)
 * [wikipedia, converse relation](https://en.wikipedia.org/wiki/Converse_relation)
 * [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
 
 <!-- ======================================================================= -->
-## References - functions
-
-* [wikipedia, magma](https://en.wikipedia.org/wiki/Magma_%28algebra%29)
-
-functions
-
-* [wikipedia, function](https://en.wikipedia.org/wiki/Function_%28mathematics%29)
-* [wikipedia, predicate](https://en.wikipedia.org/wiki/Predicate_%28mathematical_logic%29)
-* [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
-* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
-
-particular elements
-
-* [wikipedia, idempotence](https://en.wikipedia.org/wiki/Idempotence)
-* [wikipedia, identity element](https://en.wikipedia.org/wiki/Identity_element)
-* [wikipedia, absorbing element](https://en.wikipedia.org/wiki/Absorbing_element)
-
-<!-- ======================================================================= -->
 ## References - order
 
-* [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)
-* [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
 * [wikipedia, ranking](https://en.wikipedia.org/wiki/Ranking)
 
 order
@@ -90,3 +69,21 @@ morphism
 
 * [wikipedia, morphism](https://en.wikipedia.org/wiki/Morphism)
 * [wikipedia, isomorphism](https://en.wikipedia.org/wiki/Isomorphism)
+
+<!-- ======================================================================= -->
+## References - functions
+
+* [wikipedia, magma](https://en.wikipedia.org/wiki/Magma_%28algebra%29)
+
+functions
+
+* [wikipedia, function](https://en.wikipedia.org/wiki/Function_%28mathematics%29)
+* [wikipedia, predicate](https://en.wikipedia.org/wiki/Predicate_%28mathematical_logic%29)
+* [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
+* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
+
+particular elements
+
+* [wikipedia, idempotence](https://en.wikipedia.org/wiki/Idempotence)
+* [wikipedia, identity element](https://en.wikipedia.org/wiki/Identity_element)
+* [wikipedia, absorbing element](https://en.wikipedia.org/wiki/Absorbing_element)

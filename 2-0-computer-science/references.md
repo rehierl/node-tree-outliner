@@ -2,6 +2,7 @@
 <!-- ======================================================================= -->
 # References - computing
 
+* [ietf, (augmented) backus-naur form](https://tools.ietf.org/html/rfc5234)
 * [wikipedia, det fin automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
 
 substrings

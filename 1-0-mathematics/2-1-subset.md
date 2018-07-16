@@ -3,18 +3,6 @@
 # Subset
 
 <!-- ======================================================================= -->
-## power set
-
-* `A := { 1, 2 }`
-* `P(A) := { {}, {1}, {2}, {1,2} }`
-* `P(A)` is the set of all subsets in `A`
-
-clarification
-
-* `P(A)` always contains the empty set `{}`
-* `#P(A) = 2^N = 8`, if `#A = N = 3`
-
-<!-- ======================================================================= -->
 ## V subset-of W
 
 * `(V subset-of W) := (v in W) for any (v in V)`
