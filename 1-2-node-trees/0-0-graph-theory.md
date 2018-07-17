@@ -187,6 +187,13 @@ mixed
 * i.e. a graph is a partition of components
 
 <!-- ======================================================================= -->
+## wikipedia, induced subgraph
+
+* formed from a subset of vertices and all the corresponding edges
+* i.e. the edges connect vertices within the subset
+* i.e. no edge leads outwards
+
+<!-- ======================================================================= -->
 ## classification
 
 * multigraph - `E` is a multiset

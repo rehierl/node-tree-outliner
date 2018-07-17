@@ -1,7 +1,7 @@
 
 **needs substantial editing**
 
-This folder is intended to hold aspects related to sequences of elements.
+This content is intended to hold aspects related to sequences of elements.
 
 ordered tree <=> hierarchy of sequences
 

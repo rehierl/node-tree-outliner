@@ -57,7 +57,8 @@ reading material, which is literally available to anyone on this planet.
 I write in pure text form. This means that I currently do not pay much attention
 to what it will look like, if the contents are displayed (e.g. inside of a web
 browser). If documents are difficult, if not impossible to read, then try the
-source view.
+source view. The best way to read the documents in this repository would be to
+download it and use a multi-tab text editor.
 
 **Note** -
 The whole issue is quite abstract. It is anything but easy to wrap my head

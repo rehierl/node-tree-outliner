@@ -9,6 +9,7 @@ sets
 
 * [wikipedia, disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
 * [wikipedia, partition refinment](https://en.wikipedia.org/wiki/Partition_refinement)
+* [wikipedia, nested set model](https://en.wikipedia.org/wiki/Nested_set_model)
 
 substrings
 

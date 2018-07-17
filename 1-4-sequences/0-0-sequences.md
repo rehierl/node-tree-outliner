@@ -2,4 +2,7 @@
 <!-- ======================================================================= -->
 # Sequences
 
-( See "mathematics" for the core concept of sequences )
+* See "mathematics" for the core concept of sequences.
+
+<!-- ======================================================================= -->
+## TODO

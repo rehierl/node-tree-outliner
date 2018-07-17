@@ -2,7 +2,8 @@
 <!-- ======================================================================= -->
 # Set theory
 
-( See "mathematics" for the core concept of sets )
+* See "mathematics" for the core concept of sets.
+* See "relations" for "ordered sets".
 
 <!-- ======================================================================= -->
 ## wikipedia, set theory
@@ -12,11 +13,13 @@
 * xRs - holds if x is an element of s
 * subset relation - aka. set inclusion
 
-pure/hereditary sets
+hereditary sets
 
+* aka. pure sets, nested sets
 * a set whose elements are all hereditary sets
-* all elements are themselves sets, as are all elements of the elements
-* i.e. never any non-set elements?
+* all elements are themselves sets
+* all elements of the elements are sets
+* i.e. never any non-set element
 
 urelement
 
@@ -42,6 +45,27 @@ objections to set theory as foundation of mathematics
 
 * issue - introduces non-computable objects
 * e.g. infinite sets
+
+<!-- ======================================================================= -->
+## wikipedia, countable set
+
+* countable - a subset of the set of natural number exists
+  such that both sets have the same cardinality
+* i.e. associate any element with a unique natural number
+* countable - finite or countably infinite
+
+definition
+
+* (f: S -> N)
+* countable if (f) exists such that (f) is injective
+* countably infinite if (f) is bijective
+
+total/well order
+
+* can be totally ordered in various ways
+* well-orders (see ordinal numbers) - natural numbers, least element
+* other - integers, not guaranteed to have a least element
+* key definition of whether a total order is also a well order
 
 <!-- ======================================================================= -->
 ## wikipedia, finite set
@@ -100,18 +124,26 @@ refinement of partitions
 * (v <= w) - a finer-than relation on the set of partitions of X
 
 <!-- ======================================================================= -->
-## wikipedia, von neumann universe V
+## wikipedia, venn/euler diagrams
 
-* aka. von-neumann-hierarchy-of-sets
-* the class of hereditary well-founded sets
-* formalized by the Zermelo-Fraenkel set theory (ZFC)
+venn diagrams
 
-rank of a well-founded set
+* aka. primary/set/logic diagram
+* sets as regions inside closed curves/borders
+* shows all logical relations between different sets
+* i.e. must contain all 2^n possible regions
+* curves are overlapped in every possible way
+* i.e. venn diagrams display all regions
+* requires different shapes for more than 3 sets
+* e.g. ellipses for 4,5,6 sets
+* e.g. 3-D - four intersecting spheres
 
-* smallest ordinal number greater than the ranks of all members
-* rank of the empty set is 0
-* cumulative hierarchy Va - all sets divided/grouped based on their rank
-* Va - all sets having rank less than a
-* sets Va - called stages or ranks
+euler diagrams
 
-(cancelled)
+* a diagrammatic means to visualize sets and their relationships
+* like venn diagrams - via overlapping shapes
+* unlike venn diagrams - limited to relevant relationships
+* only 3 relationships possible
+* 1 - completely inclusive - subset
+* 2 - partially inclusive - overlap
+* 3 - exclusive - disjoint

@@ -16,7 +16,11 @@ subsequence
 
 * [wikipedia, infix](https://en.wikipedia.org/wiki/Infix)
 * [wikipedia, substring](https://en.wikipedia.org/wiki/Substring)
+* [wikipedia, subsequence](https://en.wikipedia.org/wiki/Subsequence)
+
+intervals
+
 * [wikipedia, interval](https://en.wikipedia.org/wiki/Interval_%28mathematics%29)
 * [wikipedia, region](https://en.wikipedia.org/wiki/Region_%28mathematics%29)
 * [wikipedia, range](https://en.wikipedia.org/wiki/Range_%28mathematics%29)
-* [wikipedia, subsequence](https://en.wikipedia.org/wiki/Subsequence)
+* [wikipedia, nested intervals](https://en.wikipedia.org/wiki/Nested_intervals)

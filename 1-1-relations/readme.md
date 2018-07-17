@@ -1,5 +1,5 @@
 
-This folder contains an overview of relations, orders and categories:
+This content contains an overview of relations, orders and categories:
 
 * The **semantics of a relation** associate meaning with its tuples.
 * An **ordered set** is a simple set paired with an order relation.

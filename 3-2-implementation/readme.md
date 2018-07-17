@@ -1,2 +1,2 @@
 
-This chapter is intended to clarify implementation specific aspects.
+This content is intended to clarify implementation specific aspects.

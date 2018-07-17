@@ -20,6 +20,7 @@ graph related
 * [wikipedia, path](https://en.wikipedia.org/wiki/Path_%28graph_theory%29)
 * [wikipedia, hamilton path](https://en.wikipedia.org/wiki/Hamiltonian_path)
 * [wikipedia, connectivity](https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29)
+* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
 
 graph related
 
@@ -30,14 +31,7 @@ graph related
 * [wikipedia, polytree](https://en.wikipedia.org/wiki/Polytree)
 
 <!-- ======================================================================= -->
-## References - hierarchies, node trees
-
-hierarchies
-
-* [wikipedia, kinship terminology](https://en.wikipedia.org/wiki/Kinship_terminology)
-* [wikipedia, hierarchy](https://en.wikipedia.org/wiki/Hierarchy)
-* [wikipedia, superior (hierarchy)](https://en.wikipedia.org/wiki/Superior_%28hierarchy%29)
-* [wikipedia, nested sets](https://en.wikipedia.org/wiki/Nested_set_model)
+## References - node trees
 
 node trees
 
