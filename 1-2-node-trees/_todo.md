@@ -5,6 +5,7 @@
 <!-- ======================================================================= -->
 ## add to core definitions
 
+* (similar to set-of-sets)
 * related vs. unrelated nodes
 * define "related nodes"
 * instead of "one is an ancestor of the other"

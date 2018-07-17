@@ -4,6 +4,7 @@
 
 * [wikipedia, topology](https://en.wikipedia.org/wiki/Topology)
 * [wikipedia, model theory](https://en.wikipedia.org/wiki/Model_theory)
+* [wikipedia, taxonomy](https://en.wikipedia.org/wiki/Taxonomy_%28general%29)
 
 <!-- ======================================================================= -->
 ## References - hierarchy
@@ -12,7 +13,12 @@ hierarchy
 
 * [wikipedia, heterarchy](https://en.wikipedia.org/wiki/Heterarchy)
 * [wikipedia, hierarchy](https://en.wikipedia.org/wiki/Hierarchy)
-* [wikipedia, superior (hierarchy)](https://en.wikipedia.org/wiki/Superior_%28hierarchy%29)
+
+visualization
+
+* [wikipedia, visual hierarchy](https://en.wikipedia.org/wiki/Visual_hierarchy)
+* [wikipedia, treemapping](https://en.wikipedia.org/wiki/Treemapping)
+* [wikipedia, radial tree](https://en.wikipedia.org/wiki/Radial_tree)
 
 hierarchy in maths
 
