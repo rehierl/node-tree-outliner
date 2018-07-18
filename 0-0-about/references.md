@@ -6,6 +6,11 @@
 * [wikipedia, model theory](https://en.wikipedia.org/wiki/Model_theory)
 * [wikipedia, taxonomy](https://en.wikipedia.org/wiki/Taxonomy_%28general%29)
 
+mnemonics
+
+* [wikipedia, mnemonic](https://en.wikipedia.org/wiki/Mnemonic)
+* [wikipedia, art of memory](https://en.wikipedia.org/wiki/Art_of_memory)
+
 <!-- ======================================================================= -->
 ## References - hierarchy
 

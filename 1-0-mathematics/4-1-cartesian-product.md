@@ -2,6 +2,7 @@
 <!-- ======================================================================= -->
 # Cartesian product
 
+* short - cart-product
 * `X` represents the Cartesian product operator
 * note the upper-case/capitalized letter 'X'
 

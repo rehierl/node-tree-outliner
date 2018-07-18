@@ -1,31 +1,43 @@
 
 <!-- ======================================================================= -->
-# Special types of orders
+# Temporary
 
-This is me trying to wrap my head around the classification of orders. The best
-course of action seems to be to (1) pick an order, (2) determine its properties,
-and (3) let others do the proper classification ...
+* cyclic
+* lattices
+* preorders
+* semiorders
+* weak orders
+* well-orders
+* well-quasi-orders
 
-Note that, in the course of this whole discussion, the focus will be on "linear
-orders of nodes" which are the result of some previous tree traversal.
+<!-- ======================================================================= -->
+## wikipedia, interval order
 
-```
-(note                - all are transitive (=x), y)
-(total) pre-order    - x, reflexive
-equivalence relation - symmetric pre-order
-partial order        - anti-symmetric pre-order
-strict partial order - x, a-symmetric
-strict weak order    - x, a-symmetric
-partial equivalence  - x, symmetric
-```
+* a collection of intervals on the real numbers
+* a partial order that corresponds to the left-to-right precedence relation
+* i.e. (l1 < l2) => l1 is completely left of l2
 
-* total/simple/linear/chain order - a total partial order
-* A "total preorder" or "weak order" is a preorder that is total!
+formally
 
-clarification
+* a poset P := (X,<=)
+* a bijection (f: X -> (l,r)) exists
+* (xi < xj) in P when (ri < lj)
 
-* a "strict weak order" is a "strict partial order" plus properties (total?)
-* none of those two are pre-orders (irreflexive)
+remarks
+
+* unit-length intervals - i.e. (i,i+1)
+* semiorders - subclass of intervall orders if unit-length intervals
+* interval graph - the complement of the interval-order's comparability graph
+
+<!-- ======================================================================= -->
+## wikipedia, semiorder
+
+* a type of ordering
+* determined for a set of items with numerical scores
+* two items are incomparable if their scores are too close
+* i.e. within a margin of error to each other
+* generalize strict-weak-orderings
+* from a special case of partial-orders and interval-orders
 
 <!-- ======================================================================= -->
 ## Preorder, quasiorder
@@ -82,14 +94,6 @@ axiomatized/formalized
 
 * A "total preorder" or "weak order" is a preorder that is total!
 * partition + total order => an ordered partition (aka. list of sets)
-
-<!-- ======================================================================= -->
-## Total order
-
-* linear order, total order, simple order, (non-strict) ordering
-* => transitive, anti-symmetric, connex
-* totally ordered set, linearly ordered set, simply ordered set, chain
-* => a set paired with such an order
 
 <!-- ======================================================================= -->
 ## Lattice order

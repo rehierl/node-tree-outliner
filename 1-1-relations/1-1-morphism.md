@@ -55,4 +55,4 @@ endo-morphism, auto-morphism
 * a mapping that can be reversed by an inverse morphism
 * two objects are isomorphic, if an isomorphism exists
 * isomorphic objects appear to be "essentially equal"
-* isomorphic objects may be considered the same
+* isomorphic objects may even be considered the same

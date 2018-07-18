@@ -84,6 +84,7 @@ left-unique   right-unique   left-total   right-total
 
 ### reflexive
 
+* "all loops"
 * `aRa` for all `(a in A)`
 * i.e. there is no `a` such that `!aRa`
 * i.e. any `a` is strictly related to itself
@@ -91,6 +92,7 @@ left-unique   right-unique   left-total   right-total
 
 ### irreflexive, strict
 
+* "no loops"
 * no `aRa` for any `(a in A)`
 * i.e. there is no `a` such that `aRa`
 * e.g. "greater than"
@@ -102,6 +104,7 @@ clarification
 
 ### coreflexive
 
+* "only loops"
 * if `aRb`, then `(a == b)`
 * i.e. no `aRb` such that `(a != b)`
 * `(R subset-of I)` if `R` is coreflexive
@@ -109,10 +112,12 @@ clarification
 
 ### quasi-reflexive
 
+* "related with loops"
 * if `aRb`, then `aRa` and `bRb`
 
 ### symmetric
 
+* "undirectional, non-strict - possible loops"
 * if `aRb`, then also `bRa`
 * i.e. no strict orientation/direction
 * e.g. "is equal to"
@@ -123,6 +128,7 @@ clarification
 
 ### anti-symmetric
 
+* "directional, non-strict - possible loops"
 * if `aRb` and `bRa`, then `(a == b)`
 * `aRa` is allowed, but not required
 * if `aRb` and `(a != b)`, then `!bRa`
@@ -130,6 +136,7 @@ clarification
 
 ### a-symmetric
 
+* "directional, strict - no loops"
 * if `aRb`, then `!bRa`
 * `aRa` is no longer allowed
 * e.g. "greater than"
@@ -141,6 +148,7 @@ clarification
 
 ### connex
 
+* "all related - all loops"
 * for any pair it holds that `aRb` or `bRa` or both
 * i.e. any pair is related/comparable - i.e. total ?
 * also, any connex relation is reflexive
@@ -148,14 +156,15 @@ clarification
 
 ### semi-connex
 
+* "all related, non-strict - possible loops"
 * for any pair `(a != b)` it holds that `aRb` or `bRa`
 * note - `(!a -> b)` <=> `(a or b)` <=!=> `(a -> !b)`
 * `aRa` is allowed, but not required
 
 ### trichotomous
 
+* "all related, strict - no loops"
 * if `aRb` xor `bRa` xor `(a == b)`
-* i.e. if `(a == b)`, then `!aRb` and `!bRa`
 * i.e. `!aRa` for any `a` => irreflexive
 * e.g. "greater than"
 
@@ -201,4 +210,4 @@ left-euclidean
 * relation over a set X
 * a well-founded relation on a class X is a binary relation R
 * if every non-empty subset (S subset-of X) has a minimal element in R
-* i.e. an element m not related by sRm
+* i.e. an element m unrelated by sRm
