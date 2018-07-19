@@ -1,0 +1,62 @@
+
+<!-- ======================================================================= -->
+# order - characteristics
+
+* issue - no strict/consistent naming convention
+* i.e. probably due to a "naturally" grown system of names
+* i.e. semantics of partial/strict/total seems mixed
+
+```
+preorder             - reflexive, transitive
+equivalence relation - symmetric preorder
+partial-order        - anti-symmetric preorder
+total-order          - connex partial-order
+```
+
+* partial - some in-comparable pairs
+* total - no in-comparable pairs
+* comparable - if (a op b) or (b op a)
+* incomparable - if neither (a <= b) nor (b <= a)
+* note - equal items are incomparable under (<)
+* note - transitivity of incomparability
+* covered - no 3rd element in between
+* precedes - there may be elements in between
+
+```
+partial equivalence relation - symmetric, transitive
+strict weak order            - strict partial order
+strict weak order            - asymmetric preorder
+strict partial order         - asymmetric preorder
+```
+
+* strict - irreflexive, no loops
+* not including reflexivity - i.e. may still be reflexive
+
+<!-- ======================================================================= -->
+## order - summary
+
+* pre-order - almost an order, but not quite
+* equivalence relation - a partition of a set
+* partial order - may hold in-comparable elements
+* antichain - a subset of a poset such that all pairs are in-comparable
+* total/linear/chain order - a poset such that all pairs are comparable
+
+classification by
+
+* comparability - all/some/none incomparable
+* reflexivity/strictness - all/some/none related to themselves
+* directed/weakness/symmetry - all/some/none relationships directed
+
+extended orders
+
+* well order - 
+* weak order - may contain ties/equals
+* lattices - each pair has a greatest-lower and a least-upper bound
+
+transform
+
+* product order - induce a partial ordering on the cart-product
+* linear extension - make all pairs comparable - partial-to-total
+* order type - same type if isomorphic
+* order isomorphism - an isomorphic mapping exists
+* order embedding - one order embedded into another

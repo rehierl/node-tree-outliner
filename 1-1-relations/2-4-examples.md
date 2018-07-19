@@ -5,7 +5,31 @@
 * i.e. examples of particular orders
 
 <!-- ======================================================================= -->
-## Abstract ordering
+## Number-based orders
+
+### wikipedia, cardinal number
+
+* cardinals, cardinal numbers - generalization of natural numbers
+* used to measure the cardinality/size of sets
+
+### wikipedia, ordinal number
+
+* ordinal, ordinal number - generalization of natural numbers
+* used to arrange a collection of objects one after another
+* i.e. label the objects with distinct numbers
+* used to describe the order-type of well-ordered sets
+
+characteristic
+
+* trichotomy - (a < b) xor (a > b) xor (a = b)
+* transitive - (a < b) and (b < c) then (a < c)
+* well-founded - every non-empty subset has a least element
+
+### wikipedia, transfinite number
+
+* numbers larger than all finite numbers
+* not necessarily absolutely infinite
+* transfinite cardinals and ordinals
 
 ### wikipedia, ranking
 
@@ -43,7 +67,7 @@
 * sum of rankings is the same under ordinal ranking
 
 <!-- ======================================================================= -->
-## Sequence-based ordering
+## Sequence-based orders
 
 ### wikipedia, alphabetical order
 
@@ -93,7 +117,50 @@ definition - lexicographic order
 * e.g. system for representing numbers
 
 <!-- ======================================================================= -->
-## Social ordering
+## Other orders
+
+### wikipedia, interval order
+
+* a collection of intervals on the real numbers
+* a partial order that corresponds to the left-to-right precedence
+* i.e. (l1 < l2) => l1 is completely left of l2
+
+formally
+
+* a poset P := (X,<=)
+* a bijection (f: X -> (L,R)) exists such that
+* (xi < xj) in P when (Ri < Lj)
+
+remarks
+
+* unit-length intervals - i.e. (i,i+1)
+* semiorders - subclass of interval orders in case of unit-length intervals
+* interval graph - the complement of the interval-order's comparability graph
+
+**TODO** - interval dimension
+**TODO** - combinatorics
+
+### wikipedia, containment order
+
+* a poset that results from the subset-containment
+* every poset is isomorphic to a containment order
+
+remarks
+
+* given poset a P = (X,<=)
+* associate to each (b in X) the set
+* X(b) = { a | (a <= b) for (a in X) }
+* transitivity ensures that
+* (X(a) subset-of X(b)) if (a <= b)
+
+remarks
+
+* serveral important poset classes arise as containment orders
+* e.g. interval-containment-orders (note - not the same as interval-order)
+* e.g. circle-orders - disks in the plane
+
+<!-- ======================================================================= -->
+## Social orders
 
 ### wikipedia, order of battle
 

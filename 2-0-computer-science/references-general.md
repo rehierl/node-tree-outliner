@@ -43,3 +43,5 @@ complexity
 * [wikipedia, p vs. np problem](https://en.wikipedia.org/wiki/P_versus_NP_problem)
 * [wikipedia, np-completeness](https://en.wikipedia.org/wiki/NP-completeness)
 * [wikipedia, time complexity](https://en.wikipedia.org/wiki/Time_complexity)
+* [wikipedia, many-one reduction](https://en.wikipedia.org/wiki/Many-one_reduction)
+* [wikipedia, turing reduction](https://en.wikipedia.org/wiki/Turing_reduction)
