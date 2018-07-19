@@ -7,23 +7,17 @@
 implications
 
 * strict <-> irreflexive
+* a-symmetric <-> irreflexive, anti-symmetric
 * transitive, symmetric, serial -> reflexive
 * transitive, asymmetric -> irreflexive
 * transitive, irreflexive -> asymmetric
 
-a-symmetric vs. irreflexive, anti-symmetric
+a relation has only one set of tuples and one "semantics"
 
-* a-symmetric -> irreflexive, anti-symmetric
-* a-symmetric <?- irreflexive, anti-symmetric
-* i.e. (<->) or only (->) ?
-
-a relation has only on set of tuples and one "semantics" only
-
-* tuples manifest the semantics of relation `R`
-* a relation has one semantics/statement only
+* tuples manifest the semantics of a relation
 * e.g. "<" xor "<=" xor "==" xor ">=" xor ">"
-* if (sem(R) := "<") and ((a,b) !in R), then (a,b) is undecided - a tie
-* i.e. not automatically ">=" - in that R, ">=" is "undefined"
+* if (sem(R) := "<") and (!aRb and !bRa), then (a,b) is undecided - a tie
+* i.e. not automatically "==" because "==" is "undefined"
 
 <!-- ======================================================================= -->
 ## types
@@ -168,12 +162,27 @@ clarification
 * i.e. `!aRa` for any `a` => irreflexive
 * e.g. "greater than"
 
-### serial
+<!-- ======================================================================= -->
+## serial
 
 * for any `a`, there is a `b` such that `aRb`
-* e.g. intervals (open or closed) combined with (<) or (<=)
-* e.g. in `[*,1]` there is no `n` such that `(1 < n)`
-* e.g. in `[1,*]` there is no `n` such that `(n < 1)` - not required?
+* e.g. intervals (open or closed) equipped with (<) or (<=)
+* e.g. `R := ([1,*],<)` - serial - there always is a greater element
+* e.g. `R := ([1,*],>)` - not serial - no `n` such that `(n < 1)`
+
+<!-- ======================================================================= -->
+## well-founded relation
+
+* relation over a set X is well-founded, if
+* every non-empty subset (S subset-of X) has a minimal element in R
+* i.e. an element m unrelated by sRm
+
+<!-- ======================================================================= -->
+## set-like/local relation
+
+* relation over a set X
+* for every (x in X), the class of all (y in X) such that yRx is a set
+* e.g. the usual ordering (<) on the class of ordinal numbers is set-like
 
 <!-- ======================================================================= -->
 ## "euclidean" property
@@ -196,18 +205,3 @@ right-euclidean, euclidean
 left-euclidean
 
 * if `aRc` and `bRc`, then also `aRb`
-
-<!-- ======================================================================= -->
-## set-like/local relation
-
-* relation over a set X
-* for every (x in X), the class of all (y in X) such that yRx is a set
-* e.g. the usual ordering < on the class of ordinal numbers is set-like
-
-<!-- ======================================================================= -->
-## well-founded relation
-
-* relation over a set X
-* a well-founded relation on a class X is a binary relation R
-* if every non-empty subset (S subset-of X) has a minimal element in R
-* i.e. an element m unrelated by sRm

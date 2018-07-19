@@ -3,12 +3,12 @@
 # References - computer science
 
 * [ietf, (augmented) backus-naur form](https://tools.ietf.org/html/rfc5234)
-* [wikipedia, det fin automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
+* [wikipedia, DFA](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
 
 sets
 
 * [wikipedia, disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
-* [wikipedia, partition refinment](https://en.wikipedia.org/wiki/Partition_refinement)
+* [wikipedia, partition refinement](https://en.wikipedia.org/wiki/Partition_refinement)
 * [wikipedia, nested set model](https://en.wikipedia.org/wiki/Nested_set_model)
 
 substrings

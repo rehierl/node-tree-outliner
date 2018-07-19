@@ -18,6 +18,12 @@ order structures
 * [wikipedia, partial order](https://en.wikipedia.org/wiki/Partially_ordered_set)
 * [wikipedia, total order](https://en.wikipedia.org/wiki/Total_order)
 
+more order structures
+
+* [wikipedia, anti-chain](https://en.wikipedia.org/wiki/Antichain)
+* [wikipedia, weak ordering](https://en.wikipedia.org/wiki/Weak_ordering)
+* [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
+
 equivalence order/relation
 
 * [wikipedia, partial equivalence relation](https://en.wikipedia.org/wiki/Partial_equivalence_relation)
@@ -27,22 +33,12 @@ equivalence order/relation
 
 transformations/operations on orders
 
+* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
 * [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
 * [wikipedia, (same) order type](https://en.wikipedia.org/wiki/Order_type)
 * [wikipedia, product order](https://en.wikipedia.org/wiki/Product_order)
 * [wikipedia, linear extension](https://en.wikipedia.org/wiki/Linear_extension)
 * [wikipedia, order embedding](https://en.wikipedia.org/wiki/Order_embedding)
-
-sophisticated order structures
-
-* [wikipedia, anti-chain](https://en.wikipedia.org/wiki/Antichain)
-* [wikipedia, weak ordering](https://en.wikipedia.org/wiki/Weak_ordering)
-
-<!-- ======================================================================= -->
-## TODO
-
-* [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
-* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
 
 <!-- ======================================================================= -->
 ## References - TODO

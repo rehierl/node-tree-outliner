@@ -31,9 +31,10 @@ strict partial order         - asymmetric preorder
 
 * strict - irreflexive, no loops
 * not including reflexivity - i.e. may still be reflexive
+* strict vs. non-strict - often ignored because easily interconvertible
 
 <!-- ======================================================================= -->
-## order - summary
+## order - overview
 
 * pre-order - almost an order, but not quite
 * equivalence relation - a partition of a set
@@ -49,8 +50,8 @@ classification by
 
 extended orders
 
-* well order - 
 * weak order - may contain ties/equals
+* well order - total, and each subset has a least element
 * lattices - each pair has a greatest-lower and a least-upper bound
 
 transform

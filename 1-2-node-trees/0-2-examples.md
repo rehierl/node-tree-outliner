@@ -6,15 +6,14 @@
 ## order theory - partial orders
 
 * vertices ordered by reachability
-* partial order => dag
-* strict partial order => dag
+* (strict) partial order => dag
 
 <!-- ======================================================================= -->
 ## wikipedia, comparability graph
 
-* aka. containment graphs
-* an undirected graph
+* aka. containment graph
 * edges - two vertices are comparable
+* an undirected graph
 
 <!-- ======================================================================= -->
 ## wikipedia, intersection graph

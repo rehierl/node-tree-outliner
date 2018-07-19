@@ -7,9 +7,13 @@
 functions
 
 * [wikipedia, function](https://en.wikipedia.org/wiki/Function_%28mathematics%29)
+* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
+* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
+
+particular functions
+
 * [wikipedia, predicate](https://en.wikipedia.org/wiki/Predicate_%28mathematical_logic%29)
 * [wikipedia, indicator function](https://en.wikipedia.org/wiki/Indicator_function)
-* [wikipedia, domain of a function](https://en.wikipedia.org/wiki/Domain_of_a_function)
 
 particular elements
 

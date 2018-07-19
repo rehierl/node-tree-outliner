@@ -33,6 +33,34 @@ remarks
 **TODO** - canceled at some point
 
 <!-- ======================================================================= -->
+## wikipedia, well order
+
+* aka. well-ordering, well-order relation
+* a total order in which each non-empty subset has a least element
+* i.e. a well-order has itself a least element
+* least element - smaller than every other element
+* in general, each element has a unique successor (i.e. a next element)
+* i.e. the least element of all elements greater than
+* every subset that has an upper bound has a least upper bound
+* i.e. the least element of all upper bounds
+* strict well ordering <=> well-founded strict total order
+* well-founded - every non-empty subset has a minimal element
+* well-ordering principle - the natural numbers are well ordered under (<)
+
+ordinal numbers
+
+* the position of each element is given by an ordinal number
+* i.e. assign an ordinal number one-by-one to each element
+* order type - in this context the association with ordinal numbers
+* zero-based or one-based counting
+
+examples
+
+* natural numbers
+* integers - not well-ordered as there is no least negative
+* reals - similar to integers
+
+<!-- ======================================================================= -->
 ## wikipedia, preorder
 
 * aka. quasi order

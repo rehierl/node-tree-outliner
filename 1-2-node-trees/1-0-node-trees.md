@@ -12,7 +12,7 @@ summary
 * a tree should not be allowed to be empty - affects definitions
 * a forest (may be empty) is a disjoint union of trees
 * tree-order := descendants are subsequent to ancestors
-* ordered tree := each node has an ordered set of child nodes
+* ordered tree, child-order := each node has an ordered set of child nodes
 
 <!-- ======================================================================= -->
 ## wikipedia, tree structure

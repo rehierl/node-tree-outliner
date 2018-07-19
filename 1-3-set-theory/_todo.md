@@ -17,10 +17,11 @@ what kind of "special order" does the equivalency require? -
 draw non-crossing borders around subtrees -
 in an unordered tree, the subtrees are ordered only if
 one subtree is a subtree of the other -
-in an ordered tree, the subtrees have an additional order -
 i.e. ordered according to the order of their root nodes -
+in an ordered tree, the subtrees have an additional order -
+i.e. tree-order + child-order -
 
 hierarchy of sets -> unordered tree -
 start with non-disjoint sets -
 end with pairwise disjoint sets -
-see partition refinement
+see partition refinement in computer science
