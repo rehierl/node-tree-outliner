@@ -65,7 +65,7 @@ clarification
 * reflexive transitive symmetric closure - smallest equivalence relation
 
 <!-- ======================================================================= -->
-### converse, transpose
+## converse, transpose
 
 * `S := { (b,a) | aRb }`
 * (S == R) <-> (is-symmetric R)

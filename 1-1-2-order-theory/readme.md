@@ -1,7 +1,9 @@
 
-This content contains an overview of relations, order theory and categories:
+<!-- ======================================================================= -->
+# Order theory
 
-* The **semantics of a relation** associate meaning with its tuples.
+This content contains nodes on order theory:
+
 * An **ordered set** is a simple set paired with an order relation.
 * A **linear set** is an ordered set paired with a linear order.
 * A **linear sequence** is a sequence that defines a linear set.

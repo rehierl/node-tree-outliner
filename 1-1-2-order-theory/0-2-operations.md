@@ -3,6 +3,35 @@
 # Order structures - operations
 
 <!-- ======================================================================= -->
+## wikipedia, order type
+
+* two ordered sets have the same "order type" if they are "order isomorphic"
+* i.e. needs an order-preserving bijective order-isomorphic mapping
+* e.g. (n -> 2*n) on the set of integer numbers
+
+<!-- ======================================================================= -->
+## wikipedia, order isomorphism
+
+order isomorphism
+
+* a monotone function
+* an isomorphism for partially ordered sets
+
+ordinal number
+
+* ordinal number - generalization of "natural number"
+* any finite set can be put in order by counting its elements
+* i.e. label its elements with distinct natural numbers
+* an ordinal number is used to describe the order type of a well ordered set
+
+order type
+
+* order isomorphic - ordered sets X and Y have the same order type
+* requires a bijection (1:1, e.g. `n -> 2*n`)
+* must be order-preserving
+* every well-ordered set is order-equivalent to exactly one ordinal number
+
+<!-- ======================================================================= -->
 ## wikipedia, product order
 
 * given two ordered sets A and B
@@ -46,35 +75,6 @@ principle
 * known as the ordering principle
 
 <!-- ======================================================================= -->
-## wikipedia, order type
-
-* two ordered sets have the same "order type" if they are "order isomorphic"
-* i.e. needs an order-preserving bijective order-isomorphic mapping
-* e.g. (n -> 2*n) on the set of integer numbers
-
-<!-- ======================================================================= -->
-## wikipedia, order isomorphism
-
-order isomorphism
-
-* a monotone function
-* an isomorphism for partially ordered sets
-
-ordinal number
-
-* ordinal number - generalization of "natural number"
-* any finite set can be put in order by counting its elements
-* i.e. label its elements with distinct natural numbers
-* an ordinal number is used to describe the order type of a well ordered set
-
-order type
-
-* order isomorphic - ordered sets X and Y have the same order type
-* requires a bijection (1:1, e.g. `n -> 2*n`)
-* must be order-preserving
-* every well-ordered set is order-equivalent to exactly one ordinal number
-
-<!-- ======================================================================= -->
 ## wikipedia, order embedding
 
 * a monotone function
@@ -102,3 +102,15 @@ perspectives
 * an order-embedding is a graph-isomorphism to an induced subgraph
 * a poset is a (small,skeletal) category
 * an order-embedding is an isomorphism to a full subcategory
+
+<!-- ======================================================================= -->
+## wikipedia, filter
+
+* a special subset of a partial order
+* e.g. a powerset ordered by inclusion
+* filters originate in topology
+* a filter is dual to an "ideal"
+* similar to a "net" in topology
+
+<!-- ======================================================================= -->
+## wikipedia, ideal

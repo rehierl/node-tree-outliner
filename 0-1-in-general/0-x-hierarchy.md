@@ -2,7 +2,9 @@
 <!-- ======================================================================= -->
 # Hierarchies
 
-( these are notes taken from the corresponding wikipedia pages )
+The hierarchies mentioned here are with regards to social/organizational
+hierarchies. As such they merely introduce a general idea of what hierarchies
+are. Hierarchies in mathematics essentially follow the same principles.
 
 <!-- ======================================================================= -->
 ## wikipedia, heterarchy
@@ -119,11 +121,3 @@ containment/natural hierarchy
 * partially ordered sets whose elements are objects of increasing complexity
 * class-containment relation - the preorder defining the hierarchy
 * containment hierarchies are special cases of hierarchies
-
-<!-- ======================================================================= -->
-## wikipedia, hereditary property
-
-* an object property that is inherited to all sub-objects
-* e.g. in topology, graph theory, set theory
-* graph theory - a graph property which also holds for its induced subgraphs
-* set theory - see pure/hereditary sets

@@ -1,4 +1,7 @@
 
+<!-- ======================================================================= -->
+# Mathematics
+
 This content contains an overview of fundamental mathematical concepts and
 definitions: values, sets, sequences, etc.
 

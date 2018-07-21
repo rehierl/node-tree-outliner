@@ -12,17 +12,18 @@ order
 * [wikipedia, hasse diagram](https://en.wikipedia.org/wiki/Hasse_diagram)
 * [wikipedia, duality in order theory](https://en.wikipedia.org/wiki/Duality_%28order_theory%29)
 
-order structures
+order structures - 1
 
 * [wikipedia, preorder](https://en.wikipedia.org/wiki/Preorder)
 * [wikipedia, partial order](https://en.wikipedia.org/wiki/Partially_ordered_set)
 * [wikipedia, total order](https://en.wikipedia.org/wiki/Total_order)
 
-more order structures
+order structures - 2
 
 * [wikipedia, anti-chain](https://en.wikipedia.org/wiki/Antichain)
 * [wikipedia, weak ordering](https://en.wikipedia.org/wiki/Weak_ordering)
 * [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
+* [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
 
 equivalence order/relation
 
@@ -30,15 +31,6 @@ equivalence order/relation
 * [wikipedia, equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation)
 * [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
 * [wikipedia, setoid](https://en.wikipedia.org/wiki/Setoid)
-
-transformations/operations on orders
-
-* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
-* [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
-* [wikipedia, (same) order type](https://en.wikipedia.org/wiki/Order_type)
-* [wikipedia, product order](https://en.wikipedia.org/wiki/Product_order)
-* [wikipedia, linear extension](https://en.wikipedia.org/wiki/Linear_extension)
-* [wikipedia, order embedding](https://en.wikipedia.org/wiki/Order_embedding)
 
 <!-- ======================================================================= -->
 ## References - TODO
@@ -48,14 +40,8 @@ mixed
 * [wikipedia, order dimension](https://en.wikipedia.org/wiki/Order_dimension)
 * [wikipedia, completeness](https://en.wikipedia.org/wiki/Completeness_%28order_theory%29)
 * [wikipedia, cyclic orders](https://en.wikipedia.org/wiki/Cyclic_order)
-* [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
 * [wikipedia, semiorder](https://en.wikipedia.org/wiki/Semiorder)
-
-characteristics
-
 * [wikipedia, upper/lower set](https://en.wikipedia.org/wiki/Upper_set)
-* [wikipedia, ideal](https://en.wikipedia.org/wiki/Ideal_%28order_theory%29)
-* [wikipedia, filter](https://en.wikipedia.org/wiki/Filter_%28mathematics%29)
 * [wikipedia, directed set](https://en.wikipedia.org/wiki/Directed_set)
 
 characteristics - boundaries
@@ -64,6 +50,18 @@ characteristics - boundaries
 * [wikipedia, least/greatest elements](https://en.wikipedia.org/wiki/Greatest_and_least_elements)
 * [wikipedia, lower/upper bounds](https://en.wikipedia.org/wiki/Upper_and_lower_bounds)
 * [wikipedia, supremum/infimum](https://en.wikipedia.org/wiki/Infimum_and_supremum)
+
+<!-- ======================================================================= -->
+## References - order operations
+
+* [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
+* [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
+* [wikipedia, (same) order type](https://en.wikipedia.org/wiki/Order_type)
+* [wikipedia, product order](https://en.wikipedia.org/wiki/Product_order)
+* [wikipedia, linear extension](https://en.wikipedia.org/wiki/Linear_extension)
+* [wikipedia, order embedding](https://en.wikipedia.org/wiki/Order_embedding)
+* [wikipedia, filter](https://en.wikipedia.org/wiki/Filter_%28mathematics%29)
+* [wikipedia, ideal](https://en.wikipedia.org/wiki/Ideal_%28order_theory%29)
 
 <!-- ======================================================================= -->
 ## References - order examples

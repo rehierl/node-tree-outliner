@@ -5,7 +5,6 @@
 * aka. pure sets, nested sets
 * a set whose elements are all hereditary sets
 * all elements are themselves sets
-* all elements of the elements are sets
 * i.e. never any non-set element
 
 <!-- ======================================================================= -->

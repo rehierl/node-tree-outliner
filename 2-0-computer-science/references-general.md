@@ -2,8 +2,13 @@
 <!-- ======================================================================= -->
 # References - computer science
 
+* [wikipedia, information science](https://en.wikipedia.org/wiki/Information_science)
+* [wikipedia, computer science](https://en.wikipedia.org/wiki/Computer_science)
+
+<!-- ======================================================================= -->
+## References - mixed topics
+
 * [ietf, (augmented) backus-naur form](https://tools.ietf.org/html/rfc5234)
-* [wikipedia, DFA](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
 
 sets
 
@@ -30,6 +35,8 @@ recursion
 
 <!-- ======================================================================= -->
 ## References - abstract concepts
+
+* [wikipedia, DFA](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
 
 turing machines
 

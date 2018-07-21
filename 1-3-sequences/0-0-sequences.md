@@ -3,6 +3,4 @@
 # Sequences
 
 * See "mathematics" for the core concept of sequences.
-
-<!-- ======================================================================= -->
-## TODO
+* every sequence is a net (topology)

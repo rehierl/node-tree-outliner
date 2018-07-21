@@ -2,7 +2,6 @@
 <!-- ======================================================================= -->
 # Category Theory
 
-* ( highly abstract and unfinished content )
 * (x) is used as the composition operator
 
 <!-- ======================================================================= -->

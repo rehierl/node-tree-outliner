@@ -13,20 +13,22 @@ core concept
 * [wikipedia, venn diagram](https://en.wikipedia.org/wiki/Venn_diagram)
 * [wikipedia, euler diagram](https://en.wikipedia.org/wiki/Euler_diagram)
 
-set theory
-
-* [wikipedia, set theory](https://en.wikipedia.org/wiki/Set_theory)
-* [wikipedia, finite set](https://en.wikipedia.org/wiki/Finite_set)
-* [wikipedia, family of sets](https://en.wikipedia.org/wiki/Family_of_sets)
-* [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
-
-set - mixed
+mixed topics
 
 * [wikipedia, urelement](https://en.wikipedia.org/wiki/Urelement)
 * [wikipedia, pure/hereditary set](https://en.wikipedia.org/wiki/Hereditary_set)
 * [wikipedia, countable set](https://en.wikipedia.org/wiki/Countable_set)
 * [wikipedia, disjoint sets](https://en.wikipedia.org/wiki/Disjoint_sets)
 * [wikipedia, disjoint union](https://en.wikipedia.org/wiki/Disjoint_union)
+* [wikipedia, open set](https://en.wikipedia.org/wiki/Open_set)
+* [wikipedia, closed set](https://en.wikipedia.org/wiki/Closed_set)
+
+set theory
+
+* [wikipedia, set theory](https://en.wikipedia.org/wiki/Set_theory)
+* [wikipedia, finite set](https://en.wikipedia.org/wiki/Finite_set)
+* [wikipedia, family of sets](https://en.wikipedia.org/wiki/Family_of_sets)
+* [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
 
 classes
 

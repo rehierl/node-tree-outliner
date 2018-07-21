@@ -94,7 +94,7 @@ end
 
 ### wikipedia, lexicographical order
 
-* short - lexi-order
+* short - lex-order
 * aka. lexical order, lexicographic(al) order, lexicographic(al) product
 * a generalization of the way words are alphabetically ordered
 * i.e. ordering of sequences analogous to the alphabetical order
@@ -107,6 +107,7 @@ definition - lexicographic order
 * i.e. the lexical-order depends on prefixes
 * pad the shorter word with "blanks"
 * blanks - a theoretical element smaller than any in A
+* i.e. a lex-order on `xN*`
 
 ### wikipedia, shortlex order
 

@@ -36,23 +36,25 @@ strict partial order         - asymmetric preorder
 <!-- ======================================================================= -->
 ## order - overview
 
+structures - 1
+
 * pre-order - almost an order, but not quite
-* equivalence relation - a partition of a set
 * partial order - may hold in-comparable elements
-* antichain - a subset of a poset such that all pairs are in-comparable
 * total/linear/chain order - a poset such that all pairs are comparable
+
+structures - 2
+
+* equivalence relation - a partition of a set
+* weak order - may contain ties/equals
+* well order - total, and each subset has a least element
+* lattices - each pair has a greatest-lower and a least-upper bound
+* antichain - a subset of a poset such that all pairs are in-comparable
 
 classification by
 
 * comparability - all/some/none incomparable
 * reflexivity/strictness - all/some/none related to themselves
 * directed/weakness/symmetry - all/some/none relationships directed
-
-extended orders
-
-* weak order - may contain ties/equals
-* well order - total, and each subset has a least element
-* lattices - each pair has a greatest-lower and a least-upper bound
 
 transform
 

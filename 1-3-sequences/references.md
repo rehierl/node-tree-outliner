@@ -24,3 +24,8 @@ intervals
 * [wikipedia, region](https://en.wikipedia.org/wiki/Region_%28mathematics%29)
 * [wikipedia, range](https://en.wikipedia.org/wiki/Range_%28mathematics%29)
 * [wikipedia, nested intervals](https://en.wikipedia.org/wiki/Nested_intervals)
+
+order related
+
+* [wikipedia, partial order](https://en.wikipedia.org/wiki/Partially_ordered_set)
+* [wikipedia, interval order](https://en.wikipedia.org/wiki/Interval_order)
