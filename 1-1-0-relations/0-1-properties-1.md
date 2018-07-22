@@ -1,7 +1,8 @@
 
 <!-- ======================================================================= -->
-# Properties of binary relations
+# Properties of binary relations (1)
 
+* note - notes taken from "wikipedia, binary relations"
 * note - "a, b" is short for "a and b"
 
 implications
@@ -169,39 +170,3 @@ clarification
 * e.g. intervals (open or closed) equipped with (<) or (<=)
 * e.g. `R := ([1,*],<)` - serial - there always is a greater element
 * e.g. `R := ([1,*],>)` - not serial - no `n` such that `(n < 1)`
-
-<!-- ======================================================================= -->
-## well-founded relation
-
-* relation over a set X is well-founded, if
-* every non-empty subset (S subset-of X) has a minimal element in R
-* i.e. an element m unrelated by sRm
-
-<!-- ======================================================================= -->
-## set-like/local relation
-
-* relation over a set X
-* for every (x in X), the class of all (y in X) such that yRx is a set
-* e.g. the usual ordering (<) on the class of ordinal numbers is set-like
-
-<!-- ======================================================================= -->
-## "euclidean" property
-
-```
-right-euclidean   left-euclidean
----------------   --------
-  c               a
- /                 \
-a |               | c
- \                 /
-  d               b
-```
-
-right-euclidean, euclidean
-
-* if `aRc` and `aRd`, then also `cRd`
-* e.g. "equality"
-
-left-euclidean
-
-* if `aRc` and `bRc`, then also `aRb`

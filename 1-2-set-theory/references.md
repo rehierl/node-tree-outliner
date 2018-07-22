@@ -22,6 +22,7 @@ mixed topics
 * [wikipedia, disjoint union](https://en.wikipedia.org/wiki/Disjoint_union)
 * [wikipedia, open set](https://en.wikipedia.org/wiki/Open_set)
 * [wikipedia, closed set](https://en.wikipedia.org/wiki/Closed_set)
+* [wikipedia, ideal](https://en.wikipedia.org/wiki/Ideal_%28set_theory%29)
 
 set theory
 

@@ -13,11 +13,11 @@ relations
 
 properties
 
-* [wikipedia, euclidean relation](https://en.wikipedia.org/wiki/Euclidean_relation)
 * [wikipedia, equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation)
+* [wikipedia, well-founded relation](https://en.wikipedia.org/wiki/Well-founded_relation)
+* [wikipedia, euclidean relation](https://en.wikipedia.org/wiki/Euclidean_relation)
 * [wikipedia, tolerance relation](https://en.wikipedia.org/wiki/Tolerance_relation)
 * [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
-* [wikipedia, well-founded relation](https://en.wikipedia.org/wiki/Well-founded_relation)
 
 operations
 

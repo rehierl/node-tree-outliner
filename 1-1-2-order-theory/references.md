@@ -20,10 +20,12 @@ order structures - 1
 
 order structures - 2
 
-* [wikipedia, anti-chain](https://en.wikipedia.org/wiki/Antichain)
 * [wikipedia, weak ordering](https://en.wikipedia.org/wiki/Weak_ordering)
 * [wikipedia, well orders](https://en.wikipedia.org/wiki/Well-order)
+* [wikipedia, anti-chain](https://en.wikipedia.org/wiki/Antichain)
+* [wikipedia, directed set](https://en.wikipedia.org/wiki/Directed_set)
 * [wikipedia, lattice order](https://en.wikipedia.org/wiki/Lattice_%28order%29)
+* [wikipedia, semiorder](https://en.wikipedia.org/wiki/Semiorder)
 
 equivalence order/relation
 
@@ -35,24 +37,21 @@ equivalence order/relation
 <!-- ======================================================================= -->
 ## References - TODO
 
-mixed
-
 * [wikipedia, order dimension](https://en.wikipedia.org/wiki/Order_dimension)
 * [wikipedia, completeness](https://en.wikipedia.org/wiki/Completeness_%28order_theory%29)
 * [wikipedia, cyclic orders](https://en.wikipedia.org/wiki/Cyclic_order)
-* [wikipedia, semiorder](https://en.wikipedia.org/wiki/Semiorder)
-* [wikipedia, upper/lower set](https://en.wikipedia.org/wiki/Upper_set)
-* [wikipedia, directed set](https://en.wikipedia.org/wiki/Directed_set)
 
-characteristics - boundaries
+<!-- ======================================================================= -->
+## References - boundaries
 
-* [wikipedia, min/max elements](https://en.wikipedia.org/wiki/Maximal_and_minimal_elements)
+* [wikipedia, minimal/maximal elements](https://en.wikipedia.org/wiki/Maximal_and_minimal_elements)
 * [wikipedia, least/greatest elements](https://en.wikipedia.org/wiki/Greatest_and_least_elements)
 * [wikipedia, lower/upper bounds](https://en.wikipedia.org/wiki/Upper_and_lower_bounds)
 * [wikipedia, supremum/infimum](https://en.wikipedia.org/wiki/Infimum_and_supremum)
+* [wikipedia, upper/lower set](https://en.wikipedia.org/wiki/Upper_set)
 
 <!-- ======================================================================= -->
-## References - order operations
+## References - operations
 
 * [wikipedia, monotonic function](https://en.wikipedia.org/wiki/Monotonic_function)
 * [wikipedia, order isomorphism](https://en.wikipedia.org/wiki/Order_isomorphism)
@@ -64,7 +63,7 @@ characteristics - boundaries
 * [wikipedia, ideal](https://en.wikipedia.org/wiki/Ideal_%28order_theory%29)
 
 <!-- ======================================================================= -->
-## References - order examples
+## References - examples
 
 number-based orders
 

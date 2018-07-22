@@ -3,6 +3,7 @@
 ## ordered sets of elements
 
 * there is no single specific type of ordered set
+* an ordered set is a set paired with some order relation
 
 Note that, in the course of this whole discussion, the focus will be on "linear
 orders of nodes" which are the result of some tree traversal.

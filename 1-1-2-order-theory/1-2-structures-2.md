@@ -3,11 +3,6 @@
 # Order structures - structures (2)
 
 <!-- ======================================================================= -->
-## wikipedia, lattice order
-
-* a poset in which every two elements have a unique supremum and infimum
-
-<!-- ======================================================================= -->
 ## wikipedia, weak ordering
 
 * formalization of ranking of a set
@@ -71,8 +66,7 @@ examples
 * comparable - if (a <= b) or (b <= a)
 * incomparable - if neither (a <= b) nor (b <= a)
 * chain - a subset of a poset such that each pair is comparable
-* antichain - a subset of a poset such that
-  no two distinct elements are comparable
+* antichain - a subset of a poset such that no pair is comparable
 * maximal antichain - not a strict subset of any other antichain
 * maximum antichain - cardinality is greater-or-equal to any other antichain
 * i.e. "any other antichain" with regards to one poset
@@ -81,3 +75,60 @@ examples
 
 **TODO** - sperner families
 **TODO** - join/meet operations
+
+<!-- ======================================================================= -->
+## wikipedia, directed set
+
+* aka. directed preorder, filtered set
+* a set X with a preorder such that X is an upward directed set
+* equivalent - a set X such that every subset has an upper bound
+
+upward directed set
+
+* every pair of elements (a,b in X) has an upper bound
+* i.e. (c in X) exists such that (a <= c) and (b <= c)
+
+downward directed set
+
+* every pair of elements (a,b in X) has a lower bound
+* i.e. (c in X) exists such that (c <= a) and (c <= b)
+
+remarks
+
+* a generalization of totally ordered sets
+* totally ordered sets are directed
+* posets are not necessarily directed - incomparable elements
+* lattices are upward and downward directed
+* in topology, directed sets define nets/sequences
+
+<!-- ======================================================================= -->
+## wikipedia, lattice order
+
+* a poset in which every two elements have a unique supremum and infimum
+* join-semilattice - each pair has a least upper bound
+* meet-semilattice - each pair has a greatest lower bound
+* lattice - if join- and meet-semilattice
+
+**TODO** - canceled after the definition
+
+<!-- ======================================================================= -->
+## wikipedia, semiorder
+
+* two items are incomparable if their numerical scores are too close
+* i.e. within a given margin of error
+
+definition
+
+* poset (X,<), (x ~ y) are incomparable if neither (x < y) nor (y < x)
+* axiom 1 - must be asymmetric
+* axiom 2 - if (x < y), (y ~ z) and (z < w), then (x < w)
+* i.e. no transitive incomparability due to the increased "distance"
+* axiom 3 - if (x < y), (y < z) and (y ~ w), then (x ~ w), (z ~ w) not both
+
+remarks
+
+* (x ~ x) - due to (a1)
+* (<) is transitive - i.e. if (y = z) and due to (a2)
+* originally introduced to model human preferences (psychology)
+
+**TODO** - canceled after the definition

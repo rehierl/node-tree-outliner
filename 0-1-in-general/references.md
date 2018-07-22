@@ -6,6 +6,7 @@
 ## References - mixed
 
 * [wikipedia, model theory](https://en.wikipedia.org/wiki/Model_theory)
+* [wikipedia, ring theory](https://en.wikipedia.org/wiki/Ring_theory)
 
 mnemonics
 

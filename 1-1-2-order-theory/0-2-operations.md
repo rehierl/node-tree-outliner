@@ -102,15 +102,3 @@ perspectives
 * an order-embedding is a graph-isomorphism to an induced subgraph
 * a poset is a (small,skeletal) category
 * an order-embedding is an isomorphism to a full subcategory
-
-<!-- ======================================================================= -->
-## wikipedia, filter
-
-* a special subset of a partial order
-* e.g. a powerset ordered by inclusion
-* filters originate in topology
-* a filter is dual to an "ideal"
-* similar to a "net" in topology
-
-<!-- ======================================================================= -->
-## wikipedia, ideal

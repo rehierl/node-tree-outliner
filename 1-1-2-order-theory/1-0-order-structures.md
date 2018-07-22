@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# order - characteristics
+# Order theory - structures
 
 * issue - no strict/consistent naming convention
 * i.e. probably due to a "naturally" grown system of names
@@ -47,8 +47,9 @@ structures - 2
 * equivalence relation - a partition of a set
 * weak order - may contain ties/equals
 * well order - total, and each subset has a least element
-* lattices - each pair has a greatest-lower and a least-upper bound
 * antichain - a subset of a poset such that all pairs are in-comparable
+* directed set - a preorder such that it is an upward directed set
+* lattices - each pair has a greatest-lower and a least-upper bound
 
 classification by
 
