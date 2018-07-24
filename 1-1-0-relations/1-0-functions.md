@@ -5,8 +5,8 @@
 A functional perspective of relations:
 
 * some relations can be understood to define functions
-* e.g. `G(R) = (A X B)` => `f : A -> B`
-* e.g. `G(R) = XT^n` => (e.g.) `f: XT^(n-1) -> Tn`
+* e.g. `G(R) = (A X B)` => `(f: A -> B)`
+* e.g. `G(R) = XT^n` => (e.g.) `(f: XT^(n-1) -> Tn)`
 * functions `f` are special kinds of relations
 
 <!-- ======================================================================= -->
@@ -46,18 +46,20 @@ in order theory
 * e.g. order-embeddings, order-isomorphisms (surjective order-embeddings)
 
 <!-- ======================================================================= -->
-## particular elements
+## wikipedia, magma
 
 * a magma `(M,*)` is a set `M` equipped with a binary operation `*`
 
-### idempotent element
+<!-- ======================================================================= -->
+## wikipedia, idempotence
 
 * element `x` is idempotent, if `(x * x = x)`
 * `*` is idempotent, if `(a * a = a)` for any `(a in M)`
 * an idempotent operation can be applied multiple times
 * it won't change the result beyond the initial application
 
-### identity/neutral element
+<!-- ======================================================================= -->
+## wikipedia, identity/neutral element
 
 * `e` is a left identity, if `(e * a = a)` for any `(a in M)`
 * `e` is a right identity, if `(a * e = a)` for any `(a in M)`
@@ -74,7 +76,8 @@ examples
 * `a + 0 = a` - additive identity
 * `a * 1 = a` - multiplicative identity
 
-### absorbing/annihilating/zero element
+<!-- ======================================================================= -->
+## absorbing/annihilating/zero element
 
 * `e` is a left zero element, if `(e * a = e)` for any `(a in M)`
 * `e` is a right zero element, if `(a * e = e)` for any `(a in M)`

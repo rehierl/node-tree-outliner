@@ -38,7 +38,7 @@ range
 
 * refers to either the codomain or the image of `f`
 * the latter is the more strict use of the word "range"
-* codomain > range > image
+* image < range < codomain
 * `f : dom(f) -> rng(f)`
 
 inverse image

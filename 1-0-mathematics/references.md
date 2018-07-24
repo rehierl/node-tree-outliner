@@ -18,7 +18,7 @@ logic/boolean
 * [wikipedia, if and only if](https://en.wikipedia.org/wiki/If_and_only_if)
 * [wikipedia, boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)
 
-sets/multisets
+multisets/sets
 
 * [wikipedia, multiset](https://en.wikipedia.org/wiki/Multiset)
 * [wikipedia, set](https://en.wikipedia.org/wiki/Set_%28mathematics%29)

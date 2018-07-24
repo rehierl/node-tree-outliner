@@ -2,20 +2,20 @@
 <!-- ======================================================================= -->
 # Types/Domains
 
-"x in X"
+(x in X)
 
-* `x in X` means that value/element `x` may represent any element in `X`
-* `X` however might contain element `y` for which `x` is not defined,
+* `(x in X)` means that value/element `x` may represent any element in `X`
+* however, `X` might contain element `y` for which `x` is not defined,
   or which will trigger an error if `x` evaluates to `y`
 
-a domain-based view on "x in X"
+a domain-based view on (x in X)
 
 * "X", or `D(x), dom(x), (domain-of x) := domainOf(x)`
 * `domainOf(x)` := a set of values for which `x` is defined
 * a domain is a strict definition of the values x may have
 * it is however not always possible to exactly specify all valid values
 
-a type-based view on "x in X"
+a type-based view on (x in X)
 
 * "X", or `T(x), type(x), (type-of x) := typeOf(x)`
 * `typeOf(x)` := a set of values for which `x` is (usually) defined
@@ -32,7 +32,7 @@ general syntax, universe type
 * `(A : B)` => `(A in B) and (B in U)`
 
 <!-- ======================================================================= -->
-## variables, elements
+## elements
 
 type-of e
 
@@ -90,11 +90,11 @@ clarification
 ## set of sequences
 
 * given a set of sequences `S`
-* if `t` is intended to represent any `s in S`, then `(dom(t) == S)`
-* `type(t)` is then a `XTi` description such that `S subset-of XTi`
-* this then allows to state `t in XTi`
+* if `t` is intended to represent any `(s in S)`, then `(dom(t) == S)`
+* `type(t)` is then a `XTi` description such that `(S subset-of XTi)`
+* this then allows to state `(t in XTi)`
 
 clarification (!!!)
 
-* due to the Cartesian product, all sequences in `S` have the same length
-* that is not what we need - e.g. a set of node sequences of any length
+* due to the Cartesian product, all sequences in `XTi` have the same length
+* that is not what we need - e.g. a set of node sequences of arbitrary length

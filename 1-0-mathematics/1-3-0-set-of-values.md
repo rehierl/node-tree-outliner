@@ -2,12 +2,13 @@
 <!-- ======================================================================= -->
 # A (simple) set of values
 
-( For in-depth discussions on sets, see "set theory" )
+* see "set theory" for in-depth discussions on sets
 
 <!-- ======================================================================= -->
 ## core concept
 
 * values may be grouped into (simple) sets of values
+* sets of values are not paired with an order-relation
 * hint: "simple" because "not ordered"
 * sets of values are complex values
 
@@ -56,25 +57,31 @@ clarification
 
 a homogenous set of values
 
-* `V5 := { 1, 2, 3 }`, `V6 := { 'a', 'b', 'c' }`
+* `V1 := { 1, 2, 3 }`
+* `V2 := { 'a', 'b', 'c' }`
 * a set may only contain values that have similar characteristics
+* `isHomogenous(V)`, `isHom(V)` := true, if `V` is a homogenous set
 
 a heterogenous set of values
 
-* `V7 := { 1, 2.0, 0xab, 'a', "abc", {5} }`
-* a set may also contain values that have distinct characteristics
+* `V3 := { 1, 2.0, 0xab, 'a' }`
+* `V4 := { 1, 2.0, 0xab, 'a', "abc", {5} }`
+* a set may contain values that have distinct characteristics
+* `isHeterogenous(V) := not isHom(V)`
+
+a set of X
+
+* `V := { vi | isX(vi) }`
+* all values `(vi in V)` have characteristic `X`
+* e.g. a set of numbers, characters, sets, etc.
 
 a set of atomic values
 
-* `V := { vi | vi in S }`
-* `S` contains primitive values only
-* no value is complex - no strings, no sets, etc.
-
-a set of sets
-
-* `V := { vi | isSet(vi), vi in S }`
-* `S` may contain sets that differ in characteristics
-* `S` may contain `V5`, `V6` and `V7`
+* `V := { vi | isAtomic(vi) }`
+* `V` contains primitive values only
+* no `vi` is complex - no strings, no sets, etc.
+* however, `V` is itself still a complex value
+* a set of atomic values is not necessarily homogenous
 
 <!-- ======================================================================= -->
 ## iteration
@@ -158,10 +165,10 @@ clarification
 * subset-of <=!=> element-of
 
 <!-- ======================================================================= -->
-## union (|, +, or)
+## union (+, or, union)
 
 * `(V union W) := { x | (x in V) or (x in W) }`
-* `(V | W), (V or W), (V + W) := (V union W)`
+* `(V or W), (V + W) := (V union W)`
 
 likewise
 
@@ -175,19 +182,19 @@ clarification
 * `((u + v) + w) <-> (u + (v + w))`
 
 <!-- ======================================================================= -->
-## intersection (&, and)
+## intersection (&, and, isect)
 
 * `(A isect B) := { x | (x in A) and (x in B) }`
 * `(A & B), (A and B) := (A isect B)`
 
 <!-- ======================================================================= -->
-## set difference (\, -, sub)
+## set difference (\, sub, diff)
 
 * `(A diff B):= { x | (x in A) and (x !in B) }`
-* `(A \ B), (A ! B), (A - B), (A sub B) := (A diff B)`
+* `(A \ B), (A sub B) := (A diff B)`
 
 <!-- ======================================================================= -->
-## symmetric difference (^, xor)
+## symmetric difference (^, xor, ex-or)
 
 * `(A ex-or B) := {x | x in (A\B or B\A) }`
 * `(A ^ B), (A xor B) := (A ex-or B)`

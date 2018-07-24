@@ -6,14 +6,14 @@
 * two elements of different sequences are **not sequent**
 * not sequent <=!=> in-sequent
 
-Note that, from now on, the terms "elements" and "values" are used synonymously:
-e.g. the values of a sequence are sequent => they appear sequently.
+Note that, from now on, the terms "elements" and "values" are in general used
+synonymously: e.g. the values of a sequence are sequent => they appear sequently.
+
+Note that confusion is inevitable,
+if a sequence contains one or more elements more than once.
 
 Note that the notion of the term "consecutive" is the same as that of
 "strictly presequent" or "strictly subsequent" (see below).
-
-Note that confusion is inevitable,
-if a sequence contains an element more than once.
 
 <!-- ======================================================================= -->
 ## pseudocode definitions
@@ -82,15 +82,17 @@ if the order of elements is not relevant in a given context:
 x is presequent to y (<)
 
 * `(x < y)` := `x` and `y` are sequent, and `x` appears before `y`
-* `s[i] is presequent to s[j]` for any `i,j in [1,#s]` and `(i < j)`
+* `(s[i] presequent-to s[j])` for any `i,j in [1,#s]` and `(i < j)`
 
 x is strictly presequent to y (<<)
 
 * `(x << y)` := `x` is presequent to `y`, and `x` appears directly before `y`
+* `(s[i] strictly-presequent-to s[j])` if `(i == (j-1))`
 
 x is loosely presequent to y
 
 * `x` is presequent to `y`, but `x` is not strictly presequent to `y` -
+* `(s[i] loosely-presequent-to s[j])` if `(i < (j-1))`
 * i.e. there are other entries in between
 
 <!-- ======================================================================= -->
@@ -102,15 +104,17 @@ x is loosely presequent to y
 y is subsequent to x (>)
 
 * `(y > x)` := `x` and `y` are sequent, and `y` appears after `x`
-* `s[i] is subsequent to s[j]` for any `i,j in [1,n]` and `(i > j)`
+* `(s[i] subsequent-to s[j])` for any `i,j in [1,n]` and `(i > j)`
 
 y is strictly subsequent to x (>>)
 
 * `(y >> x)` := `y` is subsequent to `x`, and `y` appears directly after `x`
+* `(s[i] strictly-subsequent-to s[j])` if `(i == (j+1))`
 
 y is loosely subsequent to x
 
 * `y` is subsequent to `x`, but `y` is not strictly subsequent to `x`
+* `(s[i] loosely-subsequent-to s[j])` if `(i > (j+1))`
 * i.e. there are other entries in between
 
 <!-- ======================================================================= -->
@@ -118,6 +122,7 @@ y is loosely subsequent to x
 
 * randomly pick two elements `x,y in s=[e1,...,eN]`
 * i.e. the number of unique/distinct elements in `s` is N
+* note - the focus is on elements, not values
 
 clarification
 
@@ -127,7 +132,8 @@ clarification
 x insequent to y (<>)
 
 * `x` and `y` are sequent, but neither pre- nor subsequent
-* `(x <> y) <=> (y <> x)`
+* i.e. in-sequent <=!=> not sequent
+* `(x <> y) <-> (y <> x)`
 
 <!-- ======================================================================= -->
 ## examples

@@ -1,11 +1,11 @@
 
 <!-- ======================================================================= -->
-# Values v
+# Abstract values
 
 ( The intention behind introducing "values" and their "representatives" is to
 avoid thinking in terms of concrete values like numbers, characters, etc. )
 
-`v := 2`
+constant, immutable
 
 * a value `v` (or a constant `c`) represents some specific abstract value
 * no representative `v` can be changed to represent a different value
@@ -15,30 +15,97 @@ avoid thinking in terms of concrete values like numbers, characters, etc. )
 primitive values
 
 * a primitive value is understood to be "atomic"
-* i.e. a self-enclosed unit
+* i.e. self-enclosed, indivisible units of information
 
-number identifiers
+number identifiers (ids)
 
 * `v2, v:2` := some value `v` identified by number `2`
 * multiple values can be distinguished by number identifiers
-* `v1` and `v2` always represent different specific values
 * `v1` and `v2` never hold the same abstract value
 
-letter identifiers
+letter identifiers (ids)
 
 * `vi, v:i` := some value `v` identified by `i in [1,N]`
-* number ids may be generalized into letter identifiers
+* number identifiers may be generalized into letter identifiers
 * `vi` represents one of the available values
 * e.g. `(vi == v2)` for `i = 2`
 
 clarification
 
-* `vi` is constant, `vi` can not be changed, `vi` is immutable
+* the value of `vi` can not be changed (i.e. constant, immutable)
 * `vi` is not a variable, `vi` does not represent a reference of sorts
 * it is an error to attempt to assign any value to `vi` - e.g. `vi = 2`
 
 clarification
 
 * `(v3 == v3)` and `(vi == vi)` are always true
-* `(vi == vj)` is true if `(i == j)` and false if `(i != j)`
+* `(vi == vj)` is true iff `(i == j)`, false otherwise
 * different identifiers always refer to different specific values
+
+<!-- ======================================================================= -->
+## is-atomic
+
+* `(is-atomic v)`, `isAtomic(v)` returns `true`, if value `v` is atomic
+* synonymous - atomic, primitive, simple
+
+remarks
+
+* an atomic value can not be split into distinct values
+* i.e. self-enclosed, indivisible units of information
+* e.g. numbers, characters, colors, etc.
+
+remarks
+
+* this does not mean that a value can not be created from another value
+* however, the resulting value is a new distinct value
+* i.e. a value never changes into another value
+
+<!-- ======================================================================= -->
+## is-complex
+
+* `(is-complex v)`, `isComplex(v)` := `not (is-atomic v)`
+* synonymous - complex, composite
+
+remarks
+
+* `complex := < (atomic|complex)* >`
+* complex values represent groups of atomic and/or complex values
+* an empty group `< >` is itself a complex value
+* complex values may be hierarchical
+* i.e. the members of a complex value may be atomic or complex
+* e.g. multisets, sets, sequences, strings, etc.
+
+constant, immutable
+
+* like atomic values, complex values can not be changed
+* replacing the member of a complex value will result in a distinct entity
+
+homogenous, heterogenous
+
+* a complex value is said to be homogenous, if
+  all values used to create it share the same characteristic
+* a complex value is otherwise said to be heterogenous
+* e.g. a complex value is heterogenous, if not all of its members are atomic
+* e.g. `c := < 2, 'd', ... >` is heterogenous
+
+unordered, order-relation, ordered
+
+* `comp-1 := < v1, v2, ... >`, `comp-2 := < v2, v1, ... >`
+* by default, the members within a complex value are unordered
+* i.e. a complex value has no first/last/3rd member
+* i.e. `comp-1` and `comp-2` represent the same complex value
+* additional information is needed to define such an order
+* this information must be provided by an order-relation
+* a complex value with no order-relation is an "unordered complex value"
+* a complex value paired with an order-relation is an "ordered complex value"
+
+Note that no information can be written down without specifying some sort
+of order. That is because written information is based upon a sequence of
+characters. Likewise, no computer-internal representation of a complex value
+is without order; i.e. there always is a first/last bit. Because of that,
+unordered values may appear as "artificial". However, from an abstract point
+of view, ordered complex values are the artificial ones because further
+information is required to define the corresponding order. One must therefore
+not confuse the sequence of stored information with the order of the members
+of complex values. The members might be stored in-order, but that is not a
+necessity/requirement.

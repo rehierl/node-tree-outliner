@@ -2,9 +2,11 @@
 <!-- ======================================================================= -->
 # Elements
 
+* aka. container, slot, member
 * an element represents the bearer of a value
 * elements are used to group values into complex values
-* i.e. elements act as containers/slots of values
+* elements may hold atomic or complex values
+* elements allow to describe the structure of complex values
 
 clarification
 

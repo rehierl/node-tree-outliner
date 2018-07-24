@@ -25,3 +25,23 @@ hierarchy of sets -> unordered tree -
 start with non-disjoint sets -
 end with pairwise disjoint sets -
 see partition refinement in computer science
+
+<!-- ======================================================================= -->
+## a set of sets
+
+a set of sets
+
+* `V := { vi | isSet(vi) }`
+* all values in `(vi in V)` are sets of values
+
+a heterogenous set of sets
+
+* `V := { vi | isSet(vi) }`
+* `V` contains sets that differ in characteristics
+* i.e. `vi` is a set of `X`, `vj` is a set of `Y`, etc.
+* e.g. `V` may contain `V5`, `V6` and `V7`
+
+a homogenous set of sets
+
+* `V := { vi | isSet(vi) and isX(vi) }`
+* all `(vi in V)` are sets that share the same characteristic

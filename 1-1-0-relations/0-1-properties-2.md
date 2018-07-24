@@ -30,7 +30,7 @@ induction and recursion
 * aka. well-founded or Noetherian induction
 
 <!-- ======================================================================= -->
-## wikipedia, quasitransitive
+## wikipedia, quasi-transitive
 
 * a weaker version of transitivity
 * a relation that is symmetric for some elements, and transitive elsewhere
@@ -80,4 +80,4 @@ remarks
 
 * right-euclidean, reflexive => symmetric => equivalence
 * left-euclidean, reflexive => equivalence
-* quasitransitive if right/left-euclidean
+* quasi-transitive if right/left-euclidean

@@ -22,8 +22,8 @@ clarification
 * set `V` is a subset of set `W`, if `v in W` for any `v in V`
 
 Note that, if `(V subset-of W)` is true,
-then `V` may be referred to as **subset**
-and `W` as **super-set**.
+then `V` may be referred to as the **subset**
+and `W` as the **super-set**.
 
 clarification
 
@@ -41,10 +41,10 @@ proof that `(V subset-of W) -> (#V <= #W)` is true
 * In order for `(V subset-of W)` to be false, `V` needs to contain one or more
   elements that are not in `W`. But, that is "assumed" to not be the case.
 * In order for `(#V <= #W)` to not be true, even though `(V subset-of W)` is
-  true, `(#V > #W)` would need to be true. But that is not possible as `V`
-  would need to have all the elements in `W` plus one additional element.
-  Because of that, `(V subset-of W)` could no longer be true. That would be a
-  conflict as `(V subset-of W)` can not be true and false at the same time.
+  true, `(#V > #W)` would have to be true. But that is not possible as `W` must
+  hold all the elements of `V`. Because of that, `(#V > #W)` can not be true.
+* If `W` holds all elements in `V`, then `W` may still hold elements that are
+  not in `V`. Hence, `(#V < #W)` is not in conflict.
 * `subset-of` implies an order (<=)
 
 clarification
@@ -85,8 +85,6 @@ proof that `(V == W) -> (#V == #W)` is true
 * For `((V subset-of W) and (W subset-of V))` to be true, each element in
   a set must also be an element of the other set. That is, none of those
   sets can contain an element which the other set does not contain.
-* For `(#V == #W)` to not be true, one set would need to have more elements
-  than the other. This however would be in conflict with the left side.
 * Consequently, `(V == W) -> (#V == #W)` is true.
 
 <!-- ======================================================================= -->

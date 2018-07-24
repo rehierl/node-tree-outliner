@@ -30,4 +30,4 @@ functors
 
 * [wikipedia, functor](https://en.wikipedia.org/wiki/Functor)
 * [wikipedia, forgetful functor](https://en.wikipedia.org/wiki/Forgetful_functor)
-* [wikipedia, fiathful functor](https://en.wikipedia.org/wiki/Full_and_faithful_functors)
+* [wikipedia, faithful functor](https://en.wikipedia.org/wiki/Full_and_faithful_functors)

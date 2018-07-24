@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Sequences
 
-( See "sequences" for in-depth discussions on sequences ) 
+* see "sequences" for in-depth discussions on sequences
 
 <!-- ======================================================================= -->
 ## core concept
@@ -20,9 +20,10 @@
 * a sequence can be understood to hold one element/slot per value
 * the number of elements in a sequence is referred to as its "length"
 * the elements within a sequence are ordered - has first/last element/value
+* i.e. a sequence is a group of elements paired with an order-relation
 * any element may hold the value of another element
 * i.e. a `1:N` relationship between values and elements
-* `(vi != vj) -> (ei !== ej)`
+* `(vi != vj) -> (ei !== ej)`, but not vice versa
 
 Note that, with regards to sequences, there are no operators similar to
 the set-based operators (i.e. union, intersection, etc).
@@ -131,6 +132,7 @@ set: (sequence, index, value) -> new-sequence
 * it is in general not possible to "change/replace/remove" any element
 * the set-operation must be understood to return a new sequence
 * i.e. `set(s,i,v) := prefix(s,1,i-1) & [v] & suffix(s,i+1,#s)`
+* note - (&) is the concatenation operator
 
 clarification
 
@@ -145,7 +147,7 @@ clarification
 * `(s == t)` is true, if `(#s == #t)` and `(s[i] == t[i])` for any `i in [1,#s]`
 * `(s == t)` compares the values of the corresponding elements
 * in general, the test for equality by value must also take the domains into
-  account, because `(+2 != +2.0)` is from a strict perspective true
+  account, because `(+2 == +2.0)` is `false` from a strict perspective
 
 (!=)
 
@@ -157,7 +159,7 @@ clarification
 * `s', inv(s) := [f1=eN,...,fN=e1]`, if `s = [e1,...,eN]`
 * `(s'[i] == s[N-i+1])` for any `i in [1,N]`
 * synonymous - inverse, reversed, transposed, etc.
-* `inv(inv(s)) <-> s`
+* `(s == inv(inv(s)))`
 
 palindrome
 
