@@ -3,6 +3,7 @@
 # Sequences
 
 * see "sequences" for in-depth discussions on sequences
+* note - (&) represents the concatenation operator
 
 <!-- ======================================================================= -->
 ## core concept
@@ -13,20 +14,21 @@
 `s = [si] = [v1,v2,...,vN]` for `N in [0,*]`
 
 * or the more mathematical notation `s = (si) = (v1,v2,...,vN)`
-* the array-oriented notation is used throughout this discussion
+* the array-oriented notation is in general used throughout this discussion
 
 `s := [e1,e2,...,eN]`
 
 * a sequence can be understood to hold one element/slot per value
 * the number of elements in a sequence is referred to as its "length"
-* the elements within a sequence are ordered - has first/last element/value
-* i.e. a sequence is a group of elements paired with an order-relation
+* the elements within a sequence are ordered
+* i.e. sequences have a first/last element/value
 * any element may hold the value of another element
+* i.e. in general no restriction of which value an element may hold
 * i.e. a `1:N` relationship between values and elements
 * `(vi != vj) -> (ei !== ej)`, but not vice versa
 
-Note that, with regards to sequences, there are no operators similar to
-the set-based operators (i.e. union, intersection, etc).
+Note that, with regards to sequences, there are no operators that correspond
+with the set-based operators (i.e. union, intersection, etc).
 
 clarification
 
@@ -38,7 +40,7 @@ clarification
 clarification
 
 * any sequence is itself a value
-* the expressions `(e = s)`, `{ s }`, `[ s ]` are all valid
+* the expressions `(e = s)`, `{ s }`, `[ s ]` are all valid expressions
 
 <!-- ======================================================================= -->
 ## which term to use?
@@ -74,43 +76,121 @@ vectors
 <!-- ======================================================================= -->
 ## is-sequence
 
-* `(is-sequence s), isSequence(s)` are true, if `s` is a sequence
+* `isSequence(s)` are true, if `s` is a sequence of values
 * i.e. `s` has the characteristics of a sequence
+* `(is-sequence s) := isSequence(s)`
+
+Note that `isMultiSet(s)` is understood to be true for sequences.
 
 <!-- ======================================================================= -->
-## length-of
+## a sequence is a specialized multiset
 
-* `s := [e1,e2,...,eN]`, `lengthOf(s) := N`
-* `#s, #(s), s.length, (length-of s) := lengthOf(s)`
-* `(#s is-length-of s)` is always true
+* "specialized" such that the elements within a sequence are ordered
+
+a sequence adopts the following definitions:
+
+* a sequence of X, a sequence of atomic values
+* a homogenous/heterogenous sequence of values
+* multiplcitiyOf()
+* lengthOf() := cardinalityOf()
+* isEmpty(), `[]` represents an empty sequence
+* (v in S), oneElementOf()
 
 <!-- ======================================================================= -->
-## is-empty
+## add, remove
 
-* `(is-empty s), isEmpty(s) := (#s == 0)`
-* `[]` represents the empty sequence
-* `isEmpty([])` are always true
+* e.g. `s := [ 1, 2, 3, 2 ]`
+
+add(x,s)
+
+* `add(v,s) := (s & v)`
+* i.e. append value `v` to the end of sequence `s`
+* e.g. `add(4,s) = [ 1, 2, 3, 2, 4 ]`
+
+remove(x,s)
+
+* `remove(x,s)` := remove the first element that holds value `x`
+* i.e. subsequent elements will shift by one "place" to maintain the order
+* i.e. remove() will not return a "gapped" sequence
+* e.g. `remove(2,s) = [ 1, 3, 2 ]`
+
+note that ...
+
+* the basic semantics of add() with regards to multisets is maintained
+* i.e. add() will increase the multiplicity of `x` in `s` by `1`
+* the basic semantics of remove() with regards to multisets is maintained
+* i.e. remove() will decrease the multiplicity of `x` in `s` by `1`
+
+<!-- ======================================================================= -->
+## (consistent) iteration
+
+```
+traceOf(s) begin
+  t = new sequence()
+  for e in s begin
+    t.add(e.value)
+  end
+  return t
+end
+
+s = < 1, 2, 2, 3 >
+s1 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
+s2 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
+```
+
+* any sequence of values allows to iterate over its elements
+* the iteration will visit the elements in order - i.e. from first to last
+* subsequent iterations will visit the elements in the exact same order
+* i.e. `s1` is guaranteed to be identical to `s2`
 
 <!-- ======================================================================= -->
 ## index-of
 
-* `indexOf(s,e)` := the 1-based index of element `e` in sequence `s`
-* `idx(s,e), index(s,e) := indexOf(s,e)`
+```
+firstIndexOfValue(x,seq) begin
+  index = 1
+  for e in seq begin
+    if (e.value == x) begin
+      return index
+    end
+    index = index + 1
+  end
+  return 0
+end
+```
 
-Note that the index of an element is undefined, if that element is not an
-element of the input sequence.
+* `indexOf(x,s) := firstIndexOfValue(x,s)`
+* note the 1-based index of a value, not of an element
+
+Note that the index of a value is undefined (i.e. zero/0),
+if its multiplcitiy within `s` is zero/0.
 
 <!-- ======================================================================= -->
-## n-th element of
+## n-th element/value of
+
+```
+elementAt(pos,seq) begin
+  index = 1
+  for e in seq begin
+    if (index == pos) begin
+      return e
+    end
+    index = index - 1
+  end
+  throw new ElementNotFoundException()
+end
+```
 
 * `s[i] := ei` for `i in [1,#s]`
-* `s[i] := undefined` for `i not in [1,#s]`
+* `s[i] := undefined` for `i !in [1,#s]`
+* e.g. `s[i]` is undefined if `(s == [])`
 * synonymous - entry, element, item
 
 clarification
 
 * the first index in a sequence is `1`
 * the last index in a sequence is `#s`
+* i.e. one/1-based, not zero/0-based indexes
 
 clarification
 
@@ -123,16 +203,14 @@ clarification
 get: (sequence, index) -> element
 
 * `x = s[i]` assigns the value of element `si` to `x`
-* it is in general not possible to directly "access/extract" any element
+* i.e. it is not possible to directly access an element of a complex value
 * i.e. `s[i]` implicitly dereferences element `si`
 
 set: (sequence, index, value) -> new-sequence
 
-* `s[i] = x` changes the value of element `si` to hold `x` as its value
 * it is in general not possible to "change/replace/remove" any element
 * the set-operation must be understood to return a new sequence
 * i.e. `set(s,i,v) := prefix(s,1,i-1) & [v] & suffix(s,i+1,#s)`
-* note - (&) is the concatenation operator
 
 clarification
 

@@ -2,30 +2,37 @@
 <!-- ======================================================================= -->
 # Concatenation
 
+* short - "concat"
 * `x` represents the concatenation operator
-* synonymous - concatenate, add, append
+* synonymous terms - concatenate, add, append
+* synonymous operators - `x`, `&`, `+`, `concat`, etc.
 * note the lower-case letter `x`
 
-Note that any sequence is in principle the concatenation of its elements.
+Note that any sequence is in principle the result of concatenating its elements:
+`s = [e1, ..., eN] := e1 x ... x eN`. That is, the result of a concatenation is
+in general a flat sequence.
 
-* `s = [e1, ..., eN] := e1 x ... x eN`
+<!-- ======================================================================= -->
+## cartesian product vs. concatenation
 
-Note that the result of the concatenation operation is in general a set of
-sequences. Depending on the input parameters, all sequences within the result
-of the concatenation operation is in principle **a set of flat sequences** (i.e.
-no added nesting). That is in contrast to the base definition of the Cartesian
-product.
+* cartesian product <=!=> concatenation
+* `XVi <-> xVi`, if all `Vi` are sets of values
+* `XV^N <-> xV^N`, if `V` is a set of (atomic) values
+* `XV^{a,b} <-> xV{a,b}`, if `V` is a set of values
 
-Note that, in general, there is no statement possible about the lengths of the
-sequences in the resulting set-of-sequences. Likewise, the number of sequences
-in the resulting set can not be determined in general. However, such statements
-still can be made under special circumstances: If no input set is a set of
-sequences, then the length of each sequence within the resulting set is
-identical to the number of sets involved. In contrary to that, the sequences
-in the result set of the Cartesian product always have the exact same length.
+If the concatenation is extended to operate on sets, the result will be a set
+of sequences. Depending on the input parameters, the resulting set of sequences
+will in principle be **a set of flat sequences** (i.e. no nesting). That is in
+contrast to the base definition of the Cartesian product.
 
-Note that, because the result of the concatenation is in general a set of
-sequences, the concatenation operation can be used to specify types/domains.
+In contrary to the extended definition of the Cartesian product, there is no
+general statement possible about the lengths of the sequences in the resulting
+set-of-sequences. Likewise, the number of sequences in the resulting set can in
+general not be determined. However, such statements can still be made under
+certain circumstances: If no input set is a set of sequences, then the length
+of each sequence within the resulting set is corresponds with the number of
+sets involved. In contrary to that, the sequences in the resulting set of the
+Cartesian product always have the exact same length.
 
 <!-- ======================================================================= -->
 ## (v x w)
@@ -51,7 +58,7 @@ sequences, the concatenation operation can be used to specify types/domains.
 * note that - `(#s == 2)` for any `s in (V x W)`
 * note that - `#(V x W) == (#V * #W)`
 
-similar definitions for
+similar definition(s) for
 
 * `V x w := { (v,w) | (v in V) }`
 
@@ -85,14 +92,14 @@ similar definitions for
 
 * for set-of-sequences `S` and value `v`
 * signature - (set-of-sequences, value) -> set-of-sequences
-* note that - sequence `t in (S x v)` may have any length
+* note that - `(s in S)` may have any length
 * note that - `#(S x v) == #S`
 
 `S x V := { s x v | (s in S) and (v in V) }`
 
 * for set-of-sequences `S` and set-of-values `V`
 * signature - (set-of-sequences, set-of-values) -> set-of-sequences
-* note that - sequence `t in (S x V)` may have any length
+* note that - `(s in S)` may have any length
 * note that - `#(S x V) == (#S * #V)`
 
 similar definitions for
@@ -128,9 +135,8 @@ similar definitions for
 clarification
 
 * `(s1 x t1) == (s2 x t2)` is possible
-* if `s1 prefix-of s2` and `t2 suffix-of t1`
+* if `(s1 prefix-of s2)` and `(t2 suffix-of t1)`
 * e.g. `([1]x[2,3]) == ([1,2]x[3]) == [1,2,3]`
-* i.e. `f(x1,y1) == f(x2,y2)`
 
 <!-- ======================================================================= -->
 ## summary
@@ -141,8 +147,14 @@ clarification
 * `AxbxC = (Axb)xC = Ax(bxC)` - set of sequences
 * `AxBxC = (AxB)xC = Ax(BxC)` - set of sequences
 
-Note that, for sequences `a,b,c` and sets-of-sequences `A,B,C`,
-the result is in general a set of non-nested sequences.
+Note that ...
+
+* The concatenation is, like the Cartesian product, non-commutative.
+* In contrary to that, the concatenation is associative.
+* For sequences `a,b,c` and sets-of-sequences `A,B,C`,
+  the result is in general a set of flat sequences.
+* Sets-of-nested-sequences are still possible, if the input
+  sets-of-sequences are themselves sets-of-nested-sequences.
 
 <!-- ======================================================================= -->
 ## multi-concatenation
@@ -162,42 +174,8 @@ variable concatenation power (xA{a,b})
 
 * see - regular expression like patterns
 * (+) is the union operator for sets
-* `xA{a,b}, xA^{a,b} := +(xA^i)` for `i in [a,b] in [1,*]`
-* `xA{a,b} = (xA^a + xA^(a+1) + ... + xA^b)`
+* `xA{a,b}, xA^{a,b} := (xA^a + xA^(a+1) + ... + xA^b)`
 * `xA{1,4} = (xA^1 + xA^2 + xA^3 + xA^4)`
 * `xA{a} = xA^{a,a} = xA^a`
 * `xA{+} = (xA^1 + xA^2 + ...)`
-
-<!-- ======================================================================= -->
-## infix
-
-* `t infix-of s`, if sequences `a` and `b` exist such that `axtxb = s`.
-* `(t == s)`, if and only if `axtxb = s` for `a,b = []`
-
-clarification
-
-* `t infix-of S` does not make sense, because ...
-* `(offset(t) in s1)` is not necessarily equal to `(offset(t) in s2)`
-* ... could be generalized to allow any offset.
-
-<!-- ======================================================================= -->
-## prefix
-
-* `t prefix-of s`, if sequence `u` exists such that `txu = s`
-
-t prefix-of S
-
-* `t prefix-of S`, if `t prefix-of s` for any `s in S`
-* all sequences `s in S` have sequence `t` as prefix
-* `t` is a common prefix of all sequences `s in S`
-
-<!-- ======================================================================= -->
-## suffix
-
-* `t suffix-of s`, if sequence `u` exists such that `uxt = s`
-
-t suffix-of S
-
-* `t suffix-of S`, if `t suffix-of s` for any `s in S`
-* all sequences `s in S` have sequence `t` as suffix
-* `t` is a common suffix of all sequences `s in S`
+* `xA{0} = {}`, `xA{*} = (xA{0} + xA{+}) = xA{+}`

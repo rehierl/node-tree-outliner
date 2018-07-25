@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # Subset
 
+* subset-of <=!=> element-of
+
 <!-- ======================================================================= -->
 ## power set
 
@@ -119,8 +121,8 @@ clarification
 * synonymous - strict-subset, proper-subset, true-subset
 
 Note that, if `(V strict-subset-of W)` is true,
-then `V` may be referred to as **(strict) subset**
-and `W` as **(strict) superset**.
+then `V` may be referred to as the **(strict) subset**
+and `W` as the **(strict) superset**.
 
 clarification
 

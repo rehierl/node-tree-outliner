@@ -31,8 +31,8 @@ indexOf(element, sequence) begin
 end
 
 //- returns an (pos|neg) integer value
-//- the result is >0, if e1 comes before e2
-//- the result is <0, if e1 comes after e2
+//- the result is >0, if e1 appears before e2
+//- the result is <0, if e1 appears after e2
 //- the order is upside-down, if the result is <0
 distanceBetween(e1,e2,seq) begin
   i1 = indexOf(e1,seq)
@@ -40,11 +40,14 @@ distanceBetween(e1,e2,seq) begin
   return (i2 - i1)
 end
 
-//- basic pattern of an extended definition
-//- the below short definitions use the same pattern
-//- the below definitions replace the name and operator
-isPreSequentTo(e1,e2,seq) begin
-  return (distanceBetween(e1,e2,seq) > 0)
+//- returns a positive integer value in [0,*]
+//- the number of jumps required to reach e2 from e1
+//- the result is =0, if (e1 == e2)
+//- the result is +1, if e1 is adjacent to e2
+//- the result is +2, if one ei is located between e1 and e2
+absDistance(e1,e2,seq) begin
+  result = distanceBetween(e1,e2,seq)
+  return (result >= 0) ? result : (-1)*result
 end
 
 //- pre-sequent (i1 < i2)
@@ -57,19 +60,19 @@ isSubSequentTo => (distanceBetween < 0)
 isStrictlySubSequentTo => (distanceBetween == -1)
 isLooselySubSequentTo => (distanceBetween < -1)
 
-//- in-sequent
+//- in-sequent (i1 == i2)
 isInSequentTo => (distanceBetween == 0)
 ```
 
 <!-- ======================================================================= -->
 ## sequent
 
-* `e1` and `e2` are elements of the same sequence
+* `e1` and `e2` are sequent, if they are elements of the same sequence `s`
 
 if the order of elements is not relevant in a given context:
 
-* `absDistance(x,y) := abs(distanceBetween(x,y))`
-* `(x insequent-to y) := (absDistance(x,y)) == 0)`
+* `(x sequent-to y) := (absDistance(x,y) >= 0)`
+* `(x insequent-to y) := (absDistance(x,y) == 0)`
 * `(x strictly-sequent-to y) := (absDistance(x,y) == 1)`
 * `(x loosely-sequent-to y) := (absDistance(x,y) > 1)`
 
@@ -104,7 +107,7 @@ x is loosely presequent to y
 y is subsequent to x (>)
 
 * `(y > x)` := `x` and `y` are sequent, and `y` appears after `x`
-* `(s[i] subsequent-to s[j])` for any `i,j in [1,n]` and `(i > j)`
+* `(s[i] subsequent-to s[j])` for any `i,j in [1,#s]` and `(i > j)`
 
 y is strictly subsequent to x (>>)
 
@@ -120,8 +123,7 @@ y is loosely subsequent to x
 <!-- ======================================================================= -->
 ## in-sequent (<>)
 
-* randomly pick two elements `x,y in s=[e1,...,eN]`
-* i.e. the number of unique/distinct elements in `s` is N
+* randomly pick two elements `x,y in s=[e1,...,eN]`, where `(N = #s)`
 * note - the focus is on elements, not values
 
 clarification

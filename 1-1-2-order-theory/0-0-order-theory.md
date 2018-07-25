@@ -40,7 +40,7 @@ least/greatest elements
 * with regards to partially ordered sets P
 * m is least, if (m <= a) for all elements in P
 * greatest element - dual to least
-* least/greatest elements do not necessarily exit
+* least/greatest elements do not necessarily exist
 * both are unique if they do exist
 * e.g. "1" in Nat - "1" is the least element under "<"
 * e.g. "{}" in P(s) - "{}" is the least set under "subset-of"
@@ -58,7 +58,7 @@ min/max elements
 
 subsets of partially ordered sets
 
-* maintain/inherit the order
+* subsets of posets maintain/inherit the order
 * allows to define bounds, upper/lower, least upper
 * infimum, meet - greatest lower bound
 * e.g. (-1) is a lower bound of the natural numbers
@@ -75,10 +75,11 @@ construction of new orders
 
 * e.g. construction by duality
 * e.g. cartesian product under the product order
-* product order - for (A X B) define (a1,b1)<=(a2,b2) iff (a1<=a2) & (b1<=b2)
-* note the 3 distinct orders of (<=) in (A X B), A, B
-* every partial order (<=) gives rise to a strict order (<)
+* product order - for (A X B) define (a1,b1) <= (a2,b2) iff (a1<=a2) & (b1<=b2)
+* note the 3 distinct orders (<=) in (A X B), A, B
+* every poset (<=) gives rise to a strict order (<)
 * e.g. (a < b) if (a <= b) and !(b <= a)
+* every strict order (<) gives rise to a poset (<=)
 * e.g. (a <= b) if (a < b) or (a = b)
 
 functions between orders

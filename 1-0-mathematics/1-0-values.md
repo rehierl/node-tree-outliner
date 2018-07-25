@@ -98,14 +98,3 @@ unordered, order-relation, ordered
 * this information must be provided by an order-relation
 * a complex value with no order-relation is an "unordered complex value"
 * a complex value paired with an order-relation is an "ordered complex value"
-
-Note that no information can be written down without specifying some sort
-of order. That is because written information is based upon a sequence of
-characters. Likewise, no computer-internal representation of a complex value
-is without order; i.e. there always is a first/last bit. Because of that,
-unordered values may appear as "artificial". However, from an abstract point
-of view, ordered complex values are the artificial ones because further
-information is required to define the corresponding order. One must therefore
-not confuse the sequence of stored information with the order of the members
-of complex values. The members might be stored in-order, but that is not a
-necessity/requirement.

@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Graph Theory
 
-* prime objects of study in discrete mathematics
+* graphs are objects of study in discrete mathematics
 * used to model pairwise relations between objects
 * sets of vertices/nodes that are connected by edges
 * a binary relation `R := (V,V,G)` defines a graph
@@ -12,8 +12,8 @@
 definition
 
 * `G := (V,E)` <=> `R := (A,B,G)` if `(A == B)`
-* `E subset-of (V X V)` is the (multi)set of edges
-* `e in E := (a,b)` tuples are referred to as edges
+* `E subset-of (V X V)` is the (multi)set of edges `(e in E)`
+* `e := (a,b)` these tuples are referred to as edges
 * i.e. both vertices are said to be ends or end vertices
 * i.e. both vertices are said to be adjacent
 * a vertex `a in V` may not be an end to any edge
@@ -31,7 +31,8 @@ in the context of this discussion ...
 
 * `order(G) := #V`, `size(G) := #E`
 * symmetric := if `aEb`, then also `bEa`
-* link := `aEb` if `(a != b)`, loop := `aEa`
+* link := `aEb` if `(a != b)`
+* loop := `aEa`
 
 degree
 

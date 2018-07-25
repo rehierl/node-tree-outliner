@@ -20,149 +20,64 @@
 `V := { e1:v1, e2:v3 }`
 
 * a set of values can be understood to hold one element/slot per value
-* the number of elements in a sequence is referred to as its "size"
-* the elements within a set have no order - no first/last element/value
+* the number of elements in a set is referred to as "cardinality"
+* the elements within a set have no order - i.e. no first/last element
 * no element is allowed to hold the value of another element
+* i.e. the multiplicity of each value within a set is one/1
 * i.e. a `1:1` relationship between values and elements
-* i.e. "values" and "elements" can be used synonymously
+* i.e. "values" and "elements" may be used synonymously
 * `(vi != vj) <-> (ei !== ej)`
 
 definition
 
-* `V := { vi | vi holds an odd integer }`
+* `V := { vi | (vi holds an odd integer) }`
 * instead of listing each value, sets can be defined by
   specifying a condition that must be satisfied by each value
 * alternative notations - `{:}`, `{;}`, `{,}`, etc.
 
 clarification
 
-* adding or removing a value to or from a set results in a different set
-* sets are constant/immutable, sets can not be changed, sets are not variable
-* mathematical sets of values are constant entities (not obvious to programs)
+* the number of elements in a set is referred to as its "size"
+* in contrary to multisets, `(sizeOf(set) == lengthOf(set))` always holds
+* i.e. the "size" of a set is equal to its cardinality
 
 clarification
 
-* `V1 := { V }`, `V2 := < V, V >`
-* simple sets are themselves values
-* `V2` is a multiset, not a simple set
+* adding or removing a value to or from a set results in a new set
+* sets are constant/immutable - sets can not be changed - sets are not variable
+* mathematical sets of values are constant entities - not obvious to programs
 
 <!-- ======================================================================= -->
 ## is-set
 
-* `(is-set s), isSet(s)` returns `true`, if value `s` is a set of values
-* true, if value `s` has the characteristics of a set
+* `isSet(s)` returns `true`, if value `s` is a set of values
+* i.e. `true`, if value `s` has the characteristics of a set
+* `(is-set s) := isSet(s)`
+
+Note that `isMultiSet(s)` is understood to be true for sets.
 
 <!-- ======================================================================= -->
-## set-of
+## a set is a specialized multiset
 
-a homogenous set of values
+* "specialized" such that the multiplicity of each value it holds is one/1
 
-* `V1 := { 1, 2, 3 }`
-* `V2 := { 'a', 'b', 'c' }`
-* a set may only contain values that have similar characteristics
-* `isHomogenous(V)`, `isHom(V)` := true, if `V` is a homogenous set
+a set adopts the following definitions:
 
-a heterogenous set of values
-
-* `V3 := { 1, 2.0, 0xab, 'a' }`
-* `V4 := { 1, 2.0, 0xab, 'a', "abc", {5} }`
-* a set may contain values that have distinct characteristics
-* `isHeterogenous(V) := not isHom(V)`
-
-a set of X
-
-* `V := { vi | isX(vi) }`
-* all values `(vi in V)` have characteristic `X`
-* e.g. a set of numbers, characters, sets, etc.
-
-a set of atomic values
-
-* `V := { vi | isAtomic(vi) }`
-* `V` contains primitive values only
-* no `vi` is complex - no strings, no sets, etc.
-* however, `V` is itself still a complex value
-* a set of atomic values is not necessarily homogenous
+* a set of X, a set of atomic values
+* a homogenous/heterogenous set of values
+* (random) iteration
+* multiplcitiyOf()
+* sizeOf() := cardinalityOf()
+* isEmpty(), `{}` represents an empty set
+* (v in V), oneElementOf()
 
 <!-- ======================================================================= -->
-## iteration
+## add, remove
 
-```
-traceOfValues(setOfValues) begin
-  seq = new sequence()
-  for v in setOfValues begin
-    seq.append(v)
-  end
-  return seq
-end
-
-set = {1, 2}
-s1 = traceOfValues(set)
-s2 = traceOfValues(set)
-```
-
-* any set of values allows to visit each of its values
-* an iteration may visit the values in any order
-* subsequent iterations may visit the values in different order
-* i.e. `s1` is not guaranteed to be identical to `s2`
-* synonymous - iterate, visit
-
-<!-- ======================================================================= -->
-## size-of, cardinality
-
-* `#V, #(V), sizeOf(V)` := the number of elements in `V`
-* `(size-of V), (cardinality-of V) := sizeOf(V)`
-
-<!-- ======================================================================= -->
-## is-empty
-
-* `(is-empty V), isEmpty(V) := (#V == 0)`
-* `{}` represents the empty set
-* `(#{} == 0)` is always true
-* `(V == {}) <-> (#V == 0)`
-
-<!-- ======================================================================= -->
-## one-element-of
-
-* `oneElementOf(S)` := returns a random element from the given set
-
-clarification
-
-* the element returned remains to be an element of the set
-* subsequent calls may result in different elements being returned
-
-<!-- ======================================================================= -->
-## (v in V), element-of
-
-* `(v in V), (v element-of V)` := true, if `v` is an element in `V`
-* value `v` is in set `V`, if `v` is an element of `V`
-
-clarification
-
-* different sets of values may contain the same value
-* `v1 in V1` and `v1 in V2` may be true at the same time
-* however, `v2 !in V2` may also be true -
-  i.e. the indexes are independent from each other
-
-v belongs-to V
-
-* `(v belongs-to V) := (v in V)`
-* value `v` belongs to set `V`, if `v` is an element of `V`
-
-V contains v
-
-* `V(v), (V contains v) := (v in V)`
-* set `V` contains value `v`, if `v` is an element of `V`
-
-<!-- ======================================================================= -->
-## V in W
-
-* any set is itself a value
-* `(V in W), (V element-of W)` := true, if set `V` is an element of set `W`
-* `(W contains V) := (V in W)`
-
-clarification
-
-* subset-of <=!=> element-of
+* the `add(x,V)` operation must be adjusted such that the
+  multiplicity of `x` does not increase beyond `1`
+* `(V == add(x,V)` will be true iff `(x in V)`
+* the `remove(x,V)` operation does not need to be changed
 
 <!-- ======================================================================= -->
 ## union (+, or, union)

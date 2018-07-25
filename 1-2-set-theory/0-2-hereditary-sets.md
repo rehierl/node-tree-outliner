@@ -37,7 +37,7 @@ rado/random graph
 
 hereditarily countable sets
 
-* a set that is 
+**TODO** - a set that is ...
 
 <!-- ======================================================================= -->
 ## wikipedia, von neumann universe V
@@ -54,4 +54,4 @@ rank of a well-founded set
 * Va - all sets having rank less than a
 * sets Va - called stages or ranks
 
-(canceled, too abstract)
+**TODO** - canceled, too abstract
