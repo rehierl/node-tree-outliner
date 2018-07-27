@@ -81,8 +81,8 @@ extrema
 
 strict/non-strict partial orders
 
-* non-strict - aka. reflexive, weak
-* strict - irreflexive
+* (<=) non-strict - aka. reflexive, weak
+* (<) strict - irreflexive
 * note - pairs may still be incomparable
 * the non-strict order is the reflexive closure of the strict order
 * strict partial orders correspond more closely with DAGs

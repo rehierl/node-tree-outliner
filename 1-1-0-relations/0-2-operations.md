@@ -2,7 +2,9 @@
 <!-- ======================================================================= -->
 # Operations on binary relations
 
-a hunch
+* see - "wikipedia, binary relations"
+
+an impression, a hunch
 
 * `R := (A,B,G)` if `(A != B)`
 * has characteristics of a function, "depth" is 2
@@ -12,18 +14,18 @@ a hunch
 * an "order" seems to involve all elements in `A` - "total" in some way
 
 <!-- ======================================================================= -->
-## composition
-
-* `R := (A,B,G), S := (B,C,H)`
-* `comp(S,R) := { (a,c) : aRb and bSc }`
-* right-to-left order of operands - i.e. left-after-right
-* `comp(S,R)` similar to `S(R)`
-
-<!-- ======================================================================= -->
 ## contains
 
-* `(R contains S)` := `aSb` for any `aRb`
+* (R contains S) := aSb for all aRb
 * e.g. (<) is contained in (<=)
+
+<!-- ======================================================================= -->
+## wikipedia, composition (¤)
+
+* for R:=(A,B,G) and S:=(B,C,H)
+* (S ¤ R), comp(S,R) := { (a,c) | aRb and bSc }
+* i.e. in right-to-left order, right-before-left, left-after-right
+* i.e. same order as in the composition of functions
 
 <!-- ======================================================================= -->
 ## union (+, or)
@@ -39,58 +41,99 @@ a hunch
 ## reflexive closure
 
 * `S := R + { (a,a) | (a in A) }`
-* requires `R := (A,A,G)`, i.e. `(B == A)`
+* requires R:=(A,A,G), i.e. (A == B)
 
 <!-- ======================================================================= -->
 ## reflexive reduction
 
 * `S := R \ { (a,a) | (a in A) }`
-* requires `R := (A,A,G)`, i.e. `(B == A)`
+* requires R := (A,A,G), i.e. (A == B)
 
 <!-- ======================================================================= -->
-## transitive closure
+## wikipedia, transitive closure
 
-* `S` := smallest transitive relation containing `R`
+* S is the transitive closure of R, if
+* S is the smallest transitive relation containing R
 
-clarification
+remarks
 
 * essentially continue to add `(a,c)` to `R`
   for any pair `aRb` and `bRc` until `R` is transitive
-* allows to answer if `c` can be reached beginning with `a`
+* allows to answer if `c` can be reached from `a`
+* e.g. the "less than or equal" relation on a linearly ordered set
 
-clarification
+reflexive transitive closure
 
 * reflexive transitive closure - smallest preorder containing `R`
 * note - first the transitive closure, then the reflexive closure
 * reflexive transitive symmetric closure - smallest equivalence relation
 
 <!-- ======================================================================= -->
-## converse, transpose
+## wikipedia, transitive reduction
 
-* `S := { (b,a) | aRb }`
+* transitive reduction R of a directed graph D
+* same vertices and as few edges as possible
+* for each (u,..,v) path in D, there is a (u,..,v) path in R
+* i.e. R and D have the same reachability relation
+
+directed (acyclic) graphs
+
+* R of a DAG is unique and a subgraph of D
+* i.e. R is not necessarily a subgraph of a non-DAG (cycles)
+* i.e. if D has cycles, then R is not unique
+
+<!-- ======================================================================= -->
+## wikipedia, converse/transpose/inverse (°)
+
+* `S, conv(R), inv(R) := { (b,a) | aRb }` - i.e. flipped order
+* analogous to inverse functions
+* note - every relation has a unique converse
 * (S == R) <-> (is-symmetric R)
 
 clarification
 
-* same as "inv()"?
+* if `R` is ... (or-combined)
+* ..., reflexive, irreflexive, symmetric, antisymmetric, asymmetric, ...
+* ..., transitive, total, trichotomous, partial order, total order, ...
+* ..., strict weak order, total preorder, equivalence relation,
+* then `conv(R)` is too
+
+inverses
+
+* for I being the identity relation
+* R is right-invertible, if X exists such that (R ¤ X) = I
+* R is left-invertible, if Y exists such that (Y ¤ R) = I
+* X and Y are referred to as right/left inverses of R
+* R is invertible if X and Y exist
+
+inverses for homogenous relations
+
+* X and Y coincide - i.e. are identical
+* for an endo-relation R:=(X,X,G), R° is its inverse
+* i.e. transpose = inverse
+
+related to functions
+
+* a function is invertible, iff its converse relation is a function
+* i.e. only then is the function's converse also its inverse
 
 <!-- ======================================================================= -->
 ## complement
 
-* `comp(R), S := { (a,b) | !aRb }`
-* `comp(R) := S` is the complement relation to `R`
+* `comp(R)` := is the complement relation to R
+* `comp(R) := { (a,b) | !aRb }`
+* comp(inv(R)) = inv(comp(R))
+
+if (A == B)
+
+* R is symmetric -> comp(R) is symmetric
+* R is reflexive <-> comp(R) is irreflexive
+* R is a strict weak order <-> comp(R) is a total preorder
 
 clarification
 
-* same as "converse"?
-* similar to sets `comp(A) = (U \ A)`
-* `(comp(inv(R)) == inv(comp(R)))`
-
-clarification, if `(A == B)`
-
-* `R` is symmetric -> `comp(R)` is symmetric
-* `R` is reflexive <-> `comp(R)` is irreflexive
-* `R` is a strict weak order <-> `comp(R)` is a total preorder
+* similar to sets: comp(A) = (U \ A)
+* universal relation U:=(A × B)
 
 <!-- ======================================================================= -->
 ## restriction

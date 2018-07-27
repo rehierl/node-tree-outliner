@@ -17,9 +17,10 @@ properties
 * [wikipedia, well-founded relation](https://en.wikipedia.org/wiki/Well-founded_relation)
 * [wikipedia, euclidean relation](https://en.wikipedia.org/wiki/Euclidean_relation)
 * [wikipedia, tolerance relation](https://en.wikipedia.org/wiki/Tolerance_relation)
-* [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
 
 operations
 
-* [wikipedia, inverse relation](https://en.wikipedia.org/wiki/Inverse_relation)
+* [wikipedia, composition](https://en.wikipedia.org/wiki/Composition_of_relations)
+* [wikipedia, transitive closure](https://en.wikipedia.org/wiki/Transitive_closure)
+* [wikipedia, transitive reduction](https://en.wikipedia.org/wiki/Transitive_reduction)
 * [wikipedia, converse relation](https://en.wikipedia.org/wiki/Converse_relation)

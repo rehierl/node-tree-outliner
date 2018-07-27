@@ -1,9 +1,36 @@
 
 <!-- ======================================================================= -->
-# Equivalence Relation (ER,~)
+# Related to relations
 
 <!-- ======================================================================= -->
-## wikipedia, equivalence relation
+## wikipedia, covering relation
+
+* the covering relation of a poset is the
+* bin-rel which holds between comparable elements
+* that are immediate neighbors
+
+definition
+
+* poset (X,<=)
+* (x < y) iff (x <= y) and (x != y)
+* (x covers y), if (x < y) and there is no (z) such that (x < z < y)
+* alternative - (x covers y), if `([x,y] = {x,y})`
+
+examples
+
+* e.g. given the natural numbers, (i+1) covers all i
+* e.g. given the real numbers, no number covers another under (<=)
+* e.g. the transitive reduction of a poset is a cover relation
+
+<!-- ======================================================================= -->
+## wikipedia, setoid
+
+* aka. e-set, bishop set, extensional set
+* a setoid is a set euipped with an ER
+* used in proof theory, type theory
+
+<!-- ======================================================================= -->
+## wikipedia, equivalence relation (ER,~)
 
 * there is no "equivalence order" because
 * there is no direction (i.e. "before" or "after")
@@ -23,13 +50,6 @@ construction
 * (~) is an equiv. relation on set X
 * P(x) is a property of elements of X
 * P(x) is well-defined, if whenever (x ~ y) => P(x) is true if P(y) is true
-
-<!-- ======================================================================= -->
-## wikipedia, setoid
-
-* aka. e-set, bishop set, extensional set
-* a setoid is a set euipped with an ER
-* used in proof theory, type theory
 
 <!-- ======================================================================= -->
 ## wikipedia, partition of a set

@@ -29,10 +29,11 @@ order structures - 2
 
 equivalence order/relation
 
-* [wikipedia, partial equivalence relation](https://en.wikipedia.org/wiki/Partial_equivalence_relation)
+* [wikipedia, covering relation](https://en.wikipedia.org/wiki/Covering_relation)
+* [wikipedia, setoid](https://en.wikipedia.org/wiki/Setoid)
 * [wikipedia, equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation)
 * [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
-* [wikipedia, setoid](https://en.wikipedia.org/wiki/Setoid)
+* [wikipedia, partial equivalence relation](https://en.wikipedia.org/wiki/Partial_equivalence_relation)
 
 <!-- ======================================================================= -->
 ## References - TODO

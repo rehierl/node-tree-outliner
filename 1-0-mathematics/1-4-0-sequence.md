@@ -2,6 +2,16 @@
 <!-- ======================================================================= -->
 # Sequences
 
+```
+sequences
+------------------------
+order:    o1 o2
+          |  |  - linear
+elements: e1 e2
+          | /
+values:   v1
+```
+
 * see "sequences" for in-depth discussions on sequences
 * note - (&) represents the concatenation operator
 

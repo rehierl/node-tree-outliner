@@ -2,6 +2,16 @@
 <!-- ======================================================================= -->
 # A (simple) set of values
 
+```
+sets of values
+---------------
+order:    none
+
+elements: e1 e2
+          |  |
+values:   v1 v2
+```
+
 * see "set theory" for in-depth discussions on sets
 
 <!-- ======================================================================= -->
@@ -119,3 +129,18 @@ clarification
 
 * `(A xor B) := (A \ B) or (B \ A)`
 * `(A xor B) := (A or B) \ (A & B)`
+
+<!-- ======================================================================= -->
+## wikipedia, complement
+
+* all sets are understood to be subsets of a universal set U
+* (absolute) complement - A* := (U \ A)
+* relative complement - (B \ A)
+
+properties
+
+* (A +/& B)* = A* &/+ B*
+* U=(A + A*), {}=(A & A*)
+* U={}*, {}=U*
+* involution - A=(A*)*
+* (A strict-subset-of B) => (B* strict-subset-of A*)

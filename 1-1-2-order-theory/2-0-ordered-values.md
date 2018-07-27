@@ -29,3 +29,9 @@ countable sets, total/well order
 
 <!-- ======================================================================= -->
 ## ordered multisets
+
+<!-- ======================================================================= -->
+## sequences
+
+* the order of the elements does not depend on the values they hold
+* the order-relation is a relation on the elements, not the values

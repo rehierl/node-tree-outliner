@@ -16,6 +16,17 @@ Note that there is no single specific type of "ordered set". That is because an
 ordered set is a set of elements paired with some order relation.
 
 <!-- ======================================================================= -->
+## wikipedia, hasse diagram
+
+* used to represent finite posets
+* a drawing of the order's transitive reduction
+
+remarks
+
+* edges represent the cover relation between two vertices
+* i.e. not covered-by, if not directly connected
+
+<!-- ======================================================================= -->
 ## wikipedia, order theory
 
 * examine the notion of order by the use of binary relations
@@ -31,7 +42,7 @@ ordered set is a set of elements paired with some order relation.
 (partially) ordered set
 
 * poset - a set with a partial order on it
-* partial order - transitive, reflexive, antisymmetric
+* partial order - reflexive, transitive, antisymmetric
 * linear order, chain - total partial orders
 * hasse diagrams - used to visualize partial orders
 

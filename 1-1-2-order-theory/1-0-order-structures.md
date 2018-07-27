@@ -60,7 +60,7 @@ classification by
 transform
 
 * product order - induce a partial ordering on the cart-product
-* linear extension - make all pairs comparable - partial-to-total
+* linear extension - make all pairs comparable - i.e. (partial => total)
 * order type - same type if isomorphic
 * order isomorphism - an isomorphic mapping exists
 * order embedding - one order embedded into another
