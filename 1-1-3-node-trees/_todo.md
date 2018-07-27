@@ -10,6 +10,11 @@
 * define "related nodes"
 * instead of "one is an ancestor of the other"
 
+trees
+
+* tree-order, ordered tree
+* an order-embedding?
+
 **CLARIFICATION**
 Node `n1` is said to be **disjoint** from `n2`,
 if the outer sets of both nodes are disjoint.

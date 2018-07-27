@@ -67,34 +67,34 @@ clarification
 ## sequences
 
 * `t = (x1:T1,...,xn:Tn)` where `(Ti == type(xi))`
-* `t = (x1,...,xn) : T1 X ... X Tn` (in type theory)
-* `t = (x1,...,xn) : XTi`
-* `t = (x1,...,xn) : XT^n` if `(Ti == T)` for any `i in [1,n]`
-* `type(t)` := `XTi` or `XT^n`
+* `t = (x1,...,xn) : T1 × ... × Tn` (in type theory)
+* `t = (x1,...,xn) : ×Ti`
+* `t = (x1,...,xn) : ×T^n` if `(Ti == T)` for any `i in [1,n]`
+* `type(t)` := `×Ti` or `×T^n`
 
 <!-- ======================================================================= -->
 ## n-ary types/domains
 
-* `T1 X ... X Tn` represents some type `XTi`
-* `XTi` represents an unary type, if `(n == 1)`
+* `T1 × ... × Tn` represents some type `×Ti`
+* `×Ti` represents an unary type, if `(n == 1)`
 * binary type, if `(n == 2)`
 * ternary type, if `(n == 3)`
-* `XTi` represents in general an n-ary type
+* `×Ti` represents in general an n-ary type
 
 clarification
 
-* `XTi` represents a set of (possibly nested) sequences
-* all sequences in `XTi` have the exact same length
+* `×Ti` represents a set of (possibly nested) sequences
+* all sequences in `×Ti` have the exact same length
 
 <!-- ======================================================================= -->
 ## set of sequences
 
 * given a set of sequences `S`
 * if `t` is intended to represent any `(s in S)`, then `(dom(t) == S)`
-* `type(t)` is then a `XTi` description such that `(S subset-of XTi)`
-* this then allows to state `(t in XTi)`
+* `type(t)` is then a `×Ti` description such that `(S subset-of ×Ti)`
+* this then allows to state `(t in ×Ti)`
 
 clarification (!!!)
 
-* due to the Cartesian product, all sequences in `XTi` have the same length
+* due to the Cartesian product, all sequences in `×Ti` have the same length
 * that is not what we need - e.g. a set of node sequences of arbitrary length

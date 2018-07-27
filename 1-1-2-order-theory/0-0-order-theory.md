@@ -32,7 +32,7 @@ ordered set is a set of elements paired with some order relation.
 
 * poset - a set with a partial order on it
 * partial order - transitive, reflexive, antisymmetric
-* linear order, chain - are total partial orders
+* linear order, chain - total partial orders
 * hasse diagrams - used to visualize partial orders
 
 least/greatest elements
@@ -75,8 +75,8 @@ construction of new orders
 
 * e.g. construction by duality
 * e.g. cartesian product under the product order
-* product order - for (A X B) define (a1,b1) <= (a2,b2) iff (a1<=a2) & (b1<=b2)
-* note the 3 distinct orders (<=) in (A X B), A, B
+* product order - for (A × B) define (a1,b1) <= (a2,b2) iff (a1<=a2) & (b1<=b2)
+* note the 3 distinct orders (<=) in (A × B), A, B
 * every poset (<=) gives rise to a strict order (<)
 * e.g. (a < b) if (a <= b) and !(b <= a)
 * every strict order (<) gives rise to a poset (<=)
@@ -84,11 +84,12 @@ construction of new orders
 
 functions between orders
 
-* monotone functions - an order-preserving mapping of order onto another
-* order-preserving: (a <= b) -> (f(a) <= f(b))
+* monotone functions - an order-preserving mapping between orders
+* order-preserving, isotone: (a <= b) -> (f(a) <= f(b))
 * the "converse" of this implication leads to order-reflecting
-* order-reflecting: (f(a) <= f(b)) -> (a <= b)
-* order-reversing, antitone: (a <= b) -> (f(b) <= f(a))
+* order-reflecting: (a <= b) <- (f(a) <= f(b))
+* order-reversing, antitone: (a <= b) -> (f(a) >= f(b))
+* (order-preserving vs. order-reflecting), but (order-reversing vs. ???)
 * e.g. powerset, set-complement
 * order-embedding - order-preserving and order-reflecting
 * e.g. map natural numbers to real numbers

@@ -183,7 +183,7 @@ examples
 
 * sequence of people who hold a high office as head of state
 * or sequence of people who hold a title of nobility
-* answers the question - who ist next in line if one becomes incapacitated
+* answers the question - who is next in line if one becomes incapacitated
 
 succession planning
 

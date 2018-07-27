@@ -19,16 +19,16 @@ idempotence
 
 monomorphism
 
-* (f: X->Y) is a monomorphism (aka. mono/monic), if
-* ((f x g1) = (f x g2)) -> (g1 = g2) where (g1,g2: Z->X)
-* retraction or left inverse - (g: Y->X) exists such that (g x f = 1x)
+* (f: X -> Y) is a monomorphism (aka. mono/monic), if
+* ((f × g1) = (f × g2)) -> (g1 = g2) where (g1,g2: Z -> X)
+* retraction or left inverse - (g: Y -> X) exists such that (g × f = 1x)
 * has left-inverse => monomorphism
 
 epimorphism
 
-* (f: X->Y) is a epimorphism (aka. epi/epic), if
-* (g1 x f = g2 x f) -> (g1 = g2) where (g1,g2: Y->Z)
-* section or right inverse - (g: Y->X) exists such that (f x g = 1y)
+* (f: X -> Y) is a epimorphism (aka. epi/epic), if
+* (g1 × f = g2 × f) -> (g1 = g2) where (g1,g2: Y -> Z)
+* section or right inverse - (g: Y -> X) exists such that (f × g = 1y)
 * has right-inverse => epimorphism
 
 bimorphism
@@ -38,7 +38,7 @@ bimorphism
 isomorphism
 
 * (f: X -> Y) is an isomorphism, if
-* (g: Y -> X) exists such that (g1 x f = 1x) and (f x g2 = 1y)
+* (g: Y -> X) exists such that (g1 × f = 1x) and (f × g2 = 1y)
 * g1 and g2 don't necessarily have to both exist
 * if they do, then (g1 == g2)
 * g is called the inverse of f, and f an inverse of g

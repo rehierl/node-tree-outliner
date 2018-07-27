@@ -64,6 +64,7 @@ remarks
 ## is-complex
 
 * `(is-complex v)`, `isComplex(v)` := `not (is-atomic v)`
+* note - complex values may also be referred to as "multi values"
 * synonymous - complex, composite
 
 remarks
@@ -84,16 +85,16 @@ homogenous, heterogenous
 
 * a complex value is said to be homogenous, if
   all values used to create it share the same characteristic
-* a complex value is otherwise said to be heterogenous
+* otherwise, a complex value is said to be heterogenous
 * e.g. a complex value is heterogenous, if not all of its members are atomic
 * e.g. `c := < 2, 'd', ... >` is heterogenous
 
 unordered, order-relation, ordered
 
-* `comp-1 := < v1, v2, ... >`, `comp-2 := < v2, v1, ... >`
+* `c1 := < v1, v2, ... >`, `c2 := < v2, v1, ... >`
 * by default, the members within a complex value are unordered
-* i.e. a complex value has no first/last/3rd member
-* i.e. `comp-1` and `comp-2` represent the same complex value
+* i.e. a complex value has no first/last/n-th member
+* i.e. `c1` and `c2` represent the same complex value
 * additional information is needed to define such an order
 * this information must be provided by an order-relation
 * a complex value with no order-relation is an "unordered complex value"

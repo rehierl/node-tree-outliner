@@ -2,8 +2,6 @@
 <!-- ======================================================================= -->
 # Categories
 
-* (x) is used as the composition operator
-
 <!-- ======================================================================= -->
 ## wikipedia, category of sets (Set)
 
@@ -13,7 +11,7 @@
 ## wikipedia, category of relations (Rel)
 
 * has sets as objects and binary relations as morphisms
-* functional relation - (F subset-of X x Y) - (xFy <=> f(x)=y)
+* functional relation - (F subset-of (X × Y)) - (×Fy <=> f(x)=y)
 
 <!-- ======================================================================= -->
 ## wikipedia, category of preordered sets (Ord)
@@ -39,7 +37,7 @@ a category C consists of
 * a class hom(C) of morphisms
 * (f: a -> b) maps object a to b
 * hom(a,b) - denote the hom-class of all morphisms from a to b
-* composition: hom(a,b) x hom(b,c) -> hom(a,c)
+* composition: (hom(a,b) × hom(b,c)) -> hom(a,c)
 
 small/large category
 

@@ -38,13 +38,13 @@ a hunch
 <!-- ======================================================================= -->
 ## reflexive closure
 
-* `S := R + { (a,a) | a in A }`
+* `S := R + { (a,a) | (a in A) }`
 * requires `R := (A,A,G)`, i.e. `(B == A)`
 
 <!-- ======================================================================= -->
 ## reflexive reduction
 
-* `S := R \ { (a,a) : a in A }`
+* `S := R \ { (a,a) | (a in A) }`
 * requires `R := (A,A,G)`, i.e. `(B == A)`
 
 <!-- ======================================================================= -->
@@ -83,7 +83,7 @@ clarification
 clarification
 
 * same as "converse"?
-* similar to sets `comp(A) = U \ A`
+* similar to sets `comp(A) = (U \ A)`
 * `(comp(inv(R)) == inv(comp(R)))`
 
 clarification, if `(A == B)`
@@ -96,8 +96,8 @@ clarification, if `(A == B)`
 ## restriction
 
 * `restrict(R), limit(R) := (R) -> S`
-* `limit(R) := (B,B,G)` such that `aRb` where `a in B`
-* i.e. restrict `R := (A,A,G)` to `B subset-of A`
+* `limit(R) := (B,B,G)` such that `aRb` where `(a in B)`
+* i.e. restrict `R := (A,A,G)` to `(B subset-of A)`
 
 clarification
 

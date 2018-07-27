@@ -6,8 +6,8 @@
 ## wikipedia, order type
 
 * two ordered sets have the same "order type" if they are "order isomorphic"
-* i.e. needs an order-preserving bijective order-isomorphic mapping
-* e.g. (n -> 2*n) on the set of integer numbers
+* i.e. an order-preserving bijective order-isomorphic mapping exists
+* e.g. (n -> 2*n) on the set of integers
 
 <!-- ======================================================================= -->
 ## wikipedia, order isomorphism
@@ -34,9 +34,10 @@ order type
 <!-- ======================================================================= -->
 ## wikipedia, product order
 
+* short - prod-order
 * given two ordered sets A and B
-* induce a partial ordering on the Cartesian product (A x B)
-* (a1,b1) and (a2,b2) in (A x B)
+* induce a partial ordering on the Cartesian product (A × B)
+* (a1,b1) and (a2,b2) in (A × B)
 * (a1,b1) <= (a2,b2) iff (a1 <= a2) and (b1 <= b2)
 
 remarks
@@ -50,19 +51,19 @@ remarks
 ## wikipedia, linear extension
 
 * short - lin-ext
-* the linear extension of a partial order is a total order
+* the linear extension of a poset is a total order
 * the lexi-order of totally ordered sets is a lin-ext of their prod-order
 
 definition
 
-* given op1 and op2 on set X
-* op2 is a lin-ext of op1, if
-* 1) op2 is a total order
-* 2) if (x op1 y), then (x op2 y) for all (x,y in X)
+* given o1 and o2 on set X
+* o2 is a lin-ext of o1, if
+* 1) o2 is a total order
+* 2) if (x o1 y), then (x o2 y) for all (x,y in X)
 
 remarks
 
-* op2 is said to extend op1
+* o2 is said to extend o1
 * a lin-ext is a order-preserving bijection from a poset to a chain
 
 principle
@@ -71,7 +72,7 @@ principle
 * proven by the use of the "axiom of choice"
 * the principle is itself taken as an axiom
 * a partial order in which every pair is incomparable can be extended
-* i.e. every part-order can be linearly ordered
+* i.e. every poset can be linearly ordered
 * known as the ordering principle
 
 <!-- ======================================================================= -->
@@ -87,7 +88,7 @@ formal
 * two posets (S,<=) and (T,<=)
 * (f: S -> T) is an order embedding if
 * (f) is order-preserving and order-reflecting
-* (x <= y) <=> (f(x) <= f(y)) for all (x,y in S)
+* (x <= y) <-> (f(x) <= f(y)) for all (x,y in S)
 
 remarks
 

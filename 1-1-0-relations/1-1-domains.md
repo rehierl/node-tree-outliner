@@ -24,7 +24,7 @@ codomain
 
 * `B` is said to be the function's codomain
 * an image is a subset of a function's codomain - i.e. `img(f) subset-of B`
-* `f` is surjective - `a in A` exists for any `b in B` such that `f(a)=b`
+* `f` is surjective - `a in A` exists for any `(b in B)` such that `f(a)=b`
 * surjective => `(img(f) == B)`
 
 image

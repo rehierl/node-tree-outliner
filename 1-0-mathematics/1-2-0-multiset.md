@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # A multiset of values (ms)
 
+<!-- ======================================================================= -->
+## core concept
+
 * values may be grouped into multisets of values
 * multisets are not paired with an order-relation
 * synonymous - group, collection, etc.
@@ -66,15 +69,15 @@ refer to the number of elements it needs to hold its values.
 
 sizeOf(ms)
 
-* "size" will be used to refer to the number of distinct elements
-* i.e. "size" implies a set-based perspective on a multiset
+* "size" will be used to refer to the number of distinct values
+* i.e. "size" reflects a set-based perspective on a multiset
 
 lengthOf(ms), cardinalityOf(ms)
 
-* "length" will be used to refer to the total number of elements
+* "length" will be used to refer to the number of elements
 * i.e. "length" is understood to be synonymous to "cardinality"
-* i.e. "length" is not understood to imply any order whatsoever
-* i.e. "length" implies a sequence-based perspective on a mutliset
+* i.e. "length" reflects a sequence-based perspective on a mutliset
+* i.e. "length" is not understood to imply any order
 
 clarification
 

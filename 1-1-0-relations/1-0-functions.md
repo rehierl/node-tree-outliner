@@ -5,8 +5,8 @@
 A functional perspective of relations:
 
 * some relations can be understood to define functions
-* e.g. `G(R) = (A X B)` => `(f: A -> B)`
-* e.g. `G(R) = XT^n` => (e.g.) `(f: XT^(n-1) -> Tn)`
+* e.g. `G(R) = (A × B)` => `(f: A -> B)`
+* e.g. `G(R) = ×T^n` => (e.g.) `(f: ×T^(n-1) -> Tn)`
 * functions `f` are special kinds of relations
 
 <!-- ======================================================================= -->
@@ -22,16 +22,16 @@ partial, total
 * partial function - undefined for some (a in A)
 * total function - defined for any (a in A)
 * if partial, then total with regards to some strict-subset-of A
-* surjective -> (image == codomain)
+* surjective => (image == codomain)
 
 <!-- ======================================================================= -->
 ## wikipedia, monotonic functions
 
 * aka. monotone function
 * an order-preserving or order-reversing function between two ordered sets
-* increasing, monotonically increasing, non-decreasing - order-preserving
+* order-preserving - increasing, monotonically increasing, non-decreasing
 * if `(x <= y)`, then `f(x) <= f(y)`
-* monotonically decreasing, decreasing, non-increasing - order-reversing
+* order-reversing - monotonically decreasing, decreasing, non-increasing
 * if `(x <= y)`, then `f(x) >= f(y)` - decreasing
 * strictly increasing if (<) instead of (<=)
 * strictly decreasing if (>) instead of (<= and >=)
@@ -39,11 +39,11 @@ partial, total
 
 in order theory
 
-* isotone - i.e. order-preserving
+* isotone, monotone - i.e. order-preserving
 * antitone, anti-monotone - i.e. order-reversing
-* the composite of two monotone mappings is monotone
+* the composition of two monotone mappings is monotone
 * a constant function is both monotone and antitone
-* e.g. order-embeddings, order-isomorphisms (surjective order-embeddings)
+* e.g. order-embedding, order-isomorphism (surjective order-embedding)
 
 <!-- ======================================================================= -->
 ## wikipedia, magma

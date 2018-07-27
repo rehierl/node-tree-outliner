@@ -182,6 +182,7 @@ end
 ```
 
 * `s[i] := ei` for `i in [1,#s]`
+* `s := [e1, e2, ..., eN] = [s[1], s[2], ..., s[N]]`
 * `s[i] := undefined` for `i !in [1,#s]`
 * e.g. `s[i]` is undefined if `(s == [])`
 * synonymous - entry, element, item

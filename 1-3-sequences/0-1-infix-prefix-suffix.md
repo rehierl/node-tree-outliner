@@ -2,41 +2,16 @@
 <!-- ======================================================================= -->
 # Infix, Prefix, Suffix
 
-```
-//- default notation
-s = [ s[1], s[2], ..., s[N-1], s[N] ]
-```
+Note that ...
 
-Given a sequence `s` of arbitrarily many elements, the "default notation" is
-from left-to-right, i.e. from the first (`s[1]`) to the last element (`s[N]`).
-
-```
-//- left-bound, offset-based notation
-t = [ s[l], s[l+1], ..., s[l+k-2], s[l+k-1] ]
-t = [ s[o], s[o+1], ..., s[o+k-2], s[o+k-1] ]
-```
-
-* `l` is referred to as the "left border" (l) or "offset" (o)
-* `k` represents the length of sequence `t` (i.e. `k = #t`)
-
-Given a sequence `t` that was derived from sequence `s` by removing a prefix
-and/or suffix from `s`, then `t` can be defined by using the above left-bound
-notation: `infixL(s,l,k)`.
-
-```
-//- right-bound notation
-t = [ s[r-k+1], s[r-k+2], ..., s[r-1], s[r] ]
-```
-
-* `r` is referred to as the "right border" (r)
-* `k` represents the length of sequence `t` (i.e. `k = #t`)
-
-Given a sequence `t` that was derived from sequence `s` by removing a prefix
-and/or suffix from `s`, then `t` can be defined by using the above right-bound
-notation: `infixR(s,r,k)`.
+* The following definitions will be referred to as "index-based".
+* Any non-empty infix `t` may appear several times within the corresponding
+  sequence `s`. That is, there may be more than one offset at which `t` can
+  be located in `s`.
+* The concatenation-based definitions still apply.
 
 <!-- ======================================================================= -->
-## infix
+## infix/substring
 
 ```
 s = [ s[1], s[2], ..., s[o], s[o+1], ..., s[o+n], s[o+n-1], ..., s[N] ]
@@ -130,15 +105,3 @@ sequence `u` is **the common suffix of** sequence `s` and sequence `t`
 * `(u max-suffix-of s,t)`, is true if ...
 * `u` is the longest common suffix possible
 * that is, there is no other common suffix `v` such that `(#v > #u)`
-
-<!-- ======================================================================= -->
-## distinct notes
-
-Note that infix/prefix/suffix `t` represents a distinct/exact pattern
-in the corresponding sequence `s`.
-
-Note that any non-empty infix/prefix/suffix `t` may appear several times
-within the corresponding sequence `s`. That is, there may be more than one
-offset at which `t` can be located in `s`.
-
-Note that any non-empty sequence is an infix/prefix/suffix to itself.

@@ -16,6 +16,12 @@ Note that the notion of the term "consecutive" is the same as that of
 "strictly presequent" or "strictly subsequent" (see below).
 
 <!-- ======================================================================= -->
+## covered-by
+
+* `(a covered-by b)`, if `(a strictly-sequent-to b)`
+* see "partial order" in "order theory"
+
+<!-- ======================================================================= -->
 ## pseudocode definitions
 
 Note that the naming convention is such that the name of a binary operation

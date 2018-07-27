@@ -67,6 +67,7 @@ left-unique   right-unique   left-total   right-total
 
 * unique, one-to-one, 1:1 - left-unique and right-unique
 * total - left-total and right-total
+* bijective - unique and total
 
 <!-- ======================================================================= -->
 ## properties
@@ -74,7 +75,7 @@ left-unique   right-unique   left-total   right-total
 * `R := (A,A,G)`
 * must be homogenous?
 * endo-relation - binary and homogeneous
-* universal relation U - `(A x A)` or `{ aRb | (a,b in A) }`
+* universal relation U - `(A × A)` or `{ aRb | (a,b in A) }`
 * identity relation I - `{ aRa | (a in A) }`
 
 ### reflexive

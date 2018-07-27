@@ -56,6 +56,7 @@ clarification
 
 (correspondence, dyadic relation, 2-place relation)
 
+* short - "bin-rel"
 * binary relation := `R = (A, B, G)`
 * a binary relation is an element of `P(A X B)`
 

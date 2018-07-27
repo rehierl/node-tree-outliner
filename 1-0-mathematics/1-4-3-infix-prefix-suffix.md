@@ -2,8 +2,17 @@
 <!-- ======================================================================= -->
 # Infix, prefix, suffix
 
+Note that ...
+
+* The following definitions will be referred to as "concatenation-based".
+* An infix/prefix/suffix `t` represents a distinct/exact pattern
+  in the corresponding sequence `s`.
+* An infix may also be a prefix and/or a suffix.
+* The empty sequence `[]` is an infix/prefix/suffix of any sequence.
+* Any sequence, including `[]`, is an infix, prefix and suffix to itself.
+
 <!-- ======================================================================= -->
-## infix
+## infix/substring
 
 (t infix-of s)
 
@@ -43,7 +52,7 @@
 * any `(t in T)` is a prefix of any sequence `(s in S)`
 
 <!-- ======================================================================= -->
-## suffix
+## suffix/postfix
 
 (t suffix-of s)
 

@@ -34,6 +34,7 @@ definition
 * instead of listing each value, sets can be defined by
   specifying a condition that must be satisfied by each value
 * alternative notations - `{:}`, `{;}`, `{,}`, etc.
+* this style of notation may be referred to as the "set-builder" notation
 
 clarification
 
@@ -57,7 +58,7 @@ clarification
 Note that `isMultiSet(s)` is understood to be true for sets.
 
 <!-- ======================================================================= -->
-## a set is a specialized multiset
+## simple sets is a specialized multisets
 
 * "specialized" such that the multiplicity of each value it holds is one/1
 

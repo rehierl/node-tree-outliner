@@ -25,7 +25,7 @@ directed graphs
 examples
 
 * reachability relationship in a directed graph
-* i.e. (x <= y) if some path p=(x,...,y) exists
+* e.g. set (x <= y) if some path p=(x,...,y) exists
 * many-one reduction, turing reduction in complexity
 * and many more ...
 
@@ -33,13 +33,15 @@ construction
 
 * every bin-rel can be turned into a preorder
 * take the reflexive and transitive closures
-* create an equivalence relation - (a ~ b) if (a <= b) and (b <= a)
+* create an equivalence relation - set (a ~ b) if (a <= b) and (b <= a)
 * create a partial order - via the set of equivalence classes
 * from a partial order on a partition one can create a preorder
 
 intervals
 
-* `[a,b]` => (a <= x <= b) - i.e. an intersection of sets
+* `[a,b] := (a <= x <= b)`
+* `[a,b] := { x | (a <= x) and (x <= b) }`
+* i.e. an interval represents an intersection of sets
 
 <!-- ======================================================================= -->
 ## wikipedia, partial order
@@ -58,7 +60,7 @@ partial order - e.g. (subset-of)
 * must be - reflexive, transitive, anti-symmetric
 * i.e. an anti-symmetric pre-order
 * comparable - if (a <= b) or (b <= a)
-* in-comparable - if not comparable
+* in-comparable - if neither (a <= b) nor (b <= a)
 * antichain - a subset in which all elements are in-comparable
 * covered - no 3rd element fits in between two elements
 

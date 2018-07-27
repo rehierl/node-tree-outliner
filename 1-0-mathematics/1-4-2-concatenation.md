@@ -3,13 +3,12 @@
 # Concatenation
 
 * short - "concat"
-* `x` represents the concatenation operator
+* here, (x) represents the concatenation operator
 * synonymous terms - concatenate, add, append
 * synonymous operators - `x`, `&`, `+`, `concat`, etc.
-* note the lower-case letter `x`
 
 Note that any sequence is in principle the result of concatenating its elements:
-`s = [e1, ..., eN] := e1 x ... x eN`. That is, the result of a concatenation is
+`s = [e1, ..., eN] := e1 × ... × eN`. That is, the result of a concatenation is
 in general a flat sequence.
 
 <!-- ======================================================================= -->
@@ -35,117 +34,117 @@ sets involved. In contrary to that, the sequences in the resulting set of the
 Cartesian product always have the exact same length.
 
 <!-- ======================================================================= -->
-## (v x w)
+## (v × w)
 
 * combining values with values
 
-`(v x w), (v concat w) := (v,w)`
+`v × w := (v,w)`
 
 * for two values `v` and `w`
 * signature - (value, value) -> sequence
 
-`v x W := { (v,w) | (w in W) }`
+`v × W := { (v,w) | (w in W) }`
 
 * for value `v` and set-of-values `W`
 * signature - (value, set-of-values) -> set-of-sequences
-* note that - `(#s == 2)` for any `s in (v x W)`
-* note that - `#(v x W) == #W`
+* note that - `(#s == 2)` for any `s in (v × W)`
+* note that - `#(v × W) == #W`
 
-`V x W := { (v,w) | (v in V) and (w in W) }`
+`V × W := { (v,w) | (v in V) and (w in W) }`
 
 * for set-of-values `V` and set-of-values `W`
 * signature - (set-of-values, set-of-values) -> set-of-sequences
-* note that - `(#s == 2)` for any `s in (V x W)`
-* note that - `#(V x W) == (#V * #W)`
+* note that - `(#s == 2)` for any `s in (V × W)`
+* note that - `#(V × W) == (#V * #W)`
 
 similar definition(s) for
 
-* `V x w := { (v,w) | (v in V) }`
+* `V × w := { (v,w) | (v in V) }`
 
 <!-- ======================================================================= -->
-## (s x v)
+## (s × v)
 
 * combining sequences with values
 
-`s x v := [s1,...,si,v]`
+`s × v := [s1,...,si,v]`
 
 * for sequence `s`, `(#s = i)` and value `v`
 * signature - (sequence, value) -> sequence
 * note that - value `v` is added to the end of sequence `s`
-* note that - `#(s x v) = (#s + 1)`
+* note that - `#(s × v) = (#s + 1)`
 
-`v x s := [v,s1,...,si]`
+`v × s := [v,s1,...,si]`
 
 * for sequence `s`, `(#s = i)` and value `v`
 * signature - (value, sequence) -> sequence
 * note that - value `v` is added to the beginning of sequence `s`
-* note that - `#(v x s) = (1 + #s)`
+* note that - `#(v × s) = (1 + #s)`
 
-`s x V := { s x v | (v in V) }`
+`s × V := { u | for all (u in (s × v)) and all (v in V) }`
 
 * for sequence `s` and set-of-values `V`
 * signature - (sequence, set-of-values) -> set-of-sequences
-* note that - `(#t == (#s+1))` for any `t in (s x V)`
-* note that - `#(s x V) == #V`
+* note that - `(#t == (#s+1))` for any `t in (s × V)`
+* note that - `#(s × V) == #V`
 
-`S x v := { s x v | (s in S) }`
+`S × v := { u | for all (u in (s × v)) and all (s in S) }`
 
 * for set-of-sequences `S` and value `v`
 * signature - (set-of-sequences, value) -> set-of-sequences
 * note that - `(s in S)` may have any length
-* note that - `#(S x v) == #S`
+* note that - `#(S × v) == #S`
 
-`S x V := { s x v | (s in S) and (v in V) }`
+`S × V := { u | for all (u in (s × v)), all (s in S) and all (v in V) }`
 
 * for set-of-sequences `S` and set-of-values `V`
 * signature - (set-of-sequences, set-of-values) -> set-of-sequences
 * note that - `(s in S)` may have any length
-* note that - `#(S x V) == (#S * #V)`
+* note that - `#(S × V) == (#S * #V)`
 
 similar definitions for
 
-* `V x s := { v x s | (v in V) }`
-* `v x S := { v x s | (s in S) }`
+* `V × s := { u | for all (u in (v × s)) and all (v in V) }`
+* `v × S := { u | for all (u in (v × s)) and all (s in S) }`
 
 <!-- ======================================================================= -->
-## (s x t)
+## (s × t)
 
 * combining sequences with sequences
 
-`s x t := [s1,...,si,t1,...,tj]`
+`s × t := [s1,...,si,t1,...,tj]`
 
 * for sequences `s` and `t`, `(#s = i)`, `(#t = j)` and `i,j in [0,*]`
 * signature - (sequence, sequence) -> sequence
-* note that - `#(s x t) = (#s + #t)`
+* note that - `#(s × t) = (#s + #t)`
 
-`s x T := { s x t | (t in T) }`
+`s × T := { u | for all (u in (s × t)) and all (t in T) }`
 
 * for sequence `s` and set-of-sequences `T`
 * signature - (sequence, set-of-sequences) -> set-of-sequences
-* note that - sequence `u in (S x T)` may have any length
-* note that - `#(s x T) == #T`
+* note that - sequence `u in (S × T)` may have any length
+* note that - `#(s × T) == #T`
 
-`S x T := { s x t | (s in S) and (t in T) }`
+`S × T := { u | for all (u in (s × t)), all (s in S) and all (t in T) }`
 
 * for set-of-sequences `S` and set-of-sequences `T`
 * signature - (set-of-sequences, set-of-sequences) -> set-of-sequences
-* note that - sequence `u in (S x T)` may have any length
-* note that - `#(S x T) <= (#S * #T)`
+* note that - sequence `u in (S × T)` may have any length
+* note that - `#(S × T) <= (#S * #T)`
 
 clarification
 
-* `(s1 x t1) == (s2 x t2)` is possible
-* if `(s1 prefix-of s2)` and `(t2 suffix-of t1)`
-* e.g. `([1]x[2,3]) == ([1,2]x[3]) == [1,2,3]`
+* `(s1 × t1) == (s2 × t2)` is possible
+* if `(s1 prefi×-of s2)` and `(t2 suffi×-of t1)`
+* e.g. `([1]×[2,3]) == ([1,2]×[3]) == [1,2,3]`
 
 <!-- ======================================================================= -->
 ## summary
 
-* `axbxc = (axb)xc = ax(bxc)` - one sequence
-* `axbxC = (axb)xC = ax(bxC)` - set of sequences
-* `axBxC = (axB)xC = ax(BxC)` - set of sequences
-* `AxbxC = (Axb)xC = Ax(bxC)` - set of sequences
-* `AxBxC = (AxB)xC = Ax(BxC)` - set of sequences
+* `a×b×c = (a×b)×c = a×(b×c)` - one sequence
+* `a×b×C = (a×b)×C = a×(b×C)` - set of sequences
+* `a×B×C = (a×B)×C = a×(B×C)` - set of sequences
+* `A×b×C = (A×b)×C = A×(b×C)` - set of sequences
+* `A×B×C = (A×B)×C = A×(B×C)` - set of sequences
 
 Note that ...
 
@@ -159,23 +158,23 @@ Note that ...
 <!-- ======================================================================= -->
 ## multi-concatenation
 
-n-ary concatenation product (xAi)
+n-ary concatenation product (×Ai)
 
-* `xA1 := A1` and `xAN := xA(N-1) x AN`
-* `xAi <=> (A1 x A2 x ...)`
+* `×A1 := A1` and `×AN := ×A(N-1) × AN`
+* `×Ai <=> (A1 × A2 × ...)`
 
-n-ary concatenation power (xA^N)
+n-ary concatenation power (×A^N)
 
-* `xA^1 := A` and `xA^N := xA^(N-1) x A`
-* `xA^N := xAi` for `(Ai == A)` and `i in [1,N]`
-* `xA^N <=> (A x A x ...)`
+* `×A^1 := A` and `×A^N := ×A^(N-1) × A`
+* `×A^N := ×Ai` for `(Ai == A)` and `i in [1,N]`
+* `×A^N <=> (A × A × ...)`
 
-variable concatenation power (xA{a,b})
+variable concatenation power (×A{a,b})
 
 * see - regular expression like patterns
 * (+) is the union operator for sets
-* `xA{a,b}, xA^{a,b} := (xA^a + xA^(a+1) + ... + xA^b)`
-* `xA{1,4} = (xA^1 + xA^2 + xA^3 + xA^4)`
-* `xA{a} = xA^{a,a} = xA^a`
-* `xA{+} = (xA^1 + xA^2 + ...)`
-* `xA{0} = {}`, `xA{*} = (xA{0} + xA{+}) = xA{+}`
+* `×A{a,b}, ×A^{a,b} := (×A^a + ×A^(a+1) + ... + ×A^b)`
+* `×A{1,4} = (×A^1 + ×A^2 + ×A^3 + ×A^4)`
+* `×A{a} = ×A^{a,a} = ×A^a`
+* `×A{+} = (×A^1 + ×A^2 + ...)`
+* `×A{0} = {}`, `×A{*} = (×A{0} + ×A{+}) = ×A{+}`
