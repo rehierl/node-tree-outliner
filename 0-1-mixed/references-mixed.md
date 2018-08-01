@@ -5,6 +5,7 @@
 <!-- ======================================================================= -->
 ## References - mixed
 
+* [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
 * [wikipedia, model theory](https://en.wikipedia.org/wiki/Model_theory)
 * [wikipedia, ring theory](https://en.wikipedia.org/wiki/Ring_theory)
 
@@ -26,6 +27,15 @@ topology
 * [wikipedia, closed set](https://en.wikipedia.org/wiki/Closed_set)
 * [wikipedia, clopen set](https://en.wikipedia.org/wiki/Clopen_set)
 * [wikipedia, net](https://en.wikipedia.org/wiki/Net_%28mathematics%29)
+
+type theory
+
+* [wikipedia, type theory (TT)](https://en.wikipedia.org/wiki/Type_theory)
+* [wikipedia, type system](https://en.wikipedia.org/wiki/Type_system)
+* [wikipedia, logic error](https://en.wikipedia.org/wiki/Logic_error)
+* [wikipedia, rewrite system](https://en.wikipedia.org/wiki/Rewriting)
+* [wikipedia, inductive type](https://en.wikipedia.org/wiki/Inductive_type)
+* [wikipedia, intuitionistic TT](https://en.wikipedia.org/wiki/Intuitionistic_type_theory)
 
 <!-- ======================================================================= -->
 ## References - hierarchy

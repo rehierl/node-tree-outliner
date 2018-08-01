@@ -12,7 +12,7 @@ elements: e1 e2
 values:   v1 v2
 ```
 
-* see "set theory" for in-depth discussions on sets
+* see "set theory" for further details
 
 <!-- ======================================================================= -->
 ## core concept
@@ -68,9 +68,9 @@ clarification
 Note that `isMultiSet(s)` is understood to be true for sets.
 
 <!-- ======================================================================= -->
-## simple sets is a specialized multisets
+## simple sets are specialized multisets
 
-* "specialized" such that the multiplicity of each value it holds is one/1
+* "specialized" such that the multiplicity of each value is one/1
 
 a set adopts the following definitions:
 
@@ -131,16 +131,19 @@ clarification
 * `(A xor B) := (A or B) \ (A & B)`
 
 <!-- ======================================================================= -->
-## wikipedia, complement
+## wikipedia, complement (*)
 
 * all sets are understood to be subsets of a universal set U
-* (absolute) complement - A* := (U \ A)
+* (absolute) complement - A* := (U \ A) - i.e. the default definition
 * relative complement - (B \ A)
 
 properties
 
-* (A +/& B)* = A* &/+ B*
-* U=(A + A*), {}=(A & A*)
-* U={}*, {}=U*
-* involution - A=(A*)*
+* (A + B)* = A* & B*
+* (A & B)* = A* + B*
+* U = (A + A*)
+* {} = (A & A*)
+* {}* = U
+* U* = {}
+* A = (A*)* - aka. involution
 * (A strict-subset-of B) => (B* strict-subset-of A*)

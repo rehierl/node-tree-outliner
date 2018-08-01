@@ -145,7 +145,7 @@ clarification
 ### connex
 
 * "all related - all loops"
-* for any pair it holds that `aRb` or `bRa` or both
+* for any pair it holds that `aRb` and/or `bRa`
 * i.e. any pair is related/comparable - i.e. total ?
 * also, any connex relation is reflexive
 * originates from order theory
@@ -153,8 +153,8 @@ clarification
 ### semi-connex
 
 * "all related, non-strict - possible loops"
-* for any pair `(a != b)` it holds that `aRb` or `bRa`
-* note - `(!a -> b)` <=> `(a or b)` <=!=> `(a -> !b)`
+* for any pair `(a != b)` it holds that `aRb` and/or `bRa`
+* note - `(!a -> b)` <-> `(a or b)` <-!-> `(a -> !b)`
 * `aRa` is allowed, but not required
 
 ### trichotomous

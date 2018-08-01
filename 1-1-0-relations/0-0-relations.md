@@ -20,20 +20,20 @@
 graph `G` of relation `R`
 
 * `G` is the relation's set of tuples/sequences
-* `X` is the Cartesian product of all sets involved
-* `(G(R) subset-of XSi)` is the graph of `R`
-* `(G(R) subset-of XS^n)` if `Si := S` for any `i in [2,*]`
+* `×` is the Cartesian product of all sets involved
+* `(G(R) subset-of ×Si)` is the graph of `R`
+* `(G(R) subset-of ×S^n)` if `Si := S` for any `i in [2,*]`
 * an "n-ary relation over `S`", or an "n-ary relation over a set"
 * note - all tuples in `G` have the exact same length
 
 characteristic function
 
-* `chi(XSi), R(XSi) := (S1,...,Sn) -> boolean`
-* `R(XSi)` returns true, if `s in XSi` is in the relation `R`
-* `R(XSi)` is the characteristic function of `R`
+* `chi(×Si), R(×Si) := (S1,...,Sn) -> boolean`
+* `R(×Si)` returns true, if `s in ×Si` is in the relation `R`
+* `R(×Si)` is the characteristic function of `R`
 * aka. indicator function, n-place predicate
 * `s in R` is a tuple/individual in/of `R`/`G`
-* `s in R` is true, if `R(XSi)` returns true
+* `s in R` is true, if `R(×Si)` returns true
 
 clarification
 
@@ -48,7 +48,7 @@ clarification
 * `!Rab` or `!aRb` is true, if `(a,b) not in R`
 * `R` is in general used synonymous to `G`
 * e.g. `(r in R)` rather than `(r in G)`
-* e.g. `(R subset-of XSi)` rather than `(G subset-of XSi)`
+* e.g. `(R subset-of ×Si)` rather than `(G subset-of ×Si)`
 * similar definitions for `sequence-of`, etc.
 
 <!-- ======================================================================= -->
@@ -58,7 +58,7 @@ clarification
 
 * short - "bin-rel"
 * binary relation := `R = (A, B, G)`
-* a binary relation is an element of `P(A X B)`
+* a binary relation is an element of `P(A × B)`
 
 homogenous, heterogenous
 
@@ -73,8 +73,8 @@ related-to
 
 domain - a type-based view
 
-* `dom(R) := G` for some `G in P(A X B)`
-* `type(R) := (A X B)`
+* `dom(R) := G` for some `G in P(A × B)`
+* `type(R) := (A × B)`
 * `dom(R) subset-of type(R)`
 
 domain - a function-based view (default)

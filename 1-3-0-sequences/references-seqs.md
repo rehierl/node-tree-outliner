@@ -7,16 +7,19 @@
 
 sequences
 
+* [wikipedia, unordered pair](https://en.wikipedia.org/wiki/Unordered_pair)
+* [wikipedia, ordered pair](https://en.wikipedia.org/wiki/Ordered_pair)
 * [wikipedia, tuple](https://en.wikipedia.org/wiki/Tuple)
+* [wikipedia, product type](https://en.wikipedia.org/wiki/Product_type)
+* [wikipedia, record type](https://en.wikipedia.org/wiki/Record_%28computer_science%29)
 * [wikipedia, sequences](https://en.wikipedia.org/wiki/Sequence)
 * [wikipedia, strings](https://en.wikipedia.org/wiki/String_%28computer_science%29)
-* [wikipedia, vectors](https://en.wikipedia.org/wiki/Vector_%28mathematics_and_physics%29)
 
-subsequence
+relationships
 
-* [wikipedia, infix](https://en.wikipedia.org/wiki/Infix)
-* [wikipedia, substring](https://en.wikipedia.org/wiki/Substring)
 * [wikipedia, subsequence](https://en.wikipedia.org/wiki/Subsequence)
+* [wikipedia, substring](https://en.wikipedia.org/wiki/Substring)
+* [wikipedia, infix](https://en.wikipedia.org/wiki/Infix)
 
 intervals
 

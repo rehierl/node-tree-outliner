@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Sequences
+# Tuples/Sequences
 
 ```
 sequences
@@ -12,8 +12,8 @@ elements: e1 e2
 values:   v1
 ```
 
-* see "sequences" for in-depth discussions on sequences
-* note - (&) represents the concatenation operator
+* the term used throughout this discussion is "sequences"
+* see "sequences" for further details
 
 <!-- ======================================================================= -->
 ## core concept
@@ -53,37 +53,6 @@ clarification
 * the expressions `(e = s)`, `{ s }`, `[ s ]` are all valid expressions
 
 <!-- ======================================================================= -->
-## which term to use?
-
-tuples
-
-* `t := [1, 'a']`
-* an ordered list of "anything"
-* in general of finite length
-
-sequences
-
-* `s := [1, 2, 3, ...]`
-* an enumerated collection of "something"
-* of finite or infinite length
-* in general a rule exists such that subsequent elements
-  in a sequence can be calculated from presequent ones
-* e.g. `an := a(n-2) + a(n-1)` (Fibonacci)
-
-strings
-
-* `s := ['a', 'b', 'a', 'c', ...] := "abac..."`
-* traditionally a sequence of characters
-* elements are selected from an alphabet
-* in computing generalized into a sequence of binary data of sorts
-* depending on the context, a mutable/immutable sequence
-
-vectors
-
-* `v := [1.0, 2.0, 3.0]`
-* in general an element of the real coordinate space (R^n)
-
-<!-- ======================================================================= -->
 ## is-sequence
 
 * `isSequence(s)` are true, if `s` is a sequence of values
@@ -113,7 +82,7 @@ a sequence adopts the following definitions:
 
 add(x,s)
 
-* `add(v,s) := (s & v)`
+* `add(v,s) := (s append v)`
 * i.e. append value `v` to the end of sequence `s`
 * e.g. `add(4,s) = [ 1, 2, 3, 2, 4 ]`
 
@@ -176,6 +145,13 @@ Note that the index of a value is undefined (i.e. zero/0),
 if its multiplcitiy within `s` is zero/0.
 
 <!-- ======================================================================= -->
+## (v in s), element-of
+
+* (v in s) := (indexOf(v,s) > 0)
+* (v element-of s), elementOf(v,s) := (v in s)
+* (s contains v), (v belongs-to s) := (v in s)
+
+<!-- ======================================================================= -->
 ## n-th element/value of
 
 ```
@@ -221,7 +197,7 @@ set: (sequence, index, value) -> new-sequence
 
 * it is in general not possible to "change/replace/remove" any element
 * the set-operation must be understood to return a new sequence
-* i.e. `set(s,i,v) := prefix(s,1,i-1) & [v] & suffix(s,i+1,#s)`
+* i.e. `set(s,i,v) := prefix(s,1,i-1) × [v] × suffix(s,i+1,#s)`
 
 clarification
 
@@ -243,13 +219,14 @@ clarification
 * `(s != t)` is true, if both sequences differ in length and/or values
 
 <!-- ======================================================================= -->
-## inverse sequence (s')
+## inverse sequence (°)
 
-* `s', inv(s) := [f1=eN,...,fN=e1]`, if `s = [e1,...,eN]`
-* `(s'[i] == s[N-i+1])` for any `i in [1,N]`
+* `s°, inv(s) := [f1=eN,...,fN=e1]`, if `s = [e1,...,eN]`
+* `(s°[i] == s[N-i+1])` for any `(i in [1,N])`
 * synonymous - inverse, reversed, transposed, etc.
 * `(s == inv(inv(s)))`
 
-palindrome
+remarks
 
 * `s` is a palindromic sequence, if `(s == inv(s))`
+* involution - s=(s°)°

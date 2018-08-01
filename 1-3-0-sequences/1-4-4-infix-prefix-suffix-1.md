@@ -2,12 +2,9 @@
 <!-- ======================================================================= -->
 # Infix, prefix, suffix
 
-Note that ...
-
-* The following definitions will be referred to as "concatenation-based".
-* An infix/prefix/suffix `t` represents a distinct/exact pattern
-  in the corresponding sequence `s`.
-* An infix may also be a prefix and/or a suffix.
+* The following definitions will be referred to as being "concatenation-based".
+* A substring `t` represents a distinct/exact pattern in sequence `s`.
+* Any substring/infix may also be a prefix and/or a suffix.
 * The empty sequence `[]` is an infix/prefix/suffix of any sequence.
 * Any sequence, including `[]`, is an infix, prefix and suffix to itself.
 
@@ -16,8 +13,8 @@ Note that ...
 
 (t infix-of s)
 
-* `(t infix-of s)`, if sequences `a` and `b` exist such that `s = (a x t x b)`.
-* `(t == s)`, if `s = (a x t x b)` for `a,b = []`
+* `(t infix-of s)`, if sequences `a` and `b` exist such that `s = (a × t × b)`.
+* `(t == s)`, if `s = (a × t × b)` for `a,b = []`
 * note - `[]` is an infix to any sequence
 
 (t infix-of S)
@@ -36,8 +33,8 @@ Note that ...
 
 (t prefix-of s)
 
-* `(t prefix-of s)`, if a sequence `u` exists such that `s = (t x u)`
-* `(t == s)`, if `s = (t x u)` for `(u = [])`
+* `(t prefix-of s)`, if a sequence `u` exists such that `s = (t × u)`
+* `(t == s)`, if `s = (t × u)` for `(u = [])`
 * note - `[]` is a prefix to any sequence
 
 (t prefix-of S)
@@ -56,8 +53,8 @@ Note that ...
 
 (t suffix-of s)
 
-* `(t suffix-of s)`, if sequence `u` exists such that `s = (u x t)`
-* `(t == s)`, if `s = (u x t)` for `(u = [])`
+* `(t suffix-of s)`, if sequence `u` exists such that `s = (u × t)`
+* `(t == s)`, if `s = (u × t)` for `(u = [])`
 * note - `[]` is a suffix to any sequence
 
 (t suffix-of S)

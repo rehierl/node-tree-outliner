@@ -14,7 +14,7 @@ definition
 * poset (X,<=)
 * (x < y) iff (x <= y) and (x != y)
 * (x covers y), if (x < y) and there is no (z) such that (x < z < y)
-* alternative - (x covers y), if `([x,y] = {x,y})`
+* alternative - `(x covers y)`, if `([x,y] = {x,y})`
 
 examples
 
@@ -52,6 +52,13 @@ construction
 * P(x) is well-defined, if whenever (x ~ y) => P(x) is true if P(y) is true
 
 <!-- ======================================================================= -->
+## wikipedia, partial equivalence relation (PER)
+
+* aka. restricted equivalence relation
+* must be - symmetric, transitive
+* "partial" here - "almost, but not quite"
+
+<!-- ======================================================================= -->
 ## wikipedia, partition of a set
 
 * aka. a family of sets
@@ -60,10 +67,3 @@ construction
 * subsets in P - blocks, parts, cells
 * rank of P - (#X - #P) - (#elements >= #blocks)
 * e.g. "equal to", "similar to"
-
-<!-- ======================================================================= -->
-## wikipedia, partial equivalence relation (PER)
-
-* aka. restricted equivalence relation
-* must be - symmetric, transitive
-* "partial" here - "almost, but not quite"

@@ -2,10 +2,9 @@
 <!-- ======================================================================= -->
 # Concatenation
 
-* short - "concat"
-* here, (x) represents the concatenation operator
-* synonymous terms - concatenate, add, append
-* synonymous operators - `x`, `&`, `+`, `concat`, etc.
+* here, (x) represents the concatenation product operator
+* synonymous terms - add, append, concatenate
+* synonymous operators - `x` (lower-case), `&`, `+`, `concat`, `append`
 
 Note that any sequence is in principle the result of concatenating its elements:
 `s = [e1, ..., eN] := e1 × ... × eN`. That is, the result of a concatenation is
@@ -14,7 +13,7 @@ in general a flat sequence.
 <!-- ======================================================================= -->
 ## cartesian product vs. concatenation
 
-* cartesian product <=!=> concatenation
+* (X) cartesian product <=!=> (x) concatenation
 * `XVi <-> xVi`, if all `Vi` are sets of values
 * `XV^N <-> xV^N`, if `V` is a set of (atomic) values
 * `XV^{a,b} <-> xV{a,b}`, if `V` is a set of values

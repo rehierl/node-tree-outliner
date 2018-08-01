@@ -3,8 +3,8 @@
 # Cartesian product
 
 * short - "cart-prod"
-* here, (×) represents the Cartesian product operator
-* the upper-case/capitalized letter 'X' may be used instead
+* here, (×) represents the product operator
+* synonymous operators - `X` (upper-case)
 
 Note that the result of the Cartesian product is in general a set of sequences,
 such that each sequence has length 2. That is independent of which input sets

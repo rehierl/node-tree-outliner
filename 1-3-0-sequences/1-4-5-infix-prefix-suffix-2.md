@@ -2,13 +2,13 @@
 <!-- ======================================================================= -->
 # Infix, Prefix, Suffix
 
-Note that ...
-
-* The following definitions will be referred to as "index-based".
+* The following definitions will be referred to as being "index-based".
 * Any non-empty infix `t` may appear several times within the corresponding
   sequence `s`. That is, there may be more than one offset at which `t` can
   be located in `s`.
-* The concatenation-based definitions still apply.
+* The index-based definitions require non-empty sequences. That is, under these
+  definitions, the empty sequence `[]` is not understood to be a subsequence of
+  any sequence, which is obviously in contrast to the `subset-of` operator.
 
 <!-- ======================================================================= -->
 ## infix/substring

@@ -5,7 +5,7 @@
 <!-- ======================================================================= -->
 ## wikipedia, preorder
 
-* aka. quasi order
+* aka. preset, quasi order
 * must be - reflexive, transitive
 * note - a preorder may have more characteristics
 * partial order - an antisymmetric preorder
@@ -46,7 +46,7 @@ intervals
 <!-- ======================================================================= -->
 ## wikipedia, partial order
 
-* poset - a partially ordered set
+* aka. poset, a partially ordered set
 * formalizes the intuitive concept of ordering
 * i.e. a set joined with a binary relation on that set
 * the relation indicates which element precedes another
@@ -111,6 +111,7 @@ interval
 <!-- ======================================================================= -->
 ## wikipedia, total order
 
+* aka. loset, toset, a linear/totally ordered set
 * aka. totally/linearly/simply ordered set, chain
 * aka. total/linear/simple order, (non-strict) ordering
 * linear extension - transform a partial order into a total order

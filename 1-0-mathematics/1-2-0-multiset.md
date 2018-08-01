@@ -208,7 +208,7 @@ The result will be `0` if `(x !in V)`.
 
 (v in V)
 
-* `(v in V)` := `(multiplicityOf(v,V) >= 1)`
+* `(v in V) := (multiplicityOf(v,V) >= 1)`
 * `(v element-of V), elementOf(v,V) := (v in V)`
 * `(V contains v), (v belongs-to V) := (v in V)`
 
