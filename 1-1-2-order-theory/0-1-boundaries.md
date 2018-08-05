@@ -132,4 +132,4 @@ remarks
 * S has least element => S has infimum
 * otherwise, inf does not exist or in (T\S)
 
-**TODO** - canceled at some point
+**SKIPPED** - canceled at some point

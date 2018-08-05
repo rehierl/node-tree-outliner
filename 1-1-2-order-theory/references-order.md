@@ -80,12 +80,13 @@ sequence-based orders
 * [wikipedia, lexicographical order](https://en.wikipedia.org/wiki/Lexicographical_order)
 * [wikipedia, shortlex order](https://en.wikipedia.org/wiki/Shortlex_order)
 
-general orders
+other orders
 
+* [wikipedia, prefix order](https://en.wikipedia.org/wiki/Prefix_order)
 * [wikipedia, interval order](https://en.wikipedia.org/wiki/Interval_order)
 * [wikipedia, containment order](https://en.wikipedia.org/wiki/Containment_order)
 
-other orders
+social orders
 
 * [wikipedia, order of operations](https://en.wikipedia.org/wiki/Order_of_operations)
 * [wikipedia, order of battle](https://en.wikipedia.org/wiki/Order_of_battle)

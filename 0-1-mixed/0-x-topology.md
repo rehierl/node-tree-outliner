@@ -25,7 +25,7 @@ topologies on sets
 
 * T is referred to as a topology on X, if
 * 0 - X is a set and T a family of subsets
-* 1 - {} and X are elements of T
+* 1 - {} and X itself are elements of T
 * 2 - (a + b) and (a & b) in T for any (a,b in T)
 
 remarks

@@ -41,15 +41,15 @@ left-unique   right-unique   left-total   right-total
 
 ### left-unique, injective
 
-* if `aRc` and `bRc`, then `(a == b)`
-* i.e. there is no `c` such that `aRc` and `bRc` for `(a != b)`
+* if aRc and bRc, then (a == b)
+* i.e. there is no `c` such that aRc and bRc for (a != b)
 * i.e. no two elements have the same outcome `y`
 * i.e. each `y` has no more than one income `x`
 
 ### right-unique, functional
 
-* if `aRc` and `aRd`, then `(c == d)`
-* i.e. there is no `a` such that `aRc` and `aRd` for `(c != d)`
+* if aRc and aRd, then (c == d)
+* i.e. there is no `a` such that aRc and aRd for (c != d)
 * i.e. no two elements that have the same income `x`
 * i.e. each `x` has no more than one outcome `y`
 
@@ -60,7 +60,7 @@ left-unique   right-unique   left-total   right-total
 
 ### right-total, surjective, onto
 
-* for any `c`, there is an `a` such that `aRc`
+* for any `c`, there is an `a` such that aRc
 * i.e. any `b` has an income - can be reached
 
 ### combinations of uniqueness and totality
@@ -72,80 +72,87 @@ left-unique   right-unique   left-total   right-total
 <!-- ======================================================================= -->
 ## properties
 
-* `R := (A,A,G)`
+* R := (A,A,G)
 * must be homogenous?
 * endo-relation - binary and homogeneous
-* universal relation U - `(A × A)` or `{ aRb | (a,b in A) }`
-* identity relation I - `{ aRa | (a in A) }`
+* universal relation U - (A × A) or { aRb | (a,b in A) }
+* identity relation I - { aRa | (a in A) }
 
 ### reflexive
 
 * "all loops"
-* `aRa` for all `(a in A)`
-* i.e. there is no `a` such that `!aRa`
+* aRa for all (a in A)
+* i.e. there is no `a` such that !aRa
 * i.e. any `a` is strictly related to itself
 * e.g. "is equal to"
 
 ### irreflexive, strict
 
 * "no loops"
-* no `aRa` for any `(a in A)`
-* i.e. there is no `a` such that `aRa`
+* no aRa for any (a in A)
+* i.e. there is no `a` such that aRa
 * e.g. "greater than"
 
 clarification
 
-* if `aRa` or `!aRa` for some `(a in A)`,
+* if aRa or !aRa for some (a in A),
 * then neither reflexive nor irreflexive
 
 ### coreflexive
 
 * "only loops"
-* if `aRb`, then `(a == b)`
-* i.e. no `aRb` such that `(a != b)`
-* `(R subset-of I)` if `R` is coreflexive
+* if aRb, then (a == b)
+* i.e. no aRb such that (a != b)
+* (R subset-of I) if `R` is coreflexive
 * e.g. "identical to"
 
 ### quasi-reflexive
 
 * "related with loops"
-* if `aRb`, then `aRa` and `bRb`
+* if aRb, then aRa and bRb
+* i.e. not quite reflexive
 
 ### symmetric
 
 * "undirectional, non-strict - possible loops"
-* if `aRb`, then also `bRa`
+* if aRb, then also bRa
 * i.e. no strict orientation/direction
 * e.g. "is equal to"
 
 clarification
 
-* symmetric => `(inv(R) == R)` => palindromic
+* symmetric => (inv(R) == R) => palindromic
 
 ### anti-symmetric
 
 * "directional, non-strict - possible loops"
-* if `aRb` and `bRa`, then `(a == b)`
-* `aRa` is allowed, but not required
-* if `aRb` and `(a != b)`, then `!bRa`
+* if aRb and bRa, then (a == b)
+* aRa is allowed, but not required
+* if aRb and (a != b), then !bRa
 * e.g. "greater or equal"
 
 ### a-symmetric
 
 * "directional, strict - no loops"
-* if `aRb`, then `!bRa`
-* `aRa` is no longer allowed
+* if aRb, then !bRa
+* aRa is no longer allowed
 * e.g. "greater than"
 
 ### transitive
 
-* if `aRb` and `bRc`, then also `aRc`
+* if aRb and bRc, then also aRc
 * e.g. "is ancestor of"
+
+### quasi-transitive
+
+* if (aRb & !bRa & bRc & !cRb), then also (aRc & !cRa)
+* i.e. R is not required to be asymmetric
+* i.e. not quite transitive
 
 ### connex
 
 * "all related - all loops"
-* for any pair it holds that `aRb` and/or `bRa`
+* for any pair it holds that aRb and/or bRa
 * i.e. any pair is related/comparable - i.e. total ?
 * also, any connex relation is reflexive
 * originates from order theory
@@ -153,21 +160,21 @@ clarification
 ### semi-connex
 
 * "all related, non-strict - possible loops"
-* for any pair `(a != b)` it holds that `aRb` and/or `bRa`
-* note - `(!a -> b)` <-> `(a or b)` <-!-> `(a -> !b)`
-* `aRa` is allowed, but not required
+* for any pair (a != b) it holds that aRb and/or bRa
+* note - (!a -> b) <-> (a or b) <-!-> (a -> !b)
+* aRa is allowed, but not required
 
 ### trichotomous
 
 * "all related, strict - no loops"
-* if `aRb` xor `bRa` xor `(a == b)`
-* i.e. `!aRa` for any `a` => irreflexive
+* if aRb xor bRa xor (a == b)
+* i.e. !aRa for any `a` => irreflexive
 * e.g. "greater than"
 
 <!-- ======================================================================= -->
 ## serial
 
-* for any `a`, there is a `b` such that `aRb`
+* for any `a`, there is a `b` such that aRb
 * e.g. intervals (open or closed) equipped with (<) or (<=)
-* e.g. `R := ([1,*],<)` - serial - there always is a greater element
-* e.g. `R := ([1,*],>)` - not serial - no `n` such that `(n < 1)`
+* e.g. R := ([1,*],<) - serial - there always is a greater element
+* e.g. R := ([1,*],>) - not serial - no `n` such that (n < 1)

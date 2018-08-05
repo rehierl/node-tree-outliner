@@ -35,9 +35,7 @@ rado/random graph
 * vertices are HF sets
 * edges - iff one HF set is contained within the other
 
-hereditarily countable sets
-
-**TODO** - a set that is ...
+**SKIPPED** - hereditarily countable sets
 
 <!-- ======================================================================= -->
 ## wikipedia, von neumann universe V
@@ -54,4 +52,4 @@ rank of a well-founded set
 * Va - all sets having rank less than a
 * sets Va - called stages or ranks
 
-**TODO** - canceled, too abstract
+**SKIPPED** - canceled, too abstract

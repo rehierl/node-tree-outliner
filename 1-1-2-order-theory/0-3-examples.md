@@ -120,6 +120,33 @@ definition - lexicographic order
 <!-- ======================================================================= -->
 ## Other orders
 
+### wikipedia, prefix order
+
+* generalizes the intuitive concept of a tree
+* introduces the possibility of continuous progress/branching
+
+formally
+
+* a downward-total poset P := (X,<=)
+* downward-total - if (a <= c) and (b <= c), then (a <= b) or (b <= a)
+* note - this is not left-euclidean
+
+history-preserving function
+
+* given a prefix-ordered poset P, and a point (p in P)
+* given (f: P -> Q), P and Q are both prefix-ordered posets
+* history - p* := {q | (q <= p)}
+* (f) is history-preserving, iff (f(p*) = f(p)*)
+* future - p+ := {q | (p <= q)}
+* (f) is future-preserving, iff (f(p+) = f(p)+)
+* history/future-preserving -> order-preserving
+
+isomorphism
+
+* any bijective history-preserving function is an order-isomorphism
+* P* := {p* | (p in P)} - prefix-ordered by subset-of
+* (max: P* -> P) is an isomorphism such that (max(p*) = p)
+
 ### wikipedia, interval order
 
 * a collection of intervals on the real numbers
@@ -138,8 +165,8 @@ remarks
 * semiorders - subclass of interval orders in case of unit-length intervals
 * interval graph - the complement of the interval-order's comparability graph
 
-**TODO** - interval dimension
-**TODO** - combinatorics
+**SKIPPED** - interval dimension
+**SKIPPED** - combinatorics
 
 ### wikipedia, containment order
 

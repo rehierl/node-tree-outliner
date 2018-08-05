@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # Core terms used
 
+* term "sequence" will be used in the course of this discussion
+
 tuples
 
 * `t := [1, 'a'] := (1,a)`
@@ -29,30 +31,6 @@ vectors
 
 * `v := [1.0, 2.0, 3.0] := < 1, 2, 3 >`
 * in general an element of the real coordinate space (R^n)
-
-<!-- ======================================================================= -->
-## wikipedia, unordered pair
-
-* a (multi-)set of the form {a,b}
-* i.e. no particular relation between (a) and (b)
-* aka. 2-set, binary set, etc.
-* aka. an unordered n-tuple
-* i.e. {a1,a2,...,an}
-* i.e. {a,b} == {b,a}
-
-remarks
-
-* unordered tuples - aka. multisets
-
-<!-- ======================================================================= -->
-## wikipedia, ordered pair
-
-* a pair of objects in which the order of an object is significant
-* i.e. has first and second/last element/component/coordinate
-* `(a1,b1) = (a2,b2)` iff `(a1=a2)` and `(b1=b2)`
-* (a,b) in (A × B) - Cartesian product
-* several formal definitions possible
-* e.g. Kuratowski's definition
 
 <!-- ======================================================================= -->
 ## wikipedia, tuples
@@ -104,6 +82,30 @@ implementations
 * i.e. accessed by labels
 
 <!-- ======================================================================= -->
+## wikipedia, unordered pair
+
+* a (multi-)set of the form {a,b}
+* i.e. no particular relation between (a) and (b)
+* aka. 2-set, binary set, etc.
+* aka. an unordered n-tuple
+* i.e. {a1,a2,...,an}
+* i.e. {a,b} == {b,a}
+
+remarks
+
+* unordered tuples - aka. multisets
+
+<!-- ======================================================================= -->
+## wikipedia, ordered pair
+
+* a pair of objects in which the order of an object is significant
+* i.e. has first and second/last element/component/coordinate
+* `(a1,b1) = (a2,b2)` iff `(a1=a2)` and `(b1=b2)`
+* (a,b) in (A × B) - Cartesian product
+* several formal definitions possible
+* e.g. Kuratowski's definition
+
+<!-- ======================================================================= -->
 ## wikipedia, product type
 
 * in programming languages and type theory
@@ -127,3 +129,48 @@ implementations
 
 <!-- ======================================================================= -->
 ## wikipedia, strings
+
+* a sequence of characters or more general a list of some other data
+* formal - a finite sequence of symbols over the non-empty alphabet (A)
+* no assumption is made about the nature of the symbols within A
+* `#s`, `|s|`, length := the number of symbols within the string
+* A{n} := the set of strings of length `n`
+* A* := the countably infinite set of strings of any length
+* A* - aka. Kleene closure of A
+* B is a formal language over A, if (B subset-of A*)
+
+concatenation: (A*,A*) -> A*
+
+* synonymous - concatenation, concat, add, append, &, +
+* associative, non-commutative
+* e, eps, epsilon, "" - the empty string, the identity element
+* `(s × e) = (e × s) = s`
+* i.e. append and A* form a monoid
+* length() defines a monoid homomorphism from A* to [0,*]
+* `t` is a substring-of `s`, iff `u` and `v` exist such that `s = (u × t × v)`
+* substring-of defines a partial order on A*
+* i.e. the least element element is eps
+
+prefix, suffix
+
+* `t` is a prefix-of `s`, iff `u` exists such that `s = (t × u)`
+* `t` is a suffix-of `s`, iff `u` exists such that `s = (u × t)`
+* strict/proper prefix/suffix if (u != eps)
+* any prefix/suffix is also a substring
+* prefix-of and suffix-of form prefix-orders
+
+remarks
+
+* rotation - `t = uv` is a rotation of `s = vu`
+* reversal - `t = abc` is reverse to `s = cba`
+
+**SKIPPED** - implementation-specific aspects
+
+<!-- ======================================================================= -->
+## wikipedia, infix
+
+<!-- ======================================================================= -->
+## wikipedia, prefix
+
+<!-- ======================================================================= -->
+## wikipedia, suffix

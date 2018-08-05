@@ -30,7 +30,7 @@ remarks
 * SWOs generalize semiorders, but don't assume transitivity of incomparability
 * strict total order - a trichotomous SWO
 
-**TODO** - canceled at some point
+**SKIPPED** - canceled at some point
 
 <!-- ======================================================================= -->
 ## wikipedia, well order
@@ -73,8 +73,8 @@ examples
 * width of a poset - cardinality of a maximum antichain
 * i.e. width is max k, if partition a poset into k chains
 
-**TODO** - sperner families
-**TODO** - join/meet operations
+**SKIPPED** - sperner families
+**SKIPPED** - join/meet operations
 
 <!-- ======================================================================= -->
 ## wikipedia, filter
@@ -145,7 +145,7 @@ remarks
 * meet-semilattice - each pair has a greatest lower bound
 * lattice - if join- and meet-semilattice
 
-**TODO** - canceled after the definition
+**SKIPPED** - canceled after the definition
 
 <!-- ======================================================================= -->
 ## wikipedia, semiorder
@@ -167,4 +167,4 @@ remarks
 * (<) is transitive - i.e. if (y = z) and due to (a2)
 * originally introduced to model human preferences (psychology)
 
-**TODO** - canceled after the definition
+**SKIPPED** - canceled after the definition

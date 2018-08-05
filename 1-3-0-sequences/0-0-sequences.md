@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # Sequences
 
-* See "mathematics" for the core concept of sequences.
-* See "topology" for "every sequence is a net".
+* see "mathematics" for the core concept of sequences.
+* see "topology" for "every sequence is a net".
 
 Note that, in the course of this discussion, the focus will be on "linear
 orders of nodes" which result from some tree traversal.

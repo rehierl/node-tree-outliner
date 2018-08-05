@@ -38,7 +38,7 @@ classes
 
 nested/hereditarily sets
 
-* [wikipedia, hereditarily finite set](https://en.wikipedia.org/wiki/Hereditarily_finite_set)
+* [wikipedia, hereditarily set](https://en.wikipedia.org/wiki/Hereditarily_finite_set)
 * [wikipedia, rado graph](https://en.wikipedia.org/wiki/Rado_graph)
 * [wikipedia, bit predicate](https://en.wikipedia.org/wiki/BIT_predicate)
 * [wikipedia, hereditarily countable set](https://en.wikipedia.org/wiki/Hereditarily_countable_set)

@@ -69,12 +69,16 @@ a |               | c
 
 right-euclidean, euclidean
 
-* if `aRc` and `aRd`, then also `cRd`
+* if aRc and aRd, then also cRd - and also dRc (?)
+* note - aRa and aRb -> aRb - and also bRa
+* note - aRb (and aRb) -> bRb
 * e.g. "equality"
 
 left-euclidean
 
-* if `aRc` and `bRc`, then also `aRb`
+* if aRc and bRc, then also aRb - and also bRa (?)
+* note - aRa and bRa -> aRb - and also bRa
+* note - aRb (and aRb) -> aRa
 
 remarks
 

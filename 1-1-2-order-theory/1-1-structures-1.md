@@ -76,8 +76,8 @@ extrema
 * minimal/maximal elements
 * upper/lower bounds
 
-**TODO** - cartesian product of posets
-**TODO** - sums of posets
+**SKIPPED** - cartesian product of posets
+**SKIPPED** - sums of posets
 
 strict/non-strict partial orders
 
@@ -88,9 +88,9 @@ strict/non-strict partial orders
 * strict partial orders correspond more closely with DAGs
 * i.e. every strict partial order is a DAG
 
-**TODO** - inverse and order dual
-**TODO** - mappings between posets
-**TODO** - number of posets
+**SKIPPED** - inverse and order dual
+**SKIPPED** - mappings between posets
+**SKIPPED** - number of posets
 
 linear extension
 
@@ -98,8 +98,8 @@ linear extension
 * every partial order can be extended to a total order
 * topological sorting - find an extension for a DAG
 
-**TODO** - category theory
-**TODO** - posets in topological spaces
+**SKIPPED** - category theory
+**SKIPPED** - posets in topological spaces
 
 interval
 
@@ -136,4 +136,4 @@ examples
 
 * e.g. any set of cardinal/ordinal numbers
 
-**TODO** - continue with "further concepts"
+**SKIPPED** - continue with "further concepts"

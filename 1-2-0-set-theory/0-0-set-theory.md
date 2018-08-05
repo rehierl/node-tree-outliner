@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # Set theory
 
-* See "mathematics" for the core concept of sets.
-* See "sequences" for "ordered sets".
+* see "mathematics" for the core concept of sets.
+* see "sequences" for "ordered sets".
 
 <!-- ======================================================================= -->
 ## wikipedia, set theory
