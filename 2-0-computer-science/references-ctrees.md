@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # References - computer science, trees
 
+* [wikipedia, prefix tree](https://en.wikipedia.org/wiki/Trie)
+* [wikipedia, suffix tree](https://en.wikipedia.org/wiki/Suffix_tree)
+
 tree presentation
 
 * [wikipedia, outlines](https://en.wikipedia.org/wiki/Outline_%28list%29)

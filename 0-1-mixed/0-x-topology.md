@@ -52,7 +52,7 @@ general topology
 * aka. moore-smith sequence
 * generalizes the notion of a sequence
 * a sequence is a function/map (f) such that
-* 1 - the domain is the set of natrual numbers
+* 1 - the domain is the set of natural numbers
 * 2 - the codomain is a topological space
 * however, the following two conditions are not equivalent
 * 1 - (f) is continuous (in topological sense)

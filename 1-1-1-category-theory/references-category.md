@@ -3,6 +3,7 @@
 ## References - category theory
 
 * [wikipedia, coproduct](https://en.wikipedia.org/wiki/Coproduct)
+* [wikipedia, diagram](https://en.wikipedia.org/wiki/Diagram_%28category_theory%29)
 
 category theory
 

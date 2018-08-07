@@ -4,6 +4,7 @@
 
 * [wikipedia, information science](https://en.wikipedia.org/wiki/Information_science)
 * [wikipedia, computer science](https://en.wikipedia.org/wiki/Computer_science)
+* [wikipedia, big-o-notation](https://en.wikipedia.org/wiki/Big_O_notation)
 
 <!-- ======================================================================= -->
 ## References - mixed topics
@@ -36,10 +37,13 @@ recursion
 <!-- ======================================================================= -->
 ## References - abstract concepts
 
-* [wikipedia, DFA](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
+automata theory
 
-turing machines
-
+* [wikipedia, automata theory](https://en.wikipedia.org/wiki/Automata_theory)
+* [wikipedia, finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine)
+* [wikipedia, nondeterministic automaton](https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton)
+* [wikipedia, deterministic automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
+* [wikipedia, pushdown automaton](https://en.wikipedia.org/wiki/Pushdown_automaton)
 * [wikipedia, turing machine](https://en.wikipedia.org/wiki/Turing_machine)
 * [wikipedia, turing completeness](https://en.wikipedia.org/wiki/Turing_completeness)
 

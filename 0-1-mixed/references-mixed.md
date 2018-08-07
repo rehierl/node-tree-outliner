@@ -60,3 +60,22 @@ anthropology
 
 * [wikipedia, kinship relations](https://en.wikipedia.org/wiki/Kinship)
 * [wikipedia, kinship terminology](https://en.wikipedia.org/wiki/Kinship_terminology)
+
+<!-- ======================================================================= -->
+## References - formal language
+
+* [wikipedia, formal language](https://en.wikipedia.org/wiki/Formal_language)
+* [wikipedia, formal grammar](https://en.wikipedia.org/wiki/Formal_grammar)
+
+chomsky hierarchy
+
+* [wikipedia, chomsky hierarchy](https://en.wikipedia.org/wiki/Chomsky_hierarchy)
+* [wikipedia, unrestricted grammar - t0](https://en.wikipedia.org/wiki/Unrestricted_grammar)
+* [wikipedia, context-sensitive grammar - t1](https://en.wikipedia.org/wiki/Context-sensitive_grammar)
+* [wikipedia, context-free grammar - t2](https://en.wikipedia.org/wiki/Context-free_grammar)
+* [wikipedia, regular grammar - t3](https://en.wikipedia.org/wiki/Regular_grammar)
+
+w-languages
+
+* [wikipedia, omega language](https://en.wikipedia.org/wiki/Omega_language)
+* [wikipedia, omega-regular language](https://en.wikipedia.org/wiki/Omega-regular_language)

@@ -11,8 +11,8 @@ orders of nodes" which result from some tree traversal.
 <!-- ======================================================================= -->
 ## Sequences are more than "sequences"
 
-* `s = [ e1, ..., eN ]` for `(s in XTi)`
-* `(f: (XTi,Index) -> Element)`
+* `s = [ e1, ..., eN ]` for `(s in ×Ti)`
+* `(f: (×Ti,Index) -> Element)`
 * note - closely related to orders
 * note - distinct elements may hold the same value
 * i.e. a sequence is a group of elements paired with an order-relation

@@ -12,7 +12,7 @@ elements: e1 e2
 values:   v1
 ```
 
-* the term used throughout this discussion is "sequences"
+* "sequence" is the term that will be used throughout this discussion
 * see "sequences" for further details
 
 <!-- ======================================================================= -->
@@ -50,7 +50,7 @@ clarification
 clarification
 
 * any sequence is itself a value
-* the expressions `(e = s)`, `{ s }`, `[ s ]` are all valid expressions
+* the expressions `(e = s)`, `{s}`, `[s]` are all valid expressions
 
 <!-- ======================================================================= -->
 ## is-sequence
@@ -82,7 +82,7 @@ a sequence adopts the following definitions:
 
 add(x,s)
 
-* `add(v,s) := (s append v)`
+* `add(v,s) := (s append v) := (s × v)`
 * i.e. append value `v` to the end of sequence `s`
 * e.g. `add(4,s) = [ 1, 2, 3, 2, 4 ]`
 
@@ -105,9 +105,9 @@ note that ...
 
 ```
 traceOf(s) begin
-  t = new sequence()
+  t = ()
   for e in s begin
-    t.add(e.value)
+    t = add(e.value, t)
   end
   return t
 end
@@ -117,19 +117,19 @@ s1 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
 s2 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
 ```
 
-* any sequence of values allows to iterate over its elements
+* any sequence of values allows to consistently iterate over its elements
 * the iteration will visit the elements in order - i.e. from first to last
 * subsequent iterations will visit the elements in the exact same order
-* i.e. `s1` is guaranteed to be identical to `s2`
+* i.e. `s1` is guaranteed to always be identical to `s2`
 
 <!-- ======================================================================= -->
 ## index-of
 
 ```
-firstIndexOfValue(x,seq) begin
+firstIndexOfValue(v,seq) begin
   index = 1
   for e in seq begin
-    if (e.value == x) begin
+    if (e.value == v) begin
       return index
     end
     index = index + 1
@@ -138,11 +138,11 @@ firstIndexOfValue(x,seq) begin
 end
 ```
 
-* `indexOf(x,s) := firstIndexOfValue(x,s)`
+* `indexOf(v,s) := firstIndexOfValue(v,s)`
 * note the 1-based index of a value, not of an element
 
 Note that the index of a value is undefined (i.e. zero/0),
-if its multiplcitiy within `s` is zero/0.
+if its multiplicity within `s` is zero/0.
 
 <!-- ======================================================================= -->
 ## (v in s), element-of

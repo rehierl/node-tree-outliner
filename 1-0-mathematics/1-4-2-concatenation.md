@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # Concatenation
 
-* here, (x) represents the concatenation product operator
+* here, (×) represents the concatenation product operator
 * synonymous terms - add, append, concatenate
-* synonymous operators - `x` (lower-case), `&`, `+`, `concat`, `append`
+* synonymous operators - `x` (lower-case letter), `&`, `+`, etc.
 
 Note that any sequence is in principle the result of concatenating its elements:
 `s = [e1, ..., eN] := e1 × ... × eN`. That is, the result of a concatenation is
@@ -18,29 +18,32 @@ in general a flat sequence.
 * `XV^N <-> xV^N`, if `V` is a set of (atomic) values
 * `XV^{a,b} <-> xV{a,b}`, if `V` is a set of values
 
-If the concatenation is extended to operate on sets, the result will be a set
-of sequences. Depending on the input parameters, the resulting set of sequences
-will in principle be **a set of flat sequences** (i.e. no nesting). That is in
-contrast to the base definition of the Cartesian product.
+If the concatenation is extended to operate on sets, the result will be a
+single set of sequences. Depending on the input parameters, the resulting set
+of sequences will be in general **a set of flat sequences** (i.e. no nesting).
+That is in contrast to the base definition of the Cartesian product.
 
 In contrary to the extended definition of the Cartesian product, there is no
 general statement possible about the lengths of the sequences in the resulting
-set-of-sequences. Likewise, the number of sequences in the resulting set can in
-general not be determined. However, such statements can still be made under
-certain circumstances: If no input set is a set of sequences, then the length
-of each sequence within the resulting set is corresponds with the number of
-sets involved. In contrary to that, the sequences in the resulting set of the
-Cartesian product always have the exact same length.
+set-of-sequences. Likewise, the number of sequences in the resulting set can
+in general not be determined.
+
+However, such statements can still be made under certain circumstances: If no
+input set is a set of sequences, then the length of each sequence within the
+resulting set corresponds with the number of sets involved. In contrary to
+that, the sequences in the resulting set of the Cartesian product always have
+the exact same length.
 
 <!-- ======================================================================= -->
 ## (v × w)
 
-* combining values with values
+* combining (sets of) values with (sets of) values
 
 `v × w := (v,w)`
 
 * for two values `v` and `w`
 * signature - (value, value) -> sequence
+* note that - `(A × B) <-!-> (B × A)`
 
 `v × W := { (v,w) | (w in W) }`
 
@@ -63,7 +66,7 @@ similar definition(s) for
 <!-- ======================================================================= -->
 ## (s × v)
 
-* combining sequences with values
+* combining (sets of) sequences with (sets of) values
 
 `s × v := [s1,...,si,v]`
 
@@ -79,36 +82,36 @@ similar definition(s) for
 * note that - value `v` is added to the beginning of sequence `s`
 * note that - `#(v × s) = (1 + #s)`
 
-`s × V := { u | for all (u in (s × v)) and all (v in V) }`
+`s × V := { (s × v) | for all (v in V) }`
 
 * for sequence `s` and set-of-values `V`
 * signature - (sequence, set-of-values) -> set-of-sequences
 * note that - `(#t == (#s+1))` for any `t in (s × V)`
 * note that - `#(s × V) == #V`
 
-`S × v := { u | for all (u in (s × v)) and all (s in S) }`
+`S × v := { (s × v) | for all (s in S) }`
 
 * for set-of-sequences `S` and value `v`
 * signature - (set-of-sequences, value) -> set-of-sequences
 * note that - `(s in S)` may have any length
 * note that - `#(S × v) == #S`
 
-`S × V := { u | for all (u in (s × v)), all (s in S) and all (v in V) }`
+`S × V := { (s × v) | for all (s in S) and all (v in V) }`
 
 * for set-of-sequences `S` and set-of-values `V`
 * signature - (set-of-sequences, set-of-values) -> set-of-sequences
 * note that - `(s in S)` may have any length
 * note that - `#(S × V) == (#S * #V)`
 
-similar definitions for
+similar definition(s) for
 
-* `V × s := { u | for all (u in (v × s)) and all (v in V) }`
-* `v × S := { u | for all (u in (v × s)) and all (s in S) }`
+* `V × s := { (v × s) | for all (v in V) }`
+* `v × S := { (v × s) | for all (s in S) }`
 
 <!-- ======================================================================= -->
 ## (s × t)
 
-* combining sequences with sequences
+* combining (sets of) sequences with (sets of) sequences
 
 `s × t := [s1,...,si,t1,...,tj]`
 
@@ -116,19 +119,23 @@ similar definitions for
 * signature - (sequence, sequence) -> sequence
 * note that - `#(s × t) = (#s + #t)`
 
-`s × T := { u | for all (u in (s × t)) and all (t in T) }`
+`s × T := { (s × t) | for all (t in T) }`
 
 * for sequence `s` and set-of-sequences `T`
 * signature - (sequence, set-of-sequences) -> set-of-sequences
 * note that - sequence `u in (S × T)` may have any length
 * note that - `#(s × T) == #T`
 
-`S × T := { u | for all (u in (s × t)), all (s in S) and all (t in T) }`
+`S × T := { (s × t) | for all (s in S) and all (t in T) }`
 
 * for set-of-sequences `S` and set-of-sequences `T`
 * signature - (set-of-sequences, set-of-sequences) -> set-of-sequences
 * note that - sequence `u in (S × T)` may have any length
 * note that - `#(S × T) <= (#S * #T)`
+
+similar definition(s) for
+
+* `S × t := { (s × t) | for all (s in S) }`
 
 clarification
 
@@ -139,11 +146,11 @@ clarification
 <!-- ======================================================================= -->
 ## summary
 
-* `a×b×c = (a×b)×c = a×(b×c)` - one sequence
-* `a×b×C = (a×b)×C = a×(b×C)` - set of sequences
-* `a×B×C = (a×B)×C = a×(B×C)` - set of sequences
-* `A×b×C = (A×b)×C = A×(b×C)` - set of sequences
-* `A×B×C = (A×B)×C = A×(B×C)` - set of sequences
+* `a×b×c = (a×b)×c = a×(b×c)` - one sequence only
+* `a×b×C = (a×b)×C = a×(b×C)` - a set of sequences
+* `a×B×C = (a×B)×C = a×(B×C)` - a set of sequences
+* `A×b×C = (A×b)×C = A×(b×C)` - a set of sequences
+* `A×B×C = (A×B)×C = A×(B×C)` - a set of sequences
 
 Note that ...
 

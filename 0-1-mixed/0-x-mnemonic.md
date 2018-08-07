@@ -6,7 +6,7 @@ This section is intended to collect ideas of how to represent/explain the
 rather abstract following discussions.
 
 <!-- ======================================================================= -->
-## wikipedia, Mnemonic
+## wikipedia, mnemonic
 
 * a technique to aid in information retention and retrieval
 * use of - encoding, retrieval cues, images

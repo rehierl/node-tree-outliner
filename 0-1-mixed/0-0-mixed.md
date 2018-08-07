@@ -19,8 +19,8 @@ purpose is to grasp the general idea/concept.
 
 * used in computer/information science
 * includes - representation, naming, categories, properties, relations
-* used to limit complexity and organize information
-* intended to improve problem solving - i.e. gain new knowledge
+* used to limit complexity and to organize information
+* intended to improve problem solving - i.e. new knowledge
 
 <!-- ======================================================================= -->
 ## wikipedia, taxonomy

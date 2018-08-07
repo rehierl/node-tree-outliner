@@ -179,7 +179,7 @@ s1 = traceOf(s) //- e.g. [ 2, 1, 3, 2 ]
 s2 = traceOf(s) //- e.g. [ 3, 2, 1, 2 ]
 ```
 
-* any multiset of values allows iterate over its elements
+* any multiset of values allows to randomly iterate over its elements
 * an iteration may visit the elements in any order
 * subsequent iterations may visit the elements in different order
 * i.e. `s1` is not guaranteed to be identical to `s2`

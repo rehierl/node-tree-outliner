@@ -7,7 +7,8 @@
 * not sequent <=!=> in-sequent
 
 Note that, from now on, the terms "elements" and "values" are in general used
-synonymously: e.g. the values of a sequence are sequent => they appear sequently.
+synonymously: e.g. the values of a sequence are sequent, i.e. they appear
+sequently within a sequence.
 
 Note that confusion is inevitable,
 if a sequence contains one or more elements more than once.

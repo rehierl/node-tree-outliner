@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Core terms used
+# Tuples, Sequences
 
 * term "sequence" will be used in the course of this discussion
 
@@ -21,7 +21,7 @@ sequences
 
 strings
 
-* `s := ['a', 'b', 'a', 'c', ...] := "abac..."`
+* `s := "abac..." := ['a', 'b', 'a', 'c', ...]`
 * traditionally a sequence of characters
 * elements are selected from an alphabet
 * in computing generalized into a sequence of binary data of sorts
@@ -127,50 +127,109 @@ remarks
 <!-- ======================================================================= -->
 ## wikipedia, sequences
 
+* aka. strings, words, lists, streams
+* an enumerated collection of objects
+* a sequence of members/elements/terms
+* may appear multiple times at different positions - aka. repetitions
+* length - the number of elements
+* finite/infinite sequences - with regards to their length
+* the empty sequence () may be excluded
+
+formally defined as a function
+
+* (f: Naturals -> Elements)
+* domain - the index set holds rank/index values
+* conventional aspect whether 0- or 1-based indexes are used
+
+notation
+
+* complete listing - e.g. (1,2,3)
+* first few elements - e.g. (2,3,5,7,11,...)
+* a formula to compute the n-th element - e.g. (2*n)
+* sequence of sequences - ( ( ( a(m,n) )_n )_m)
+* recursion - e.g. (an = a(n-1) + a(n-2))
+
+properties
+
+* (f: Integers -> Elements)
+* domain - an interval of integers
+* allows for bi-infinite sequences
+* codomain - usually fixed by context
+* f(1) -> 1st element, f(2) -> 2nd element, ...
+* sequences and limits studied in topological spaces
+* sequences generalized as nets
+* net: a function from a directed set to a topological space
+
+finite, infinite
+
+* length of a sequence: the number of terms
+* n-tuple: a finite sequence of length n
+* infinite sequence: in general finite on one side, infinite on the other
+* i.e. has a first but no final element
+* aka. one-sided infinite sequence
+* bi-infinite: neither a first, nor a final element
+* aka. two-way infinite
+
+increasing, decreasing
+
+* monotonically increasing - each term is greater or equal to the one before it
+* i.e. (an <= an+1) for all (n in Nat)
+* (strictly) monotonically increasing (<=,<)
+* (strictly) monotonically decreasing (>=,>)
+* monotone sequence - either increasing or decreasing
+* non-increasing - neither <= nor < - similarly non-decreasing
+* may be more clear than (strictly) decreasing/increasing
+
+bounded
+
+* upper bound, bounded from above - (an <= m)
+* lower bound, bounded from below - (an >= m)
+
+**SKIPPED** - limits and convergence
+**SKIPPED** - series - sum over all terms
+**SKIPPED** - uses of sequences
+
 <!-- ======================================================================= -->
-## wikipedia, strings
+## wikipedia, subsequences
 
-* a sequence of characters or more general a list of some other data
-* formal - a finite sequence of symbols over the non-empty alphabet (A)
-* no assumption is made about the nature of the symbols within A
-* `#s`, `|s|`, length := the number of symbols within the string
-* A{n} := the set of strings of length `n`
-* A* := the countably infinite set of strings of any length
-* A* - aka. Kleene closure of A
-* B is a formal language over A, if (B subset-of A*)
+* a sequence that can be derived from another
+* derived by deletion/removal - i.e. no change in order
+* e.g. (t subsequence-of s), if t=[b,d] and s=[a,b,c,d,e]
+* subsequence-of is a pre-order
+* note - not (t substring-of s)
+* note - substring-of does not support removal within an infix
+* common subsequence - e.g. u=[b] is a common subsequence of s and t
+* used in bio-informatics - e.g. compare/analyze/store protein sequences
 
-concatenation: (A*,A*) -> A*
+<!-- ======================================================================= -->
+## wikipedia, indexed family
 
-* synonymous - concatenation, concat, add, append, &, +
-* associative, non-commutative
-* e, eps, epsilon, "" - the empty string, the identity element
-* `(s × e) = (e × s) = s`
-* i.e. append and A* form a monoid
-* length() defines a monoid homomorphism from A* to [0,*]
-* `t` is a substring-of `s`, iff `u` and `v` exist such that `s = (u × t × v)`
-* substring-of defines a partial order on A*
-* i.e. the least element element is eps
+* a collection/family of objects
+* each object is associated with an index
 
-prefix, suffix
+definition
 
-* `t` is a prefix-of `s`, iff `u` exists such that `s = (t × u)`
-* `t` is a suffix-of `s`, iff `u` exists such that `s = (u × t)`
-* strict/proper prefix/suffix if (u != eps)
-* any prefix/suffix is also a substring
-* prefix-of and suffix-of form prefix-orders
+* (x: I -> X), index set I, element/indexed set X
+* (xi) - a family of elements in X indexed by I
+* x() - in general only surjective, not necessarily injective
+* i.e. (xi = xj) is allowed for some (i != j)
+* X := { xi | (i in I) } - the set/family of all objects
+* note - (#X <= #I) - i.e. not (==)
+
+functions, sets, families
+
+* any function f with domain I induces a family (f(i))
+* a family of objects is in general a collection - i.e. not a set
+* a set iff f() is injective
+
+subfamily
+
+* (Bi) for (i in J) is a subfamily of (Ai) for (i in I)
+* iff (J subset-of I) and (Bi = Ai) for all (i in J)
+* note - B is not required to be 0/1-based
 
 remarks
 
-* rotation - `t = uv` is a rotation of `s = vu`
-* reversal - `t = abc` is reverse to `s = cba`
-
-**SKIPPED** - implementation-specific aspects
-
-<!-- ======================================================================= -->
-## wikipedia, infix
-
-<!-- ======================================================================= -->
-## wikipedia, prefix
-
-<!-- ======================================================================= -->
-## wikipedia, suffix
+* a N×M matrix is indexed by tuples in (N × M)
+* a net is a family indexed by a directed set
+* diagrams - an analogous concept in category theory
