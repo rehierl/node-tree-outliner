@@ -2,8 +2,9 @@
 <!-- ======================================================================= -->
 # TODO - mathematics
 
-component vs. element
-
-* element => component xor value
-* component - whenever "element" refers to the component of the complex value
-* value - whenever "element" refers to the inner values
+**TODO** -
+define (directed) trees as a complex values? -
+i.e. similar to multisets, sets and sequences -
+e.g. nodes as components -
+too many variations for trees? -
+needs standard operations

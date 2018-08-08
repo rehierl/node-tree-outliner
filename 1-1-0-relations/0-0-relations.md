@@ -58,7 +58,7 @@ clarification
 
 * short - "bin-rel"
 * binary relation := `R = (A, B, G)`
-* a binary relation is an element of `P(A × B)`
+* a binary relation is an element of the powerset `P(A × B)`
 
 homogenous, heterogenous
 

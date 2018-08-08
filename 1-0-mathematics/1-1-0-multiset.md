@@ -3,13 +3,13 @@
 # A multiset of values (ms)
 
 ```
-sets of values
----------------
-order:    none
+multisets
+-------------
+order:  none
 
-elements: e1 e2
-          | /
-values:   v1
+slots:  c1 c2
+        | /
+values: v1
 ```
 
 <!-- ======================================================================= -->
@@ -17,24 +17,22 @@ values:   v1
 
 * values may be grouped into multisets of values
 * multisets are not paired with an order-relation
+* i.e. there is no order on the underlying set of components
 * synonymous - group, collection, etc.
 * multisets are complex values
 
-`ms1 := < v1, v2, v1 >`
+`ms1 := < c1:v1, c2:v2, c3:v1 >` or short `< v1, v2, v1 >`
 
-* each value may appear multiple times within a multiset
+* a multiset holds one component per value
+* the number of components in a multiset is referred to as its "cardinality"
+* the components within a multiset have no order - i.e. no first/last component
+* a component is allowed to hold the value of another component
+* i.e. different components may hold identical values
+* i.e. a `1:N` relationship between values and components
 * the "multiplicity" of `v1` is `2` because `v1` appears twice within `ms1`
+* `(vi != vj) -> (ci !== cj)`, but not vice versa
 
-`ms1 := < e1:v1, e2:v2, e3:v1 >`
-
-* a multiset can be understood to hold one element/slot per value
-* the number of elements in a multiset is referred to as "cardinality"
-* the elements within a multiset have no order - i.e. no first/last element
-* any element is allowed to hold the value of another element
-* i.e. a `1:N` relationship between values and elements
-* `(vi != vj) -> (ei !== ej)`, but not vice versa
-
-`ms2 := < e1:v1, e2:v1, e3:v2 >`
+`ms2 := < e1:v1, e2:v1, e3:v2 >` or short `< v1, v1, v2 >`
 
 * `(ms2 == ms1)` => `ms1` is considered to be equal to `ms2`
 * i.e. both have the same distinct values, and the same multiplicity per value
@@ -42,9 +40,10 @@ values:   v1
 definition
 
 * `V := < vi | (vi holds an odd integer) >`
-* instead of listing each value, multisets can be defined by
+* instead of listing each value, multisets may be defined by
   specifying a condition that must be satisfied by each value
 * alternative notations - `<:>`, `<;>`, `<,>`, etc.
+* i.e. a set-builder-like notation
 
 <!-- ======================================================================= -->
 ## which characters to use?
@@ -52,27 +51,18 @@ definition
 * in general, `{` and `}` are used to group values into multisets
 * this pair of characters is however misleading as they are also used for sets
 * however, in contrary to multisets, simple sets hold distinct values only
-* `[` and `]` could be confused with arrays
 * `(` and `)` could be confused with sequences
-* both of these pairs imply some element order
+* `[` and `]` could be confused with arrays/sequences
+* both of these pairs imply some order of components
 * `<` and `>` seem unique enough to avoid such issues
-* note that vectors aren't subject of this discussion
+* note - vectors aren't subject of this discussion
 
 <!-- ======================================================================= -->
 ## cardinality
 
-* the cardinality of a multiset is
-  the total number of its elements
-* the cardinality of a multiset is the sum over
-  the multiplicities of each distinct value
-
-element, component
-
-* elements are in general referred to as "components"
-* `ms1` has 3 components, but only 2 distinct values
-
-Note that the "cardinality" of a complex value is in general understood to
-refer to the number of elements it needs to hold its values.
+* the cardinality of a multiset is equal to
+  the sum over the multiplicities of its distinct values
+* `ms1` has cardinality 3, but only 2 distinct elements
 
 <!-- ======================================================================= -->
 ## size, length
@@ -84,9 +74,9 @@ sizeOf(ms)
 
 lengthOf(ms), cardinalityOf(ms)
 
-* "length" will be used to refer to the number of elements
+* "length" will be used to refer to the number of components
 * i.e. "length" is understood to be synonymous to "cardinality"
-* i.e. "length" reflects a sequence-based perspective on a mutliset
+* i.e. "length" reflects a sequence-based perspective of a mutliset
 * i.e. "length" is not understood to imply any order
 
 clarification
@@ -101,8 +91,8 @@ clarification
 
 * labels are not part of a multiset, they don't allow to access a component
 * labels act as a visual aid and are intended to support discussions
-* i.e. it is not possible to retrieve the element/value associated with a label
-* i.e. a multiset is still not a dictionary
+* i.e. it is not possible to retrieve the component associated with a label
+* i.e. a multiset is no dictionary
 
 clarification
 
@@ -149,12 +139,6 @@ a multiset of atomic values
 * `(is-multiset ms) := isMultiSet(ms)`
 
 <!-- ======================================================================= -->
-## cardinality
-
-* `#V, #(V)` := the number of elements in multiset `V`
-* `(cardinality-of V), cardinalityOf(V) := #V`
-
-<!-- ======================================================================= -->
 ## is-empty
 
 * `(is-empty V), isEmpty(V) := (#V == 0)`
@@ -168,8 +152,8 @@ a multiset of atomic values
 ```
 traceOf(multiset) begin
   seq = new sequence()
-  for e in multiset begin
-    seq.add(e.value)
+  for c in multiset begin
+    seq.add(c.value)
   end
   return seq
 end
@@ -179,9 +163,9 @@ s1 = traceOf(s) //- e.g. [ 2, 1, 3, 2 ]
 s2 = traceOf(s) //- e.g. [ 3, 2, 1, 2 ]
 ```
 
-* any multiset of values allows to randomly iterate over its elements
-* an iteration may visit the elements in any order
-* subsequent iterations may visit the elements in different order
+* any multiset of values allows to randomly iterate over its components
+* an iteration may visit the components in any order
+* subsequent iterations may visit the components in different order
 * i.e. `s1` is not guaranteed to be identical to `s2`
 * synonymous - iterate, visit
 
@@ -191,8 +175,8 @@ s2 = traceOf(s) //- e.g. [ 3, 2, 1, 2 ]
 ```
 multiplicityOf(x,V) begin
   result = 0
-  for e in V begin
-    if(e.value == x) begin
+  for c in V begin
+    if(c.value == x) begin
       result = result + 1
     end
   end
@@ -200,8 +184,8 @@ multiplicityOf(x,V) begin
 end
 ```
 
-That is, multiplicityOf() returns the number of occurrences of `x` in `V`.
-The result will be `0` if `(x !in V)`.
+* multiplicityOf() returns the number of occurrences of `x` in `V`
+* the result is `0` if no component holds `x` as its value
 
 <!-- ======================================================================= -->
 ## (v in V), element-of
@@ -240,16 +224,8 @@ remove(x,V)
 ## one-element-of
 
 * `oneElementOf(V)` := a random element of the given multiset
+* i.e. subsequent calls may result in different elements being returned
 
-clarification
-
-* the element returned remains to be an element of the set - i.e. not removed
-* each element is returned with equal chance - i.e. `1/#V`
-* i.e. subsequent calls will result in different elements being returned
-
-Recall that elements can not be accessed directly.
-That is, any access to an element will access the value it holds.
-
-Note that this operation is most useful in combination with multisets that
-have cardinality one/1. This operation allows to consistently retrieve the
-single element/value it holds.
+Note that this operation is useful in combination with multisets that have
+cardinality one/1. This operation allows to consistently retrieve the single
+element/value it holds.

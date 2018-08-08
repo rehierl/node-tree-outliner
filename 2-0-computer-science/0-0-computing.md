@@ -39,7 +39,7 @@ structure
 
 * start with a single set S of all elements
 * reach the next set X and split Si in two sets (Si & X) and (Si \ X)
-* needs (1) a list of sets, (2) elements per set, (3) set of element
+* needs (1) a list of sets, (2) elements per set, (3) a set of elements
 
 e.g. used in Coffman-Graham algorithm for parallel scheduling
 

@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # TODO - relations
 
-a relation-based definition of "path"
+a definition of "path" based upon a relation
 
 * given an endo-relation R:=(A,G)
 * p:=(x1,x2,...,xn) is a path

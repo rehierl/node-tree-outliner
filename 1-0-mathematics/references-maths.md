@@ -10,7 +10,7 @@ syntax related
 * [wikipedia, augmented backus-naur form](https://en.wikipedia.org/wiki/Augmented_Backus%E2%80%93Naur_form)
 * [wikipedia, regular expressions](https://en.wikipedia.org/wiki/Regular_expression)
 
-logic/boolean
+boolean logic
 
 * [wikipedia, logic](https://en.wikipedia.org/wiki/Logic)
 * [wikipedia, material conditional (->)](https://en.wikipedia.org/wiki/Material_conditional)
@@ -18,7 +18,7 @@ logic/boolean
 * [wikipedia, if and only if](https://en.wikipedia.org/wiki/If_and_only_if)
 * [wikipedia, boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra)
 
-multisets, sets, sequences
+values - abstract, atomic, complex
 
 * [wikipedia, multiset](https://en.wikipedia.org/wiki/Multiset)
 * [wikipedia, set](https://en.wikipedia.org/wiki/Set_%28mathematics%29)
@@ -28,6 +28,8 @@ multisets, sets, sequences
 * [wikipedia, cartesian product](https://en.wikipedia.org/wiki/Cartesian_product)
 * [wikipedia, sequences](https://en.wikipedia.org/wiki/Sequence)
 * [wikipedia, concatenation](https://en.wikipedia.org/wiki/Concatenation)
+* [wikipedia, equinumerosity](https://en.wikipedia.org/wiki/Equinumerosity)
+* [wikipedia, cardinality](https://en.wikipedia.org/wiki/Cardinality)
 
 types
 

@@ -1,12 +1,9 @@
 
 <!-- ======================================================================= -->
-# Set of elements - E()
+# E() - Set of elements
 
 * the general notion of the E() operator is as follows:
 * E(x) := "the set of elements within the supplied atomic/complex value"
-
-Note that this operator has turned out to be quite useful.
-It will therefore appear throughout this discussion.
 
 **atomic values**
 
@@ -26,12 +23,12 @@ It will therefore appear throughout this discussion.
 * E(c) := union of all E(v) for (v in c)
 * i.e. (E(s) == s) is never true
 
-If E(c) is defined recursively and if all complex values only hold atomic
+If E(c) is defined recursively, and if all complex values only hold atomic
 ex-or complex values, then E(c) will only hold atomic values. That is, E(c)
 would completely resolve all complex values. This however is not intended.
 
-* the default definition - i.e. non-recursive:
-* E(c) := { w | for all (w in E(v)) and all (v in c) }
+* the non-recursive definition (i.e. default):
+* E(c) := { w | for all (v in c) and all (w in E(v)) }
 * i.e. (E(s) == s) is never true
 
 The intention of the E(c) operator with regards to complex values is for it to

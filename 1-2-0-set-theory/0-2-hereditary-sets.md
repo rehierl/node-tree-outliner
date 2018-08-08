@@ -3,7 +3,7 @@
 # Hereditary sets
 
 * aka. pure sets, nested sets
-* a set whose elements are all hereditary sets
+* a set whose elements all are hereditary sets
 * all elements are themselves sets
 * i.e. never any non-set element
 

@@ -3,13 +3,13 @@
 # A (simple) set of values
 
 ```
-sets of values
----------------
-order:    none
+(simple) sets
+-------------
+order:  none
 
-elements: e1 e2
-          |  |
-values:   v1 v2
+slots:  c1 c2
+        |  |
+values: v1 v2
 ```
 
 * see "set theory" for further details
@@ -19,7 +19,7 @@ values:   v1 v2
 
 * values may be grouped into (simple) sets of values
 * sets of values are not paired with an order-relation
-* hint: "simple" because "not ordered"
+* hint - "simple" because "not ordered"
 * sets of values are complex values
 
 `V := { v1, v2 }`
@@ -27,15 +27,15 @@ values:   v1 v2
 * each set contains a value no more than once
 * i.e. each value must be unique
 
-`V := { e1:v1, e2:v3 }`
+`V := { c1:v1, c2:v2 }`
 
-* a set of values can be understood to hold one element/slot per value
-* the number of elements in a set is referred to as "cardinality"
-* the elements within a set have no order - i.e. no first/last element
-* no element is allowed to hold the value of another element
+* a set of values can be understood to hold one component per element
+* the number of components in a set is referred to as "cardinality"
+* the components within a set have no order - i.e. no first/last component
+* no component is allowed to hold the value of another component
 * i.e. the multiplicity of each value within a set is one/1
-* i.e. a `1:1` relationship between values and elements
-* i.e. "values" and "elements" may be used synonymously
+* i.e. a `1:1` relationship between its elements and components
+* i.e. "values", "elements" and "component" may be used synonymously
 * `(vi != vj) <-> (ei !== ej)`
 
 definition
@@ -49,8 +49,8 @@ definition
 clarification
 
 * the number of elements in a set is referred to as its "size"
-* in contrary to multisets, `(sizeOf(set) == lengthOf(set))` always holds
-* i.e. the "size" of a set is equal to its cardinality
+* in contrary to multisets, `(sizeOf(set) == lengthOf(set))` is always true
+* i.e. the "size" of a set is always equal to its cardinality
 
 clarification
 
@@ -70,7 +70,7 @@ Note that `isMultiSet(s)` is understood to be true for sets.
 <!-- ======================================================================= -->
 ## simple sets are specialized multisets
 
-* "specialized" such that the multiplicity of each value is one/1
+* "specialized" such that the multiplicity of each element is one/1
 
 a set adopts the following definitions:
 

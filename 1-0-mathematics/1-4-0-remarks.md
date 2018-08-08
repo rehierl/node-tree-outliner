@@ -3,7 +3,7 @@
 # Remarks
 
 <!-- ======================================================================= -->
-## computer science vs. mathematics
+## Computer science vs. Mathematics
 
 * `a = v`, `b = v`, `x = (a === b)`
 * variables `a` and `b` are both set to hold the abstract value `v`
@@ -14,14 +14,13 @@ at some specific location (aka. address). In general, the combination of a
 value and its globally unique address will be referred to as an object.
 
 Computer science can therefore in principle not support indistinguishable
-entities. That is because two objects, set to represent the exact same abstract
-entity, can always be distinguished from one another by their address. Hence,
+entities. That is because two objects, set to represent the same abstract
+value, can always be distinguished from one another by their address. Hence,
 and in computer science, `x` will always evaluate to `false`. In contrary to
 that, mathematics has in general no concept of storage location. Because of
 that, and in mathematics, `x` will always evaluate to `true`.
 
-<!-- ======================================================================= -->
-## sets of values
+### sets of values
 
 ```
 1: a = [v1], b = [v2]
@@ -34,19 +33,18 @@ From a technical perspective, the value of a storage location can be changed at
 any point. Care must therefore be taken to not end up with a result that is in
 conflict with abstract mathematical concepts. That is, after modifying sequence
 `b`, the set of objects `c` no longer represents an abstract set of values; it
-instead represents a multiset of values. Hence, computer science can only
-simulate the abstract mathematical concept of sets of values.
+instead represents a multiset of values. Hence, programs can in general only
+simulate abstract mathematical concepts.
 
-Note that the implementation of a set of values is in fact closer to a set of
-objects than a set of abstract values.
+Note that the implementation of a set of values is, due to its inner components,
+closer to a set of objects than a set of abstract values.
 
-<!-- ======================================================================= -->
-## ordered vs. unordered complex values
+### ordered vs. unordered complex values
 
 In general, no information can be written down without specifying some sort
 of order. That is, because written information is based upon a sequence of
 characters. Likewise, no computer-internal representation of a complex value
-is completely without order; i.e. there always is a first/last bit of
+is ever completely without order; i.e. there always is a first/last bit of
 information. Because of that, unordered complex values may appear to a
 programmer as being "artificial" and ordered complex values as the more
 "natural" concept.
@@ -56,5 +54,6 @@ artificial ones because further information is required that defines the
 corresponding order.
 
 One must therefore not confuse the order of sequentialized/stored information,
-which can not be avoided, with the order of the members of some abstract
-complex value. True unordered abstract values can therefore only be simulated.
+which can not be avoided, with the order of the components of some abstract
+complex value. Programs can therefore only simulate true unordered abstract
+values.

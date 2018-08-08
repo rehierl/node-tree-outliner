@@ -152,11 +152,11 @@ clarification
 <!-- ======================================================================= -->
 ## (n in N), (n !in N)
 
-* `n in N` is true, if `n` is an element of `N`
+* `(n in N)` is true, if `n` is an element of `N`
 * `(n !in N), (n not-in N), (n not in N) := not (n in N)`
 
 clarification
 
 * the `in` operator merely tests that `n` is an element of `N`
 * the `in` operator can not determine if `N` contains `n` multiple times
-* `N` appears as if it contains each value no more than once
+* based on the `in` operator, `N` is treated as a set of elements

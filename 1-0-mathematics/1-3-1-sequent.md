@@ -2,19 +2,19 @@
 <!-- ======================================================================= -->
 # Sequent
 
-* two elements of the same sequence are **sequent**
-* two elements of different sequences are **not sequent**
+* two components of the same sequence are **sequent**
+* two components of different sequences are **not sequent**
 * not sequent <=!=> in-sequent
 
-Note that, from now on, the terms "elements" and "values" are in general used
-synonymously: e.g. the values of a sequence are sequent, i.e. they appear
-sequently within a sequence.
+Note that the terms "components" and "elements" are in general used without
+further distinction: e.g. the elements of a sequence are sequent, i.e. they
+appear sequently within a sequence. However, conflicts are inevitable, if a
+sequence contains an element more than once.
 
-Note that confusion is inevitable,
-if a sequence contains one or more elements more than once.
+* e.g. is `1` in `[1,2,1]` presequent to `2`? .. Yes and no.
 
-Note that the notion of the term "consecutive" is the same as that of
-"strictly presequent" or "strictly subsequent" (see below).
+Note that the notion of the terms "consecutive" and "covering" is the same
+as that of ("strictly presequent" or "strictly subsequent") (see below).
 
 <!-- ======================================================================= -->
 ## covered-by
@@ -30,30 +30,32 @@ refers to the 1st parameter, which will be tested against the 2nd parameter
 (i.e. the context of the corresponding operation).
 
 ```
-indexOf(element, sequence) begin
-  for i in 1 to sequence.length begin
-    if(sequence[i] === element) return i
+indexOf(component, sequence) begin
+  index = 1
+  for c in sequence begin
+    if(c === component) return index
+    index = index + 1
   end
-  throw new ElementNotFoundException()
+  throw new NotFoundException()
 end
 
 //- returns an (pos|neg) integer value
-//- the result is >0, if e1 appears before e2
-//- the result is <0, if e1 appears after e2
+//- the result is >0, if c1 appears before c2
+//- the result is <0, if c1 appears after c2
 //- the order is upside-down, if the result is <0
-distanceBetween(e1,e2,seq) begin
-  i1 = indexOf(e1,seq)
-  i2 = indexOf(e2,seq)
+distanceBetween(c1,c2,seq) begin
+  i1 = indexOf(c1,seq)
+  i2 = indexOf(c2,seq)
   return (i2 - i1)
 end
 
 //- returns a positive integer value in [0,*]
-//- the number of jumps required to reach e2 from e1
-//- the result is =0, if (e1 == e2)
-//- the result is +1, if e1 is adjacent to e2
-//- the result is +2, if one ei is located between e1 and e2
-absDistance(e1,e2,seq) begin
-  result = distanceBetween(e1,e2,seq)
+//- the number of jumps required to reach c2 from c1
+//- the result is =0, if (c1 == c2)
+//- the result is +1, if c1 is adjacent to c2
+//- the result is +2, if one ci is located between c1 and c2
+absDistance(c1,c2,seq) begin
+  result = distanceBetween(c1,c2,seq)
   return (result >= 0) ? result : (-1)*result
 end
 
@@ -74,9 +76,9 @@ isInSequentTo => (distanceBetween == 0)
 <!-- ======================================================================= -->
 ## sequent
 
-* `e1` and `e2` are sequent, if they are elements of the same sequence `s`
+* `c1` and `c2` are sequent, if they are components of the same sequence `s`
 
-if the order of elements is not relevant in a given context:
+if the order of components is not relevant in a given context:
 
 * `(x sequent-to y) := (absDistance(x,y) >= 0)`
 * `(x insequent-to y) := (absDistance(x,y) == 0)`
@@ -86,8 +88,8 @@ if the order of elements is not relevant in a given context:
 <!-- ======================================================================= -->
 ## pre-sequent (<, <<)
 
-* `e1` appears before `e2`
-* `e1` **precedes** `e2`
+* `c1` appears before `c2`
+* `c1` **precedes** `c2`
 
 x is presequent to y (<)
 
@@ -108,8 +110,8 @@ x is loosely presequent to y
 <!-- ======================================================================= -->
 ## sub-sequent (>, >>)
 
-* `e2` appears after `e1`
-* `e2` **succeeds** `e1`
+* `c2` appears after `c1`
+* `c2` **succeeds** `c1`
 
 y is subsequent to x (>)
 
@@ -130,8 +132,8 @@ y is loosely subsequent to x
 <!-- ======================================================================= -->
 ## in-sequent (<>)
 
-* randomly pick two elements `x,y in s=[e1,...,eN]`, where `(N = #s)`
-* note - the focus is on elements, not values
+* randomly pick two components `x,y in s=[c1,...,cN]`, where `(N = #s)`
+* note - the focus is on components, not elements
 
 clarification
 

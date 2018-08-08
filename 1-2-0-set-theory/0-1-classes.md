@@ -41,7 +41,7 @@ properties
 graphical representation
 
 * an undirected graph may be associated to any symmetric relation on X
-* vertices are all elements of X
+* vertices all are elements of X
 * two vertices s and t are joined iff s~t
 
 invariant, well-defined
