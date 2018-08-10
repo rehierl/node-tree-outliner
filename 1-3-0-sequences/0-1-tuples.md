@@ -196,7 +196,6 @@ bounded
 * derived by deletion/removal - i.e. no change in order
 * e.g. (t subsequence-of s), if t=[b,d] and s=[a,b,c,d,e]
 * subsequence-of is a pre-order
-* note - not (t substring-of s)
 * note - substring-of does not support removal within an infix
 * common subsequence - e.g. u=[b] is a common subsequence of s and t
 * used in bio-informatics - e.g. compare/analyze/store protein sequences
@@ -214,7 +213,7 @@ definition
 * x() - in general only surjective, not necessarily injective
 * i.e. (xi = xj) is allowed for some (i != j)
 * X := { xi | (i in I) } - the set/family of all objects
-* note - (#X <= #I) - i.e. not (==)
+* note - (#X <= #I) - i.e. not necessarily (==)
 
 functions, sets, families
 

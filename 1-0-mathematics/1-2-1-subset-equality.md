@@ -63,9 +63,9 @@ set which could be in conflict with that requirement.
 ## equal-to
 
 * `(V == W), (V equal-to W) := (V subset-of W) and (W subset-of V)`
-* the values in both sets can not be used to distinguish both sets
-* any value `v in V` also belongs to `W`, and
-  any value `w in W` also belongs to `V`
+* the elements in both sets can not be used to distinguish both sets
+* any element `(v in V)` also belongs to `W`, and
+  any element `(w in W)` also belongs to `V`
 * `V` and `W` are said to be equal
 
 clarification

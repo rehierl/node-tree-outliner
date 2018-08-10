@@ -5,11 +5,11 @@
 ```
 sequences
 ----------------------
-order:  o1 o2
-        |  |  - linear
-slots:  c1 c2
-        | /
-values: v1
+order:      o1 o2
+            |  |  - linear
+components: c1 c2
+            | /
+elements:   v1
 ```
 
 * see "sequences" for further details
@@ -18,7 +18,7 @@ values: v1
 <!-- ======================================================================= -->
 ## core concept
 
-* values may be grouped into sequences of values
+* values may be grouped into sequences of elements
 * sequences are complex values
 
 `s = [si] = [v1,v2,...,vN]` for `N in [0,*]`
@@ -32,9 +32,9 @@ values: v1
 * the number of components in a sequence is referred to as its "length"
 * the components within a sequence are ordered
 * i.e. sequences have a first/last component
-* any component may hold the value of another component
-* i.e. in general no restriction of which element/value a component may hold
-* i.e. a `1:N` relationship between elements/values and components
+* any component may hold the element of another component
+* i.e. in general no restriction of which element a component may hold
+* i.e. a `1:N` relationship between elements and components
 * `(vi != vj) -> (ei !== ej)`, but not vice versa
 
 Note that, with regards to sequences, there are no operators that correspond
@@ -43,7 +43,7 @@ with the set-based operators (i.e. union, intersection, etc).
 clarification
 
 * throughout the course of this discussion, the term "sequence" refers to
-* a constant/immutable list of elements - i.e. fixed in length and values
+* a constant/immutable list of elements - i.e. fixed in length and elements
 * not necessarily a list of elements of the same kind
 * a list of any length (finite or infinite)
 
@@ -70,8 +70,8 @@ Note that `isMultiSet(s)` is understood to be true for sequences.
 
 a sequence adopts the following definitions:
 
-* a sequence of X, a sequence of atomic values
-* a homogenous/heterogenous sequence of values
+* a sequence of X, a sequence of atomic elements, etc.
+* a homogenous/heterogenous sequence of elements
 * multiplcitiyOf(), isEmpty()
 * lengthOf() := cardinalityOf()
 * `()` and `[]` both represent empty sequences
@@ -119,7 +119,7 @@ s1 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
 s2 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
 ```
 
-* any sequence of values allows to consistently iterate over its components
+* any sequence of elements allows to consistently iterate over its components
 * the iteration will visit the components in order - i.e. from first to last
 * subsequent iterations will visit the components in the exact same order
 * i.e. `s1` is guaranteed to always be identical to `s2`
@@ -131,9 +131,7 @@ s2 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
 firstIndexOf(v,seq) begin
   index = 1
   for c in seq begin
-    if (c.value == v) begin
-      return index
-    end
+    if (c.value == v) return index
     index = index + 1
   end
   return 0
@@ -192,7 +190,7 @@ get: (sequence, index) -> element
 
 * `x = s[i]` assigns element `si` to `x`
 
-set: (sequence, index, value) -> new-sequence
+set: (sequence, index, element) -> new-sequence
 
 * it is in general not possible to "change/replace/remove" any element
 * the set-operation must be understood to return a new sequence
@@ -204,9 +202,10 @@ set: (sequence, index, value) -> new-sequence
 (==)
 
 * `(s == t)` is true, if `(#s == #t)` and `(s[i] == t[i])` for any `i in [1,#s]`
-* i.e. implicitly compares the values of the corresponding components
-* in general, the test for equality by value must also take the domains into
-  account, because `(+2 == +2.0)` is from a strict perspective `false`
+* i.e. implicitly compares the elements of the corresponding components
+* in general, the test for equality by element must also take the domains
+  into account, because `(+2 == +2.0)` is from a strict perspective `false`
+* i.e. integer values aren't identical to floating point values
 
 (!=)
 

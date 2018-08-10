@@ -24,7 +24,7 @@ concatenation: (A*,A*) -> A*
 * `(s × e) = (e × s) = s`
 * i.e. append and A* form a monoid
 * length() defines a monoid homomorphism from A* to [0,*]
-* `t` is a substring-of `s`, iff `u` and `v` exist such that `s = (u × t × v)`
+* `t` is a substring-of `s`, iff `u` and `v` exist such that `s=(u×t×v)`
 * substring-of defines a partial order on A*
 * i.e. the least element element is eps
 
@@ -39,7 +39,10 @@ prefix, suffix
 remarks
 
 * rotation - `t = uv` is a rotation of `s = vu`
+* note - `u` and `v` are themselves strings, not symbols
 * reversal - `t = abc` is reverse to `s = cba`
+* note - all symbols in `t` are in reversed order
+* note - (rotation != reversal)
 
 **SKIPPED** - implementation-specific aspects
 
@@ -75,7 +78,9 @@ homomorphism
 projection
 
 * remove all characters not in S
-* pi(s) = eps if (s=eps), pi(t) if (s=ta) and (a !in S), pi(t)a if (a in S)
+* pi(s)=eps if (s=eps)
+* pi(t) if (s=ta) and (a !in S)
+* pi(t)a if (a in S)
 
 right-quotient
 

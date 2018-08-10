@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # Abstract, atomic and complex values
 
-( The intention behind introducing "values" and their "representatives" is to
-move past thinking in terms of concrete values like numbers, strings, etc. )
+The intention behind introducing "values" and their "representatives" is to
+move past thinking in terms of specific values like numbers, sequences, etc.
 
 constant, immutable
 
@@ -11,11 +11,6 @@ constant, immutable
 * no representative `v` can be changed to represent a different value
 * e.g. the literal `'2'` represents the abstract number value `2`
 * i.e. a fixed relationship between a value and its representative
-
-primitive values
-
-* a primitive value is understood to be "atomic"
-* i.e. self-enclosed, indivisible units of information
 
 number identifiers (ids)
 
@@ -40,13 +35,13 @@ clarification
 
 * `(v3 == v3)` and `(vi == vi)` are always true
 * `(vi == vj)` is true iff `(i == j)`, false otherwise
-* different identifiers always refer to different specific values
+* different identifiers always refer to different abstract values
 
 <!-- ======================================================================= -->
 ## Atomic values
 
-* an atomic value can not be split into distinct values
-* i.e. self-enclosed, indivisible units of information
+* a primitive value can not be split into distinct atomic values
+* i.e. atomic, self-enclosed, indivisible units of information
 * e.g. numbers, characters, colors, etc.
 
 ### is-atomic
@@ -62,17 +57,16 @@ clarification
 <!-- ======================================================================= -->
 ## Components
 
-( The intention behind the introduction of "components" is to avoid confusion
-with the "elements" of a complex value - i.e. distinguish between "elements"
-and "components". The term "element" is in general used to refer to the value
-of a component. That is, both terms refer to distinct concepts. )
+The intention of introducing "components" is to avoid confusion with the
+"elements" of a complex value. That is, "components" are understood to be
+the building blocks of complex values.
 
 * aka. slot, component, container
-* components represent the bearers of atomic or complex values
 * components are used to group values into more complex values
+* components represent bearers of atomic or complex values
 * components allow to define the structure of complex values
 
-components always hold a single value
+components always hold a single abstract value
 
 * they hold one value, and one value only
 * a component always holds a defined value
@@ -87,7 +81,7 @@ components need to be understood as being globally unique
 
 * complex values do not share the same components
 * no complex value contains a component more than once
-* complex values are sets of components
+* complex values represent groups of unique of components
 
 ### (value-of c)
 
@@ -102,8 +96,8 @@ components need to be understood as being globally unique
 clarification
 
 * `(c == v) <-> (v == c)`
-* the test for equality refers to the values components hold
-* i.e. components are implicitly dereferenced to their values
+* the test for equality refers to the values the components hold
+* i.e. components are implicitly dereferenced
 
 clarification
 
@@ -112,8 +106,10 @@ clarification
 
 ### (c1 === c2)
 
-* `(c1 === c2)` is true if `c1` and `c2` represent the same component
-* `(c1 !== c2)` is true if `c1` and `c2` represent different components
+* `(ci === cj)` is true iff `(i == j)`
+* i.e. both reference the same component
+* `(ci !== cj)` is true iff `(i != j)`
+* i.e. both reference different components
 
 clarification
 
@@ -134,7 +130,9 @@ clarification
 ## Complex values
 
 * `complex := < (atomic|complex)* >`
-* complex values represent groups of atomic and/or complex values
+* complex values represent groups of unique components
+* each component within a complex value holds an abstract value
+* these abstract values may be atomic or complex
 * i.e. complex values may themselves be hierarchical
 * an empty group `< >` is itself a complex value
 * e.g. multisets, sets, sequences, strings, etc.
@@ -142,14 +140,13 @@ clarification
 constant, immutable
 
 * like atomic values, complex values can not be changed
-* replacing the element of a complex value will result in a new complex value
-* i.e. the elements of a complex value can not be replaced
+* i.e. replacing the value of a component will yield a different complex value
 
 homogenous, heterogenous
 
 * a complex value is said to be homogenous,
   if all values used to create it share the same characteristics
-* otherwise, a complex value is said to be heterogenous
+* heterogenous - its inner values have different characteristics
 * e.g. a complex value is heterogenous, if not all of its members are atomic
 * e.g. `c := < 2, 'd', ... >` is heterogenous
 
@@ -161,18 +158,43 @@ unordered, ordered, order-relation
 * i.e. `x` and `y` represent the same complex value
 * additional information is needed to define such an order
 * this information must be provided by an associated order-relation
-* a complex value with no order-relation is an "unordered complex value"
-* a complex value paired with an order-relation is an "ordered complex value"
+* unordered complex value - a complex value with no associated order-relation
+* ordered complex value - a complex value paired with an order-relation
+
+<!-- ======================================================================= -->
+## Components vs. Elements
+
+components
+
+* components are unique entities
+* no complex value contains a component more than once
+* complex values do not share any components
+
+values/elements
+
+* the term "element" is in general used synonymous to "(abstract) value"
+* elements are not necessarily unique to complex values
+* a complex value may contain elements more than once
+* complex values may share the same elements
+
+Note that the term "element" is used to point out that a value belongs to a
+complex value. That is, the term emphasizes the relationship with a complex
+value. In contrary to that, the term "value" focuses more on isolated an entity.
+
+clarification
+
+* components are used to define the structure of a complex value
+* components and elements combined define complex values
 
 <!-- ======================================================================= -->
 ## Cardinality
 
-* `#V, #(V)` := the number of components in some complex value `V`
+* `#V, #(V)` := the number of components within the complex value `V`
 * `(cardinality-of V), cardinalityOf(V) := #V`
 * similar, but not synonymous terms - size, length, strength, power
 
 Note that the cardinality of a complex value is in general understood
-to refer to the number of components needed to hold its values/elements.
+to refer to the number of components needed to hold its elements.
 
 ### wikipedia, equinumerosity
 

@@ -5,52 +5,50 @@
 ```
 multisets
 -------------
-order:  none
+order:       none
 
-slots:  c1 c2
-        | /
-values: v1
+components:  c1 c2
+             | /
+elements:    v1
 ```
 
 <!-- ======================================================================= -->
 ## core concept
 
-* values may be grouped into multisets of values
-* multisets are not paired with an order-relation
+* elements may be grouped into multisets
+* a multiset is not paired with an order-relation
 * i.e. there is no order on the underlying set of components
+* i.e. all components are considered to be equal
 * synonymous - group, collection, etc.
 * multisets are complex values
 
-`ms1 := < c1:v1, c2:v2, c3:v1 >` or short `< v1, v2, v1 >`
+`ms1 := < c1:v1, c2:v2, c3:v1 >`, or short `< v1, v2, v1 >`
 
-* a multiset holds one component per value
-* the number of components in a multiset is referred to as its "cardinality"
-* the components within a multiset have no order - i.e. no first/last component
-* a component is allowed to hold the value of another component
-* i.e. different components may hold identical values
-* i.e. a `1:N` relationship between values and components
+* a multiset holds one component per element
+* different components may hold the same element
+* i.e. a `1:N` relationship between elements and components
 * the "multiplicity" of `v1` is `2` because `v1` appears twice within `ms1`
 * `(vi != vj) -> (ci !== cj)`, but not vice versa
 
-`ms2 := < e1:v1, e2:v1, e3:v2 >` or short `< v1, v1, v2 >`
+`ms2 := < e1:v1, e2:v1, e3:v2 >`, or short `< v1, v1, v2 >`
 
 * `(ms2 == ms1)` => `ms1` is considered to be equal to `ms2`
-* i.e. both have the same distinct values, and the same multiplicity per value
+* i.e. both have the same elements, and the same multiplicity per element
 
 definition
 
 * `V := < vi | (vi holds an odd integer) >`
-* instead of listing each value, multisets may be defined by
-  specifying a condition that must be satisfied by each value
+* instead of listing each element, multisets may be defined by
+  specifying a condition that must be satisfied by each element
 * alternative notations - `<:>`, `<;>`, `<,>`, etc.
 * i.e. a set-builder-like notation
 
 <!-- ======================================================================= -->
 ## which characters to use?
 
-* in general, `{` and `}` are used to group values into multisets
+* in general, `{` and `}` are used to group elements into multisets
 * this pair of characters is however misleading as they are also used for sets
-* however, in contrary to multisets, simple sets hold distinct values only
+* however, in contrary to multisets, simple sets hold distinct elements only
 * `(` and `)` could be confused with sequences
 * `[` and `]` could be confused with arrays/sequences
 * both of these pairs imply some order of components
@@ -61,7 +59,7 @@ definition
 ## cardinality
 
 * the cardinality of a multiset is equal to
-  the sum over the multiplicities of its distinct values
+  the sum of multiplicities of its distinct elements
 * `ms1` has cardinality 3, but only 2 distinct elements
 
 <!-- ======================================================================= -->
@@ -69,7 +67,7 @@ definition
 
 sizeOf(ms)
 
-* "size" will be used to refer to the number of distinct values
+* "size" will be used to refer to the number of distinct elements
 * i.e. "size" reflects a set-based perspective on a multiset
 
 lengthOf(ms), cardinalityOf(ms)
@@ -103,38 +101,43 @@ clarification
 <!-- ======================================================================= -->
 ## multiset-of
 
-a homogenous multiset of values
+a homogenous multiset of elements
 
 * `V1 := < 1, 2, 3 >`
 * `V2 := < 'a', 'b', 'c' >`
-* a multiset may only contain values that have similar characteristics
+* a multiset may only contain elements that have similar characteristics
 * `isHomogenous(V)`, `isHom(V)` := true, if `V` is a homogenous multiset
 
-a heterogenous multiset of values
+a heterogenous multiset of elements
 
 * `V3 := < 1, 2.0, 0xab, 'a' >`
 * `V4 := < 1, 2.0, 0xab, 'a', "abc", {5} >`
-* a multiset may contain values that have distinct characteristics
+* a multiset may contain elements that have distinct characteristics
 * `isHeterogenous(V) := not isHom(V)`
 
 a multiset of X
 
 * `V := < vi | isX(vi) >`
-* all values `(vi in V)` have characteristic `X`
+* all elements `(vi in V)` have characteristic `X`
 * e.g. a multiset of numbers, characters, sets, etc.
 
-a multiset of atomic values
+a multiset of (atomic) values
 
 * `V := < vi | isAtomic(vi) >`
-* `V` contains primitive values only
+* `V` contains primitive/atomic elements only
 * no `vi` is complex - no strings, no sets, etc.
-* however, `V` is itself still a complex value
-* a set of atomic values is not necessarily homogenous
+* however, `V` itself is still a complex value
+* a multiset of atomic elements is not necessarily homogenous
+* e.g. `V := < 1, 'a', 0xff, ... >`
+
+Note that "a multiset of values" is used to refer to a multiset whose elements
+all are atomic. In contrary to that "a multiset of elements" does not allow to
+may any assumption with regards to the values it holds.
 
 <!-- ======================================================================= -->
 ## is-multiset
 
-* `isMultiSet(ms)` returns `true`, if value `ms` is a multiset of values
+* `isMultiSet(ms)` returns `true`, if value `ms` is a multiset of elements
 * i.e. `true` if `ms` has the characteristics of a multiset
 * `(is-multiset ms) := isMultiSet(ms)`
 
@@ -151,9 +154,9 @@ a multiset of atomic values
 
 ```
 traceOf(multiset) begin
-  seq = new sequence()
+  t = ()
   for c in multiset begin
-    seq.add(c.value)
+    t = add(c.value, t)
   end
   return seq
 end
@@ -163,7 +166,7 @@ s1 = traceOf(s) //- e.g. [ 2, 1, 3, 2 ]
 s2 = traceOf(s) //- e.g. [ 3, 2, 1, 2 ]
 ```
 
-* any multiset of values allows to randomly iterate over its components
+* any multiset of elements allows to randomly iterate over its components
 * an iteration may visit the components in any order
 * subsequent iterations may visit the components in different order
 * i.e. `s1` is not guaranteed to be identical to `s2`
@@ -185,7 +188,25 @@ end
 ```
 
 * multiplicityOf() returns the number of occurrences of `x` in `V`
-* the result is `0` if no component holds `x` as its value
+* the result is `0` if no component holds `x` as its element
+
+<!-- ======================================================================= -->
+## add, remove
+
+add(x,V)
+
+* `add(x,V)` := increase the multiplicity of `x` in `V` by `1`
+* i.e. `V` and `add(x,V)` will only differ in multiplicity of `x`
+* i.e. `multiplicityOf(x,add(x,V)) == multiplicityOf(x,V)+1`
+* signature: (element,multiset) -> new-multiset
+
+remove(x,V)
+
+* `remove(x,V)` := decrease the multiplicity of `x` in `V` by `1`
+* i.e. `V` and `remove(x,V)` will only differ in multiplicity of `x`
+* `(V == remove(x,V))` will be true iff `(x !in V)`
+* i.e. the multiplicity of `x` can not be reduced beyond `0`
+* signature: (element,multiset) -> new-multiset
 
 <!-- ======================================================================= -->
 ## (v in V), element-of
@@ -203,24 +224,6 @@ end
 * `(W contains V), (V belongs-to W), (V element-of W) := (V in W)`
 
 <!-- ======================================================================= -->
-## add, remove
-
-add(x,V)
-
-* `add(x,V)` := increase the multiplicity of `x` in `V` by `1`
-* i.e. `V` and `add(x,V)` will only differ in multiplicity of `x`
-* i.e. `multiplicityOf(x,add(x,V)) == multiplicityOf(x,V)+1`
-* signature: (value,multiset) -> new-multiset
-
-remove(x,V)
-
-* `remove(x,V)` := decrease the multiplicity of `x` in `V` by `1`
-* i.e. `V` and `remove(x,V)` will only differ in multiplicity of `x`
-* `(V == remove(x,V))` will be true iff `(x !in V)`
-* i.e. the multiplicity of `x` can not be reduced beyond `0`
-* signature: (value,multiset) -> new-multiset
-
-<!-- ======================================================================= -->
 ## one-element-of
 
 * `oneElementOf(V)` := a random element of the given multiset
@@ -228,4 +231,4 @@ remove(x,V)
 
 Note that this operation is useful in combination with multisets that have
 cardinality one/1. This operation allows to consistently retrieve the single
-element/value it holds.
+remaining element it holds.

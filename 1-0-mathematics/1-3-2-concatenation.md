@@ -14,9 +14,9 @@ in general a flat sequence.
 ## cartesian product vs. concatenation
 
 * (X) cartesian product <=!=> (x) concatenation
-* `XVi <-> xVi`, if all `Vi` are sets of values
-* `XV^N <-> xV^N`, if `V` is a set of (atomic) values
-* `XV^{a,b} <-> xV{a,b}`, if `V` is a set of values
+* `XVi <-> xVi`, if all `Vi` are sets of elements
+* `XV^N <-> xV^N`, if `V` is a set of (atomic) elements
+* `XV^{a,b} <-> xV{a,b}`, if `V` is a set of elements
 
 If the concatenation is extended to operate on sets, the result will be a
 single set of sequences. Depending on the input parameters, the resulting set
