@@ -2,7 +2,8 @@
 <!-- ======================================================================= -->
 # TODO - order theory
 
-* "ordered values" needs to be fleshed oud
+**TODO** -
+"ordered values" needs substantial editing
 
 <!-- ======================================================================= -->
 ## poset -> dag

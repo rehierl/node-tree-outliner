@@ -2,13 +2,18 @@
 <!-- ======================================================================= -->
 # Concatenation
 
-* here, (×) represents the concatenation product operator
+* (×) represents the concatenation operator
 * synonymous terms - add, append, concatenate
 * synonymous operators - `x` (lower-case letter), `&`, `+`, etc.
 
 Note that any sequence is in principle the result of concatenating its elements:
-`s = [e1, ..., eN] := e1 × ... × eN`. That is, the result of a concatenation is
-in general a flat sequence.
+`s = [e1, ..., eN] := e1 × ... × eN`. That is, the result of the concatenation
+operation is in general a flat sequence.
+
+Note that in general sets will be homogenous sets-of-elements. That is, the
+elements within a set are either all sequences, or the sets hold non-sequence
+elements (i.e. values) only. Because of that, the concatenation operation
+differs from the Cartesian product.
 
 <!-- ======================================================================= -->
 ## cartesian product vs. concatenation

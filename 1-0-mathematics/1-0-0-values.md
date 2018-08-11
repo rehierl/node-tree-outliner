@@ -196,6 +196,10 @@ clarification
 Note that the cardinality of a complex value is in general understood
 to refer to the number of components needed to hold its elements.
 
+* `#(v,V)` := the number of components within `V` that hold value `v`
+* the cardinality of an element is also known as its "multiplicity"
+* the cardinality of a value that is not an element of `V` is zero/0
+
 ### wikipedia, equinumerosity
 
 * two sets A and B are equinumerous, if a bijection exists between them

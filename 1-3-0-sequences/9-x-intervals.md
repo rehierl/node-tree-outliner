@@ -51,9 +51,6 @@ That is the underlying bijection must be known and order-preserving.
 ## wikipedia, interval order
 
 * `(xi < xj)` for intervals `xi -> (Li,Ri)` if `(Ri < Lj)`
-* TODO - how does that order behave with regards to overlapping - incomparable?
-* TODO - try different orders e.g. `(Li < Lj)`
-* TODO - is one of those orders similar to the enter-/exit-order?
 
 <!-- ======================================================================= -->
 ## wikipedia, intervals

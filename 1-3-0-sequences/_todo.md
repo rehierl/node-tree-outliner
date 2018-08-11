@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # TODO - sequences
 
+**TODO** - the whole chapter needs substantial editing
+
 you would if you could, but you won't because you can't
 - https://en.wikipedia.org/wiki/List_of_unsolved_problems_in_mathematics
 
@@ -20,6 +22,18 @@ sequences define trees - nested intervals
 - (f: Index -> Length)
 - (a,b) = node sequence of node a has length b
 - node sequence of node a is a subsequence of the root's sequence
+
+<!-- ======================================================================= -->
+## interval order
+
+**TODO** -
+how does that order behave with regards to overlapping - incomparable?
+
+**TODO** -
+try different orders e.g. `(Li < Lj)`
+
+**TODO** -
+is one of those orders similar to the enter-/exit-order?
 
 <!-- ======================================================================= -->
 ## subsequences

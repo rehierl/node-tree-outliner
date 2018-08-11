@@ -33,6 +33,7 @@ elements:    v1 v2
 * the components within a set have no order - i.e. no first/last component
 * no component is allowed to hold the element of another component
 * i.e. the multiplicity of each element within a set is one/1
+* i.e. `(#(v,V) == 1)` for all `(v in V)`
 * i.e. a `1:1` relationship between its elements and components
 * i.e. "values", "elements" and "component" may be used synonymously
 * `(vi != vj) <-> (ei !== ej)`
@@ -60,7 +61,7 @@ clarification
 Note that `isMultiSet(s)` is understood to be true for sets.
 
 <!-- ======================================================================= -->
-## simple sets are specialized multisets
+## sets are specialized multisets
 
 * "specialized" such that the multiplicity of each element is one/1
 
@@ -85,19 +86,19 @@ a set adopts the following definitions:
 <!-- ======================================================================= -->
 ## union (+, or, union)
 
-* `(V union W) := { x | (x in V) or (x in W) }`
-* `(V or W), (V + W) := (V union W)`
+* `(A union B) := { x | (x in A) or (x in B) }`
+* `(A or B), (A + B) := (A union B)`
 
 likewise
 
-* `(V + w) := (V + {w})`
-* `(v + W) := ({v} + W)`
-* `(v + w), ({v} + {w}) := {v, w}`
+* `(A + b) := (A + {b})`
+* `(a + B) := ({a} + B)`
+* `(a + b), ({a} + {b}) := {a, b}`
 
 clarification
 
-* `((U + V) + W) <-> (U + (V + W))`
-* `((u + v) + w) <-> (u + (v + w))`
+* `((A + B) + C) <-> (A + (B + C))`
+* `((a + b) + c) <-> (a + (b + c))`
 
 <!-- ======================================================================= -->
 ## intersection (&, and, isect)
@@ -108,13 +109,13 @@ clarification
 <!-- ======================================================================= -->
 ## set difference (\, sub, diff)
 
-* `(A diff B):= { x | (x in A) and (x !in B) }`
+* `(A diff B) := { x | (x in A) and (x !in B) }`
 * `(A \ B), (A sub B) := (A diff B)`
 
 <!-- ======================================================================= -->
 ## symmetric difference (^, xor, ex-or)
 
-* `(A ex-or B) := {x | x in (A\B or B\A) }`
+* `(A ex-or B) := { x | x in (A\B or B\A) }`
 * `(A ^ B), (A xor B) := (A ex-or B)`
 
 clarification

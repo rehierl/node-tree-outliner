@@ -1,36 +1,37 @@
 
 <!-- ======================================================================= -->
-# Subset
+# Subset, equality
 
-* subset-of <=!=> element-of
+Note that "subset-of" is distinct from "element-of".
+
+Note that the definition of "subset-of" is a specialization of "subgroup-of".
+The specialization/simplification is based upon the definition that the
+cardinality of each element within a set is one/1.
 
 <!-- ======================================================================= -->
-## power set
+## power-set
 
 * `A := { 1, 2 }`
 * `P(A) := { {}, {1}, {2}, {1,2} }`
+* note - `#P(A) = (2^N = 4)` elements
 * `P(A)` is the set of all subsets in `A`
-* note - `{}` and `A` in `P(A)`
-
-clarification
-
-* `P(A)` always contains the empty set `{}`
-* `#P(A) = 2^N = 8`, if `#A = N = 3`
+* note - `P(A)` contains `{}` and `A`
 
 <!-- ======================================================================= -->
-## V subset-of W
+## subset-of
 
 * `(V subset-of W) := (v in W) for any (v in V)`
-* set `V` is a subset of set `W`, if `v in W` for any `v in V`
+* set `V` is a subset of set `W`, if `(v in W)` for all `(v in V)`
 
 Note that, if `(V subset-of W)` is true,
-then `V` may be referred to as the **subset**
-and `W` as the **super-set**.
+then `V` may be referred to as the "sub-set"
+and `W` as the "super-set".
 
 clarification
 
-* The empty set `{}` is a subset to any set.
-* Any set, including `{}`, is a subset to itself.
+* the empty set `{}` is a subset to any set
+* any set, including `{}`, is a subset to itself
+* `subset-of` implies an order (<=)
 
 clarification
 
@@ -40,6 +41,7 @@ clarification
 
 proof that `(V subset-of W) -> (#V <= #W)` is true
 
+* Note that this can be easily read from the definition of subgroup-of.
 * In order for `(V subset-of W)` to be false, `V` needs to contain one or more
   elements that are not in `W`. But, that is "assumed" to not be the case.
 * In order for `(#V <= #W)` to not be true, even though `(V subset-of W)` is
@@ -63,23 +65,20 @@ set which could be in conflict with that requirement.
 ## equal-to
 
 * `(V == W), (V equal-to W) := (V subset-of W) and (W subset-of V)`
-* the elements in both sets can not be used to distinguish both sets
 * any element `(v in V)` also belongs to `W`, and
   any element `(w in W)` also belongs to `V`
+* `V` and `W` can not be distinguished from one another
 * `V` and `W` are said to be equal
+
+Note that, for two sets to be equal, both sets must have the same size and
+contain the same elements. That is, the union of both sets must be identical
+(in size) to the intersection of both sets.
 
 clarification
 
 * `(V == W) <-> (W == V)`
 * `(V == W) -> (#V == #W)`
 * `(#V == #W) =!> (V == W)`
-
-clarification
-
-* For two sets to be equal, both sets must have the same size and contain the
-  same elements. That is, the union of both sets must be identical (in size)
-  to the intersection of both sets.
-* `(V == W) <-> ( #(V or W) == #(V and W) )`
 
 proof that `(V == W) -> (#V == #W)` is true
 
@@ -90,47 +89,41 @@ proof that `(V == W) -> (#V == #W)` is true
 * Consequently, `(V == W) -> (#V == #W)` is true.
 
 <!-- ======================================================================= -->
-## unequal-to, distinct-to/from
+## unequal-to
 
 * `(V != W) := not (V == W)`
+* `(V unequal-to W), (V distinct-to W) := (V != W)`
 * `(V != W) <-> (V !subset-of W) or (W !subset-of V)`
-* synonymous - distinct-to/from, unequal-to
+* `V` and `W` can be distinguished from one another
+* `V` and `W` are said to be unequal or distinct from one another
 
 clarification
 
 * `(V != W) <-> (W != V)`
 * `(#V != #W) -> (V != W)`
 * `(V != W) =!> (#V != #W)`
-
-clarification
-
-* Two distinct sets are unequal.
-* Both sets can be distinguished from one another.
-* Two distinct sets differ in size and/or their elements.
-
-clarification
-
-* For two sets to be distinct, one or both sets must be non-empty.
 * `(V != W) -> (#V > 0) or (#W > 0)`
 
+If two sets are unequal, then both sets differ in size and/or elements.
+
 <!-- ======================================================================= -->
-## V strict-subset-of W
+## strict-subset-of
 
 * `(V strict-subset-of W) := (V subset-of W) and (V != W)`
-* some `w in W` must exist such that `w !in V` is true
-* synonymous - strict-subset, proper-subset, true-subset
+* some `(w in W)` must exist such that `(w !in V)` is true
+* synonymous - strict-, proper-, true-subset
 
 Note that, if `(V strict-subset-of W)` is true,
-then `V` may be referred to as the **(strict) subset**
-and `W` as the **(strict) superset**.
+then `V` may be referred to as the "strict sub-set"
+and `W` as the "strict super-set".
 
 clarification
 
-* The empty set `{}` is a strict subset to any non-empty set.
-* No set, including `{}`, is a strict subset to itself.
+* the empty set `{}` is a strict subset to any non-empty set
+* no set, including `{}`, is a strict subset to itself
+* `strict-subset-of` implies an order (<)
 
 clarification
 
 * `(V strict-subset-of W) -> (#V < #W)`
 * `(V strict-subset-of W) -> !(W strict-subset-of V)`
-* `strict-subset-of` implies an order (<)

@@ -1,8 +1,4 @@
 
-**TODO** - (open aspects)
-
-* currently just a "summary" of thoughts
-
 <!-- ======================================================================= -->
 # Common properties
 

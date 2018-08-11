@@ -2,7 +2,8 @@
 <!-- ======================================================================= -->
 # TODO - relations
 
-a definition of "path" based upon a relation
+**TODO** -
+a relation-based definition of "path"
 
 * given an endo-relation R:=(A,G)
 * p:=(x1,x2,...,xn) is a path

@@ -1,6 +1,4 @@
 
-**TODO** - (open aspects)
-
 <!-- ======================================================================= -->
 # (Simple) Hierarchy/Forest of sets
 
@@ -276,30 +274,3 @@ Any subset of a hierarchy is a forest of hierarchies.
 
 Note however that, under certain circumstances (i.e. the hierarchy's
 root set is included), the subset will itself be a hierarchy.
-
-<!-- ======================================================================= -->
-## TODOs
-
-**TODO** -
-define sub-hierarchy? -
-required to proof (CE(h) == V) -
-as counterpart to sub-tree?
-
-**TODO** -
-go meta with forests? -
-a forest is itself a set of elements -
-a hierarchy of forests? -
-"an outline of an outline"? -
-an unordered/ordered forest?
-
-**TODO** -
-given a set of elements V -
-how many hierarchies are theoretically possible? -
-what is the max possible number of sets in P (hint: powerset)? -
-with regards to: resource management, allocation of resources
-
-**TODO** -
-`(css(l) in P)` iff `(l in LS)` -
-reduces the number of possible hierarchies -
-it requires that (css(p) !in P) for (p in PS) -
-i.e. each parent set removes a possible set in P -

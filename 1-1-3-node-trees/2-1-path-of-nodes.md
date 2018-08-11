@@ -6,16 +6,6 @@ A path `p` is a sequence of nodes `p := [n1,n2,...,nk] in xN^k`
 such that `(ni parent-of ni+1)` or `(ni child-of ni+1)`
 for `i in [1,k-1]`, `k in [2,*]`.
 
-Any definition based on sequences also apply to paths:
-
-* `#p` := length of a path
-* `p[n]` := the n-th node of a path
-* `(t == s)`, `(t != s)`, `(t === s)`, `(t !== s)`
-* `(t subsequence-of s)`
-* `(t prefix-of s)`, `(u prefix-of s,t)`
-* `(t suffix-of s)`, `(u suffix-of s,t)`
-* (strictly|loosely)? pre-, sub-, in-sequent entries
-
 Note that paths `p1` and `p2` are not necessarily identical if they share
 a common prefix and a common suffix: `p1=[p1,...,pA,i1,...,iB,s1,...,sC]`, 
 `p2=[p1,...,pA,j1,...,jD,s1,...,sC]` for `B and D in [0,+Infinity)`.

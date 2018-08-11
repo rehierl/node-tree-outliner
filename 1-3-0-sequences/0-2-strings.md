@@ -115,9 +115,9 @@ prefixes
 extensions
 
 * sets-of-strings often referred to as "formal language"
-* sets-of-strings: (S × T) := { (s × t) | (s in S) and (t in T) }
 * string-with-set: (s × T) := { (s × t) | (t in T) }
 * set-with-string: (S x t) := { (s × t) | (s in S) }
+* sets-of-strings: (S × T) := { (s × t) | (s in S) and (t in T) }
 
 <!-- ======================================================================= -->
 ## wikipedia, substring

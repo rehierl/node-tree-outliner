@@ -1,7 +1,5 @@
 
 <!-- ======================================================================= -->
-# Subsequences
+# TODO - sequences
 
-**TODO**
-- write a summary
-- to introduce the core terms
+**TODO** - the whole chapter needs substantial editing

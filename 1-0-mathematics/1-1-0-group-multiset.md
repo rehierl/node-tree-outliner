@@ -56,14 +56,13 @@ definition
 * note - vectors aren't subject of this discussion
 
 <!-- ======================================================================= -->
-## cardinality
+## cardinality, size, length
 
-* the cardinality of a multiset is equal to
-  the sum of multiplicities of its distinct elements
+cardinality
+
+* the cardinality of a multiset is the number of its components
+* equal to the sum of multiplicities of its elements
 * `ms1` has cardinality 3, but only 2 distinct elements
-
-<!-- ======================================================================= -->
-## size, length
 
 sizeOf(ms)
 
@@ -75,7 +74,7 @@ lengthOf(ms), cardinalityOf(ms)
 * "length" will be used to refer to the number of components
 * i.e. "length" is understood to be synonymous to "cardinality"
 * i.e. "length" reflects a sequence-based perspective of a mutliset
-* i.e. "length" is not understood to imply any order
+* i.e. "length" is however not understood to imply any order
 
 clarification
 
@@ -156,7 +155,7 @@ may any assumption with regards to the values it holds.
 traceOf(multiset) begin
   t = ()
   for c in multiset begin
-    t = add(c.value, t)
+    t = (t × c.value)
   end
   return seq
 end
@@ -166,6 +165,7 @@ s1 = traceOf(s) //- e.g. [ 2, 1, 3, 2 ]
 s2 = traceOf(s) //- e.g. [ 3, 2, 1, 2 ]
 ```
 
+* (×) represents the concatenation operator for sequences
 * any multiset of elements allows to randomly iterate over its components
 * an iteration may visit the components in any order
 * subsequent iterations may visit the components in different order
@@ -187,8 +187,19 @@ multiplicityOf(x,V) begin
 end
 ```
 
-* multiplicityOf() returns the number of occurrences of `x` in `V`
+* `#(x,V) := multiplicityOf(x,V)`
+* returns the number of occurrences of `x` in `V`
 * the result is `0` if no component holds `x` as its element
+
+<!-- ======================================================================= -->
+## finite, infinite
+
+In principle, the number of components of a group may be finite or infinite.
+Furthermore, the multiplicity of each element may be finite or infinite.
+
+In order not to open Pandora's box, the groups/multisets in the context of this
+discussion all are finite. That is, the multiplicity of each element is finite,
+as is the cardinality of each group.
 
 <!-- ======================================================================= -->
 ## add, remove
@@ -196,16 +207,17 @@ end
 add(x,V)
 
 * `add(x,V)` := increase the multiplicity of `x` in `V` by `1`
-* i.e. `V` and `add(x,V)` will only differ in multiplicity of `x`
 * i.e. `multiplicityOf(x,add(x,V)) == multiplicityOf(x,V)+1`
+* i.e. `V` and `add(x,V)` will always differ in multiplicity of `x`
+* i.e. in contrary to remove(), add() is never idempotent
 * signature: (element,multiset) -> new-multiset
 
 remove(x,V)
 
 * `remove(x,V)` := decrease the multiplicity of `x` in `V` by `1`
-* i.e. `V` and `remove(x,V)` will only differ in multiplicity of `x`
-* `(V == remove(x,V))` will be true iff `(x !in V)`
+* `(remove(x,V) == V)` will be true iff `(x !in V)`
 * i.e. the multiplicity of `x` can not be reduced beyond `0`
+* i.e. `remove(x,V)` is idempotent if `V` does not contain `x`
 * signature: (element,multiset) -> new-multiset
 
 <!-- ======================================================================= -->

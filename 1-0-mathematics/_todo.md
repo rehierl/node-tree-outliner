@@ -4,7 +4,11 @@
 
 **TODO** -
 define (directed) trees as a complex values? -
-i.e. similar to multisets, sets and sequences -
-e.g. nodes as components -
+similar to multisets, sets and sequences -
+treat nodes as components? -
 too many variations for trees? -
-needs standard operations
+needs standard operations -
+
+**TODO** -
+what are the characteristics of subgroup-of -
+i.e. compared to subset-of?

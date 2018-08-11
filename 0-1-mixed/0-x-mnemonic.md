@@ -13,7 +13,7 @@ rather abstract following discussions.
 * attempt to associate information with something more accessible/meaningful
 * i.e. make information more "relatable"
 
-**TODO** - "memory hooks" in this discussion represent "mnemonics".
+Note that "memory hooks" in this discussion represent "mnemonics".
 
 <!-- ======================================================================= -->
 ## wikipedia, art of memory

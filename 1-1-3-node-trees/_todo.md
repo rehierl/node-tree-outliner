@@ -2,6 +2,10 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+**TODO** -
+align the core definitions with those in hierarchy-of-sets -
+including `T := (N,E)` -
+
 <!-- ======================================================================= -->
 ## add to core definitions
 

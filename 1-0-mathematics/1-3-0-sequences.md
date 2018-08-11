@@ -62,7 +62,7 @@ clarification
 Note that `isMultiSet(s)` is understood to be true for sequences.
 
 <!-- ======================================================================= -->
-## a sequence is a specialized multiset
+## sequences are specialized multisets
 
 * "specialized" such that the components within a sequence are ordered
 * i.e. the order of components may carry over to its elements
@@ -76,6 +76,29 @@ a sequence adopts the following definitions:
 * lengthOf() := cardinalityOf()
 * `()` and `[]` both represent empty sequences
 * (v in S), oneElementOf()
+
+<!-- ======================================================================= -->
+## (consistent) iteration
+
+```
+traceOf(s) begin
+  t = ()
+  for c in s begin
+    t = (t × c.value)
+  end
+  return t
+end
+
+s = [ 1, 2, 2, 3 ]
+s1 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
+s2 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
+```
+
+* (×) represents the concatenation operator for sequences
+* any sequence of elements allows to consistently iterate over its components
+* the iteration will visit the components in order - i.e. from first to last
+* subsequent iterations will visit the components in the exact same order
+* i.e. `s1` is guaranteed to always be identical to `s2`
 
 <!-- ======================================================================= -->
 ## add, remove
@@ -101,28 +124,6 @@ note that ...
 * i.e. add() will increase the multiplicity of `x` in `s` by `1`
 * the basic semantics of remove() with regards to multisets is maintained
 * i.e. remove() will decrease the multiplicity of `x` in `s` by `1`
-
-<!-- ======================================================================= -->
-## (consistent) iteration
-
-```
-traceOf(s) begin
-  t = ()
-  for c in s begin
-    t = add(c.value, t)
-  end
-  return t
-end
-
-s = [ 1, 2, 2, 3 ]
-s1 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
-s2 = traceOf(s) //- e.g. [ 1, 2, 2, 3 ]
-```
-
-* any sequence of elements allows to consistently iterate over its components
-* the iteration will visit the components in order - i.e. from first to last
-* subsequent iterations will visit the components in the exact same order
-* i.e. `s1` is guaranteed to always be identical to `s2`
 
 <!-- ======================================================================= -->
 ## index-of
@@ -210,6 +211,37 @@ set: (sequence, index, element) -> new-sequence
 (!=)
 
 * `(s != t)` is true, if both sequences differ in length and/or elements
+
+<!-- ======================================================================= -->
+## subsequences
+
+subsequence - the generalized, removal-based definition
+
+* `(t subsequence-of s)` := `t` is derived from `s` removing elements
+* given sequence `s=[a,b,c,d,e]`, then `t=[b,d]` is a subsequence of `s`
+* `s` is referred to as the "super-sequence" and `t` as the "sub-sequence"
+* note - the empty sequence `[]` is a subsequence to any sequence
+* note - any sequence is a subsequence to itself
+
+substring - the concatenation-based definition
+
+* (×) represents the concatenation operator
+* `(t,u,v substring-of s)`, if `s = (t × u × v)`
+* `s` is referred to as the "super-string" and `t,u,v` as "sub-strings"
+* note - subsequences are not required to be non-empty
+* `(t infix-of s)`, if `s == (u × t × v)` for some `u,v`
+* `(t prefix-of s)`, if `s == (t × u)` for some `u`
+* `(t suffix-of s)`, if `s == (u × t)` for some `u`
+* note - the empty string `""` or `[]` is a substring to any string
+* note - any string is a substring to itself
+
+Note that the focus of this discussion is on substrings rather than the general,
+removal-based subsequences. That is, the exact pattern of a substring appears
+within a given super-string. In addition to that, and because characters are
+not the focus of this discussion, the term "subsequence" is used as if it were
+defined using the concatenation operation.
+
+* synonymous - subsequence, substring, infix
 
 <!-- ======================================================================= -->
 ## inverse sequence (°)

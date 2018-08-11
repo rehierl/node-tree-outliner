@@ -36,7 +36,7 @@ equivalence order/relation
 * [wikipedia, partition of a set](https://en.wikipedia.org/wiki/Partition_of_a_set)
 
 <!-- ======================================================================= -->
-## References - TODO
+## References - SKIPPED
 
 * [wikipedia, order dimension](https://en.wikipedia.org/wiki/Order_dimension)
 * [wikipedia, completeness](https://en.wikipedia.org/wiki/Completeness_%28order_theory%29)

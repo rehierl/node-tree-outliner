@@ -1,6 +1,4 @@
 
-**TODO** - (open aspects)
-
 <!-- ======================================================================= -->
 # Set of sets
 
@@ -241,14 +239,3 @@ Likewise, two related sets are not necessarily coupled.
 * (=!>) both sets may overlap each other.
 * (<!=) `{}` is disjoint and related to any set.
 * hint: `(a <-> b) <-> (!a <-> !b)`
-
-<!-- ======================================================================= -->
-# TODO - extend disjoint/coupled definitions for (N > 2)?
-
-Note that two or more sets have one or more elements in common, if the
-intersection of all sets involved is non-empty. That is, an element which
-is common to two or more sets must be an element of all those sets.
-
-Note that two or more sets are disjoint from one another, if any two distinct
-sets are disjoint. Put differently, there are no two sets within such a set of
-sets that have even one element in common.

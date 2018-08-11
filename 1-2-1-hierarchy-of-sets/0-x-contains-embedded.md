@@ -1,10 +1,7 @@
 
-**TODO** - (open aspects)
-
 <!-- ======================================================================= -->
 # (loosely) contains/embedded
 
-**TODO** -
 a node loosely contains a distant descendant -
 a node strictly contains a child -
 a set loosely contains a child set -
