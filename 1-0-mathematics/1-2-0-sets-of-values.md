@@ -14,6 +14,9 @@ elements:    v1 v2
 
 * see "set theory" for further details
 
+Note that simple sets are specialized multisets such that the multiplicity of
+no element can increase past one/1.
+
 <!-- ======================================================================= -->
 ## core concept
 
@@ -82,61 +85,3 @@ a set adopts the following definitions:
   multiplicity of `x` does not increase beyond `1`
 * `(V == add(x,V)` will be true iff `(x in V)`
 * the `remove(x,V)` operation does not need to be changed
-
-<!-- ======================================================================= -->
-## union (+, or, union)
-
-* `(A union B) := { x | (x in A) or (x in B) }`
-* `(A or B), (A + B) := (A union B)`
-
-likewise
-
-* `(A + b) := (A + {b})`
-* `(a + B) := ({a} + B)`
-* `(a + b), ({a} + {b}) := {a, b}`
-
-clarification
-
-* `((A + B) + C) <-> (A + (B + C))`
-* `((a + b) + c) <-> (a + (b + c))`
-
-<!-- ======================================================================= -->
-## intersection (&, and, isect)
-
-* `(A isect B) := { x | (x in A) and (x in B) }`
-* `(A & B), (A and B) := (A isect B)`
-
-<!-- ======================================================================= -->
-## set difference (\, sub, diff)
-
-* `(A diff B) := { x | (x in A) and (x !in B) }`
-* `(A \ B), (A sub B) := (A diff B)`
-
-<!-- ======================================================================= -->
-## symmetric difference (^, xor, ex-or)
-
-* `(A ex-or B) := { x | x in (A\B or B\A) }`
-* `(A ^ B), (A xor B) := (A ex-or B)`
-
-clarification
-
-* `(A xor B) := (A \ B) or (B \ A)`
-* `(A xor B) := (A or B) \ (A & B)`
-
-<!-- ======================================================================= -->
-## wikipedia, complement (*)
-
-* all sets are understood to be subsets of a universal set U
-* (absolute) complement - A* := (U \ A) - i.e. the default definition
-* relative complement - (B \ A)
-
-properties
-
-* (A + B)* = A* & B*
-* (A & B)* = A* + B*
-* U = (A + A*)
-* {} = (A & A*)
-* {}* = U
-* U* = {}
-* A = (A*)* - aka. involution
-* (A strict-subset-of B) => (B* strict-subset-of A*)

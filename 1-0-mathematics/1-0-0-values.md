@@ -198,7 +198,7 @@ to refer to the number of components needed to hold its elements.
 
 * `#(v,V)` := the number of components within `V` that hold value `v`
 * the cardinality of an element is also known as its "multiplicity"
-* the cardinality of a value that is not an element of `V` is zero/0
+* the cardinality of a value, which is not an element of `V`, is zero/0
 
 ### wikipedia, equinumerosity
 

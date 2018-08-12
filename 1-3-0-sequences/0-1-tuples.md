@@ -2,36 +2,6 @@
 <!-- ======================================================================= -->
 # Tuples, Sequences
 
-* term "sequence" will be used in the course of this discussion
-
-tuples
-
-* `t := [1, 'a'] := (1,a)`
-* an ordered list of "anything"
-* in general of finite length
-
-sequences
-
-* `s := [1, 2, ...] := (1,2, ...)`
-* an enumerated collection of "something"
-* of finite or infinite length
-* in general a rule exists such that subsequent elements
-  in a sequence can be calculated from presequent ones
-* e.g. `an := a(n-2) + a(n-1)` (Fibonacci)
-
-strings
-
-* `s := "abac..." := ['a', 'b', 'a', 'c', ...]`
-* traditionally a sequence of characters
-* elements are selected from an alphabet
-* in computing generalized into a sequence of binary data of sorts
-* depending on the context, a mutable/immutable sequence
-
-vectors
-
-* `v := [1.0, 2.0, 3.0] := < 1, 2, 3 >`
-* in general an element of the real coordinate space (R^n)
-
 <!-- ======================================================================= -->
 ## wikipedia, tuples
 

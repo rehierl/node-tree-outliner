@@ -15,13 +15,13 @@ u = [          d, e, f, g            ]
 
 clarification
 
-* a super-string (`s`) is said to contain its substrings (`u`)
+* a super-string (`s`) is said to contain its sub-strings (`u`)
 * a substring is a sequence of contiguous/consecutive elements
 
 Note that the definition of "subsequence" in the context of this discussion
 deviates from the mathematical definition in such a way that a subsequence
-represents an exact pattern that can be located within another sequence (i.e.
-contiguous/ consecutive/ no gaps). In general, the definition used here is
+represents an exact pattern which can be located within another sequence (i.e.
+contiguous/consecutive/no gaps). In general, the definition used here is
 more strict and needs to be understood to be similar to the definition of
 "substring" or "infix".
 

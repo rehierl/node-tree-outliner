@@ -12,6 +12,14 @@ components:  c1 c2
 elements:    v1
 ```
 
+Note that multisets are understood to represent groups of components, each
+of which holds a single element. Besides that, multisets have no further
+properties. Because of that, multisets can be seen to represent the most basic
+type of complex values. Specialized complex values can then be understood to
+"inherit" this base type by specialization (i.e. add further characteristics):
+e.g. (1) "each element must be unique" (simple sets), or (2) "the components
+are linearly ordered" (sequences).
+
 <!-- ======================================================================= -->
 ## core concept
 
@@ -176,7 +184,7 @@ s2 = traceOf(s) //- e.g. [ 3, 2, 1, 2 ]
 ## multiplicity-of
 
 ```
-multiplicityOf(x,V) begin
+cardinalityOf(x,V) begin
   result = 0
   for c in V begin
     if(c.value == x) begin
@@ -187,9 +195,9 @@ multiplicityOf(x,V) begin
 end
 ```
 
-* `#(x,V) := multiplicityOf(x,V)`
+* `#(x,V), multiplicityOf(x,V) := cardinalityOf(x,V)`
 * returns the number of occurrences of `x` in `V`
-* the result is `0` if no component holds `x` as its element
+* the result is `0`, if no component of `V` holds `x` as its element
 
 <!-- ======================================================================= -->
 ## finite, infinite
@@ -223,17 +231,15 @@ remove(x,V)
 <!-- ======================================================================= -->
 ## (v in V), element-of
 
-(v in V)
-
-* `(v in V) := (multiplicityOf(v,V) >= 1)`
+* `(v in V) := (cardinalityOf(v,V) >= 1)`
 * `(v element-of V), elementOf(v,V) := (v in V)`
 * `(V contains v), (v belongs-to V) := (v in V)`
 
-(V in W)
+Note that ...
 
-* any multiset is itself a value
-* `(V in W)` := `(multiplicityOf(V,W) >= 1)`
-* `(W contains V), (V belongs-to W), (V element-of W) := (V in W)`
+* the same definitions apply, if `v` is a complex value
+* "contains" needs to be read as "contains as an element"
+* (subgroup-of <=!=> element-of)
 
 <!-- ======================================================================= -->
 ## one-element-of
@@ -243,4 +249,4 @@ remove(x,V)
 
 Note that this operation is useful in combination with multisets that have
 cardinality one/1. This operation allows to consistently retrieve the single
-remaining element it holds.
+element a multiset holds.

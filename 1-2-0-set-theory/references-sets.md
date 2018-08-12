@@ -26,6 +26,7 @@ mixed topics
 
 set theory
 
+* [wikipedia, naive set theory](https://en.wikipedia.org/wiki/Naive_set_theory)
 * [wikipedia, set theory](https://en.wikipedia.org/wiki/Set_theory)
 * [wikipedia, finite set](https://en.wikipedia.org/wiki/Finite_set)
 * [wikipedia, family of sets](https://en.wikipedia.org/wiki/Family_of_sets)

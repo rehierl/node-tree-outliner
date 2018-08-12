@@ -60,8 +60,8 @@ clarification
 ## set of values
 
 * in general, any set can be understood to represent a type/domain
-* the type of a set is however a set of sets
-* hint: `subset-of <=!=> element-of`
+* the type of a set is however a set-of-sets
+* hint: subset-of <=!=> element-of
 
 <!-- ======================================================================= -->
 ## sequences

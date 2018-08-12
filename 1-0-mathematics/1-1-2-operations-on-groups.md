@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Set-like operations on groups
+# (Set-like) Operations on groups
 
 Note that the following definitions correspond with those defined for simple
 sets of values. That is, the following definitions can be understood to be

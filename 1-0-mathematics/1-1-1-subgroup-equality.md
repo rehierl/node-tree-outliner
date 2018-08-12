@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Subgroup, equality
 
-Note that "subgroup-of" is distinct from "element-of".
+* (subgroup-of <=!=> element-of)
 
 <!-- ======================================================================= -->
 ## power-set (of a multiset)

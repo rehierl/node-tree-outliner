@@ -15,6 +15,9 @@ elements:   v1
 * see "sequences" for further details
 * "sequence" is the term that will be used throughout this discussion
 
+Note that sequences are specialized multisets such that there is an order
+relation on the underlying set of components.
+
 <!-- ======================================================================= -->
 ## core concept
 
@@ -143,14 +146,7 @@ end
 * note the 1-based indexes
 
 Note that the index of a value is undefined (i.e. zero/0),
-if its multiplicity within `s` is zero/0.
-
-<!-- ======================================================================= -->
-## (v in s), element-of
-
-* (v in s) := (indexOf(v,s) > 0)
-* (v element-of s), elementOf(v,s) := (v in s)
-* (s contains v), (v belongs-to s) := (v in s)
+if its multiplicity/cardinality within `s` is zero/0.
 
 <!-- ======================================================================= -->
 ## n-th element of
@@ -210,6 +206,7 @@ set: (sequence, index, element) -> new-sequence
 
 (!=)
 
+* `(s != t) := not (s == t)`
 * `(s != t)` is true, if both sequences differ in length and/or elements
 
 <!-- ======================================================================= -->

@@ -2,8 +2,19 @@
 <!-- ======================================================================= -->
 # E() - Set of elements
 
-* the general notion of the E() operator is as follows:
+* the basic notion of the E() operator is as follows:
 * E(x) := "the set of elements within the supplied atomic/complex value"
+
+Note that the E() operation is basically the union of a given set/sequence
+of elements. That is, if `S` is a given set/sequence, then `E(S)` is the
+union set over all elements in `S`.
+
+* if `S := {}`, then ...
+* `E(S), +(S) := {}`
+* `&(S) := U`
+
+<!-- ======================================================================= -->
+## definition of E()
 
 **atomic values**
 
@@ -37,7 +48,8 @@ purpose is therefore to only resolve the complex elements within the given set.
 That is, to create a set of all those elements that are elements of the complex
 values within the given set. Hence, only the 1st level is to be resolved.
 
-* example:
+**example**
+
 * c := { ({a},{b}), ({b},{c}) }
 * E(c) := { {a}, {b}, {c} } - the intended result
 * E(c) := { a, b, c } - not the intended result
