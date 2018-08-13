@@ -3,13 +3,11 @@
 # A (simple) set of elements
 
 ```
-(simple) sets
--------------
-order:       none
-
-components:  c1 c2
-             |  |
-elements:    v1 v2
+(simple) sets (no order)
+------------------------
+components:  c1 c2 c3
+             |  |  |
+elements:    v1 v2 v3
 ```
 
 * see "set theory" for further details

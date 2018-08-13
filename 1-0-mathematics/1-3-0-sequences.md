@@ -3,13 +3,13 @@
 # Sequences
 
 ```
-sequences
-----------------------
-order:      o1 o2
-            |  |  - linear
-components: c1 c2
-            | /
-elements:   v1
+sequences (linear order)
+------------------------
+order:      o1 o2 o3
+            |  |  |
+components: c1 c2 c3
+            |  | /
+elements:   v1 v2  
 ```
 
 * see "sequences" for further details
@@ -214,11 +214,11 @@ set: (sequence, index, element) -> new-sequence
 
 subsequence - the generalized, removal-based definition
 
-* `(t subsequence-of s)` := `t` is derived from `s` removing elements
+* `(t subsequence-of s)` := `t` is derived from `s` by the removal of elements
 * given sequence `s=[a,b,c,d,e]`, then `t=[b,d]` is a subsequence of `s`
 * `s` is referred to as the "super-sequence" and `t` as the "sub-sequence"
-* note - the empty sequence `[]` is a subsequence to any sequence
-* note - any sequence is a subsequence to itself
+* the empty sequence `[]` is a subsequence to any sequence
+* any sequence is a subsequence to itself
 
 substring - the concatenation-based definition
 
@@ -229,14 +229,14 @@ substring - the concatenation-based definition
 * `(t infix-of s)`, if `s == (u × t × v)` for some `u,v`
 * `(t prefix-of s)`, if `s == (t × u)` for some `u`
 * `(t suffix-of s)`, if `s == (u × t)` for some `u`
-* note - the empty string `""` or `[]` is a substring to any string
-* note - any string is a substring to itself
+* the empty string `""` or `[]` is a substring to any string
+* any string is a substring to itself
 
 Note that the focus of this discussion is on substrings rather than the general,
 removal-based subsequences. That is, the exact pattern of a substring appears
 within a given super-string. In addition to that, and because characters are
 not the focus of this discussion, the term "subsequence" is used as if it were
-defined using the concatenation operation.
+defined based upon the concatenation operation.
 
 * synonymous - subsequence, substring, infix
 

@@ -13,15 +13,6 @@ sequence contains an element more than once.
 
 * e.g. is `1` in `[1,2,1]` presequent to `2`? .. Yes and no.
 
-Note that the notion of the terms "consecutive" and "covering" is the same
-as that of ("strictly presequent" or "strictly subsequent") (see below).
-
-<!-- ======================================================================= -->
-## covered-by
-
-* `(a covered-by b)`, if `(a strictly-sequent-to b)`
-* see "partial order" in "order theory"
-
 <!-- ======================================================================= -->
 ## pseudocode definitions
 
@@ -74,9 +65,19 @@ isInSequentTo => (distanceBetween == 0)
 ```
 
 <!-- ======================================================================= -->
+## covered-by
+
+* `(a covered-by b)`, if `(a strictly-sequent-to b)`
+* see "partial order" in "order theory"
+
+Note that the notion of the terms "consecutive" and "covering" is similar to
+strictly-sequent, strictly-presequent and strictly-subsequent (see below).
+
+<!-- ======================================================================= -->
 ## sequent
 
-* `c1` and `c2` are sequent, if they are components of the same sequence `s`
+* components `x` and `y` are sequent, ...
+* if they are components of the same sequence `s`
 
 if the order of components is not relevant in a given context:
 
@@ -88,44 +89,44 @@ if the order of components is not relevant in a given context:
 <!-- ======================================================================= -->
 ## pre-sequent (<, <<)
 
-* `c1` appears before `c2`
-* `c1` **precedes** `c2`
+* component `x` appears before `y`
+* `x` **precedes** `y`
 
-x is presequent to y (<)
+x is presequent-to y (<)
 
 * `(x < y)` := `x` and `y` are sequent, and `x` appears before `y`
 * `(s[i] presequent-to s[j])` for any `i,j in [1,#s]` and `(i < j)`
 
-x is strictly presequent to y (<<)
+x is strictly-presequent-to y (<<)
 
-* `(x << y)` := `x` is presequent to `y`, and `x` appears directly before `y`
+* `(x << y)` := `x` is presequent-to `y`, and `x` appears directly before `y`
 * `(s[i] strictly-presequent-to s[j])` if `(i == (j-1))`
 
-x is loosely presequent to y
+x is loosely-presequent-to y
 
-* `x` is presequent to `y`, but `x` is not strictly presequent to `y` -
+* `x` is presequent-to `y`, but `x` is not strictly presequent-to `y` -
 * `(s[i] loosely-presequent-to s[j])` if `(i < (j-1))`
 * i.e. there are other entries in between
 
 <!-- ======================================================================= -->
 ## sub-sequent (>, >>)
 
-* `c2` appears after `c1`
-* `c2` **succeeds** `c1`
+* component `y` appears after `x`
+* `y` **succeeds** `x`
 
-y is subsequent to x (>)
+y is subsequent-to x (>)
 
 * `(y > x)` := `x` and `y` are sequent, and `y` appears after `x`
 * `(s[i] subsequent-to s[j])` for any `i,j in [1,#s]` and `(i > j)`
 
-y is strictly subsequent to x (>>)
+y is strictly-subsequent-to x (>>)
 
-* `(y >> x)` := `y` is subsequent to `x`, and `y` appears directly after `x`
+* `(y >> x)` := `y` is subsequent-to `x`, and `y` appears directly after `x`
 * `(s[i] strictly-subsequent-to s[j])` if `(i == (j+1))`
 
-y is loosely subsequent to x
+y is loosely-subsequent-to x
 
-* `y` is subsequent to `x`, but `y` is not strictly subsequent to `x`
+* `y` is subsequent-to `x`, but `y` is not strictly subsequent-to `x`
 * `(s[i] loosely-subsequent-to s[j])` if `(i > (j+1))`
 * i.e. there are other entries in between
 
@@ -133,14 +134,13 @@ y is loosely subsequent to x
 ## in-sequent (<>)
 
 * randomly pick two components `x,y in s=[c1,...,cN]`, where `(N = #s)`
-* note - the focus is on components, not elements
 
 clarification
 
-* if `(x != y)`, then `x` is either pre- or subsequent to `y`
-* if `(x == y)`, then `x` is neither pre- nor subsequent to `y`
+* if `(x != y)`, then `x` is either pre- or subsequent-to `y`
+* if `(x == y)`, then `x` is neither pre- nor subsequent-to `y`
 
-x insequent to y (<>)
+x insequent-to y (<>)
 
 * `x` and `y` are sequent, but neither pre- nor subsequent
 * i.e. in-sequent <=!=> not sequent
@@ -149,8 +149,8 @@ x insequent to y (<>)
 <!-- ======================================================================= -->
 ## examples
 
-* presequent -> strictly or loosely presequent
-* subsequent -> strictly or loosely subsequent
+* presequent -> strictly- or loosely-presequent
+* subsequent -> strictly- or loosely-subsequent
 * insequent -> not presequent and not subsequent
 
 assumed that `x` and `y` are sequent

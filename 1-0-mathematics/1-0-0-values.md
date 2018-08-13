@@ -57,31 +57,31 @@ clarification
 <!-- ======================================================================= -->
 ## Components
 
-The intention of introducing "components" is to avoid confusion with the
-"elements" of a complex value. That is, "components" are understood to be
-the building blocks of complex values.
+components are the building blocks of complex values
 
-* aka. slot, component, container
 * components are used to group values into more complex values
-* components represent bearers of atomic or complex values
-* components allow to define the structure of complex values
+* in addition to their value, components may have further properties
+* e.g. a reference to the next/previous component
+* components therefore allow to define the structure of complex values
 
-components always hold a single abstract value
+components represent abstract values
 
-* they hold one value, and one value only
-* a component always holds a defined value
+* components hold abstract or complex values
+* i.e. complex values may themselves be hierarchical
+* components hold one value, and one value only
+
+components are immutable entities
+
 * the value of a component is never undefined
-
-components are immutable entities/objects
-
-* the value a component holds is set during the creation of a complex value
+* the value of a component is set during the creation of a complex value
 * after that, the value of a component can not be changed (i.e. immutable)
 
-components need to be understood as being globally unique
+components are globally unique entities
 
 * complex values do not share the same components
 * no complex value contains a component more than once
 * complex values represent groups of unique of components
+* any component always belongs to a complex value
 
 ### (value-of c)
 
@@ -132,8 +132,7 @@ clarification
 * `complex := < (atomic|complex)* >`
 * complex values represent groups of unique components
 * each component within a complex value holds an abstract value
-* these abstract values may be atomic or complex
-* i.e. complex values may themselves be hierarchical
+* by default, any component may hold any value
 * an empty group `< >` is itself a complex value
 * e.g. multisets, sets, sequences, strings, etc.
 
@@ -144,18 +143,17 @@ constant, immutable
 
 homogenous, heterogenous
 
-* a complex value is said to be homogenous,
-  if all values used to create it share the same characteristics
-* heterogenous - its inner values have different characteristics
+* a complex value is homogenous, if its elements share certain characteristics
+* heterogenous - its elements have different characteristics
 * e.g. a complex value is heterogenous, if not all of its members are atomic
-* e.g. `c := < 2, 'd', ... >` is heterogenous
+* e.g. the complex value `c := < 2, 'd', ... >` is heterogenous
 
 unordered, ordered, order-relation
 
-* `x := < v1, v2, ... >`, `y := < v2, v1, ... >`
 * by default, the components within a complex value have no order
+* i.e. components have by default no relationship with each other
+* i.e. other than being part of the same or different complex values
 * i.e. a complex value has no first/last/n-th component
-* i.e. `x` and `y` represent the same complex value
 * additional information is needed to define such an order
 * this information must be provided by an associated order-relation
 * unordered complex value - a complex value with no associated order-relation
@@ -164,11 +162,14 @@ unordered, ordered, order-relation
 <!-- ======================================================================= -->
 ## Components vs. Elements
 
+The intention of introducing "components" (aka. slots or containers) is to
+avoid confusion with the "elements" of a complex value.
+
 components
 
-* components are unique entities
+* components are unique entities that hold/represent values/elements
 * no complex value contains a component more than once
-* complex values do not share any components
+* distinct complex values do not share any components
 
 values/elements
 
@@ -179,7 +180,7 @@ values/elements
 
 Note that the term "element" is used to point out that a value belongs to a
 complex value. That is, the term emphasizes the relationship with a complex
-value. In contrary to that, the term "value" focuses more on isolated an entity.
+value. In contrary to that, the term "value" focuses more on isolated entities.
 
 clarification
 

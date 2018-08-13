@@ -3,13 +3,11 @@
 # A multiset of values (ms)
 
 ```
-multisets
+multisets (no order)
 -------------
-order:       none
-
-components:  c1 c2
-             | /
-elements:    v1
+components:  c1 c2 c3
+             |  | /
+elements:    v1 v2
 ```
 
 Note that multisets are understood to represent groups of components, each
