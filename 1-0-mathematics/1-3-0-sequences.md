@@ -163,10 +163,10 @@ elementAt(index,seq) begin
 end
 ```
 
-* `s[i] := ei` for `i in [1,#s]`
-* `s := [e1, e2, ..., eN] = [s[1], s[2], ..., s[N]]`
+* `s := [e1, e2, ..., eN]`
+* `s[i] := elementAt(i,s) := si := ei`
+* `s[i] := undefined` if `(s == [])`
 * `s[i] := undefined` if `not (i in [1,#s])`
-* e.g. `s[i]` is undefined if `(s == [])`
 * synonymous - entry, element, item
 
 clarification
@@ -178,7 +178,7 @@ clarification
 clarification
 
 * `[si]` refers to sequence `si`
-* `s[i]` refers to element `si` of sequence `s`
+* `s[i]` refers to element `si` in sequence `s`
 
 <!-- ======================================================================= -->
 ## get/set access

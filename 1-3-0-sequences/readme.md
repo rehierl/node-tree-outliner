@@ -1,4 +1,5 @@
 
 **TODO** - needs substantial editing
 
-This content is intended to hold aspects related to sequences of elements.
+This content contains definitions related to sequences of nodes,
+which will be needed in the context of this discussion.
