@@ -162,11 +162,11 @@ bounded
 <!-- ======================================================================= -->
 ## wikipedia, subsequences
 
-* a sequence that can be derived from another
-* derived by deletion/removal - i.e. no change in order
+* a sequence that can be derived from an initial sequence
+* derived by the deletion/removal of elements - i.e. same order
 * e.g. (t subsequence-of s), if t=[b,d] and s=[a,b,c,d,e]
 * subsequence-of is a pre-order
-* note - substring-of does not support removal within an infix
+* in contrary to that, substring-of does not support removal within an infix
 * common subsequence - e.g. u=[b] is a common subsequence of s and t
 * used in bio-informatics - e.g. compare/analyze/store protein sequences
 

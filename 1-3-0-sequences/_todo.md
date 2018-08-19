@@ -24,8 +24,8 @@ sequences define trees - nested intervals
 <!-- ======================================================================= -->
 ## set of sequences
 
-trees
-- define "(strict) subtree"
+trees, orders
+- define "(strict) subtree", "(strict) suborder"?
 - compare node order of a subtree -vs- node order of a tree
 
 drawing borders around subtrees
