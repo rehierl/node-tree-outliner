@@ -22,6 +22,27 @@ sequences define trees - nested intervals
 - node sequence of node a is a subsequence of the root's sequence
 
 <!-- ======================================================================= -->
+## set of sequences
+
+trees
+- define "(strict) subtree"
+- compare node order of a subtree -vs- node order of a tree
+
+drawing borders around subtrees
+- a hierarchy of subtrees based on the subtree-of operator
+- translates directly into a hierarchy of sets of nodes
+
+ordered sequences
+- a tree's node order -vs- the traversal's node/visit order
+- the traversal's visit order -vs- the traversal's enter order
+- proof that: node order <-> visit order <-> enter order
+- the issue: a node is a single unit - i.e. enter vs. exit
+
+properties of (s in S)
+- all sequences have the same order
+- define "suborder" - order embedding?
+
+<!-- ======================================================================= -->
 ## interval order
 
 **TODO** -
@@ -32,12 +53,6 @@ try different orders e.g. `(Li < Lj)`
 
 **TODO** -
 is one of those orders similar to the enter-/exit-order?
-
-<!-- ======================================================================= -->
-## subsequences
-
-* mathematics / subsequences
-* needs an introductory summary
 
 <!-- ======================================================================= -->
 ## prefix-order

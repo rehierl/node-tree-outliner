@@ -42,112 +42,205 @@ vectors
 <!-- ======================================================================= -->
 ## Ordered sequences (s)
 
-Even though sequences can be created in any number of ways, the focus of this
-discussion is on the traversal of document trees. To be more accurate, the
-focus is on sequences whose elements are the nodes of a tree.
+Even though sequences can be created in any number of different ways, the
+focus of this discussion is on the traversal of document trees. To be more
+accurate, the focus is on sequences whose elements are the nodes of a tree.
 
-* `T := (N,R)` is a **directed acyclic node tree**
-* `T` is not necessarily an ordered node tree
+* `T := (N,R)` is a **directed acyclic tree of nodes**
+* `T` is commonly, but not necessarily an ordered tree
 * `N` is the tree's set of nodes
 * `(R subset-of N×N)` is the tree's endo-relation
-* `((ni,nj) in R)` iff `(ni parent-of nj)`
+* `sem(R)` := `((ni,nj) in R)` iff `(ni parent-of nj)`
 
 During the traversal of a tree, each node will be visited no more than once,
 and all nodes will be visited one after another. As soon as a node is visited,
-the tree traversal can be seen to associate the next available unique ordinal
+the tree traversal can be understood to associate the next available ordinal
 number with each node. Because of that, a strict total order `P` exists on a
-tree's set of nodes `N`. Note that this order will in general be referred to
-as the traversal's **node order**, **visit order**, **enter order** - i.e. a
-**topological sorting**.
+tree's set of nodes `N`.
 
-**TODO** - a tree's node order -vs- the traversal's node/visit order
-**TODO** - the traversal's visit order -vs- the traversal's enter order
-**TODO** - proof that: node order <-> visit order <-> enter order
+Note that this order will in general be referred to as the traversal's **node
+order**, **visit order**, **enter order** - i.e. a **topological sorting**.
 
 Put differently, the traversal of a tree can be seen to add/append/associate
 each node to/with a sequence of nodes `s` as soon as a node is entered. Once
 the traversal of a tree has finished, such sequences will contain all the nodes
-(i.e. `(E(s) == N)`) in the tree's enter order. That is, the index associated
-with each node represents the ordinal number associated with that node via the
-tree traversal's enter order. Note that such a node sequence will in general be
-referred to as the **(node) sequence (of the tree)** - i.e. a **trace of nodes**.
+(i.e. `(E(s) == N)`) in the traversal's enter order. That is, the index of a
+node in `s` represents the ordinal number the traversal associates with a node.
 
-In the context of this discussion, a sequence of nodes `s := [n1, n2, ..., nk]`
-contains no node more than once. Because of that, the set of nodes `E(s)` is
-a set of elements such that `(#E(s) == #s)`. A node sequence can therefore be
-understood to define an ordered set of nodes `P, P(s) := (E(s),<)` such that
-`(s[i] < s[j])` iff `(i < j)`. And because `P(s)` does not contain even one
-pair of incomparable nodes, the node order defined is a strict total order.
-Note that sequences of elements, for which `(#E(s) == #s)` is true, will in
-general be referred to as **ordered sequences**, or as **linear sequences**.
+Note that such a node sequence will in general be referred to as the **(node)
+sequence (of a tree)** - i.e. a **trace of nodes**.
 
-* `s := [n1, ..., nk]` is a sequence such that `(E(s) == N)`
+* `(s, seq: T -> N*)` is a function such that
+* `s(t)` returns the node sequence of tree `t`
+* `s = s(t) = [n1, n2, ..., nk]` where `(s[i] in N)` for all `(i in [1,k])`
+
+In the context of this discussion, a sequence of nodes `s` contains no node
+more than once. Because of that, the set of nodes `E(s)` is a set of elements
+such that `(#E(s) == #s)`. A node sequence can therefore be understood to
+define an order relation `P, P(s) := (E(s),<)` on the set of nodes such that
+`(s[i] < s[j])` iff `(i < j)`. And because `P` does not contain even one pair
+of incomparable nodes, the node order defined by such a sequence is a strict
+total order.
+
+Note that a sequence of elements, for which `(#E(s) == #s)` is true, will in
+general be referred to as an **ordered sequence**, or as a **linear sequence**.
+
+* `s = [n1, ..., nk]` is a sequence of nodes
+* `(E(s) == N)` and `(#s == #N)` are both true
 * `P := (E(s),<)` where `(s[i] < s[j])` iff `(i < j)`
 * `P` is an ordered set of nodes in enter order
-* `((ni,nj) in P)` iff `(ni entered-before nj)`
+* `sem(P)` := `((ni,nj) in P)` iff `(ni entered-before nj)`
 * `P` is a strict total order
 
 <!-- ======================================================================= -->
-## Sets of ordered sequences (S)
+## Set of ordered sequences (S)
 
-The traversal of a tree is however not limited to creating only one sequence of
-nodes. That is because the very same tree traversal can be used to create a node
-sequence for the whole tree and one for each (strict) subtree.
+The traversal of a tree is however not limited to creating only one sequence.
+That is because a tree traversal can be used to create a sequence for the whole
+tree and one for each (strict) subtree. Because of that, a tree traversal can
+be understood to add each node to one or more sequences and therefore to create
+a set of sequences `S`.
 
-As such, the
-tree traversal can be understood to add each node to one or more sequences and
-therefore to create a set of sequences `S`. Note that such a set of sequences
-will in general be referred to as the **set of (node) sequences (of a tree)**.
+Note that such a set of sequences will in general be referred to as the **set
+of (node) sequences (of a tree)**.
 
 Put differently, each node within a tree can be understood to represent the
-root of a tree. That is, any tree can be seen to contain `#N` subtrees, i.e.
-`(#N-1)` strict subtrees and the subtree that begins in the given tree's root.
-Because of that, a tree traversal can be understood to create a node sequence
-for each subtree.
+root of a subtree for which a node sequence will be created. Because of that,
+each tree can be seen to represent `#N` distinct subtrees: `(#N-1)` strict
+subtrees and the subtree that begins in the tree's root.
 
-*  such that `(#S == #N)`
+Note that the subtree of a node, which has the given node as its root, will
+in general be referred to as the **(sub)tree of a node**. In addition to that,
+the sequence created for the subtree, which corresponds with a node, will in
+general be referred to as the **node sequence of a node**. Note also that the
+node sequence of a tree is identical to the node sequence of its root.
 
-That is, each node `n` can be understood to be associated with its own
-node sequence `s`. Because of that, a bijective function `(s: N -> S)` can be
-defined which allows to refer to the sequence `s(n)` of node `n`. Note that any
-sequence in `S` will be referred to as the **node sequence (of a node)**. Note
-also that the node sequence of a tree is identical to the node sequence of its
-root.
+* `(t, tree: N -> T)` is a function such that
+* `tree(n)` returns the (sub)tree that has `n` as its root
+* i.e. `t(n)` returns the subtree's endo-relation
 
-**TODO** - define "(strict) subtree"
+Likewise, ...
 
-<!-- ======================================================================= -->
-## Properties of (s in S)
+* `(r, root: T -> N)` is inverse to `tree()`
+* `root(t)` returns the root node `r` of the given tree `t`
+* i.e. `(tree(root(t)) == t)` and `(root(tree(r)) == r)` are both true
 
-Obviously, the root of a tree will be entered first and will therefore always
-appear as the first node in a tree's node sequence. In general, node `n` will
-be the first node of sequence `s` created for the subtree that has `n` as its
-root.
+Furthermore, a tree's root will be entered first during the traversal of a
+tree. Because of that, the root of any subtree will always be the first node
+in the node sequence of a subtree. In general, node `n` will be the first
+node of sequence `s` created for `tree(n)`.
 
-As before, the traversal of a tree can be seen to add each node to one or more
-sequences as soon as the corresponding node is entered. That is, each node `n`
-will be added to `#A(n)+1` sequences, where `A(n)` refers to the set of ancestor
-nodes of `n`. Put differently, the number of sequences that contain `n` as an
-element is equal to `#p(r,n)`, where `p` is the rooted path that begins in a
-tree's root `r` and ends in the corresponding node `n`.
+*  `(s[1] == n) <-> (s == seq(tree(n)))`
 
-Because of that, the sequence of
-a descendant is related to the sequences of its ancestors. That is, all nodes
-in `s(d)` of some descendant `d` of node `n` are also nodes in `s(n)`. In short:
-`(E(s(d)) strict-subset-of E(s(n)))` iff `(d descendant-of n)`. Furthermore, the
-nodes are added to the sequences in the exact same enter order. That is, the
-index order of `s(d)` corresponds with the index order of `s(n)`, which is why
-the sequence of a descendant is a substring to the sequences of its ancestors.
-In short: `(s(d) strict-substring-of s(n))`.
+Consequently, no node sequence created for another subtree will begin with the
+exact same node. The sequence created for the subtree of a node will therefore
+be unique and distinct from the sequences of any other subtree. The set of
+sequences `S` of a tree will therefore hold one sequence per node. That is,
+each node `n` can be understood to be associated with its own sequence `s`.
 
-**TODO** - same order of sequences
-**TODO** - define "suborder" - order embedding?
-**TODO** - compare the node order of a subtree with the node order of a tree
+* `(#S == #N)`
+* `(s, seq: N -> S) := seq(tree(n))` is a function such that
+* `s(n)` returns the node sequence `s` of node `n`
 
 <!-- ======================================================================= -->
+## Example sets of sequences
 
-The creation of node sequences during the traversal of a tree can be understood
-to introduce a **stream-based perspective** on the node sequences of a tree.
-That is because
+```
+node tree T   set of sequences S
+===========   ==================
+ n1 -> n2     s(n1) := [n1, n2]
+              s(n2) := [n2]
+```
 
-**TODO** - expand - e.g. open/closed sequence?
+* (A1) As soon as the traversal enters the root `n1`, it can be understood
+  to create the node sequence `s(n1)` and to add `n1` to that sequence as
+  its very first node.
+* (A2) After that, the traversal will enter the root's first and only child
+  `n2` and will treat that node as the root of a subtree. That is, the
+  traversal will create and initialize the node sequence `s(n2)`. However,
+  and because the tree traversal has not yet exited `n1`, `n2` must also
+  be added to `s(n1)`.
+* (A3) Obviously, the next step is to exit `n2`,
+  which is why no more nodes will be added to `s(n2)`.
+* (A4) Likewise, the next step is to exit `n1`,
+  which is why no more nodes will be added to `s(n1)`.
+
+```
+node tree T   set of sequences S
+===========   ==================
+ n1 -|-> n2   s(n1) := [n1, n2, n3]
+     |-> n3   s(n2) := [n2]
+              s(n3) := [n3]
+```
+
+* (B0) Due to the structural similarities, this fragment can be understood
+  to begin just after having executed steps A1 through A3. That is, `n3`
+  is about to be entered.
+* (B1) Entering `n3` is obviously exactly the same as entering any other
+  root node. That is, `s(n3)` will be created and initialized with `n3`.
+  However, and because the tree traversal has not yet exited, `n1`, `n3`
+  must also be added to `s(n1)`.
+* (B2) Similar to (A3), the next step is to exit `n3`,
+  which is why no more nodes will be added to `s(n3)`.
+* (B3) Finally, the last step is to exit `n1`,
+  which is why no more nodes will be added to `s(n1)`.
+
+As can be easily seen from these examples, ...
+
+* Any sequence in `S` is an infix to the root's node sequence.
+* The sequence of a descendant will always be a
+  strict infix to the sequences of its ancestors.
+* The sequence of a descendant will never be a
+  prefix to the sequences of its ancestors.
+* The sequence of a descendant may be, but does not have to be
+  a strict suffix to one or more sequences of its ancestors
+  - e.g. `(s(n3) strict-suffix-to s(n1))`.
+* `S` may contain sequences that are disjoint
+  - e.g. `(s(n2) disjoint-to s(n3))`.
+* If two distinct sequences have one or more nodes in common,
+  then one sequence is a strict subsequence of the other.
+* Each node will be added to `#A(n)+1` sequences, where
+  `A(n)` is the set of ancestors of the corresponding node.
+
+<!-- ======================================================================= -->
+## A stream-based perspective
+
+As can also be seen from the above examples, nodes are added to a sequence as
+soon as the defining node was entered. In addition to that, the traversal will
+continue to add nodes to a sequence until the defining node was exited.
+
+Any sequence can therefore be understood to have states associated with it:
+(1) A sequence is **undefined** for as long as its defining node has not been
+entered. (2) A sequence is **open** for as long as the traversal of a tree
+is still visiting the nodes of the corresponding subtree. (3) And finally, a
+sequence is **closed** as soon as the defining node of a sequence was exited.
+
+Note that this state-based perspective on the node sequence of a tree will in
+general be referred to as the **stream-based perspective**. That is, the above
+node sequences can, similar to binary streams, be understood to represent
+streams of nodes.
+
+In addition to that, and once a defining node is entered, all the nodes of the
+corresponding subtree are added to a sequence. That is, this perspective has
+no paused and no continued states. Because of that, the above sequences can be
+understood to be **consecutive** or **contiguous** with regards to the tree
+traversal's node order.
+
+Note that the sequence of a descendant would otherwise not be infixes to the
+the sequences of its ancestors.
+
+<!-- ======================================================================= -->
+## Related ordered sequences
+
+As before the traversal of a tree can be understood to add each node to one or
+more sequences. Because of that, the sequence of a descendant always has one or
+more nodes in common with the sequences of its ancestors. That is, the sequences
+of descendant nodes are related to the sequences of their ancestors.
+
+Furthermore, and because any sequence is an infix to the root's node sequence,
+all sequences correspond with the tree traversal's enter order. That is, all
+sequences represent sub-orders to the traversal's enter order.
+
+The remainder of this chapter will therefore focus on a detailed introduction
+of definitions that allow to describe the relationships the ordered sequences
+of a tree have with each other.
