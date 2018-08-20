@@ -42,6 +42,9 @@ properties of (s in S)
 - all sequences have the same order
 - define "suborder" - order embedding?
 
+define
+- set-based operators for ordered sequences?
+
 <!-- ======================================================================= -->
 ## interval order
 
