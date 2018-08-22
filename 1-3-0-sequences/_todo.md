@@ -14,7 +14,8 @@ relationship with interval order
 
 sequences define trees - direct edges
 - (f: Index -> Index)
-- (a,b) = node a has parent b
+- (f := { (a,b) | (b = f(a)) }
+- (a,b) = (a child-of b)
 
 sequences define trees - nested intervals
 - (f: Index -> Length)
@@ -33,10 +34,9 @@ drawing borders around subtrees
 - translates directly into a hierarchy of sets of nodes
 
 ordered sequences
-- a tree's node order -vs- the traversal's node/visit order
-- the traversal's visit order -vs- the traversal's enter order
+- a tree's node order -vs- a traversal's node/visit/enter order
 - proof that: node order <-> visit order <-> enter order
-- the issue: a node is a single unit - i.e. enter vs. exit
+- the issue: a node is a single unit - vs. enter and exit events
 
 properties of (s in S)
 - all sequences have the same order
@@ -55,36 +55,3 @@ define
 * i.e. a sequence is a group of elements paired with an order-relation
 * sequences represent ordered multisets - nope
 * sequences may represent ordered sets
-
-<!-- ======================================================================= -->
-## interval order
-
-**TODO** -
-how does that order behave with regards to overlapping - incomparable?
-
-**TODO** -
-try different orders e.g. `(Li < Lj)`
-
-**TODO** -
-is one of those orders similar to the enter-/exit-order?
-
-<!-- ======================================================================= -->
-## prefix-order
-
-```
-prefix-order          tree-related order
--------------------   -----------------------------
-0 1 2 3 4 5 6 7 8 9   0 1 2 3 4 5 6 7 8 9
-=================     ========= =========
-===============         =======   ===
-=============             =====     =
-===========                   =
-=========
-=======
-=====
-===
-=
-```
-
-* i.e. "just add in-comparable substrings"
-* or - compare with suffix-order

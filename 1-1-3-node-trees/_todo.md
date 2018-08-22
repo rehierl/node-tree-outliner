@@ -13,11 +13,7 @@ including `T := (N,E)` -
 * related vs. unrelated nodes
 * define "related nodes"
 * instead of "one is an ancestor of the other"
-
-trees
-
-* tree-order, ordered tree
-* an order-embedding?
+* define "sub-tree"
 
 **CLARIFICATION**
 Node `n1` is said to be **disjoint** from `n2`,

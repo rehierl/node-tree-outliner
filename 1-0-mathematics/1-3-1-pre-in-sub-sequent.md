@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Sequent
+# pre-/in-/sub-sequent
 
 * two components of the same sequence are **sequent**
 * two components of different sequences are **not sequent**
@@ -21,7 +21,8 @@ refers to the 1st parameter, which will be tested against the 2nd parameter
 (i.e. the context of the corresponding operation).
 
 ```
-indexOf(component, sequence) begin
+//- return the index of a component in the given sequence
+indexOf(sequence, component) begin
   index = 1
   for c in sequence begin
     if(c === component) return index
@@ -30,23 +31,27 @@ indexOf(component, sequence) begin
   throw new NotFoundException()
 end
 
+//- abbreviation
+i(s,c) or idx(s,c) => indexOf(s,c)
+
 //- returns an (pos|neg) integer value
 //- the result is >0, if c1 appears before c2
 //- the result is <0, if c1 appears after c2
 //- the order is upside-down, if the result is <0
-distanceBetween(c1,c2,seq) begin
-  i1 = indexOf(c1,seq)
-  i2 = indexOf(c2,seq)
-  return (i2 - i1)
+distanceBetween(s,c1,c2) begin
+  return (idx(s,c2) - idx(s,c1))
 end
+
+//- abbreviation
+d(s,c1,c2) => distanceBetween(s,c1,c2)
 
 //- returns a positive integer value in [0,*]
 //- the number of jumps required to reach c2 from c1
 //- the result is =0, if (c1 == c2)
 //- the result is +1, if c1 is adjacent to c2
 //- the result is +2, if one ci is located between c1 and c2
-absDistance(c1,c2,seq) begin
-  result = distanceBetween(c1,c2,seq)
+absDistance(seq,c1,c2) begin
+  result = distanceBetween(seq,c1,c2)
   return (result >= 0) ? result : (-1)*result
 end
 
@@ -92,17 +97,17 @@ if the order of components is not relevant in a given context:
 * component `x` appears before `y`
 * `x` **precedes** `y`
 
-x is presequent-to y (<)
+x is **presequent-to** y (<)
 
 * `(x < y)` := `x` and `y` are sequent, and `x` appears before `y`
 * `(s[i] presequent-to s[j])` for any `i,j in [1,#s]` and `(i < j)`
 
-x is strictly-presequent-to y (<<)
+x is **strictly-presequent-to** y (<<)
 
 * `(x << y)` := `x` is presequent-to `y`, and `x` appears directly before `y`
 * `(s[i] strictly-presequent-to s[j])` if `(i == (j-1))`
 
-x is loosely-presequent-to y
+x is **loosely-presequent-to** y
 
 * `x` is presequent-to `y`, but `x` is not strictly presequent-to `y` -
 * `(s[i] loosely-presequent-to s[j])` if `(i < (j-1))`
@@ -114,17 +119,17 @@ x is loosely-presequent-to y
 * component `y` appears after `x`
 * `y` **succeeds** `x`
 
-y is subsequent-to x (>)
+y is **subsequent-to** x (>)
 
 * `(y > x)` := `x` and `y` are sequent, and `y` appears after `x`
 * `(s[i] subsequent-to s[j])` for any `i,j in [1,#s]` and `(i > j)`
 
-y is strictly-subsequent-to x (>>)
+y is **strictly-subsequent-to** x (>>)
 
 * `(y >> x)` := `y` is subsequent-to `x`, and `y` appears directly after `x`
 * `(s[i] strictly-subsequent-to s[j])` if `(i == (j+1))`
 
-y is loosely-subsequent-to x
+y is **loosely-subsequent-to** x
 
 * `y` is subsequent-to `x`, but `y` is not strictly subsequent-to `x`
 * `(s[i] loosely-subsequent-to s[j])` if `(i > (j+1))`
@@ -140,7 +145,7 @@ clarification
 * if `(x != y)`, then `x` is either pre- or subsequent-to `y`
 * if `(x == y)`, then `x` is neither pre- nor subsequent-to `y`
 
-x insequent-to y (<>)
+x **insequent-to** y (<>)
 
 * `x` and `y` are sequent, but neither pre- nor subsequent
 * i.e. in-sequent <=!=> not sequent

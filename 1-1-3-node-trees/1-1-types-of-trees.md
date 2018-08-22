@@ -6,7 +6,7 @@ subgraph
 
 * subgraph - subsets of vertices and subset of edges
 * spanning subgraph - same vertices, fewer edges
-* induced subgraph - vertex subset and all edges in that subset
+* induced subgraph - subset of vertices and all edges in that subset
 
 subtree
 
@@ -14,18 +14,25 @@ subtree
 * subtree of a rooted tree - all edges and vertices descendant to a vertex
 
 <!-- ======================================================================= -->
-## wikipedia, recursive tree
+## wikipedia, spanning tree
 
-* an unordered, non-planar labeled rooted tree
-* nodes are labeled using integers in `[1,n]`
-* labels increase with distance from the root
-* non-planar - children have no order
+* a subgraph of an undirected graph that is a tree
+* the tree includes all vertices with a minimum number of edges
+* for a given graph, several spanning trees may exist
+* a graph may have only one spanning tree - the graph is itself a tree
+* a graph must be connected
+
+comments
+
+* somewhat related to hamilton paths
+* note that graphs in general do not have to be directed
+* directedness in graph theory is more a special case, not the default
 
 <!-- ======================================================================= -->
 ## wikipedia, trémaux/normal tree
 
 * aka. normal spanning tree
-* a spanning tree of an undirected graph rooted at one vertex
+* the spanning tree of an undirected graph, rooted at one vertex
 * two vertices are adjacent as ancestor and descendant
 * all depth-first search trees are trémaux trees
 
@@ -35,16 +42,20 @@ comments
 * "ancestor and descendant" ...
 
 <!-- ======================================================================= -->
-## wikipedia, spanning tree
+## wikipedia, recursive tree
 
-* a subgraph of an undirected graph that is a tree
-* the tree includes all vertices with minimum number of edges
-* a graph may have several spanning trees
-* a graph may have only one spanning tree - the graph is itself a tree
-* a graph must be connected
+* an unordered, non-planar labeled rooted tree
+* nodes are labeled using integers in `[1,n]`
+* labels increase with distance to the root
+* non-planar - children have no order
 
-comments
+<!-- ======================================================================= -->
+## wikipedia, radial tree
 
-* somewhat related to hamilton paths
-* note that graphs in general do not have to be directed
-* directedness in graph theory is more a special case, not the default
+(more a method of visualization)
+
+* the tree's root in the center
+* all other nodes on circles/orbits around the root
+* 1st level on the 1st outer circle/orbit
+* next level on the next outer circle/orbit
+* i.e. the orbit of a node corresponds with its node level

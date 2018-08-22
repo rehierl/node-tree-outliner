@@ -2,7 +2,8 @@
 <!-- ======================================================================= -->
 # Node tree definitions
 
-* definitions used throughout this discussion
+* core definitions used throughout this discussion
+* a summary of standard and non-standard definitions
 
 <!-- ======================================================================= -->
 ## subsets of nodes
@@ -30,7 +31,7 @@
 <!-- ======================================================================= -->
 ## semantics of E
 
-* edge `e := [p,c] in E subset-of PxC subset-of NxN`
+* edge `e := [p,c] in E subset-of P×C subset-of N×N`
 * the direction of any edge is top-down
 
 the semantics of an edge `e := [p,c] in E` is such that ...

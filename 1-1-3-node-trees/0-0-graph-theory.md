@@ -2,6 +2,12 @@
 <!-- ======================================================================= -->
 # Graph Theory
 
+* for the most part notes taken from wikipedia pages
+* i.e. several pages directly dedicated to "graph theory"
+
+<!-- ======================================================================= -->
+## overview
+
 * graphs are objects of study in discrete mathematics
 * used to model pairwise relations between objects
 * sets of vertices/nodes that are connected by edges
@@ -12,18 +18,19 @@
 definition
 
 * `G := (V,E)` <=> `R := (A,B,G)` if `(A == B)`
-* `E subset-of (V X V)` is the (multi)set of edges `(e in E)`
+* `(E subset-of V×V)` is the (multi)set of edges `(e in E)`
 * `e := (a,b)` these tuples are referred to as edges
 * i.e. both vertices are said to be ends or end vertices
 * i.e. both vertices are said to be adjacent
-* a vertex `a in V` may not be an end to any edge
+* a vertex `(a in V)` may not be an end to any edge
 * i.e. there may be no `aEb` or `bEa`
 * i.e. `a` is not necessarily connected
 
 in the context of this discussion ...
 
-* `G` (i.e. `V`) is assumed to be non-empty, `E` may be empty
-* simple graph := `E` is no multiset, no loops
+* `G` (i.e. `V`) is assumed to be non-empty
+* `E` is however not required to be non-empty
+* simple graph := `E` is no multiset, and has no loops
 * `G` is a finite simple graph
 
 <!-- ======================================================================= -->
@@ -186,13 +193,6 @@ mixed
 * two vertices are adjacent, if a path exists such that (#p == 1)
 * connected component - a connected subgraph
 * i.e. a graph is a partition of components
-
-<!-- ======================================================================= -->
-## wikipedia, induced subgraph
-
-* formed from a subset of vertices and all the corresponding edges
-* i.e. the edges connect vertices within the subset
-* i.e. no edge leads outwards
 
 <!-- ======================================================================= -->
 ## classification

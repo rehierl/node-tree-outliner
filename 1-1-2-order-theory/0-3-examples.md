@@ -120,6 +120,27 @@ definition - lexicographic order
 <!-- ======================================================================= -->
 ## Other orders
 
+### wikipedia, interval order
+
+* a collection of intervals on the real numbers
+* a partial order that corresponds to the left-to-right precedence
+* i.e. (l1 < l2) => l1 is completely left of l2
+
+formally
+
+* a poset P := (X,<=)
+* a bijection (f: X -> (L,R)) exists such that
+* (xi < xj) in P when (Ri < Lj)
+
+remarks
+
+* unit-length intervals - i.e. (i,i+1)
+* semiorders - subclass of interval orders in case of unit-length intervals
+* interval graph - the complement of the interval-order's comparability graph
+
+**SKIPPED** - interval dimension
+**SKIPPED** - combinatorics
+
 ### wikipedia, prefix order
 
 * generalizes the intuitive concept of a tree
@@ -147,27 +168,6 @@ isomorphism
 * P* := {p* | (p in P)} - prefix-ordered by subset-of
 * (max: P* -> P) is an isomorphism such that (max(p*) = p)
 
-### wikipedia, interval order
-
-* a collection of intervals on the real numbers
-* a partial order that corresponds to the left-to-right precedence
-* i.e. (l1 < l2) => l1 is completely left of l2
-
-formally
-
-* a poset P := (X,<=)
-* a bijection (f: X -> (L,R)) exists such that
-* (xi < xj) in P when (Ri < Lj)
-
-remarks
-
-* unit-length intervals - i.e. (i,i+1)
-* semiorders - subclass of interval orders in case of unit-length intervals
-* interval graph - the complement of the interval-order's comparability graph
-
-**SKIPPED** - interval dimension
-**SKIPPED** - combinatorics
-
 ### wikipedia, containment order
 
 * a poset that results from the subset-containment
@@ -184,8 +184,8 @@ remarks
 remarks
 
 * serveral important poset classes arise as containment orders
-* e.g. interval-containment-orders (note - not the same as interval-order)
-* e.g. circle-orders - disks in the plane
+* e.g. interval-containment-order (!= interval-order)
+* e.g. circle-order - disks in the plane
 
 <!-- ======================================================================= -->
 ## Social orders

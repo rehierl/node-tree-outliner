@@ -3,9 +3,6 @@
 # Tree of nodes
 
 * a tree represents the hierarchical nature of a structure
-
-summary
-
 * trees may be visualized as "nested sets"
 * the definition of parent/leaf should be child-based, not degree-based
 * a degree-based definition is problematic regards to the tree's root

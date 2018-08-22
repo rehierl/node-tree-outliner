@@ -3,23 +3,22 @@
 # Examples
 
 <!-- ======================================================================= -->
-## order theory - partial orders
-
-* vertices ordered by reachability
-* (strict) partial order => dag
-
-<!-- ======================================================================= -->
 ## wikipedia, comparability graph
 
 * aka. containment graph
-* edges - two vertices are comparable
-* an undirected graph
+* undirected edges - two vertices are comparable in a poset
+* equivalent to containment graphs of set families
+
+incomparability graph
+
+* edges - two vertices are incomparable
 
 <!-- ======================================================================= -->
 ## wikipedia, intersection graph
 
-* edges - two sets have intersect each other
-* any undirected graph represents an intersection graph
+* undirected edges - two sets intersect each other
+* i.e. the intersection of connected sets is non-empty
+* i.e. sets may overlap each other
 
 classes of intersection graphs
 
@@ -30,11 +29,14 @@ classes of intersection graphs
 ## wikipedia, interval graph
 
 * a family of real intervals
-* edges - two intervals intersect each other
+* undirected edges - two intervals intersect each other
+* i.e. the intersection of both intervals is non-empty
+* i.e. two intervals may overlap each other
 
 <!-- ======================================================================= -->
 ## wikipedia, contact graph
 
 * aka. tangency graph
-* edges - two geometric objects touch (but not cross) each other
+* vertices - represent geometric objects (e.g. curves, lines, polygons)
+* undirected edges - two geometric objects touch (but don't cross) each other
 * similar to an intersection graph

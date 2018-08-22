@@ -10,5 +10,5 @@ too many variations for trees? -
 needs standard operations -
 
 **TODO** -
-what are the characteristics of subgroup-of -
-i.e. compared to subset-of?
+`(V subgroup-of W) := (#(v,V) <= #(v,W))` -
+comparison between subgroup-of and subset-of?

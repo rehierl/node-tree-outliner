@@ -18,9 +18,7 @@ graph related
 * [wikipedia, directed graph](https://en.wikipedia.org/wiki/Directed_graph)
 * [wikipedia, orientation](https://en.wikipedia.org/wiki/Orientation_%28graph_theory%29)
 * [wikipedia, path](https://en.wikipedia.org/wiki/Path_%28graph_theory%29)
-* [wikipedia, hamilton path](https://en.wikipedia.org/wiki/Hamiltonian_path)
 * [wikipedia, connectivity](https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29)
-* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
 
 graph related
 
@@ -29,6 +27,15 @@ graph related
 * [wikipedia, dense graph](https://en.wikipedia.org/wiki/Dense_graph)
 * [wikipedia, tournament](https://en.wikipedia.org/wiki/Tournament_%28graph_theory%29)
 * [wikipedia, polytree](https://en.wikipedia.org/wiki/Polytree)
+
+algorithms
+
+* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
+* [wikipedia, topological sorting](https://en.wikipedia.org/wiki/Topological_sorting)
+* [wikipedia, hamilton path](https://en.wikipedia.org/wiki/Hamiltonian_path)
+* [wikipedia, prüfer sequence](https://en.wikipedia.org/wiki/Pr%C3%BCfer_sequence)
+* [wikipedia, graph rewriting](https://en.wikipedia.org/wiki/Graph_rewriting)
+* [wikipedia, planarity testing](https://en.wikipedia.org/wiki/Planarity_testing)
 
 examples
 

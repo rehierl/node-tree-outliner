@@ -56,8 +56,9 @@ visualization
 * typically as a pyramid
 * i.e. apex at the top, base at the bottom level
 * tree-mapping - e.g. via nested rectangular areas
-* radial trees - hierarchy in the center,
-  first level on the first outer circle/orbit
+* radial trees - root in the center, first level on
+  the first outer circle/orbit, next level on the
+  next outer circle/orbit
 * fractal maps - (no further info)
 
 visual hierarchy

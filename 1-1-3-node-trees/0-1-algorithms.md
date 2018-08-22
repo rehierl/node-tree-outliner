@@ -5,58 +5,23 @@
 Algorithms related to graphs and trees.
 
 <!-- ======================================================================= -->
-## Hamilton path
+## wikipedia, induced subgraph
 
-* aka. a traceable path
-* a path in an undirected/directed graph that visits each vertex
-* assumed to visit each vertex only once
-
-hamiltonian-connected graph
-
-* for every pair of vertices,
-* there is a hamilton path between both
-
-comment
-
-* presumably uses only the edges in the given graph
-* i.e. does not add new ones, which would make no sense anyways
-
-<!-- ======================================================================= -->
-## Prüfer sequence (tree)
-
-* iteratively remove vertices from a tree until two vertices remain
-* set i: remove the leaf with the smallest label and add i to the sequence
-* the resulting sequence has length (n-2) and is unique to the tree
-* i.e. prüfer-sequence <-> tree
-
-comment
-
-* x is "unique to a tree"
-* i.e. tree -> x -> same tree
-* the prüfer sequence of a tree can be used to re-create that tree
-
-<!-- ======================================================================= -->
-## Graph rewriting
-
-* produce a new graph from an input graph
-
-example
-
-* represent the state of a computation/process as a graph
-* as a result of graph rewrite rules
-* further execution is understood to transform that graph
+* formed from a subset of vertices and all the corresponding edges
+* i.e. the edges connect vertices within the subset
+* i.e. no edge leads outwards
 
 <!-- ======================================================================= -->
 ## Topological sort
 
-* topological sort/ordering
-* a linear ordering of vertices
+* topological sort/ordering of a directed graph
+* a linear ordering of its vertices
 * such that `aEb -> (a presequent-to b)`
 
 notes
 
 * only possible with DAGs
-* any DAG has one or more topological orderings (i.e. min one)
+* any DAG has one or more topological orderings (i.e. >=1)
 * most used in "scheduling"
 * basis for linear-time algorithms
 * used to find the critical path of a project
@@ -74,35 +39,58 @@ comments
 comments
 
 * a "topological sort" could be understood to be rewriting a graph
-* i.e. produce a "linear graph"
+* i.e. produce a "linear graph/path"
 
 comments
 
 * a graph traversal can be understood to visit the vertices
-* according to some pre-calculated topological sort order
+* according to some pre-calculated topological ordering
 
 <!-- ======================================================================= -->
-## Graph traversal/search
+## wikipedia, panarity testing
 
-* visit/check/update each vertex
-* classified by the order in which each vertex is visited
-* graph traversal is a generalization of tree traversal
+* test whether a graph is planar
+* i.e. can be drawn on a plane without crossing edges
+* O(n) - i.e. linear complexity
 
-depth-first search (DFS)
+<!-- ======================================================================= -->
+## wikipedia, hamilton path
 
-* a tree-based algorithm
-* begin with a root and visit child vertices before sibling vertices
-* depth before breadth
+* aka. a traceable path
+* a path in an undirected/directed graph that visits each vertex
+* assumed to visit each vertex only once
 
-breadth-first search (BFS)
+hamiltonian-connected graph
 
-* a tree-based search
-* begin with a root and visit the siblings before any child
-* breadth before depth
+* for every pair of vertices,
+* there is a hamilton path between both
 
-notes
+comment
 
-* in a general graph, vertices may be visited more than once
-* visit as infrequently as possible
-* serialize/deserialize is more efficient with BFS as it allows
-  to re-construct the graph more efficiently
+* presumably uses only the edges in the given graph
+* i.e. does not add new ones, which would make no sense anyways
+
+<!-- ======================================================================= -->
+## wikipedia, prüfer sequence (tree)
+
+* iteratively remove vertices from a tree until two vertices remain
+* set i: remove the leaf with the smallest label and add i to the sequence
+* the resulting sequence has length (n-2) and is unique to the tree
+* i.e. prüfer-sequence <-> tree
+
+comment
+
+* x is "unique to a tree"
+* i.e. tree -> x -> same tree
+* the prüfer sequence of a tree can be used to re-create that tree
+
+<!-- ======================================================================= -->
+## wikipedia, graph rewriting
+
+* produce a new graph from an input graph
+
+example
+
+* represent the state of a computation/process as a graph
+* further execution is understood to transform that graph
+* as the result of graph rewrite rules

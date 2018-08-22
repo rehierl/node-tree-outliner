@@ -18,23 +18,24 @@ graph traversal
 
 depth-first search (DFS)
 
-* visit child vertices before the neighbors
-* depth before breadth
-* stack/recursion-based implementation
+* visit child vertices before neighbors
+* i.e. depth before breadth
+* stack/recursion-based implementations
 * stack/recursion used when backtracking
-* e.g. topological sorts, planetarity testing, etc.
+* e.g. topological sorts, planetarity testing
 
 breadth-first search (BFS)
 
 * visit the neighbors before visiting the children
-* queue-based implementation
-* e.g. shortest path, bipartiteness, flood fill, etc.
+* i.e. breadth before depth
+* queue-based implementations
+* e.g. shortest path, bipartiteness, flood fill
 
 graph exploration
 
 * a variant of graph traversal
 * in cases where the knowledge of a graph is limited
-* e.g. web pages, seemingly infinite graphs
+* e.g. web pages, graphs of (seemingly) infinite size
 
 <!-- ======================================================================= -->
 ## wikipedia, tree traversal
@@ -52,7 +53,7 @@ depth-first search (DFS)
 * children before siblings
 * children in left-to-right or first-to-last order
 * alternatively in right-to-left or last-to-first order
-* preorder (NLR) - visit the node before any child nodes
+* preorder (NLR) - visit the node before any child node
 * inorder (LNR) - visit the node in between its left and right child
 * postorder (LRN) - visit the node after all child nodes
 * generic trees - nodes may have any number of child nodes
@@ -65,12 +66,14 @@ breadth-first search (BFS)
 other search algorithms are possible
 
 * which are neither DFS nor BFS
+* i.e. hybrids/variations
 
 infinite trees
 
-* obviously, no strict/complete traversal
-* also used in combination with over-sized trees
-* DFS and BFS may end up not visiting any node at all
+* no strict/complete traversal possible
+* also used in combination with over/super-sized trees
+* i.e. trees of (seemingly) infinite size
+* a strict DFS and BFS search may end up visiting no node at all
 * hybrid methods exist that can visit countably infinite trees
 
 <!-- ======================================================================= -->
@@ -89,11 +92,12 @@ types of edges
 
 DFS ordering
 
-* s = [v(1) .. v(i-1), v(i), v(i+1) .. v(n)] is in DFS ordering, if
-* prefix(i) = [v(1) .. v(i-1)], suffix(i) = [v(i+1) .. v(n)]
-* index(s,v) = index of last neighbor of v in s, otherwise 0
-* for all i in [2,n-1], v = s(i) is the vertex such that
-* (index(prefix(i),v) >= index(prefix(i),w)) for all w in suffix(i)
+* `s = [v(1) .. v(i-1), v(i), v(i+1) .. v(n)]` is in DFS ordering, if
+* `prefix(s,i) = [v(1) .. v(i-1)]` and `suffix(s,i) = [v(i+1) .. v(n)]`
+* `index(s,v)` = index of last neighbor of `v` in `s`, otherwise `0`
+* for all `(i in [2,n-1])`, `s(i)=v` is the vertex `v` such that
+* `(index(prefix(i),v) >= index(prefix(i),w))` for all `w` in `suffix(s,i)`
+* **TODO** - the last line could use some clarification
 
 comments
 
@@ -103,13 +107,13 @@ comments
 Vertex ordering
 
 * use DFS to linearly order the vertices
-* preordering - order the vertices in the order they were first visited
-* postordering - order the vertices in the order they were last visited
-* reverse post-ordering - flipped postordering
+* pre-ordering - order the vertices in the order they were first visited
+* post-ordering - order the vertices in the order they were last visited
+* reverse post-ordering - flipped post-ordering
 
 reverse post-ordering
 
-* not the same as preordering
+* not the same as pre-ordering
 * produces a topological sorting of any DAG
 * often represents a natural linearization of control flow
 * example if-then-else construct
@@ -124,8 +128,9 @@ reverse post-ordering
 
 BFS ordering
 
-* s = [v(1) .. v(i-1), v(i), v(i+1) .. v(n)] is in BFS ordering, if
-* prefix(i) = [v(1) .. v(i-1)], suffix(i) = [v(i+1) .. v(n)]
-* index(s,v) = index of first neighbor of v in s, otherwise +Infinity
-* for all i in [2,n-1], v = s(i) is the vertex such that
-* (index(prefix(i),v) <= index(prefix(i),w)) for all w in suffix(i)
+* `s = [v(1) .. v(i-1), v(i), v(i+1) .. v(n)]` is in BFS ordering, if
+* `prefix(s,i) = [v(1) .. v(i-1)]` and `suffix(s,i) = [v(i+1) .. v(n)]`
+* `index(s,v)` = index of first neighbor of `v` in `s`, otherwise `+Infinity`
+* for all `(i in [2,n-1])`, `s(i)=v` is the vertex such that
+* `(index(prefix(i),v) <= index(prefix(i),w))` for all `w` in `suffix(i)`
+* **TODO** - the last line could use some clarification

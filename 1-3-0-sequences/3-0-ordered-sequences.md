@@ -13,11 +13,11 @@ in the context of nodes represents the `entered-before` relationship between
 nodes. As such, no node sequence contains any pair of incomparable nodes, which
 is why a node sequence can be understood to define an ordered set of nodes `P`:
 
-* `s = [{ n1, ..., nk }]` is an ordered sequence of nodes
+* `s = [{ n1, ..., nk }] in N*` is an ordered sequence of nodes
 * `(E(s) subset-of N)` and `(#E(s) == #s)` are both true
 * `P := (E(s),<)` where `(s[i] < s[j])` iff `(i < j)`
 * `P` is an ordered set of nodes in enter order
-* `sem(P)` := `((x,y) in P)` iff `(x entered-before y)`
+* `sem(P)` := `xPy` iff `(x entered-before y)`
 * `P` is a strict total order
 
 Note that a sequence of elements, for which `(#E(s) == #s)` is true, will in

@@ -7,13 +7,14 @@
 
 * category - structures in terms of labeled directed graphs
 * vertices represent objects and the arrows between them morphisms
-* category theory - also used as an axiomatic foundation for mathematics
+* category theory is used as an axiomatic foundation for mathematics
 * the arrows can be composed associatively
-* the identity arrow exists
+* identity arrow exist
 
 basic concept
 
 * a category represents other mathematical concepts
+* i.e. a category may represent a class of objects
 * arrows - visualize that one object can be processed/transformed into another
 * category theory allows to proof results based on simpler objects
 
