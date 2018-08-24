@@ -25,8 +25,8 @@ subtree
 comments
 
 * somewhat related to hamilton paths
-* note that graphs in general do not have to be directed
-* directedness in graph theory is more a special case, not the default
+* note - graphs in general do not have to be directed
+* directedness in graph theory is more of a special case, not the default
 
 <!-- ======================================================================= -->
 ## wikipedia, trémaux/normal tree
@@ -47,6 +47,7 @@ comments
 * an unordered, non-planar labeled rooted tree
 * nodes are labeled using integers in `[1,n]`
 * labels increase with distance to the root
+* i.e. the labels respect the tree order
 * non-planar - children have no order
 
 <!-- ======================================================================= -->

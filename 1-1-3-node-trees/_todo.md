@@ -6,9 +6,6 @@
 align the core definitions with those in hierarchy-of-sets -
 including `T := (N,E)` -
 
-<!-- ======================================================================= -->
-## add to core definitions
-
 * (similar to set-of-sets)
 * related vs. unrelated nodes
 * define "related nodes"

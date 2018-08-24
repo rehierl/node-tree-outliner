@@ -30,11 +30,11 @@ knowledge of the corresponding set of elements and the order of elements:
 * `I := [c, f] = (A & B) = { c, d, e, f }`
 
 Because of that, an interval of indexes can be understood to define a substring
-in the context of a linear sequence. That is, if the borders are understood to
-index the endpoints (e.g. `I:=[1,3]` defines substring `s:=[a,b,c]` in the
+in the context of an ordered sequence. That is, if the borders are understood
+to index the endpoints (e.g. `I:=[1,3]` defines substring `s:=[a,b,c]` in the
 context of the above ordered set of lower-case letters).
 
-Note that an interval represents a unique linear sequence.
+Note that an interval represents a unique ordered sequence.
 That is, any interval represents an ordered set of values.
 
 Note that this perspective requires total, order-isomorphic orders.

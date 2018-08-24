@@ -74,7 +74,7 @@ subsequences of ordered sequences
 * not all components in `V5` hold unique elements
 * i.e. `(a < b)` and `(b < a)` can not both be true
 
-notation for "ordered/linear sequences"
+notation for ordered sequences
 
 * note the issue of using `{` and `}` for simple and ordered sets
 * both symbols don't allow to distinguish a simple set from an ordered set

@@ -3,7 +3,7 @@
 # Graph Theory
 
 * for the most part notes taken from wikipedia pages
-* i.e. several pages directly dedicated to "graph theory"
+* i.e. pages that are in general dedicated to "graph theory"
 
 <!-- ======================================================================= -->
 ## overview
@@ -57,15 +57,17 @@ degree
 
 undirected
 
-* `aEb` and `bEa` are considered to be equal
-* the vertices in an edge appear to be equal
-* edges `{a,b}` appear to be 2-element sets
-* edges have no specific orientation
+* `aEb` is considered to be "equal" to `bEa`
+* i.e. if `aEb` is true, then `bEa` is also true
+* `a` and `b` are understood to be "equal"
+* edges are understood to have "no orientation"
+* edges `{a,b}` appear as 2-element sets
 
 directed, digraph
 
-* `aEb` and `bEa` are considered to be unequal
-* the vertices in an edge are understood to be "unequal"
+* `aEb` is considered to be "un-equal" to `bEa`
+* `a` and `b` are understood to be "un-equal"
+* edges are understood to be "directional"
 
 edges/arrows
 
@@ -78,10 +80,10 @@ edges/arrows
 
 mixed
 
-* most commonly - either directed xor undirected edges
+* most commonly - either directed ex-or undirected edges
 * however, (`{a,b}`) and (`aEb` and `bEa`) are not necessarily equal
 * that is, `aEb` and `bEa` might have different attributes (e.g. weight)
-* mixed graph - has both, directed and undirected edges
+* mixed graph - has both, directed and undirected edges (i.e. anti-symmetric)
 
 <!-- ======================================================================= -->
 ## adjacent to (~)
@@ -109,7 +111,8 @@ adjacent edges
 
 oriented graph
 
-* oriented if `(!aEb and !bEa) xor aEb xor bEa`
+* oriented if `(!aEb and !bEa) ex-or aEb ex-or bEa` (i.e. asymmetric)
+* note - an oriented graph can not have any reflexive edges `aEa`
 * some use "oriented graph" synonymous to "directed graph"
 * note - from a strict perspective, both therms are not equivalent
 
@@ -131,14 +134,14 @@ tournament
 
 common notation
 
-* `p := [a, (a,b), b, (b,c), c, ...] "or" [v0,e0,v1,e1, ...]`
-* `p := [e0,e1,...] "or" [v0,v1,v2, ...]`
+* `p := [a, (a,b), b, (b,c), c, ...]` or `p := [v0,e0,v1,e1, ...]`
+* `p := [e0,e1,...]` or `p := [v0,v1,v2, ...]`
 * the vertex in between two neighboring edges is common to both edges
 
 simplified notation
 
 * `aPb := [a, ..., b]`
-* a path exists such that it begins in `a` and ends in `b`
+* a path exists that connects `a` with `b`
 
 notable definitions
 
@@ -169,7 +172,7 @@ mixed
 
 connected vertices
 
-* two vertices are connected, if `(aPb or bPa)` is true
+* two vertices are connected, if `aPb` and/or `bPa`
 * disconnected - not connected
 
 connected graph
@@ -209,7 +212,7 @@ mixed
 * directed acyclic graph (DAG) - finite, directed, no cycles
 * polytree - a DAG whose undirected graph is a tree
 * tree - connected, no cycles
-* forest - a disjoint union of trees
+* forest - a union of disjoint trees
 * cyclic - has one or more cycles
 * acyclic - has not even one cycle
 

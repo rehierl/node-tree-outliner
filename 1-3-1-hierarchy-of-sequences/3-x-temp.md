@@ -92,7 +92,7 @@ will only be used in combination with non-empty sequences.
 
 
 <!-- ======================================================================= -->
-## linear sequences
+## ordered sequences
 
 ```
 A = [0,0,1,1,1,4,3,2,6,7]

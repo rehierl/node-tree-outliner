@@ -25,7 +25,7 @@ number with each node. Because of that, a strict total order `P` exists on a
 tree's set of nodes.
 
 Note that this order will in general be referred to as the traversal's **node
-order**, **visit order**, **enter order** - i.e. a **topological sorting**.
+order**, **visit order**, **enter order** - i.e. **topological sorting (?!?)**.
 
 Put differently, the traversal of a tree can be seen to add/append/associate
 each node to/with a sequence of nodes `s` as soon as a node is entered. Once

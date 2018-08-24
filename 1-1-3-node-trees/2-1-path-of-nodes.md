@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Paths
 
-A path `p` is a sequence of nodes `p := [n1,n2,...,nk] in xN^k`
+A path `p` is a sequence of nodes `p := [n1,n2,...,nk] in ×N^k`
 such that `(ni parent-of ni+1)` or `(ni child-of ni+1)`
 for `i in [1,k-1]`, `k in [2,*]`.
 
@@ -11,13 +11,13 @@ a common prefix and a common suffix: `p1=[p1,...,pA,i1,...,iB,s1,...,sC]`,
 `p2=[p1,...,pA,j1,...,jD,s1,...,sC]` for `B and D in [0,+Infinity)`.
 They might still differ in an infix (i.e. `(B > 0)` and/or `(D > 0)`).
 
-Note that a path is not necessarily a linear sequence of nodes. That is,
+Note that a path is not necessarily an ordered sequence of nodes. That is,
 nodes may appear more than once within a path (hint: loops and cycles).
 
 <!-- ======================================================================= -->
 ## uni-directional paths
 
-Given a path `p=[n1,...,nk] in xN^k`
+Given a path `p=[n1,...,nk] in ×N^k`
 such that `(ni parent-of ni+1)` for any `i in [1,#p-1]`.
 
 * `p` is a top-down/downwards oriented path
@@ -28,7 +28,7 @@ such that `(ni parent-of ni+1)` for any `i in [1,#p-1]`.
 * `RL` or `RTL` - any path that begins in a root and ends in a leaf
 * `(RTL subset-of TD)` - read RTL as root-to-leaf
 
-Given a path `p=[n1,...,nk] in xN^k`
+Given a path `p=[n1,...,nk] in ×N^k`
 such that `(ni child-of ni+1)` for any `i in [1,#p-1]`.
 
 * `p` is a bottom-up/upwards oriented path
@@ -41,19 +41,19 @@ such that `(ni child-of ni+1)` for any `i in [1,#p-1]`.
 
 clarification
 
-* `[p,c] in E in TD`, but `E !in BU`
-* the edges of a tree are top-down paths
+* `[p,c] in E in TD`, but not `E in BU`
+* the edges of a tree are 2-noded, top-down oriented paths
 * i.e. `(p parent-of c)`, not `(p child-of c)`
 
 Any such path has one direction only!
 
-* any such path is uni-directional
+* any such path is said to be uni-directional
 * no `(p in TD)` has a pair of nodes `[ni, ni+1]` such that
   `(ni child-of ni+1)`, or `(ni descendant-of ni+j)`
 * no `(p in BU)` has a pair of nodes `[ni, ni+1]` such that
   `(ni parent-of ni+1)`, or `(ni ancestor-of ni+j)`
 
-A path based upon relation x
+A path based upon relation R
 
 * any path `(p in TD)` is said to be a path based upon the `parent-of` relation
 * any path `(p in BU)` is said to be a path based upon the `child-of` relation
@@ -65,7 +65,7 @@ node-to-node
 
 * `path(a,b) := [a,...,b]`
 * the uni-directional path that begins in `a` and ends in `b`
-* `path(a,a) := [a]` - note that any tree is acyclic
+* `path(a,a) := [a]` - note that trees are acyclic
 
 node-to-set
 
@@ -73,24 +73,23 @@ node-to-set
 * the uni-directional paths that begin in `a` and end in `B`
 
 **CLARIFICATION**
-The path `rp(n) := [r,...,n] in RD` of a node `n` that begins in the tree's
-root will be referred to as **the rooted path of a node**. Every node in a tree
-always has exactly one non-empty rooted path.
+The path `rp(n) := [r,...,n] in RD` of a node `n` that begins in a tree's root
+will be referred to as **the rooted path of a node**. For every node `n` in a
+tree there exists exactly one rooted path `rp(n)`.
 
-* `(rp(n)[0] == r)` - any rooted path begins with the root of the tree
-* `rp(r) := [r]` - the `rp(r)` is the only rooted path that has length 1
-* `(#rp(n) >= 1)` - empty rooted paths don't exist
+* `(rp(n)[1] == r)` - any rooted path begins with the root of the tree
+* `rp(r) := [r]` - i.e. `rp(r)` is the only rooted path that has length 1
 
 <!-- ======================================================================= -->
 ## loops, cycles
 
-* a path `(p in TD)` has loops, if `(pi == pi+1)`
+* a path `(p in TD)` has loops, if `(pi == pi+1)` for some `i in [1,#p-1]`
 * a path `(p in TD)` has cycles, if `(pi == pj)` for some `i,j in [1,#p]`
 * i.e. a loop is considered to be a special cycle (1-cycle)
 * i.e. a cyclic path may have loops
 
 **CLARIFICATION**
-Any unidirectional path in a tree of nodes represents a linear sequence.
+Any unidirectional path in a tree of nodes represents an ordered sequence.
 
 That is because a tree has by definition neither loops nor cycles.
 
@@ -98,9 +97,9 @@ That is because a tree has by definition neither loops nor cycles.
 ## undirected definitions
 
 * `n1` is **strictly related to** `nk`,
-  if `p=[n1,nk] in TD or BU`
+  if `p=[n1,nk] in (TD or BU)`
 * `n1` is **loosely related to** `nk`,
-  if `p=[n1,...,nk] in TD or BU` and `#p in [3,*)`
+  if `p=[n1,...,nk] in (TD or BU)` and `#p in [3,*)`
 * `n1` is **related to** `nk`, if `n1` is strictly or loosely related to `nk`
 * synonymous - related to, connected with, in relationship with, coupled with
 
@@ -114,13 +113,13 @@ in words:
 <!-- ======================================================================= -->
 ## directed definitions
 
-away from the root, i.e. downwards
+away from the root
 
 * any path `(p in TD)` points **downwards**
 * `n1` **contains** `nk`, if `p=[n1,...,nk] in TD`
 * synonymous - contains, is ancestor of
 
-towards the root, i.e. upwards
+towards the root
 
 * any path `(p in BU)` points **upwards**
 * `n1` is **located inside of** `nk`, if `p=[n1,...,nk] in BU`

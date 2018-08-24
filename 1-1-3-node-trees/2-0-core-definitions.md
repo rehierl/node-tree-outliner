@@ -4,6 +4,7 @@
 
 * core definitions used throughout this discussion
 * a summary of standard and non-standard definitions
+* the focus is on directed node trees
 
 <!-- ======================================================================= -->
 ## subsets of nodes

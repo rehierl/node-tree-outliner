@@ -2,14 +2,7 @@
 <!-- ======================================================================= -->
 # Graph theory algorithms
 
-Algorithms related to graphs and trees.
-
-<!-- ======================================================================= -->
-## wikipedia, induced subgraph
-
-* formed from a subset of vertices and all the corresponding edges
-* i.e. the edges connect vertices within the subset
-* i.e. no edge leads outwards
+* algorithms related to graphs and trees
 
 <!-- ======================================================================= -->
 ## Topological sort
@@ -47,7 +40,14 @@ comments
 * according to some pre-calculated topological ordering
 
 <!-- ======================================================================= -->
-## wikipedia, panarity testing
+## wikipedia, induced subgraph
+
+* formed from a subset of vertices and all the corresponding edges
+* i.e. the edges connect vertices within the subset
+* i.e. no edge leads into or out of the subset
+
+<!-- ======================================================================= -->
+## wikipedia, planarity testing
 
 * test whether a graph is planar
 * i.e. can be drawn on a plane without crossing edges

@@ -11,7 +11,7 @@ ordered tree <=> hierarchy of sequences
 
 ordered tree => (hierarchy of sets <=> unordered tree)
 
-* the sequences in the strict hierarchy of an ordered tree are linear sequences
+* the sequences in the strict hierarchy of an ordered tree are ordered sequences
 * these represent ordered sets of nodes (each node is visited once)
 * a hierarchy of sets can be created based on an ordered tree
 * this hierarchy of sets can not be used to recreate the ordered tree

@@ -22,7 +22,7 @@ depth-first search (DFS)
 * i.e. depth before breadth
 * stack/recursion-based implementations
 * stack/recursion used when backtracking
-* e.g. topological sorts, planetarity testing
+* e.g. topological ordering, planetarity testing
 
 breadth-first search (BFS)
 
@@ -114,7 +114,7 @@ Vertex ordering
 reverse post-ordering
 
 * not the same as pre-ordering
-* produces a topological sorting of any DAG
+* produces a topological ordering of any DAG (?!?)
 * often represents a natural linearization of control flow
 * example if-then-else construct
 

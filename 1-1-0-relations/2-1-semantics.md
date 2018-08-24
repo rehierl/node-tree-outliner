@@ -14,11 +14,11 @@ examples
 * super-sequence-of <=> sub-sequence-of
 
 <!-- ======================================================================= -->
-## inverse (',inv)
+## inverse (°,inv)
 
 * `R := (S1,...,Sn,G)`
-* `R', inv(R) := (Sn,...,S1,inv(G))`
-* `R', inv(R) := (B,A,H)` such that `H := { (b,a) | aRb }`
+* `R°, inv(R) := (Sn,...,S1,inv(G))`
+* `R°, inv(R) := (B,A,H)` such that `H := { (b,a) | aRb }`
 
 clarification
 
@@ -47,8 +47,8 @@ semantics
 
 * `sem(R) := <statement>` or simply `R := <statement>`
 * a relation has no meaning under a given statement,
-  if that statement does not apply to some `s in R`
-* a statement must apply to all `r in R`
+  if that statement does not apply to some `(s in R)`
+* a statement must apply to all `(r in R)`
 
 examples for `R in (A × B)`
 
@@ -88,7 +88,7 @@ if `S` is antonymous to `R`, then `R` is also antonymous to `S`
 
 examples for `R,S in (A × B)` that have antonymous semantics
 
-* assume `R:=(A,B,G)` and `S:=(B,A,G')`
+* assume `R:=(A,B,G)` and `S:=(B,A,G°)`
 * `R` := (`a` is a subset of `b`), and
   `S` := (`b` is a superset of `a`)
 * `R` := (`a` contains `b`), and
@@ -98,15 +98,15 @@ examples for `R,S in (A × B)` that have antonymous semantics
 
 examples for `R,S in (A × B × C)` that have antonymous semantics
 
-* assume `R:=(A,B,C,G)` and `S:=(C,B,A,G)`
+* assume `R := (A,B,C,G)` and `S := (C,B,A,G)`
 * `R` := (`a` and `b` are the biological parents of `c`), and
   `S` := (`c` is a biological child of `b` and `a`)
 
 `R` and `inv(R)` are not necessarily antonymous to each other
 
-* assume `R:=(A,B,C,G)` and `T:=(C,B,A,G):=inv(R)`
+* assume `R := (A,B,C,G)` and `T := (C,B,A,G) := inv(R)`
 * `R` := (set `c` is the intersection of sets `a` and `b`) =: `T`
-* where `R: (A,B) -> C` and `T: (C) -> (B,A)`
+* where `(R: (A,B) -> C)` and `(T: C -> (B,A))`
 
 **Memory hook**
-Antonymous relation require antonymous semantics.
+Antonymous relations require antonymous semantics.

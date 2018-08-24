@@ -5,9 +5,9 @@
 * a tree represents the hierarchical nature of a structure
 * trees may be visualized as "nested sets"
 * the definition of parent/leaf should be child-based, not degree-based
-* a degree-based definition is problematic regards to the tree's root
-* a tree should not be allowed to be empty - affects definitions
-* a forest (may be empty) is a disjoint union of trees
+* a degree-based definition is problematic with regards to the tree's root
+* a tree should not be allowed to be empty - adds complexity to definitions
+* a forest (may be empty) is a union of disjoint trees
 * tree-order := descendants are subsequent to ancestors
 * ordered tree, child-order := each node has an ordered set of child nodes
 
@@ -28,8 +28,8 @@ visualized as
 
 * classical node-link diagrams
 * nested sets - use enclosure/containment to show parenthood (!!!)
-* layered "icicle" diagrams - stacked rectangles
-* outlines, tree views - lists that use indentation
+* layered "icicle" diagrams - i.e. stacked rectangles
+* outlines, tree views - i.e. indentation-based listing
 * nested parenthesis
 
 notes
@@ -54,10 +54,10 @@ notes
 * any two vertices are connected by exactly one path
 * a tree <-> an acyclic connected graph
 * a tree - may have more than one root
-* a forest - a disjoint union of trees
+* a forest - a union of disjoint trees
 * a forest - an acyclic graph, not necessarily connected
 * rooted tree - has one root only
-* directed tree - only has directed edges
+* directed tree - has directed edges only
 * directed rooted tree - a directed tree that has one root only
 * arborescence, branching, out-tree - all edges point away from the root
 * anti-arborescence, in-tree - all edges point towards the root
@@ -66,7 +66,7 @@ tree if one of these equivalent conditions hold
 
 * connected, no cycles
 * acyclic, a cycle is formed if any edge is added
-* connected, but disconnected, if a single edge is removed
+* connected, but disconnected if a single edge is removed
 * any two vertices can be connected by a unique simple path
 * connected, (#V-1) edges
 * no simple cycles and (#V-1) edges
@@ -77,7 +77,7 @@ more definitions
 * external/outer/terminal vertex - `(degree(v) == 1)`
 * leaf - a terminal vertex (!!!)
 * forest - connected components are trees
-* forest - a disjoint union of trees
+* forest - a union of disjoint trees
 * forest - an undirected acyclic graph
 * discrete graph - vertices only, no edges
 * polytree - a DAG whose undirected graph is a tree

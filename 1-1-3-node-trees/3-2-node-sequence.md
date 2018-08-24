@@ -4,9 +4,8 @@
 
 Given a directed rooted tree of nodes (no loops, no cycles), the DFS and BFS
 algorithms will visit each node exactly once. As such, any of these can be used
-to create a trace of nodes that reflects the executed traversal. And because a
-trace of nodes is an ordered sequence of nodes (i.e. an ordered set of nodes),
-such a node trace represents a topological sort order.
+to create a trace of nodes that represents the executed tree traversal as an
+ordered sequence of nodes.
 
 ```
 nodeSequenceOf(root) begin
