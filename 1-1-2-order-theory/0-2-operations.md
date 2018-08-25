@@ -74,7 +74,7 @@ perspectives
 
 * short - lin-ext
 * the linear extension of a poset is a total order
-* the lexi-order of totally ordered sets is a lin-ext of their prod-order
+* the lexi-order of a totally ordered set is a lin-ext of its prod-order
 
 definition
 

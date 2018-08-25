@@ -5,250 +5,205 @@
 * for the most part notes taken from wikipedia pages
 * i.e. pages that are in general dedicated to "graph theory"
 
-<!-- ======================================================================= -->
-## overview
+in the context of this discussion ...
 
-* graphs are objects of study in discrete mathematics
+* `G := (V,E)` - the formal definition of a graph
+* `V` and `E` are both assumed to be finite and non-empty
+* `E` is a set of tuples - i.e. directed
+* for each `(v in V)` there is an `(e in E)` such that `vEx` and/or `xEv`
+* i.e. all vertices are connected, i.e. no isolated vertices
+* there is no `(e in E)` such that `vEv` for any `(v in V)`
+* i.e. no "reflexive" edges
+
+general notes
+
+* in graph theory, the "undirected" case seems to be the default
+* most commonly, either directed ex-or undirected edges - no mixed graph
+* (`{a,b}`) and (`aEb` and `bEa`) are not necessarily equal
+* i.e. `aEb` and `bEa` might have different attributes (e.g. weight)
+
+<!-- ======================================================================= -->
+## wikipedia, graph theory
+
+* graphs are objects of study in discrete mathematics (dm)
 * used to model pairwise relations between objects
-* sets of vertices/nodes that are connected by edges
-* a binary relation `R := (V,V,G)` defines a graph
-* a graph is an abstract, non-visual structure
-* not to be confused with its visual representation
+* sets of vertices/nodes/points connected via edges/arcs/lines
 
 definition
 
-* `G := (V,E)` <=> `R := (A,B,G)` if `(A == B)`
-* `(E subset-of V×V)` is the (multi)set of edges `(e in E)`
-* `e := (a,b)` these tuples are referred to as edges
-* i.e. both vertices are said to be ends or end vertices
-* i.e. both vertices are said to be adjacent
-* a vertex `(a in V)` may not be an end to any edge
-* i.e. there may be no `aEb` or `bEa`
-* i.e. `a` is not necessarily connected
+* `G := (V,E)` - i.e. a binary/endo-relation
+* set of vertices `V`, set of edges `(E subset of V×V)`
+* unordered if `e = {a,b}`, ordered if `e = (a,b)`
+* multigraph - if `E` is a multiset
+* simple graph - if `E` is a true set of unordered pairs (no loops)
+* the vertices of an edge are said to be ends or end vertices
+* order(G) = #V - the number of its vertices
+* size(G) = #E - the number of its edges
+* degree(v) - the number of connected edges
 
-in the context of this discussion ...
+application
 
-* `G` (i.e. `V`) is assumed to be non-empty
-* `E` is however not required to be non-empty
-* simple graph := `E` is no multiset, and has no loops
-* `G` is a finite simple graph
+* used to model relations
+* e.g. networks of communication
+* e.g. flow of computation
 
-<!-- ======================================================================= -->
-## definitions
+**SKIPPED** - history
 
-* `order(G) := #V`, `size(G) := #E`
-* symmetric := if `aEb`, then also `bEa`
-* link := `aEb` if `(a != b)`
-* loop := `aEa`
+graph drawing
 
-degree
+* vertices as circles, edges as lines/arcs/arrows between them
+* a graph however is an abstract, non-visual structure
+* i.e. not to be confused with its visual representation
+* hint - one graph, multiple visual representations
 
-* `in-degree(v in V) := #{ (a,v) | aEb }`
-* `out-degree(v in V) := #{ (v,b) | vEb }`
-* `degree(v) := in-degree(v) + out-degree(v)`
-* note - loops on `v` (i.e. `vEv`) are counted twice
-* `degree(a,b) := #{ (a,b) | aEb } + #{ (b,a) | bEa }`
+data structures
 
-<!-- ======================================================================= -->
-## directed, undirected
+* depends on the problem domain
+* incidence list - array of pairs of vertices
+* adjacency list - lists of neighbors of each vertex
+* i.e. `[(a,b), ...]` vs. `[(a,[b]), ...]`
+* incidence matrix - `[vertex-to-edge] := {0,1}`
+* adjacency matrix - `[vertex-to-vertex] := {0,1}`
 
-* directed/undirected graph is determined by the graph/relation's semantics
-* the main focus of this discussion is on directed graphs
+subgraphs, induced subgraphs, minors
 
-undirected
+* subgraph - subset of vertices and edges between them
+* i.e. not necessarily all the edges between them
+* reason - many graph properties are hereditary
+* i.e. a graph has a property iff all subgraphs have it too
+* induced subgraph - a subgraph, but all edges in the vertex subset
 
-* `aEb` is considered to be "equal" to `bEa`
-* i.e. if `aEb` is true, then `bEa` is also true
-* `a` and `b` are understood to be "equal"
-* edges are understood to have "no orientation"
-* edges `{a,b}` appear as 2-element sets
-
-directed, digraph
-
-* `aEb` is considered to be "un-equal" to `bEa`
-* `a` and `b` are understood to be "un-equal"
-* edges are understood to be "directional"
-
-edges/arrows
-
-* `(a,b)` is also referred to as "arrow" from `a` to `b`
-* `a` reflects the arrow's tail, and `b` the arrow's `head`
-* `b` is a direct successor of `a`
-* `a` is a direct predecessor of `b`
-* `b` is a successor-of and reachable-from `a`,
-  if a path exists that leads from `a` to `b`
-
-mixed
-
-* most commonly - either directed ex-or undirected edges
-* however, (`{a,b}`) and (`aEb` and `bEa`) are not necessarily equal
-* that is, `aEb` and `bEa` might have different attributes (e.g. weight)
-* mixed graph - has both, directed and undirected edges (i.e. anti-symmetric)
+**SKIPPED** - most of the applications listings
 
 <!-- ======================================================================= -->
-## adjacent to (~)
+## wikipedia, graph theory (dm)
 
-* with regards to undirected graphs
+* object of study in discrete mathematics (dm)
+* a set of objects in which some pairs are related
+* objects - aka. vertices, nodes points
+* pairs of objects - aka. edges/arrows E, arcs/lines A
+* depicted as a set of connected dots
+* edges may be directed (oriented) or undirected
+* consequently, graphs may be directed or undirected
 
-adjacent vertices
+definition
 
-* `(a ~ b), (a adjacent-to b)` is true, if `{a,b} in E`
-* `a` and `b` are adjacent to one another
-* synonymous - adjacent, strictly related
+* a graph is an ordered pair `G := (V,E)`
+* set of vertices `V`, set of edges `E` or arcs `A`
+* undirected, if `e := {a,b}` for all `(e in E)` and some `(a,b in V)`
+* i.e. pairs are 2-element subsets of `V`
+* directed, if `e := (a,b)` for all `(e in E)` and some `(a,b in V)`
+* `E` may be a multiset of edges => multigraph
+* `a` and `b` may be referred to as ends or end vertices
+* a vertex `x` may exist such that neither `xEa` nor `aEx`
+* in general `V`, `E` finite sets and `(#V > 0)`
+* `order(G) := #V` and `size(G) := #E`
+* `degree(x) := #({ xEa } union { aEx })`
+* i.e. loops (i.e. `xEx`) are counted twice
 
-adjacent edges
+adjacency relation (~)
 
-* e.g. `e1 := (a,b)` and `e2 := (b,c)`
-* two adjacent/consecutive edges share a common vertex
+* induced by the edges of an undirected graph
+* i.e. an induced symmetric binary relation `R := (V,~)`
+* `(a ~ b), (a adjacent-to b) := (e in E)` for `e := {a,b}`
+* adjacent vertices - `a` and `b` in `e := (a,b)`
+* `a,b` and `e` are said to be incident
+* adjacent edges - e.g. `e1 := (a,b)` and `e2 := (b,c)`
+* aka. consecutive arrows
+
+clarified definitions
+
+* undirected graph - `aEb` and `bEa` are considered equal
+* i.e. unordered pairs `{a,b}` instead of ordered pairs `(a,b)`
+* `G := (V,A)` in case of undirected graphs
+* directed graph (aka. digraph) in case of directed edges
+* `(x -> y) := (x,y)` an arrow with head `y` and tail `x`
+* `(y direct-successor-of x)`, if `xEy`
+* aka. `(x direct-predecessor-of y)`
+* `(y successor-of x)`, if `xPy`
+* aka. `(y reachable-from x)`, `(x predecessor-of y)`
+* inverted arrow `yEx` of arrow `xEy`
+* `G` is symmetric iff `xEy -> yEx`
+* oriented graph, if `xEy`, but not `yEx` (i.e. not both)
+* i.e. not necessarily equal to "directed graph"
+* mixed graph if `G := (V,E,A)` - i.e. has edges and arcs
+* link if `aEb` for `(a != b)`, loop if `aEa`
+* multigraph if `( #({ aEb }) > 1 )`
+* simple graph - unordered, no multigraph, no loops
+* quiver, multi-digraph - i.e. a directed multigraph
+* weighted graph - edges have associated weights/values
+
+classes of graphs
+
+* regular graph - each vertex has the same number of neighbors
+* k-regular graph - each vertex has degree k
+* complete graph - each vertex is connected to all other vertices
+* finite graph - `V` and `E` are both finite sets
+* connected graph - a path exists for any pair of vertices
+* strongly connected - a directed path exists for any pair
+* weakly connected - an undirected path exists for any pair
+* disconnected graph - not (|strongly|weakly) connected
+* bipartite graph - `V` is a union of two disjoint sets
+* i.e. the edges lead from one set to the other
+* path graph - aka. linear graph - the whole graph resembles a path
+* planar graph - can be drawn on a plane without crossing edges
+* cycle graph - a path graph that resembles a closed path
+* tree - connected with no cycles
+* forest - a union of disjoint trees
+
+properties
+
+* null graph - no vertices and no edges
+* trivial graph - one vertex, no edges
+* edgeless graph - vertices, but no edges
+
+A symmetric, loop-less graph `G` is equivalent to a simple undirected graph
+`G'` (i.e. `{a,b} in E'` if `aEb` and `bEa`).
 
 <!-- ======================================================================= -->
-## orientation, tournament
+## wikipedia, path (graph theory)
 
-* orientation := assign a "direction" to the edges of an undirected graph
-* may also refer to the resulting graph of such an operation
-* i.e. the "orientation of an undirected graph"
-* undirected => orientation => directed
+* a sequence of edges which connect a sequence of vertices
+* a directed path (dipath) - edges are directed in the same direction
 
-oriented graph
-
-* oriented if `(!aEb and !bEa) ex-or aEb ex-or bEa` (i.e. asymmetric)
-* note - an oriented graph can not have any reflexive edges `aEa`
-* some use "oriented graph" synonymous to "directed graph"
-* note - from a strict perspective, both therms are not equivalent
-
-acyclic orientation
-
-* an orientation that does not form any directed cycle
-
-tournament
-
-* take an undirected complete graph
-* assign a direction to each edge
-* i.e. an orientation of a complete graph
-
-<!-- ======================================================================= -->
-## path
-
-* directed graph, digraph => directed path, dipath
-* dipath => all edges in the same direction
-
-common notation
+definition
 
 * `p := [a, (a,b), b, (b,c), c, ...]` or `p := [v0,e0,v1,e1, ...]`
-* `p := [e0,e1,...]` or `p := [v0,v1,v2, ...]`
-* the vertex in between two neighboring edges is common to both edges
-
-simplified notation
-
-* `aPb := [a, ..., b]`
-* a path exists that connects `a` with `b`
-
-notable definitions
-
-* walk - a sequence of edges, no restriction
-* open walk - start and end vertex is different
-* closed walk - same first and last vertex
-* trail - no repeated edges, repeated vertices allowed
-* tour - a closed trail
+* infinite path - no first and last vertex
+* semi-infinite path (ray) - first, but no last vertex
 * simple path - no repeated vertices
+* weighted graph - each edge has a weight
+* weight of path - sum of all weight values - aka. cost/length
 
-loops and cycles
+glossary - trail, walk
 
-* loop - a path such that `p := [a,a]` (i.e. `aEa`)
-* cycle - a path such that `p := [a,...,a]` (i.e. a closed walk)
-* 1-cycle - a cycle of length one - `p := [a,a]` - (i.e. a loop)
-* 2-cycle - a cycle of length two - `p := [a,b,a]`
+* trail - a walk without repeated edges
+* exception - first vertex may be equal to the last
+* tour - a closed trail
+* walk - a sequence of vertices and edges
+* the vertex in between two neighboring edges is common to both edges
+* simple path - a walk without repeated vertices/edges
+* open - first and last vertices are different
+* closed (cycle) - begins and ends at the same vertex
 
-mixed
+notational
 
-* vertex-independent/disjoint paths := to paths have no vertex in common
-* edge-independent/disjoint paths := two paths have no edge in common
-* `vertex-disjoint -> edge-disjoint`
-* distance between vertices := length of shortest path
-* diameter of a connected graph := "length of longest path"
-
-<!-- ======================================================================= -->
-## connected
-
-connected vertices
-
-* two vertices are connected, if `aPb` and/or `bPa`
-* disconnected - not connected
-
-connected graph
-
-* connected graph - for any two vertices `aPb` must be true
-* i.e. there are no unreachable vertices
-* note the implication - each vertex must be a sink and a source
-* note that this refers to the graph as a whole
-* disconnected - not connected
-
-weakly/strongly connected
-
-* given a directed graph
-* weakly connected - turning the directed edges into undirected edges
-  produces an undirected connected graph
-* (simply) connected - for any two vertices `(aPb or bPa)` is true
-* strongly connected - for any two vertices `(aPb and bPa)` is true
-
-mixed
-
-* two vertices are adjacent, if a path exists such that (#p == 1)
-* connected component - a connected subgraph
-* i.e. a graph is a partition of components
+* alternatively - `p := [e1,e2,...]` - a sequence of adjacent edges
+* alternatively - `p := [v1,v2,...]` - a sequence of adjacent vertices
+* `xPy` := a path exists that connects `x` with `y`
+* i.e. a path `p := [x,...,y]` exists
 
 <!-- ======================================================================= -->
-## classification
+## wikipedia, graph theory (abstract data type)
 
-* multigraph - `E` is a multiset
-* simple graph - undirected and `E` is a set (no multiset)
-* regular graph - each vertex has the same degree
-* complete graph - `E` has an edge for each pair of vertices
-* dense graph - #E is close to the maximum number of edges possible
-* sparse graph - #E is opposite to dense
-* finite graph - sets `V` and `E` are both finite in size
-* network - vertices and/or edges have attributes
-* planar - can draw `G` on a plane without intersecting edges
-* directed acyclic graph (DAG) - finite, directed, no cycles
-* polytree - a DAG whose undirected graph is a tree
-* tree - connected, no cycles
-* forest - a union of disjoint trees
-* cyclic - has one or more cycles
-* acyclic - has not even one cycle
-
-bipartite graph
-
-* `V` can be split into two sets (`X` and `Y`) such that
-* all edges lead from `X` into `Y`, or vice versa
-
-path/linear graph
-
-* all vertices on one path, such that ...
-* the degree of all but two vertices is 2
-* i.e. one big path
-
-cycle/circular graph
-
-* all vertices on one path, such that ...
-* the degree of all vertices is 2
-* i.e. one big cycle/loop
-
-aboresence
-
-* there is exactly one path from the root to any other node
-* a directed, rooted tree in which all edges point away from the root
-* aborecence -> directed acyclic graph (DAG)
-
-<!-- ======================================================================= -->
-## graph data structure
-
-* an abstract data type meant to implement a graph
+* used to implement an undirected or directed graph
 * may represent vertices by references (i.e. external)
 * may associate values with edges (e.g. reference, weight, etc)
 
 adjacency list
 
-* associate each vertex with the collection of its neighboring vertices
+* associate each vertex with the collection of its neighbors
+* supports additional vertex properties
 * e.g. `Hashmap<V,[V]>`
 
 adjacency matrix
@@ -260,6 +215,6 @@ adjacency matrix
 
 incidence matrix
 
-* more general than an adjacency matrix (#A X #B)
+* more general than an adjacency matrix `[#V, #E]`
 * i.e. possibly two different sets of vertices
 * elements indicate if (a,b) are related (i.e. incident)

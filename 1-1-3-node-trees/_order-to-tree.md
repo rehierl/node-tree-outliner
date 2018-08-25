@@ -29,6 +29,17 @@ wikipedia, tree (set theory)
 * trees grow downward - root is greatest
 * a subtree is downward closed - a subset
 
+wikipedia, topological sorting
+
+* https://en.wikipedia.org/wiki/Topological_sorting
+* create a partial order from a DAG
+* (1) the order's objects are the vertices
+* (2) define (x <= y) if (y) can be reached from (x)
+* create a DAG from a partial order
+* (1) the DAG's vertices are the objects of the order
+* (2) define edge (x,y) if (x <= y)
+* (3) use transitive reduction
+
 wikipedia, comparability graph
 
 * https://en.wikipedia.org/wiki/Comparability_graph

@@ -7,6 +7,27 @@
 * the focus is on directed node trees
 
 <!-- ======================================================================= -->
+## paths of nodes
+
+* paths are seen as sequences of adjacent vertices
+
+loops and cycles
+
+* loop - a path such that `p := [a,a]` (i.e. `aEa`)
+* cycle - a path such that `p := [a,...,a]` (i.e. `aPa`)
+* 1-cycle - a cycle of length one - `p := [a,a]`
+* 2-cycle - a cycle of length two - `p := [a,b,a]`
+
+sets of paths
+
+* vertex-independent - two paths that have no vertex in common
+* edge-independent - two paths that have no edge in common
+* aka. vertex-disjoint, edge-disjoint
+* vertex-disjoint -> edge-disjoint
+* distance between vertices - the length of the shortest path
+* diameter of a component - the length of the longest path
+
+<!-- ======================================================================= -->
 ## subsets of nodes
 
 * `N` is the set of all nodes

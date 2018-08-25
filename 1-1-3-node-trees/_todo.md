@@ -2,6 +2,15 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+* [wikipedia, graph property](https://en.wikipedia.org/wiki/Graph_property)
+* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
+* [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
+
+mixed
+
+* (strict) subtree as induced subtrees
+* suffix-order on rooted paths
+
 **TODO** -
 align the core definitions with those in hierarchy-of-sets -
 including `T := (N,E)` -

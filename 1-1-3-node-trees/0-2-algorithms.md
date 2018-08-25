@@ -5,39 +5,46 @@
 * algorithms related to graphs and trees
 
 <!-- ======================================================================= -->
-## Topological sort
+## wikipedia, topological sorting
 
-* topological sort/ordering of a directed graph
-* a linear ordering of its vertices
-* such that `aEb -> (a presequent-to b)`
+* topological sort or topological ordering of a DAG
+* a linear ordering of vertices such that `aEb -> (a presequent-to b)`
+* the graph must have no cycles - i.e. must be acyclic
+* any DAG has one or more topological orderings (i.e. >=1)
 
 notes
 
-* only possible with DAGs
-* any DAG has one or more topological orderings (i.e. >=1)
-* most used in "scheduling"
+* used in (instruction) scheduling
 * basis for linear-time algorithms
 * used to find the critical path of a project
 * used to find shortest paths
 
 algorithms
 
-* Kahn's algorithm - start with sinks
+* Kahn's algorithm
 * Depth-first search
 
 comments
 
-* seems related to linear extensions of partial orders
+* a traversal can be understood to visit the vertices
+* according to some pre-calculated topological ordering
+
+relation to partial orders
+
+* closely related to linear extensions of partial orders
+* i.e. produce a total order for a partial order
+* create a partial order from a DAG
+* (1) the order's objects are the vertices
+* (2) define (x <= y) if (y) can be reached from (x)
+* create a DAG from a partial order
+* (1) the DAG's vertices are the objects of the order
+* (2) define edge (x,y) if (x <= y)
+* (3) use transitive reduction
 
 comments
 
 * a "topological sort" could be understood to be rewriting a graph
 * i.e. produce a "linear graph/path"
-
-comments
-
-* a graph traversal can be understood to visit the vertices
-* according to some pre-calculated topological ordering
 
 <!-- ======================================================================= -->
 ## wikipedia, induced subgraph
@@ -57,7 +64,7 @@ comments
 ## wikipedia, hamilton path
 
 * aka. a traceable path
-* a path in an undirected/directed graph that visits each vertex
+* a path in a graph that visits each vertex
 * assumed to visit each vertex only once
 
 hamiltonian-connected graph

@@ -12,6 +12,16 @@
 * ordered tree, child-order := each node has an ordered set of child nodes
 
 <!-- ======================================================================= -->
+## wikipedia, tree (set theory)
+
+* tree - a partially ordered set `(T,<)`
+* such that - `{ s in T | (s < t) for each (t in T) }` is well-ordered
+* frequently only one root - minimal element
+* each well-ordered set `(T,<)` is a tree
+* trees grow downward - root is the greatest node
+* a subtree is downward closed - i.e. subset
+
+<!-- ======================================================================= -->
 ## wikipedia, tree structure
 
 * nodes- the vertices of the tree's graph
@@ -36,16 +46,6 @@ notes
 
 * each finite tree has a root
 * an infinite tree may have a root
-
-<!-- ======================================================================= -->
-## wikipedia, tree (set theory)
-
-* tree - a partially ordered set `(T,<)`
-* such that - `{ s in T | (s < t) for each (t in T) }` is well-ordered
-* frequently only one root - minimal element
-* each well-ordered set `(T,<)` is a tree
-* trees grow downward - root is the greatest node
-* a subtree is downward closed - i.e. subset
 
 <!-- ======================================================================= -->
 ## wikipedia, tree (graph theory)
