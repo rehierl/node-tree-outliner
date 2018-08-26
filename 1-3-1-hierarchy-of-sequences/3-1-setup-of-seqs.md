@@ -37,7 +37,7 @@ A setup (i.e. a set of sequences) is said to be consistent (with regards to the
 definition of the `subsequence-of` operator), if the following requirements are
 satisfied:
 
-1. Each sequence represents a set of values (see below: distinct)
+1. Each sequence represents a set of values.
 2. If two sequences have one or more elements in common,
    then one sequence is a subsequence of the other.
 
@@ -45,7 +45,7 @@ Note that this kind of consistency does not require that for each sequence (S1)
 another sequence (S2) exists with which the first sequence (S1) has any pattern
 in common. A sequence may exist that does not share any elements/patterns with
 any other sequence. Put differently such a setup may have more than one root
-sequence (see below).
+sequence.
 
 Note that there is no pair of sequences that overlap each other.
 

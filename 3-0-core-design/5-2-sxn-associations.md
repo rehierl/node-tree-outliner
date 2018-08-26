@@ -49,8 +49,8 @@ which is not the current node's parent section, can be understood to be
 open, no node will be strictly associated with such a seemingly suspended
 section.
 
-Note that, because a section can not be "strictly suspended" (see the state
-transitions), the term "suspended" must always be understood to be synonymous
+Note that, because a section can not be "strictly suspended" (/see/ state
+transitions /), the term "suspended" must always be understood to be synonymous
 to "loosely (or seemingly) suspended". That is because these sections still
 count as being open.
 

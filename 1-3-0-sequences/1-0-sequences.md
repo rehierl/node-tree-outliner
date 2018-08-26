@@ -2,9 +2,9 @@
 <!-- ======================================================================= -->
 # Sequences
 
-* see "mathematics" for the core concept of sequences
-* see "formal languages" for string-related aspects
-* see "topology" for "every sequence is a net"
+* (/see/ "mathematics" /) for the core concept of sequences
+* (/see/ "formal languages" /) for string-related aspects
+* (/see/ "topology" /) for "every sequence is a net"
 
 <!-- ======================================================================= -->
 ## Which term is appropriate?

@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Operations on binary relations
 
-* see - "wikipedia, binary relations"
+* (/see/ "wikipedia, binary relations" /)
 
 an impression, a hunch
 

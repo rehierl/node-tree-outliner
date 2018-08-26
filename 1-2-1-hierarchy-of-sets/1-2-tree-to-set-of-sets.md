@@ -239,7 +239,7 @@ But what if the inner set of `n1` and/or the inner set of `n2` is empty?
 * `B` means that "one set is a strict subset of the other"
 
 (`n1` and `n2` are both parent nodes) =>
-(A ex-or B) is obviously true (see above).
+(A ex-or B) is obviously true.
 
 (`n1` and `n2` are both leaf nodes) =>
 Both empty inner sets are obviously disjoint. In addition to that, none of the

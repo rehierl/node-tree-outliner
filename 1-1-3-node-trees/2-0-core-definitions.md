@@ -3,13 +3,12 @@
 # Node tree definitions
 
 * core definitions used throughout this discussion
-* a summary of standard and non-standard definitions
-* the focus is on directed node trees
+* an overview of standard and non-standard definitions
+* the focus is on rooted, directed trees of nodes
+* aka. arborescence, out-tree
 
 <!-- ======================================================================= -->
 ## paths of nodes
-
-* paths are seen as sequences of adjacent vertices
 
 loops and cycles
 

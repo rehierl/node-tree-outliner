@@ -114,8 +114,8 @@ That is because ...
 
 * (1) one or more open sections can be forced subsections of their ancestors
   (e.g. when entering `n4`, `s3` is a forced subsection of `s1` and `s0`).
-* (2) one way or another, each section must be closed explicitly (see the
-  definition of section states), in an orderly bottom-up fashion (close
+* (2) one way or another, each section must be closed explicitly (/see/ the
+  definition of section states /), in an orderly bottom-up fashion (close
   subsections first).
 
 **TODO**
@@ -202,12 +202,12 @@ the end-marker node is identified to be implicitly associated, which is why
 the current node's close modifier must be ignored.
 
 Note that an implementation will neither encounter case-1 nor case-3 with
-regards to type-2 sections (see the "implicit associations" chapter). That is,
-because the corresponding sections are already closed and will therefore no
-longer appear within the current path of sections. Because of that, the only
-relevant cases are case-2 and case-4. Consequently, an entered end-marker
-node either is a child node of the section's parent container, or one of the
-container's distant descendants.
+regards to type-2 sections (/see/ "implicit associations" /). That is, because
+the corresponding sections are already closed and will therefore no longer
+appear within the current path of sections. Because of that, the only relevant
+cases are case-2 and case-4. Consequently, an entered end-marker node either
+is a child node of the section's parent container, or one of the container's
+distant descendants.
 
 However, holding a node reference with each section object will increase the
 memory footprint of the resulting outline. Hence, these references can, but

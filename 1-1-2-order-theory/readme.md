@@ -34,4 +34,4 @@ set of nodes).
 Note that this linear order is reflected by the index each node has within
 the node trace. That is, each node is associated with a unique/distinct number
 value, and the nodes are ordered according to that value (i.e. a strict
-monotone mapping - see also: order isomorphism).
+monotone mapping) (/see/ "order isomorphism" /).

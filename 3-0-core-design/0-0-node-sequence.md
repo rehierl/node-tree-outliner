@@ -173,8 +173,8 @@ side effect on any node in `s3`.
 In general, the minimal set of data used by an operation can be referred to as
 the context of an operation. And because an operation can not function properly,
 if any data is taken away from its context (minimal set), any data within an
-operation's context is considered to be significant to that operation (see
-en.wikipedia.org: Context (computing), Operational context, Operating context).
+operation's context is considered to be significant to that operation (/see/
+en.wikipedia.org: Context (computing), Operational context, Operating context /).
 
 **CLARIFICATION**
 Operations executed during a node event (referred to as the current event) are

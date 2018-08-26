@@ -196,7 +196,7 @@ Associating `n5` with `s1` results in a conflict:
 (2 - due to `n5` closing `s1`) nodes `n6-9` are not located inside of `s1`.
 
 Both statements combined result in contradictory statements with
-regards to the location of a section (see strong connectivity).
+regards to the location of a section (/see/ strong connectivity /).
 
 **n1:s0, n5:s5**
 
@@ -240,7 +240,7 @@ Associating `n5` with `s1` adds another conflict:
 (2 - due to `n5` closing `s1`) section `s5` is not located inside of `s1`.
 
 Both statements combined result in contradictory statements with
-regards to the location of a section (see strong connectivity).
+regards to the location of a section (/see/ strong connectivity /).
 
 **n1:s1, n5:s5**
 

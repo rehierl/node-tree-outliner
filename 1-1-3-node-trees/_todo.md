@@ -3,13 +3,27 @@
 # TODO - node trees
 
 * [wikipedia, graph property](https://en.wikipedia.org/wiki/Graph_property)
-* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
 * [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
+* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
+
+what are sections?
+
+* the union of sets of nodes
+* i.e. no crossing borders
+* the union of subtrees
 
 mixed
 
 * (strict) subtree as induced subtrees
-* suffix-order on rooted paths
+* prefix/suffix-order of a rooted path
+* prefix/suffix-order of a tree
+* disjoint tree
+
+thoughts
+
+* sequences are not required, if ...
+* a topological sorting can be defined
+* based on the relationships of sets
 
 **TODO** -
 align the core definitions with those in hierarchy-of-sets -

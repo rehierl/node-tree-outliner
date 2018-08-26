@@ -12,7 +12,7 @@ components: c1 c2 c3
 elements:   v1 v2  
 ```
 
-* see "sequences" for further details
+* (/see/ "sequences" /)
 * "sequence" is the term that will be used throughout this discussion
 
 Note that sequences are specialized multisets such that there is an order

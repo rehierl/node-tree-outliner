@@ -5,11 +5,18 @@
 * algorithms related to graphs and trees
 
 <!-- ======================================================================= -->
+## wikipedia, induced subgraph
+
+* formed from a subset of vertices and all the corresponding edges
+* i.e. the edges connect vertices within the subset
+* i.e. no edge leads into or out of the subset
+
+<!-- ======================================================================= -->
 ## wikipedia, topological sorting
 
-* topological sort or topological ordering of a DAG
-* a linear ordering of vertices such that `aEb -> (a presequent-to b)`
-* the graph must have no cycles - i.e. must be acyclic
+* topological sort, or topological ordering of a DAG
+* a linear ordering of vertices such that `aPb -> (a presequent-to b)`
+* the graph must not have any cycles - i.e. must be acyclic
 * any DAG has one or more topological orderings (i.e. >=1)
 
 notes
@@ -45,13 +52,6 @@ comments
 
 * a "topological sort" could be understood to be rewriting a graph
 * i.e. produce a "linear graph/path"
-
-<!-- ======================================================================= -->
-## wikipedia, induced subgraph
-
-* formed from a subset of vertices and all the corresponding edges
-* i.e. the edges connect vertices within the subset
-* i.e. no edge leads into or out of the subset
 
 <!-- ======================================================================= -->
 ## wikipedia, planarity testing

@@ -9,21 +9,22 @@ graph theory
 
 * [wikipedia, graph theory glossary](https://en.wikipedia.org/wiki/Glossary_of_graph_theory_terms)
 * [wikipedia, graph theory](https://en.wikipedia.org/wiki/Graph_theory)
-* [wikipedia, graph theory (dm)](https://en.wikipedia.org/wiki/Graph_%28discrete_mathematics%29)
+* [wikipedia, graph (dm)](https://en.wikipedia.org/wiki/Graph_%28discrete_mathematics%29)
 * [wikipedia, graph (data type)](https://en.wikipedia.org/wiki/Graph_%28abstract_data_type%29)
 * [wikipedia, path](https://en.wikipedia.org/wiki/Path_%28graph_theory%29)
 
 characteristics (1)
 
-* [wikipedia, multigraph](https://en.wikipedia.org/wiki/Multigraph)
 * [wikipedia, directed graph](https://en.wikipedia.org/wiki/Directed_graph)
-* [wikipedia, quiver](https://en.wikipedia.org/wiki/Graph_%28discrete_mathematics%29)
+* [wikipedia, directed acyclic graph (dag)](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
 * [wikipedia, degree](https://en.wikipedia.org/wiki/Degree_%28graph_theory%29)
 * [wikipedia, regular graph](https://en.wikipedia.org/wiki/Regular_graph)
 * [wikipedia, branching factor](https://en.wikipedia.org/wiki/Branching_factor)
 
 characteristics (2)
 
+* [wikipedia, multigraph](https://en.wikipedia.org/wiki/Multigraph)
+* [wikipedia, quiver](https://en.wikipedia.org/wiki/Quiver_%28mathematics%29)
 * [wikipedia, connectivity](https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29)
 * [wikipedia, orientation](https://en.wikipedia.org/wiki/Orientation_%28graph_theory%29)
 * [wikipedia, complete graph](https://en.wikipedia.org/wiki/Complete_graph)

@@ -188,7 +188,7 @@ Note however, that a section's complete node sequence may still overlap (i.e.
 completely include and/or reach out of) the complete node sequence of another
 section. That is, the definitions so far do not include this aspect.
 
-(see also "sectioning nodes")
+* (/see/ "sectioning nodes" /)
 
 <!-- ======================================================================= -->
 ## reduced sequence

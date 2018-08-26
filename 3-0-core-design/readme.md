@@ -36,7 +36,7 @@ node sequence
 * The sectioning nodes of a tree are the tree's active nodes. All other nodes
   are said to be the tree's inactive or passive nodes (i.e. they have no effect
   whatsoever one the outline of a tree).
-* In general, and with the exception of parent containers (see "last nodes"),
+* In general, and with the exception of parent containers (/see/ "last nodes" /),
   any inactive node can be ignored.
 * The outline of a tree is the structure that holds all sections. Not to
   be misunderstood with a hierarchical listing of section properties (e.g.

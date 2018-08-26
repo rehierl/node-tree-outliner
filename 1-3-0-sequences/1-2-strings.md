@@ -53,8 +53,9 @@ remarks
 * set operations with languages - e.g. union, intersection, etc.
 * (S × T) := { (s × t) | (s in S) and (t in T) }
 * (S × {}) => {}, whereas (S × {e}) => S
-* Alpha(s) := the set of characters of a string - see also E()
-* Alpha(S) := the set of characters of a language - again E()
+* Alpha(s) := the set of characters of a string
+* Alpha(S) := the set of characters of a language
+* (/see/ "set of elements E()" /)
 
 substitution
 

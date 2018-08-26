@@ -24,7 +24,7 @@ i.e. tree-order + child-order -
 hierarchy of sets -> unordered tree -
 start with non-disjoint sets -
 end with pairwise disjoint sets -
-see partition refinement in computer science
+(/see/ "partition refinement" in "computer science" /)
 
 <!-- ======================================================================= -->
 ## a set of sets

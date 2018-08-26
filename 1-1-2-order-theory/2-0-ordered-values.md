@@ -25,7 +25,7 @@ ordered set
 countable sets, total/well order
 
 * sets can be totally ordered in various ways
-* well-orders (see ordinal numbers) - natural numbers, least element
+* well-orders (/see/ "ordinal numbers" /) - natural numbers, least element
 * other - integers, not guaranteed to have a least element
 * key definition of whether a total order is also a well order
 

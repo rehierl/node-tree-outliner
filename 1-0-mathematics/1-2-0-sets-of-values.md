@@ -10,7 +10,7 @@ components:  c1 c2 c3
 elements:    v1 v2 v3
 ```
 
-* see "set theory" for further details
+* (/see/ "set theory" /)
 
 Note that simple sets are specialized multisets such that the multiplicity of
 no element can increase past one/1.

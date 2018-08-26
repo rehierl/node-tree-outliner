@@ -338,7 +338,7 @@ the parent container of another section.
 
 **CLARIFICATION**
 Closing a type-2 section when its parent container is exited is a necessity,
-if the type-2 definition is strict (see: "Why no loose type-2 definition?").
+if the type-2 definition is strict (/see/ "Why no loose type-2 definition?" /).
 
 That is because if a type-2 sectioning node had no next sibling, the first
 node associated would then be the next sibling of the sectioning node's next

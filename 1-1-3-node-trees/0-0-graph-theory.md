@@ -76,7 +76,7 @@ subgraphs, induced subgraphs, minors
 **SKIPPED** - most of the applications listings
 
 <!-- ======================================================================= -->
-## wikipedia, graph theory (dm)
+## wikipedia, graph (dm)
 
 * object of study in discrete mathematics (dm)
 * a set of objects in which some pairs are related
@@ -186,7 +186,7 @@ glossary - trail, walk
 * open - first and last vertices are different
 * closed (cycle) - begins and ends at the same vertex
 
-notational
+notational aspects
 
 * alternatively - `p := [e1,e2,...]` - a sequence of adjacent edges
 * alternatively - `p := [v1,v2,...]` - a sequence of adjacent vertices

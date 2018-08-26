@@ -6,7 +6,7 @@
 * trees may be visualized as "nested sets"
 * the definition of parent/leaf should be child-based, not degree-based
 * a degree-based definition is problematic with regards to the tree's root
-* a tree should not be allowed to be empty - adds complexity to definitions
+* a tree should not be be empty - adds complexity to definitions
 * a forest (may be empty) is a union of disjoint trees
 * tree-order := descendants are subsequent to ancestors
 * ordered tree, child-order := each node has an ordered set of child nodes
@@ -42,10 +42,18 @@ visualized as
 * outlines, tree views - i.e. indentation-based listing
 * nested parenthesis
 
-notes
+<!-- ======================================================================= -->
+## wikipedia, arborescence (graph theory)
 
-* each finite tree has a root
-* an infinite tree may have a root
+* an acyclic digraph (DAG) such that ...
+* ... for every vertex `v` there is a unique rooted path `p := [r,...,v]`
+* a directed, rooted tree in which the edges point away from the root
+* synonymous - directed rooted tree, out-arborescence, out-tree
+
+if the arcs are reversed
+
+* i.e. all edges point towards the root
+* synonymous - anti-arborescence, in-tree
 
 <!-- ======================================================================= -->
 ## wikipedia, tree (graph theory)

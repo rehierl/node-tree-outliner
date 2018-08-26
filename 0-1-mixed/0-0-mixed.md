@@ -12,7 +12,7 @@ purpose is to grasp the general idea/concept.
 * an object property that is inherited to all sub-objects
 * e.g. in topology, graph theory, set theory
 * graph theory - a graph property which also holds for its induced subgraphs
-* set theory - see pure/hereditary sets
+* set theory - (/see/ "hereditary sets" /)
 
 <!-- ======================================================================= -->
 ## wikipedia, ontology

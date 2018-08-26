@@ -22,7 +22,7 @@ difference to set theory (ST)
 * ST is built on top of logic
 * ST - an element can belong to multiple sets
 * TT - terms generally belong to one type only
-* ST encodes numbers as sets - see hereditary sets
+* ST encodes numbers as sets - (/see/ "hereditary sets" /)
 * TT encodes numbers as functions
 
 normalization

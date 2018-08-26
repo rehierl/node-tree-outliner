@@ -60,7 +60,7 @@ line-based representation is:
 Note that the order of numbers within each sequence (A to E) corresponds with
 the order of numbers within the ordered set of numbers. Furthermore, sequence
 A is "identical" to the ordered set. Because of that, the numbers only have to
-be specified once by the "root sequence" (see below).
+be specified once by the "root sequence".
 
 Note that the left-to-right order of identifiers (i.e. A to E) to the right
 corresponds with the order of sequence definitions (i.e. the lines of `=`

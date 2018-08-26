@@ -13,7 +13,7 @@ are used. Consequently, the result of the Cartesian product is in principle
 
 Note that the Cartesian product is the default/standard formal basis used to
 define types/domains. This however requires to extend the base definition of
-the Cartesian product (see below).
+the Cartesian product.
 
 <!-- ======================================================================= -->
 ## binary product
@@ -82,7 +82,7 @@ sequences such that all sequences `(s in S)` have the exact same length.
 
 variable Cartesian power (×A{a,b})
 
-* see - regular expression like patterns
+* (/see/ "regular expression like patterns" /)
 * (+) is the union operator for sets
 * `×A{a,b}, ×A^{a,b} := (×A^a + ×A^(a+1) + ... + ×A^b)`
 * `×A{1,4} = (×A^1 + ×A^2 + ×A^3 + ×A^4)`

@@ -12,7 +12,7 @@ or by an end-marker node -> `Section.endMarkerNode`
 
 add a similar note to "reduced sequences" -
 add a `lastTopLevelNode` property definition -
-see the extensions chapter -
+(/see/ the extensions chapter /) -
 
 could also define a `Node Section.closeReason` property -
 and then compare it with a `Section.parentContainer` property -

@@ -50,7 +50,7 @@ e.g. used in Coffman-Graham algorithm for parallel scheduling
 <!-- ======================================================================= -->
 ## wikipedia, nested set model
 
-* see also - sequences / nested intervals
+* (/see/ "sequences" in "nested intervals" /)
 * a model/technique used to represent nested sets in relational databases
 * nested sets - aka. hereditarily finite set, trees, hierarchies
 * due to difficulties to express operations on hierarchies

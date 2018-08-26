@@ -54,7 +54,7 @@ all of the section's ancestor sections.
 
 Note that the latter aspect is because a node still counts as being explicitly
 associated with its parent section, and implicitly with all of the parent
-section's ancestor sections (see `SxN` associations).
+section's ancestor sections (/see/ S×N relation /).
 
 **Memory hook**
 Section `s1` is "a forced subsection of" `s0`, if all content nodes of `s1`
@@ -267,8 +267,8 @@ however an end-marker node is reached before its default scope is exited, then
 that section ends with the unassociated end-marker node.
 
 Note that, because end-marker nodes do not belong to the sections they close,
-the end of a section is still defined by exclusion (see "last nodes"). With
-that regards, the definition of end-marker nodes is consistent with the 
+the end of a section is still defined by exclusion (/see/ "last nodes" /).
+With that regards, the definition of end-marker nodes is consistent with the 
 definition of parent containers.
 
 **CLARIFICATION**

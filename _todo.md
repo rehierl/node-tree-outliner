@@ -20,6 +20,22 @@ scientific knowledge is invaluable to all as a whole,
 but has almost no value to a few
 
 <!-- ======================================================================= -->
+## tagging syntax
+
+* (/tag/ content /)
+* e.g. (/see/ reference /)
+
+known tags
+
+* see: intended to be used for "see also" references
+
+remarks
+
+* introduced for future use
+* used to embed commands into markdown files
+* eventually to include the **TODO** syntax
+
+<!-- ======================================================================= -->
 ## minor/isolated/mixed
 
 - a section is a subset of the tree's set of nodes

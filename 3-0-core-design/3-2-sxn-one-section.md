@@ -74,7 +74,7 @@ Here, the relations used to create such a path all have the same orientation
 path is therefore said to be semantically consistent.
 
 Note that, if only one relation would be involved, such a path could be
-referred to as a "dipath", a directed path (see basics/graph).
+referred to as a "dipath", a directed path (/see/ "graph theory" /).
 
 <!-- ======================================================================= -->
 ## derived statements

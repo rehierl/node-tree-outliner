@@ -27,8 +27,8 @@ can be associated with the corresponding roles. That is, there are no cases
 in which nodes will be associated any other way than what is required by their
 default definition.
 
-Note that this is yet another reason as to why not to associate sectioning
-nodes with the sections they declare (see "Association of sectioning nodes").
+Note that this is yet another reason as to why not to associate sectioning nodes
+with the sections they declare (/see/ "Association of sectioning nodes" /).
 
 <!-- ======================================================================= -->
 ## associating end-marker nodes

@@ -70,15 +70,6 @@ isInSequentTo => (distanceBetween == 0)
 ```
 
 <!-- ======================================================================= -->
-## covered-by
-
-* `(a covered-by b)`, if `(a strictly-sequent-to b)`
-* see "partial order" in "order theory"
-
-Note that the notion of the terms "consecutive" and "covering" is similar to
-strictly-sequent, strictly-presequent and strictly-subsequent (see below).
-
-<!-- ======================================================================= -->
 ## sequent
 
 * components `x` and `y` are sequent, ...
@@ -150,6 +141,15 @@ x **insequent-to** y (<>)
 * `x` and `y` are sequent, but neither pre- nor subsequent
 * i.e. in-sequent <=!=> not sequent
 * `(x <> y) <-> (y <> x)`
+
+<!-- ======================================================================= -->
+## covered-by
+
+* `(a covered-by b)`, if `(a strictly-sequent-to b)`
+* (/see/ "partial order" in "order theory" /)
+
+Note that the notion of the terms "consecutive" and "covering" is similar
+to strictly-sequent, strictly-presequent and strictly-subsequent.
 
 <!-- ======================================================================= -->
 ## examples

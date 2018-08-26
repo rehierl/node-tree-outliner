@@ -270,5 +270,6 @@ hierarchy (e.g. H1 and H2).
 
 Note that the node sequence of any rooted ordered tree represents an ordered
 set of values. H0, and any subset of it, automatically represent distinct setups
-(see - consistent set of sequences / requirement 1). However, this can only be
-guaranteed if (and only if) the initial tree has neither loops nor cycles.
+(/see/ "requirement 1" in "consistent set of sequences" /). However, this can
+only be guaranteed if (and only if) the initial tree has neither loops nor
+cycles.

@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # pre-/in-/sub-sequent (2)
 
-Note that the pre-/in-/sub-sequent definitions (see sequences)
+Note that the pre-/in-/sub-sequent definitions (/see/ sequences /)
 can be used in combination with ordered sequences of nodes:
 
 * (x is **not sequent to** y) := distance(x,y) is undefined

@@ -182,7 +182,7 @@ n-ary concatenation power (×A^N)
 
 variable concatenation power (×A{a,b})
 
-* see - regular expression like patterns
+* (/see/ "regular expression like patterns" /)
 * (+) is the union operator for sets
 * `×A{a,b}, ×A^{a,b} := (×A^a + ×A^(a+1) + ... + ×A^b)`
 * `×A{1,4} = (×A^1 + ×A^2 + ×A^3 + ×A^4)`

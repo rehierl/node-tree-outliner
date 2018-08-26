@@ -62,7 +62,7 @@ From the definition of inner sections:
   subsection to itself. Which is because a parent section always has more
   content nodes than any of its inner sections.
 
-From the definition of end-marker nodes (see extensions):
+From the definition of end-marker nodes (/see/ extensions /):
 
 * End-marker nodes will not be associated with the sections they close.
   Because of that, case-dependent associations would have to be justified, if
@@ -94,14 +94,14 @@ If a sectioning node would have to be associated with its own section, then the
 sectioning node and all of its descendants would also automatically belong to
 the declared section and therefore also to its node sequence. Consequently. it
 would not be possible to describe the general properties of a section's node
-sequence (see: reduced sequence) independently of its sectioning node.
+sequence (/see/ reduced sequence /) independently of its sectioning node.
 
 That is because the index of the first actual content node within the section's
 node sequence would then not be the same for all section types. Which is,
 because a section's node sequence would then always begin with the section's
-sectioning node, which could then be followed by one or more intermediate data
-nodes (see type-2 sectioning nodes), which are then followed by the section's
-actual content nodes.
+sectioning node, which could then be followed by one or more intermediate
+data nodes (/see/ type-2 sectioning nodes /), which are then followed by the
+section's actual content nodes.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -292,7 +292,7 @@ can be seen to be in conflict with such a design decision.
 
 In contrary to that, and when not associating any sectioning node with its
 own section, the `firstContentNode` property will always correspond with the
-section's very first node (see below).
+section's very first node.
 
 <!-- ======================================================================= -->
 ## sectioning nodes
@@ -329,7 +329,7 @@ Consequently, and even if each node is associated with one section only, the
 content node. In addition to that, this node always is identical to the
 section's first top-level node (i.e. critical to transformations).
 
-(see also "reduced sequences")
+* (/see/ "reduced sequences" /)
 
 <!-- ======================================================================= -->
 ## derived statements

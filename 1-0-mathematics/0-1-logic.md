@@ -90,7 +90,7 @@ clarification
 
 clarification
 
-* the negation operator (!, see below) must not be used with these
+* the negation operator (!) must not be used with these
   strict operators (i.e. not `<!-`, `-!>`, `<-!->`, etc)
 * hint: no confusion with the lower-or-equal order operator (<=) possible
 

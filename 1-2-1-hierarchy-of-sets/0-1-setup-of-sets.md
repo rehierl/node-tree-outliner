@@ -139,7 +139,7 @@ Note that requirement 2 will be referred to as "req-2" and
 as "consistency with regards to the `subset-of` operator".
 
 * `(s coupled-with t) -> (s related-to t)` is true if `(s != t)`
-* Note that this statement is required to be true (see req-2).
+* Note that this statement is required to be true (/see/ "req-2" /).
 
 Note that the intention of the above requirement is to guarantee that the setup
 does not contain two sets that overlap each other. That is, any two non-empty
@@ -239,7 +239,7 @@ strictly related. That is a consequence of the `strictly-related-to` operator.
 
 (3) `(s coupled-with t) -> (s strictly-related-to t)` is true if `(s != t)`.
 That statement is true as a result of the transitive (->) operator
-in combination with `(s coupled-with t) -> (s related-to t))` (see 1)
+in combination with `(s coupled-with t) -> (s related-to t))` - see (1)
 
 (4) `(s related-to t) <- (s strictly-related-to t)` is true if `(s != t)`.
 That statement is true because of the very definition of the
@@ -247,7 +247,7 @@ That statement is true because of the very definition of the
 
 (5) `(s coupled-with t) <- (s strictly-related to t)` is true if `(s != t)`.
 That statement is true as a result of the transitive (->) operator
-in combination with `(s coupled-with t) <- (s related-to t))` (see 1)
+in combination with `(s coupled-with t) <- (s related-to t))` - see (1)
 
 (6) `(s coupled-with t) <-> (s strictly-related to t)` is true if `(s != t)`.
 That is because `((a -> b) and (a <- b)) <-> (a <-> b)` (i.e. 3+5).

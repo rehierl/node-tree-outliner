@@ -50,6 +50,22 @@ comment
 * similar directed/undirected graph
 
 <!-- ======================================================================= -->
+## wikipedia, directed acyclic graph (dag)
+
+* a finite directed graph with no cycles
+* there is no path possible that begins and ends in some vertex
+* forests - the undirected counterparts
+
+topological ordering
+
+* every dag has a topological ordering
+* in general, this ordering is not unique
+* unique iff a directed path exists that contains all vertices
+* e.g. path graph
+
+**SKIPPED** - parts non-relevant to the discussion
+
+<!-- ======================================================================= -->
 ## wikipedia, degree
 
 * aka. valency
@@ -108,7 +124,7 @@ definitions
 * (simply) connected - (xPy or yPx) for all pairs
 * strongly connected - (xPy and yPx) for all pairs
 
-**SKIPPED** - as non-relevant to the current discussion
+**SKIPPED** - parts non-relevant to the discussion
 
 <!-- ======================================================================= -->
 ## wikipedia, orientation
@@ -127,7 +143,7 @@ oriented graph
 * a polytree is an orientation of an undirected tree
 * directed <=!=> oriented
 
-**SKIPPED** - as non-relevant to the current discussion
+**SKIPPED** - parts non-relevant to the discussion
 
 <!-- ======================================================================= -->
 ## wikipedia, complete graph
@@ -153,7 +169,7 @@ oriented graph
 * i.e. the orientation of a complete graph
 * used in voting theory, social choice theory, ...
 
-**SKIPPED** - as non-relevant to the current discussion
+**SKIPPED** - parts non-relevant to the discussion
 
 <!-- ======================================================================= -->
 ## wikipedia, polytree
@@ -172,4 +188,4 @@ oriented graph
 * drawing - plane graph, planar embedding of the graph
 * defined as mapping from a node to a point on the plane
 
-**SKIPPED** - as non-relevant to the current discussion
+**SKIPPED** - parts non-relevant to the discussion
