@@ -7,14 +7,6 @@ only try to reflect the core principles/aspects of the following topics. The
 purpose is to grasp the general idea/concept.
 
 <!-- ======================================================================= -->
-## wikipedia, hereditary property
-
-* an object property that is inherited to all sub-objects
-* e.g. in topology, graph theory, set theory
-* graph theory - a graph property which also holds for its induced subgraphs
-* set theory - (/see/ "hereditary sets" /)
-
-<!-- ======================================================================= -->
 ## wikipedia, ontology
 
 * used in computer/information science

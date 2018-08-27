@@ -2,14 +2,7 @@
 <!-- ======================================================================= -->
 # Graph theory algorithms
 
-* algorithms related to graphs and trees
-
-<!-- ======================================================================= -->
-## wikipedia, induced subgraph
-
-* formed from a subset of vertices and all the corresponding edges
-* i.e. the edges connect vertices within the subset
-* i.e. no edge leads into or out of the subset
+* operations related to graphs and trees
 
 <!-- ======================================================================= -->
 ## wikipedia, topological sorting
@@ -52,6 +45,55 @@ comments
 
 * a "topological sort" could be understood to be rewriting a graph
 * i.e. produce a "linear graph/path"
+
+<!-- ======================================================================= -->
+## wikipedia, induced subgraph
+
+* formed from a subset of vertices and all the corresponding edges
+* i.e. the edges connect vertices within the subset
+* i.e. no edge leads into or out of the subset
+
+<!-- ======================================================================= -->
+## wikipedia, edge contraction
+
+* merging two adjacent vertices into one and adjusting the edges
+
+definition
+
+* occurs relative to a particular edge `e`
+* `e` is removed and its incident vertices `u` and `v`
+  are merged into a new vertex `w`
+* edges then need to be modified
+* `(uEx -> wEx)`, `(xEu -> xEw)`
+* `(vEy -> wEy)`, `(yEv -> yEw)`
+* note - fewer/merged edges are possible if `E` is a set
+* note - will in general produce a multiset
+* note - may or may not be allowed to produce loops
+
+more formal
+
+* remove edge `uEv` and/or `vEu`
+* replace `u` by `w` in any edge `uEx` and `xEu`
+* likewise, replace `v` by `w`
+
+vertex identification
+
+* aka. vertex contraction
+* `u` and `v` may or may not be (strictly) connected
+* i.e. more general than edge contraction
+
+path contraction
+
+* contract a path into a single edge
+* edges connected to intermediary vertices may be removed
+  or connected to the end vertices
+
+application
+
+* used in proof by induction
+* e.g. proof that a property holds for a smaller graph,
+  and then that the property holds for a larger graph
+* e.g. merge essentially equal vertices
 
 <!-- ======================================================================= -->
 ## wikipedia, planarity testing

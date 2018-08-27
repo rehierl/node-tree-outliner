@@ -7,7 +7,7 @@
 
 graph theory
 
-* [wikipedia, graph theory glossary](https://en.wikipedia.org/wiki/Glossary_of_graph_theory_terms)
+* [wikipedia, glossary of terms](https://en.wikipedia.org/wiki/Glossary_of_graph_theory_terms)
 * [wikipedia, graph theory](https://en.wikipedia.org/wiki/Graph_theory)
 * [wikipedia, graph (dm)](https://en.wikipedia.org/wiki/Graph_%28discrete_mathematics%29)
 * [wikipedia, graph (data type)](https://en.wikipedia.org/wiki/Graph_%28abstract_data_type%29)
@@ -32,6 +32,12 @@ characteristics (2)
 * [wikipedia, tournament](https://en.wikipedia.org/wiki/Tournament_%28graph_theory%29)
 * [wikipedia, polytree](https://en.wikipedia.org/wiki/Polytree)
 * [wikipedia, planar graph](https://en.wikipedia.org/wiki/Planar_graph)
+* [wikipedia, graph minor](https://en.wikipedia.org/wiki/Graph_minor)
+
+graph property
+
+* [wikipedia, graph property](https://en.wikipedia.org/wiki/Graph_property)
+* [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
 
 data structures
 
@@ -39,10 +45,11 @@ data structures
 * [wikipedia, incidence matrix](https://en.wikipedia.org/wiki/Incidence_matrix)
 * [wikipedia, adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix)
 
-algorithms
+operations
 
 * [wikipedia, topological sorting](https://en.wikipedia.org/wiki/Topological_sorting)
 * [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
+* [wikipedia, edge contraction](https://en.wikipedia.org/wiki/Edge_contraction)
 * [wikipedia, prüfer sequence](https://en.wikipedia.org/wiki/Pr%C3%BCfer_sequence)
 * [wikipedia, hamilton path](https://en.wikipedia.org/wiki/Hamiltonian_path)
 * [wikipedia, graph rewriting](https://en.wikipedia.org/wiki/Graph_rewriting)

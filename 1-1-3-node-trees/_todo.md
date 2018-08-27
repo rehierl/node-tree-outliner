@@ -2,10 +2,6 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
-* [wikipedia, graph property](https://en.wikipedia.org/wiki/Graph_property)
-* [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
-* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
-
 what are sections?
 
 * the union of sets of nodes
@@ -14,7 +10,8 @@ what are sections?
 
 mixed
 
-* (strict) subtree as induced subtrees
+* (strict) subtree as "induced subtrees"
+* i.e. induced by its root node
 * prefix/suffix-order of a rooted path
 * prefix/suffix-order of a tree
 * disjoint tree
@@ -25,15 +22,16 @@ thoughts
 * a topological sorting can be defined
 * based on the relationships of sets
 
-**TODO** -
-align the core definitions with those in hierarchy-of-sets -
-including `T := (N,E)` -
+<!-- ======================================================================= -->
+## core definitions
 
-* (similar to set-of-sets)
+align them with those in hierarchy-of-sets
+
+* including `T := (N,E)`
 * related vs. unrelated nodes
 * define "related nodes"
 * instead of "one is an ancestor of the other"
-* define "sub-tree"
+* properly define "sub-graph", "sub-tree"
 
 **CLARIFICATION**
 Node `n1` is said to be **disjoint** from `n2`,

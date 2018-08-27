@@ -1,11 +1,15 @@
 
 <!-- ======================================================================= -->
-# Paths
+# Paths of nodes
 
-* (/see/ "path P over relation R" /)
+* (/see/ "path (p) over relation (R)" /)
 * paths are understood as sequences of adjacent nodes
 * which allows to use sequence-based definitions
 * e.g. length-of, subpath-of, prefix-of, ...
+
+Note that, unless specified otherwise, all paths in the current discussion
+are considered to be uni-directional paths consistent with the relation of
+an arborescence (i.e. top-down oriented paths).
 
 <!-- ======================================================================= -->
 ## multi-directional paths
@@ -16,7 +20,7 @@ such that `(ni covered-by ni+1)` for `i in [1,#p-1]`.
 clarifications
 
 * `p := [n1]` is considered to be a degenerated path
-* `(p[i] == p[j])` may be true for `(i != j)`
+* `(p[i] == p[j])` may be true for `(i != j)` - i.e. loops, cycles
 * due to `covered-by`, a path may in general be multi-directional
 * e.g. siblings are connected via multi-directional paths
 * such paths are said to have no consistent orientation
@@ -30,8 +34,8 @@ such that `(ni parent-of ni+1)` for any `(i in [1,#p-1])`.
 * `p` is an uni-directional, top-down/downward oriented path
 * `ni` is an ancestor of `ni+j`, and `ni+j` is a descendant of `ni`
 * `TD` - represents the set of all possible top-down paths
-* `RD` - any path that begins in a root (`n1 in R`), i.e. any rooted path
-* `TL` - any path that ends in a leaf (`nk in L`)
+* `RD` - any path that begins in a root (`n1 in RN`), i.e. any rooted path
+* `TL` - any path that ends in a leaf (`nk in LN`)
 * `RL` or `RTL` - any path that begins in a root and ends in a leaf
 * `(RTL subset-of TD)` - read RTL as root-to-leaf
 
@@ -41,12 +45,12 @@ such that `(ni child-of ni+1)` for any `(i in [1,#p-1])`.
 * `p` is an uni-directional, bottom-up/upward oriented path
 * `ni` is a descendant of `ni+j`, and `ni+j` is an ancestor of `ni`
 * `BU` - represents the set of all possible bottom-up paths
-* `BR` - any path that ends in a root (`nk in R`)
-* `LU` - any path that begins in a leaf (`n1 in L`)
+* `BR` - any path that ends in a root (`nk in RN`)
+* `LU` - any path that begins in a leaf (`n1 in LN`)
 * `LR` or `LTR` - any path that beings in a leaf and ends in a root
 * `(LTR subset-of BU)` - read LTR as leaf-to-root
 
-Any such path has one direction/orientation only!
+Any such path has one direction/orientation only:
 
 * any such path is said to be uni-directional
 * i.e. no `(p in TD)` has a pair of nodes `[ni, ni+1]`
@@ -55,13 +59,27 @@ Any such path has one direction/orientation only!
   such that `(ni parent-of ni+1)`, or `(ni ancestor-of ni+j)`
 
 **CLARIFICATION**
-Any unidirectional path in a tree of nodes (no loops, no cycles)
-is an ordered sequence of nodes.
+The path `rp(n) := [r,...,n] in RD` that begins in a tree's root `r` and ends
+in a given node `n` will be referred to as **the rooted path of a node**.
+
+* `(rp(n)[1] == r)` - any rooted path begins with the tree's root
+* `rp(r) := [r]` - i.e. `rp(r)` is the only rooted path that has length 1
+* each node `n` in a tree has a unique rooted path `rp(n)`
+
+**CLARIFICATION**
+Any unidirectional path in an arborescence represents an ordered set of nodes.
+
+That is because no such path contains any loops or cycles and therefore also no
+repeated nodes. Because of that, the length of a path's node sequence is equal
+to the number of nodes in the set of its elements `E(p)` (i.e. `(#p == #E(p))`).
+Consequently, a path can be understood to define a totally ordered set of nodes.
 
 <!-- ======================================================================= -->
 ## general definitions
 
-* `xPy` is true, if such a path exists over the underlying relation
+* `xPy` is true, if a path can be formed over the underlying relation `R`
+* i.e. the relation has edges that allow to connect node `x` with node `y`
+* `P` can be seen to represent the set of all possible paths over `R`
 
 node-to-node
 
@@ -76,13 +94,21 @@ node-to-set
 * the set of uni-directional paths that begin in `a` and end in `B`
 * may be the empty set, if there is no `b` related to `a`
 
-**CLARIFICATION**
-The path `rp(n) := [r,...,n] in RD` of a node `n` that begins in a tree's root
-will be referred to as **the rooted path of a node**. Every node `n` in a tree
-has a unique rooted path `rp(n)`.
+loops and cycles
 
-* `(rp(n)[1] == r)` - any rooted path begins with the tree's root
-* `rp(r) := [r]` - i.e. `rp(r)` is the only rooted path that has length 1
+* loop - a path such that `p := [a,a]` (i.e. `aEa`)
+* cycle - a path such that `p := [a,...,a]` (i.e. `aPa`)
+* 1-cycle - a cycle of length one - `p := [a,a]`
+* 2-cycle - a cycle of length two - `p := [a,b,a]`
+
+sets of paths
+
+* vertex-independent - two paths that have no vertex in common
+* edge-independent - two paths that have no edge in common
+* aka. vertex-disjoint, edge-disjoint
+* vertex-disjoint -> edge-disjoint
+* distance between vertices - the length of the shortest path
+* diameter of a component - the length of the longest path
 
 <!-- ======================================================================= -->
 ## directed/undirected definitions

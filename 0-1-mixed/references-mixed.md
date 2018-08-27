@@ -5,7 +5,6 @@
 <!-- ======================================================================= -->
 ## References - mixed
 
-* [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
 * [wikipedia, model theory](https://en.wikipedia.org/wiki/Model_theory)
 * [wikipedia, ring theory](https://en.wikipedia.org/wiki/Ring_theory)
 

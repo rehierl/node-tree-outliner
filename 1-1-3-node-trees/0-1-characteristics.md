@@ -189,3 +189,16 @@ oriented graph
 * defined as mapping from a node to a point on the plane
 
 **SKIPPED** - parts non-relevant to the discussion
+
+<!-- ======================================================================= -->
+## wikipedia, graph minor
+
+* an undirected graph H of another graph G
+* H can be formed from G by deleting edges/vertices and/or edge contraction
+
+definition
+
+* undirected H of undirected G - if an isomorphic graph I exists ...
+* that can be derived from G by contracting edges, deleting edges/vertices
+
+**SKIPPED** - parts non-relevant to the discussion

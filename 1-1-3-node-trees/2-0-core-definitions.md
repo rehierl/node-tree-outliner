@@ -5,26 +5,7 @@
 * core definitions used throughout this discussion
 * an overview of standard and non-standard definitions
 * the focus is on rooted, directed trees of nodes
-* aka. arborescence, out-tree
-
-<!-- ======================================================================= -->
-## paths of nodes
-
-loops and cycles
-
-* loop - a path such that `p := [a,a]` (i.e. `aEa`)
-* cycle - a path such that `p := [a,...,a]` (i.e. `aPa`)
-* 1-cycle - a cycle of length one - `p := [a,a]`
-* 2-cycle - a cycle of length two - `p := [a,b,a]`
-
-sets of paths
-
-* vertex-independent - two paths that have no vertex in common
-* edge-independent - two paths that have no edge in common
-* aka. vertex-disjoint, edge-disjoint
-* vertex-disjoint -> edge-disjoint
-* distance between vertices - the length of the shortest path
-* diameter of a component - the length of the longest path
+* aka. arborescence or out-tree
 
 <!-- ======================================================================= -->
 ## subsets of nodes
@@ -44,9 +25,8 @@ sets of paths
 * the definition of parent/leaf is child-based -
   i.e. a parent is a node that has one or more child nodes
 * a tree has no loops and no cycles (i.e. acyclic)
-* a tree always has exactly one root node -
-  i.e. `(#RN == 1)`, `(#N >= 1)`
-* a tree always has one or more nodes - i.e. never empty
+* a tree always has exactly one root node - i.e. `(#RN == 1)`
+* a tree always has one or more nodes - i.e. `(#N >= 1)`
 * a forest is the union of disjoint trees
 
 <!-- ======================================================================= -->
