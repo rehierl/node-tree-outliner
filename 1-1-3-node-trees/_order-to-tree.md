@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # TODO - (order <-> trees)
 
+* prefix/suffix-order of a rooted path
+* prefix/suffix-order of a tree
+
 post-order traversal
 
 * a topological ordering?

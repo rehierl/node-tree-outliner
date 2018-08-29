@@ -2,37 +2,30 @@
 <!-- ======================================================================= -->
 # Path (p) over relation (R)
 
-* (/see/ "path of nodes" /)
+* (/see/ "path of nodes" in "node trees" /)
 
-a relation-based definition of "path"
+A path over an endo-relation `R := (V,E)` such that `(E subset-of VxV)` is a
+sequence of vertices `p := (v1,v2,...,vk) in ×V^k` such that `(xi in V)`. In
+addition to that, any consecutive pair of vertices represents an edge in `R`
+- i.e.  `((vi,vi+1) in E)`.
 
-* given a binary relation `R := (A,B,G)`
-* a path over `R` is a sequence `p := (x1,x2,...,xn)`
-* such that `(xi in (A or B))` and
-* where `(ei in R)` for `ei := (xi,xi+1)`
-* and all `(i in [1,#p-1])`
-* i.e. `(x1 in A)` and/or `(x1 in B)`
+the length of a path `(#p == k)`
 
-the length of a path `(#p == n)`
-
-* a sequence-based path/definition/view
-* i.e. `(#p == n)` if `p := (x1,...,xn)`
-* a hop/pair/edge-based path/definition/view
-* i.e. `(#p == #{ (xi,xi+1) })`, i.e. `(#p == (n-1))`
-* a degenerated path if `p in { [], [x1] }`
+* a vertex-based view
+* i.e. `(#p := k)` if `p := (v1,...,vk)`
+* i.e. the number of components in `p`
+* aka. the vertex-length of a path
+* a hop/pair/edge-based view
+* i.e. `(#p := #{ (vi,vi+1) })`, i.e. `(#p == (k-1))`
+* i.e. the number of consecutive pairs in `p`
+* aka. the edge-length of a path
 
 clarification
 
-* if `(A disjoint-to B)`, then `(#p == 2)`
-* i.e. for no `aRb` there is a `c` such that `bRc`
-* if `((A isect B) != {})`, then `(#p in [2,*])`
-* i.e. `p` may even have infinite length
-
-as sequences of elements
-
-* a path `p` over relation `R` is a sequence of vertices
-* i.e. all definitions for sequences of elements can be used
-* e.g. sub-sequence <-> sub-path
+* `p := ()` and `p := (v1)` are both degenerated paths
+* a path may have in general infinite length
+* the definitions for sequences apply to paths
+* i.e. subsequence-of, prefix-of, ...
 
 <!-- ======================================================================= -->
 ## loops, cycles
@@ -42,13 +35,13 @@ as sequences of elements
 
 cyclic vs. acyclic
 
-* `p` is cyclic, if `p` has repetitions
-* i.e. `([y,...,y] subpath-of p)` where `(y in (A or B))`
-* `p` is cyclic, if `(#E(p) < #p)`
-* `p` is acyclic, if `(#E(p) == #p)`
-* `p` has loops, if `([y,y] subpath-of p)`
+* `p` is cyclic, if `((v,...,v) subsequence-of p)`
+* i.e. `p` is cyclic, if `(#E(p) < #p)`
+* i.e. `p` is acyclic, if `(#E(p) == #p)`
+* `p` has loops, if `((v,v) subsequence-of p)`
+* i.e. loops count as cycles that have edge-length 1 - aka. 1-cycle
 
-Put differently, a path is cyclic if an element in it is
+Put differently, a path is cyclic if a vertex in it is
 presequent and subsequent to itself.
 
 <!-- ======================================================================= -->
@@ -59,21 +52,22 @@ semantics) is associated. The edges therefore support a sense of **direction**
 and/or **orientation**, if the vertices of an edge are considered to be unequal.
 
 However, that notion of orientation is broken, if two vertices are connected
-in both ways (i.e. `aEb` and `bEa`). `R` must therefore be anti-symmetric and
-irreflexive (i.e. asymmetric). In general, `R` must be **acyclic**.
+in both ways (i.e. `aEb` and `bEa`). In order for all edges to have consistent
+orientation, `R` must be anti-symmetric and irreflexive (i.e. asymmetric).
+In general, `R` must be **acyclic**.
 
-With that in mind, any path `p=[v1,v2,...]` over such a relation `R` can be
+With that in mind, any path `p=(v1,v2,...)` over such a relation `R` can be
 understood to be **uni-directional**, if `((vi,vi+1) in R)` for any pair of
 consecutive vertices.
 
-A path may be referred to as being **multi-directional**, if a path contains
+A path may be referred to as being **multi-directional**, if it contains
 pairs such that `(vi,vi+1)` or `(vi+1,vi)` in `R`. Put differently, if the
-path contains pairs in `R` ex-or `ant(R)` (i.e. inverted/antonymous relation).
+path contains pairs in `R` and `ant(R)` (i.e. inverted/antonymous relation).
 
 A path may be referred to as **consistent with**, or **in the direction of**
-`R`, if each pair `(vi,vi+1)` is an element of `R` (aka. connected in `R`).
-In contrary to that, a path may be referred to as being **inverted**, or
-**antonymous**, if each pair `(vi,vi+1)` is an element of `ant(R)`.
+`R`, if each pair `(vi,vi+1)` is an edge in `R`. In contrary to that, a path
+may be referred to as being uni-directional but **inverted**, or **antonymous**,
+if each pair `(vi,vi+1)` is an edge in `ant(R)`.
 
 <!-- ======================================================================= -->
 ## reachability-based
@@ -82,16 +76,16 @@ In contrary to that, a path may be referred to as being **inverted**, or
 
 (p in R), (R contains p)
 
-* any edge `(e in G)` represents a path `p`
-* i.e. `aRb` => `p:=(a,b)` => `(p in G)`
-* `R` is said to contain path `p:=(a,b)`
-* i.e. R can be extended to contain any path over its edges
-* i.e. `(p in R)` if `p=(x1,...,xn)` and `((xi,xi+1) in G)`
+* any edge `(e in E)` represents a path `p`
+* i.e. `aRb` => `p:=(a,b)` => `(p in E)`
+* `R` is said to contain path `p:=(a,b)`, if `aRb`
+* i.e. `R` can be understood to contain any possible path
+* i.e. `(p in R)`, if `p=(v1,...,vn)` and `((vi,vi+1) in E)`
 
 extended notation
 
 * `P := { p | (p in R) }`
-* i.e. the set of all (possible) paths in `R`
+* i.e. the set of all possible paths in `R`
 * `aPb := (p in R)` where `p := (a,...,b)`
 * i.e. a path `p` exists in `R` that connects `a` with `b`
 
@@ -128,6 +122,8 @@ extended notation
 <!-- ======================================================================= -->
 ## sequence-based
 
+* **TODO** - rethink - keep or remove?
+
 (a sequent-to b)
 
 * `(a sequent-to b)`, if `aPb` and/or `bPa`
@@ -138,7 +134,7 @@ extended notation
 
 * `(a insequent-to b)`, if neither `aPb` nor `bPa`
 * i.e. equivalent to disconnected/unrelated/incomparable
-* **TODO** - a path-based definition - interesting
+* **TODO** - an unexpected, path-based perspective
 * it could use some additional thought
 
 (a predecessor-of b)

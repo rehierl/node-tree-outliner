@@ -6,15 +6,6 @@ what are sections?
 
 * the union of sets of nodes
 * i.e. no crossing borders
-* the union of subtrees
-
-mixed
-
-* (strict) subtree as "induced subtrees"
-* i.e. induced by its root node
-* prefix/suffix-order of a rooted path
-* prefix/suffix-order of a tree
-* disjoint tree
 
 thoughts
 
@@ -23,15 +14,21 @@ thoughts
 * based on the relationships of sets
 
 <!-- ======================================================================= -->
-## core definitions
+sub-graph, sub-tree
 
+* the union of subtrees
+* (strict) subtree as "induced subtrees"
+* i.e. induced by its root node
+* properly define "sub-graph", "sub-tree"
+* disjoint tree
+
+<!-- ======================================================================= -->
 align them with those in hierarchy-of-sets
 
 * including `T := (N,E)`
 * related vs. unrelated nodes
 * define "related nodes"
 * instead of "one is an ancestor of the other"
-* properly define "sub-graph", "sub-tree"
 
 **CLARIFICATION**
 Node `n1` is said to be **disjoint** from `n2`,

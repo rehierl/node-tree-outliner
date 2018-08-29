@@ -22,8 +22,7 @@
 <!-- ======================================================================= -->
 ## core definitions
 
-( Note that the following definitions are very
-similar to those in "node trees / core definitions" )
+* (/see/ "core definitions" in "node trees" /)
 
 With regards to a strict setup, the following references may be used:
 

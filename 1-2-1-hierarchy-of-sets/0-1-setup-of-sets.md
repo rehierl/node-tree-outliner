@@ -47,7 +47,7 @@ if it does not contain the empty set `{}` as an element.
 
 * `S := (V,P)`.
 * `V` is a set of elements.
-* `P` is a set of sets of elements.
+* `P` is a strict subset of the powerset `P(V)`
 * `V := E(P)` := "the union of all sets (s in P)"
 
 clarifications

@@ -56,8 +56,8 @@ hierarchy (of nested sets)**, if the CSS of each parent set is empty.
 
 **CLARIFICATION**
 A simple hierarchy may be referred to as **a normalized minimal (simple)
-hierarchy (of nested sets)**, if it was created from a minimal hierarchy by
-minimizing the characteristic subsets of its leaf sets.
+hierarchy (of nested sets)**, if it was created from a minimal hierarchy
+by minimizing the characteristic subsets of its leaf sets.
 
 * `(#css(p) == 0)` for any `(p in PS)`
 * `(#css(l) == 1)` for any `(l in LS)`
