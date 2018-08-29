@@ -7,7 +7,7 @@
 * but, an association is initially a node property, not a graph property
 * however, an association could be considered a property of a subgraph
 
-similarity with CSS style sheets
+some similarity with style sheets in CSS
 
 * seems to be more similar to CSS properties
 * unless overridden, these are inherited to all descendants
@@ -62,12 +62,3 @@ properties of properties
 * minor-closed - every graph minor has the same property
 
 **SKIPPED** - properties of invariants
-
-<!-- ======================================================================= -->
-## wikipedia, glossary of terms
-
-* subgraph - formed from a subset of vertices and edges
-* i.e. no restriction of which vertices/edges to select
-* spanning subgraph - all vertices, but only a subset of edges
-* induced subgraph - subset of vertices and all edges between them
-* i.e. the subset of edges is not arbitrarily selected

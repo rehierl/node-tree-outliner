@@ -47,13 +47,6 @@ comments
 * i.e. produce a "linear graph/path"
 
 <!-- ======================================================================= -->
-## wikipedia, induced subgraph
-
-* formed from a subset of vertices and all the corresponding edges
-* i.e. the edges connect vertices within the subset
-* i.e. no edge leads into or out of the subset
-
-<!-- ======================================================================= -->
 ## wikipedia, edge contraction
 
 * merging two adjacent vertices into one and adjusting the edges

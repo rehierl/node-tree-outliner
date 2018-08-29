@@ -1,5 +1,21 @@
 
 <!-- ======================================================================= -->
+## ordered vs. unordered
+
+* ordered tree - each `C(p)` is an ordered set of nodes
+* i.e. with each `C(p)` a total order relation is associated
+* i.e. each parent has a first and a last child
+* i.e. each sibling may have a next and a previous sibling
+* unordered tree - no `C(p)` has an order relation
+
+Remarks
+
+* in general, a tree is either ordered ex-or unordered
+* i.e. associate an order relation with all `C(p)`, or none at all
+* "ordered/unordered tree" is not to be confused with "directed tree"
+* i.e. a tree is a "directed ordered tree" ex-or a "directed unordered tree"
+
+<!-- ======================================================================= -->
 ## next/previous sibling
 
 * given an ordered tree ...

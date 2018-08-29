@@ -11,7 +11,11 @@ graph theory
 * [wikipedia, graph theory](https://en.wikipedia.org/wiki/Graph_theory)
 * [wikipedia, graph (dm)](https://en.wikipedia.org/wiki/Graph_%28discrete_mathematics%29)
 * [wikipedia, graph (data type)](https://en.wikipedia.org/wiki/Graph_%28abstract_data_type%29)
+
+paths of vertices
+
 * [wikipedia, path](https://en.wikipedia.org/wiki/Path_%28graph_theory%29)
+* [wikipedia, induced path](https://en.wikipedia.org/wiki/Induced_path)
 
 characteristics (1)
 
@@ -34,11 +38,6 @@ characteristics (2)
 * [wikipedia, planar graph](https://en.wikipedia.org/wiki/Planar_graph)
 * [wikipedia, graph minor](https://en.wikipedia.org/wiki/Graph_minor)
 
-graph property
-
-* [wikipedia, graph property](https://en.wikipedia.org/wiki/Graph_property)
-* [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
-
 data structures
 
 * [wikipedia, adjacency list](https://en.wikipedia.org/wiki/Adjacency_list)
@@ -48,16 +47,24 @@ data structures
 operations
 
 * [wikipedia, topological sorting](https://en.wikipedia.org/wiki/Topological_sorting)
-* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
 * [wikipedia, edge contraction](https://en.wikipedia.org/wiki/Edge_contraction)
 * [wikipedia, prüfer sequence](https://en.wikipedia.org/wiki/Pr%C3%BCfer_sequence)
 * [wikipedia, hamilton path](https://en.wikipedia.org/wiki/Hamiltonian_path)
 * [wikipedia, graph rewriting](https://en.wikipedia.org/wiki/Graph_rewriting)
 * [wikipedia, planarity testing](https://en.wikipedia.org/wiki/Planarity_testing)
 
-examples
+subgraphs
+
+* [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
+* [wikipedia, intersection graph](https://en.wikipedia.org/wiki/Intersection_graph)
+
+graph property
+
+* [wikipedia, graph property](https://en.wikipedia.org/wiki/Graph_property)
+* [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
+
+more graph examples
 
 * [wikipedia, comparability graph](https://en.wikipedia.org/wiki/Comparability_graph)
-* [wikipedia, intersection graph](https://en.wikipedia.org/wiki/Intersection_graph)
 * [wikipedia, interval graph](https://en.wikipedia.org/wiki/Interval_graph)
 * [wikipedia, contact graph](https://en.wikipedia.org/wiki/Contact_graph)

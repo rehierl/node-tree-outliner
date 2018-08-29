@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # Examples
 
+* more examples for particular graphs
+
 <!-- ======================================================================= -->
 ## wikipedia, comparability graph
 
@@ -12,18 +14,6 @@
 incomparability graph
 
 * edges - two vertices are incomparable
-
-<!-- ======================================================================= -->
-## wikipedia, intersection graph
-
-* undirected edges - two sets intersect each other
-* i.e. the intersection of connected sets is non-empty
-* i.e. sets may overlap each other
-
-classes of intersection graphs
-
-* interval graphs
-* and many more ...
 
 <!-- ======================================================================= -->
 ## wikipedia, interval graph
