@@ -57,6 +57,8 @@ subgraphs
 
 * [wikipedia, induced subgraph](https://en.wikipedia.org/wiki/Induced_subgraph)
 * [wikipedia, intersection graph](https://en.wikipedia.org/wiki/Intersection_graph)
+* [wikipedia, clique](https://en.wikipedia.org/wiki/Clique_%28graph_theory%29)
+* [wikipedia, intersection number](https://en.wikipedia.org/wiki/Intersection_number_%28graph_theory%29)
 
 graph property
 

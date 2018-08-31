@@ -13,14 +13,6 @@ some similarity with style sheets in CSS
 * unless overridden, these are inherited to all descendants
 
 <!-- ======================================================================= -->
-## wikipedia, hereditary property
-
-* an object property inherited to all sub-objects
-* used in topology, graph theory, set theory
-* graph theory - a graph property that also applies to its induced subgraphs
-* (/see/ "hereditary sets" /)
-
-<!-- ======================================================================= -->
 ## wikipedia, graph property
 
 * aka. graph invariant
@@ -62,3 +54,60 @@ properties of properties
 * minor-closed - every graph minor has the same property
 
 **SKIPPED** - properties of invariants
+
+<!-- ======================================================================= -->
+## wikipedia, glossary of terms
+
+graph property
+
+* true for some graphs, but not for others
+* depends only on the graph structure
+* not incidental/invariant - e.g. no labels
+* may be described as classes of graphs
+* e.g. the set of subgraphs of a section (???)
+
+maximal subgraph
+
+* a subgraph of `G` that has property `p` such that ...
+* none of its super-graphs in `G` have `p`
+* i.e. a maximal element of the subgraphs in `G` with `p`
+* e.g. maximal clique, (belongs-to section)
+* maximum -> maximal, but not vice versa
+
+maximum subgraph
+
+* the largest subgraph among all subgraphs with property `p`
+* (don't yet see the difference to maximal ...)
+
+minimal subgraph
+
+* no proper subgraph has the same property
+* i.e. a minimal element of the subgraphs with `p`
+
+monotone property
+
+* a property that is closed under subgraphs
+* if G has a hereditary property, then so must every subgraph
+* hereditary - closed under induced subgraphs
+* minor-closed - closed under minors
+
+<!-- ======================================================================= -->
+## wikipedia, hereditary property
+
+* an object property inherited to all sub-objects
+* used in topology, graph theory, set theory
+* graph theory - a graph property that also applies to its induced subgraphs
+* (/see/ "hereditary sets" /)
+
+<!-- ======================================================================= -->
+## wikipedia, graph minor
+
+* an undirected graph H of another graph G
+* H is formed from G by deleting edges/vertices and/or edge contraction
+
+definition
+
+* undirected H of undirected G - if an isomorphic graph I exists ...
+* that can be derived from G by contracting edges, deleting edges/vertices
+
+**SKIPPED** - parts non-relevant to the discussion

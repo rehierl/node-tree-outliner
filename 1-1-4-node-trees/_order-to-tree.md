@@ -27,6 +27,14 @@ order theory - partial orders
 * [wikipedia, tree (set theory)](https://en.wikipedia.org/wiki/Tree_%28set_theory%29)
 * [wikipedia, topological sorting](https://en.wikipedia.org/wiki/Topological_sorting)
 * [wikipedia, comparability graph](https://en.wikipedia.org/wiki/Comparability_graph)
+* [wikipedia, degeneracy ordering](https://en.wikipedia.org/wiki/Degeneracy_%28graph_theory%29)
+
+## wikipedia, glossary of terms
+
+order(ing) of a graph
+
+* an arrangement of its vertices into a sequence
+* e.g. topological ordering - degeneracy ordering
 
 ### wikipedia, tree (set theory)
 

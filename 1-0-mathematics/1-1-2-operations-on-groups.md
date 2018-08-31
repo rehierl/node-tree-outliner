@@ -4,7 +4,7 @@
 
 Note that the following definitions correspond with those defined for simple
 sets of values. That is, the following definitions can be understood to be
-generalization of the set-based operations and the set-based operations as
+generalizations of the set-based operations and the set-based operations as
 specializations.
 
 The cardinality/multiplicity of a value, that is not an element of a group,
@@ -23,6 +23,7 @@ extended set-builder-like notation
 ## union (+, or, union)
 
 * `(A union B) := < x*n | (n = #(x,A) + #(x,B)) >`
+* i.e. the sum of the multiplicities in both groups
 * `(A or B), (A + B) := (A union B)`
 
 likewise
@@ -40,18 +41,6 @@ example
 
 * `A := < 1, 2, 2 > and B := < 1, 2 >`
 * `(A union B) = < 1, 1, 2, 2, 2 >`
-
-<!-- ======================================================================= -->
-## intersection (&, and, isect)
-
-* `(A isect B) := < x*n | (n = min(#(x,A), #(x,B))) >`
-* i.e. the minimum of the multiplicities in both groups
-* `(A & B), (A and B) := (A isect B)`
-
-example
-
-* `A := < 1, 2, 2 > and B := < 1, 2 >`
-* `(A and B) = < 1, 2 >`
 
 <!-- ======================================================================= -->
 ## difference (\, sub, diff)
@@ -82,13 +71,26 @@ example
 * `(A xor B) = (< 2 > union < 3 >) = < 2, 3 >`
 
 <!-- ======================================================================= -->
+## intersection (&, and, isect)
+
+* `(A isect B) := < x*n | (n = min(#(x,A), #(x,B))) >`
+* i.e. the minimum of the multiplicities in both groups
+* `(A & B), (A and B) := (A isect B)`
+
+example
+
+* `A := < 1, 2, 2 > and B := < 1, 2 >`
+* `(A and B) = < 1, 2 >`
+
+<!-- ======================================================================= -->
 ## complement (*)
 
 Similar to simple sets, a universal group U could be defined, which would have
 to contain any element with infinite multiplicity. Because of that, an absolute
 complement can not be defined as the multiplicities within the resulting group
-would be infinite (?). Because of that A* := (U \ A) would be equal to U,
-regardless of what the contents of group A are.
+would be infinite (?). Because of that A* := (U \ A) would be essentially equal
+to U, regardless of what the contents of group A are.
 
 However, a "relative complement" (i.e. U' \ A) may still be defined with regards
-to some known finite and restricted universal group U'.
+to some known finite and restricted universal group U' - e.g. as the union of
+all groups in the current context.

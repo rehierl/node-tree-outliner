@@ -2,11 +2,7 @@
 <!-- ======================================================================= -->
 # Operations on sets
 
-<!-- ======================================================================= -->
-## set difference (\, sub, diff)
-
-* `(A diff B) := { x | (x in A) and (x !in B) }`
-* `(A \ B), (A sub B) := (A diff B)`
+* (/see/ "operations on groups" /)
 
 <!-- ======================================================================= -->
 ## wikipedia, union (+, or, union)
@@ -39,12 +35,36 @@ multi-set operation - +(), E()
 * note - `+({}) := {}`
 
 <!-- ======================================================================= -->
+## set difference (\, sub, diff)
+
+* `(A diff B) := { x | (x in A) and (x !in B) }`
+* `(A \ B), (A sub B) := (A diff B)`
+
+<!-- ======================================================================= -->
+## wikipedia, symmetric difference (^, xor, ex-or)
+
+* `(A ex-or B) := { x | x in (A\B or B\A) }`
+* `(A ^ B), (A xor B) := (A ex-or B)`
+
+clarification
+
+* `(A xor B) := (A \ B) or (B \ A)`
+* `(A xor B) := (A or B) \ (A & B)`
+* `(A ^ {}) = A`
+* `(A ^ A) = {}`
+
+commutative, associative
+
+* `(A ^ B) = (B ^ A)`
+* `((A ^ B) ^ C) = (A ^ (B ^ C))`
+
+<!-- ======================================================================= -->
 ## wikipedia, intersection (&, and, isect)
 
 * `(A isect B) := { x | (x in A) and (x in B) }`
 * `(A & B), (A and B) := (A isect B)`
 
-interset, disjoint
+intersect, disjoint
 
 * intersect - `(A & B) != {}`
 * disjoint - `(A & B) == {}`
@@ -74,24 +94,6 @@ any possible element.
 * use `+(S)` as a replacement for `U`
 * `&(S) subset-of +(S)` is also true
 * `&(S) := { (x in +(S)) | (x in s) for all (s in S) }`
-
-<!-- ======================================================================= -->
-## wikipedia, symmetric difference (^, xor, ex-or)
-
-* `(A ex-or B) := { x | x in (A\B or B\A) }`
-* `(A ^ B), (A xor B) := (A ex-or B)`
-
-clarification
-
-* `(A xor B) := (A \ B) or (B \ A)`
-* `(A xor B) := (A or B) \ (A & B)`
-* `(A ^ {}) = A`
-* `(A ^ A) = {}`
-
-commutative, associative
-
-* `(A ^ B) = (B ^ A)`
-* `((A ^ B) ^ C) = (A ^ (B ^ C))`
 
 <!-- ======================================================================= -->
 ## wikipedia, complement (*)

@@ -3,6 +3,7 @@
 # Path-based, node-related definitions
 
 * (/see/ "path of nodes" /)
+* (/see/ "relationship between sets /)
 * definitions based upon unidirectional, downward-oriented paths
 
 <!-- ======================================================================= -->
@@ -26,8 +27,8 @@ The height of a node/tree can be defined as follows:
 <!-- ======================================================================= -->
 ## ancestor, descendant
 
-Because of the paths in a tree being downward oriented, the following can be
-said about the relationship between the nodes of a path:
+Because of the paths in a tree being downward oriented, the following can
+be said about the relationship between the nodes of a path:
 
 * for `(p in P)` and `p := p(x,y)` - i.e. `xPy`
 * `x` is an **ancestor of** `y`
@@ -108,7 +109,7 @@ the nodes in `N` can be classified with regards to a given node `n`:
 The set of descendants `D(n)` of a node `n` may be referred to as **the inner
 nodes of a node**. And because each node has an "inside", any node can also be
 understood to have an "outside". The set of nodes that are not inner nodes to
-a given node will be referred to as **the outer nodes of a node**.
+a given node can therefore be referred to as **the outer nodes of a node**.
 
 * `IN(n) := D(n)`
 * `ON(n) := (N \ IN(n) \ {n})`
@@ -120,15 +121,15 @@ Note that `A(n)` and `ON(n)` are not identical!
 <!-- ======================================================================= -->
 ## contains, inside-of
 
-A node `x` is said to **contain** node `y`, iff `(y in IN(x))`.
-That is, `y` is an inner node of `x`.
+A node `x` is said to **contain** node `y`,
+iff `(y in IN(x))`. That is, `y` is an inner node of `x`.
 
 * `(x in y) := (y in IN(x))`
 * `(x contains y) := (x in y)`
 * `xPy` is true, iff `(x contains y)`
 
-A node `x` is said to be **(located) inside of** node `y`, iff `(x in IN(y))`.
-That is, `x` is an inner node of `y`.
+A node `x` is said to be **(located) inside of** node `y`,
+iff `(x in IN(y))`. That is, `x` is an inner node of `y`.
 
 * `(x inside-of y) := (x in IN(y))`
 * `(x inside-of y) := (y contains x)`

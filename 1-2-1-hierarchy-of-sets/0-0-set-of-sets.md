@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # Set of sets
 
+* (/see/ relationships between sets /)
+
 ```
 multiset-of-sets = <
   A: { 1, 2, 3, 4 },
@@ -166,8 +168,9 @@ That is, two sets are either disjoint ex-or coupled with each other.
 * `( (V coupled-with W) or (V disjoint-to W) )` is always true
 
 Note that common elements can be understood to act as a "link" between the
-sets involved. These links can be understood to bind such sets together,
-which is why those sets can be said to be "connected" or "coupled".
+sets involved. These links can be understood to bind sets together, which
+is why those sets can be said to be "connected" or "coupled" with each other
+via some "point of contact" (aka. **intersection**).
 
 **CLARIFICATION**
 Set D is said to **overlap** set A

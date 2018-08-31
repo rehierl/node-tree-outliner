@@ -37,3 +37,13 @@ notational aspects
 
 <!-- ======================================================================= -->
 ## wikipedia, induced path
+
+* aka. a snake
+* a path `p` in an undirected graph that is an induced subgraph
+* i.e. all vertices not in `p` are not connected
+* likewise, induced (chordless) cycles
+
+characterization of graph families
+
+* i.e. induced allow to characterize graphs
+* e.g. the connected graphs with no induced cycle are trees
