@@ -3,6 +3,7 @@
 # TODO - (order <-> trees)
 
 * prefix/suffix-order of a rooted path
+* i.e. a rooted path is in tree order
 * prefix/suffix-order of a tree
 
 post-order traversal
@@ -20,6 +21,15 @@ order theory - partial orders
 
 * vertices ordered by reachability
 * (strict) partial order => dag
+
+inner/outer sets of a node
+
+* allows to construct the partial order of a tree
+* needs the transitive closure
+* for each node take its rooted path
+* in that sequence of nodes, connect each node ni with all ni+k
+* the set of all ni+k of all rooted paths through ni
+* represents the inner set of a node
 
 <!-- ======================================================================= -->
 ## wikipedia

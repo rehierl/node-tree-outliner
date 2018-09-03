@@ -2,8 +2,10 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
-* induced subtree -> induced (sub)path
-* overlapping hierarchy => more than one parent
+* subpath vs. subsequence
+* sequences/paths as hierarchies of sets
+* is the hierarchy of a traversal consistent with the hierarchy of a tree?
+* i.e. how does a traversal blend into the tree?
 
 thoughts
 
@@ -11,26 +13,8 @@ thoughts
 * a topological sorting can be defined
 * based on the relationships of sets
 
-sub-graph, sub-tree
-
-* the union of subtrees
-* (strict) subtree as "induced subtrees"
-* i.e. induced by its root node
-* properly define "sub-graph", "sub-tree"
-* disjoint tree
-
 <!-- ======================================================================= -->
-inner/outer sets of a node
-
-* construction of the partial order of a tree
-* needs the transitive closure
-* for each node take its rooted path
-* in that sequence of nodes, connect each node ni with all ni+k
-* the set of all ni+k of all rooted paths through ni
-* represents the inner set of a node
-
-<!-- ======================================================================= -->
-sections
+## sections
 
 how to answer the h1-div-h1-issue?
 

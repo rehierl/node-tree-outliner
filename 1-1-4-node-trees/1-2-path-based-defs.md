@@ -18,11 +18,13 @@ The level/depth of a node can be defined as follows:
 
 The height of a node/tree can be defined as follows:
 
-* `height(n) := max({ #p | (p in p(n,L)) }) - 1`
+* `height(n) := max({ #p-1 | (p in p(n,L)) })`
 * i.e. the edge-length of the longest node-to-leaf path
 * `height(tree) := height(r)`
 * i.e. the height of a tree is the height of its root
 * i.e. `(height(l) == 0)` for `(l in LN)`
+
+Note that the height of a tree is equivalent to its diameter.
 
 <!-- ======================================================================= -->
 ## ancestor, descendant
@@ -57,17 +59,6 @@ Similar to that, the following functions can be defined:
 * i.e. `D(n)` returns the set of all descendants of `n`
 * i.e. `(D(n) subset-of DN)` is true
 
-Remarks in general:
-
-* any edge points away from an ancestor towards its descendants
-* `(A(n) union {n}) == E(rp(n))`
-* i.e. the ancestors of a node are all located on the rooted path of a node
-* `(r ancestor-of n)` is true for any `(n in (N \ RN))`
-* i.e. a tree's root is an ancestor to any non-root node
-* i.e. any non-root node is a descendant to a tree's root
-* the parent of a node `P(n)` is the node's least significant ancestor
-* i.e. `P(n)` is sub-ordinate to all other nodes in `A(n)`
-
 With regards to downward-oriented paths:
 
 * `p := (n1,...,ni,...,nk)` where `(p in P)`
@@ -101,25 +92,49 @@ The set of nodes `DD(n) := D(n) \ C(n)` that are descendants, but no child to
 a given node `n` will be referred to as **the distant descendants of a node**.
 
 <!-- ======================================================================= -->
-## inner/outer nodes of a node
+## the structure of rooted paths
+
+In a rooted path, any edge is downwards oriented from an ancestor towards
+its descendants. Because of that, the ancestors `A(n)` of a node `n` are
+all presequent to that node in its rooted path:
+
+* `(A(n) union {n}) == E(rp(n))`
+* `rp(n) := (prefix × n)` where `(E(prefix) == A(n))`
+
+Furthermore, the parent `p` of a node is the least significant ancestor of
+a node. That is, `p` is subordinate to any other ancestor in `A(n)`:
+
+* `rp(n) := (prefix × p × n)` where `(E(prefix) == DA(n))`
+* `rp(n) := (rp(p) × n)` where `(p parent-of n)` and `rp(r) := (r)`
+* i.e. a recursive definition of rooted paths
+
+A root `r` is therefore the most significant ancestor of all non-root nodes.
+In addition to that, a root is still the least significant ancestor to its
+child nodes.
+
+* `(r ancestor-of n)` is true for all `(n in (N \ RN))`
+
+<!-- ======================================================================= -->
+## inner/outer node of a node
 
 Due to all rooted paths having a downward (aka. inward) directed orientation,
 the nodes in `N` can be classified with regards to a given node `n`:
 
 The set of descendants `D(n)` of a node `n` may be referred to as **the inner
-nodes of a node**. And because each node has an "inside", any node can also be
-understood to have an "outside". The set of nodes that are not inner nodes to
-a given node can therefore be referred to as **the outer nodes of a node**.
+nodes of a node** `IN(n)`. And because each node has an "inside", any node can
+also be understood to have an "outside". The set of nodes that are not inner
+nodes to a given node, including the node itself, can therefore be referred to
+as **the outer nodes of a node** `ON(N)`.
 
 * `IN(n) := D(n)`
 * `ON(n) := (N \ IN(n) \ {n})`
 * `(A(n) subset-of ON(n))`
 * i.e. `(#A(n) <= ON(n))`
 
-Note that `A(n)` and `ON(n)` are not identical!
+Note that `A(n)` and `ON(n)` are not necessarily identical.
 
 <!-- ======================================================================= -->
-## contains, inside-of
+## contains, inside-of, outside-of
 
 A node `x` is said to **contain** node `y`,
 iff `(y in IN(x))`. That is, `y` is an inner node of `x`.
@@ -134,6 +149,16 @@ iff `(x in IN(y))`. That is, `x` is an inner node of `y`.
 * `(x inside-of y) := (x in IN(y))`
 * `(x inside-of y) := (y contains x)`
 * `(x inside-of y) := (IN(x) subset-of IN(y))`
+
+A node `x` is said to be **(located) outside of** node `y`,
+iff `(x in (N \ IN(y) \ {y}))`.
+That is, `x` is not inside-of and not equal-to `y`.
+
+* `(x outside-of y) := (x !in y) and (x != y)`
+* `(x outside-of y) <=!=> not (x inside-of y)`
+
+Note that both definitions (i.e. inside-of, outside-of) provide a sense of
+direction (i.e. inwards, outwards) with regards to the corresponding node.
 
 <!-- ======================================================================= -->
 ## coupled, disjoint, overlap
@@ -166,5 +191,5 @@ nodes `x` and `y` in a tree are either strictly related (i.e. one is a strict
 subset of the other) ex-or both sets are disjoint. That is, both nodes can not
 be understood to **overlap** each other.
 
-Note that two sets of elements are said to overlap each other, if both sets
+Recall that two sets of elements are said to overlap each other, if both sets
 have one or more elements in common, but none is a subset of the other.

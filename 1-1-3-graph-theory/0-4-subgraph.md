@@ -31,7 +31,7 @@ induced subgraph
 * a subgraph `S` such that `(T subset-of V)`
 * and all edges in `E` whose endpoints are in `T`
 * i.e. a subset of vertices and all edges between them
-* i.e. the subset of edges is not arbitrarily selected
+* i.e. the subset of edges is not arbitrary
 * e.g. induced paths, induced cycles
 
 intersection
@@ -49,15 +49,15 @@ proper subgraph
 spanning subgraph
 
 * a subgraph `S` such that `(T == V)` and `(U subset-of E)`
-* i.e. all vertices, but only a subset of edges
-* i.e. a special case of an induced subgraph
+* i.e. all vertices, but not necessarily all edges between them
+* i.e. not a special case of an induced subgraph
 
 subgraph
 
 * a graph `S` formed from another graph `G`
 * such that `(T subset-of V)` and `(U subset-of E)`
 * `T` must include all endpoints of the edge subset `U`
-* `S` may, or may not be connected
+* `S` is not necessarily connected
 * other than that, no further restriction
 * subforest - a subgraph of a forest
 
@@ -76,14 +76,12 @@ supergraph
 ## wikipedia, induced subgraph
 
 * formed from a subset of vertices and all the corresponding edges
+* that is, there is no general rule as how the vertex-subset is formed
+* in contrary to that, the edge-subset is formed based on the vertex-subset
 * i.e. the edges connect vertices within the vertex subset
-* i.e. no edge leads into, or out of the subset
+* i.e. no edge leads into, or out of the vertex-subset
 * e.g. induced paths - i.e. subgraphs that are paths
 * notational - `G[V']`
-
-remarks
-
-* no rule as how to create the vertex subset
 
 <!-- ======================================================================= -->
 ## wikipedia, intersection graph
@@ -92,13 +90,13 @@ remarks
 * i.e. (un)directed edges - two sets intersect each other
 * i.e. the intersection of connected sets is non-empty
 * i.e. sets may overlap each other
-* classes defined by the types of sets
+* classes of graphs defined by the types of sets
 * e.g. interval graphs
 
 definition
 
 * create one vertex per set
-* connect vertices, if vertices intersect
+* connect vertices, if the sets intersect
 
 all graphs are intersection graphs
 
