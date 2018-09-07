@@ -60,7 +60,7 @@ left-unique   right-unique   left-total   right-total
 
 ### right-total, surjective, onto
 
-* for any `c`, there is an `a` such that aRc
+* for any `c`, there is an `a` such that `aRc`
 * i.e. any `b` has an income - can be reached
 
 ### combinations of uniqueness and totality

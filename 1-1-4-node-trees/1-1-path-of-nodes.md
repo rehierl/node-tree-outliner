@@ -7,6 +7,7 @@
 * all sequence-based definitions apply to paths
 * e.g. length-of, subsequence-of, prefix-of, ...
 * i.e. `(s subpath-of t) := (s subsequence-of t)`
+* note - a path can be understood to represent a graph
 
 Note that, unless specified otherwise, all paths in the current discussion
 are considered to be uni-directional paths in the direction of the underlying

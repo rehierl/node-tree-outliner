@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # Paths of vertices
 
+* note - a path can be understood to represent a graph
+
 <!-- ======================================================================= -->
 ## wikipedia, path (graph theory)
 

@@ -3,12 +3,8 @@
 # Node tree definitions
 
 * a summary of standard and non-standard definitions
-* i.e. definitions used throughout this discussion
-* the focus is on directed rooted trees of nodes
+* the focus here is on directed rooted trees of nodes
 * aka. arborescence, out-tree
-
-Note that forests, i.e. possibly empty unions of disjoint trees,
-are not in the focus of this discussion.
 
 <!-- ======================================================================= -->
 ## downward-oriented edges
@@ -18,11 +14,15 @@ An arborescence is a directed tree `T` defined as a tuple of sets:
 * `T := (N,E)`
 * `N` is the non-empty set of nodes
 * `(E subset-of N×N)` is the possibly empty set of edges
+* such that `(E(e) subset-of N)` for all `(e in E)`
+* i.e. both endpoints of each edge are nodes in `N`
 
-Each node `(n in N)` can be understood to represent some unique object:
+Each node `(n in N)` can be understood to represent some unique object. That
+is, nodes stand for abstract entities whose object properties are considered
+to be non-relevant to the corresponding tree.
 
 * `(o: N -> O)` - is a bijective function
-* `o(n)` returns the object that node `n` represents
+* `o(n)` returns the object which node `n` represents
 * i.e. `(o(x) !== o(y))` where `(x,y in N)`
 * i.e. distinct nodes represent distinct objects
 * `(n: O -> N)` - is inverse to `o()`
@@ -30,8 +30,8 @@ Each node `(n in N)` can be understood to represent some unique object:
 * i.e. `(o(n(o)) === o)` and `(n(o(n)) === n)`
 
 Due to each edge `(e in E)` being an ordered pair of nodes `((x,y) in N×N)`,
-the following can be said about the relationship between the nodes `x` and `y`
-of `e`:
+the following can be said about the relationship between its two nodes `x`
+and `y`:
 
 * `x` is the parent node of `y`
 * i.e. `(x parent-of y)` is true
@@ -44,19 +44,19 @@ of `e`:
 * `y` is less significant than `x`
 
 The following can be said about an edge `e` and the relationship it has with
-its nodes `x` and `y`:
+both of its nodes `x` and `y`:
 
 * `e := (x,y)` or `(x -> y)`
 * `e` begins in `x` and ends in `y`
 * `e` is an outgoing edge of `x`
 * `e` is an incoming edge of `y`
 * `e` is downward-directed/oriented
-* `e` points away from a super-ordinate towards a sub-ordinate node
+* i.e.  away from a super-ordinate towards a sub-ordinate node
 
 Because no node is considered to be super- or sub-ordinate to itself,
-no edge is allowed to begin and end in the same node.
+no edge begins and ends in the same node.
 
-* `((x,x) in E)` is not allowed
+* `((x,x) in E)` is not allowed for any `(x in N)`
 * i.e. a tree of nodes has no loops
 * i.e. each edge is an ordered pair of distinct nodes
 * i.e. `((x,y) in E)` iff `(x != y)`
@@ -101,9 +101,9 @@ Similar to that, the following functions can be defined:
 The following conditions hold for all trees:
 
 * `(#RN == 1)` - each tree always has exactly one root `r`
-* `(#P(c) == 1)` - each child has exactly one parent
 * `(#N >= 1)` - a tree has at least its root as node
 * i.e. the tree's set of nodes is never empty
+* `(#P(c) == 1)` - each child has exactly one parent
 
 Because of that, `P()` can be re-defined as follows:
 
@@ -114,8 +114,8 @@ Because of that, `P()` can be re-defined as follows:
 
 Some further characteristics of a tree are:
 
-* any parent has a child node
-* any child has a parent (and one parent only)
+* each parent has a child
+* each child has a parent (and one parent only)
 * a root has no parent, but may itself be one
 * a root is no child, but may itself have one
 * `(#N == 1)` => `(RN,LN == {r})` and `(PN,CN,IN == {})`
@@ -176,8 +176,25 @@ The semantics of an edge `e := (p,c) in E` is such that:
 * `pEc <-> (p parent-of c) <-> (c child-of p)`
 * i.e. `sem(E)` := "parent-of", not "child-of"
 
+<!-- ======================================================================= -->
+## additional notes
+
 Note that, if all edges are inverted (i.e. child-of semantics), the resulting
-directed graph would no longer be tree. That is, because the structure would
+directed graph would no longer be a tree. That is, because the structure would
 then have one or more root nodes (i.e. the former leaf nodes) and never more
 than one leaf node (i.e. the former root). Consequently, and if non-linear,
 that structure would not correspond with the definition of an arborescence.
+
+Note that, because of `(#P(c) == 1)`, each non-root node `(n in N\RN)` is the
+2nd node to one, and only one, edge. That is, each child node has exactly one
+incoming edge. In contrary to that, each non-leaf node `(n in N\LN)` has one
+or more outgoing edges. That is, each parent node is the 1st node of one or
+more edges.
+
+Note that the `parent-of` relation can not be seen as a function: not right
+unique (i.e. a parent may have several child nodes, i.e. not functional). In
+contrary to that, the antonymous `child-of` relation is functional: right
+unique (i.e. each child has one parent only, i.e. functional), not left-unique
+(i.e. a parent may have several child nodes, i.e. not injective), not left
+total (i.e. the root has no parent), not right total (i.e. leaf nodes have no
+child, i.e. not surjective).

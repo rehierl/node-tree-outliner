@@ -8,17 +8,23 @@
 ## wikipedia, glossary of terms
 
 * assumed graphs: `G := (V,E)`, `S := (T,U)`, `X := (Y,Z)`
-* i.e. vertex sets `V,T,Y` and edge sets `E,U,Z`
+* where `V,T,Y` represent sets of vertices
+* and `E,U,Z` represent sets of edges
 
 connected graph
 
-* each pair of vertices forms a path
-* strong connectivity - in directed graphs
-* i.e. a path in both directions exists
+* each pair of vertices is connected via a path
+* i.e. connected via an edge vs. via a path
+* strongly connected directed graphs
+* i.e. a path exists in both directions
+* weakly connected graph
+* i.e. an undirected path exists
 
 connected component
 
 * a maximal connected subgraph
+* i.e. all nodes in a component are connected
+* i.e. each node to every other node
 
 disjoint graphs
 
@@ -30,8 +36,8 @@ induced subgraph
 * aka. full subgraph
 * a subgraph `S` such that `(T subset-of V)`
 * and all edges in `E` whose endpoints are in `T`
-* i.e. a subset of vertices and all edges between them
-* i.e. the subset of edges is not arbitrary
+* i.e. a subset of vertices and all the incident edges
+* i.e. the subset of edges is not arbitrarily selected
 * e.g. induced paths, induced cycles
 
 intersection
@@ -56,21 +62,23 @@ subgraph
 
 * a graph `S` formed from another graph `G`
 * such that `(T subset-of V)` and `(U subset-of E)`
-* `T` must include all endpoints of the edge subset `U`
+* `T` must include all the endpoints of each edge in `U`
+* i.e. `(E(e) subset-of T)` for all `(e in U)`
 * `S` is not necessarily connected
+* i.e. `T` hay have isolated vertices
 * other than that, no further restriction
 * subforest - a subgraph of a forest
 
 subtree
 
 * a connected subgraph of a tree
-* also - particular subgraphs for rooted trees
+* may be restricted to particular subgraphs for rooted trees
 * e.g. all vertices and edges reachable from some initial vertex
 
 supergraph
 
 * formed by adding vertices, edges or both
-* subgraph <=> supergraph
+* sub-graph vs. super-graph
 
 <!-- ======================================================================= -->
 ## wikipedia, induced subgraph
