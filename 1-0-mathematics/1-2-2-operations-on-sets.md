@@ -38,7 +38,12 @@ multi-set operation - +(), E()
 ## set difference (\, sub, diff)
 
 * `(A diff B) := { x | (x in A) and (x !in B) }`
-* `(A \ B), (A sub B) := (A diff B)`
+* `(A \ B), (A sub B), (A - B) := (A diff B)`
+
+note that ...
+
+* there doesn't seem to be a wikipedia page dedicated to the set difference
+* this operation is however also known as the "relative complement" (see below)
 
 <!-- ======================================================================= -->
 ## wikipedia, symmetric difference (^, xor, ex-or)

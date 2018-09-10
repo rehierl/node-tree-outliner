@@ -3,7 +3,7 @@
 # Node tree definitions
 
 * a summary of standard and non-standard definitions
-* the focus here is on directed rooted trees of nodes
+* the focus here is on directed rooted node trees
 * aka. arborescence, out-tree
 
 <!-- ======================================================================= -->
@@ -112,7 +112,7 @@ Because of that, `P()` can be re-defined as follows:
 * i.e. `P(r)` returns a `null` reference for `r`
 * notational: `xPy := (x == P(y))`
 
-Some further characteristics of a tree are:
+Some additional characteristics are:
 
 * each parent has a child
 * each child has a parent (and one parent only)
@@ -162,7 +162,10 @@ The following function can be defined:
 Remarks
 
 * a tree has no edge `xEy` or `yEx`, if `xSy`
-* **TODO** - not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
+
+**TODO**
+- not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
+- recheck the exact properties of "right-euclidean"
 
 <!-- ======================================================================= -->
 ## parent-of semantics
@@ -181,8 +184,8 @@ The semantics of an edge `e := (p,c) in E` is such that:
 
 Note that, if all edges are inverted (i.e. child-of semantics), the resulting
 directed graph would no longer be a tree. That is, because the structure would
-then have one or more root nodes (i.e. the former leaf nodes) and never more
-than one leaf node (i.e. the former root). Consequently, and if non-linear,
+then have one or more root nodes (i.e. the former leaf nodes) and always one,
+and only one leaf node (i.e. the former root). Consequently, and if non-linear,
 that structure would not correspond with the definition of an arborescence.
 
 Note that, because of `(#P(c) == 1)`, each non-root node `(n in N\RN)` is the
@@ -192,9 +195,9 @@ or more outgoing edges. That is, each parent node is the 1st node of one or
 more edges.
 
 Note that the `parent-of` relation can not be seen as a function: not right
-unique (i.e. a parent may have several child nodes, i.e. not functional). In
-contrary to that, the antonymous `child-of` relation is functional: right
+unique (i.e. a parent may have several child nodes, i.e. not functional).
+In contrary to that, the antonymous `child-of` relation is functional: right
 unique (i.e. each child has one parent only, i.e. functional), not left-unique
 (i.e. a parent may have several child nodes, i.e. not injective), not left
-total (i.e. the root has no parent), not right total (i.e. leaf nodes have no
-child, i.e. not surjective).
+total (i.e. the root has no parent), not right total (i.e. leaf nodes have
+no child, i.e. not surjective).

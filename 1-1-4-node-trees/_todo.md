@@ -2,16 +2,49 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
-* subpath vs. subsequence
-* sequences/paths as hierarchies of sets
-* is the hierarchy of a traversal consistent with the hierarchy of a tree?
-* i.e. how does a traversal blend into the tree?
+* define union/intersection/diff for graphs/trees
+* vertex/edge disjoint graphs/trees
+* define the leaf-set of a node/tree
 
-thoughts
+<!-- ======================================================================= -->
+## paths -> subtree
 
-* sequences are not required, if ...
-* a topological sorting can be defined
-* based on the relationships of sets
+* a path is a graph and a tree
+* i.e. induced subtree -> induced subpath
+* a tree is a hierarchy of sets -> a path is a hierarchy of sets
+* e.g. start with rooted paths
+
+rethink that thought - from (induced) paths
+
+* similarities with the removal-based definition of "subsequence"
+* removal of vertices and edges from the transitive closure of a sequence
+* i.e. not just from its cover relation
+* any subsequence can be considered an "induced subsequence".
+
+<!-- ======================================================================= -->
+## path -> sequence
+
+* a path is a sequence
+* a (ordered) sequence is a hierarchy of sets
+* i.e. sets that all are strictly related (~ 1st dimension)
+* i.e. a tree adds disjoint subsets (~ 2nd dimension)
+
+<!-- ======================================================================= -->
+## traversal -> sequence
+
+* the tree traversal defines a sequence
+* a rooted path is somewhat perpendicular to the node sequence
+
+traversal vs. node tree
+
+* are sequences required, if the traversal is consistent with the tree?
+* i.e. a node sequence must fit into the hierarchy of sets
+* i.e. the traversal is defined base on the relationships of the sets
+
+traversal vs. set hierarchy
+
+* how does the hierarchy of sets of an ordered sequence
+* blend into the hierarchy of sets of an ordered tree?
 
 <!-- ======================================================================= -->
 ## sections
