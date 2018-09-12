@@ -8,7 +8,7 @@
 ## wikipedia, directed graph
 
 * aka. digraph
-* each edge in a directed graph as a direction/orientation
+* each edge in a directed graph has a direction/orientation
 * i.e. the edges are ordered pairs of vertices
 * arcs A - undirected connections, unordered pairs
 * edges E - directed connections, ordered pairs - aka. arrow
@@ -37,11 +37,12 @@ terminology
 * branching factor - the number of arrows that lead away from x
 * source - if (ideg == 0) - i.e. no incoming arrows
 * sink - if (odeg == 0) - i.e. no outgoing arrows
+* (somewhat odd definitions for source/sink)
+* (as it includes that any isolated vertex is a source and a sink)
 * internal - a vertex that is neither a source, nor a sink
-* (somewhat odd definitions for source/sink/internal)
 * balanced digraph - if (ideg == odeg) for each vertex
 
-comment
+remarks
 
 * directing/orientating an edge - (undirected -> directed)
 * i.e. associate a direction/orientation with an edge
@@ -106,7 +107,7 @@ vertex related
 <!-- ======================================================================= -->
 ## wikipedia, connectivity
 
-* connected - a path exists between each pair of vertices
+* connected - a path exists between any pair of vertices
 * i.e. there are no unreachable vertices
 * note - each vertex must be a sink and a source
 * disconnected - if not connected

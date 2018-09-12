@@ -1,121 +1,125 @@
 
 <!-- ======================================================================= -->
-# Node tree definitions
+# Definitions related to node trees
 
-* a summary of standard and non-standard definitions
-* the focus here is on directed rooted node trees
+* a summary of (relevant) standard and non-standard definitions
+* the focus is on directed rooted node trees
 * aka. arborescence, out-tree
 
 <!-- ======================================================================= -->
-## downward-oriented edges
+## basic definitions
 
-An arborescence is a directed tree `T` defined as a tuple of sets:
+An arborescence/tree is an oriented graph `T` defined as a tuple of sets:
 
-* `T := (N,E)`
+* `T := (N,E)` is a graph of nodes
 * `N` is the non-empty set of nodes
 * `(E subset-of N×N)` is the possibly empty set of edges
 * such that `(E(e) subset-of N)` for all `(e in E)`
 * i.e. both endpoints of each edge are nodes in `N`
 
-Each node `(n in N)` can be understood to represent some unique object. That
-is, nodes stand for abstract entities whose object properties are considered
-to be non-relevant to the corresponding tree.
+As trees are directed graphs, each node represents a unique object:
 
-* `(o: N -> O)` - is a bijective function
-* `o(n)` returns the object which node `n` represents
-* i.e. `(o(x) !== o(y))` where `(x,y in N)`
-* i.e. distinct nodes represent distinct objects
-* `(n: O -> N)` - is inverse to `o()`
-* `n(o)` returns the id/reference/node of object `o`
-* i.e. `(o(n(o)) === o)` and `(n(o(n)) === n)`
+* `o(n)` returns the object that node `n` represents
+* `n(o) := v(o)` returns the id/reference/node of object `o`
 
-Due to each edge `(e in E)` being an ordered pair of nodes `((x,y) in N×N)`,
-the following can be said about the relationship between its two nodes `x`
-and `y`:
-
-* `x` is the parent node of `y`
-* i.e. `(x parent-of y)` is true
-* `y` is a child node of `x`
-* i.e. `(y child-of x)` is true
-* i.e. `child-of` is antonymous to `parent-of`
-* `x` is super-ordinate to `y`
-* `y` is sub-ordinate to `x`
-* `x` is more significant than `y`
-* `y` is less significant than `x`
-
-The following can be said about an edge `e` and the relationship it has with
-both of its nodes `x` and `y`:
+The following can be said about the nodes of an edge:
 
 * `e := (x,y)` or `(x -> y)`
-* `e` begins in `x` and ends in `y`
-* `e` is an outgoing edge of `x`
-* `e` is an incoming edge of `y`
+* `x` is the parent of `y`, and `y` is a child of `x`
+* i.e. `(x parent-of y)` is true, iff `x` is the parent of `y`
+* i.e. `(y child-of x)` is true, iff `y` is a child of `x`
+* i.e. `child-of` is antonymous to `parent-of`
+* `x` is super-ordinate to `y`, and `y` is sub-ordinate to `x`
+* `x` is more significant than `y`, and `y` is less significant than `x`
+
+The following can be said about an edge `e` and the relationship it has
+with both of its nodes `x` and `y`:
+
 * `e` is downward-directed/oriented
-* i.e.  away from a super-ordinate towards a sub-ordinate node
+* i.e. from a super-ordinate towards a sub-ordinate node
+
+Like any (directed) graph, each tree can be understood to have an indicator
+function `E()` associated with it:
+
+* `(E: N×N -> Bool)` or `E(x,y) := ((x,y) in E)`
+* notational: `xEy := E(x,y)`
 
 Because no node is considered to be super- or sub-ordinate to itself,
 no edge begins and ends in the same node.
 
-* `((x,x) in E)` is not allowed for any `(x in N)`
+* `xEx` is not allowed to be true for any `(x in N)`
 * i.e. a tree of nodes has no loops
 * i.e. each edge is an ordered pair of distinct nodes
-* i.e. `((x,y) in E)` iff `(x != y)`
-
-Each tree can be understood to have an indicator function `E()` such that:
-
-* `(E: N×N -> Bool)` or `E(x,y) := ((x,y) in E)`
-* notational: `xEy := E(x,y)`
+* i.e. `xEy` may be true iff `(x != y)`
 
 <!-- ======================================================================= -->
 ## root, parent, child, inner, leaf
 
 Based on `E`, the following subsets of `N` can be defined:
 
-* `RN := { r | ((x,r) !in E) for all (x in N) }`
+* `RN := { (r in N) | ((x,r) !in E) for all (x in N) }`
 * i.e. the set of nodes that have no parent
 * i.e. each `(r in RN)` is a root node
-* `PN := { p | pEy for some (y in N) }`
+* i.e. each root is a source vertex: `(RN == SRC)`
+* `PN := { (p in N) | pEy for some (y in N) }`
 * i.e. the set of nodes that are parent to some child
 * i.e. each `(p in PN)` is a parent node
-* `CN := { c | xEc for some (x in N) }`
+* `CN := { (c in N) | xEc for some (x in N) }`
 * i.e. the set of nodes that are child to some parent
 * i.e. each `(c in CN)` is a child node
-* `IN := { i | (i in PN) and (i in CN) }`
+* `IN := { (i in N) | (i in PN) and (i in CN) }`
 * i.e. the set of nodes that have a parent and a child
-* i.e. each `(i in IN)` is an inner node of the tree
-* `LN := { l | ((l,y) !in E) for all (y in N) }`
+* i.e. each `(i in IN)` is an inner node to the tree
+* i.e. each inner node is an internal vertex: `(IN == INT)`
+* `LN := { (l in N) | ((l,y) !in E) for all (y in N) }`
 * i.e. the set of nodes that have no child
 * i.e. each `(l in LN)` is a leaf node
+* i.e. each leaf is a sink vertex: `(LN == SNK)`
 
 Similar to that, the following functions can be defined:
 
-* `(P: N -> P(N))`, or `P(n) := { p | pEn }`
-* i.e. `P(n)` returns the set of parent nodes of `n`
-* i.e. `n` is a child, if `(P(n) != {})`
-* notational: `xPy := (x in P(y))`
-* `(C: N -> P(N))`, or `C(n) := { c | nEc }`
-* i.e. `C(n)` returns the set of child nodes of `n`
-* i.e. `n` is a parent, if `(C(n) != {})`
-* notational: `xCy := (x in C(y))`
+* `(p: N -> p(N))`, or `p(n) := { p | pEn }`
+* i.e. `p(n)` returns the set of parent nodes of `n`
+* i.e. `n` is a child, if `(p(n) != {})`
+* i.e. `p()` is equivalent to `src()`
+* notational: `xPy := (x in p(y))`
+* `(c: N -> P(N))`, or `c(n) := { c | nEc }`
+* i.e. `c(n)` returns the set of child nodes of `n`
+* i.e. `n` is a parent, if `(c(n) != {})`
+* i.e. `c()` is equivalent to `snk()`
+* notational: `xCy := (x in c(y))`
 
 The following conditions hold for all trees:
 
 * `(#RN == 1)` - each tree always has exactly one root `r`
 * `(#N >= 1)` - a tree has at least its root as node
 * i.e. the tree's set of nodes is never empty
-* `(#P(c) == 1)` - each child has exactly one parent
+* `(#p(c) == 1)` - each child has exactly one parent
 
-Because of that, `P()` can be re-defined as follows:
+Because of that, `p()` can be re-defined:
 
-* `(P: N -> N)` or `P(n) := p such that pEn`
-* i.e. `P(n)` returns the parent of node `n`
-* i.e. `P(r)` returns a `null` reference for `r`
-* notational: `xPy := (x == P(y))`
+* `(p: N -> N)` or `p(n) := p such that pEn`
+* i.e. `p(n)` returns the parent of node `n`
+* i.e. `p(r)` returns a `null` reference for `r`
+* note - `p()` is still considered to be identical to `src()`
+* i.e. even though `p()` returns a node and `src()` a set of nodes
+* notational: `xPy := (x == p(y))`
 
-Some additional characteristics are:
+Note that, because of `(#p(c) == 1)`, each non-root node `(n in N\RN)` is
+a sink to one, and only one, edge. That is, each child node has exactly
+one incoming edge. In contrary to that, each non-leaf node `(n in N\LN)`
+is a source to one or more edges. That is, each parent node has one or
+more outgoing edges. Put differently, each node may be the sink of an edge
+no more than once. In contrary to that, any node may act as a source to any
+number of edges.
+
+<!-- ======================================================================= -->
+## remarks
+
+Further characteristics are:
 
 * each parent has a child
-* each child has a parent (and one parent only)
+* each child has a parent, and one parent only
 * a root has no parent, but may itself be one
 * a root is no child, but may itself have one
 * `(#N == 1)` => `(RN,LN == {r})` and `(PN,CN,IN == {})`
@@ -145,7 +149,7 @@ With regards to a node's child nodes (i.e. a child-based view):
 
 * `x` is a child of `p`, if `pEx` is true
 * `x` is a sibling of `y`, if `(pEx and pEy)` is true
-* i.e. `(x sibling-of y)`, if `(P(x) == P(y))` is true
+* i.e. `(x sibling-of y)`, if `(p(x) == p(y))` is true
 * i.e. siblings have the same parent node
 * notational: `xSy := (x sibling-of y)`
 * `(x sibling-of y) <-> (y sibling-of x)`
@@ -154,45 +158,41 @@ With regards to a node's child nodes (i.e. a child-based view):
 
 The following function can be defined:
 
-* `(S: N -> P(N))` or `S(n) := { s | pEs where pEn and (s != n) }`
-* `S(n)` returns the set of siblings of node `n`
-* i.e. `S(n) := C(p)\{n}` where `pEn`
-* notational: `xSy := (x in S(y))`
+* `(s: N -> P(N))` or `s(n) := { s | pEs where pEn and (s != n) }`
+* `s(n)` returns the set of siblings of node `n`
+* i.e. `s(n) := c(p)\{n}` where `pEn`
+* notational: `xSy := (x in s(y))`
 
-Remarks
-
-* a tree has no edge `xEy` or `yEx`, if `xSy`
+Note that there is no edge `xEy` or `yEx`, if `xSy`.
 
 **TODO**
 - not right-euclidean - `pEa` and `pEb`, but neither `aEb` nor `bEb`
 - recheck the exact properties of "right-euclidean"
 
 <!-- ======================================================================= -->
-## parent-of semantics
+## semantics of a tree
 
-The semantics of an edge `e := (p,c) in E` is such that:
+The semantics of a tree `T := (N,E)` is such that:
 
-* `(e in E)`, `(E subset-of PN×CN)` and `(PN×CN subset-of N×N)`
-* `(p parent-of c)` - i.e. `p` is the parent of `c`
+* `sem(T) := (p parent-of c)` - i.e. `p` is the parent of `c`
+* `((p,c) in E)`, `(E subset-of PN×CN)` and `(PN×CN subset-of N×N)`
 * i.e. each edge is downward-oriented
-* `(c child-of p)` - i.e. `c` is a child of `p`
-* `pEc <-> (p parent-of c) <-> (c child-of p)`
-* i.e. `sem(E)` := "parent-of", not "child-of"
+
+In contrary to that:
+
+* `sem(G) := (c child-of p)` - i.e. `c` is a child of `p`
+* i.e. `pEc <-> (p parent-of c) <-> (c child-of p)`
+* i.e. each edge is upward-oriented
+
+Note that, if all edges are inverted (i.e. `child-of` semantics), the resulting
+oriented graph would in general no longer be a tree. That is, because the
+structure would then have one or more root nodes (i.e. the former leaf nodes)
+and always one, and only one leaf node (i.e. the former root). Consequently,
+and if non-linear, that structure would not correspond with the definition of
+an arborescence. Hence, a tree must have the `parent-of` semantics.
 
 <!-- ======================================================================= -->
-## additional notes
-
-Note that, if all edges are inverted (i.e. child-of semantics), the resulting
-directed graph would no longer be a tree. That is, because the structure would
-then have one or more root nodes (i.e. the former leaf nodes) and always one,
-and only one leaf node (i.e. the former root). Consequently, and if non-linear,
-that structure would not correspond with the definition of an arborescence.
-
-Note that, because of `(#P(c) == 1)`, each non-root node `(n in N\RN)` is the
-2nd node to one, and only one, edge. That is, each child node has exactly one
-incoming edge. In contrary to that, each non-leaf node `(n in N\LN)` has one
-or more outgoing edges. That is, each parent node is the 1st node of one or
-more edges.
+## remarks
 
 Note that the `parent-of` relation can not be seen as a function: not right
 unique (i.e. a parent may have several child nodes, i.e. not functional).

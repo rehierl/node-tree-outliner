@@ -5,22 +5,12 @@
 * for the most part notes taken from wikipedia pages
 * i.e. pages that are in general dedicated to "graph theory"
 
-in the context of this discussion ...
-
-* `G := (V,E)` - the formal definition of a graph
-* `V` and `E` are both assumed to be finite and non-empty
-* `E` is a set of tuples - i.e. directed
-* for each `(v in V)` there is an `(e in E)` such that `vEx` and/or `xEv`
-* i.e. all vertices are connected, i.e. no isolated vertices
-* there is no `(e in E)` such that `vEv` for any `(v in V)`
-* i.e. no "reflexive" edges
-
 general notes
 
 * in graph theory, the "undirected" case seems to be the default
 * most commonly, either directed ex-or undirected edges - no mixed graph
 * (`{a,b}`) and (`aEb` and `bEa`) are not necessarily equal
-* i.e. `aEb` and `bEa` might have different attributes (e.g. weight)
+* e.g. `aEb` and `bEa` might have different attributes (e.g. weight)
 
 <!-- ======================================================================= -->
 ## wikipedia, graph theory
@@ -155,7 +145,7 @@ properties
 
 * null graph - no vertices and no edges
 * trivial graph - one vertex, no edges
-* edgeless graph - vertices, but no edges
+* edgeless graph - vertices, no edges
 
 A symmetric, loop-less graph `G` is equivalent to a simple undirected graph
 `G'` (i.e. `{a,b} in E'` if `aEb` and `bEa`).

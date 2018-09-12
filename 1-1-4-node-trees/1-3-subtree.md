@@ -33,8 +33,7 @@ whose endpoints are both in `T`.
 * i.e. `S` is a subgraph of `G`, induced by its vertex-subset `T`
 
 Note that there is no degree of freedom as to how the edge-subset `U` is
-formed. That is, the edge-subset is always a direct consequence of the
-vertex-subset `T`.
+formed. That is, the edge-subset `U` is a consequence of the vertex-subset `T`.
 
 Note that there is in general no requirement or limitation as to how the
 vertex-subset `T` is formed. Because of that, an induced subgraph is not
@@ -44,7 +43,7 @@ components.
 A **strict/proper induced subgraph** `S` is an induced subgraph formed from
 another graph `G` by removing at least one vertex - i.e. `(#T < #V)`.
 
-Note that a proper induced subgraph may still have the same edge subset as its
+Note that a proper induced subgraph may still have the same edge-subset as its
 super-graph - i.e. not necessarily `(#U < #E)`. That is because a proper induced
 subgraph may be formed by removing only isolated vertices from its super-graph.
 
@@ -62,9 +61,8 @@ is on the characteristic of the subgraph. In addition to that, `S` may or may
 not satisfy further restrictions.
 
 Note that a subtree is commonly defined as: "A connected subgraph of a tree".
-That is, this definition requires `G` to be a tree. As a consequence of that
-requirement, `S` is guaranteed to be a tree. That is because any connected
-subgraph of a tree is by consequence automatically a tree. Because of that,
+That is, this definition requires `G` to be a tree. Consequently, and because
+`S` is a connected subgraph of `G`, `S` is itself a tree. Because of that,
 the common definition is more specific and the above definition more general.
 
 As above, a **strict/proper subtree** is formed by removing at least one node
@@ -73,8 +71,6 @@ and/or edge - i.e. `(#T < #V)` and/or `(#U < #E)`. That is, any tree `G` is a
 
 An **induced subtree** `S := (T,U)` is an induced subgraph of a graph
 `G := (V,E)` such that `S` is a tree.
-
-* `S := G[T] := (T,U)` such that `isTree(S)` is true
 
 A **strict/proper induced subtree** `S` is an induced subtree formed from
 another graph `G` by removing at least one vertex - i.e. `(#T < #V)`.
@@ -127,10 +123,11 @@ identical to the outer set of its only child.
 ## subtree of a tree
 
 Obviously, there are several ways to form a subtree `S` from a given tree `T`.
-However, any non-empty subtree will effectively always have a root node `r`.
-That is, any node in `S` will have a unique rooted path that begins in the
-subtree's root. Other than that, a subtree is not required to contain all
-the descendants of `r` in `T`. That is, `S` may have different leaf nodes.
+However, and independently of how exactly a subtree is formed, a subtree will
+always have a root `r`. (Note that `r` may or may not be identical to `R(T)`).
+Hence, and like any other tree, each node in `S` has a unique rooted path. In
+addition to that, a subtree is not required to contain all the descendants of
+`r` in `T`. Consequently, `S` may have leaf nodes that are no leafs in `T`.
 
 That is, a subtree is in general defined by its root and its leaf nodes.
 

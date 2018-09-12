@@ -2,9 +2,17 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+* define connected component
 * define union/intersection/diff for graphs/trees
-* vertex/edge disjoint graphs/trees
+* see - operations on sets
+* vertex/node/edge disjoint graphs/trees
+* vertex/node-disjoint -> edge-disjoint
 * define the leaf-set of a node/tree
+
+directed tree
+
+* ordered pair of nodes -> tree order
+* the tree order of a tree is built upon the node order in each edge
 
 <!-- ======================================================================= -->
 ## paths -> subtree

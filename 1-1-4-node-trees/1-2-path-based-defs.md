@@ -32,12 +32,16 @@ Note that the height of a tree is equivalent to its diameter.
 Because of the paths in a tree being downward oriented, the following can
 be said about the relationship between the nodes of a path:
 
-* for `(p in P)` and `p := p(x,y)` - i.e. `xPy`
-* `x` is an **ancestor of** `y`
-* i.e. `(x ancestor-of y)` is true
+(x ancestor-of y)
+
+* `(x ancestor-of y)` is true, if `xPy`
+* i.e. `x` is said to be an ancestor of `y`
 * notational: `xAy := xPy`
-* `y` is a **descendant of** `x`
-* i.e. `(y descendant-of x)` is true
+
+(y descendant-of x)
+
+* `(y descendant-of x)` is true, if `xPy`
+* i.e. `y` is said to be a descendant of `x`
 * i.e. `descendant-of` is antonymous to `ancestor-of`
 * notational: `yDx := xPy`
 
@@ -86,17 +90,17 @@ With regards to `DN`:
 ## distant ancestor/descendant
 
 The set of nodes `DA(n) := A(n) \ P(n)` that are ancestors, but no parent to
-a given node `n` will be referred to as **the distant ancestors of a node**.
+a given node `n` may be referred to as "the distant ancestors of a node".
 
 The set of nodes `DD(n) := D(n) \ C(n)` that are descendants, but no child to
-a given node `n` will be referred to as **the distant descendants of a node**.
+a given node `n` may be referred to as "the distant descendants of a node".
 
 <!-- ======================================================================= -->
 ## the structure of rooted paths
 
-In a rooted path, any edge is downwards oriented from an ancestor towards
-its descendants. Because of that, the ancestors `A(n)` of a node `n` are
-all presequent to that node in its rooted path:
+In a rooted path, any edge is downward oriented (i.e. from an ancestor towards
+its descendants). Because of that, the ancestors `A(n)` of a node `n` are all
+presequent to that node in its rooted path:
 
 * `(A(n) union {n}) == E(rp(n))`
 * `rp(n) := (prefix × n)` where `(E(prefix) == A(n))`
@@ -107,24 +111,23 @@ a node. That is, `p` is subordinate to any other ancestor in `A(n)`:
 * `rp(n) := (prefix × p × n)` where `(E(prefix) == DA(n))`
 * `rp(n) := (rp(p) × n)` where `(p parent-of n)` and `rp(r) := (r)`
 * i.e. a recursive definition of rooted paths
+* `(rp(a) prefix-of rp(n))` where `(a ancestor-of n)`
 
-A root `r` is therefore the most significant ancestor of all non-root nodes.
-In addition to that, a root is still the least significant ancestor to its
-child nodes.
+A tree's root `r` is the most significant ancestor of all other nodes.
 
-* `(r ancestor-of n)` is true for all `(n in (N \ RN))`
+* `(r ancestor-of n)` is true for all `(n in N\RN)`
 
 <!-- ======================================================================= -->
-## inner/outer node of a node
+# inner/outer node of a node
 
 Due to all rooted paths having a downward (aka. inward) directed orientation,
 the nodes in `N` can be classified with regards to a given node `n`:
 
 The set of descendants `D(n)` of a node `n` may be referred to as **the inner
 nodes of a node** `IN(n)`. And because each node has an "inside", any node can
-also be understood to have an "outside". The set of nodes that are not inner
-nodes to a given node, including the node itself, can therefore be referred to
-as **the outer nodes of a node** `ON(N)`.
+be understood to have an "outside". The set of nodes that are not inner nodes
+to a given node, including the node itself, can therefore be referred to as
+**the outer nodes of a node** `ON(N)`.
 
 * `IN(n) := D(n)`
 * `ON(n) := (N \ IN(n) \ {n})`
