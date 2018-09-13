@@ -4,7 +4,7 @@
 
 * (/see/ "path of nodes" /)
 * (/see/ "relationship between sets /)
-* definitions based upon unidirectional, downward-oriented paths
+* definitions based upon uni-directional, downward-oriented paths
 
 <!-- ======================================================================= -->
 ## level, depth, height

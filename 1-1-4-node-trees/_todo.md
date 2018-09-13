@@ -2,7 +2,14 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
-* define connected component
+note - graphs are in general "reduced" to subsets of vertices and the implicit
+inclusion of all incident edges - i.e. a general pattern - i.e. edges are in
+general ignored - i.e. the focus is on sets of vertices
+
+* define union (operation) on graphs
+* e.g. a disjoint union of maximal components
+* induced path
+* path graph - aka. linear graph - the whole graph resembles a path
 * define union/intersection/diff for graphs/trees
 * see - operations on sets
 * vertex/node/edge disjoint graphs/trees

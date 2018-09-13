@@ -2,30 +2,112 @@
 <!-- ======================================================================= -->
 # Path-based, vertex-related definitions
 
+Distance between vertices
+
 * distance between vertices - the length of the shortest path
 
 <!-- ======================================================================= -->
-## components
+## loops, cycles
 
-* (/see/ "connectivity" in "characteristics" /)
-* connected graph - a path exists for any pair of vertices
-* strongly connected - a directed path exists for any pair
-* weakly connected - an undirected path exists for any pair
-* disconnected graph - not (|strongly|weakly) connected
-* diameter of a component `C` - the length of the longest possible path in `C`
+* in this discussion, a graph is assumed to have neither loops nor cycles
+* (trees have by definition neither loops nor cycles)
 
-Note that a vertex `(v in V)` is said to be "connected", if `vEx` and/or `xEv`
-is true for some `(x in V)`. In addition to that, vertex `v` is said to be
-"connected with" the corresponding vertex `x`.
+cycles
 
-Note that a vertex `(v in V)` may exist such that neither `vEx` nor `xEv` is
-true for any vertex `(x in V)`. That is, a graph may contain vertices that
-are no endpoint to any edge `(e in E)`. These kind of vertices may in general
-be referred to as being "isolated" or "disconnected".
+* `(p in P)` is a cycle, if `(p == p(v,v))` for some `(v in V)`
+* i.e. `p` begins and ends with the same vertex `v`
+* `p` is cyclic, if `(#E(p) < #p)`
+* i.e. `(p[i] == p[j])` for some `(i != j)`
+* `p` is acyclic, if `(#E(p) == #p)`
+* `G` is cyclic, if `P` contains a cyclic paths
+* `G` is acyclic, if `P` contains no cyclic path
+* i.e. all paths `(p in P)` are acyclic
+
+Note that a path is cyclic, if it contains a vertex more than once.
+That is, the corresponding vertex is presequent and subsequent to itself.
+
+loops
+
+* `(p in P)` is a loop, if `(p == (v,v))` for some `(v in V)`
+* i.e. `p` is a cycle of vertex-length 2 (aka. edge-length 1)
+* i.e. `p` is a 1-cycle
+
+Note that an acyclic graph is also loop-less. However, an irreflexive
+relation (i.e. no loops) may or may not be acyclic.
 
 <!-- ======================================================================= -->
-## (connected) components
+## reachability-based qualifiers
 
-In general, a graph `G := (V,E,P)` is said to be "connected", if there is a
-path `xPy` or `yPx` for any pair of vertices `(x,y in V)`. However, graphs
-may be created such that it contains disconnected pairs of vertices.
+* covered-by := strictly-connected-to
+
+(a connected-to b)
+
+* `(a connected-to b)`, if `aPb` and/or `bPa`
+* `a` is connected-to `b` and/or `b` is connected-to `a`
+* synonymous - related-to, comparable-to
+* note - connected-to is undirected
+
+(a not-connected-to b)
+
+* `(a not-connected-to b)`, if neither `aPb` nor `bPa`
+* synonymous - disconnected-from, unrelated-with, incomparable-to
+
+(a strictly-connected-to b)
+
+* `(a strictly-connected-to b)`, if `aEb` and/or `bEa`
+* `a` is directly connected-to `b` and/or `b` is directly connected-to `a`
+* synonymous - strictly-related-to, covered-by
+
+(a loosely-connected-to b)
+
+* `(a loosely-connected-to b)` := connected-to, but not strictly-connected-to
+* i.e. there are vertices in between `a` and `b` - i.e. `(#p > 2)`
+* i.e. connected-to <-> (strictly- or loosely-connected-to)
+* synonymous - loosely-related-to
+
+(a simply/strongly-connected-to b)
+
+* simply, if `aPb` ex-or `bPa`
+* strongly, if `aPb` and `bPa`
+
+<!-- ======================================================================= -->
+## sequence-based qualifiers
+
+(a sequent-to b)
+
+* `(a sequent-to b)`, if `aPb` and/or `bPa`
+* i.e. equivalent to connected/related/comparable
+* note - "sequent-to" is undirected
+
+(a insequent-to b)
+
+* `(a insequent-to b)`, if neither `aPb` nor `bPa`
+* i.e. equivalent to disconnected/unrelated/incomparable
+* i.e. "insequent" is antonymous to "sequent"
+* **TODO** - an unexpected, path-based perspective
+* i.e. could use some additional thought
+
+(a predecessor-of b)
+
+* `(a predecessor-of b)`, if `aPb`
+* i.e. predecessor-of is directed
+* synonymous - presequent-to
+* note - "predecessor-of" is directed
+
+(b successor-of a)
+
+* `(b successor-of a)`, if `bPa`
+* i.e. successor-of is directed
+* note - `aPb` and `bPa` may both be true
+* synonymous - subsequent-to
+
+similar definitions possible for ...
+
+* strict/loose predecessor-of
+* strictly/loosely presequent-to
+* strict/loose/distant successor-of
+* strictly/loosely subsequent-to
+
+Note that, because each edge `((x,y) in E)` is a path of vertex-length 2, two
+adjacent vertices can be said to be sequent to each other. That is, `x` is
+(strictly) presequent to `y`, and `y` (strictly) subsequent to `x`.
