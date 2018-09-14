@@ -2,10 +2,17 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+Note that there is no freedom as to how the set of edges of the resulting graph
+is formed. That is, the set of edges is a consequence of the set of vertices in
+the resulting graph.
+
 note - graphs are in general "reduced" to subsets of vertices and the implicit
 inclusion of all incident edges - i.e. a general pattern - i.e. edges are in
 general ignored - i.e. the focus is on sets of vertices
 
+* define a term equivalent to "siblings"? - i.e. snk(v)
+* define a term equivalent to "parent"? - i.e. src(v)
+* define sets of connected src/snk vertices
 * define union (operation) on graphs
 * e.g. a disjoint union of maximal components
 * induced path

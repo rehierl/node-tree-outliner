@@ -2,15 +2,13 @@
 <!-- ======================================================================= -->
 # Path-based, vertex-related definitions
 
-Distance between vertices
-
-* distance between vertices - the length of the shortest path
+In a graph `G := (V,E)`, "the distance between two vertices" `x` and `y` is the
+edge-length of the shortest possible path `p(x,y)` in `UG(G)`. (Note that the
+distance between a vertex and itself is `0`, regardless whether `G` contains
+reflexive edges or not).
 
 <!-- ======================================================================= -->
 ## loops, cycles
-
-* in this discussion, a graph is assumed to have neither loops nor cycles
-* (trees have by definition neither loops nor cycles)
 
 cycles
 
@@ -18,9 +16,10 @@ cycles
 * i.e. `p` begins and ends with the same vertex `v`
 * `p` is cyclic, if `(#E(p) < #p)`
 * i.e. `(p[i] == p[j])` for some `(i != j)`
+* i.e. `p` contains repeated vertices
 * `p` is acyclic, if `(#E(p) == #p)`
-* `G` is cyclic, if `P` contains a cyclic paths
-* `G` is acyclic, if `P` contains no cyclic path
+* `G` is cyclic, if `P` contains a cyclic path
+* `G` is acyclic, if `P` has no cyclic paths
 * i.e. all paths `(p in P)` are acyclic
 
 Note that a path is cyclic, if it contains a vertex more than once.
@@ -29,11 +28,11 @@ That is, the corresponding vertex is presequent and subsequent to itself.
 loops
 
 * `(p in P)` is a loop, if `(p == (v,v))` for some `(v in V)`
-* i.e. `p` is a cycle of vertex-length 2 (aka. edge-length 1)
+* i.e. `p` is a cycle of edge-length 1
 * i.e. `p` is a 1-cycle
 
 Note that an acyclic graph is also loop-less. However, an irreflexive
-relation (i.e. no loops) may or may not be acyclic.
+graph/relation (i.e. no loops) may still have cycles.
 
 <!-- ======================================================================= -->
 ## reachability-based qualifiers
@@ -60,9 +59,10 @@ relation (i.e. no loops) may or may not be acyclic.
 
 (a loosely-connected-to b)
 
-* `(a loosely-connected-to b)` := connected-to, but not strictly-connected-to
-* i.e. there are vertices in between `a` and `b` - i.e. `(#p > 2)`
-* i.e. connected-to <-> (strictly- or loosely-connected-to)
+* `(a loosely-connected-to b)` := connected, but not strictly-connected
+* i.e. the shortest path between `a` and `b` has more than 2 vertices
+* i.e. there are one or more vertices in between `a` and `b`
+* i.e. connected <-> (strictly- ex-or loosely-connected)
 * synonymous - loosely-related-to
 
 (a simply/strongly-connected-to b)
@@ -85,7 +85,7 @@ relation (i.e. no loops) may or may not be acyclic.
 * i.e. equivalent to disconnected/unrelated/incomparable
 * i.e. "insequent" is antonymous to "sequent"
 * **TODO** - an unexpected, path-based perspective
-* i.e. could use some additional thought
+* i.e. could maybe use some additional thought
 
 (a predecessor-of b)
 
