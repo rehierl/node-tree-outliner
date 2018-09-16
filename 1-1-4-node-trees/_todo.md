@@ -2,6 +2,16 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+set difference defined as relative complement
+i.e. define graph difference as relative complement
+
+any consistent path in a tree is itself a tree
+
+inner/outer set vs. inner/outer nodes
+
+induced subgraphs -
+maintain the relationships between the vertices
+
 Note that there is no freedom as to how the set of edges of the resulting graph
 is formed. That is, the set of edges is a consequence of the set of vertices in
 the resulting graph.

@@ -1,14 +1,38 @@
 
 <!-- ======================================================================= -->
-# Graph theory algorithms
+# Unary operations on graphs
 
-* operations related to graphs and trees
+* i.e. produce a result based on a single input graph
+
+<!-- ======================================================================= -->
+## wikipedia, complement graph
+
+* graph H := (V,F) is inverse to graph G := (V,E)
+* iff (x adjacent-to y in G) -> not (x adjacent-to y in H)
+* i.e. start with a complete graph of G and remove all edges in E
+* i.e. the same set of vertices, but disjoint sets of edges
+
+definition
+
+* H := (V,K\E), where K is the set of all 2-element subsets of V
+* similar with directed graphs - i.e. K is the set of all 2-element pairs
+
+applications/examples
+
+* graph-theoretic concepts are related via complement graphs
+* e.g. the complement of an edge-less graph is complete
+* e.g. induced subgraph in H is a complement to its counterpart in G
+
+remarks
+
+* self-complementary graph - isomorphic to its own complement
+* several classes of graphs are self-complementary
 
 <!-- ======================================================================= -->
 ## wikipedia, topological sorting
 
 * topological sort, or topological ordering of a DAG
-* a linear ordering of vertices such that `aPb -> (a presequent-to b)`
+* a linear ordering of vertices such that: aPb -> (a presequent-to b)
 * the graph must not have any cycles - i.e. must be acyclic
 * any DAG has one or more topological orderings (i.e. >=1)
 

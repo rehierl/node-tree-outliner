@@ -44,14 +44,19 @@ data structures
 * [wikipedia, incidence matrix](https://en.wikipedia.org/wiki/Incidence_matrix)
 * [wikipedia, adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix)
 
-operations
+unary operations
 
+* [wikipedia, complement graph](https://en.wikipedia.org/wiki/Complement_graph)
 * [wikipedia, topological sorting](https://en.wikipedia.org/wiki/Topological_sorting)
 * [wikipedia, edge contraction](https://en.wikipedia.org/wiki/Edge_contraction)
 * [wikipedia, prüfer sequence](https://en.wikipedia.org/wiki/Pr%C3%BCfer_sequence)
 * [wikipedia, hamilton path](https://en.wikipedia.org/wiki/Hamiltonian_path)
 * [wikipedia, graph rewriting](https://en.wikipedia.org/wiki/Graph_rewriting)
 * [wikipedia, planarity testing](https://en.wikipedia.org/wiki/Planarity_testing)
+
+binary operations
+
+* [wikipedia, disjoint union](https://en.wikipedia.org/wiki/Disjoint_union_of_graphs)
 
 subgraphs
 
