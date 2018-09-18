@@ -147,12 +147,20 @@ oriented graph
 **SKIPPED** - parts non-relevant to the discussion
 
 <!-- ======================================================================= -->
-## wikipedia, complete graph
+## wikipedia, complete graph (Kn)
 
 * a simple undirected graph
-* in which every pair of vertices is connected
+* in which every vertices is connected to all other vertices
 * a complete digraph - same with one directed edge per pair
-* visualization - all vertices on a single circle
+* visualization - all vertices on the same circle
+
+notational
+
+* a `Kn` graph has `n*(n-1)/2` edges
+* a regular graph of degree `(n-1)`
+* K1 - a 1-vertex edgeless graph
+* K2 - a 2-vertex path graph
+* K3 - a 3-vertex triangular graph
 
 <!-- ======================================================================= -->
 ## wikipedia, dense graph

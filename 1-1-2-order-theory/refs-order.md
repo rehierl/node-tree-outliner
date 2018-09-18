@@ -62,6 +62,7 @@ equivalence order/relation
 * [wikipedia, order embedding](https://en.wikipedia.org/wiki/Order_embedding)
 * [wikipedia, filter](https://en.wikipedia.org/wiki/Filter_%28mathematics%29)
 * [wikipedia, ideal](https://en.wikipedia.org/wiki/Ideal_%28order_theory%29)
+* [wikipedia, series-parallel partial order](https://en.wikipedia.org/wiki/Series-parallel_partial_order)
 
 <!-- ======================================================================= -->
 ## References - examples

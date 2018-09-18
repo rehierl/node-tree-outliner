@@ -57,6 +57,11 @@ unary operations
 binary operations
 
 * [wikipedia, disjoint union](https://en.wikipedia.org/wiki/Disjoint_union_of_graphs)
+* [wikipedia, cartesian product](https://en.wikipedia.org/wiki/Cartesian_product_of_graphs)
+* [wikipedia, tensor product](https://en.wikipedia.org/wiki/Tensor_product_of_graphs)
+* [wikipedia, strong product](https://en.wikipedia.org/wiki/Strong_product_of_graphs)
+* [wikipedia, series-parallel graphs](https://en.wikipedia.org/wiki/Series-parallel_graph)
+* [wikipedia, lexicographic product](https://en.wikipedia.org/wiki/Lexicographic_product_of_graphs)
 
 subgraphs
 
@@ -70,8 +75,9 @@ graph property
 * [wikipedia, graph property](https://en.wikipedia.org/wiki/Graph_property)
 * [wikipedia, hereditary property](https://en.wikipedia.org/wiki/Hereditary_property)
 
-more graph examples
+more examples
 
 * [wikipedia, comparability graph](https://en.wikipedia.org/wiki/Comparability_graph)
 * [wikipedia, interval graph](https://en.wikipedia.org/wiki/Interval_graph)
 * [wikipedia, contact graph](https://en.wikipedia.org/wiki/Contact_graph)
+* [wikipedia, cograph](https://en.wikipedia.org/wiki/Cograph)

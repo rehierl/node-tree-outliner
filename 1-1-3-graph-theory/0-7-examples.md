@@ -30,3 +30,23 @@ incomparability graph
 * vertices - represent geometric objects (e.g. curves, lines, polygons)
 * undirected edges - two geometric objects touch (but don't cross) each other
 * similar to an intersection graph
+
+<!-- ======================================================================= -->
+## wikipedia, cograph
+
+* aka. complement-reducible graph, P4-free graph
+* generated from a K1 graph by complementation and disjoint union
+* examples - complete/cluster/threshold graphs
+
+construction
+
+* any 1-vertex graph is a cograph
+* if G is a cograph, then so is its complement
+* if G and H are cographs, then so is their disjoint union
+
+remarks
+
+* ties to series-parallel graphs
+* has several other characterizations
+
+**SKIPPED** - essentially the whole page

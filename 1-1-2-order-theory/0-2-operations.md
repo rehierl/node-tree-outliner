@@ -70,6 +70,63 @@ perspectives
 * an order-embedding is an isomorphism to a full subcategory
 
 <!-- ======================================================================= -->
+## wikipedia, series-parallel partial order
+
+* (/see/ "series-parallel graph" /)
+* a poset formed by composition from smaller series-parallel posets
+* characterized as N-free finite posets
+* include weak orders, reachability in directed trees
+* the comparability graphs of series-parallel posets are cographs
+
+series composition (SC) - P;Q, P*Q, P<Q
+
+* given two posets P and Q
+* the disjoint union of the elements in P and Q
+* if (x,y in P/Q), ordered according to P ex-or Q
+* i.e. both either in P ex-or both in Q
+* if (x in P) and (y in Q), then ...
+* both have an additional order (<=) in the composition
+* SC is associative, but not commutative
+
+parallel composition (PC) - P||Q, P+Q
+
+* given two posets P and Q
+* the disjoint union of elements in P and Q
+* if (x,y in P/Q), ordered according to P ex-or Q
+* if (x in P) and (y in Q), then incomparable
+* PC is associative and commutative
+
+ties with graph theory
+
+* any poset may be represented by a directed acyclic graph
+* note - there is usually more than one way to do so
+* vertex-sp (vsp) graph - the graph of a sp poset
+* minimal vsp graphs - the transitive reduction (i.e. cover relation)
+
+remarks
+
+* class of sp-posets formed by composition from one-element posets
+* weak order - a sp-poset such that all PCs are executed first
+
+**SKIPPED** some aspects
+
+<!-- ======================================================================= -->
+## wikipedia, product order
+
+* short - prod-order
+* given two ordered sets A and B
+* induce a partial ordering on the Cartesian product (A × B)
+* (a1,b1) and (a2,b2) in (A × B)
+* (a1,b1) <= (a2,b2) iff (a1 <= a2) and (b1 <= b2)
+
+remarks
+
+* aka. coordinate-wise order, component-wise order
+* the product order of two totally ordered sets is not total
+* e.g. (0,1) and (1,0) are incomparable
+* in general, the prod-order is a sub-relation of the lexi-order
+
+<!-- ======================================================================= -->
 ## wikipedia, linear extension
 
 * short - lin-ext
@@ -96,19 +153,3 @@ principle
 * a partial order in which every pair is incomparable can be extended
 * i.e. every poset can be linearly ordered
 * known as the ordering principle
-
-<!-- ======================================================================= -->
-## wikipedia, product order
-
-* short - prod-order
-* given two ordered sets A and B
-* induce a partial ordering on the Cartesian product (A × B)
-* (a1,b1) and (a2,b2) in (A × B)
-* (a1,b1) <= (a2,b2) iff (a1 <= a2) and (b1 <= b2)
-
-remarks
-
-* aka. coordinate-wise order, component-wise order
-* the product order of two totally ordered sets is not total
-* e.g. (0,1) and (1,0) are incomparable
-* in general, the prod-order is a sub-relation of the lexi-order

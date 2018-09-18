@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+build upon series-parallel graphs/posets
+
 set difference defined as relative complement
 i.e. define graph difference as relative complement
 
