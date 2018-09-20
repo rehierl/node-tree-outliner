@@ -2,21 +2,16 @@
 <!-- ======================================================================= -->
 # Binary operations on graphs
 
-* two graphs `S := (T,U)` and `X := (Y,Z)` are, ...
-* based on certain rules, used to create ...
-* a new graph `(S + X) := G := (V,E)`
-* i.e. `(f: (S,X) -> G)`
-
-remarks
-
-* note - `K2` is the complete graph with two vertices
+* two graphs `S := (T,U)` and `X := (Y,Z)` are used ...
+* to create a new graph `(S operator X) := operator(S,X) := (V,E) := G`
+* i.e. `(operator: (S,X) -> G)`
 
 <!-- ======================================================================= -->
-## wikipedia, cographs
+## wikipedia, cographs (join)
 
 * mentioned the join operation on graphs
 * create the disjoint union of G and H
-* and then connect every pair (V(G) × V(H))
+* and connect every pair of vertices in (V(G) × V(H))
 
 <!-- ======================================================================= -->
 ## wikipedia, disjoint union (+)
@@ -24,7 +19,12 @@ remarks
 * aka. graph sum (+)
 * used to combine graphs to form a larger graph
 * analogous to the disjoint union of sets
-* make the vertex sets disjoint
+
+unclear ?!?
+
+* either make the vertex sets disjoint before the union, ...
+* or expect the graphs to be disjoint from the start
+* i.e. a union of disjoint graphs?
 
 remarks
 
@@ -71,6 +71,7 @@ remarks
 * aka. direct/categorical/cardinal/relational product
 * aka. Kronecker/weak-direct product, conjunction
 * e.g. `(G × K2)` is a bipartite graph
+* where K2 is the single-edge complete graph
 
 <!-- ======================================================================= -->
 ## wikipedia, strong product (*)
@@ -129,7 +130,7 @@ SC(X,Y)
 two-terminal series-parallel graph (TTSPG)
 
 * formed by a series of PC or SC compositions
-* starting from single-edge K2 graphs
+* starting with the single-edge complete graph K2
 
 DEF1 - series-parallel (SP) graphs
 

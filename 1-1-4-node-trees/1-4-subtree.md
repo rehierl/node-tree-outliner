@@ -36,8 +36,9 @@ is connected.
 
 There are obviously several ways to form a subtree `S` from a given tree `T`.
 However, and independently of how exactly a subtree is formed, a subtree will
-always have a root `r`. (Note that the `r` of `S` may or may not be identical
-to the root of the super-tree `T` - i.e. `(RN(S) == RN(T)` may be true).
+always have a root `r`. (Note that the root `r` of subtree `S` may or may not
+be identical to the root of the super-tree `T` - i.e. `(RN(S) == RN(T)` is in
+general not true).
 
 Like any other tree, each node in `S` has a unique rooted path in `T`. In
 addition to that, a subtree is not required to contain all the descendants `d`

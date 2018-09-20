@@ -8,11 +8,11 @@ that, `v` is said to be **connected with** vertex `x`.
 
 Note that a vertex `(v in V)` may exist such that neither `vPx` nor `xPv` is
 true for any vertex `(x in V)`. That is, a graph may contain vertices that
-are no endpoint to any edge `(e in E)`. These kind of vertices are said to be
-**isolated/disconnected**.
+are no endpoint to any edge `(e in E)`. These kind of vertices are said to
+be **isolated/disconnected**.
 
 <!-- ======================================================================= -->
-## (induced) subgraph
+## subgraph
 
 A (simple) **subgraph** `S := (T,U)` is a graph derived from another graph
 `G := (V,E)` by removing some of its vertices and/or edges.
@@ -23,9 +23,70 @@ A (simple) **subgraph** `S := (T,U)` is a graph derived from another graph
 * i.e. no edge in `U` leads in-to, or out-of `S`
 * `(S sub-graph-of G) <-> (G super-graph-of S)`
 
-Similar to simple sets, a **strict/proper subgraph** is formed by removing at
-least one vertex and/or edge - i.e. `(#T < #V)` and/or `(#U < #E)`. That is,
-any graph `G` is a (simple) subgraph, but no proper subgraph to itself.
+Note that the semantics of a subgraph is, by the construction of a subgraph,
+identical to the semantics of its supergraph. Consequently, the same needs
+to apply to an empty subgraph.
+
+* `(S subgraph-of G) -> (sem(S) == sem(G))`
+
+Similar to simple sets, a **strict/proper subgraph** is formed by removing
+at least one vertex and/or edge - i.e. `(#T < #V)` and/or `(#U < #E)`. That
+is, any graph `G` is a (simple) subgraph, but no proper subgraph to itself.
+
+<!-- ======================================================================= -->
+## subgraph-of
+
+Given the two graphs `S := (T,U)` and `G := (V,E)`, a subgraph-of operator
+can be defined.
+
+* `(S subgraph-of G)` is true, if the following conditions hold:
+* (1) `(T subset-of V)` and `(U subset-of E)` are both true
+* (2) `(E(e) subset-of T)` is true for all `(e in U)`
+* (3) `(sem(S) == sem(G))` is true
+
+Similar to that, a proper/strict-subgraph-of operator can be defined.
+
+* `(S strict-subgraph-of G)` is true, if the following conditions hold:
+* (4) `(S subgraph-of G)` is true
+* (5) `(S != G)` is true
+* synonymous - proper-subgraph-of
+
+Note that, if condition (2) is not met, then `S` is not even a graph. Also,
+(5) can be simplified as `(#T < #V)` and/or `(#U < #E)`. That is, the test
+for in-equality can be reduced to a test of in-equality with regards to the
+corresponding numbers of elements.
+
+Note that the subgraph-of operator is no longer a removal-based operator.
+
+<!-- ======================================================================= -->
+## related-to, unrelated-to
+
+Two graphs `S := (T,U)` and `G := (V,E)` can be said to be **related** with
+each other, if one is a subgraph of the other.
+
+* `(S related-to G) := (S subgraph-of G) or (G subgraph-of S)`
+
+Likewise, two graphs `S` and `G` can be said to be **strictly related** with
+each other, if both are related, but not equal. That is, one is a proper
+subgraph of the other.
+
+* `(S strictly-related-to G) := (S related-to G) and (S != G)`
+
+Note that, because the subgraph-of operator is no removal-based operator,
+any two separate/distinct graph entities may be related to each other. That
+is, (even though it still is) a subgraph does not need to be embedded into
+its supergraph.
+
+Two graphs `S` and `G` are said to be **unrelated** with each other, if both
+are not related to each other. That is, neither one of them is a subgraph of
+the other.
+
+* `(S unrelated-to G) := not (S related-to G)`
+
+Note that there is no definition (possible) for "strictly unrelated".
+
+<!-- ======================================================================= -->
+## induced subgraph
 
 An **induced subgraph** `S := (T,U)` is formed from another graph `G := (V,E)`
 by removing some of its vertices. In addition to that, the edge-subset `U` is
@@ -37,91 +98,34 @@ whose endpoints are both in `T`.
 * i.e. `S` is a subgraph of `G`, induced by its vertex-subset `T`
 
 Note that there is no freedom as to how the edge-subset `U` is formed. That is,
-the edge-subset `U` is understood as a consequence of the vertex-subset `T`.
+the edge-subset `U` can be understood as a consequence of the vertex-subset `T`.
 
 Note that there is in general no requirement or limitation as to how the subset
-of vertices `T` is formed. Because of that, an induced subgraph `S := (T,U)` is
-not necessarily connected.
+of vertices `T` is formed. And because `T` may contain disconnected vertices,
+an induced subgraph `S := (T,U)` is in general not necessarily connected.
 
 A **strict/proper induced subgraph** `S` is an induced subgraph formed from a
 graph `G` by removing at least one vertex - i.e. `(#T < #V)`.
 
 Note that a proper induced subgraph may still have the same edge-subset as
 its super-graph - i.e. not necessarily `(#U < #E)`. That is because a proper
-induced subgraph may be formed by removing one or more isolated vertices.
+induced subgraph may be formed by removing only isolated vertices.
 
 <!-- ======================================================================= -->
-## (connected) components
+## induced-subgraph-of
 
-A **(connected) component** `c := G[T] := (T,U)` of a graph `G := (V,E)`
-is an induced subgraph such that each vertex `(x in T)` is connected with
-all other vertices `(y in T)` in the graph's underlying undirected graph
-`UG := UG(G) := (V,A)`. That is, `UG` contains an undirected path `p` for
-any pair of vertices `(x,y in T)` - i.e. `(p(x,y) in P[UG])`.
+As before, an induced-subgraph-of operator can be defined as follows:
 
-The **diameter** of a component `c := (T,U)` is the edge-length of the longest
-path in it. That is, `diameter(c) := max({ #p | (p in P[c]) })`. Note that the
-diameter of a cyclic component is undefined/infinite.
+* where `S := (T,U)` and `G := (V,E)`
+* `(S induced-subgraph-of G)` is true, if the following conditions hold:
+* (1) `(S subgraph-of G)` is true
+* (2) `(U == { (e in E) | (E(e) subset-of T) })` is true
 
-A **maximal (connected) component** `c := (T,U)` is a component of a graph
-`G := (V,E)` such that no vertex `(v in V\T)` can be added to its set of
-vertices `T` while maintaining its connectivity. That is, there is no more
-vertex `(v in V\T)` such that `v` is connected to all other vertices in `T`.
-Consequently, no other induced subgraph `G[T + {v}]` is a component of `G`.
+Likewise, a proper/strict-induced-subgraph-of operator can be defined:
 
-A component of the form `c := ({v},{})` will be referred to as a (maximal
-connected) **trivial component**. That is, each isolated vertex represents
-its own maximal component.
+* `(S strict-induced-subgraph-of G)` is true, if
+* (3) `(S induced-subgraph-of G)` is true
+* (4) `(S != G)` is true
+* synonymous - proper-induced-subgraph-of
 
-Any component `c := (T,U)` may obviously referred to as being **connected**. In
-addition to that, a component may be referred to as being **strongly connected**
-(i.e. a strongly connected component), if all pairs of vertices `(x,y in U)`
-are connected in both directions - i.e. `(xPy and yPx)`. (Because of that, any
-component in an undirected graph is strongly connected). In contrary to that,
-a component is said to be **simply/weakly connected**, if a pair of vertices
-exists such that `xPy`, but not `yPx` - i.e. `(xPy ex-or yPx)` is true for some
-vertices. Because of that, each connected component is also weakly connected,
-but not each connected component is also strongly connected. Consequently,
-"weakly connected" is synonymous to "not strongly connected".
-
-Note that ...
-
-* The term "component" will in general refer to a maximal component.
-* Each vertex in a graph belongs to exactly one maximal component.
-* Components in an oriented, acyclic graph are weakly connected.
-* Components in an oriented, cyclic graph may be strongly connected.
-* (e.g. a cycle graph is strongly connected)
-
-<!-- ======================================================================= -->
-## the set of (maximal) components
-
-A non-empty graph `G := (V,E)` has in general more than one maximal component.
-That is because, depending on the graph's set of edges `E`, a maximal component
-`c := G[T]` may be limited to a proper subset of `V`. Hence, further maximal
-components will be induced by subsets of `V\T`.
-
-Any graph can therefore be understood as a **union of disjoint (maximal)
-components**. That is, as a set of (maximal) components `C`. Similar to
-the set of all possible paths `P`, each graph can therefore be understood
-to have a set of components `C` associated with it.
-
-Note that, similar to `P(G)`, the set of components `C` of a given graph
-`G` can be clarified as `C(G)`.
-
-<!-- ======================================================================= -->
-## connected graphs
-
-Depending on the number of components in a graph's set of components `C`,
-a non-empty graph `G` may be classified as:
-
-* connected, if `(#C == 1)` - i.e. `(C(G) == {c})`
-* i.e. a connected graph has one, and only one maximal component
-* strongly connected, if `G` is connected and if `c` is strongly connected
-* weakly connected, if `G` is connected and if `c` is weakly connected
-* disconnected, if `(#C > 1)` - i.e. `(C[G] == { c1, ..., ck })`
-* i.e. a disconnected graph has more than one maximal component
-
-Note that a null-graph may be referred to as being connected. That is because
-it has no maximal component and therefore also no other maximal component
-that could "disconnect" the graph - i.e. a null-graph is understood to have
-no characteristic that could be in conflict with its connectivity.
+Note that (4) can be simplified as `(#T < #V)`.

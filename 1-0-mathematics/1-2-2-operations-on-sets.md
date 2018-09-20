@@ -35,35 +35,6 @@ multi-set operation - +(), E()
 * note - `+({}) := {}`
 
 <!-- ======================================================================= -->
-## set difference (\, sub, diff)
-
-* `(A diff B) := { x | (x in A) and (x !in B) }`
-* `(A \ B), (A sub B), (A - B) := (A diff B)`
-
-note that ...
-
-* there doesn't seem to be a wikipedia page dedicated to the set difference
-* this operation is however also known as the "relative complement" (see below)
-
-<!-- ======================================================================= -->
-## wikipedia, symmetric difference (^, xor, ex-or)
-
-* `(A ex-or B) := { x | x in (A\B or B\A) }`
-* `(A ^ B), (A xor B) := (A ex-or B)`
-
-clarification
-
-* `(A xor B) := (A \ B) or (B \ A)`
-* `(A xor B) := (A or B) \ (A & B)`
-* `(A ^ {}) = A`
-* `(A ^ A) = {}`
-
-commutative, associative
-
-* `(A ^ B) = (B ^ A)`
-* `((A ^ B) ^ C) = (A ^ (B ^ C))`
-
-<!-- ======================================================================= -->
 ## wikipedia, intersection (&, and, isect)
 
 * `(A isect B) := { x | (x in A) and (x in B) }`
@@ -104,8 +75,11 @@ any possible element.
 ## wikipedia, complement (*)
 
 * all sets are understood to be subsets of a universal set U
-* (absolute) complement - A* := (U \ A) - i.e. the default definition
+* (absolute) complement - A* := (U \ A)
+* i.e. remove all elements of A from U
 * relative complement - (B \ A)
+* i.e. remove all element of A from B
+* i.e. the relative complement of A in regards to B
 
 properties
 
@@ -118,3 +92,32 @@ properties
 * U* = {}
 * A = (A*)* - aka. involution
 * (A strict-subset-of B) => (B* strict-subset-of A*)
+
+<!-- ======================================================================= -->
+## set difference (\, sub, diff)
+
+* `(A diff B) := { x | (x in A) and (x !in B) }`
+* `(A \ B), (A sub B), (A - B) := (A diff B)`
+
+note that ...
+
+* there doesn't seem to be a wikipedia page dedicated to the set difference
+* this operation is however also known as the "relative complement" (see below)
+
+<!-- ======================================================================= -->
+## wikipedia, symmetric difference (^, xor, ex-or)
+
+* `(A ex-or B) := { x | x in (A\B or B\A) }`
+* `(A ^ B), (A xor B) := (A ex-or B)`
+
+clarification
+
+* `(A xor B) := (A \ B) or (B \ A)`
+* `(A xor B) := (A or B) \ (A & B)`
+* `(A ^ {}) = A`
+* `(A ^ A) = {}`
+
+commutative, associative
+
+* `(A ^ B) = (B ^ A)`
+* `((A ^ B) ^ C) = (A ^ (B ^ C))`

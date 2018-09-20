@@ -45,26 +45,20 @@ represent the same set).
 A set of sets is said to be **a (simple) setup (of sets)**,
 if it does not contain the empty set `{}` as an element.
 
-* `S := (V,P)`.
-* `V` is a set of elements.
-* `P` is a strict subset of the powerset `P(V)`
-* `V := E(P)` := "the union of all sets (s in P)"
+* `S := (V,P)`
+* `P` is a family of sets of elements
+* `V` is a set of elements
 
 clarifications
 
+* A setup `S` is a two-element tuple of possibly empty sets
 * No set `(s in P)` is allowed to be empty - i.e. `({} !in P)`
-* `S` is a two-element tuple of possibly empty sets.
-* `(s subset-of V)` for any `(s in P)`
-* `(P strict-subset-of P(V))`
+* `V := E(P)` := "the union of all sets `(s in P)`"
+* i.e. `(P strict-subset-of P(V))` and `(0 <= #P < #P(V))`
+* `(s subset-of V)` for all `(s in P)`
 
-Note that `P` is a strict subset of `V`'s power-set `P(V)`. That is, all
-elements in `P` are elements of `P(V)`. However, no element in `P` is allowed
-to be empty.
-
-* `(0 <= #P < #P(V))`
-
-Note that `V` is empty if only if `P` is empty. That is because even though
-no `(p in P)` may be empty, `P` itself is still allowed to be empty.
+Note that `V` is empty if and only if `P` is empty. That is because even
+though no `(p in P)` may be empty, `P` itself is still allowed to be empty.
 
 * `(#P = 0) <-> (#V = 0)`
 * `(#P > 0) <-> (#V > 0)`
@@ -72,7 +66,7 @@ no `(p in P)` may be empty, `P` itself is still allowed to be empty.
 Note that `V` may hold elements of any kind. That is, there is no requirement
 of what kind of elements `V` must hold. The only restriction there is, is that
 all elements within `V` must be distinct from any other element in `V`. Other
-than that, `V` may hold elements of one kind (homogenous), or elements of
+than that, `V` may hold elements of one kind (homogenous), or even elements of
 different kinds (heterogenous).
 
 **Memory hook**
@@ -139,7 +133,7 @@ Note that requirement 2 will be referred to as "req-2" and
 as "consistency with regards to the `subset-of` operator".
 
 * `(s coupled-with t) -> (s related-to t)` is true if `(s != t)`
-* Note that this statement is required to be true (/see/ "req-2" /).
+* Note that this statement is true by the above requirement.
 
 Note that the intention of the above requirement is to guarantee that the setup
 does not contain two sets that overlap each other. That is, any two non-empty

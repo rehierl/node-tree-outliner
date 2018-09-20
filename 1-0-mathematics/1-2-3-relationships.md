@@ -24,7 +24,7 @@
 * i.e. `A` and `B` have some elements in common
 * i.e. `A` and `B` intersect each other
 * i.e. `intersects` has no orientation
-* synonymous - `coupled-with` (i.e. some point of contact)
+* synonymous - `coupled-with` (via some point of contact)
 
 (A subset-of B)
 
@@ -75,7 +75,7 @@
 
 (A overlaps B)
 
-* `(A overlaps B) := (A != B) and (A unrelated-to B)`
+* `(A overlaps B) := (A coupled-with B) and (A unrelated-to B)`
 * i.e. `((A & B) != {}) and ((A & B) != A) and ((A & B) != B)`
 * i.e. each set has an element not in the other
 * `(A overlaps B) <-> (B overlaps A)`

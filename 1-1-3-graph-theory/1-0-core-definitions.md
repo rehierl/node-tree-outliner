@@ -53,6 +53,13 @@ Each graph can be understood to have an indicator function `A()` such that:
 * `(A: V×V -> Bool)` or `A(x,y) := ({x,y} in A)`
 * notational - `xAy := A(x,y)`
 
+For purposes of clarification, the following operators may be used:
+
+* `(V: Graph -> Set)` or `V(G) := V` where `G := (V,A)`
+* i.e. the set of vertices of the given graph
+* `(A: Graph -> Set)` or `A(G) := A` where `G := (V,A)`
+* i.e. the set of arcs of the given graph
+
 <!-- ======================================================================= -->
 ## directed graphs
 
@@ -92,10 +99,17 @@ Each graph can be understood to have an indicator function `E()` such that:
 * notational - `xEy := E(x,y)`
 
 In addition to that, a directed graph can be understood to have an indicator
-function `A()` such that:
+function `E()` such that:
 
-* `(A: V×V -> Bools` or `A(x,y) := ((x,y) in E) or ((y,x) in E)`
-* notational - `xAy := A(x,y) := xEy or yEx`
+* `(E: V×V -> Bools` or `E(x,y) := ((x,y) in E) or ((y,x) in E)`
+* notational - `xEy := E(x,y) := xEy or yEx`
+
+For purposes of clarification, the following operators may be used:
+
+* `(V: Graph -> Set)` or `V(G) := V` where `G := (V,E)`
+* i.e. the set of vertices of the given graph
+* `(E: Graph -> Set)` or `E(G) := E` where `G := (V,E)`
+* i.e. the set of arcs of the given graph
 
 <!-- ======================================================================= -->
 ## remarks
@@ -107,6 +121,7 @@ A graph `G := (V,E)` is referred to as ...
 
 * an "edgeless graph", if `(#E == 0)`
 * a "null graph" or an "empty graph", if `(#V == 0) and (#E == 0)`
+* i.e. `G := ({},{})` is the null/empty graph
 * a "trivial graph", if `(#V == 1) and (#E == 0)`
 * an "oriented graph", if `((x,y) in E)`, then `((y,x) !in E)`
 
@@ -206,3 +221,38 @@ have "homogenous/consistent semantics".
 Put differently, the semantics of a graph is the "reason" as to why two
 vertices are connected. Furthermore, that reason is the same for any other
 pair of adjacent vertices.
+
+<!-- ======================================================================= -->
+## equality, inequality, isomorphic
+
+Two directed graphs `S := (T,U)` and `G := (V,E)` are considered to be
+**equal** if both graphs have equal sets of vertices, equal sets of edges,
+and equal semantics.
+
+* `(S == G)`, iff `(T == V)` and `(U == E)` and `(sem(S) == sem(G))`
+* `(S equal-to) := (S == G)`
+
+Note that the "equal semantics" aspect ensures that both graphs are of the
+same "sort". In a given context, the graphs in question usually satisfy that
+condition, which is why that aspect is in general omitted.
+
+In contrary to that, two directed graphs are **unequal**, if they differ in
+their sets of vertices, their sets of edges, and/or in their semantics.
+
+* `(S != G) := not (S == G)`
+* `(S != G)`, iff `(T != V)` or `(U != E)` or `(sem(S) != sem(G))`
+* `(S unequal-to G) := (S != G)`
+
+Note that two unequal graphs may still be isomorphic to each other. That is,
+an isomorphism may still exists that maps one graph onto the other. If such
+an isomorphism exists, both graphs are said to be **isomorphic** to each other.
+
+Note that two isomorphic graphs might have different semantics. Because of
+that, "isomorphic" needs to be understood more in the sense of "structurally"
+equivalent, whereas "equal" is understood in the sense of "identical".
+
+**TODO** - the above definitions are clear, the following two are not:
+
+* Two equal graphs may be referred to as being **identical**.
+* Two isomorphic graphs as being **equivalent**.
+* i.e. need to look up the formal meaning of those terms

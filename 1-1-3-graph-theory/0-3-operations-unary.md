@@ -2,18 +2,16 @@
 <!-- ======================================================================= -->
 # Unary operations on graphs
 
-* a graph `H := (V,F)` is, ...
-* based on certain rules, used to create ...
-* a new graph `G := (V,E)`
-* i.e. `(f: S -> G)`
+* a single graph `H := (V,F)` is used ...
+* to create a new graph `operator(H) := G := (V,E)`
+* i.e. `(operator: S -> G)`
 
 <!-- ======================================================================= -->
 ## wikipedia, complement graph
 
-* notational - comp(G)
-* graph H := (V,F) is inverse to graph G := (V,E)
+* the complement graph H := (V,F) is inverse to graph G := (V,E)
 * iff (x adjacent-to y in G) -> not (x adjacent-to y in H)
-* i.e. start with a complete graph K(#V) and remove all edges in E
+* i.e. start with a complete graph K(G) and remove all edges in E
 * i.e. the same set of vertices, but disjoint sets of edges
 
 definition

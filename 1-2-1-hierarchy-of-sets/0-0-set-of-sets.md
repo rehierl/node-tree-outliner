@@ -170,7 +170,7 @@ That is, two sets are either disjoint ex-or coupled with each other.
 Note that common elements can be understood to act as a "link" between the
 sets involved. These links can be understood to bind sets together, which
 is why those sets can be said to be "connected" or "coupled" with each other
-via some "point of contact" (aka. **intersection**).
+via some "point of contact".
 
 **CLARIFICATION**
 Set D is said to **overlap** set A
