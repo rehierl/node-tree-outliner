@@ -73,21 +73,20 @@ comments
 * i.e. produce a "linear graph/path"
 
 <!-- ======================================================================= -->
-## wikipedia, edge contraction
+## wikipedia, edge contraction (EC)
 
 * merging two adjacent vertices into one and adjusting the edges
 
 definition
 
-* occurs relative to a particular edge `e`
-* `e` is removed and its incident vertices `u` and `v`
-  are merged into a new vertex `w`
-* edges then need to be modified
-* `(uEx -> wEx)`, `(xEu -> xEw)`
-* `(vEy -> wEy)`, `(yEv -> yEw)`
-* note - fewer/merged edges are possible if `E` is a set
-* note - will in general produce a multiset
-* note - may or may not be allowed to produce loops
+* occurs relative to an initial edge `e := (u,v)`
+* `e` is removed and its incident vertices are merged
+* i.e. the vertices `u` and `v` are merged into a new vertex `w`
+* after the vertex merger, incident edges need to be adjusted
+* `(uEx -> wEx)`, `(xEu -> xEw)`, `(vEy -> wEy)`, `(yEv -> yEw)`
+* i.e. even less edges are possible if `E` is a set
+* i.e. edge contraction may in general produce a multiset/graph
+* i.e. may or may not be allowed to produce loops
 
 more formal
 
@@ -95,17 +94,40 @@ more formal
 * replace `u` by `w` in any edge `uEx` and `xEu`
 * likewise, replace `v` by `w`
 
-vertex identification
+vertex identification/contraction - i.e. **VC**
 
-* aka. vertex contraction
-* `u` and `v` may or may not be (strictly) connected
-* i.e. more general than edge contraction
+* `u` and `v` may or may not be adjacent
+* i.e. VC is more general than EC
+* i.e. EC is a special case of VC
+* edges between `u` and `v` become loops
+* i.e. loops may or may not be allowed
+
+vertex cleaving/splitting
+
+* split one vertex into two vertices
+* i.e. reverse to vertex contraction
 
 path contraction
 
 * contract a path into a single edge
 * edges connected to intermediary vertices may be removed
-  or connected to the end vertices
+* or connected to the path's end vertices
+
+(unclear - path contraction)
+
+* what exactly happens to inner vertices?
+* note - the path is merged into an edge, not a single vertex
+* note - edges incident to an inner vertex may end up ...
+* being incident to one endpoint or the other
+
+twisting
+
+* given two disjoint graphs G1 and G2, and some other graph G
+* (u1,v1 in V1), (u2,v2 in V2) and (u,v in V)
+* identify (u1,u2 as u in G) and (v1,v2 as v in G)
+* a twisting G* of G with respect to {u,v}
+* identifies u1 with v2, and v1 with u2
+* (completely unclear meaning)
 
 application
 

@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+define endpoints of a path -
+i.e. the start and end vertices
+
 build upon series-parallel graphs/posets
 
 set difference defined as relative complement

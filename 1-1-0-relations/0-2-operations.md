@@ -30,12 +30,12 @@ an impression, a hunch
 <!-- ======================================================================= -->
 ## union (+, or)
 
-* `(R + S), (R or S) := { (a,b) : aRb or aSb }`
+* `(R + S) := { (a,b) : aRb or aSb }`
 
 <!-- ======================================================================= -->
 ## intersection (&, and)
 
-* `(R & S), (R and B) := { (a,b) : aRb and aSb }`
+* `(R & S) := { (a,b) : aRb and aSb }`
 
 <!-- ======================================================================= -->
 ## reflexive closure
@@ -57,8 +57,8 @@ an impression, a hunch
 
 remarks
 
-* essentially continue to add `(a,c)` to `R`
-  for any pair `aRb` and `bRc` until `R` is transitive
+* essentially iteratively add `(a,c)` to `R` for
+  all pairs `aRb` and `bRc` until `R` is transitive
 * allows to answer if `c` can be reached from `a`
 * e.g. the "less than or equal" relation on a linearly ordered set
 
