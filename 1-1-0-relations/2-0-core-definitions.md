@@ -1,9 +1,14 @@
 
 <!-- ======================================================================= -->
-# Definitions related to relations and graph theory
+# Definitions related to relations
 
-* relevant standard and non-standard, relation-based definitions
+* standard and non-standard, relation-based definitions
 * the focus is on endo-relations `R := (V,E)`
+
+relevant to ...
+
+* (/see/ "graph theory" /)
+* (/see/ "order theory" /)
 
 <!-- ======================================================================= -->
 ## endo-relations
@@ -27,8 +32,7 @@ given tuple of elements in `×Si` is an element in `G`.
 In the context of this discussion, all relations are binary relations (i.e.
 each has only two sets of elements `S1` and `S2`) over a single set of elements
 `S` (i.e. `S1` and `S2` are both equal to the same set `S`, i.e. a homogenous
-relation). That is, each relation in the context of this discussion is an
-endo-relation.
+relation). That is, the focus of this discussion is on endo-relations.
 
 * `R := (S1,S2,G) := (S,S,G) := (S,G)`
 * `R(s1,s2)` is true, if `((s1,s2) in G)`
@@ -54,11 +58,11 @@ domain - a function-based view (default)
 * `field(R) := (dom(R) union range(R))`
 
 <!-- ======================================================================= -->
-## related graph-based terminology
+## general context
 
-Due to the focus on endo-relations, graph theoretical terminology can be used
-in combination with the above relations. That is, relations are understood to
-represent graphs.
+Due to the focus on endo-relations, graph theoretical terminology will be used
+in the context of such relations. That is, endo-relations are understood to
+represent and define (directed) graphs.
 
 * `R := (V,E)`, where `(E subset-of V×V)`
 * `V` is the set of vertices, `E` the set of edges `e`
@@ -66,46 +70,57 @@ represent graphs.
 * `e` is incident to `x` and `y`, if `e := (x,y)` and `xEy`
 * `x` is adjacent to `y`, if `xEy` is true
 * `x` and `y` are both endpoints of `e`
-* (see graph theory for more even terms)
-
-Each edge `e := (x,y)` in the set of edges `E` is an element of the Cartesian
-product `V×V` over the set of vertices `V`. Because of that, each edge has `x`
-as its first and `y` as its last vertex. Hence, the edges in a relation are
-directed, which is why relations can be understood to represent directed graphs.
-
-* `x` is the source, and `y` the sink of `e`
-* `x` is a source of `y` and `y` a sink of `x`
 
 Each endpoint of an edge `(e in E)` must be an element of the set of vertices
 `V`. Put differently, the set of endpoints of each edge must be a subset to
 the vertex set. Obviously, `R` would otherwise not satisfy the definition of
-a relation, if `E` would contain some `e` that had an element outside of the
-vertex set (i.e. `(v !in V)`).
+a relation, if `E` would contain some edge `e` that has one or both of its
+endpoints outside of the vertex set `V` (i.e. `(v !in V)`).
 
 * if `(e in E)`, then `(E(e) subset-of V)`
 
-Recall that each element in the Cartesian product `×Si` is an ordered tuple.
-That is, each tuple has a 1st (`S1`) and a last element (`Sn`).
+Each edge `e := (x,y)` in the set of edges `E` is an element of the Cartesian
+product `V×V` over the set of vertices `V`. Because of that, each edge `e` has
+`x` as its first and `y` as its last vertex. As such, the endpoints of an edge
+are considered to be unequal, which is why the edges in a relation support a
+notion of orientation (i.e. the edges are directed). Hence, endo-relations are
+understood to represent and define directed graphs.
 
-The set of vertices `V` is in general not required to hold vertices that have
-common characteristics. That is, the vertices in a relation may in general be
-arbitrary elements. However, in the context of this discussion, all vertices
-are by default expected to represent elements of some sort, which is why all
-vertices in a relation are required to share some common characteristics.
+* `x` is the source, and `y` the sink of `e`
+* `x` is a source to `y` and `y` a sink to `x`
 
-Similar to that, some reason is associated with each edge `(e in E)` which
-provides an explanation as to why two vertices are adjacent to each other.
-This reason will be referred to as **the semantics of an edge** `sem(e)`.
+As a simple set of elements, the set of vertices `V` is in general not required
+to hold vertices that have common characteristics. That is, the vertices in a
+relation may in general represent arbitrary elements. However, in the context
+of this discussion, all vertices are expected to represent elements of the same
+kind, which is why all vertices in a relation are required to share common
+characteristics of some sort. Put differently, a relation's set of vertices
+is expected to be a homogenous set of elements.
 
-In general, 
+Similar to that, some reason is associated with each edge `(e in E)` which is
+understood to provide an explanation as to why two vertices are adjacent to
+each other. This reason will be referred to as the semantics of an edge.
 
-A relation that only has an empty set of vertices (i.e. `(V == {})`) and no
-edge in `E` (i.e. `(E == {})`), will be referred to as the **null relation**,
-or as the "empty relation" `Ø`. That is, the null relation is a binary tuple
-of empty sets (i.e. `Ø := ({},{})`).
+* e.g. `sem(e) := (x divisible-by y)` for some edge `e := (x,y)`
 
-In contrary to that, a relation that has a set of `n` vertices and an edge
-for every pair of vertices, will be referred to as the **complete relation**
-`Rn`. That is, the set of edges of a complete relation is equal to the
-Cartesian product over its set of vertices (i.e. `(E == V×V)`). (Note that
-complete relations may be used similar to concept of the universal set `U`).
+The reasons behind two pairs of edges `e1` and `e2` are in general not required
+to correspond with each other. That is, in a relation `(sem(e1) != sem(e2))`
+may in general be true for some pair of edges. In such a case, the set of edges
+`E` can be understood to be heterogenous. Because of that, a relation can in
+general be understood to hold a set of tuples that is used to associate each
+edge with its semantics.
+
+* `R := (V,E,S)`, where `S` is defined as follows
+* `S := { (e,s) | (e in E) and (s == sem(e)) }`
+
+However, in the context of this discussion, the semantics of each edge is
+expected to correspond with the semantics of any other edge. Because of that,
+the semantics of a relation `sem(R)` can be defined via the semantics of its
+edges.
+
+* `(sem(e) == sem(R))` for all `(e in E)`
+* `sem(R) := sem(e)` for some `(e in E)`
+
+Put together, all relations in this discussion are seen as directed graphs and
+are expected to be endo-relations based upon a homogenous set of vertices and
+with consistent semantics over its set of edges.
