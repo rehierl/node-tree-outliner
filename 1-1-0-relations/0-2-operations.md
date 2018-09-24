@@ -7,11 +7,11 @@
 an impression, a hunch
 
 * `R := (A,B,G)` if `(A != B)`
-* has characteristics of a function, "depth" is 2
+* has the characteristics of a function, if its "depth" is 2
 * `R := (A,A,G)` if `(A == B)`
-* has characteristics of a function, if "depth" is "limited" to 2
+* has the characteristics of a function, if its "depth" is "limited" to 2
 * `R := (A,A,G)` i.e. `(A == B)`
-* an "order" seems to involve all elements in `A` - "total" in some way
+* an "order" seems to involve all elements in `A` - i.e. "total" in some way
 
 <!-- ======================================================================= -->
 ## contains
@@ -140,8 +140,8 @@ clarification
 ## restriction
 
 * `restrict(R), limit(R) := (R) -> S`
-* `limit(R) := (B,B,G)` such that `aRb` where `(a in B)`
-* i.e. restrict `R := (A,A,G)` to `(B subset-of A)`
+* `restrict(R) := (B,G)` such that `aRb` where `(a,b in B)`
+* i.e. restrict `R := (A,G)` to `R' := (B,G)` where `(B subset-of A)`
 
 clarification
 
@@ -149,4 +149,4 @@ clarification
 * ..., reflexive, irreflexive, symmetric, asymmetric, transitive, total, ...
 * ..., trichotomous, partial order, total order, strict weak order, ...
 * ..., total preorder (weak order), equivalence relation,
-* then `limit(R)` is too
+* then `restrict(R)` is too

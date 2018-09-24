@@ -1,2 +1,2 @@
 
-This content is intended to clarify implementation specific aspects.
+This content is intended to clarify on implementation specific aspects.

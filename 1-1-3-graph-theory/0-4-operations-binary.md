@@ -20,12 +20,6 @@
 * used to combine graphs to form a larger graph
 * analogous to the disjoint union of sets
 
-unclear ?!?
-
-* either make the vertex sets disjoint before the union, ...
-* or expect the graphs to be disjoint from the start
-* i.e. a union of disjoint graphs?
-
 remarks
 
 * the result is necessarily disconnected
@@ -33,6 +27,12 @@ remarks
 * e.g. clusters of graphs are unions of complete graphs
 * e.g. every graph is a disjoint union of its components
 * e.g. forests (of trees)
+
+unclear ?!?
+
+* either make the vertex sets disjoint before the union, ...
+* or expect the graphs to be disjoint from the start
+* i.e. a union of disjoint graphs?
 
 <!-- ======================================================================= -->
 ## wikipedia, cartesian product (¤)

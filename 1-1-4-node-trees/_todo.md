@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+restriction (relations) vs. induced subgraph
+
 define endpoints of a path -
 i.e. the start and end vertices
 

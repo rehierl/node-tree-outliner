@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Definitions related to graphs
 
-* a summary of (relevant) standard and non-standard definitions
+* standard and non-standard, graph-based definitions
 * the focus is on directed graphs of vertices
 
 Note that, in the context of this discussion, a graph is in general assumed
@@ -119,11 +119,11 @@ rather than on undirected graphs `UG := (V,A)`.
 
 A graph `G := (V,E)` is referred to as ...
 
-* an "edgeless graph", if `(#E == 0)`
-* a "null graph" or an "empty graph", if `(#V == 0) and (#E == 0)`
-* i.e. `G := ({},{})` is the null/empty graph
-* a "trivial graph", if `(#V == 1) and (#E == 0)`
-* an "oriented graph", if `((x,y) in E)`, then `((y,x) !in E)`
+* "edgeless graph", if `(#E == 0)`
+* "null graph" or "empty graph", if `(#V == 0) and (#E == 0)`
+* i.e. `G := ({},{})` is the null/empty graph `Ø`
+* "trivial graph", if `(#V == 1) and (#E == 0)`
+* "oriented graph", if `xEy` then `!yEx` (i.e. one direction only)
 
 Note that the binary relation of an oriented graph is irreflexive (aka.
 strict) and anti-symmetric. That is, the binary relation of such a graph
@@ -213,14 +213,17 @@ general, the semantics of two distinct graphs differ in general. (Note that
 However, the semantics of each edge in a single graph is identical to the
 semantics of the graph - i.e. `(sem(e) == sem(G))` for any edge `(e in E)`.
 Because of that, the semantics of a graph `sem(G)` can be said to apply to
-all of its edges. All edges in a graph are therefore understood to be of
-the same sort (i.e. have the exact same meaning). As such, any graph in the
-context of this discussion can be referred to as being "homogenous", or to
-have "homogenous/consistent semantics".
+all of its edges. All edges in a graph are therefore said to be **edges of
+the same sort** (i.e. have the exact same meaning). As such, any graph in
+the context of this discussion can be referred to as being "homogenous",
+or to have "homogenous/consistent semantics".
 
 Put differently, the semantics of a graph is the "reason" as to why two
 vertices are connected. Furthermore, that reason is the same for any other
 pair of adjacent vertices.
+
+Note that two graphs, that have same semantics, are referred to as being
+**graphs of the same sort**.
 
 <!-- ======================================================================= -->
 ## equality, inequality, isomorphic

@@ -1,7 +1,5 @@
 
-<!-- ======================================================================= -->
-# Relations
+This content represents an overview of mathematical relations.
 
-This content contains notes on mathematical relations:
-
-* The **semantics of a relation** associate meaning with its tuples.
+Note that the focus of this discussion is on endo-relations. Because of
+that, the relations in question can be understood to define directed graphs.

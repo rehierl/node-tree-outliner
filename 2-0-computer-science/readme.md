@@ -1,4 +1,4 @@
 
-**needs substantial editing**
+This content is relevant topics in computer science.
 
-This content is about general aspects related to computer science.
+**TODO** - this whole chapter needs substantial editing

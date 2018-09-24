@@ -5,24 +5,25 @@
 <!-- ======================================================================= -->
 ## finitary relations
 
-(the set-theoretic notion of "relation")
+* the set-theoretic notion of "relation"
+* `R := (S1,S2,...,Sn,G)`
 
-* `R := (S,S2,...,Sn,G)`
-* e.g. `Si := Nat`, `G := {(1,2), (2,3), ...}`
-* `S1,...,Sn` represent sets of some sorts
+the sets `Si` are the domains of `R`
+
+* `S1,...,Sn` all represent sets of some sorts
 * `(n in [1,*])` is the number of slots/places
 * `n` is the arity/adicity/dimension of relation `R`
 * `R` is itself a (n+1)-tuple (aka. correspondence)
 * `R` is said to be a n-ary/n-adic/n-dimensional relation
 * `R` is finitary, if `n` is finite, otherwise `R` is infinit-ary
-* the sets `Si` are the domains of `R`
 
 graph `G` of relation `R`
 
 * `G` is the relation's set of tuples/sequences
 * `×` is the Cartesian product of all sets involved
-* `(G(R) subset-of ×Si)` is the graph of `R`
-* `(G(R) subset-of ×S^n)` if `Si := S` for any `(i in [2,*])`
+* `(G(R) subset-of (S1 × ... × Sn))` is the graph of `R`
+* i.e. `(G(R) subset-of ×Si)` is the graph of `R`
+* `(G(R) subset-of ×S^n)` if `Si := S` for all `(i in [1,*])`
 * an "n-ary relation over `S`", or an "n-ary relation over a set"
 * note - all tuples in `G` have the exact same length
 
@@ -53,10 +54,8 @@ clarification
 <!-- ======================================================================= -->
 ## binary relations
 
-(correspondence, dyadic relation, 2-place relation)
-
-* short - "bin-rel"
 * binary relation := `R = (A,B,G)`
+* aka. correspondence, dyadic relation, 2-place relation
 * a binary relation is an element of the powerset `P(A×B)`
 
 homogenous, heterogenous

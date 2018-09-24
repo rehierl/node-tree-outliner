@@ -1,4 +1,4 @@
 
-**TODO** - needs substantial editing
+This content proofs that (directed) ordered trees are hierarchies of sequences.
 
-Proof that (directed) ordered trees are equivalent to hierarchies of sequences.
+**TODO** - this whole chapter needs substantial editing

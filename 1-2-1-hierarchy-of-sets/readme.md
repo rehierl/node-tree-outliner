@@ -1,2 +1,2 @@
 
-Proof that (directed) trees are equivalent to hierarchies of sets.
+This content proofs that (directed) trees are hierarchies of sets.

@@ -1,3 +1,2 @@
 
-This content is dedicated to the definition of extensions to the default
-definitions (e.g. rank values).
+This content extends the base design: rank values, etc.
