@@ -1,6 +1,6 @@
 
 <!-- ======================================================================= -->
-# Semantics of a relation
+# Semantics of a graph
 
 * without any meaning, a relation is just another set of sequences/tuples
 * the semantics of a relation defines its orientation/direction and meaning
@@ -31,6 +31,34 @@ clarification
 * inverting a relation usually drops the initial semantics
 * the inverted relation has no meaning under the initial semantics
 * that is because the order of elements has changed
+
+<!-- ======================================================================= -->
+## semantics of a graph
+
+The edges of a graph `G := (V,E)` represent the relationship between two
+adjacent vertices `(x,y in V)` - e.g. `(x divisible-by y)`. Hence, and in
+general, the semantics of two distinct graphs differ in general. (Note that
+`sem(G)` will be used to refer to the semantics of the corresponding graph).
+
+* `sem(G) := (x divisible-by y)`
+* i.e. `((x,y) in E)` iff `x` is divisible by `y`
+* `sem(H) := (x multiple-of y)`
+* i.e. `((x,y) in E)` iff `x` is a multiple of `y`
+
+However, the semantics of each edge in a single graph is identical to the
+semantics of the graph - i.e. `(sem(e) == sem(G))` for any edge `(e in E)`.
+Because of that, the semantics of a graph `sem(G)` can be said to apply to
+all of its edges. All edges in a graph are therefore said to be **edges of
+the same sort** (i.e. have the exact same meaning). As such, any graph in
+the context of this discussion can be referred to as being "homogenous",
+or to have "homogenous/consistent semantics".
+
+Put differently, the semantics of a graph is the "reason" as to why two
+vertices are connected. Furthermore, that reason is the same for any other
+pair of adjacent vertices.
+
+Note that two graphs, that have same semantics, are referred to as being
+**graphs of the same sort**.
 
 <!-- ======================================================================= -->
 ## palindromic

@@ -114,7 +114,7 @@ edge with its semantics.
 * `S := { (e,s) | (e in E) and (s == sem(e)) }`
 
 However, in the context of this discussion, the semantics of each edge is
-expected to correspond with the semantics of any other edge. Because of that,
+expected to correspond with the semantics of all other edges. Because of that,
 the semantics of a relation `sem(R)` can be defined via the semantics of its
 edges.
 

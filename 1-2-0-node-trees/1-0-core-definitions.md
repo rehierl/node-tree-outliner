@@ -2,7 +2,7 @@
 <!-- ======================================================================= -->
 # Definitions related to node trees
 
-* a summary of (relevant) standard and non-standard definitions
+* standard and non-standard, tree-related definitions
 * the focus is on directed rooted node trees
 * aka. arborescence, out-tree
 

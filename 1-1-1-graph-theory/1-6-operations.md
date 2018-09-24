@@ -171,10 +171,14 @@ subgraph of `S` and an induced subgraph of `X` (i.e. `(G == S[V])` and
 ## complete graph (Kn)
 
 A graph `G := (V,E)` is **complete**, if each vertex `(v in V)` is adjacent
-(as the source of the corresponding edge) to every other vertex.
+(as the source of the corresponding edge) to every other vertex. That is,
+the set of edges `E` in a complete graph is equal to the Cartesian product
+over its set of vertices `V`.
+
+* `(E == V×V)`, if `G := (V,E)` is complete
 
 Note that in an undirected graph, an arc has no source vertex.
-That is because both endpoints of all arcs are considered to be equal.
+That is because both endpoints of an arcs are considered to be equal.
 
 undirected complete graphs (UKn)
 
@@ -192,15 +196,16 @@ Note that an undirected complete graph is equal to the underlying undirected
 graph of the corresponding directed complete graph - i.e. `(UKn == UG(DKn))`.
 
 Note that the focus of this discussion is on directed graphs. Hence, `Kn`
-will be used to refer to the corresponding directed complete graph `DKn`
+will be used to refer to the corresponding directed complete graph `DKn`,
 rather than its undirected counterpart `UKn`.
 
 Any graph `G := (V,E)` can be turned into a complete graph, if the missing
 edges are added to its set of edges. The resulting complete graph `K(G)` can
-therefore be understood to be induced by the input graph's set of vertices
-`V(G)`, even though graph `G` may be missing some of the edges.
+therefore be understood as the **induced complete graph** of the input graph
+`G`. That is, induced by its set of vertices `V(G)`, even though the set of
+edges `E` may be missing some of the edges.
 
-Note that the term "induced" is thus understood as: The resulting graph can
+Note that the term "induced" is understood as: The resulting graph can
 be created "based on a given set of vertices", and "based on a certain rule
 that allows to uniquely determine the corresponding (new) edges". Hence,
 `K(G)` can be understood as an **induced complete graph**. Because of that,

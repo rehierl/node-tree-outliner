@@ -3,12 +3,15 @@
 # Definitions related to graphs
 
 * standard and non-standard, graph-based definitions
-* the focus is on directed graphs of vertices
+* the focus is on directed graphs of vertices `G := (V,E)`
 
-Note that, in the context of this discussion, a graph is in general assumed
-to have the following characteristics: a directed graph, not a null graph,
-finitely many vertices, not an edgeless multigraph, is acyclic and oriented.
-Hence, the underlying relation of a graph is assumed to be asymmetric.
+Note that the focus of graph theory is in general on undirected graphs.
+In contrary to that, the focus of this discussion is on directed graphs.
+
+Note that, in the context of this discussion, a graph is in general assumed to
+have the following characteristics: a homogenous set of finitely many vertices,
+a directed graph with consistent semantics over its edges, not a null graph,
+not an edgeless multigraph, acyclic and oriented (i.e. asymmetric).
 
 <!-- ======================================================================= -->
 ## undirected graphs
@@ -19,7 +22,7 @@ A finite undirected graph `G` (or `UG`) is defined as follows:
 * `V` is the possibly empty, finite simple set of vertices
 * `A` is the possibly empty, finite simple set of arcs
 * i.e. `(a subset-of V)` and `(#a == 2)` for all arcs `(a in A)`
-* i.e. `A` is a set of 2-element sets over `V`
+* i.e. `A` is a set of 2-element simple sets over `V`
 
 Each vertex `(v in V)` can be understood to represent some unique object.
 That is, vertices represent abstract entities whose object properties are
@@ -114,50 +117,47 @@ For purposes of clarification, the following operators may be used:
 <!-- ======================================================================= -->
 ## remarks
 
-Note that the focus of this discussion is on directed graphs `DG := (V,E)`
-rather than on undirected graphs `UG := (V,A)`.
-
 A graph `G := (V,E)` is referred to as ...
 
 * "edgeless graph", if `(#E == 0)`
-* "null graph" or "empty graph", if `(#V == 0) and (#E == 0)`
+* `Ø` or "null graph" or "empty graph", if `(#V == 0) and (#E == 0)`
 * i.e. `G := ({},{})` is the null/empty graph `Ø`
 * "trivial graph", if `(#V == 1) and (#E == 0)`
 * "oriented graph", if `xEy` then `!yEx` (i.e. one direction only)
 
-Note that the binary relation of an oriented graph is irreflexive (aka.
-strict) and anti-symmetric. That is, the binary relation of such a graph
-is a-symmetric.
+Note that the binary relation of an oriented graph is irreflexive (aka. strict)
+and anti-symmetric. That is, the binary relation of a graph is a-symmetric.
 
 An edge `((x,y) in E)` is referred to as ...
 
 * a "loop", if `(x == y)`
 * a "link", if `(x != y)`
 
-Note that `E` is a set of ordered pairs. That is, if `xEy` is true for
-two vertices `(x,y in V)`, then there is one, and only one edge `(e in E)`
-such that `e := (x,y)`. That is, `E` is a simple set, not a multiset of
-edges. (Note that `xEy` and `yEx` count as one edge if `(x == y)`). A graph
-that is based upon a multiset of edges is referred to as a **multigraph**.
+Note that `E` is a set of ordered pairs. That is, if `xEy` is true for two
+vertices `(x,y in V)`, then there is one, and only one edge `(e in E)` such
+that `e := (x,y)`. That is, `E` is a simple set, not a multiset of edges.
+(Note that `xEy` and `yEx` count as one edge if `(x == y)`). A graph that
+is based upon a multiset of edges is referred to as a **multigraph**.
 
-Note that, `xEx` may be true for any vertex in a graph. That is, edges
-may in general exist that begin and end in the exact same vertex `x`.
-These kind of edges may in general be referred to as "loops" or as
-"reflexive edges". Because of that, a graph with no such edges may be
-referred to as **loopless** or "irreflexive".
+Note that, `xEx` may be true for any vertex in a graph. That is, edges may in
+general exist that begin and end in the same vertex `x`. These kind of edges
+may in general be referred to as "loops" or as "reflexive edges". Because of
+that, a graph with no such edges may be referred to as being **loopless** or
+"irreflexive".
 
 Note that for each directed graph `G := (V,E)`, an undirected graph
-`UG := (V,A)` can be formed such that `({x,y} in A)` iff `xEy`. That is,
-for each edge `((x,y) in G)`, `A` contains an arc `{x,y}`. An undirected
-graph formed such way will be referred to as the "underlying undirected
-graph of a directed graph" (short: **UG(G)**).
+`UG := (V,A)` can be formed such that `({x,y} in A)` if `xEy`. That is, for
+each edge `((x,y) in G)`, `A` contains an arc `{x,y}`. (Note that two distinct
+edges may correspond with the same arc). An undirected graph formed this way
+will be referred to as the **underlying undirected graph** `UG(G)` of the
+corresponding directed graph `G`.
 
-Note that for each undirected graph `G := (V,A)`, a directed graph
-`DG := (V,E)` can be formed such that `((x,y) in E)` iff `xAy`. That is,
-for each arc `({x,y} in A)`, `E` contains an edge `(x,y)`. A directed
-graph formed such way will be referred to as an "orientation of an
-undirected graph". Obviously, and in contrary to "UG(G)", an undirected
-graph has in general several different orientations.
+Note that for each undirected graph `G := (V,A)`, a directed graph `DG := (V,E)`
+can be formed such that `((x,y) in E)` if `xAy`. That is, for each arc
+`({x,y} in A)`, `E` may contain `(x,y)` and/or `(y,x)`. If each arc corresponds
+with one edge only, then a directed graph formed such way will be referred to
+as an **orientation** of an undirected graph. Obviously, and in contrary to
+"UG(G)", an undirected graph may in general have several distinct orientations.
 
 <!-- ======================================================================= -->
 ## subsets of vertices
@@ -198,34 +198,6 @@ Similar to that, the following functions can be defined:
 * i.e. `odeg(v), out-degree(v) := #snk(v)`
 
 <!-- ======================================================================= -->
-## semantics of a graph
-
-The edges of a graph `G := (V,E)` represent the relationship between two
-adjacent vertices `(x,y in V)` - e.g. `(x divisible-by y)`. Hence, and in
-general, the semantics of two distinct graphs differ in general. (Note that
-`sem(G)` will be used to refer to the semantics of the corresponding graph).
-
-* `sem(G) := (x divisible-by y)`
-* i.e. `((x,y) in E)` iff `x` is divisible by `y`
-* `sem(H) := (x multiple-of y)`
-* i.e. `((x,y) in E)` iff `x` is a multiple of `y`
-
-However, the semantics of each edge in a single graph is identical to the
-semantics of the graph - i.e. `(sem(e) == sem(G))` for any edge `(e in E)`.
-Because of that, the semantics of a graph `sem(G)` can be said to apply to
-all of its edges. All edges in a graph are therefore said to be **edges of
-the same sort** (i.e. have the exact same meaning). As such, any graph in
-the context of this discussion can be referred to as being "homogenous",
-or to have "homogenous/consistent semantics".
-
-Put differently, the semantics of a graph is the "reason" as to why two
-vertices are connected. Furthermore, that reason is the same for any other
-pair of adjacent vertices.
-
-Note that two graphs, that have same semantics, are referred to as being
-**graphs of the same sort**.
-
-<!-- ======================================================================= -->
 ## equality, inequality, isomorphic
 
 Two directed graphs `S := (T,U)` and `G := (V,E)` are considered to be
@@ -250,12 +222,11 @@ Note that two unequal graphs may still be isomorphic to each other. That is,
 an isomorphism may still exists that maps one graph onto the other. If such
 an isomorphism exists, both graphs are said to be **isomorphic** to each other.
 
-Note that two isomorphic graphs might have different semantics. Because of
-that, "isomorphic" needs to be understood more in the sense of "structurally"
-equivalent, whereas "equal" is understood in the sense of "identical".
+* (/see/ "category theory" /)
 
-**TODO** - the above definitions are clear, the following two are not:
+Note that two isomorphic graphs may have different semantics. Because of that,
+"isomorphic" is understood more in the sense of "both have the same structure"
+(i.e. both are **equivalent**), whereas "equal" is understood in the sense of
+"both represent the exact same graph" (i.e. both are **identical**).
 
-* Two equal graphs may be referred to as being **identical**.
-* Two isomorphic graphs as being **equivalent**.
-* i.e. need to look up the formal meaning of those terms
+**TODO** - does "equivalent vs. identical" represent standard convention?
