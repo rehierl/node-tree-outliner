@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # Unary operations on graphs
 
+The following operations take a single input graph `H`
+in order to produce a result:
+
 * a single graph `H := (V,F)` is used ...
 * to create a new graph `operator(H) := G := (V,E)`
 * i.e. `(operator: S -> G)`

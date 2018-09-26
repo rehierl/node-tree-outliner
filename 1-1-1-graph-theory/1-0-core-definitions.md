@@ -8,10 +8,10 @@
 Note that the focus of graph theory is in general on undirected graphs.
 In contrary to that, the focus of this discussion is on directed graphs.
 
-Note that, in the context of this discussion, a graph is in general assumed to
+Note that, in the context of this discussion, a graph is in general expected to
 have the following characteristics: a homogenous set of finitely many vertices,
-a directed graph with consistent semantics over its edges, not a null graph,
-not an edgeless multigraph, acyclic and oriented (i.e. asymmetric).
+a directed graph with consistent semantics over its edges, not a null graph, not
+an edgeless multigraph, acyclic and oriented.
 
 <!-- ======================================================================= -->
 ## undirected graphs
@@ -25,8 +25,8 @@ A finite undirected graph `G` (or `UG`) is defined as follows:
 * i.e. `A` is a set of 2-element simple sets over `V`
 
 Each vertex `(v in V)` can be understood to represent some unique object.
-That is, vertices represent abstract entities whose object properties are
-considered to be non-relevant to the corresponding graph.
+That is, vertices represent abstract entities whose object properties
+are considered to be non-relevant to the corresponding graph.
 
 * `(o: V -> O)` - is a bijective function
 * `o(v)` returns the object that vertex `v` represents
@@ -35,6 +35,11 @@ considered to be non-relevant to the corresponding graph.
 * `(v: O -> V)` - is inverse to `o()`
 * `v(o)` returns the id/reference/vertex of object `o`
 * i.e. `(o(v(o)) === o)` and `(v(o(v)) === n)`
+
+Note that the set of vertices `V` is in general expected to represent
+vertices of some kind. That is, all vertices are assumed share common
+characteristics, which is why `V` is expected to be a homogenous simple
+set of vertices.
 
 The following can be said about the vertices of any arc `(a in A)`:
 
@@ -125,8 +130,9 @@ A graph `G := (V,E)` is referred to as ...
 * "trivial graph", if `(#V == 1) and (#E == 0)`
 * "oriented graph", if `xEy` then `!yEx` (i.e. one direction only)
 
-Note that the binary relation of an oriented graph is irreflexive (aka. strict)
-and anti-symmetric. That is, the binary relation of a graph is a-symmetric.
+Note that the binary relation of an oriented graph is irreflexive/strict
+and anti-symmetric. That is, the binary relation of an oriented graph is
+consequently a-symmetric.
 
 An edge `((x,y) in E)` is referred to as ...
 
@@ -219,8 +225,8 @@ their sets of vertices, their sets of edges, and/or in their semantics.
 * `(S unequal-to G) := (S != G)`
 
 Note that two unequal graphs may still be isomorphic to each other. That is,
-an isomorphism may still exists that maps one graph onto the other. If such
-an isomorphism exists, both graphs are said to be **isomorphic** to each other.
+an isomorphism may still exists that maps one graph onto the other. If such an
+isomorphism exists, both graphs are said to be **isomorphic** to each other.
 
 * (/see/ "category theory" /)
 

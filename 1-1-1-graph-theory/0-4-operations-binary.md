@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # Binary operations on graphs
 
+The following operations take two input graphs `S` and `X`
+in order to produce a result:
+
 * two graphs `S := (T,U)` and `X := (Y,Z)` are used ...
 * to create a new graph `(S operator X) := operator(S,X) := (V,E) := G`
 * i.e. `(operator: (S,X) -> G)`

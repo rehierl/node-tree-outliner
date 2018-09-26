@@ -85,11 +85,11 @@ directed (acyclic) graphs
 <!-- ======================================================================= -->
 ## wikipedia, converse/transpose/inverse (°)
 
-* `S, conv(R), inv(R) := { (b,a) | aRb }`
-* i.e. the order of vertices of each edge is flipped
-* analogous to inverse functions
+* `S, R°, conv(R), inv(R) := { (b,a) | aRb }`
+* i.e. the order of vertices in each edge is flipped
+* i.e. analogous to inverse functions
 * note - every relation has a unique converse
-* (S == R) <-> (is-symmetric R)
+* (S == R), iff R is symmetric
 
 clarification
 
