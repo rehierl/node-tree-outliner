@@ -10,10 +10,27 @@ in order to produce a result:
 * i.e. `(operator: S -> G)`
 
 <!-- ======================================================================= -->
+## wikipeida, transpose graph
+
+* (/see/ "transpose" in "relations" /)
+* aka, converse, transpose, reverse
+* if (x,y) in G, then (y,x) in the converse graph
+* "converse" - from the converse of a logical statement
+* i.e. (Q -> P) is the converse of (P -> Q)
+* "transpose" - from transposing the adjacency matrix
+* notational - G', G^T, etc.
+
+remarks
+
+* little difference in maths, but relevant in computer science
+* with regards to incoming/outgoing edges
+
+<!-- ======================================================================= -->
 ## wikipedia, complement graph
 
+* (/see/ "complement" in "relations" /)
 * the complement graph H := (V,F) is inverse to graph G := (V,E)
-* iff (x adjacent-to y in G) -> not (x adjacent-to y in H)
+* i.e. (x adjacent-to y in G) -> not (x adjacent-to y in H)
 * i.e. start with a complete graph K(G) and remove all edges in E
 * i.e. the same set of vertices, but disjoint sets of edges
 

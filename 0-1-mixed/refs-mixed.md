@@ -13,6 +13,13 @@ mnemonics
 * [wikipedia, mnemonic](https://en.wikipedia.org/wiki/Mnemonic)
 * [wikipedia, art of memory](https://en.wikipedia.org/wiki/Art_of_memory)
 
+semantics
+
+* [wikipedia, semantics](https://en.wikipedia.org/wiki/Semantics)
+* [wikipedia, formal semantics](https://en.wikipedia.org/wiki/Formal_semantics_%28linguistics%29)
+* [wikipedia, opposite semantics](https://en.wikipedia.org/wiki/Opposite_%28semantics%29)
+* [wikipedia, converse semantics](https://en.wikipedia.org/wiki/Converse_%28semantics%29)
+
 classification
 
 * [wikipedia, ontology](https://en.wikipedia.org/wiki/Ontology_%28information_science%29)

@@ -14,6 +14,12 @@ in order to produce a result:
 * i.e. `(operator: S -> G)`
 
 <!-- ======================================================================= -->
+## converse/transpose graph
+
+* (/see/ "semantics" /)
+* note - flipped edges and flipped semantics
+
+<!-- ======================================================================= -->
 ## complete graph (Kn)
 
 A graph `G := (V,E)` is **complete**, if each vertex `(v in V)` is adjacent

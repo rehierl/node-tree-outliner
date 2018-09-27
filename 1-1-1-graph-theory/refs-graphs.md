@@ -44,8 +44,9 @@ data structures
 * [wikipedia, incidence matrix](https://en.wikipedia.org/wiki/Incidence_matrix)
 * [wikipedia, adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix)
 
-unary operations
+operations - unary
 
+* [wikipedia, transpose graph](https://en.wikipedia.org/wiki/Transpose_graph)
 * [wikipedia, complement graph](https://en.wikipedia.org/wiki/Complement_graph)
 * [wikipedia, topological sorting](https://en.wikipedia.org/wiki/Topological_sorting)
 * [wikipedia, edge contraction](https://en.wikipedia.org/wiki/Edge_contraction)
@@ -54,7 +55,7 @@ unary operations
 * [wikipedia, graph rewriting](https://en.wikipedia.org/wiki/Graph_rewriting)
 * [wikipedia, planarity testing](https://en.wikipedia.org/wiki/Planarity_testing)
 
-binary operations
+operations - binary
 
 * [wikipedia, disjoint union](https://en.wikipedia.org/wiki/Disjoint_union_of_graphs)
 * [wikipedia, cartesian product](https://en.wikipedia.org/wiki/Cartesian_product_of_graphs)
