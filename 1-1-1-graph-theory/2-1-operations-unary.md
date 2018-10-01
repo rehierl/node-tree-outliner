@@ -2,17 +2,6 @@
 <!-- ======================================================================= -->
 # Unary operations on graphs
 
-* (/see/ "operations" in "relations" /)
-* (/see/ "relationships between sets" /)
-* the general focus is (still) on directed (simple) graphs
-
-The following operations take a single input graph `H`
-in order to produce a result:
-
-* a single graph `H := (V,F)` is used ...
-* to create a new graph `operator(H) := G := (V,E)`
-* i.e. `(operator: S -> G)`
-
 <!-- ======================================================================= -->
 ## converse/transpose graph
 
@@ -77,7 +66,7 @@ context, they can be understood to contain every possible vertex and every
 possible edge.
 
 <!-- ======================================================================= -->
-## complement graph (standard)
+## complement graph (G*)
 
 By standard definition, the complement graph `G*` (or `comp(G)`) of graph
 `G := (V,E)` is formed by removing all its edges from its induced complete
@@ -87,13 +76,19 @@ graph `K(G)`.
 * `(V(G*) == V(G))` and `(E(G*) disjoint-to E(G))`
 
 Note that, by this standard definition, the complement graph of a complete
-graph is unequal to the empty graph `Ø`. That is, `Kn*` is an edgeless-graph
-that has `n` disconnected vertices.
+graph is not equal to the empty graph `Ø`. That is, `Kn*` is an edgeless-graph
+with `n` disconnected vertices.
 
-* `(Kn* != Ø)`, if `G` is complete
+* `(G* != Ø)`, if `G` is complete (i.e. equal to `Kn*`)
 * `(Kn* == (V(Kn),{})`, if `G` is complete
 
-Note that this is in contrary to the universal set `U`:
-The complement of the universal set `U*` is the empty set `{}`.
+Note that this is in contrary to the universal set of elements `U` as the
+complement of the universal set `U*` is the empty set `{}`.
 
 * `(U* == {})`
+
+Note that, from a less strict perspective, an edgeless graph could still be
+understood to be empty (i.e. without meaning). That is, if the meaning of
+a vertex is understood to be defined by the set of vertices to which it is
+adjacent, then each vertex in such a graph has no meaning as it has no
+vertices adjacent to it.

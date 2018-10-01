@@ -224,7 +224,7 @@ expression of `G°` would end up being broken. To resolve this issue, one also
 needs to "adjust" the semantics of `G°`.
 
 * `(c,p)` in `G°` => `(e[2] parent-of e[1])` => `(p parent-of c)` (ok)
-* note - `sem(e)` is oriented against the direction of `dir(e)` (meh)
+* note - `sem(e)` is oriented against the direction of `dir(e)` (not quite ok)
 
 Even though, the semantical expression now applies to the flipped edges, the
 edges end up having inconsistently oriented semantics. In a context where the
@@ -235,12 +235,12 @@ aspect needs to be fixed as well.
 In order to fix both of the above aspects, one needs to replace the semantics
 of an initial graph with semantics that has the opposite meaning. That is, the
 semantics of the initial graph needs to be replaced by its relational antonym
-(aka. converse semantics, **antonymous semantics**).
+(aka. **converse semantics**, antonymous semantics).
 
 * `(c,p)` in `G°` => `(e[1] child-of e[2])` => `(c child-of p)` (ok)
 
 **Memory hook**
-An antonymous/converse graph needs antonymous/converse semantics.
+A converse/antonymous graph needs converse/antonymous semantics.
 
 <!-- ======================================================================= -->
 ## general remarks
@@ -252,7 +252,7 @@ The following is a short list of possible, converse semantics:
 * superset-of vs. subset-of
 * subsequent-to vs. presequent-to
 
-Note that, if the converse of a graph needs to be created in the context of this
-discussion, then the converse is expected to have converse semantics. That is,
-in the context of the following discussion, a converse graph includes flipped
-edges and flipped semantics.
+Note that, if the converse of a graph needs to be created in the context of
+this discussion, then the converse graph is expected to have converse semantics.
+That is, in the context of the following discussion, a converse graph includes
+flipped edges and flipped semantics.

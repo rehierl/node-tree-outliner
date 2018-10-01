@@ -16,11 +16,13 @@ an impression, a hunch
 <!-- ======================================================================= -->
 ## contains
 
-* (R contains S) := aSb for all aRb
+* (R contains S) := aRb for all aSb
 * e.g. (<) is contained in (<=)
 
 <!-- ======================================================================= -->
 ## wikipedia, composition (¤)
+
+**TODO** - add this operation to graphs?
 
 * for R:=(A,B,G) and S:=(B,C,H)
 * (S ¤ R), comp(S,R) := { (a,c) | aRb and bSc }

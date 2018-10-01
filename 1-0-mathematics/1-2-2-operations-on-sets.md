@@ -78,7 +78,7 @@ any possible element.
 * (absolute) complement - A* := (U \ A)
 * i.e. remove all elements of A from U
 * relative complement - (B \ A)
-* i.e. remove all element of A from B
+* i.e. remove all elements in A from B
 * i.e. the relative complement of A in regards to B
 
 properties

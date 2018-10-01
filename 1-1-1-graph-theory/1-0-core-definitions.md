@@ -235,4 +235,4 @@ Note that two isomorphic graphs may have different semantics. Because of that,
 (i.e. both are **equivalent**), whereas "equal" is understood in the sense of
 "both represent the exact same graph" (i.e. both are **identical**).
 
-**TODO** - does "equivalent vs. identical" represent standard convention?
+**TODO** - is "equivalent vs. identical" standard interpretation?

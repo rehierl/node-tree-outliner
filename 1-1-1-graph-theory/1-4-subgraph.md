@@ -97,12 +97,16 @@ whose endpoints are both in `T`.
 * i.e. `U` contains all those edges in `E` whose endpoints are both in `T`
 * i.e. `S` is a subgraph of `G`, induced by its vertex-subset `T`
 
-Note that there is no freedom as to how the edge-subset `U` is formed. That is,
-the edge-subset `U` can be understood as a consequence of the vertex-subset `T`.
+Note that, in the context of relations, an induced subgraph represents the
+restricted relation of its super-graph. That is, restricted to the given
+subset of vertices.
 
 Note that there is in general no requirement or limitation as to how the subset
 of vertices `T` is formed. And because `T` may contain disconnected vertices,
 an induced subgraph `S := (T,U)` is in general not necessarily connected.
+
+Note that there is no freedom as to how the edge-subset `U` is formed. That is,
+the edge-subset `U` can be understood as a consequence of the vertex-subset `T`.
 
 A **strict/proper induced subgraph** `S` is an induced subgraph formed from a
 graph `G` by removing at least one vertex - i.e. `(#T < #V)`.

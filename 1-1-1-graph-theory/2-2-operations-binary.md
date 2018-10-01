@@ -2,29 +2,6 @@
 <!-- ======================================================================= -->
 # Binary operations on graphs
 
-* (/see/ "operations" in "relations" /)
-* (/see/ "relationships between sets" /)
-* the general focus is (still) on directed (simple) graphs
-
-The following operations take two input graphs `S` and `X`
-in order to produce a result:
-
-* two graphs `S := (T,U)` and `X := (Y,Z)` are used ...
-* to create a new graph `(S operator X) := operator(S,X) := (V,E) := G`
-* i.e. `(operator: (S,X) -> G)`
-
-Note that the context of the following definitions is the description of the
-relationship between a graph and its subgraphs. The following definitions
-therefore create new graphs by executing set-based operations (e.g. union of
-sets) on the corresponding sets of vertices and/or on the corresponding sets
-of edges. That is, the following definitions build upon existing vertices
-and/or edges rather than the creation of (entirely) new entities via (e.g.)
-the Cartesian product (e.g. tensor/strong product).
-
-Note that the following operations require the corresponding graphs to be of
-the same sort. That is, the graphs involved are (implicitly) expected to have
-matching/consistent/identical semantics.
-
 <!-- ======================================================================= -->
 ## equal, unequal, distinct
 
@@ -41,8 +18,8 @@ matching/consistent/identical semantics.
 `S` and `G` are **unequal**, if ...
 
 * `(S != G) := not (S == G)`
-* i.e. both differ in their vertex-set or their edge-set
-* i.e. one graph or both have elements that the other does not have
+* i.e. both differ in their vertex-set and/or in their edge-set
+* i.e. a graph (or both) has elements that the other does not have
 
 Note that two unequal graphs are said to be **distinct** (from one another).
 
@@ -54,32 +31,32 @@ Given two (simple) sets `A` and `B`, the following definitions apply:
 * `(A disjoint-to B) := ((A & B) == {})`
 * `(A coupled-with B) := not (A disjoint-to B)`
 
-Two graphs `S := (T,U)` and `G := (V,E)` are said to be **disjoint** (to each
-other / from one another), if both have neither vertices nor edges in common:
+Two graphs `S := (T,U)` and `G := (V,E)` are said to be **disjoint**
+(from one another), if both have neither vertices nor edges in common:
 
 * `(S disjoint-to G)`, if `(T disjoint-to V)` and `(U disjoint-to E)`
 * `(S disjoint-to G) <-> (G disjoint-to S)`
 
-Two graphs `S` and `G` are said to be **coupled** (with each other), if both
-have one or more vertices and/or edges in common:
+Two graphs `S` and `G` are said to be **coupled** (with each other),
+if both have one or more vertices and/or edges in common:
 
 * `(S coupled-with G) := not (S disjoint-to G)`
 * `(S coupled-with G) <-> (G coupled-with S)`
 
 Like the common elements in coupled simple sets of elements, the above common
 vertices and/or edges act as a "link" between both graphs. These links can
-therefore be understood to bind both graphs together, which is why those
+therefore be understood to bind both graphs together, which is why two such
 graphs can be said to be "connected" or "coupled" via some "point of contact".
 
-Two graphs `S` and `G` are said to **overlap** (each other), if both are
-coupled with each other, and each of them has one or more vertices and/or
-edges the other graph does not have.
+Two graphs `S` and `G` are said to **overlap** (each other), if both are coupled
+with each other, and if both have one or more vertices and/or edges the other
+graph does not have.
 
 * `(S overlaps G) := (S coupled-with G) and (S unrelated-to G)`
 * `(S overlaps G) <-> (G overlaps S)`
 
 <!-- ======================================================================= -->
-## remarks - disjoint, coupled, related
+## remarks on - disjoint, coupled, related
 
 Note that both endpoints of an edge `(e in E)` in a graph `G := (V,E)` must
 be elements in the graph's set of vertices `V` (i.e. `(E(e) subset-of V)`).
@@ -88,31 +65,38 @@ If that is not the case, then `G` would not satisfy the definition of a graph.
 Two coupled graphs `S := (T,U)` and `G := (V,E)` always have coupled sets of
 vertices. That is because the endpoints of a common edge are always elements
 in both sets of vertices `T` and `V`. The converse is however not necessarily
-true. That is because coupled sets of vertices do not guarantee coupled sets
-of edges.
+true. That is because both sets of vertices may be coupled via disconnected
+vertices.
 
 * `(U coupled-with E) -> (T coupled-with V)`
 
 Note that an empty subgraph `S` of a graph `G` is disjoint to its supergraph,
 regardless whether the supergraph is itself empty or not.
 
-* `(S disjoint-to G)`, if `(S subgraph-of G)` and `(S == Ø)`
+* `(S == Ø)` => `(S subgraph-of G)` and `(S disjoint-to G)`
 
-Note that, any non-empty subgraph is coupled with its supergraph. That is, a
-non-empty subgraph is never disjoint from its supergraph. However, the converse
-is not necessarily true. That is, two graphs that are coupled with each other,
-are not necessarily related to each other.
+Note that a non-empty subgraph is coupled with its supergraph.
+That is, a non-empty subgraph is never disjoint to its supergraph.
 
-* `(S coupled-with G)`, if `(S subgraph-of G)` and `(S != Ø)`
-* `(S related-to G) -> (S coupled-with G)`
+* `(S != Ø)` and `(S subgraph-of G)` => `(S coupled-with G)`
+* `(S related-to G) -> (S coupled-with G)` if `(S != Ø)`
+
+Note that the converse is not necessarily true. That is, two graphs that are
+coupled with each other, are not necessarily related to each other.
+
+* `(S coupled-with G)` =!> `(S related-to G)`
+* `(S coupled-with G)` <=> `(S related-to G)` or `(S overlaps G)`
+
+Note that two graphs are unrelated if they overlap each other. Likewise, two
+graphs that overlap each other are unrelated. Because of that, "overlaps" and
+"related-to" are exclusive such that they can not be both.
 
 <!-- ======================================================================= -->
 ## union (+, or, union)
 
 Graph `G := (V,E)` is said to be the **union** graph `G := (S + X)` of two
-graphs `S := (T,U)` and `X := (Y,Z)`, if its vertex-set is the union of the
-vertex sets of both graphs, and if its edge-set is the union of the edge
-sets of both graphs.
+graphs `S := (T,U)` and `X := (Y,Z)`, if its vertex-set is the union of both
+vertex sets, and if its edge-set is the union of both edge sets.
 
 * `G := (S + X) := (V,E)`, where
 * `V := (T + Y)` and `E := (U + Z)`
@@ -145,21 +129,19 @@ intersection graph `(S & X)` is unequal to the empty graph `Ø`.
 * `(S intersects X) <-> (S coupled-with X)`
 
 <!-- ======================================================================= -->
-## remarks - intersection
+## remarks on - intersection
 
-Note that two intersecting graphs are not necessarily related to each other.
-Likewise, two such graphs do not necessarily overlap each other. However, two
-intersecting graphs are either related or both overlap each other.
+As above, two intersecting graphs are not necessarily related to each other.
+However, two such graphs are either related, or both overlap each other.
 
-* `(S related-to G) -> (S intersects G)`
-* `(S overlaps G) -> (S intersects G)`
+* `(S related-to G) -> (S intersects G)` (i.e. if `S` and `G` are non-empty)
 * `(S intersects G) <-> (S related-to G) ex-or (S overlaps G)`
 
 Note that the set of vertices `V` in an intersection graph `G := (S & X)` does
-not allow to determine the set of common edges `E` based on one of the given
-graphs. That is, the intersection graph `G` is **not (necessarily) an induced
-subgraph** of the input graphs (i.e. `(G == S[V])` and `(G == X[S])` are both
-not necessarily true).
+not allow to determine the set of common edges `E` based on one of the input
+graphs involved. That is, the intersection graph `G` is **not (necessarily)
+an induced subgraph** of one or both of the input graphs (i.e. `(G == S[V])`
+and `(G == X[S])` are both not necessarily true).
 
 Example 1: The intersection graph `G := (S & X)` for `S := ({1,2},{(1,2)})`,
 `X := ({1,2},{(2,1)})` is `G := ({1,2},{})`. That is, `G` is not an induced
