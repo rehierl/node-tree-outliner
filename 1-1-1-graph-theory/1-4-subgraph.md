@@ -18,13 +18,21 @@ A (simple) **subgraph** `S := (T,U)` is a graph derived from another graph
 `G := (V,E)` by removing some of its vertices and/or edges.
 
 * `(T subset-of V)` and `(U subset-of E)`
-* `T` must include both endpoints of all the edges in `U`
-* i.e. `(E(e) subset-of T)` is true for all edges `(e in U)`
-* i.e. no edge in `U` leads in-to, or out-of `S`
 * `(S sub-graph-of G) <-> (G super-graph-of S)`
 
+Note that, if vertex `(v in V)` is removed from a super-graph, then all edges
+`(e in V)` that have `v` as an endpoint, but are not also incident to another
+vertex `(x in V)`, must be removed as well. That is because the resulting
+sub-graph still needs to satisfy the definition of a graph. Hence, edges may
+be removed without further consequence, but the removal of a vertex may trigger
+the removal of additional edges.
+
+* `T` must include all endpoints of all edges in `U`
+* i.e. `(E(e) subset-of T)` is true for all edges `(e in U)`
+* i.e. no edge in `U` leads in-to, or out-of `S`
+
 Note that the semantics of a subgraph is, by the construction of a subgraph,
-identical to the semantics of its supergraph. Consequently, the same needs
+identical to the semantics of its super-graph. The same therefore also needs
 to apply to an empty subgraph.
 
 * `(S subgraph-of G) -> (sem(S) == sem(G))`
@@ -107,9 +115,12 @@ an induced subgraph `S := (T,U)` is in general not necessarily connected.
 
 Note that there is no freedom as to how the edge-subset `U` is formed. That is,
 the edge-subset `U` can be understood as a consequence of the vertex-subset `T`.
+Because of that, the term "induced" is understood as: The resulting graph is
+created "based on a given set of vertices", and "based on a certain rule which
+allows to uniquely determine all the edges in the resulting graph".
 
-A **strict/proper induced subgraph** `S` is an induced subgraph formed from a
-graph `G` by removing at least one vertex - i.e. `(#T < #V)`.
+A **strict/proper induced subgraph** `S` is an induced subgraph formed from
+a graph `G` by removing at least one vertex - i.e. `(#T < #V)`.
 
 Note that a proper induced subgraph may still have the same edge-subset as
 its super-graph - i.e. not necessarily `(#U < #E)`. That is because a proper

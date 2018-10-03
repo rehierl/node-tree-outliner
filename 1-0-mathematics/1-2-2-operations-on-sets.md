@@ -72,6 +72,29 @@ any possible element.
 * `&(S) := { (x in +(S)) | (x in s) for all (s in S) }`
 
 <!-- ======================================================================= -->
+## set difference (\, sub, diff)
+
+* `(A diff B) := { x | (x in A) and (x !in B) }`
+* `(A \ B), (A - B), (A sub B) := (A diff B)`
+
+note that ...
+
+* `((A \ B) subset-of A)`
+* there doesn't seem to be a wikipedia page dedicated to the set difference
+* this operation is however also known as the "relative complement" (see below)
+
+Note that `B` is not required to be a subset of `A`. That is, `B` may have
+all, some or even no elements in `A`. The empty set `{}` and `A` are therefore
+both subsets of `A`.
+
+Note that a generic removal-based operation can only define to remove no
+element in `A`, all elements in `A`, or all the elements that another set
+`B` contains. Also, the partial removal of some of the elements in `B` does
+not have to be taken into account, as one can think of a pre-executed filter
+operation that restricts `B` to a subset of `A` which only contains the
+to-be-removed elements.
+
+<!-- ======================================================================= -->
 ## wikipedia, complement (*)
 
 * all sets are understood to be subsets of a universal set U
@@ -86,23 +109,12 @@ properties
 * (A + B)* = A* & B*
 * (A & B)* = A* + B*
 * (A & B) = (A* + B*)*
-* U = (A + A*)
-* {} = (A & A*)
+* (A + A*) = U
+* (A & A*) = {}
 * {}* = U
 * U* = {}
 * A = (A*)* - aka. involution
 * (A strict-subset-of B) => (B* strict-subset-of A*)
-
-<!-- ======================================================================= -->
-## set difference (\, sub, diff)
-
-* `(A diff B) := { x | (x in A) and (x !in B) }`
-* `(A \ B), (A sub B), (A - B) := (A diff B)`
-
-note that ...
-
-* there doesn't seem to be a wikipedia page dedicated to the set difference
-* this operation is however also known as the "relative complement" (see below)
 
 <!-- ======================================================================= -->
 ## wikipedia, symmetric difference (^, xor, ex-or)

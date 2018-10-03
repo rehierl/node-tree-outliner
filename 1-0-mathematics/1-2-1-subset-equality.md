@@ -53,13 +53,19 @@ proof that `(V subset-of W) -> (#V <= #W)` is true
 
 clarification
 
+Note that, from a different perspective, a sub-set can be defined as a set
+that can be formed by removing elements from its super-set. This view will
+be referred to as the "removal-based" perspective of the subset-of definition.
+
 Note that the empty set `{}` has no element that could be in conflict with the
 requirement of the `subset-of` definition. Because of that, "any element in the
 subset is an element of the super-set" is understood to be true if the subset
 is empty. That is because the definition of the `subset-of` operator merely
 states that, for `(V subset-of W)` to be true, any element that exists in `V`
 must also be an element of `W`. Obviously, there is no element in the empty
-set which could be in conflict with that requirement.
+set which could be in conflict with that requirement. (Another way to put it
+would be based upon the removal-based view of the definition: The empty set
+can be formed from the super-set by removing all of its elements).
 
 <!-- ======================================================================= -->
 ## equal-to

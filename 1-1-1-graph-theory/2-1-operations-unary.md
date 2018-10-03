@@ -6,20 +6,20 @@
 ## converse/transpose graph
 
 * (/see/ "semantics" /)
-* note - flipped edges and flipped semantics
+* note - converse edges and converse semantics
 
 <!-- ======================================================================= -->
 ## complete graph (Kn)
 
 A graph `G := (V,E)` is **complete**, if each vertex `(v in V)` is adjacent
 (as the source of the corresponding edge) to every other vertex. That is,
-the set of edges `E` in a complete graph is equal to the Cartesian product
-over its set of vertices `V`.
+the set of edges `E` in a complete (directed) graph is equal to the Cartesian
+product over its set of vertices `V`.
 
 * `(E == V×V)`, if `G := (V,E)` is complete
 
 Note that in an undirected graph, an arc has no source vertex.
-That is because both endpoints of an arcs are considered to be equal.
+That is because both endpoints of an arc are considered to be equal.
 
 undirected complete graphs (UKn)
 
@@ -42,16 +42,10 @@ rather than its undirected counterpart `UKn`.
 
 Any graph `G := (V,E)` can be turned into a complete graph, if the missing
 edges are added to its set of edges. The resulting complete graph `K(G)` can
-therefore be understood as the **induced complete graph** of the input graph
-`G`. That is, induced by its set of vertices `V(G)`, even though the set of
-edges `E` may be missing some of the edges.
-
-Note that the term "induced" is understood as: The resulting graph can
-be created "based on a given set of vertices", and "based on a certain rule
-that allows to uniquely determine the corresponding (new) edges". Hence,
-`K(G)` can be understood as an **induced complete graph**. Because of that,
-the focus of the term "induced" is on a fixed "rule", rather than on a set
-of existing edges.
+therefore be understood to be induced by the input graph `G`. Hence, `K(G)`
+can be understood as an **induced complete graph**. (Recall that, the focus
+of the term "induced" is understood to be on a fixed "rule", rather than on
+a set of existing edges).
 
 Note that ...
 
@@ -66,21 +60,21 @@ context, they can be understood to contain every possible vertex and every
 possible edge.
 
 <!-- ======================================================================= -->
-## complement graph (G*)
+## complement graph (*)
 
 By standard definition, the complement graph `G*` (or `comp(G)`) of graph
-`G := (V,E)` is formed by removing all its edges from its induced complete
+`G := (V,E)` is formed by removing all of its edges from its induced complete
 graph `K(G)`.
 
 * `(G*: Graph -> Graph)` where `G* := (V,F)` and `F := (E(K(G)) \ E(G))`
 * `(V(G*) == V(G))` and `(E(G*) disjoint-to E(G))`
 
-Note that, by this standard definition, the complement graph of a complete
-graph is not equal to the empty graph `Ø`. That is, `Kn*` is an edgeless-graph
-with `n` disconnected vertices.
+Note that, by this definition, the complement graph of a complete graph is not
+equal to the empty graph `Ø`. That is, `Kn*` is an edgeless-graph that has `n`
+disconnected vertices.
 
-* `(G* != Ø)`, if `G` is complete (i.e. equal to `Kn*`)
-* `(Kn* == (V(Kn),{})`, if `G` is complete
+* `(Kn* != Ø)` as `(Kn* == (V(Kn),{})`
+* `(G & G*) != Ø)` (i.e. `G` and `G*` are not disjoint)
 
 Note that this is in contrary to the universal set of elements `U` as the
 complement of the universal set `U*` is the empty set `{}`.

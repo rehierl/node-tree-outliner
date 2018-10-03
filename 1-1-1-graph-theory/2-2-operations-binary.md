@@ -11,7 +11,7 @@
 `S` and `G` are **equal**, if ...
 
 * `(S == G)`, if `(T == V)` and `(U == E)`
-* i.e. both have the same vertex-set and the same edge-set
+* i.e. both have the same set of vertices and the same set of edges
 * i.e. all vertices and edges of one graph are elements of the other
 * `(S == G) := (S subgraph-of G) and (G subgraph-of S)`
 
@@ -60,22 +60,25 @@ graph does not have.
 
 Note that both endpoints of an edge `(e in E)` in a graph `G := (V,E)` must
 be elements in the graph's set of vertices `V` (i.e. `(E(e) subset-of V)`).
-If that is not the case, then `G` would not satisfy the definition of a graph.
+If that would not be the case, then `G` would not even qualify as a graph.
 
 Two coupled graphs `S := (T,U)` and `G := (V,E)` always have coupled sets of
-vertices. That is because the endpoints of a common edge are always elements
+vertices. That is because the endpoints of a common edge are also elements
 in both sets of vertices `T` and `V`. The converse is however not necessarily
-true. That is because both sets of vertices may be coupled via disconnected
-vertices.
+true. That is, two graphs that are coupled via coupled sets of vertices, do
+not necessarily also have coupled sets of edges (e.g. both graphs may be
+coupled via isolated vertices).
 
 * `(U coupled-with E) -> (T coupled-with V)`
+* `(S coupled-with G) <-> (T coupled-with V)`
+* (`S` and `G` may still have edges in common)
 
 Note that an empty subgraph `S` of a graph `G` is disjoint to its supergraph,
 regardless whether the supergraph is itself empty or not.
 
 * `(S == Ø)` => `(S subgraph-of G)` and `(S disjoint-to G)`
 
-Note that a non-empty subgraph is coupled with its supergraph.
+Note that a non-empty subgraph is coupled with its (non-empty) supergraph.
 That is, a non-empty subgraph is never disjoint to its supergraph.
 
 * `(S != Ø)` and `(S subgraph-of G)` => `(S coupled-with G)`
@@ -87,9 +90,10 @@ coupled with each other, are not necessarily related to each other.
 * `(S coupled-with G)` =!> `(S related-to G)`
 * `(S coupled-with G)` <=> `(S related-to G)` or `(S overlaps G)`
 
-Note that two graphs are unrelated if they overlap each other. Likewise, two
-graphs that overlap each other are unrelated. Because of that, "overlaps" and
-"related-to" are exclusive such that they can not be both.
+Note that two graphs are unrelated, if both overlap each other. Likewise, two
+graphs that are related to each other, do not overlap each other. Because of
+that, "overlaps" and "related-to" are exclusive. That is, two graphs can not
+be both (i.e. overlapping and related) at the same time.
 
 <!-- ======================================================================= -->
 ## union (+, or, union)
@@ -119,7 +123,7 @@ all vertices and edges that are common to both.
 
 Note that the intersection graph `G` is a subgraph of `S` and `X`.
 
-* `(G subgraph-of S)` and `(G subgraph-of X)` are both true, if `(G := (S & X))`
+* if `(G := (S & X))` => `(G subgraph-of S)` and `(G subgraph-of X)`
 
 Two graphs `S` and `X` are said to **intersect** (each other), if their
 intersection graph `(S & X)` is unequal to the empty graph `Ø`.
@@ -128,20 +132,23 @@ intersection graph `(S & X)` is unequal to the empty graph `Ø`.
 * `(S intersects X) <-> (X intersects S)`
 * `(S intersects X) <-> (S coupled-with X)`
 
+Note that "intersects" is equivalent to "coupled-with".
+
 <!-- ======================================================================= -->
 ## remarks on - intersection
 
 As above, two intersecting graphs are not necessarily related to each other.
-However, two such graphs are either related, or both overlap each other.
+That is because two such graphs are either related ex-or overlap each other.
 
 * `(S related-to G) -> (S intersects G)` (i.e. if `S` and `G` are non-empty)
 * `(S intersects G) <-> (S related-to G) ex-or (S overlaps G)`
 
-Note that the set of vertices `V` in an intersection graph `G := (S & X)` does
-not allow to determine the set of common edges `E` based on one of the input
-graphs involved. That is, the intersection graph `G` is **not (necessarily)
-an induced subgraph** of one or both of the input graphs (i.e. `(G == S[V])`
-and `(G == X[S])` are both not necessarily true).
+The set of vertices `V` in an intersection graph `G := (S & X)` does not allow
+to determine the set of common edges `E` based on one of the input graphs. That
+is, the intersection graph `G` is not (necessarily) an induced subgraph of one
+or both of the input graphs (i.e. `(G == S[V])` and `(G == X[S])` are both not
+necessarily true). Because of that, the set of common edges must be determined
+by comparing both sets of edges in the given input graphs.
 
 Example 1: The intersection graph `G := (S & X)` for `S := ({1,2},{(1,2)})`,
 `X := ({1,2},{(2,1)})` is `G := ({1,2},{})`. That is, `G` is not an induced
