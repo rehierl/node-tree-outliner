@@ -5,6 +5,7 @@
 Just a listing of commits which I have uploaded to github.
 Any other commit was a private (i.e. non-public) commit.
 
+* 2018-10-04 - commit ....... - border graph
 * 2018-08-27 - commit 2d911d4 - hierarchy of set, substantial revision
 * 2018-06-11 - commit 1dcbe9a - hierarchies of sets/sequences
 * 2018-05-22 - commit 586ca80 - minor intermediate commits
