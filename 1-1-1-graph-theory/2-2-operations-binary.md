@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # Binary operations on graphs
 
+* simple and comparison-based binary operations
+
 <!-- ======================================================================= -->
 ## equal, unequal, distinct
 

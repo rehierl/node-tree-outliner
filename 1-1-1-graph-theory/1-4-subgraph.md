@@ -94,7 +94,7 @@ the other.
 Note that there is no definition (possible) for "strictly unrelated".
 
 <!-- ======================================================================= -->
-## induced subgraph
+## induced subgraph (V)
 
 An **induced subgraph** `S := (T,U)` is formed from another graph `G := (V,E)`
 by removing some of its vertices. In addition to that, the edge-subset `U` is
@@ -105,9 +105,9 @@ whose endpoints are both in `T`.
 * i.e. `U` contains all those edges in `E` whose endpoints are both in `T`
 * i.e. `S` is a subgraph of `G`, induced by its vertex-subset `T`
 
-Note that, in the context of relations, an induced subgraph represents the
-restricted relation of its super-graph. That is, restricted to the given
-subset of vertices.
+Note that, in the context of relations, an induced subgraph represents a
+restriction of its super-relation. That is, restricted to the given subset
+of vertices.
 
 Note that there is in general no requirement or limitation as to how the subset
 of vertices `T` is formed. And because `T` may contain disconnected vertices,
@@ -119,6 +119,18 @@ Because of that, the term "induced" is understood as: The resulting graph is
 created "based on a given set of vertices", and "based on a certain rule which
 allows to uniquely determine all the edges in the resulting graph".
 
+Note that a non-empty graph `S`, that is a subgraph of `G`, is also a subgraph
+of the graph induced by the vertex-set of `G` (i.e. `G[V(G)]`). In general, if
+`S` is a subgraph of an induced subgraph `G[X]` (i.e. induced by a subset of
+the vertices in `G`), then `S` is also subgraph of `G` itself. The converse is
+not in general true because, if `S` is a subgraph of `G`, then `S` is not a
+subgraph to all possible induced subgraphs of `G`. However, at least one such
+induced induced subgraph always exist.
+
+* `(S subgraph-of G) <- (S subgraph-of G[X])`
+* `(S subgraph-of G) <-> (S subgraph-of G[V(G)])`
+* `(S subgraph-of G) <-> (S subgraph-of G[V(S)])`
+
 A **strict/proper induced subgraph** `S` is an induced subgraph formed from
 a graph `G` by removing at least one vertex - i.e. `(#T < #V)`.
 
@@ -127,11 +139,11 @@ its super-graph - i.e. not necessarily `(#U < #E)`. That is because a proper
 induced subgraph may be formed by removing only isolated vertices.
 
 <!-- ======================================================================= -->
-## induced-subgraph-of
+## induced-subgraph-of (V)
 
 As before, an induced-subgraph-of operator can be defined as follows:
 
-* where `S := (T,U)` and `G := (V,E)`
+* for `S := G[T]` where `S := (T,U)` and `G := (V,E)`
 * `(S induced-subgraph-of G)` is true, if the following conditions hold:
 * (1) `(S subgraph-of G)` is true
 * (2) `(U == { (e in E) | (E(e) subset-of T) })` is true
@@ -144,3 +156,35 @@ Likewise, a proper/strict-induced-subgraph-of operator can be defined:
 * synonymous - proper-induced-subgraph-of
 
 Note that (4) can be simplified as `(#T < #V)`.
+
+<!-- ======================================================================= -->
+## induced subgraph (E)
+
+The above definition of an induced subgraph `S` may be referred to as being
+**induced by a subset of vertices** (i.e. `S := G[V]`) such that the vertex
+set in `S` holds all those vertices in `V` that are also vertices in `V(G)`
+(i.e. `V(S) == (V(G) & V)`). Consequently, the "fixed" rule then is to take
+all those edges in `G` that have both of their endpoints in `V(S)`.
+
+* `S := G[V] := (T,U)` where `T := (V(G) & V)` and
+* `U := { (e in E(G)) | (E(e) subset-of T) }`
+
+Similar to that, an induced subgraph `S` can be defined based upon a subset
+of edges `E` (i.e. `S := G[E]`): An induced subgraph, **induced by a subset
+of edges** `E`, is a subgraph of `G` such that the edge set in `S` holds all
+those edges in `E` that are also edges in `E(G)` (i.e. `E(S) == (E(G) & E)`).
+Consequently, the "fixed" rule then is to take all those vertices in `G` that
+are endpoints to one or more edges in `E(S)`.
+
+* `S := G[E] := (T,U)` where `U := (E(G) & E)` and
+* `T := { (v in V(G)) | (v endpoint-of e) for some (e in U) }`
+
+Note that `G[E]` can not have any disconnected vertices. Hence, `G[E(G)]` may
+be used to refer to the maximal subgraph of `G` that has no isolated vertices.
+Note however that `G[E]` may itself still be disconnected as it may have more
+than one maximal component with two or more vertices.
+
+Note that `V(S)` in `S := G[T]` is not necessarily equal to `T`. Likewise,
+`E(S)` is not necessarily equal to `E` in `S := G[E]`. In general both sets
+are assumed to be equivalent because the input sets are in general expected
+to be reduced to the appropriate elements (i.e. no element not in `G`).

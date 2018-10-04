@@ -2,6 +2,8 @@
 <!-- ======================================================================= -->
 # Binary operations on graphs
 
+* removal-based binary operations
+
 <!-- ======================================================================= -->
 ## options to define the graph difference (\)
 
@@ -28,7 +30,7 @@ while maintaining the vertices in `G`.
 
 Recall that the endpoints of an edge in a graph are both vertices in a graph's
 set of vertices. Because of that, an edge in `S` can only be removed from `G`,
-if `G` itself contains the corresponding edge and both of its endpoints.
+if `G` contains the corresponding edge and both of its endpoints.
 
 Example 1: The graph difference `T := (G \ S)` for `G := ({1,2},{(1,2),(2,1)})`,
 `S := ({1,2},{(1,2)})` under that option is `T := ({1,2},{(2,1)})`.
@@ -48,13 +50,12 @@ the universal set of elements, an edgeless graph of vertices.
 This option is intended to remove all the vertices in `S` from the set of
 vertices in `G`, while maintaining the set of edges in `G`.
 
-However, the endpoints of any edge `e` in a graph `G := (V,E)` must still be
-elements in `V` (i.e. `(E(e) subset-of V)`). Because of that, and if a vertex
-`(v in V)` would have to be removed, then any edge `(e in E)` that has `v` as
-one of its endpoints, must be implicitly removed. That is, because the result
-of such an operation would otherwise not be a graph. Consequently, the removal
-of all the vertices in `S` must also result in the implicit removal of any
-incident edge.
+Recall that the endpoints of any edge `e` in a graph `G := (V,E)` must both
+still be elements in `V` (i.e. `(E(e) subset-of V)`). Because of that, and if
+a vertex `(v in V)` would have to be removed, then any edge `(e in E)` incident
+to `v`, must also be implicitly removed. That is, because the result of such
+an operation would otherwise not be a graph. Consequently, the removal of all
+vertices in `S` also results in the implicit removal of any incident edge.
 
 Example: The graph difference `T := (G \ S)` for `G := ({1,2,3},{(1,2),(2,3)})`,
 `S := ({1},{})` under that option is `T := ({2,3},{(2,3)})`.
@@ -78,7 +79,8 @@ Example: The graph difference `T := (G \ S)` for `G := ({1,2,3},{(1,2),(2,3)})`,
 
 Due to the above explanations, there are only two options available that allow
 to define the difference between two graphs. Because of that, option-1 will be
-referred to as the **edge-based**, and option-2 as the **vertex-based** view.
+referred to as the **edge-based**, and option-2 as the **vertex-based** view or
+definition.
 
 The difference graph of `(G \ G)` under the edge-based definition is an edgeless
 graph of vertices (i.e. one component per vertex). In contrary to that, the
@@ -88,14 +90,9 @@ definition of the relationship between a graph and its subgraphs as it appears
 to be "closer" to the difference between simple sets of elements.
 
 * `(G diff S) := (V,E)` where `V := (V(G) \ V(S))` and
-* `E := { (x,y) in E(G) | (x !in V(S)) or (y !in V(s)) }`
+* `E := { (x,y) in E(G) | (x,y !in V(S)) }`
 * `(G \ S), (G - S), (G sub S) := (G diff S)`
 * i.e. **the vertex-based definition**
-
-Alternatively, the vertex-based definition of the graph difference can be
-defined as an induced subgraph:
-
-* `(G diff S) := G[ V(G) \ V(S) ]`
 
 Note that ...
 
@@ -104,25 +101,25 @@ Note that ...
 * `((G \ Ø) == G)`
 * `((G \ S) disjoint-to S)`
 
-Note however that the union `T` of a difference graph `(G \ S)` with the
-subtracted graph `S` is not necessarily equivalent to the initial graph `G`.
-That is due to the required implicit removal of incident edges.
+Note that `(G \ S)` can be defined as an induced subgraph of `G`:
 
-* `G <=!=> T`, if `T := ((G \ S) + S)`
-* `(T subgraph-of G)` is always true
-* and `(T proper-subgraph-of G)` may be true
+* `(G diff S) := G[V(G) \ V(S)]`
 
-Note that `S` is not required to be a subgraph of `G`. Likewise, `S` may
-overlap `G`, or both graphs may even be disjoint from one another.
+In `T := (G \ S)`, `S` is not required to be a subgraph of `G`. Likewise, `S`
+may overlap `G`, or both graphs may even be disjoint from one another. However,
+in the context of this discussion, the intersection between `S` and `G` is
+assumed to be non-empty. Furthermore, `S` is assumed to be reduced to that
+intersection, which is why `S` is assumed to have no elements (vertices and/or
+edges) outside of `G`. Thus, `S` is assumed to be a non-empty subgraph of `G`.
 
 <!-- ======================================================================= -->
 ## symmetric difference (^, xor, ex-or)
 
-With the vertex-based definition of the difference graph, the symmetric
-difference between two graphs can be defined "similar" to the symmetric
-difference between two simple sets of elements.
+With the above vertex-based definition, the symmetric difference between two
+graphs can be defined "similar" to the symmetric difference between two simple
+sets of elements.
 
-* `(G ex-or S) := (G \ S) or (S \ G)`
+* `(G ex-or S) := (G \ S) + (S \ G)`
 * `(G ^ S), (G xor S) := (G ex-or S)`
 
 **TODO** - any applications/use?

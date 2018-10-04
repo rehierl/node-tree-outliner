@@ -119,7 +119,7 @@ properties
 <!-- ======================================================================= -->
 ## wikipedia, symmetric difference (^, xor, ex-or)
 
-* `(A ex-or B) := { x | x in (A\B or B\A) }`
+* `(A ex-or B) := (A \ B) + (B \ A)`
 * `(A ^ B), (A xor B) := (A ex-or B)`
 
 clarification
