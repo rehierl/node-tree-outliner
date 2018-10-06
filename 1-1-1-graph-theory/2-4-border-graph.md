@@ -40,16 +40,15 @@ is defined by its set of edges (i.e. `(IBG(G,S) == G[E])`).
 Note that the endpoints of each edge in `IBG` are vertices in `S` and `G`.
 Because of that, each edge in `IBG` can be said to begin in `G` and to end in
 `S`. All of these edges can however also be said to begin in `S` and to end
-in `G`. The orientation of the edges in `IBG` is therefore unclear. Hence, an
-inner border graph `IBG` does not allow to clarify the relationship between a
-super-graph and its sub-graph. Because of that, an empty inner border graph is
-better than a non-empty one.
+in `G`. The orientation, with regards to `S` and `G`, of the edges in `IBG` is
+therefore unclear. Hence, an inner border graph `IBG` does not allow to clarify
+the relationship between a super-graph and its sub-graph.
 
 <!-- ======================================================================= -->
 ## outer border graph (OBG)
 
 The second aspect of `(G <=!=> T)` is that `G` may contain edges that connect
-`(G \ S)` with `G[V(S)]`. Such edges however do not exist, if `G[V(S)]` is a
+`(G \ S)` with `G[V(S)]`. However, such edges do not exist, if `G[V(S)]` is a
 maximal component in `G`.
 
 Note that the **outer border graph** `OBG(G,S)` can be defined as follows:
@@ -61,12 +60,12 @@ Note that the **outer border graph** `OBG(G,S)` can be defined as follows:
 * note - `(OBG(A,B) == OBG(B,A))`
 
 That is, the outer border graph `OBG` is a subgraph of `G` such that each edge
-is an edge in `G` where one of the endpoints is in `(G \ S)` and the other in
-`S`. That is, each edge in `OBG` leads from one subgraph to another. As before,
-the set of vertices in `OBG` is defined by the set of its edges (i.e.
+in it is an edge in `G` where one of its endpoints is in `(G \ S)` and the
+other in `S`. That is, each edge in `OBG` leads from one subgraph to another.
+As before, the set of vertices in `OBG` is defined by the set of its edges (i.e.
 `(OBG(G,S) == G[E])`).
 
-Note that an outer border graph `OBG` has two subgraphs: One that is reduced
+Note that an outer border graph `OBG` has two subgraphs: One that is limited
 to all the edges that point inwards from `(G \ S)` to `S` (i.e. `Ei`, aka.
 `OBGi`), and one that is reduced to all the edges that point outwards from
 `S` to `(G \ S)` (i.e. `Eo`, aka. `OBGo`). That is, these two subgraphs have
@@ -80,7 +79,8 @@ Note that `S` may be considered a **source** of `G`, if `(OBGi == Ø)` and
 `(OBGo != Ø)` are both true. Likewise, `S` may be considered a **sink** of `G`,
 if `(OBGi != Ø)` and `(OBGo == Ø)`. Hence, `S` may be considered **internal**
 to `G`, if `(OBGi != Ø)` and `(OBGo != Ø)`. Finally, `S` may be considered to
-be **disconnected** from `(G \ S)`, if `(OBGi == Ø)` and `(OBGo == Ø)`.
+be **disconnected** from `(G \ S)`, if `(OBGi == Ø)` and `(OBGo == Ø)`. In the
+last case, `S` is a subgraph of a maximal component in `G`.
 
 <!-- ======================================================================= -->
 ## border graph (BG)
@@ -88,20 +88,21 @@ be **disconnected** from `(G \ S)`, if `(OBGi == Ø)` and `(OBGo == Ø)`.
 In the context of this discussion, `S` is in general formed as an induced
 subgraph of `G` (i.e. `(G[V(S)] == S)`). Because of that, `S` contains all
 the edges in `G` that have both of their endpoints in `S`. Because of that,
-the inner border graph `IBG(G,S)` is assumed to be empty.
+the inner border graph `IBG(G,S)` is expected to be empty.
 
 * `(S == G[V(S)]) -> (IBG(G,S) == Ø)`
 
 Because of that, the term **border graph** `BG(G,S)` (or simply `BG`) is in
 general used to refer to the outer border graph `OBG(G,S)` (i.e. `(BG := OBG)`).
 
-Similar to the above, `S` is in general formed as a proper induced subgraph
-of `G`. The outer border graph between the two is therefore not required to
-be empty or to even hold a single edge.
+Similar to that, `S` is in general formed as a proper induced subgraph of `G`.
+The outer border graph between the two is therefore not required to be empty
+or to even have a single edge. That is, such a subgraph may or may not be a
+maximal component in `G`.
 
 Note that `(G == T)` is true if, and only if `S` is an induced subgraph of
 `G` (i.e. `(S == G[V(S)])`) and if `S` represents a maximal component in `G`.
-That is, `G` is any other case unequal to `T`.
+That is, `G` is in any other case unequal to `T`.
 
 * in general `(G == T + IBG(G,S) + OBG(G,S))`
 * `(G != T)` if `(IBG != Ø)` and/or `(OBG != Ø)`
@@ -138,7 +139,7 @@ super-graph G              sub-graph S
 * IBG: `V(IBG) := {3}` and `E(IBG) := {(3,3)}`
 * OBG: `V(OBG) := {1,2}` and `E(OBG) := {(1,2)}`
 
-In this particular example, note that ...
+Note that, in this particular example, ...
 
-* `(S != G[V(S)])`
+* `(S != G[V(S)])`, i.e. due to edge `(3,3)`
 * `(OBGo == Ø)` and `(OBG == OBGi)`

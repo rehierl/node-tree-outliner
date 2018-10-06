@@ -184,12 +184,16 @@ In contrary to that:
 * i.e. `pEc <-> (p parent-of c) <-> (c child-of p)`
 * i.e. each edge is upward-oriented
 
+Note that, in both cases, the semantics of each edge is oriented in the
+direction of the corresponding edge. That is, the edges have consistently
+oriented semantics.
+
 Note that, if all edges are inverted (i.e. `child-of` semantics), the resulting
 oriented graph would in general no longer be a tree. That is, because the
 structure would then have one or more root nodes (i.e. the former leaf nodes)
 and always one, and only one leaf node (i.e. the former root). Consequently,
 and if non-linear, that structure would not correspond with the definition of
-an arborescence. Hence, a tree must have the `parent-of` semantics.
+an arborescence. Hence, such a tree must have the `parent-of` semantics.
 
 <!-- ======================================================================= -->
 ## remarks

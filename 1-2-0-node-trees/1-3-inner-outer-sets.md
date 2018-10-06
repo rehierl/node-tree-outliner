@@ -14,9 +14,8 @@ the union of a node with its inner set of nodes will be referred to as
 
 * `IS(n) := IN(n) := D(n)`
 * `OS(n) := (IS(n) union {n})`
-* i.e. `(#OS(n) >= 1)` and `OS(n) <=!=> ON(n)`
+* i.e. `(#OS(n) >= 1)` and `(OS(n) != ON(n))`
 * where `ON(n)` is the set of outer nodes of node `n`
-* **TODO** - align `ON()` with `OS()`?
 
 Note that the outer set of a tree's root is identical to the tree's set of
 nodes `N` - i.e. `(OS(r) == N)` if `(r == RN(T))`.
@@ -26,24 +25,25 @@ its outer set. That is, both sets are defined as: "All the nodes that can be
 reached beginning with, and including (or excluding) the defining node".
 
 `IS(n)` and `OS(n)` only differ in the defining node `n`. Because of that, the
-inner set of a node is a strict subset to the node's outer set. In addition to
-that, the outer set of a descendant is a strict subset to the outer sets of its
-ancestors.
+inner set of a node is a strict subset to its outer set. In addition to that,
+the outer set of a descendant `d` of `n` is a strict subset to the outer sets
+of its ancestors.
 
 * `(#IS(n) == #OS(n)-1)`
 * `(IS(n) strict-subset-of OS(n))`
 * `(OS(d) strict-subset-of OS(n))`, if `(d descendant-of n)`
 
 Note that the outer sets of siblings are disjoint. That is because no descendant
-of a node is also a descendant of the node's siblings. For that to be false, a
-node would need to have more than one parent. Because of that, the inner set of
-a node is the disjoint union of the outer sets of its child nodes.
+of a node is also a descendant of the node's siblings. (The rooted paths of both
+nodes split apart in the node's parent). For that to be false, a node would need
+to have more than one parent. Hence, the inner set of a node is the disjoint
+union of the outer sets of its child nodes.
 
 * `(OS(n) disjoint-to OS(s))`, if `(s sibling-of n)`
 * also, `(OS(n) disjoint-to OS(d))`, if `(d descendant-of s)`
 
 Note that, if a parent has one child only, then the parent's inner set is equal
-to the outer set of its only child. Also, the inner sets of leaf nodes are empty.
+to the outer set of its child. The inner sets of leaf nodes are therefore empty.
 
 * `(IS(n) == OS(c))`, if `(CN(n) == {c})`
 * `(IS(l) == {})`, if `(l in LN)` - i.e. `(CN(n) == {})`
@@ -61,35 +61,36 @@ with it:
 * `OS, OS(T) := { OS(n) | (n in N)  }`
 * `(#OS == #N)` - i.e. one outer set per node
 
-Note that, because no outer set is ever empty, the following applies to
-any pair of sets `(s,t in OS)`:
+Note that, because all outer sets are non-empty, the following applies to all
+pairs of sets `(s,t in OS)`:
 
 * `(s disjoint-to t)` ex-or `(s related-to t)`
 * `(s disjoint-to t)` ex-or `(s strictly-related-to t)`, if `(s != t)`
 * `(s overlaps t)` is always false
 
 In contrary to that, the defining node `n` of an inner set `IS(n)` is never an
-element of that set. However, a tree `T := (N,E)` may still be understood to
-have a set of inner sets (aka. **the set of inner sets of a tree**) associated
-with it:
+element of such a set. Because of that, a non-empty inner set is unique to its
+defining parent node. Hence, a tree `T := (N,E)` may also be understood to have
+a set of inner sets (aka. **the set of inner sets of a tree**) associated with
+it:
 
 * `IS, IS(T) := { IS(n) | (n in N) }`
 * `(#IS <= #N)` - i.e. not necessarily one set per node
 
 Note that, with regards to the relationships between its sets, `IS(T)` is
 not as clear as `OS(T)`. That is because the inner set of any leaf is empty.
-(Note that the empty set `{}` is disjoint-to and related-to any set). Hence,
-the following applies to all pairs of sets `(s,t in IS)`:
+(Note that the empty set `{}` is disjoint-to, but still related-to any other
+set). Hence, the following applies to all pairs of sets `(s,t in IS)`:
 
 * `(s disjoint-to t)` and/or `(s related-to t)`
 * `(s disjoint-to t)` and/or `(s strictly-related-to t)`, if `(s != t)`
 * `(s overlaps t)` is always false
 
 <!-- ======================================================================= -->
-## a visual aid
+## a visual representation
 
 **Memory hook**
-In order to imagine the set of outer sets `OS(T)`, try these steps:
+In order to imagine the set of outer sets `OS(T)`, try the following:
 
 * Draw a node tree onto a piece of paper.
 * Surround the whole tree with a border.

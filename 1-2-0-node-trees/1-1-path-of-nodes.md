@@ -75,7 +75,7 @@ given node `n` will be referred to as **the set of rooted paths of a node**.
 Any path `(p in P)` in an arborescence represents a downward-oriented path.
 In addition to that, any such path represents an ordered set of nodes.
 
-That is because no such path contains any loops or cycles and therefore also
+That is because no such path contains even one loop or cycle and therefore also
 no repeated nodes. Because of that, the length of a path's sequence of nodes
 in `P` is equal to the number of nodes in the set of its elements `E(p)` (i.e.
 `(#E(p) == #p)`). Consequently, and if the index order of such a path is taken
@@ -88,22 +88,22 @@ Any node `(n in N\RN)` is connected to the root `r` via a unique rooted path
 That is because ...
 
 * each rooted tree has a root `r`, and one root only
-* each node `(n in N\RN)` has a parent, and one parent only
-* each edge `(e in E)` is strictly downward oriented
-* i.e. a tree has no loops and no cycles
+* each non-root node `n` has a parent, and one parent only
 * => a tree consists of a single connected component
-* => only one path can be formed that begins in `r` and ends in `n`
+* each edge `(e in E)` is oriented away from the root
+* => a tree has no loops and no cycles
+* => only one rooted path `rp(n)` can be formed per node `n`
 
 Because of that, `rp(n)` will be referred to as **the rooted path of a node**.
 
 * for all `(n in N)` ...
 * `RP(n) := { rp(n) }`
-* `(#RP == #N)`
 * `(#RP(n) == 1)`
 * `rPn` is true
+* `(#RP == #N)`
 
 Note that all rooted paths have finite length (i.e. `(#rp(n) <= #N)`).
 
 **CLARIFICATION**
-Any tree consists of a single connected, non-empty component.
+Any non-empty tree consists of a single connected component.
 That is because each node in a tree is connected to the root.

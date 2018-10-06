@@ -47,10 +47,10 @@ be said about the relationship between the nodes of a path:
 
 Based on such paths, the following subsets of `N` can be defined:
 
-* `AN := { a | aPn for one or more (n in N) }`
+* `AN := { a | aPn for some (n in N) }`
 * i.e. the set of all ancestor nodes
 * i.e. each `(a in AN)` is an ancestor
-* `DN := { d | nPd for one or more (n in N) }`
+* `DN := { d | nPd for some (n in N) }`
 * i.e. the set of all descendant nodes
 * i.e. each `(d in DN)` is a descendant
 
@@ -66,7 +66,7 @@ Similar to that, the following functions can be defined:
 With regards to downward-oriented paths:
 
 * `p := (n1,...,ni,...,nk)` where `(p in P)`
-* `(n(i-j) ancestor-of ni)` for `(j in [1,*])`
+* `(n(i-j) ancestor-of ni)` for `(j in [1,(i-1)])`
 * `(n(i+j) descendant-of ni)` for `(j in [1,*])`
 
 With regards to `AN`:
@@ -96,11 +96,11 @@ The set of nodes `DD(n) := D(n) \ C(n)` that are descendants, but no child to
 a given node `n` may be referred to as "the distant descendants of a node".
 
 <!-- ======================================================================= -->
-## the structure of rooted paths
+## a recursive definition of rooted paths
 
 In a rooted path, any edge is downward oriented (i.e. from an ancestor towards
 its descendants). Because of that, the ancestors `A(n)` of a node `n` are all
-presequent to that node in its rooted path:
+presequent to that node in the node's rooted path:
 
 * `(A(n) union {n}) == E(rp(n))`
 * `rp(n) := (prefix × n)` where `(E(prefix) == A(n))`
@@ -115,7 +115,7 @@ a node. That is, `p` is subordinate to any other ancestor in `A(n)`:
 
 A tree's root `r` is the most significant ancestor of all other nodes.
 
-* `(r ancestor-of n)` is true for all `(n in N\RN)`
+* `(r ancestor-of n)` is true for all non-root nodes `(n in N\RN)`
 
 <!-- ======================================================================= -->
 # inner/outer node of a node
@@ -126,52 +126,60 @@ the nodes in `N` can be classified with regards to a given node `n`:
 The set of descendants `D(n)` of a node `n` may be referred to as **the inner
 nodes of a node** `IN(n)`. And because each node has an "inside", any node can
 be understood to have an "outside". The set of nodes that are not inner nodes
-to a given node, including the node itself, can therefore be referred to as
-**the outer nodes of a node** `ON(N)`.
+to a given node, excluding the node itself, may therefore be loosely referred
+to as **the outer nodes of a node** `ON(N)`.
 
 * `IN(n) := D(n)`
 * `ON(n) := (N \ IN(n) \ {n})`
+* i.e. `(n !in IN(n))` and `(n !in ON(n))`
+* i.e. `{n} == ((N \ IN(n)) \ ON(n))`
 * `(A(n) subset-of ON(n))`
 * i.e. `(#A(n) <= ON(n))`
 
-Note that `A(n)` and `ON(n)` are not necessarily identical.
+Note that ...
+
+* `n` is neither an inner node, nor an outer node to itself
+* `(#A(n) <= #ON(n))`, i.e. both sets are not necessarily identical
 
 <!-- ======================================================================= -->
-## contains, inside-of, outside-of
+## nodes - contains, inside-of, outside-of
 
 A node `x` is said to **contain** node `y`,
-iff `(y in IN(x))`. That is, `y` is an inner node of `x`.
+if `(y in IN(x))`. That is, `y` is an inner node of `x`.
 
 * `(x in y) := (y in IN(x))`
 * `(x contains y) := (x in y)`
 * `xPy` is true, iff `(x contains y)`
 
 A node `x` is said to be **(located) inside of** node `y`,
-iff `(x in IN(y))`. That is, `x` is an inner node of `y`.
+if `(x in IN(y))`. That is, `x` is an inner node of `y`.
 
 * `(x inside-of y) := (x in IN(y))`
 * `(x inside-of y) := (y contains x)`
 * `(x inside-of y) := (IN(x) subset-of IN(y))`
 
 A node `x` is said to be **(located) outside of** node `y`,
-iff `(x in (N \ IN(y) \ {y}))`.
+if `(x in (N \ IN(y) \ {y}))`.
 That is, `x` is not inside-of and not equal-to `y`.
 
 * `(x outside-of y) := (x !in y) and (x != y)`
 * `(x outside-of y) <=!=> not (x inside-of y)`
 
 Note that both definitions (i.e. inside-of, outside-of) provide a sense of
-direction (i.e. inwards, outwards) with regards to the corresponding node.
+direction (i.e. inwards, outwards) with regards to a given node.
 
 <!-- ======================================================================= -->
-## coupled, disjoint, overlap
+## nodes - coupled, disjoint, overlap
 
-Two distinct nodes `x` and `y` are said to be **coupled** with each other,
-if one contains the other.
+Two distinct nodes `x` and `y` are said to be **coupled** with each other, if
+one contains the other. That is, one node is an inner node (aka. a descendant)
+of the other.
 
 * `(x coupled-with y) := (xPy or yPx)`
-* i.e. coupled-with has no orientation
 * `(x coupled-with y) := (x in E(rp(y))) or (y in (E(rp(x)))`
+* `(x coupled-with y) := (x in IN(y)) or (y in IN(x))`
+* `(x coupled-with y) := (IN(x) coupled-with IN(y))`
+* i.e. coupled-with has no orientation
 
 Two distinct nodes `x` and `y` are said to be **disjoint** from one another,
 if both nodes are not coupled with each other:
@@ -180,19 +188,20 @@ if both nodes are not coupled with each other:
 * i.e. disjoint-from has no orientation
 * disjoint <=> not coupled
 
-Put differently, the sets of nodes `IN(x)` and `IN(y)` of two disjoint nodes
-`x` and `y` are disjoint. That is, both nodes have no descendants in common.
+Less accurately, the sets of inner nodes of two disjoint nodes `x` and `y`
+(i.e. `IN(x)` and `IN(y)`) are disjoint. That is, both nodes have no descendants
+in common.
 
 Furthermore, if `(y in x)`, then any descendant `d` of `y` is also a descendant
 of `x`. That is because any rooted path `rp(d)` contains `x` and `y` such that
-`(x presequent-to y)`. Hence, any `(d in IN(x))` for all `(d in IN(y))`.
+`(x presequent-to y)`. Therefore, `(d in IN(x))` is true for all `(d in IN(y))`.
 Consequently, `(IN(y) strict-subset-of IN(x))` because `y` is also a descendant
 of `x`, but no descendant to itself.
 
-Because of that, both sets of inner nodes `IN(x)` and `IN(y)` of two distinct
-nodes `x` and `y` in a tree are either strictly related (i.e. one is a strict
-subset of the other) ex-or both sets are disjoint. That is, both nodes can not
-be understood to **overlap** each other.
+Because of that, two sets of inner nodes `IN(x)` and `IN(y)` in a tree are
+either strictly related (i.e. one is a strict subset of the other) ex-or both
+sets are disjoint. That is, both nodes can not be understood to **overlap**
+each other.
 
 Recall that two sets of elements are said to overlap each other, if both sets
 have one or more elements in common, but none is a subset of the other.

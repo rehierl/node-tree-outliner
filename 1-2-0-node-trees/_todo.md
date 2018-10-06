@@ -2,6 +2,12 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+the start/end tags don't represent the visit of a node -
+a node is being visited beginning with its start tag
+and until its end tag - i.e. throughout the entire time
+
+tags are like nested parenthesis/intervals
+
 restriction (relations) vs. induced subgraph
 
 define endpoints of a path -
