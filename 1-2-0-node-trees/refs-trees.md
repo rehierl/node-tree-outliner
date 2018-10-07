@@ -16,10 +16,3 @@ graph/tree types
 * [wikipedia, trémaux/normal tree](https://en.wikipedia.org/wiki/Tr%C3%A9maux_tree)
 * [wikipedia, recursive tree](https://en.wikipedia.org/wiki/Recursive_tree)
 * [wikipedia, radial tree](https://en.wikipedia.org/wiki/Radial_tree)
-
-graph/tree traversal
-
-* [wikipedai, graph traversal](https://en.wikipedia.org/wiki/Graph_traversal)
-* [wikipedia, tree traversal](https://en.wikipedia.org/wiki/Tree_traversal)
-* [wikipedia, depth-first search](https://en.wikipedia.org/wiki/Depth-first_search)
-* [wikipedia, breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search)

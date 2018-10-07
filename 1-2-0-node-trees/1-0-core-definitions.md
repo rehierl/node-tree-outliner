@@ -196,6 +196,19 @@ and if non-linear, that structure would not correspond with the definition of
 an arborescence. Hence, such a tree must have the `parent-of` semantics.
 
 <!-- ======================================================================= -->
+## a forest of trees
+
+A forest (of trees) `F` is a disjoint union of trees:
+
+* `F := (N,E)`
+* `N` is the possibly empty set of nodes
+* `(E subset-of N×N)` is the possibly empty set of edges
+* such that `(E(e) subset-of N)` for any `(e in E)`
+* i.e. both endpoints of each edge are nodes in `N`
+
+Note that each (maximal) connected component must be a tree as defined above.
+
+<!-- ======================================================================= -->
 ## remarks
 
 Note that the `parent-of` relation can not be seen as a function: not right
