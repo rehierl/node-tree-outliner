@@ -12,3 +12,5 @@ Put differently, what effects does it have, if such descendants are omitted?
 
 **TODO** - In order to answer that question,
 further considerations need to be taken into account.
+
+Recall that all the elements of a subset must also be elements of a superset.

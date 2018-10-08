@@ -2,11 +2,13 @@
 <!-- ======================================================================= -->
 # border graph
 
+* (/see/ "border graphs" in "node trees")
+
 The union `T` of the difference graph `(G \ S)` with the subtracted graph `S`
 is not necessarily equal to `G` (i.e. it may be, but it does not have to be).
 That is due to the required implicit removal of incident edges.
 
-* `G <=!=> T`, where `T := ((G \ S) + S)`
+* `(G <=!=> T)`, where `T := ((G \ S) + S)`
 * `(T subgraph-of G)` is always true
 * `(T proper-subgraph-of G)` is not necessarily true
 
@@ -23,8 +25,7 @@ subgraph of `G` (i.e. if `(S == G[V(S)])`).
 * `(S subgraph-of G) <-> (S subgraph-of G[V(S)])`
 * `(S subgraph-of G) =!> (S proper-subgraph-of G[V(S)])`
 
-Note that the **inner border graph** `IBG(G,S)`, that reduces `G` to the above
-subset of edges, can be defined as follows:
+The **inner border graph** `IBG(G,S)` can be defined as follows:
 
 * `IBG, IBG(G,S) := (V,E)` where
 * `E := { (e in E(G)) | (e !in E(S)) and (E(e) subset-of V(S)) }`
@@ -40,18 +41,18 @@ is defined by its set of edges (i.e. `(IBG(G,S) == G[E])`).
 Note that the endpoints of each edge in `IBG` are vertices in `S` and `G`.
 Because of that, each edge in `IBG` can be said to begin in `G` and to end in
 `S`. All of these edges can however also be said to begin in `S` and to end
-in `G`. The orientation, with regards to `S` and `G`, of the edges in `IBG` is
-therefore unclear. Hence, an inner border graph `IBG` does not allow to clarify
-the relationship between a super-graph and its sub-graph.
+in `G`. The orientation, with regards to `S` and `G`, of the edges in `IBG`
+is therefore unclear. Hence, an inner border graph `IBG` does not allow to
+clarify the relationship between a super-graph and its sub-graph.
 
 <!-- ======================================================================= -->
 ## outer border graph (OBG)
 
 The second aspect of `(G <=!=> T)` is that `G` may contain edges that connect
-`(G \ S)` with `G[V(S)]`. However, such edges do not exist, if `G[V(S)]` is a
-maximal component in `G`.
+`(G \ S)` with `G[V(S)]`. However, such edges do not exist, if `G[V(S)]` is
+a maximal component in `G`.
 
-Note that the **outer border graph** `OBG(G,S)` can be defined as follows:
+The **outer border graph** `OBG(G,S)` can be defined as follows:
 
 * `OBG, OBG(G,S) := (V,E)` where `E := (Ei + Eo)` such that
 * `Ei := { ((x,y) in E(G)) | (x in (V(G) \ V(S)) and (y in V(S)) }`
@@ -59,11 +60,11 @@ Note that the **outer border graph** `OBG(G,S)` can be defined as follows:
 * `V := { (v in V(G)) | (v endpoint-of e) for some (e in E(OBG)) }`
 * note - `(OBG(A,B) == OBG(B,A))`
 
-That is, the outer border graph `OBG` is a subgraph of `G` such that each edge
-in it is an edge in `G` where one of its endpoints is in `(G \ S)` and the
-other in `S`. That is, each edge in `OBG` leads from one subgraph to another.
-As before, the set of vertices in `OBG` is defined by the set of its edges (i.e.
-`(OBG(G,S) == G[E])`).
+That is, the outer border graph `OBG` is a subgraph of `G` such that each
+edge in it is an edge in `G` where one of its endpoints is in `(G \ S)` and
+the other in `S`. That is, each edge in `OBG` leads from one subgraph to
+another. As before, the set of vertices in `OBG` is defined by the set of
+its edges (i.e. `(OBG(G,S) == G[E])`).
 
 Note that an outer border graph `OBG` has two subgraphs: One that is limited
 to all the edges that point inwards from `(G \ S)` to `S` (i.e. `Ei`, aka.
@@ -114,26 +115,27 @@ That is, `G` is in any other case unequal to `T`.
 Given the following two graphs, ...
 
 ```
-super-graph G              sub-graph S
-=============              ===========
-1 -> 2 -|-> 3 <-> 3        2 -|-> 3
-        |-> 4                 |-> 4
+super-graph G         sub-graph S
+=============         ===========
+1 -> 2 -|-> 3*        2 -|-> 3
+        |-> 4            |-> 4
 ```
 
+* note - `*` in `3*` represents a reflexive edge (i.e. `(3,3)`)
 * G: `V(G) := {1,2,3,4}` and `E(G) := {(1,2),(2,3),(2,4),(3,3)}`
 * S: `V(S) := {2,3,4}` and `E(S) := {(2,3),(2,4)}`
 
 ... the corresponding border graphs are as follows:
 
 ```
- |= G ===========================|
- |        |= S ================| |
- | |= OBG ====|    |= IBG ===| | |
- | | 1 -> | 2 | -> | 3 <-> 3 | | |
- | |==========|    |=========| | |
- |        |     -> 4           | |
- |        |====================| |
- |===============================|
+ |= G =========================|
+ |        |= S ==============| |
+ | |= OBG ====|    |= IBG =| | |
+ | | 1 -> | 2 | -> | 3*    | | |
+ | |==========|    |=======| | |
+ |        |     -> 4         | |
+ |        |==================| |
+ |=============================|
 ```
 
 * IBG: `V(IBG) := {3}` and `E(IBG) := {(3,3)}`
@@ -141,5 +143,5 @@ super-graph G              sub-graph S
 
 Note that, in this particular example, ...
 
-* `(S != G[V(S)])`, i.e. due to edge `(3,3)`
+* `(S != G[V(S)])` - obviously due to edge `(3,3)`
 * `(OBGo == Ø)` and `(OBG == OBGi)`
