@@ -5,8 +5,8 @@
 * (/see/ "border graphs" in "node trees")
 
 The union `T` of the difference graph `(G \ S)` with the subtracted graph `S`
-is not necessarily equal to `G` (i.e. it may be, but it does not have to be).
-That is due to the required implicit removal of incident edges.
+may be (but does not have to be) equal to `G`. That is due to the implicit
+removal of incident edges.
 
 * `(G <=!=> T)`, where `T := ((G \ S) + S)`
 * `(T subgraph-of G)` is always true
@@ -17,9 +17,9 @@ That is due to the required implicit removal of incident edges.
 
 One aspect of `(G <=!=> T)` is that the "interior" of `S` in `G` may have more
 edges than `S` (e.g. `G` has loops, but `S` does not). That is, if `S` is a
-subgraph of `G`, then `S` may be a proper subgraph of the graph induced by
-the vertex-set `V(S)`. Such edges however do not exist, if `S` is an induced
-subgraph of `G` (i.e. if `(S == G[V(S)])`).
+subgraph of `G`, then `S` may be a proper subgraph of the graph induced by the
+vertex-set `V(S)`. These additional edges however do not exist, if `S` is an
+induced subgraph of `G` (i.e. if `(S == G[V(S)])`).
 
 * `G[V(S)] <=!=> S`
 * `(S subgraph-of G) <-> (S subgraph-of G[V(S)])`
@@ -60,17 +60,17 @@ The **outer border graph** `OBG(G,S)` can be defined as follows:
 * `V := { (v in V(G)) | (v endpoint-of e) for some (e in E(OBG)) }`
 * note - `(OBG(A,B) == OBG(B,A))`
 
-That is, the outer border graph `OBG` is a subgraph of `G` such that each
-edge in it is an edge in `G` where one of its endpoints is in `(G \ S)` and
-the other in `S`. That is, each edge in `OBG` leads from one subgraph to
-another. As before, the set of vertices in `OBG` is defined by the set of
-its edges (i.e. `(OBG(G,S) == G[E])`).
+That is, the outer border graph `OBG` is a subgraph of `G` such that each edge
+is an edge in `G` such that one of its endpoints is in `(G \ S)` and the other
+in `S`. That is, each edge in `OBG` leads from one subgraph to another. As
+before, the set of vertices in `OBG` is defined by the set of its edges (i.e.
+`(OBG(G,S) == G[E])`).
 
-Note that an outer border graph `OBG` has two subgraphs: One that is limited
-to all the edges that point inwards from `(G \ S)` to `S` (i.e. `Ei`, aka.
-`OBGi`), and one that is reduced to all the edges that point outwards from
-`S` to `(G \ S)` (i.e. `Eo`, aka. `OBGo`). That is, these two subgraphs have
-disjoint sets of edges.
+Note that an outer border graph `OBG` has two subgraphs: One restricted to all
+the edges that point inwards from `(G \ S)` to `S` (i.e. `Ei`, aka. `OBGi`),
+and one restricted to all the edges that point outwards from `S` to `(G \ S)`
+(i.e. `Eo`, aka. `OBGo`). Consequently, these two subgraphs have disjoint sets
+of edges.
 
 * `OBG == (OBGi + OBGo)`
 * `(OBGi(A,B) <=!=> OBGi(B,A))`
@@ -79,40 +79,44 @@ disjoint sets of edges.
 Note that `S` may be considered a **source** of `G`, if `(OBGi == Ø)` and
 `(OBGo != Ø)` are both true. Likewise, `S` may be considered a **sink** of `G`,
 if `(OBGi != Ø)` and `(OBGo == Ø)`. Hence, `S` may be considered **internal**
-to `G`, if `(OBGi != Ø)` and `(OBGo != Ø)`. Finally, `S` may be considered to
-be **disconnected** from `(G \ S)`, if `(OBGi == Ø)` and `(OBGo == Ø)`. In the
-last case, `S` is a subgraph of a maximal component in `G`.
+to `G`, if `(OBGi != Ø)` and `(OBGo != Ø)`. And finally, `S` may be considered
+to be **disconnected** from `(G \ S)`, if `(OBGi == Ø)` and `(OBGo == Ø)`.
+
+Note that, in the last case, `S` is the subgraph of the union of maximal
+components in `G`. However, that is not entirely accurate as `S` must have
+all the vertices in that union, but is not required to have all the edges
+in such a union of components.
 
 <!-- ======================================================================= -->
 ## border graph (BG)
 
 In the context of this discussion, `S` is in general formed as an induced
-subgraph of `G` (i.e. `(G[V(S)] == S)`). Because of that, `S` contains all
-the edges in `G` that have both of their endpoints in `S`. Because of that,
-the inner border graph `IBG(G,S)` is expected to be empty.
+subgraph of `G` (i.e. `(S == G[V(S)])`). Because of that, `S` contains all
+the edges in `G` that have both of their endpoints in `S`. As a result, the
+the inner border graph `IBG(G,S)` is in general empty.
 
 * `(S == G[V(S)]) -> (IBG(G,S) == Ø)`
 
-Because of that, the term **border graph** `BG(G,S)` (or simply `BG`) is in
-general used to refer to the outer border graph `OBG(G,S)` (i.e. `(BG := OBG)`).
+Because of that, the term **border graph** `BG(G,S)` (or simply `BG`) is by
+default used to refer to the outer border graph `OBG(G,S)` (i.e. `(BG := OBG)`).
 
 Similar to that, `S` is in general formed as a proper induced subgraph of `G`.
 The outer border graph between the two is therefore not required to be empty
 or to even have a single edge. That is, such a subgraph may or may not be a
 maximal component in `G`.
 
-Note that `(G == T)` is true if, and only if `S` is an induced subgraph of
-`G` (i.e. `(S == G[V(S)])`) and if `S` represents a maximal component in `G`.
-That is, `G` is in any other case unequal to `T`.
+Note that the above union `T` is equal to `G` (i.e. `(G == T)`) if `S` is
+an induced subgraph of `G` (i.e. `(S == G[V(S)])`), and if `S` is a maximal
+component in `G`.
 
-* in general `(G == T + IBG(G,S) + OBG(G,S))`
+* in general `(G == T + IBG(G,S) + OBG(G,S))`, where `(T := (G \ S) + S)`
 * `(G != T)` if `(IBG != Ø)` and/or `(OBG != Ø)`
 * `(G == T)` if `(IBG == Ø)` and `(OBG == Ø)`
 
 <!-- ======================================================================= -->
 ## example
 
-Given the following two graphs, ...
+Given the two graphs, ...
 
 ```
 super-graph G         sub-graph S
@@ -121,11 +125,11 @@ super-graph G         sub-graph S
         |-> 4            |-> 4
 ```
 
-* note - `*` in `3*` represents a reflexive edge (i.e. `(3,3)`)
+* where `*` in `3*` represents a reflexive edge (i.e. `(3,3)`)
 * G: `V(G) := {1,2,3,4}` and `E(G) := {(1,2),(2,3),(2,4),(3,3)}`
 * S: `V(S) := {2,3,4}` and `E(S) := {(2,3),(2,4)}`
 
-... the corresponding border graphs are as follows:
+... the border graphs are as follows:
 
 ```
  |= G =========================|
@@ -143,5 +147,5 @@ super-graph G         sub-graph S
 
 Note that, in this particular example, ...
 
-* `(S != G[V(S)])` - obviously due to edge `(3,3)`
-* `(OBGo == Ø)` and `(OBG == OBGi)`
+* `(S != G[V(S)])` - due to edge `(3,3)`
+* `(OBG == OBGi)` - due to `(OBGo == Ø)`

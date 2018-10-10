@@ -2,6 +2,10 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+is there any other way to form a class of sets -
+such that each set represents the corresponding node -
+i.e. the relationship of each set represents the relationship of each node
+
 the start/end tags don't represent the visit of a node -
 a node is being visited beginning with its start tag
 and until its end tag - i.e. throughout the entire time
