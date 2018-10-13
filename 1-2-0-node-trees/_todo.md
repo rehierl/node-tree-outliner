@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+a hierarchy of trees -
+i.e. a tree of subtrees
+
 is there any other way to form a class of sets -
 such that each set represents the corresponding node -
 i.e. the relationship of each set represents the relationship of each node
