@@ -2,13 +2,16 @@
 <!-- ======================================================================= -->
 # Operations on trees
 
-Any operation on a tree is by definition also an operation on the tree's graph.
-Because of that, and unless stated otherwise, any operation defined for a graph
-can be used in the context of a tree. The following content therefore focuses
-on those aspects that arise, if such operations are executed on node trees.
+Recall that the overall focus is on the subtrees of a single document tree.
+Furthermore, each subtree is understood to be induced by its root node (i.e.
+`S := T[r]`, i.e. `S := T[OS(r)]`).
 
 <!-- ======================================================================= -->
 ## general remarks
+
+Any operation on a tree is by definition also an operation on the tree's graph.
+Because of that, and unless stated otherwise, any operation defined for a graph
+can be used in the context of a tree.
 
 If two graphs have an edge in common, then both graphs also have the endpoints
 of that edge in common. In contrary to that, two graphs may have one or more
@@ -21,7 +24,7 @@ identical.
 
 Because issues arise, if arbitrary trees are processed (i.e. arbitrary sets of
 nodes and arbitrary connections between those nodes), the following conditions
-are expected to hold:
+are considered to be prerequisites to the operations mentioned below:
 
 (1) The nodes in trees `S` and `T` must be connected in a similar fashion.
 That is, if trees `S` and `T` have nodes `a` and `b` in common, and if `S`
@@ -32,8 +35,7 @@ focus is that `a` can not be an ancestor of `b` in `S` and a descendant of
 (2) In general, a common node must be a descendant of common ancestors. That is,
 if trees `S` and `T` have node `n` in common, and if `n` has `a` as an ancestor
 in `S`, then `a` must also be an ancestor of `n` in `T`. The main focus is that
-both trees in general need to have all of the ancestors of a common node in
-common.
+both trees need to have all of the ancestors of a common node in common.
 
 (3) The node trees `S` and `T` must have the same child order. That is, if trees
 `S` and `T` have nodes `a` and `b` in common, and if `b` is the next sibling of

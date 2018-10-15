@@ -96,21 +96,22 @@ to be "closer" to the difference between simple sets of elements.
 
 Note that ...
 
-* `((G \ S) subgraph-of G)`
-* `((G \ G) == Ø)`
 * `((G \ Ø) == G)`
+* `((G \ G) == Ø)`
 * `((G \ S) disjoint-to S)`
+* `((G \ S) subgraph-of G)`
 
 Note that `(G \ S)` can be defined as an induced subgraph of `G`:
 
 * `(G diff S) := G[V(G) \ V(S)]`
 
-In `T := (G \ S)`, `S` is not required to be a subgraph of `G`. Likewise, `S`
-may overlap `G`, or both graphs may even be disjoint from one another. However,
-in the context of this discussion, the intersection between `S` and `G` is
-assumed to be non-empty. Furthermore, `S` is assumed to be reduced to that
-intersection, which is why `S` is assumed to have no elements (vertices and/or
-edges) outside of `G`. Thus, `S` is assumed to be a non-empty subgraph of `G`.
+In `T := (G \ S)`, `S` is not required to be a subgraph of `G`. Likewise,
+`S` may overlap `G`, or both graphs may even be disjoint from one another.
+However, in the context of this discussion, the intersection between `S` and
+`G` is assumed to be non-empty. Furthermore, `S` is assumed to be reduced to
+that intersection, which is why `S` is assumed to have no elements (vertices
+and/or edges) outside of `G`. That is, `S` is in general expected to be a
+non-empty subgraph of `G`.
 
 <!-- ======================================================================= -->
 ## symmetric difference (^, xor, ex-or)
@@ -122,4 +123,4 @@ sets of elements.
 * `(G ex-or S) := (G \ S) + (S \ G)`
 * `(G ^ S), (G xor S) := (G ex-or S)`
 
-**TODO** - any applications/use?
+**TODO** - any application/use?

@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # TODO - node trees
 
+one characteristic element per set -
+consequently one additional element per descendant
+
 a hierarchy of trees -
 i.e. a tree of subtrees
 
