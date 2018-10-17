@@ -2,8 +2,8 @@
 <!-- ======================================================================= -->
 # Operations on trees
 
-Recall that the overall focus is on the subtrees of a document tree. In
-addition to that, each subtree is assumed to be induced by its root node
+Recall that the overall focus is on the subtrees of a single document tree.
+In addition to that, each subtree is assumed to be induced by its root node
 (i.e. `S := T[r]`, i.e. `S := T[OS(r)]`).
 
 <!-- ======================================================================= -->
@@ -13,14 +13,14 @@ Any operation on a tree is by definition also an operation on the tree's graph.
 Because of that, and unless stated otherwise, any operation defined to operate
 on a graph can in general be used with trees.
 
-Recall that, if two graphs have an edge in common, then both graphs also
-have both of the endpoints of such an edge in common. In contrary to that,
-two graphs may have one or more vertices, but no edge in common.
+Recall that, if two graphs have an edge in common, then both graphs also have
+both of the endpoints of that edge in common. In contrary to that, two graphs
+may have one or more vertices, but no edge in common.
 
-The execution of binary operations on graphs must also take the semantics of
-both graphs into account. That is, the semantics of two input graphs, for which
-such an operation has to be executed, are by default expected to be similar,
-if not identical.
+The execution of binary operations on two graphs must also take the semantics
+of both graphs into account. Because of that, the semantics of two input graphs
+are by default expected to correspond with each other (i.e. to be similar, if
+not identical).
 
 Because issues arise, if arbitrary trees are processed (i.e. arbitrary sets of
 nodes and arbitrary connections between the nodes), the following conditions
@@ -86,11 +86,12 @@ if one is a subtree of the other:
 * `(and: (Tree,Tree) -> {Ø,Tree})` or `R := (S & T)`
 
 Two distinct subtrees `S` and `T` of a common super-tree `U` (i.e. `S := U[s]`,
-`T := U[t]` and `(s != t)`) can not overlap each other.
+`T := U[t]` and `(s != t)`, where `s` is the root of `S` and `t` the root of
+`T`) can not overlap each other.
 
-To proof that, the following cases need to be distinguished: (Case-1) `s` is an
-ancestor of `t`, (Case-2) `t` is an ancestor of `s`, or (Case-3) `s` is not an
-ancestor of `t`, and `t` not an ancestor of `s`.
+To proof that, the following cases need to be distinguished: (Case-1) `s` is
+an ancestor of `t`, (Case-2) `t` is an ancestor of `s`, or (Case-3) `s` is
+not an ancestor of `t`, and `t` not an ancestor of `s`.
 
 Case-1/2: Subtree `S` is induced by the outer set of node `s` and therefore
 includes all the nodes in the outer set of `t`. Because of that, `T` is a
@@ -99,7 +100,7 @@ is equal to `T`.
 
 * `((S & T) == T)` if `(s ancestor-of t)`
 * `((S & T) == S)` if `(t ancestor-of s)`
-* note - `(S & T)` is in both cases a subtree of `S` and `T`
+* i.e. `(S & T)` is in both cases a subtree of `S` and `T`
 
 Case-3: Subtree `S` is induced by the outer set of node `s` and can therefore
 not include any node in the outer set of `t`. Because of that, subtrees `S`
@@ -108,16 +109,16 @@ and `T` are disjoint. That is, the intersection between `S` and `T` is empty.
 * `((S & T) == Ø)`, if `(s !ancestor-of t)` and `(t !ancestor-of s)`
 
 Consequently, two such subtrees are either disjoint ex-or one is a proper
-induced subtree of the other. That is, the requirements (i.e. a non-empty
-intersection and unrelated) can not be met. Because of that, no two such
-subtrees of a common super-tree can overlap each other.
+induced subtree of the other. That is, the requirements of "overlaps" (i.e.
+a non-empty intersection and unrelated) can not be met. Because of that,
+no two such subtrees can overlap each other.
 
 * `(S disjoint-to T) ex-or (S related-to T)` if `(S != T)`
 * if `R := (S & T)`, then `(R in {Ø,S,T})`
 
-Note that, in the context of this discussion, the intersection between two
-trees is, due to the above, required to either be empty (i.e. `Ø`) ex-or a
-subtree of both input trees (i.e. not a forest of more than one trees).
+Note that, in the context of this discussion and due to the above, the
+intersection between two trees **must be either empty ex-or a subtree**
+of both input trees (i.e. not a forest of more than one trees).
 
 <!-- ======================================================================= -->
 ## union (+, or, union)
@@ -125,9 +126,9 @@ subtree of both input trees (i.e. not a forest of more than one trees).
 * `(or: (Tree,Tree) -> Tree)` or `R := (S + T)`
 
 The union of two trees is in general not a tree. That is, depending on both
-input trees, the result may be a single tree, a non-empty forest of two trees,
-or none of the two (i.e. a non-empty generic graph). Obviously, the goal is a
-requirement that the result of a union operation is always a single tree.
+input trees, the result may be a single tree, a forest of two trees, or none
+of the two (i.e. a generic non-tree graph). The focus will obviously be on
+the requirement that the result of a union of trees needs to be a single tree.
 
 A forest of trees is defined as the disjoint union of trees. The union of two
 disjoint trees is therefore a disjoint union of trees and thus by definition
@@ -136,43 +137,97 @@ both trees must have a non-empty intersection (i.e. a common subtree).
 
 For two distinct trees `S` and `T` with root nodes `s` and `t`, the following
 cases can be distinguished: (Case-1) `S` is a subtree of `T`, (Case-2) `T` is
-a subtree of `S`, and (Case-3) both trees overlap each other.
+a subtree of `S`, and (Case-3) both trees overlap each other (i.e. both trees
+are unrelated with each other).
 
 Case-1/2: The result in these cases will be one of the input trees. That is
-because a subtree can not add any new element to its super-tree. A subtree
-would not be a subtree, if it had an element outside of its super-tree.
+because a subtree can not add any new element to its super-tree (it would
+otherwise not be a subtree if it had an element outside of its super-tree).
 
 * `((S + T) == S)` if `(S == T)`
 * `((S + T) == S)` if `(T subtree-of S)`
 * `((S + T) == T)` if `(S subtree-of T)`
 
+Note that this also includes the case in which both trees are equal.
+
 Case-3: If two trees overlap each other, then none is a subtree of the other.
 Each tree therefore has one or more nodes the other tree does not have. Because
 of that, the following cases can be distinguished: (Case-4) root `s` is not
 equal to and not an ancestor of root `t`, (Case-5) `t` is not equal to and not
-an ancestor of `s`, and (Case-6) `s` is an ancestor of `t`, or `t` an ancestor
-of `s`.
+an ancestor of `s`, and (Case-6) `s` is a node in `T` and/or `t` a node in `S`.
 
-Case-4/5: 
+Case-4/5: If `t` is not an element of the outer set of `s`, then a node in the
+intersection between the two trees exists that has two distinct parent nodes.
+Because of that, the union of such trees would result in a non-tree graph.
+Consequently, the root of one tree must be a node in the other tree.
 
-Note that, in the context of this discussion, the union of two trees is,
-due to the above, required to yield a single tree.
+Case-6: If `s` is a node in `T`, then `S` must have leaf nodes not in `T` -
+otherwise, case-1/2 would apply. (Note that, if `(s == t)` is true, then `T`
+must also have leaf nodes not in `S`).
 
-<!-- ======================================================================= -->
-
-Case-3: If both trees overlap each other in such a way that none of the root
-nodes is a node of the other tree, then the result have a node with two "parent"
-nodes (i.e. the root node of the intersection tree).
-
-a non-tree graph. That is, because the resulting graph will have one or more
-vertices with two incoming edges.
-
-The order of operations is relevant (i.e. non-associative)
-
-Likewise, and due to the above, `S` and `T` must not overlap each other.
-
-Any tree can be defined as a sequence of union operations
-unique sequences?
+Note that, in the context of this discussion, the union of two trees is, due
+to the above, required to yield a single tree. Because of that, **the root of
+T must be a node in S**.
 
 <!-- ======================================================================= -->
-## graph difference (\, sub, diff)
+## difference (\, sub, diff)
+
+* `(sub: (Tree,Tree) -> {Ø,Tree})` or `R := (S \ T)`
+
+Recall that, in the context of this discussion, the graph difference is based
+upon the removal of vertices (i.e. the **vertex-based** definition). That is,
+the result is defined as the removal of all the vertices in the 2nd operand
+from the 1st operand, including the implicit removal of all the edges that are
+incident to the vertices being removed.
+
+Note that, due to the general operation (i.e. remove elements of the 2nd tree
+from the 1st tree) this operation is **not commutative**. That is, the order of
+both input trees is relevant.
+
+The difference of two trees is in general a forest of trees. That is, depending
+on both input trees, the result may be empty, a single tree, or a forest of two
+or more trees. Similar as before, the focus will be on the requirement that the
+result of such an operation is either empty, ex-or a single tree.
+
+Obviously, if both input trees `S` and `T` are disjoint, then the result of
+`(S \ T)` is equal to `S` (i.e. `(S \ Ø) == S`). That is because `T` then has
+no elements that could be removed from `S`. Because of that, both trees are
+expected to have a non-empty intersection. (i.e. a common subtree). And because
+`T` can be understood to be restricted to that subtree, root `t` of `T` must
+be a node in `S`.
+
+* `((S \ T) == S)` if `(T == Ø)`
+
+For two distinct trees `S` and `T` with root nodes `s` and `t`, the following
+cases can be distinguished: (Case-0) `T` is equal to `S`, (Case-2) `T` is not
+an induced subtree of `S` (i.e. `(T != S[t])`), and (Case-2) `T` is such an
+induced subtree.
+
+Case-1: In that particular case, `(S \ T)` will obviously be an empty graph.
+Note however that `T` can be understood to be an induced subtree of `S` (i.e.
+`(T == S[t])` where `(s == t)`).
+
+* `((S \ T) == Ø)` if `(T == S)`
+
+Case-2: Because `T` is not an induced subtree of `S` (i.e. `(T != S[t])`), `T`
+is guaranteed to have a leaf `l` that is no leaf in `S`. Because of that, the
+result of `(S \ T)` will contain an induced subtree for each child node of `l`
+(i.e. `S[c]` where `(c child-of l)`). Consequently, the result is in general
+going to be a forest of trees.
+
+Note however that, if (1) the root of `T` is equal to the root of `S` (i.e.
+`(t == s)`), and if (2) `T` has only one leaf `l` that is a parent (and
+therefore no leaf) in `S`, and if (3) `l` has only one child `c` in `S`,
+then the result of `(S \ T)` is going to be a single tree (i.e. `R == S[c]`).
+That particular case however is outside of the scope of this discussion
+because the focus of this discussion is on generic conditions.
+
+Case-3: Because `T` is an induced subtree of `S` (i.e. `(T == S[t])`), `T`
+is guaranteed to have all the descendants of `t` in `s`. Because of that, the
+result of `(S \ T)` can not contain any tree that is induced by a descendant
+of `t` in `S`. Hence, the result is guaranteed to be either empty (i.e. if
+`(s == t)`) ex-or a single tree (i.e. `(S \ S[t])`).
+
+Note that, in the context of this discussion, the difference between two trees
+is, due to the above, required to either be empty ex-or a single tree. Because
+of that, **T must be an induced subtree of S**.

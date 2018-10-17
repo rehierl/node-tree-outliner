@@ -128,3 +128,26 @@ induced subtrees that can be formed based upon a given tree will be referred
 to as the tree's "class of induced subtrees". (Note that an induced subtree
 is still a generic subtree, and that a tree's class of induced subtrees is
 a sub-class of the tree's class of generic subtrees).
+
+<!-- ======================================================================= -->
+## subtrees, example
+
+```
+tree S            tree T           tree U
+=============     ===========      ========
+1 -|-> 2 -> 4     1 -> 2 -> 4      1 -|-> 2
+   |-> 3                              |-> 3
+```
+
+The following applies to the above trees:
+
+* `T` is a (generic) subtree of `S`
+* `T` and `S` do not overlap each other
+* `T` is no induced subtree of `S` - i.e. `(T != S[1])`
+* note - `3` is not a node and therefore no leaf in `T`
+* `U` is a (generic) subtree of `S`
+* `U` and `S` do not overlap each other
+* `U` is no induced subtree of `S` - i.e. `(U != S[1])`
+* note - `2` is a leaf in `U` but no leaf in `S`
+* note - `4` is not a node and therefore no leaf in `U`
+* `T` and `U` overlap each other
