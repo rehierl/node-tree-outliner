@@ -6,7 +6,7 @@ removal of a node in a tree
 != removal of an object in an ordered set
 
 one characteristic element per set -
-consequently one additional element per descendant
+i.e. one additional element per descendant
 
 a hierarchy of trees -
 i.e. a tree of subtrees

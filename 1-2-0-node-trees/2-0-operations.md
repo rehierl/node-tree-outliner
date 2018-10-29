@@ -2,12 +2,9 @@
 <!-- ======================================================================= -->
 # Operations on trees
 
-Recall that the overall focus is on the subtrees of a single document tree. In
-addition to that, each subtree is in general expected to be induced by its root
-node (i.e. `S := T[r]`, i.e. `S := T[OS(r)]`).
-
-<!-- ======================================================================= -->
-## general remarks
+Recall that the overall focus is on the subtrees of a document tree.
+In addition to that, each subtree is in general expected to be induced
+by its root node (i.e. `S := T[r]`, i.e. `S := T[OS(r)]`).
 
 Any operation on a tree is by definition also an operation on the tree's graph.
 Because of that, and unless stated otherwise, any operation defined to operate
@@ -21,6 +18,9 @@ The execution of binary operations on two graphs must also take the semantics
 of both graphs into account. Because of that, the semantics of two input graphs
 are by default expected to correspond with each other. That is, the semantics
 are expected to be similar, if not identical.
+
+<!-- ======================================================================= -->
+## requirements
 
 Because issues arise, if arbitrary trees are processed (i.e. arbitrary sets of
 nodes and arbitrary connections between those nodes), the following conditions
@@ -66,13 +66,15 @@ The following binary, graph-based operations may be used without limitation:
 
 * equal, unequal, distinct
 * disjoint, coupled, overlap
-* subgraph/subtree
+* subgraph/subtree-of
 
 Two trees `S` and `T` are said to be **related** with each other,
 if one is a subtree of the other:
 
 * `(S related-to T)`, if `(S subtree-of T)` or `(T subtree-of S)`
 * `(S related-to T) <-> (T related-to S)`
+
+Note that these operations all return boolean values.
 
 <!-- ======================================================================= -->
 ## intersection (&, and, isect)
@@ -106,8 +108,8 @@ are disjoint. That is, the intersection between `S` and `T` is empty.
 
 Consequently, two such subtrees are either disjoint ex-or one is a proper
 induced subtree of the other. That is, the requirements of "overlaps" (i.e.
-a non-empty intersection and unrelated) can never be met. Because of that,
-two such subtrees can not overlap each other.
+a non-empty intersection and still unrelated) can never be met. Because of
+that, two such subtrees can not overlap each other.
 
 * `(S disjoint-to T) ex-or (S related-to T)` if `(S != T)`
 * if `R := (S & T)`, then `(R in {Ø,S,T})`
@@ -145,30 +147,31 @@ not be a subtree, if it had an element outside of its super-tree).
 * `((S + T) == T)` if `(S subtree-of T)`
 
 Note that this also includes the case in which both trees are equal. That is
-because `(S subtree-of T)` and `(T subtree-of S)` are both true.
+because `(S subtree-of T)` and `(T subtree-of S)` are then both true.
 
 Case-3: If two trees overlap each other, then none is a subtree of the other.
-And because both trees are required to have a non-empty intersection, each tree
-needs to have one or more nodes the other tree does not have. Because of that,
-the following cases can be distinguished: (Case-4) root `t` is not a node in
-`S`, (Case-5) `s` is not a node in `T`, and (Case-6) `s` is a node in `T` and/or
-`t` a node in `S`.
+And because both trees are required to have a non-empty intersection, each
+tree needs to have one or more nodes the other tree does not have. Because
+of that, the following cases can be distinguished: (Case-4) root `t` is not
+a node in `S`, (Case-5) `s` is not a node in `T`, and (Case-6) `s` is a node
+in `T` and/or `t` a node in `S`.
 
 Case-4/5: If `t` is not a node in the outer set of `s`, then a node in the
-intersection between the two trees exists (i.e. the root of the common subtree)
-that has two distinct parent nodes which are both not common to `S` and `T`.
-Because of that, the union of such trees would result in a non-tree graph as
-that node would have two parent nodes in the resulting graph. Consequently,
-the root of one tree must be a node in the other tree.
+non-empty intersection between both trees exists (i.e. the root of the common
+subtree) that has two distinct parent nodes which are both not common to `S`
+and `T`. Because of that, the union of such trees would result in a non-tree
+graph as that node would have two parent nodes in the resulting graph.
+Consequently, the root of one tree must be a node in the other tree.
 
 Case-6: If `s` is a node in `T`, then `S` must have leaf nodes not in `T` -
-otherwise, case-1/2 would apply. (Note that, if `(s == t)` is true, then `T`
+otherwise, Case-1/2 would apply. (Note that, if `(s == t)` is true, then `T`
 must also have leaf nodes not in `S`). The result in such a case is guaranteed
-to be a single tree.
+to be a single tree because in case of `(t ancestor-of s)`, new subtrees will
+be added to one or more nodes in `T`.
 
-Note that, in the context of this discussion, the union of two trees is,
-due to the above, required to yield a single tree. Because of that, and
-in `(S + T)`, **the root of T must be a node in S**.
+Note that, in the context of this discussion, the union of two trees is, due to
+the above, required to yield a single tree. Because of that, and in `(S + T)`,
+**the root of T must be a node in S**.
 
 <!-- ======================================================================= -->
 ## difference (\, sub, diff)

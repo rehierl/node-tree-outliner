@@ -9,7 +9,7 @@ must be a subtree of a component in `G`. That is because `S` could otherwise not
 be a tree as trees are by definition connected. Consequently, `G` can be thought
 of as being reduced to the relevant component, which is why `G` can be treated
 as a connected graph. That is, the components in `G`, which are not essential
-to the following discussion, can and will be ignored.
+to the following discussion, will be ignored.
 
 <!-- ======================================================================= -->
 ## subtree S of super-tree T
@@ -17,7 +17,7 @@ to the following discussion, can and will be ignored.
 The following assumes the super-graph `G := (V,E)` of subtree `S := (M,F)`
 to be a tree `T := (N,E)` (i.e. `G := T`).
 
-Note that `(S == T[V(S)])` is true. That is, `S` is equal to the subgraph,
+Note that `(S == T[M])` is true. That is, `S` is equal to the subgraph,
 induced in `T` by the set of vertices/nodes in `S`.
 
 **generic subtrees**
@@ -25,7 +25,7 @@ induced in `T` by the set of vertices/nodes in `S`.
 The generic method used to define subtrees (i.e. `subtreeOf(T,r,LS)`) will be
 covered by the following two cases, in which the definition of the induced
 subtrees is based upon subsets of elements rather than on the outer set of a
-given node.
+node.
 
 The two aspects that need to be taken into account are, (1) whether or not the
 root `r` of subtree `S` is identical to the root of the super-tree `T` (i.e.
@@ -83,7 +83,7 @@ begin in `S` and end in `T`.
 * `(OBG(T,S) <=!=> Ø)`, where `OBG := OBGi + OBGo`
 * i.e. `OBGi` and `OBGo` are both not necessarily empty
 
-Note that the outer border `OBGi` in between `T` and `S` is not empty, if `S`
+Note that the outer border `OBGi` in between `T` and `S` is non-empty, if `S`
 is induced by the outer set of a child in `T`. That is because the `r` then is
 unequal to the root of `T`. Furthermore, `OBGi` then has a single edge only.
 

@@ -12,8 +12,8 @@ and `G` may both still satisfy further restrictions.
 Note that a subtree is commonly defined as: "A connected subgraph of a tree".
 By that definition, the super-graph `G` is required to be a tree. Because of
 that, and because the subgraph `S` is required to be a connected subgraph of
-the super-graph `G`, `S` is itself consequently a tree. This definition is
-therefore more specific than the above.
+`G`, `S` is itself consequently a tree. This definition is therefore more
+specific than the above.
 
 A **strict/proper subtree** `S := (M,F)` is a subtree formed from a graph
 `G := (V,E)` by removing at least one vertex and/or edge (i.e. `(#M < #V)`
@@ -56,7 +56,7 @@ because any tree has a single root and only one parent per child.
 * `(#M < #N) -> (#F < #E)` if `(S == T[M])`
 
 () In the context of this discussion, the super-graph `G := (V,E)` of a subtree
-`S := (M,F)` is assumed to be a tree (i.e. `G := T` where `T := (N,E)`) and any
+`S := (M,F)` is in general a tree (i.e. `G := T` where `T := (N,E)`) and any
 subtree is assumed to be a non-empty induced subtree of such a tree.
 
 <!-- ======================================================================= -->
@@ -65,7 +65,7 @@ subtree is assumed to be a non-empty induced subtree of such a tree.
 Obviously, there are multiple ways to form a subtree `S` from another tree `T`.
 However, and independently of how exactly a subtree is formed, a subtree must
 itself be a tree and therefore always have a single root `r`. All the other
-nodes in subtree `S` must consequently be descendants of `r`.
+nodes in subtree `S` must consequently be descendant to that node.
 
 Note that the root of subtree `S` is not necessarily identical to the root
 of its super-tree `T` (i.e. `(RN(S) == RN(T)` is not required to be true).
@@ -84,25 +84,25 @@ A **generic subtree** may be formed as `S := subtreeOf(T,r,LS)`, where ...
 That is, the top-down paths in `P` over `T`, begin in `r` and end in a leaf `l`
 of subtree `S`. (Obviously, each path in `P` is a root-to-leaf path in `S`).
 As such, all paths in `P` are understood to define path graphs. Consequently,
-the resulting subtree can be formed as the union of such a set of rooted paths.
-
-Note that any tree, which can be formed based upon the above generic method,
-can also be expressed as an induced subtree. That is, if the subtree is induced
-by the appropriate set of elements (i.e. the subtree's set of nodes or its set
-of edges).
+the resulting subtree can be formed as the union of such graphs.
 
 Note that any tree, which can be formed based upon the above generic method,
 may be referred to as a "generic subtree". Hence, the set of generic subtrees
 which can be formed based upon a given tree may be referred to as the tree's
 "class of generic subtrees".
 
+Note that any tree, which can be formed based upon the above generic method,
+can also be expressed as an induced subtree. That is, if the subtree is induced
+by the appropriate set of elements (i.e. the subtree's set of nodes or its set
+of edges).
+
 <!-- ======================================================================= -->
 ## a simple method to form subtrees 
 
 A disadvantage of the generic method is that one has to first determine for
-each node in `T`, whether or not that node is a node of the subtree `S`.
-Based on these nodes, one then has to determine the root `r` of `S` and its
-leaf  nodes `LS`. However, the second aspect (i.e. determining the leaf nodes)
+each node in `T`, whether or not that node is a node of subtree `S`. Based
+on these nodes, one then has to determine the root `r` of `S` and its leaf
+nodes `LS`. However, the second aspect (i.e. determining the leaf nodes)
 can be simplified, if all the descendants of `r` in `T` are included in `S`.
 
 An **induced subtree** may be formed as `S := subtreeOf(T,r)`, where ...
@@ -114,8 +114,8 @@ That is, such a subtree is defined as an induced subtree, induced by a subset
 of nodes. Simply put, this class of subtrees contains trees that are **induced
 by the corresponding (root) node** (i.e. `T[r]`). Or, more accurately, induced
 by the outer set of nodes in `T` of the subtree's root (i.e. `T[OS(r)]`). (Note
-that the outer set of any node includes all the leaf nodes that are descendants
-of the given node).
+that the outer set of any node includes all the leaf nodes that are descendant
+to the given node).
 
 Note that the inner sets of nodes in `T` can not be used to induce subtrees.
 That is because the subgraphs induced by inner sets of nodes are in general
@@ -123,11 +123,11 @@ forests (i.e. unions) of subtrees. In addition to that, the subgraph induced
 by the inner set of a leaf node is always an empty forest.
 
 Note that any tree, that can be formed based upon this (simplified) method,
-will in general be referred to as an "induced subtree". Hence, the set of
-induced subtrees that can be formed based upon a given tree will be referred
-to as the tree's "class of induced subtrees". (Note that an induced subtree
-is still a generic subtree, and that a tree's class of induced subtrees is
-a sub-class of the tree's class of generic subtrees).
+will simply be referred to as an "induced subtree". Hence, the set of induced
+subtrees that can be formed based upon a given tree will be referred to as the
+tree's "class of induced subtrees". (Note that an induced subtree is still a
+generic subtree, and that a tree's class of induced subtrees is a sub-class of
+the tree's class of generic subtrees).
 
 <!-- ======================================================================= -->
 ## subtrees, example

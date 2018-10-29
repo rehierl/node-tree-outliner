@@ -98,15 +98,15 @@ a given node `n` may be referred to as "the distant descendants of a node".
 <!-- ======================================================================= -->
 ## a recursive definition of rooted paths
 
-In a rooted path, any edge is downward oriented (i.e. from an ancestor towards
-its descendants). Because of that, the ancestors `A(n)` of a node `n` are all
-presequent to that node in the node's rooted path:
+In a rooted path, any edge is downward oriented (i.e. from an ancestor
+towards its descendants). Because of that, the ancestors `A(n)` of a
+node `n` are all presequent to that node in the node's rooted path:
 
 * `(A(n) union {n}) == E(rp(n))`
 * `rp(n) := (prefix × n)` where `(E(prefix) == A(n))`
 
-Furthermore, the parent `p` of a node is the least significant ancestor of
-a node. That is, `p` is subordinate to any other ancestor in `A(n)`:
+Furthermore, the parent `p` of a node is the least significant ancestor
+of a node. That is, `p` is subordinate to any other ancestor in `A(n)`:
 
 * `rp(n) := (prefix × p × n)` where `(E(prefix) == DA(n))`
 * `rp(n) := (rp(p) × n)` where `(p parent-of n)` and `rp(r) := (r)`

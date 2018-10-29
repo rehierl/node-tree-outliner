@@ -17,7 +17,7 @@ An arborescence/tree is an oriented graph `T` defined as a tuple of sets:
 * such that `(E(e) subset-of N)` for all `(e in E)`
 * i.e. both endpoints of each edge are nodes in `N`
 
-As trees are directed graphs, each node represents a unique object:
+Each node is understood to represent a unique object:
 
 * `o(n)` returns the object that node `n` represents
 * `n(o) := v(o)` returns the id/reference/node of object `o`
@@ -28,9 +28,9 @@ The following can be said about the nodes of an edge:
 * `x` is the parent of `y`, and `y` is a child of `x`
 * i.e. `(x parent-of y)` is true, iff `x` is the parent of `y`
 * i.e. `(y child-of x)` is true, iff `y` is a child of `x`
-* i.e. `child-of` is antonymous to `parent-of`
 * `x` is super-ordinate to `y`, and `y` is sub-ordinate to `x`
 * `x` is more significant than `y`, and `y` is less significant than `x`
+* i.e. `child-of` is converse to `parent-of`
 
 The following can be said about an edge `e` and the relationship it has
 with both of its nodes `x` and `y`:
