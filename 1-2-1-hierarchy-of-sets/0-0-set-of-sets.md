@@ -28,7 +28,7 @@ Note that sets A and B are distinct. They differ in size and in the elements
 they contain. Likewise, sets B and C are distinct. Even though both sets have
 the same amount of elements, both sets differ in the element(s) they contain.
 
-Note that the following fragments are equivalent:
+Note that the following representations are equivalent:
 
 ```
 |-C,D-|       |-C-----|      |-D-----|       |-D,C-|
@@ -38,9 +38,9 @@ Note that the following fragments are equivalent:
               |-------|      |-------|
 ```
 
-Sets C and D are equivalent, which is because there is no element that would
-allow to distinguish both sets from one another. Because of that, there is
-**no distinct order** (i.e. inside vs. outside) between those two sets.
+Sets C and D are equivalent because there is no element that would allow
+to distinguish both sets from one another. Because of that, there is **no
+distinct order** (i.e. inside vs. outside) between the two.
 
 Note that, in order to avoid these kind of circumstances, each set needs to
 have elements which allow to **distinguish** a set from all the other sets.
@@ -59,13 +59,14 @@ Set E contains elements 1 and 2, and set F elements 2 and 3. That is, both sets
 contain 2, but E does not contain 3 and F does not contain 1. As before, there
 is no distinct order (i.e. inside vs. outside) between those two sets.
 
-Note that, due to the **crossing borders**, both sets are said to **overlap**
-each other. Also note that both sets need to have elements in common (they
-would otherwise be disjoint) and elements that the other set does not have
-(one set would otherwise be a subset of the other).
+Note that sets E and F are said to **overlap** each other, which is visible via
+the **crossing borders**. That is, both sets have elements in common (they would
+otherwise be disjoint) and elements that the other set does not have (one set
+would otherwise be a subset of the other). As such, overlapping sets represent
+a third type of relationship between sets.
 
-Note that, even though A is distinct from B, and B distinct is from C, the
-borders of those sets do not cross each other.
+Note that, even though A is distinct from B, and that B distinct is from C,
+the borders of those sets do not cross each other.
 
 <!-- ======================================================================= -->
 ## E(), set-of-elements

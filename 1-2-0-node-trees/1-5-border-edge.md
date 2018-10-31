@@ -14,11 +14,9 @@ to the following discussion, will be ignored.
 <!-- ======================================================================= -->
 ## subtree S of super-tree T
 
-The following assumes the super-graph `G := (V,E)` of subtree `S := (M,F)`
-to be a tree `T := (N,E)` (i.e. `G := T`).
-
-Note that `(S == T[M])` is true. That is, `S` is equal to the subgraph,
-induced in `T` by the set of vertices/nodes in `S`.
+The following assumes the super-graph `G := (V,E)` of subtree `S := (M,F)` to
+be a tree `T := (N,E)` (i.e. `G := T`). Because of that, `(S == T[M])` is true.
+That is, `S` is equal to the subgraph, induced by the set of its nodes.
 
 **generic subtrees**
 
@@ -57,8 +55,8 @@ because `S` then is identical to `T`.
 
 If, in contrary to that, `S` is induced by a proper subset of edges (i.e.
 `(F proper-subset-of E)`), then the inner border graph is still empty (i.e.
-`(IBG == Ø)`). That is because `T` is a tree and because `S` must be a tree
-such that each edge in `S` exists in `T`.
+`(IBG == Ø)`). That is because `T` is and `S` must be a tree. Put differently,
+every edge in `T` in between the nodes of `S` is included.
 
 However, the outer border graph is never going to be empty (i.e. `(OBG != Ø)`,
 i.e. `(OBGi != Ø)` and/or `(OBGo != Ø)`), if `S` is a proper subtree of `T`.
@@ -84,11 +82,13 @@ begin in `S` and end in `T`.
 * i.e. `OBGi` and `OBGo` are both not necessarily empty
 
 Note that the outer border `OBGi` in between `T` and `S` is non-empty, if `S`
-is induced by the outer set of a child in `T`. That is because the `r` then is
-unequal to the root of `T`. Furthermore, `OBGi` then has a single edge only.
+is induced by the outer set of a child in `T`. That is because the root `r` of
+`S` is then unequal to the root `t` of `T`. Furthermore, `OBGi` then has one
+edge only.
 
-* `p` is the parent of `r` in `T` - i.e. `(r in CN(T,p))`
-* `(OBGi(T,S) == {e})`, if `S := T[OS(r)]` and `(e == (p,r))`
+* `r` is the root of `S` and `S := T[OS(r)]`
+* `p` is the parent of `r` in `T` - i.e. `(r != t)`
+* `(OBGi(T,S) == {e})` where `(e == (p,r))`
 
 Note that the outer border `OBGo` in between `S` and `T` is empty, if `S` is
 induced by the outer set of its root `r` in `T`. That is because `S` then has
@@ -96,18 +96,22 @@ all the leaf nodes of `r` in `T`.
 
 * `(OBGo(T,S) == Ø)`, if `S := T[OS(r)]`
 
-That is, any proper subtree `S := T[OS(r)]`, induced by the outer set of its
-root `r`, is connected to its super-tree `T` by a single edge `(e in OBGi)`.
-That edge connects `r` with its parent in `T` and is incoming in regards to
-`r` (i.e. root `r` is the sink of `e`). Because of that, `e` reflects the
-relationship between both trees.
+**SUMMARY**
+Any proper subtree `S := T[OS(r)]`, induced by the outer set of its root `r`,
+is connected to its super-tree `T` by a single edge `(e in OBGi)`. That edge
+connects `r` with its parent in `T` and is incoming in regards to `r` (i.e.
+root `r` is the sink of `e`). Because of that, `e` reflects the relationship
+between both trees.
 
-Due to the above, no other type of subtrees can be defined such that the
+Note that, due to the above, the single edge `e` in `OBGi` will simply be
+referred to as the **border edge** (in short: `BE(T,S) := e`).
+
+**CLARIFICATION**
+Due to the above, no other class of subtrees can be defined such that the
 relationship between a super-tree and one of its subtrees can be uniquely
 determined. That is, because in any other case, the additional edges in the
-border graphs break the above unique relationship. Hence, the focus of the
-overall discussion is on subtrees that are induced by their root nodes (i.e.
-`T[r]`).
+border graphs break the above distinct relationship. The focus of the overall
+discussion is therefore on subtrees that are induced by their root node.
 
 <!-- ======================================================================= -->
 ## subtree S of super-tree T, example
@@ -132,13 +136,13 @@ super-tree T      sub-tree S
  |        |= S ========| |
  | |= OBG ====|        | |
  | | 1 -> | 2 | -|-> 3 | |
- | |==========|        | |
- |        |      |-> 4 | |
+ | |==========|  |-> 4 | |
  |        |============| |
  |=======================|
 ```
 
 * `(IBG == Ø)`, `(OBGo == Ø)` and `(OBGi == ({1,2}, {(1,2)}) )`
+* i.e. `(BE(T,S) == (1,2))`
 
 Note that `(T supertree-of S)` because `(e in OBGi)` is oriented from a node
 in `T` towards the root of `S`. That is, because `e` still has the parent-of
@@ -153,22 +157,22 @@ ordinate node towards a sub-ordinate node. The relationship between `T` and
 The following assumes the super-graph `G := (V,E)` of subtree `S := (M,F)`
 to be a connected, non-tree graph.
 
-Recall that the overall focus is on subtrees of trees. The considerations below
-are therefore non-substantial to the overall discussion and need to be seen as
-an attempt to provide an even wider perspective.
+Recall that the overall focus is on subtrees of trees. The considerations
+below are therefore non-substantial to the overall discussion and need to
+be seen as an attempt to provide an even wider perspective.
 
 Note that the semantics of a subgraph is by definition equivalent to the
 semantics of its super-graph. Because of that, the question arises how the
 semantics of `S` could result in `S` being a tree, but the very same semantics
-allowing `G` to not be a tree? As the content below will not attempt to answer
-that question, the following needs to be understood from a purely theoretical
-(i.e. structural/syntactical) perspective.
+allowing `G` to be a non-tree graph? As the content below will not attempt
+to answer that question, the following needs to be understood from a purely
+theoretical (i.e. structural/syntactical) perspective.
 
 **main considerations**
 
 Recall that the focus is on the component in `G` to which `S` is a subtree.
-Because of that, the edges in any other component in `G` can not be edges in
-`S` or in the border graphs between the two. As such, these edges are outside
+That is because the edges in any other component in `G` can not be edges in
+`S` or in the border graphs between the two. Hence, these edges are outside
 of the scope of the following discussion and will therefore be ignored.
 
 Another consequence of the this case (i.e. `(G super-graph-of S)`) is that `G`
