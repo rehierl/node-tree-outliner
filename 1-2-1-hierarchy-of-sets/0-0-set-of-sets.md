@@ -59,14 +59,14 @@ Set E contains elements 1 and 2, and set F elements 2 and 3. That is, both sets
 contain 2, but E does not contain 3 and F does not contain 1. As before, there
 is no distinct order (i.e. inside vs. outside) between those two sets.
 
-Note that sets E and F are said to **overlap** each other, which is visible via
-the **crossing borders**. That is, both sets have elements in common (they would
-otherwise be disjoint) and elements that the other set does not have (one set
-would otherwise be a subset of the other). As such, overlapping sets represent
-a third type of relationship between sets.
+Note that sets E and F are said to **overlap** each other, noticeable via the
+**crossing borders**. That is, both sets have elements in common (they would
+otherwise be disjoint) and elements that the other set does not have (they
+would otherwise be related). As such, overlapping sets represent a third type
+of relationship between sets.
 
-Note that, even though A is distinct from B, and that B distinct is from C,
-the borders of those sets do not cross each other.
+Note that, even though A is distinct from B, and that B is distinct from C,
+the borders of these sets do not cross each other.
 
 <!-- ======================================================================= -->
 ## E(), set-of-elements
@@ -200,8 +200,8 @@ Both sets are therefore unrelated to each other.
 **CLARIFICATION**
 The empty set is disjoint and related to any set, but not distinct to itself.
 A non-empty set is coupled with and related to itself. Two distinct non-empty
-sets may be coupled. Two distinct non-empty and coupled sets are not necessarily
-related.
+sets may be coupled with each other. Two distinct non-empty and coupled sets
+are not necessarily related.
 
 ```
      \ set-2 |          |          |
@@ -224,8 +224,7 @@ Likewise, two distinct sets are not necessarily disjoint.
 
 * `disjoint <=!=> distinct`
 * (=!>) `{}` is disjoint to any set, but not distinct to itself.
-* (<!=) both sets may overlap each other.
-* (<!=) both sets may be strictly related.
+* (<!=) both sets may be coupled with each other.
 
 **CLARIFICATION**
 Two disjoint sets are not necessarily unrelated.

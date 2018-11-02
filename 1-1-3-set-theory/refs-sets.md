@@ -37,7 +37,7 @@ classes
 * [wikipedia, class (set theory)](https://en.wikipedia.org/wiki/Class_%28set_theory%29)
 * [wikipedia, equivalence class](https://en.wikipedia.org/wiki/Equivalence_class)
 
-nested/hereditarily sets
+hereditarily sets
 
 * [wikipedia, hereditarily set](https://en.wikipedia.org/wiki/Hereditarily_finite_set)
 * [wikipedia, rado graph](https://en.wikipedia.org/wiki/Rado_graph)

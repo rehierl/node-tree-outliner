@@ -3,7 +3,7 @@
 # Strict/Normalized Hierarchy/Forest of sets
 
 **CLARIFICATION**
-A setup is said to be **a strict/normalized hierarchy (of nested sets)**,
+A setup is said to be **a strict/normalized hierarchy (of sets)**,
 if the following requirements are met:
 
 0. `H := (V,P,G)`
@@ -50,14 +50,14 @@ hold one reference to the combined information of that set.
 
 **CLARIFICATION**
 A simple hierarchy of sets may be referred to as **a minimal (simple)
-hierarchy (of nested sets)**, if the CSS of each parent set is empty.
+hierarchy (of sets)**, if the CSS of each parent set is empty.
 
 * `(#css(p) == 0)` for any `(p in PS)`
 
 **CLARIFICATION**
 A simple hierarchy may be referred to as **a normalized minimal (simple)
-hierarchy (of nested sets)**, if it was created from a minimal hierarchy
-by minimizing the characteristic subsets of its leaf sets.
+hierarchy (of sets)**, if it was created from a minimal hierarchy by
+minimizing the characteristic subsets of its leaf sets.
 
 * `(#css(p) == 0)` for any `(p in PS)`
 * `(#css(l) == 1)` for any `(l in LS)`

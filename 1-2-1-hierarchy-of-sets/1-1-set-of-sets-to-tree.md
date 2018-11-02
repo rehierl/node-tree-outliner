@@ -3,13 +3,13 @@
 # Hierarchy of sets => Unordered tree
 
 The focus of this discussion is on how to create a node tree `T := (N,E)`
-from a (simple/strict) hierarchy of nested sets `H := (V,P,G)`.
+from a (simple/strict) hierarchy of sets `H := (V,P,G)`.
 
 <!-- ======================================================================= -->
 ## Simple hierarchy => Unordered tree
 
 ```
-a minimal hierarchy of nested sets             node tree
+a minimal hierarchy of sets                    node tree
 =========================================  =>  =================
 
 |-A-------------------------------------|       A
@@ -32,7 +32,7 @@ tree to the right has one node per set `(s in P)`, not one node per element
 `(v in V)` (i.e. 8 nodes, not 5).
 
 **CLARIFICATION**
-Any (simple) hierarchy of nested sets `H := (V,P,G)` defines
+Any (simple) hierarchy of sets `H := (V,P,G)` defines
 the structure of an unordered node tree `T := (N,E)`.
 
 In order to create a node tree from a simple hierarchy,
@@ -111,7 +111,7 @@ determined.
 ## Strict hierarchy => unordered tree
 
 ```
-a strict hierarchy of nested sets              node tree
+a strict hierarchy of sets                     node tree
 =========================================  =>  =================
 
 |---------------------------------------|       1
@@ -131,7 +131,7 @@ to represent a label for the corresponding set. Because of that, the visual
 representation can be made more compact:
 
 ```
-a strict hierarchy of nested sets              node tree
+a strict hierarchy of sets                     node tree
 =========================================  =>  =================
 
 |-1-------------------------------------|       1
@@ -147,7 +147,7 @@ into the position of a label, but, in contrary to before, each CE remains to be
 an element of the corresponding set.
 
 **CLARIFICATION**
-Any strict hierarchy of nested sets `H := (V,P,G)` defines
+Any strict hierarchy of sets `H := (V,P,G)` defines
 the structure and the nodes of an unordered node tree `T := (N,E)`.
 
 In order to create a node tree from a strict hierarchy,

@@ -120,6 +120,12 @@ a heterogenous multiset of elements
 * a multiset may contain elements that have distinct characteristics
 * `isHeterogenous(V) := not isHom(V)`
 
+a nested multiset of elements
+
+* `V5 := < 0, < 1, 2, 3 >, 4 >`
+* i.e. `V1` is an element of `V5`
+* a multiset may contain a multiset as an element
+
 a multiset of X
 
 * `V := < vi | isX(vi) >`

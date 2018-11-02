@@ -12,8 +12,9 @@ elements:    v1 v2 v3
 
 * (/see/ "set theory" /)
 
-Note that simple sets are specialized multisets such that the multiplicity of
-no element can increase past one/1.
+Note that simple sets are specialized multisets such that the multiplicity
+of each element can not increase past one/1. Also, a set is a nested set,
+if it has elements that are themselves sets.
 
 <!-- ======================================================================= -->
 ## core concept

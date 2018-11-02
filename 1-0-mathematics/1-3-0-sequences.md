@@ -16,7 +16,8 @@ elements:   v1 v2
 * "sequence" is the term that will be used throughout this discussion
 
 Note that sequences are specialized multisets such that there is an order
-relation on the underlying set of components.
+relation on the underlying set of components. Also, a sequence is a nested
+sequence, if it has elements that are themselves sequences.
 
 <!-- ======================================================================= -->
 ## core concept

@@ -53,7 +53,7 @@ clarifications
 
 * A setup `S` is a two-element tuple of possibly empty sets
 * No set `(s in P)` is allowed to be empty - i.e. `({} !in P)`
-* `V := E(P)` := "the union of all sets `(s in P)`"
+* `V := E(P)` := "the union of all the sets in `P`"
 * i.e. `(P strict-subset-of P(V))` and `(0 <= #P < #P(V))`
 * `(s subset-of V)` for all `(s in P)`
 
@@ -121,7 +121,7 @@ However, two coupled sets are still not necessarily related.
 ## Consistent setup (of sets)
 
 **CLARIFICATION**
-A set of sets `S` is said to be **a (consistent) setup (of nested sets)**,
+A set of sets `S` is said to be **a (consistent) setup (of sets)**,
 if the following requirements are met:
 
 0. `S := (V,P)`
@@ -130,12 +130,12 @@ if the following requirements are met:
    then one set is a subset of the other.
 
 Note that requirement 2 will be referred to as "req-2" and
-as "consistency with regards to the `subset-of` operator".
+as "consistency in regards to the `subset-of` operator".
 
 * `(s coupled-with t) -> (s related-to t)` is true if `(s != t)`
 * Note that this statement is true by the above requirement.
 
-Note that the intention of the above requirement is to guarantee that the setup
+Note that the intention of the above requirement is to guarantee that a setup
 does not contain two sets that overlap each other. That is, any two non-empty
 sets are either disjoint ex-or related with each other.
 
@@ -277,15 +277,14 @@ Is a valid transformation because `(!a <-> b) <-> (a xor b)`.
 ## Strict setup (of sets)
 
 **CLARIFICATION**
-A setup is said to be **a (strict) setup (of nested sets)**,
+A setup is said to be **a (strict) setup (of sets)**,
 if the following requirements are met:
 
 0. `S := (V,P)`.
 1. `S` is a consistent setup.
 
 Note that a consistent setup is therefore equivalent to a strict setup.
-That is, there are no additional requirements which need to be satisfied:
-A consistent setup is equivalent to a strict setup.
+That is, there are no additional requirements which need to be satisfied.
 
 This definition therefore stresses the consequences of the initial requirement
 (req-2) of a consistent setup:

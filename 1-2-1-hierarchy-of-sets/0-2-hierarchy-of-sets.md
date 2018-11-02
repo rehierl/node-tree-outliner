@@ -188,8 +188,8 @@ Note that each element in such a rooted path is a set of elements.
 ## (Simple) Hierarchy/Forest of sets
 
 **CLARIFICATION**
-Any strict setup of nested sets represents a forest of directed unordered
-node trees. The following relation can be defined for any strict setup:
+Any strict setup of sets represents a forest of directed unordered trees.
+The following relation can be defined for any strict setup:
 
 * `R := (P,G)` where `(G subset-of PxP)`
 * `e := (p1,p2)` such that `(e in G)`,
@@ -198,7 +198,7 @@ node trees. The following relation can be defined for any strict setup:
 * `G` is the graph (aka. set of edges)
 
 **CLARIFICATION**
-A setup is said to be **a (simple) hierarchy (of nested sets)**,
+A setup is said to be **a (simple) hierarchy (of sets)**,
 if the following requirements are met:
 
 0. `H := (V,P,G)`
