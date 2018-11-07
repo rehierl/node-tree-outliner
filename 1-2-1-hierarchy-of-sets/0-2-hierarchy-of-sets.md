@@ -158,7 +158,8 @@ Note that ...
 
 **CLARIFICATION**
 Each set `s in P` in a strict setup `S := (V,P)`
-has a unique **rooted path** `p := (s0,s1,...,sk)` such that ...
+has a unique **rooted path** `p := (s0,s1,...,sk)`
+that can be used as a set reference.
 
 * `p(i) = s(i) = si`
 * `s(i) in P` and `(s(i) parent-set-of s(i+1))`

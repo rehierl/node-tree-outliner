@@ -13,45 +13,39 @@
 ```
 
 **CLARIFICATION**
-Any element within a CSS is referred to as **a characteristic element (CE)**.
-The union of all characteristic subsets within a given hierarchy is said to
-be the set of characteristic elements of the corresponding hierarchy. A similar
-definition is possible with regards to any (s in P):
+Any element within a CSS will be referred to as **a characteristic element CE**.
+The union of all characteristic subsets within a hierarchy will be referred to
+as **the set of (all) characteristic elements CE(h)** in the corresponding
+hierarchy. A similar definition is possible in regards to any (s in P):
 
 * `CE(h) := E(CSS(h))` for any hierarchy `h`
 * `CE(s) := css(s)` for any `(s in P)`
 * `CE(css) := css` for any `(css in CSS(h))`
-* `(CE(x) subset-of V)`
 
 Note that, depending on the context of a statement, (s in P) and css(s) may
-both be referred to as **the parent set of** the CE, if the CE is an element
-of the corresponding CSS.
+both be referred to as the parent set of a CE, if the CE is an element of
+the corresponding CSS.
 
-Note that, like the set of elements (V) within a hierarchy, CE(h) may be a
-homogenous, or a heterogenous set of elements. That is, there is no requirement
-of what kind of elements these sets hold.
+Note that, like the set of elements (V) within a hierarchy (h), CE(h) may
+be a homogenous, or a heterogenous set of elements. That is, there is no
+requirement of what kind of elements these sets hold.
 
 **CLARIFICATION**
-Any characteristic element (CE) is unique to its characteristic subset (CSS)
-and therefore also unique to the parent set of its CSS. That is because any
-CSS is disjoint to any other CSS.
+Each CE is unique to its CSS. That is, two distinct sets (s,t in P)
+can not have any characteristic elements in common.
 
 * `CSS-to-CE` is a `1:N` relationship.
-* `(CSS(h)-{})` is a partition of `CE(h)` into disjoint sets.
+* i.e. a CSS may have one or more CEs
+* `(CSS(h) \ {})` is a partition of `CE(h)` into disjoint sets.
 
 Note that the "uniqueness" of a CE is similar to the "uniqueness" of its CSS:
 The parent set of a CSS is the least significant set which contains all the
 characteristic elements in that CSS.
 
-<!-- ======================================================================= -->
-## Always (CE(h) == V)
-
 **CLARIFICATION**
-Any CE, as an element of one or more (s in P), is an element in V.
-
-Because of that, the relationship of each set (s in P) that has one or more CEs,
-also depends on all the CEs it holds. After all, and similar to a CSS, any CE is
-an element of its parent set (s) and an element of all the sets in A(s).
+The relationship of each set (s in P) with a non-empty CSS depends on its CEs.
+After all, and similar to a CSS, any CE is an element of its parent set (s)
+and an element of all the sets in A(s).
 
 As a consequence, two disjoint sets (s,t in P) can not hold the same CE. That
 is, because both sets would then no longer be disjoint. In addition to that,
@@ -59,40 +53,45 @@ both sets would overlap each other as they were initially disjoint. Because of
 that, the (disjoint ex-or strictly related) rule could no longer apply, which
 is why such CEs, if added to disjoint sets, would break the hierarchy.
 
-**CLARIFICATION**
-Any element (v in V) is a characteristic element (ce in CE(h)).
-
-(1) Any hierarchy (h) has exactly one root set (r in P). In addition to that,
-the root set holds all the elements in V. That is because any other set (s in P)
-is a strict subset of (r). If there would be even one set disjoint to (r), then
-(h) would not be a hierarchy because that set would then be an additional root
-set.
-
-(2) If an element (v in V) is an element such that it does not belong to any
-other set (s in P) other than the root set (r), then that element (v) is a CE
-of (r). This obviously includes the case in which the root set is itself a leaf
-set (i.e. has no descendants).
-
-(3) If element (v) is no such element, then it can only belong to one child
-set of (r). That is because the child sets of a parent set are disjoint to
-one another; they would otherwise not have the same parent set.
-
-(4) Child set (c in P), which holds (v in V), can now be understood to represent
-the root set (r) of a sub-hierarchy. The iteration therefore has to recursively
-continue with step-2.
-
-Note that (v) will either be the CE of a parent set ex-or the CE of a leaf set.
+<!-- ======================================================================= -->
+## (CE(h) == V)
 
 **CLARIFICATION**
-Every (v in V) is a CE and every CE is an element in V.
+Each CE is an element in V.
+
+That is because each CE is an element of one or more sets in P.
+
+**CLARIFICATION**
+Each element in V is a CE.
+
+(1) Any hierarchy (h) has by definition exactly one root set (r in P).
+Furthermore, the root set is equal to V, which is because any other set
+(s in P) is a strict subset to (r).
+
+(2) If element (v) is an element such that it is not an element of any other
+set other than the root set (r), then that element is an CE of (r). (Note that
+this includes the case in which the root set is itself a leaf set).
+
+(3) If element (v) is no such element, then it must also be an element of one
+of the child sets of (r). That is because the child sets of a parent set are
+disjoint to one another (i.e. due to disjoint ex-or strictly related).
+
+(4) Child set (c in P), which holds (v in V), can now be seen as the root set
+(r) of a sub-hierarchy. The iteration therefore has to recursively continue
+with step-2.
+
+**CLARIFICATION**
+The overall set of CEs is equal to the hierarchy's set of elements.
+That is because each element in V is a CE and each CE is an element in V.
 
 * `(CE(h) == V)`
-* `(CSS(h)-{})` is a partition of `V` into disjoint sets.
+* `(CSS(h) \ {})` is a partition of `V` into disjoint sets.
+* (recall that all characteristic subsets are disjoint)
 
 <!-- ======================================================================= -->
-## ce(), ce-of-css(), ce-of-set()
+## ce-of-css(), ce-of-set(), ce()
 
-A CE of a CSS can be retrieved as follows:
+A (random) CE of a CSS can be retrieved as follows:
 
 ```
 ce-of-css(css,h) begin
@@ -101,13 +100,13 @@ ce-of-css(css,h) begin
 end
 ```
 
-Note that, provided the input parameter (css) does indeed represent an element
-in CSS(h), the result is undefined if the CSS is empty. Furthermore, if the
-CSS has more than one CE, the result is a random CE of the input CSS. That is,
-because, even though each CE is different to all other CEs in that CSS, a simple
-set of elements provides no means to retrieve a particular element (i.e. a CSS
-has no first/last CE, etc). And even if a simple set of values had such means,
-there is no information available to tell which CE to return.
+Note that, provided the input CSS does indeed represent an element in CSS(h),
+the result is undefined if the CSS is empty. Furthermore, if the CSS has more
+than one CE, the result is a random CE of the input CSS. That is because, even
+though each CE is distinct to all the other CEs in that CSS, a simple set of
+elements provides no means to retrieve a particular element (i.e. a CSS has no
+first/last CE, etc). And even if a simple set of values had such means, there
+is no information available to tell which specific CE to return.
 
 ```
 ce-of-set(s,h) begin
@@ -117,8 +116,8 @@ return ce
 end
 ```
 
-Note that, as before, the result is either undefined (if (css(s)=={})),
-the single CE of css(s), or a random element in css(s).
+Note that, as before, the result is either undefined (if (css(s) == {})),
+the single CE of css(s), or a random CE in css(s).
 
 ```
 ce(x,h) begin
@@ -130,8 +129,10 @@ ce(x,h) begin
 end
 ```
 
-Note that any leaf set is identical to its CSS (i.e. css(l) == l) and
-that the CSS of a parent set is not an element in P.
+Note that any leaf set is equal to its CSS (i.e. css(l) == l) and that the CSS
+of a parent set is not an element in P. Hence, if (x) is not a set in P, then
+(x) must be a CSS. If, in contrary to that, (x) is a set in P, then (x) may or
+may not be a CSS (i.e. leaf set vs. parent set).
 
 <!-- ======================================================================= -->
 ## css-of-ce(), set-of-ce()
@@ -147,9 +148,10 @@ css-of-ce(ce,h) begin
 end
 ```
 
-Note that, provided the input (ce) is indeed an element of an existing CSS,
-the result is defined and unique. That is, step-2 can only trigger in case
-of an input error, and step-3 only if the corresponding hierarchy is broken.
+Note that, provided the input CE is indeed the element of a CSS, the result is
+defined and unique. That is, step-2 can only trigger in case of an input error,
+and step-3 only if the corresponding hierarchy is broken (as each CE is unique
+to its CSS).
 
 ```
 set-of-ce(ce,h) begin
@@ -159,13 +161,12 @@ set-of-ce(ce,h) begin
 end
 ```
 
-Note that, provided the input (ce) does not represent an input error, the result
-is defined and unique. That is because the corresponding CSS will never be empty.
+Note that, provided the input CE is indeed the element of a CSS, the result is
+defined and unique. That is because the corresponding CSS will never be empty.
 
 Note that neither `css-of-ce()` nor `set-of-ce()` allow to retrieve the empty
 CSS of a parent set, or a parent set that has an empty CSS. None of those sets
-can be retrieved by the above functions because there is no CE that would allow
-to identify those sets.
+can be retrieved as there is no CE that would allow to identify those sets.
 
 <!-- ======================================================================= -->
 ## Iff (#CE(s) == 1)
@@ -184,28 +185,31 @@ to identify those sets.
 |----------------|
 ```
 
-**CLARIFICATION**
-The following is true, iff each CSS holds exactly one CE:
 
-* (#CE(s) == 1) is true for any (s in P)
+
+**CLARIFICATION**
+The following is true, iff each CSS has exactly one CE:
+
+* if (#CE(s) == 1) is true for any (s in P), then ...
 * `ce-of-set()` is defined and unique for any (s in P)
-* `set-of-ce()` allows to identify any (s in P)
+* `set-of-ce()` allows to retrieve any (s in P)
 
 **CLARIFICATION**
-(#V == #P) is true, iff (#CE(s) == 1).
+If each CSS has exactly one CE, then V and P have equal size.
 
 (1) (#CSS(h) == #P) -
-That is because each CSS is now required to be non-empty.
-In addition to that, any non-empty CSS is disjoint to any other CSS.
+That is because each set (s in p) has a unique non-empty CSS.
 
 (2) (#CE(h) == #P) -
-That is because each CSS is required to hold exactly one CE.
+That is because each CSS is required to have exactly one CE.
 
 (3) (#V == #P) -
-That is because (CE(h) == V).
+That is because (#CSS(h) == #P == #CE(h) == #V).
+
+* `(#V == #P)` is true, iff `(#CE(s) == 1)`
 
 **CLARIFICATION**
-`ce-of-set()` is inverse to `set-of-ce()` iff (#CE(s) == 1).
+`ce-of-set()` is inverse to `set-of-ce()` iff `(#CE(s) == 1)`.
 
-* `(set-of-ce( ce-of-set(s) ) == s)` is true for any (s in P)
-* `(ce-of-set( set-of-ce(ce) ) == ce)` is true for any (ce in CE(h))
+* `(set-of-ce( ce-of-set(s) ) == s)` is true for any `(s in P)`
+* `(ce-of-set( set-of-ce(ce) ) == ce)` is true for any `(ce in CE(h))`
