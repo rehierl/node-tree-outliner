@@ -27,7 +27,7 @@ A tree is a binary tuple defined as follows:
 * `N` is the set of nodes
 * `E` is the set of edges
 
-Note that this discussion is with regards to directed un-ordered trees.
+Note that this discussion is in regards to directed un-ordered trees.
 
 **CLARIFICATION**
 As a whole, any tree can be understood to define its set of nodes.
@@ -40,8 +40,9 @@ by a node that acts as the starting point of a formal definition.
 
 Note that the definitions of these sets of nodes are based upon observations.
 The following definitions therefore merely introduce names for these particular
-sets of nodes. Similar to the subset of uneven integers, these subsets don't
-exist as separate entities, but as integral parts of the tree's set of nodes.
+sets of nodes. Similar to the subset of uneven integers in the overall set of
+integers, these subsets don't exist as separate entities, but as integral parts
+of the tree's set of nodes.
 
 <!-- ======================================================================= -->
 ## The inner/outer set of a node
@@ -84,9 +85,9 @@ if the defining node is added to (or removed from) the other set.
 **CLARIFICATION**
 Each node can be understood to contain itself and its descendants.
 
-Other ways to express that statement are: node `n1` contains node `n2`,
-iff (1) `n2` is a node of the subtree that has `n1` as its root,
-or (2) `n1`'s outer set contains `n2`.
+Other ways to express that statement are: node `n1` contains node `n2`, iff
+(1) `n2` is a node in the subtree that has `n1` as its root, or (2) `n1`'s
+outer set contains `n2` as an element.
 
 <!-- ======================================================================= -->
 ## Relationship between the sets of different nodes
@@ -116,8 +117,8 @@ The above statements should be fairly obvious because any descendant of a node
 is also a descendant of the node's ancestors. As such, a descendant is also an
 element of both sets of any of the node's ancestors.
 
-* If a parent has one child only, then the parent's inner set is identical to
-  the child's outer set. Both sets are strict subsets to the parent's outer set.
+* If a parent has one child only, then the parent's inner set is equal to the
+  child's outer set. Both sets are strict subsets to the parent's outer set.
 * If a parent has more than one child, then the parent's inner set holds more
   nodes than any of the outer sets of its child nodes. That is, the outer set
   of any child is a strict subset of the parents's inner set.
@@ -160,11 +161,9 @@ no nodes in common.
 The set of outer sets always has exactly one root set.
 (=> the set of outer sets is a simple hierarchy).
 
-That is because the set of outer sets always has exactly one root set,
-which is because a node tree is by definition a rooted tree of nodes.
-
-Note that any other outer set is a strict subset to the outer set of the root.
-That is because any other node in a tree is a descendant of the root node.
+That is because a node tree has by definition exactly one root to which all
+other nodes are descendant. Because of that, the outer set of any other node
+is a strict subset to the outer set of the root.
 
 **CLARIFICATION**
 Each outer set has its defining node as its only CE.
@@ -172,41 +171,26 @@ Each outer set has its defining node as its only CE.
 
 The inner set of a node is the union of the outer sets of its child nodes.
 Because of that, the defining node is the only node that remains after
-subtracting the inner set of a node from its the outer set.
+subtracting the inner set of a node from its outer set.
 
 **CLARIFICATION**
-The outer set of a node is unique to a node.
-No other node has the exact same outer set.
-(=> #P == #V)
-
-(1) If node `n1` is an ancestor of `n2`, then `n1`'s outer set contains `n1`,
-but `n2`'s outer set does not. The outer sets of both nodes are different.
-
-(2) If the outer sets of two nodes are disjoint, then the outer sets of both
-nodes have no nodes in common. That is, the outer sets of two unrelated nodes
-are different.
-
-Note that this is also a consequence of each outer set having its defining
-node as its only CE. Which is, because any CSS is disjoint to any other CSS.
-
-**CLARIFICATION**
-The **set of outer sets** of a node tree is **a strict hierarchy of sets**.
+The **set of outer sets** of a node tree is a **strict hierarchy of sets**.
 
 **Memory hook**
-Take a piece of paper and use it to draw a rooted node tree. Next, draw a border
-around that node tree. Then, draw a border around each subtree such that no
-border crosses another border. When done, the set of borders represents the
+Take a piece of paper and use it to draw a rooted node tree. Then, draw a border
+around that node tree. After that, draw a border around each subtree such that
+no border crosses another border. When done, the set of borders represents the
 tree's hierarchy of outer sets H1.
 
 <!-- ======================================================================= -->
 ## The set of inner sets
 
-Note that no inner set will contain the root node.
+Note that the root node of a tree is not an element of any inner set.
 
 Note that all inner sets of leaf nodes are empty `{}` and that: (a) the empty
 set is disjoint to any other set - (b) the empty set is a subset to any other
-set - (c) the empty set is a strict subset to any non-empty set - (d) the empty
-set is not a strict subset to itself.
+set - (c) the empty set is a strict subset to any non-empty set - (d) the
+empty set is not a strict subset to itself.
 
 **CLARIFICATION**
 The inner sets of a leaf nodes are empty.
@@ -222,17 +206,17 @@ of the inner set of `n1`. (Note that this is true, even if `n2` is a leaf node:
 `n1` has a non-empty inner set, `n2` has an empty inner set).
 
 (2) If node `n1` is an ancestor of `n2`, then the inner set of `n1` has `n2`
-as an element, but the inner set of `n2` does not. The inner set of an ancestor
-has always more elements than the inner set of a descendant. That is, the inner
-set of a descendant is a strict subset of the inner set of an ancestor. (Note
-that this is true, even if `n2` is a leaf node).
+(not `n1`!) as an element, but the inner set of `n2` does not. The inner set
+of an ancestor has always more elements than the inner set of a descendant.
+That is, the inner set of a descendant is a strict subset of the inner set
+of an ancestor. (Note that this is true, even if `n2` is a leaf node).
 
 (3) If two nodes are unrelated to one another (i.e. none is an ancestor of the
 other), then the inner sets of both nodes are disjoint. That is, both sets have
 no nodes in common.
 
 **CLARIFICATION**
-But what if the inner set of `n1` and/or the inner set of `n2` is empty?
+What if the inner set of `n1` and/or the inner set of `n2` is empty?
 
 * `(A ex-or B) := (A && !B) || (!A && B)`
 * `A` means that "both sets are disjoint"
@@ -247,18 +231,17 @@ empty inner sets is a strict subset of the other. Consequently, (A ex-or B) is
 true.
 
 (`n1` is a parent, `n2` is a leaf) =>
-Both sets are disjoint. However, the empty inner set of `n2` is also a strict
-subset of the non-empty inner set of `n1`. Because of that, (A ex-or B) does
-not apply. (Note that `n2`'s empty inner set is always a strict subset of
-`n1`'s inner set. That is, whether `n1` is an ancestor of `n2` or not).
+Both sets are obviously disjoint. However, the empty inner set of `n2` is also
+a strict subset of the non-empty inner set of `n1`. Because of that, (A ex-or B)
+does not apply. (Note that `n2`'s empty inner set is a strict subset of `n1`'s
+inner set, whether `n1` is an ancestor of `n2` or not).
 
 **CLARIFICATION**
 The set of inner sets is not guaranteed to have a non-empty root set.
 (=> the set of inner sets is no simple hierarchy).
 
-That is because a node tree that has only one root node will result in a set of
-inner sets that only holds the empty set as its only element. Which is because
-in that case, the root node is by definition also a leaf node.
+That is because a node tree that has only one root node (i.e. also a leaf) will
+result in a set of inner sets that only holds the empty set as its only element.
 
 **CLARIFICATION**
 The CSS of each inner set is not guaranteed to hold one node only.
@@ -266,27 +249,27 @@ The CSS of each inner set is not guaranteed to hold one node only.
 
 (1) The CSS of the inner set of a leaf node is obviously empty.
 
-(2) The CSS of the inner set of a parent node may hold once CE per child.
-Because of that, the CSS is a non-empty CSS that holds one or more elements.
+(2) The CSS of the inner set of a parent node may have once CE per child.
+Because of that, the CSS is a non-empty CSS that have one or more elements.
 
 **CLARIFICATION**
 The non-empty inner set of a node is unique to that node.
 No other node has the exact same non-empty inner set.
 
 (1) If node `n1` is an ancestor of `n2`, then `n1`'s inner set contains `n2`,
-but `n2`'s inner set does not. The inner sets of both nodes are different.
+but `n2`'s inner set does not. The inner sets of both nodes are distinct.
 
 (2) If the inner sets of two non-leaf nodes are disjoint, then the inner sets
 of both nodes have no nodes in common. That is, the inner sets of two unrelated
-nodes are different.
+nodes are distinct.
 
 **CLARIFICATION**
-The inner set of a node is not unique to a node.
-(=> #P <= #N)
+The inner set of a node is in general not unique to a node.
+(=> `(#P <= #N)`)
 
-(1) If a tree has more than one leaf node, then more than one node has the
-empty set as its inner set. Because of that, the set of inner sets will hold
-fewer sets than the tree has nodes.
+If a tree has more than one leaf node, then more than one node has the empty
+set as its inner set. Because of that, the set of inner sets will have fewer
+sets than the tree has nodes.
 
 **CLARIFICATION**
 The set of inner sets of a node tree does not represent a strict hierarchy.

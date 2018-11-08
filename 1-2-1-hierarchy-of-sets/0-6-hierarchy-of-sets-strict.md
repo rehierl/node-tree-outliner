@@ -12,19 +12,20 @@ if the following requirements are met:
 
 Note that ...
 
-* strict hierarchy => simple hierarchy
-* Each element in V is a CE: (CE(h) == V).
-* Any set (s in P) has exactly one CE.
-* Any set (s in P) can be identified its CE.
-* Each CSS has exactly one CE: (#CSS(h) == #CE(h)).
-* There are as many elements in V as there are elements in P: (#P == #V)
+* A strict hierarchy is also a simple hierarchy.
+* Each element in V is a CE since (CE(h) == V) is true.
+* Any set (s in P) can be identified/retrieved by its CE.
+* Each CSS has exactly one CE, i.e. (#CSS(h) == #CE(h)).
+* The P has as many elements as V, i.e. (#P == #V).
+* Each (v in V) is a CE.
 
-Note that the word "normalized" is with regards to:
-"Each non-empty CSS holds one CE only".
+Note that the term "normalized" is in regards to:
+"Each CSS has exactly one CE".
 
 **CLARIFICATION**
-A setup is said to be **a strict/normalized forest (of hierarchies)**
-or "a forest of strict hierarchies", if the following requirements are met:
+A setup is said to be **a strict/normalized forest (of hierarchies)**, or
+"a forest of strict/normalized hierarchies", if the following requirements
+are met:
 
 0. `F := (V,P,G)`
 1. The setup is a simple forest.
@@ -32,9 +33,9 @@ or "a forest of strict hierarchies", if the following requirements are met:
 
 Note that
 
-* strict forest => simple forest
+* A strict forest is also a simple forest.
 * Any forest is a union of disjoint hierarchies.
-* Any hierarchy in a forest can be identified by the CE of its root set.
+* Any hierarchy in a forest can be identified/retrieved by the CE of its root.
 
 <!-- ======================================================================= -->
 ## derived statements
@@ -42,11 +43,12 @@ Note that
 **CLARIFICATION**
 Any non-empty CSS can be minimized to hold exactly one CE.
 
-Additional CEs do not add substantial information to a hierarchy. They merely
-increase the storage requirement of a hierarchy (hint: ancestor sets). That is,
-instead of having multiple distinct CEs per set, each of which can be understood
-to represent a bit of information that is unique to a set, a set should only
-hold one reference to the combined information of that set.
+No additional CE adds substantial information to a hierarchy as those merely
+increase the storage requirement of a hierarchy (hint: ancestor sets). That
+is, instead of having multiple distinct CEs per set, each of which can be
+understood to represent a bit of information that is unique to a set, a set
+should only have one reference to the combined information (set of CEs) of
+that set.
 
 **CLARIFICATION**
 A simple hierarchy of sets may be referred to as **a minimal (simple)

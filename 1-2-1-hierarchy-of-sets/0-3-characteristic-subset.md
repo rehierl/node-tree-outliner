@@ -33,9 +33,9 @@ Note that ...
 * `V, E(h) := { e | (e in s) and (s in P) }`
 
 Note that, because `(s in P)` is a strict subset to any of its ancestors,
-`css(s)` is a subset of `s` and a strict subset to any set in `A(s)`.
-Consequently, `s` is the least significant set to which `css(s)` is a subset.
-Because of that, set `s` will be referred to as the parent set of `css(s)`.
+`css(s)` is a subset of `s` and a strict subset to any set in `A(s)`. Hence,
+`s` is the least significant set to which `css(s)` is a subset. Because of
+that, set `s` will be referred to as the parent set of `css(s)`.
 
 **CLARIFICATION**
 The **set of all characteristic subsets** is defined as follows:
@@ -64,9 +64,9 @@ leaf set is never empty.
 **CLARIFICATION**
 The CSS of a parent set `(p in PS)` may be empty (e.g. CSS(/C)).
 
-That is because, if a parent set (p in PS) is equal to the union of its
-descendant sets, then all the elements in (p) are also elements in its
-descendant sets. In that particular case, css(p) is empty.
+That is because, if a parent set (p) is equal to the union of its descendant
+sets, then all the elements in (p) are also elements in its descendant sets.
+In that particular case, css(p) is empty.
 
 * `(css(p) == {})` if `(p in PS)` and `(p == E(D(p))`
 * `(css(p) == {}) -> (p in PS)`
@@ -74,7 +74,7 @@ descendant sets. In that particular case, css(p) is empty.
 **CLARIFICATION**
 The CSS of a parent set `(p in PS)` is never an element in `P`.
 
-That is obviously true, if css(p) is empty. However, it is also true if css(p)
+That is obviously true if css(p) is empty. However, it is also true if css(p)
 is non-empty. That is because (p), as a parent set, has one or more non-empty
 child sets, which is why the non-empty CSS is guaranteed to have fewer elements
 than (p). Hence, and in order for (css(p) in P) to be true, css(p) would have
@@ -126,7 +126,7 @@ That is because css(p) may be empty for more than one (p in PS).
 
 **CLARIFICATION**
 Any element in a CSS is unique to its CSS.
-Put differently, distinct characteristic subsets are disjoint.
+Put differently, any two distinct characteristic subsets are disjoint.
 
 (1) For two distinct sets (s,t in P) to have coupled characteristic subsets,
 (s & t) would have to be non-empty. That is because css(s) is still a subset
@@ -163,7 +163,8 @@ A CSS is obviously not "unique" to its parent set (s in P) in a strict sense.
 That is because (s) may have one or more ancestor sets and because css(s) is
 also a strict subset to all of these sets. However, a CSS is "unique" to (s)
 in such a way that (s) is the least significant set of these sets. No other
-set "contains" a given CSS in that particular "unique" way.
+set has a given CSS as its characteristic subset - i.e. a CSS is "unique" in
+that particular way.
 
 <!-- ======================================================================= -->
 ## set-of-css()
@@ -191,7 +192,10 @@ The possible outcomes of that implementation are:
 (0) The result is undefined, if no (s in P) exists
 such that (css(s) == css) - i.e. trigger step-2.
 
-(1) If the input css is empty, then ...
+Note that this step represents an user input error.
+
+(1) If the input css is empty,
+and if step-2 did not trigger, then ...
 
 (1.1) The result is unclear if more than one (p in PS) exists
 such that (css(p) == {}) - i.e. trigger step-3.
@@ -199,10 +203,11 @@ such that (css(p) == {}) - i.e. trigger step-3.
 (1.2) The result is (p), if exactly one (p in PS) exists
 such that (css(p) == {}).
 
-(2) If the input css is non-empty, then ...
+(2) If the input css is non-empty,
+and if step-2 did not trigger, then ...
 
 (2.1) The result is a unique (s in P).
-That is because css is (due to case 0) guaranteed to be in CSS(h).
+That is because each non-empty CSS is unique to its parent set.
 
 Note that each hierarchy always has at least one non-empty CSS.
 That is because each hierarchy always has at least one leaf set.

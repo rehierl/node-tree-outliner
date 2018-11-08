@@ -21,21 +21,21 @@ a minimal hierarchy of sets                    node tree
 |---------------------------------------|
 ```
 
-Note that labels (`A to F`) are not part of the hierarchy.
-These labels only serve as a visual aid, intended to support discussions.
+Note that labels `A` to `F` are not part of the hierarchy
+and only serve as a visual aid.
 
-Note that the only information available, which can be used to reliably create
-a node tree based on a given hierarchy, are the relationships the sets have
-with each other. That is because the definition of a hierarchy has no
-characteristics with regards to the elements in `V`. Consequently, the node
-tree to the right has one node per set `(s in P)`, not one node per element
-`(v in V)` (i.e. 8 nodes, not 5).
+Note that the only information available, which can be used to reliably form a
+node tree based on a given hierarchy, are the relationships the sets have with
+each other. That is because the definition of a hierarchy has no requirements
+in regards to the elements in `V`. Consequently, the node tree to the right has
+one node per set `(s in P)`, not one node per element `(v in V)` (i.e. 8 nodes
+instead of 5).
 
 **CLARIFICATION**
 Any (simple) hierarchy of sets `H := (V,P,G)` defines
-the structure of an unordered node tree `T := (N,E)`.
+the structure of a directed unordered node tree `T := (N,E)`.
 
-In order to create a node tree from a simple hierarchy,
+In order to create a tree based on a simple hierarchy,
 the following steps must be executed:
 
 1. Create a node `ni` for each set `si` (i.e. `(#N == #P)`) and
@@ -44,11 +44,10 @@ the following steps must be executed:
    the parent node of `nj` (i.e. `(si,sj) in G => (ni,nj) in E`).
 
 Even though the relationship of a set (with all the other sets) is defined by
-the elements a set holds, the creation of the nodes and the association of a
-set with a node is unrelated to these elements. That is because a hierarchy
-does not reliably hold the information that would allow to determine which
-node a set represents. In general, a hierarchy only states what relationship
-a set has with all the other sets.
+common elements, the creation of the nodes and the association of a set with
+a node is unrelated to these elements. That is because a simple hierarchy does
+not reliably allow to determine which node a set represents. In general, a
+hierarchy only states what relationship a set has with all the other sets.
 
 Note that ...
 
@@ -58,16 +57,16 @@ Note that ...
   the structure of the node tree.
 * The resulting graph will be a directed graph. That is because
   the relationship a set has with all the other sets is directed.
-* A set is no ancestor to itself. That is, the resulting graph will
-  have one root, no loops and no cycles (i.e. a node tree).
+* A set is no ancestor to itself. That is, the resulting graph has
+  one root, no loops and no cycles (i.e. a node tree).
 
 **Memory hook**
 What counts is what relationship a set has with all the other sets. Other than
-that, the elements the sets hold provide no further information that could be
+that, the elements the sets have provide no further information that could be
 relied upon.
 
 <!-- ======================================================================= -->
-## Required characteristics
+## missing characteristics
 
 **CLARIFICATION**
 Because a simple hierarchy `H := (V,P,G)` has no characteristics that could
@@ -83,17 +82,17 @@ further characteristics, which are specified by the following requirements:
 1. In order to embed the information which node a set represents, the sets
    need to contain the nodes in such a way that, based on any given set, the
    corresponding node can be identified. (=> `(N subset-of V)`).
-2. In order for the resulting tree to have the same amount of nodes, the
-   hierarchy must hold one set per node. (=> `(#P == #N)`).
-3. A method must exist that allows to reliably determine which node a set
-   represents. Because of that, the node a set represents must be a node
+2. In order for the resulting tree to have as many nodes as there are sets
+   in `P`, the hierarchy must contain one set per node. (=> `(#P == #N)`).
+3. A method must exist that allows to uniquely determine which node a set
+   represents. Because of that, the node a set represents must be an element
    of the corresponding set. (=> `node-of: P -> N`).
 
 Note that these requirements will be referred to as "req-1" to "req-3".
 
 **CLARIFICATION**
 A strict hierarchy satisfies all of the above requirements,
-if the CE each set holds is identical to the node it represents.
+if the CE of each set is identical to the node it represents.
 
 (req-1) `(V == N)` => `(N subset-of V)`.
 That is, each set is guaranteed to have access to the node it represents.
@@ -104,7 +103,7 @@ That is, `(#P == #N)` is guaranteed to be true because
 
 (req-3) `node-of := ce-of-set(s)`.
 That is, in a strict hierarchy, each set has a non-empty CSS. And because
-each CSS holds exactly one element, the node a set represents can be reliably
+each CSS holds exactly one element, the node a set represents can be uniquely
 determined.
 
 <!-- ======================================================================= -->
@@ -143,14 +142,14 @@ a strict hierarchy of sets                     node tree
 ```
 
 Note that the leaf sets only appear to be empty. The CE of each set is elevated
-into the position of a label, but, in contrary to before, each CE remains to be
+into the position of a label. But, in contrary to before, each CE remains to be
 an element of the corresponding set.
 
 **CLARIFICATION**
 Any strict hierarchy of sets `H := (V,P,G)` defines
-the structure and the nodes of an unordered node tree `T := (N,E)`.
+the structure and the nodes of a directed unordered node tree `T := (N,E)`.
 
-In order to create a node tree from a strict hierarchy,
+In order to create a tree based on a strict hierarchy,
 the following steps must be executed:
 
 1. Determine the node `ni` each sets `si` represents (i.e. `ni = ce(si)`)
@@ -160,5 +159,7 @@ the following steps must be executed:
 
 Note however that the tree's structure is still defined by the relationship
 a set has with all the other sets. In contrary to before, the elements within
-those sets now hold the previously missing information, which is why the node
-of each set can be uniquely determined.
+those sets now allow to uniquely determine the node a set represents.
+
+Note that there is no order in a strict hierarchy which would define the child
+order in a directed ordered node tree.

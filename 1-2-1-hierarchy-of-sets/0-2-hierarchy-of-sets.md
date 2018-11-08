@@ -208,7 +208,7 @@ if the following requirements are met:
 
 0. `H := (V,P)`
 1. The setup is strict.
-2. The setup has exactly one root set.
+2. The setup has one and only one root set.
 
 A simple hierarchy has the following properties:
 
@@ -231,17 +231,19 @@ or "a forest of simple hierarchies", if the following requirements are met:
 1. The setup is a strict.
 2. The setup has zero, one or more than one root sets.
 
-Note that, in contrary to a hierarchy, a forest may be empty.
-That is, a forest is not required to have even a single root set.
+Any strict setup therefore is a forest of hierarchies.
+In contrary to that, not every strict setup is also a hierarchy of sets.
 
 * strict setup <=> a forest of hierarchies
 * a hierarchy => a forest of hierarchies
 
-Note that any strict setup is a forest of hierarchies. That is, a forest is
-not strictly "a set of sets of sets" (i.e. "a set of hierarchies"). A forest
-is like a hierarchy, one set of "flat" sets. Because of that, any operation
-defined on a set of sets (e.g. union, subset, etc) can be used in combination
-with forests.
+Note that, in contrary to a hierarchy, a forest may be empty.
+That is, a forest is not required to have even a single root set.
+
+Note that a forest is not strictly "a set of sets of sets" (i.e. "a set of
+hierarchies"). A forest is like a hierarchy, one set of "flat" sets. Because
+of that, any operation defined on a set of sets (e.g. union, subset, etc)
+can be used in combination with forests.
 
 Note that any two hierarchies in a forest of N hierarchies are disjoint. That
 is, because the forest would otherwise either have less than N hierarchies, or
@@ -270,11 +272,12 @@ The root set (r in P) of a hierarchy `H := (V,P)` is equal to V. Because
 of that, a hierarchy's root set is the largest set (i.e. in terms of number
 of elements) in P.
 
-That is because (1) V is the union of all sets in P (i.e. V := E(P)),
-and (2) any other set (s in P) is a strict subset to the root set (r in P).
+That is because (1) V is the union of all sets in P (i.e. V := E(P)), and
+(2) any other set (s in P) is a strict subset to the root set (r in P).
 
 **CLARIFICATION**
-Two distinct hierarchies are disjoint, if their root sets are disjoint.
+Two hierarchy instances are disjoint, if their root sets are disjoint.
+(The focus here is on two hierarchy entities, i.e. two separate setups).
 
 Note that, if root set `r1` is disjoint to `r2`,
 then any subset `s1` of `r1` is disjoint to any subset `s2` of `r2`.
