@@ -14,9 +14,9 @@ Note that the diameter of a cyclic component is undefined/infinite.
 
 A **maximal (connected) component** `c := (T,U)` is a component of a graph
 `G := (V,E)` such that no vertex `(v in V\T)` can be added to its set of
-vertices `T` while maintaining its connectivity. That is, there is no more
-vertex `(v in V\T)` such that `v` is connected to all other vertices in `T`.
-Consequently, no other induced subgraph `G[T + {v}]` is a component of `G`.
+vertices `T` while maintaining its connectivity. That is, there is no vertex
+`(v in V\T)` such that `v` is connected to any vertex in `T`. Consequently,
+no other induced subgraph `G[T + {v}]` is a component of `G`.
 
 A component of the form `c := ({v},{})` will be referred to as a (maximal
 connected) **trivial component**. That is, each isolated vertex represents
@@ -36,6 +36,7 @@ Note that ...
 
 * The term "component" will in general refer to a maximal component.
 * Each vertex in a graph belongs to exactly one maximal component.
+* (i.e. the (maximal) components in a graph are **disjoint**)
 * Components in an oriented, acyclic graph are weakly connected.
 * Components in an oriented, cyclic graph may be strongly connected.
 * (e.g. a cycle graph is strongly connected)

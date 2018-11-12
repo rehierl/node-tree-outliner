@@ -113,7 +113,7 @@ clarification
 If two sets are unequal, then both sets differ in size and/or elements.
 
 <!-- ======================================================================= -->
-## strict-subset-of
+## strict/proper subset-of
 
 * `(V strict-subset-of W) := (V subset-of W) and (V != W)`
 * some `(w in W)` must exist such that `(w !in V)` is true
@@ -133,3 +133,7 @@ clarification
 
 * `(V strict-subset-of W) -> (#V < #W)`
 * `(V strict-subset-of W) -> !(W strict-subset-of V)`
+
+**TODO** - "proper subtree" is a better term in the context of trees.
+as a matter of consistency, it would be best to replace the occurrences
+of "strict subset" by "proper subset".

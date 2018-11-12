@@ -45,7 +45,7 @@ at least one vertex and/or edge - i.e. `(#T < #V)` and/or `(#U < #E)`. Any
 graph `G` is therefore a (simple) subgraph, but no proper subgraph to itself.
 
 <!-- ======================================================================= -->
-## subgraph-of
+## subgraph-of, strict-subgraph-of
 
 Given the two graphs `S := (T,U)` and `G := (V,E)`, a subgraph-of operator
 can be defined.

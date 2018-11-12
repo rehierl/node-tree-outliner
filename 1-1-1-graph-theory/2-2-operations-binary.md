@@ -2,12 +2,11 @@
 <!-- ======================================================================= -->
 # Binary operations on graphs
 
-* simple and comparison-based binary operations
+* comparison-based binary operations
 
 <!-- ======================================================================= -->
 ## equal, unequal, distinct
 
-* (/see/ "core definitions" /)
 * given two graphs `S := (T,U)` and `G := (V,E)`
 
 `S` and `G` are **equal**, if ...
@@ -87,7 +86,8 @@ That is, a non-empty subgraph is never disjoint to its supergraph.
 * `(S related-to G) -> (S coupled-with G)` if `(S != Ø)`
 
 Note that the converse is not necessarily true. That is, two graphs that are
-coupled with each other, are not necessarily related to each other.
+coupled with each other, are not necessarily related to each other as both
+graphs may overlap each other.
 
 * `(S coupled-with G)` =!> `(S related-to G)`
 * `(S coupled-with G)` <=> `(S related-to G)` or `(S overlaps G)`
