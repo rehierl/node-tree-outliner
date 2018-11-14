@@ -2,13 +2,31 @@
 <!-- ======================================================================= -->
 # Relationships between sets
 
+<!-- ======================================================================= -->
+## overview
+
 ```
          |--> disjoint    |--> equal
 (A ? B) -|                |
-         |--> intersects -|--> strict subset
+         |--> intersects -|--> strict sub/super-set
               (coupled)   |
                           |--> overlap
 ```
+
+(A equal-to B)
+
+* `(A == B) := ((A union B) == (A isect B))`
+* i.e. every element in both sets is common to both
+* i.e. `A` and `B` are equal to each other
+* i.e. `equal-to` has no orientation
+* `(A == B) <-> (A subset-of B) and (B subset-of A)`
+* i.e. `A ` and `B` are subsets to each other
+
+(A unequal-to B)
+
+* `(A != B) := not (A == B)`
+* i.e. `unequal-to` is converse/antonymous to `equal-to`
+* synonymous - `distinct-to`, `distinct-form`
 
 (A disjoint-to B)
 
@@ -29,16 +47,17 @@
 (A subset-of B)
 
 * `(A subset-of B) := ((A & B) == A)`
-* i.e. `A` and `B` intersect each other
 * i.e. all elements in `A` are elements in `B`
 * i.e. `subset-of` has "some" orientation
+* note - `({} subset-of {})`, `(A subset-of A)`
 * `(A subset-of B) -> (#A <= #B)`
 
 (A contains B)
 
 * `(A contains B) := (B subset-of A)`
-* i.e. `contains` has some orientation
-* note - `(B !in A)` - i.e. `A` does not contain `B` as an element
+* i.e. synonymous to `subset-of`
+* note - `(B in A)` := `A` contains `B` as an element
+* note - "element-of" vs. "subset-of"
 * synonymous - `inside-of`
 
 (A related-to B)
@@ -52,27 +71,13 @@
 * `(A unrelated-to B) := not (A related-to B)`
 * i.e. `unrelated-to` is converse/antonymous to `related-to`
 
-(A equal-to B)
-
-* `(A == B) := (A subset-of B) and (B subset-of A)`
-* `(A == B) := ((A isect B) == (A union B))`
-* i.e. `A ` and `B` are subsets to each other
-* i.e. the intersection is equal to `A` and `B`
-* i.e. `equal-to` has no orientation
-
-(A unequal-to B)
-
-* `(A != B) := not (A == B)`
-* i.e. `unequal-to` is converse/antonymous to `equal-to`
-* synonymous - `distinct-to`, `distinct-form`
-
 (A strict-subset-of B)
 
 * `(A strict-subset-of B) := (A subset-of B) and (A != B)`
 * i.e. `A` is distinct from, but still a subset-of `B`
 * `(A strict-subset-of B) -> (B strict-superset-of A)`
 * i.e. `B` has one or more elements not in `A`
-* `(A strict-subset-of B) -> (B !strict-subset-of A)`
+* `(A strict-subset-of B) -> (B no-strict-subset-of A)`
 * i.e. `strict-subset-of` has a strict/proper orientation/direction
 * `(A strict-subset-of B) -> (#A < #B)`
 * synonymous - `proper-subset-of`
@@ -81,7 +86,7 @@
 
 * `(A strictly-related-to B) := (A related-to B) and (A != B)`
 * i.e. `A` is distinct from, but still related to `B`
-* i.e. both sets are unequal and one is a subset of the other
+* i.e. both are unequal and one is a subset of the other
 * i.e. `strictly-related` has no orientation
 * synonymous - `properly-related-to`
 

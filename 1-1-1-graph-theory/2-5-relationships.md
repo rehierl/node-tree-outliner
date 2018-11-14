@@ -2,18 +2,36 @@
 <!-- ======================================================================= -->
 # Relationships between graphs
 
-Note that the following operators are largely similar to those related to
-simple sets of elements. (/see/ "relationships between sets" in "mathematics").
+Note that the following operators are largely equal/similar to the set-based
+operators. (/see/ "relationships between sets" in "mathematics" /).
+
+<!-- ======================================================================= -->
+## overview
 
 ```
          |--> disjoint    |--> equal
 (S ? G) -|                |
-         |--> intersects -|--> strict subgraph
+         |--> intersects -|--> strict sub/super-graph
               (coupled)   |
                           |--> overlap
 ```
 
 * given two graphs `S := (T,U)` and `G := (V,E)`
+
+(S equal-to G)
+
+* `(S == G) := (T == V) and (U == E)`
+* i.e. both graphs have the same set of vertices and edges
+* i.e. the intersection graph is equal to `S` and `G`
+* i.e. `equal-to` has no orientation
+* `(S == G) <-> (S subgraph-of G) and (G subgraph-of S)`
+* i.e. `S` and `G` are subgraphs to each other
+
+(S unequal-to G)
+
+* `(S != G) := not (S == G)`
+* i.e. `unequal-to` is converse/antonymous to `equal-to`
+* synonymous - `distinct-to`, `distinct-from`
 
 (S disjoint-to G)
 
@@ -21,8 +39,8 @@ simple sets of elements. (/see/ "relationships between sets" in "mathematics").
 * i.e. `S` and `G` have no vertices in common
 * i.e. `S` and `G` are disjoint to each other
 * i.e. `disjoint-to` has no orientation
-* note - `(T disjoint-to V) -> (U disjoint-to E)`
 * note - `(S disjoint-to G) -> (S distinct-to G)`
+* note - `(T disjoint-to V) -> (U disjoint-to E)`
 
 (S intersects G)
 
@@ -35,16 +53,16 @@ simple sets of elements. (/see/ "relationships between sets" in "mathematics").
 
 (S subgraph-of G)
 
-* `(S subgraph-of G) := (T subset-of G) and (U subset-of E)`
-* i.e. `S` and `G` intersect each other
+* `(S subgraph-of G) := (T subset-of V) and (U subset-of E)`
 * i.e. all vertices/edges in `S` are vertices/edges in `G`
 * i.e. `subgraph-of` has "some" orientation
+* note - `(Ø subgraph-of Ø)`, `(G subgraph-of G)`
 
 (S contains G)
 
 * `(G contains S) := (S subgraph-of G)`
 * i.e. `contains` has "some" orientation
-* note - there is no issue similar to "element-of" vs. "subset-of"
+* note - no issue similar to "element-of" vs. "subset-of"
 * synonymous - `inside-of`
 
 (S related-to G)
@@ -58,20 +76,6 @@ simple sets of elements. (/see/ "relationships between sets" in "mathematics").
 * `(S unrelated-to G) := not (S related-to G)`
 * i.e. `unrelated-to` is converse/antonymous to `related-to`
 
-(S equal-to G)
-
-* `(S == G) := (S subgraph-of G) and (G subgraph-of S)`
-* alternative - `(S == G) := (T == V) and (U == E)`
-* i.e. `S` and `G` are subgraphs to each other
-* i.e. the intersection graph is equal to `S` and `G`
-* i.e. `equal-to` has no orientation
-
-(S unequal-to G)
-
-* `(S != G) := not (S == G)`
-* i.e. `unequal-to` is converse/antonymous to `equal-to`
-* synonymous - `distinct-to`, `distinct-from`
-
 (S proper-subgraph-of G)
 
 * `(S proper-subgraph-of G) := (S subgraph-of G) and (S != G)`
@@ -80,14 +84,13 @@ simple sets of elements. (/see/ "relationships between sets" in "mathematics").
 * i.e. `G` has one or more vertices not in `S`
 * `(S proper-subgraph-of G) -> (G no-proper-subgraph-of S)`
 * i.e. `proper-subgraph-of` has a strict/proper orientation/direction
-* `(S proper-subgraph-of G) <-> (T proper-subset-of V)`
 * synonymous - `strict-subgraph-of`
 
 (S properly-related-to G)
 
 * `(S properly-related-to G) := (S related-to G) and (S != G)`
 * i.e. `S` is distinct from, but still related to `G`
-* i.e. both graphs are unequal and one is a subgraph of the other
+* i.e. both are unequal and one is a subgraph of the other
 * i.e. `properly-related-to` has no orientation
 * synonymous - `strictly-related-to`
 

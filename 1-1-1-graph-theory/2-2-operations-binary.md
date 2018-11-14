@@ -2,7 +2,9 @@
 <!-- ======================================================================= -->
 # Binary operations on graphs
 
-* comparison-based binary operations
+* simple and comparison-based binary operations
+* i.e. equal, distinct, disjoint, coupled, overlap
+* i.e. union, intersection
 
 <!-- ======================================================================= -->
 ## equal, unequal, distinct
@@ -61,7 +63,8 @@ graph does not have.
 
 Note that both endpoints of an edge `(e in E)` in a graph `G := (V,E)` must
 be elements in the graph's set of vertices `V` (i.e. `(E(e) subset-of V)`).
-If that would not be the case, then `G` would not even qualify as a graph.
+If that would not be the case, then `G` would not even satisfy the definition
+of a graph.
 
 Two coupled graphs `S := (T,U)` and `G := (V,E)` always have coupled sets of
 vertices. That is because the endpoints of a common edge are also elements
@@ -101,8 +104,8 @@ be both (i.e. overlapping and related) at the same time.
 ## union (+, or, union)
 
 Graph `G := (V,E)` is said to be the **union** graph `G := (S + X)` of two
-graphs `S := (T,U)` and `X := (Y,Z)`, if its vertex-set is the union of both
-vertex sets, and if its edge-set is the union of both edge sets.
+graphs `S := (T,U)` and `X := (Y,Z)`, if its vertex-set is the union of `T`
+and `Y`, and if its edge-set is the union of `U` and `Z`.
 
 * `G := (S + X) := (V,E)`, where
 * `V := (T + Y)` and `E := (U + Z)`
@@ -115,20 +118,22 @@ Note that `S` and `X` are not required to be disjoint.
 ## intersection (&, and, isect)
 
 Graph `G := (V,E)` is said to be the **intersection** graph `G := (S & X)`
-of two graphs `S := (T,U)` and `X := (Y,Z)`, if `G` was formed by taking
-all vertices and edges that are common to both.
+of two graphs `S := (T,U)` and `X := (Y,Z)`, if `G` was formed by taking all
+vertices and edges that are common to both. Put differently, if its vertex-set
+is the intersection between `T` and `Y`, and if its edge-set is the intersection
+between `U` and `Z`.
 
 * `G := (S & X) := (V,E)`, where
 * `V := { (v in T) | (v in Y) }` and `E := { (e in U) | (e in Z) }`
 * associative - `(A & B & C) == ((A & B) & C) == (A & (B & C))`
 * commutative - `(A & B) == (B & C)`
 
-Note that the intersection graph `G` is a subgraph of `S` and `X`.
+Note that the intersection graph `G := (S & X)` is a subgraph of `S` and `X`.
 
 * if `(G := (S & X))` => `(G subgraph-of S)` and `(G subgraph-of X)`
 
 Two graphs `S` and `X` are said to **intersect** (each other), if their
-intersection graph `(S & X)` is unequal to the empty graph `Ø`.
+intersection graph `(S & X)` is distinct from the empty graph `Ø`.
 
 * `(S intersects X) := ((S & X) != Ø)`
 * `(S intersects X) <-> (X intersects S)`
@@ -150,18 +155,18 @@ to determine the set of common edges `E` based on one of the input graphs. That
 is, the intersection graph `G` is not (necessarily) an induced subgraph of one
 or both of the input graphs (i.e. `(G == S[V])` and `(G == X[S])` are both not
 necessarily true). Because of that, the set of common edges must be determined
-by comparing both sets of edges in the given input graphs.
+by comparing the sets of edges in the input graphs.
 
-Example 1: The intersection graph `G := (S & X)` for `S := ({1,2},{(1,2)})`,
+Example 1: The intersection graph `G := (S & X)` of `S := ({1,2},{(1,2)})` and
 `X := ({1,2},{(2,1)})` is `G := ({1,2},{})`. That is, `G` is not an induced
 subgraph to any of them (i.e. `(G == S[V])` and `(G == X[V])` are both false).
 
-Example 2/3: The intersection graph `G := (S & X)` for `S := ({1,2},{(1,2)})`,
+Example 2/3: The intersection graph `G := (S & X)` of `S := ({1,2},{(1,2)})` and
 `X := ({1,2},{})` is `G := ({1,2},{})`. That is, `G` is not an induced subgraph
 of `S`, but an induced subgraph of `X` (i.e. in contrary to `(G == S[V])` being
 false, `(G == X[V])` is true).
 
-Example 4: The intersection graph `G := (S & X)` for `S := ({1,2},{(1,2)})`,
+Example 4: The intersection graph `G := (S & X)` of `S := ({1,2},{(1,2)})` and
 `X := ({1,2,3},{(1,2)})` is `G := ({1,2},{})`. That is, `G` is an induced
 subgraph of `S` and an induced subgraph of `X` (i.e. `(G == S[V])` and
 `(G == X[V])` are both true).

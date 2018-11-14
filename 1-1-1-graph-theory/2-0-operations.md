@@ -31,9 +31,9 @@ of the relationship between a graph and its subgraphs. The following definitions
 therefore create new graphs by executing set-based operations (e.g. union of
 sets) on the corresponding sets of vertices and/or on the corresponding sets
 of edges. That is, the definitions build upon existing vertices and/or edges
-rather than the creation of (entirely) new entities (e.g. via the Cartesian
-product, e.g. tensor/strong product).
+rather than creating (entirely) new entities (e.g. via the Cartesian product,
+e.g. tensor/strong product).
 
-Note that the binary operations in general require the input graphs to be of
+Note that the binary operations require in general the input graphs to be of
 the same sort. That is, the graphs involved are (implicitly) expected to have
 similar, if not identical semantics.
