@@ -206,7 +206,8 @@ A forest (of trees) `F` is a disjoint union of trees:
 * such that `(E(e) subset-of N)` for any `(e in E)`
 * i.e. both endpoints of each edge are nodes in `N`
 
-Note that each (maximal) connected component must be a tree as defined above.
+An alternative definition could be: A forest (of trees) is a graph such
+that each (maximal) connected component in it is a tree (as defined above).
 
 <!-- ======================================================================= -->
 ## remarks

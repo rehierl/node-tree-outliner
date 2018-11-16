@@ -56,7 +56,7 @@ By definition, the defining node `n` of an outer set `OS(n)` is always an
 element of that set and unique to it. That is, no other outer set in a tree
 has the exact same defining node. Because of that, any tree `T := (N,E)` can
 be understood to have a set of outer sets (aka. **the set of outer sets of a
-tree**) of exactly `#N` sets associated with it:
+tree**) of exactly `#N` elements associated with it:
 
 * `OS, OS(T) := { OS(n) | (n in N)  }`
 * `(#OS == #N)` - i.e. one outer set per node
@@ -73,15 +73,15 @@ element of such a set. Because of that, a non-empty inner set is unique to its
 defining node. However, an empty inner set does not necessarily have a unique
 defining node. Hence, a tree `T := (N,E)` may also be understood to have a set
 of inner sets (aka. **the set of inner sets of a tree**) of possibly fewer than
-`#N` sets associated with it:
+`#N` elements associated with it:
 
 * `IS, IS(T) := { IS(n) | (n in N) }`
 * `(#IS <= #N)` - i.e. not necessarily one set per node
 
-Note that, with regards to the relationships between its sets, `IS(T)` is
-not as clear as `OS(T)`. That is because the inner set of any leaf is empty.
-(Note that the empty set `{}` is disjoint-to, but still related-to any other
-set). Hence, the following applies to all pairs of sets `(s,t in IS)`:
+Note that, in regards to the relationships between its sets, `IS(T)` is not as
+clear as `OS(T)`. That is because the inner set of any leaf is empty. (Note that
+the empty set `{}` is disjoint-to, but still related-to any other set). Hence,
+the following applies to all pairs of sets `(s,t in IS)`:
 
 * `(s disjoint-to t)` and/or `(s related-to t)`
 * `(s disjoint-to t)` and/or `(s strictly-related-to t)`, if `(s != t)`
