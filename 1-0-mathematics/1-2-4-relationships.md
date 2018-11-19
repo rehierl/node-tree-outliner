@@ -8,7 +8,7 @@
 ```
          |--> disjoint    |--> equal
 (A ? B) -|                |
-         |--> intersects -|--> strict sub/super-set
+         |--> intersects -|--> proper subset
               (coupled)   |
                           |--> overlap
 ```
@@ -16,7 +16,7 @@
 (A equal-to B)
 
 * `(A == B) := ((A union B) == (A isect B))`
-* i.e. every element in both sets is common to both
+* i.e. all elements are common to both
 * i.e. `A` and `B` are equal to each other
 * i.e. `equal-to` has no orientation
 * `(A == B) <-> (A subset-of B) and (B subset-of A)`
@@ -25,7 +25,7 @@
 (A unequal-to B)
 
 * `(A != B) := not (A == B)`
-* i.e. `unequal-to` is converse/antonymous to `equal-to`
+* i.e. `unequal-to` is converse to `equal-to`
 * synonymous - `distinct-to`, `distinct-form`
 
 (A disjoint-to B)
@@ -34,12 +34,12 @@
 * i.e. `A` and `B` have no elements in common
 * i.e. `A` and `B` are disjoint to each other
 * i.e. `disjoint-to` has no orientation
-* note - `(A disjoint-to B) -> (A distinct-to B)`
 
 (A intersects B)
 
 * `(A intersects B) := ((A & B) != {})`
 * i.e. `A` and `B` have some elements in common
+* i.e. `intersects` is converse to `disjoint-to`
 * i.e. `A` and `B` intersect each other
 * i.e. `intersects` has no orientation
 * synonymous - `coupled-with` (via some point of contact)
@@ -55,10 +55,9 @@
 (A contains B)
 
 * `(A contains B) := (B subset-of A)`
-* i.e. synonymous to `subset-of`
 * note - `(B in A)` := `A` contains `B` as an element
 * note - "element-of" vs. "subset-of"
-* synonymous - `inside-of`
+* synonymous - `subset-of`, `inside-of`
 
 (A related-to B)
 
@@ -69,7 +68,7 @@
 (A unrelated-to B)
 
 * `(A unrelated-to B) := not (A related-to B)`
-* i.e. `unrelated-to` is converse/antonymous to `related-to`
+* i.e. `unrelated-to` is converse to `related-to`
 
 (A strict-subset-of B)
 
@@ -78,7 +77,7 @@
 * `(A strict-subset-of B) -> (B strict-superset-of A)`
 * i.e. `B` has one or more elements not in `A`
 * `(A strict-subset-of B) -> (B no-strict-subset-of A)`
-* i.e. `strict-subset-of` has a strict/proper orientation/direction
+* i.e. `strict-subset-of` is strictly oriented
 * `(A strict-subset-of B) -> (#A < #B)`
 * synonymous - `proper-subset-of`
 
@@ -101,7 +100,7 @@
 ## remarks
 
 Note that the `strict-subset-of` operator is the only set-related operator
-that has a strict/proper orientation/direction.
+that is strictly/properly oriented.
 
 Note that `disjoint-to` and `subset-of` have strict definitions. That is, a set
 either contains all elements of the other (i.e. subset-of), or none at all (i.e.
@@ -109,6 +108,6 @@ disjoint). In contrary to that, `overlaps` merely states that one set must have
 one or more, but not all elements of the other. As such, the `overlaps` operator
 is rather imprecise (i.e. how many elements exactly?).
 
-Note that two distinct (i.e. unequal) sets which do not overlap each other, are
-either strictly related ex-or disjoint. As such, this either-or relationship
+Note that two distinct sets which do not overlap each other, are either
+strictly related ex-or disjoint. As such, this either-or relationship
 is fundamental to partial orders and node trees.

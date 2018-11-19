@@ -5,7 +5,7 @@
 <!-- ======================================================================= -->
 ## converse/transpose graph
 
-* (/see/ "semantics" /)
+* (/see/ "semantics" in "graph theory" /)
 * note - converse edges and converse semantics
 
 <!-- ======================================================================= -->

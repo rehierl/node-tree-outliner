@@ -2,8 +2,9 @@
 <!-- ======================================================================= -->
 # Relationships between graphs
 
-Note that the following operators are largely equal/similar to the set-based
-operators. (/see/ "relationships between sets" in "mathematics" /).
+The following operators are largely equal/similar to the set-based operators.
+
+* (/see/ "relationships between sets" in "mathematics" /).
 
 <!-- ======================================================================= -->
 ## overview
@@ -11,7 +12,7 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 ```
          |--> disjoint    |--> equal
 (S ? G) -|                |
-         |--> intersects -|--> strict sub/super-graph
+         |--> intersects -|--> proper subgraph
               (coupled)   |
                           |--> overlap
 ```
@@ -21,7 +22,7 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 (S equal-to G)
 
 * `(S == G) := (T == V) and (U == E)`
-* i.e. both graphs have the same set of vertices and edges
+* i.e. both graphs have equal sets of vertices and equal sets of edges
 * i.e. the intersection graph is equal to `S` and `G`
 * i.e. `equal-to` has no orientation
 * `(S == G) <-> (S subgraph-of G) and (G subgraph-of S)`
@@ -30,7 +31,7 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 (S unequal-to G)
 
 * `(S != G) := not (S == G)`
-* i.e. `unequal-to` is converse/antonymous to `equal-to`
+* i.e. `unequal-to` is converse to `equal-to`
 * synonymous - `distinct-to`, `distinct-from`
 
 (S disjoint-to G)
@@ -39,13 +40,13 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 * i.e. `S` and `G` have no vertices in common
 * i.e. `S` and `G` are disjoint to each other
 * i.e. `disjoint-to` has no orientation
-* note - `(S disjoint-to G) -> (S distinct-to G)`
 * note - `(T disjoint-to V) -> (U disjoint-to E)`
 
 (S intersects G)
 
 * `(S intersects G) := ((T & V) != {})`
 * i.e. `S` and `G` have some vertices in common
+* i.e. `intersects` is converse to `disjoint-to`
 * i.e. `S` and `G` intersect each other
 * i.e. `intersects` has no orientation
 * note - `(U intersects E) -> (T intersects V)`
@@ -61,9 +62,8 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 (S contains G)
 
 * `(G contains S) := (S subgraph-of G)`
-* i.e. `contains` has "some" orientation
 * note - no issue similar to "element-of" vs. "subset-of"
-* synonymous - `inside-of`
+* synonymous - `subgraph-of`, `inside-of`
 
 (S related-to G)
 
@@ -74,7 +74,7 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 (S unrelated-to G)
 
 * `(S unrelated-to G) := not (S related-to G)`
-* i.e. `unrelated-to` is converse/antonymous to `related-to`
+* i.e. `unrelated-to` is converse to `related-to`
 
 (S proper-subgraph-of G)
 
@@ -83,7 +83,7 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 * `(S proper-subgraph-of G) -> (G proper-supergraph-of S)`
 * i.e. `G` has one or more vertices not in `S`
 * `(S proper-subgraph-of G) -> (G no-proper-subgraph-of S)`
-* i.e. `proper-subgraph-of` has a strict/proper orientation/direction
+* i.e. `proper-subgraph-of` is strictly oriented
 * synonymous - `strict-subgraph-of`
 
 (S properly-related-to G)
@@ -104,7 +104,7 @@ operators. (/see/ "relationships between sets" in "mathematics" /).
 ## remarks
 
 Note that the `proper-subgraph-of` operator is the only graph-related operator
-that has a strict/proper orientation/direction.
+that is strictly/properly oriented.
 
 Note that `disjoint-to` and `subgraph-of` have strict definitions. That is, a
 graph either contains all the vertices/edges of the other (i.e. subgraph-of),
@@ -113,6 +113,6 @@ that one graph must have one or more, but not all the corresponding elements
 of the other. As such, the `overlaps` operator is rather imprecise (i.e. how
 many elements exactly?).
 
-Note that two distinct (i.e. unequal) graphs which do not overlap each other,
-are either properly related ex-or disjoint. In the context of simple sets of
-elements, this either-or relationship allows to define partial orders.
+Note that two distinct graphs which do not overlap each other, are either
+properly related ex-or disjoint. In the context of simple sets of elements,
+this either-or relationship allows to define partial orders.
