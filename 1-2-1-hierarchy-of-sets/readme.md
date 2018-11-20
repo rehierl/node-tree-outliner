@@ -1,2 +1,3 @@
 
-This content proofs that (directed) trees are hierarchies of sets.
+This content proofs that a (directed) tree
+corresponds with a hierarchy of sets.

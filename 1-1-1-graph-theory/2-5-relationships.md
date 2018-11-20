@@ -23,7 +23,7 @@ The following operators are largely equal/similar to the set-based operators.
 
 * `(S == G) := (T == V) and (U == E)`
 * i.e. both graphs have equal sets of vertices and equal sets of edges
-* i.e. the intersection graph is equal to `S` and `G`
+* i.e. the intersection graph is equal to `S` and equal to `G`
 * i.e. `equal-to` has no orientation
 * `(S == G) <-> (S subgraph-of G) and (G subgraph-of S)`
 * i.e. `S` and `G` are subgraphs to each other
@@ -36,7 +36,7 @@ The following operators are largely equal/similar to the set-based operators.
 
 (S disjoint-to G)
 
-* `(S disjoint-to B) := (T disjoint-to V)`
+* `(S disjoint-to G) := (T disjoint-to V)`
 * i.e. `S` and `G` have no vertices in common
 * i.e. `S` and `G` are disjoint to each other
 * i.e. `disjoint-to` has no orientation

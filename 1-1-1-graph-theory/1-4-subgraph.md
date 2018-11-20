@@ -17,7 +17,7 @@ to be **isolated** or **disconnected**.
 A (simple) **subgraph** `S := (T,U)` is a graph formed from another graph
 `G := (V,E)` by removing some of the vertices and/or edges in `G`.
 
-* `(T subset-of V)` and `(U subset-of E)`
+* `(T subset-of V) and (U subset-of E)`
 * `(S sub-graph-of G) <-> (G super-graph-of S)`
 
 Note that, if vertex `(v in V)` is removed from a super-graph, then all edges
