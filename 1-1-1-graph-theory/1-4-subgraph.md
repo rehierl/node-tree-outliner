@@ -7,23 +7,23 @@ Note that a vertex `(v in V)` in a graph `G := (V,E,P)` is **connected**, if
 both vertices `v` and `x` are said to be **connected with** each other.
 
 Note that a vertex `(v in V)` may exist such that neither `vPx` nor `xPv` is
-true for any other vertex `(x in V)`. That is, a graph may contain vertices
-that are no endpoint to any edge `(e in E)`. These kind of vertices are said
-to be **isolated** or **disconnected**.
+true for another vertex `(x in V)`. That is, a graph may contain vertices that
+are no endpoint to an edge `(e in E)`. These kind of vertices are said to be
+**isolated** or **disconnected**.
 
 <!-- ======================================================================= -->
 ## subgraph
 
-A (simple) **subgraph** `S := (T,U)` is a graph formed from another graph
-`G := (V,E)` by removing some of the vertices and/or edges in `G`.
+A (simple) **subgraph** `S := (T,U)` is a graph formed from its super-graph
+`G := (V,E)` by removing vertices and/or edges from `G`.
 
-* `(T subset-of V) and (U subset-of E)`
-* `(S sub-graph-of G) <-> (G super-graph-of S)`
+* `(S subgraph-of G) := (T subset-of V) and (U subset-of E)`
+* `(S subgraph-of G) -> (#T <= #V) and (#U <= #E)`
 
-Note that, if vertex `(v in V)` is removed from a super-graph, then all edges
-`(e in V)` that have `v` as an endpoint, must also be removed. That is because
-a subgraph must still satisfy the definition of a graph in which the endpoints
-of its edges are vertices in its set of vertices. Hence, edges may be removed
+Note that, if vertex `(v in V)` is removed from a graph, then all the edges
+`(e in V)` to which `v` is an endpoint, must also be removed. That is because
+a subgraph must still satisfy the definition of a graph which the endpoints of
+its edges to be vertices in its set of vertices. Hence, edges may be removed
 without further consequence, but the removal of a vertex may trigger the
 (implicit) removal of edges.
 
@@ -32,50 +32,55 @@ without further consequence, but the removal of a vertex may trigger the
 * i.e. no edge in `U` leads in-to, or out-of `S`
 
 Note that the semantics of a subgraph are by definition identical to the
-semantics of its super-graph. The same therefore also applies to an empty
-subgraph formed from another graph by removing all its vertices and edges.
-And because the empty graph can be formed from any non-empty graph, the
+semantics of its super-graph. The same also applies to an empty subgraph
+formed from another graph by removing all of its vertices and edges. And
+because the empty graph can be formed from any non-empty graph, the
 semantics of the empty graph needs to be understood to correspond with
 the semantics of any non-empty graph.
 
 * `(S subgraph-of G) -> (sem(S) == sem(G))`
 
-Similar to simple sets, a **strict/proper subgraph** is formed by removing
-at least one vertex and/or edge - i.e. `(#T < #V)` and/or `(#U < #E)`. Any
+Similar to simple sets, a **strict/proper subgraph** `S := (T,U)` is formed by
+removing at least one vertex and/or edge from its super-graph `G := (V,E)`. Any
 graph `G` is therefore a (simple) subgraph, but no proper subgraph to itself.
 
-<!-- ======================================================================= -->
-## subgraph-of, strict-subgraph-of
-
-A **subgraph-of** operator can be defined as follows:
-
-* for two graphs `S := (T,U)` and `G := (V,E)`
-* `(S subgraph-of G)` is true, if the following holds:
-* (1) `(T subset-of V)` and `(U subset-of E)` are both true
-* (2) `(E(e) subset-of T)` is true for any edge `(e in U)`
-* (3) `(sem(S) == sem(G))` is true
-
-Likewise, a **proper/strict-subgraph-of** operator can be defined:
-
-* `(S strict-subgraph-of G)` is true, if the following holds:
-* (4) `(S subgraph-of G)` is true
-* (5) `(S != G)` is true
-* synonymous - proper-subgraph-of
-
-Note that, if condition (2) is not met, then `S` is not even a graph. Also,
-and because (4) still needs to be satisfied, (5) can be simplified as
-`(#T != #V) and/or (#U != #E)`. That is, the test for in-equality can be
-reduced to a test of in-equality in regards to the numbers of elements in
-the corresponding sets. Consequently, the sets of vertices and/or edges in
-`S` must have fewer elements (i.e. `<` instead of `!=`) than the corresponding
-set in `G`.
-
-Note that the subgraph-of operator is as such still a removal-based operator.
-That is, the corresponding test may still proof that one graph can be formed
-by removing vertices and/or edges from the other.
+* `(S proper-subgraph-of G) := (S subgraph-of G) and (S != G)`
 
 <!-- ======================================================================= -->
-## related-to, unrelated-to
+## remarks
+
+If `(S proper-subgraph-of G)` is true, the "being unequal" part is equivalent
+to `(#T != #V) and/or (#U != #E)`.  That is, the test whether both graphs are
+unequal can be reduced to a test of in-equality in regards to the numbers of
+elements in the corresponding sets. In addition to that, the sets of vertices
+and/or edges in `S` must have fewer elements (i.e. `<` instead of `!=`) than
+the corresponding set in `G`. That is due to the orientation of the
+"proper-subgraph-of" operator.
+
+* `(S != G) <=> (#T < #V) and/or (#U < #E)`
+* i.e. `(#T < #V)` ex-or `(#U < #E)` ex-or `((#T < #V) and (#U < #E))`
+
+In general, if graphs `S := (T,U)` and `G := (V,E)` have an edge in common,
+then both graphs also share both of the endpoints of that edge. Because of
+that, two graphs that have intersecting sets of edges also have intersecting
+sets of vertices. In contrary to that, two graphs that have intersecting sets
+of vertices, do not necessarily also have intersecting sets of edges.
+
+* `(U intersects E) -> (T intersects V)`
+
+If `(U subset-of E)` is true (i.e. all the edges in `U` are also edges in `E`),
+then a vertex `v` may still exist in `T` that is no vertex in `V`. Vertex `v`
+must however be disconnected since an edge incident to `v` would then also be
+an edge in `E`, which would require `v` to also be a vertex in `V`. Because of
+that, `(U subset-of E)` does not imply that `(T subset-of V)` is also true.
+Likewise, if `(T subset-of V)` is true, then an edge in `U` may still exist
+that is no edge in `E`. Because of that, `(T subset-of V)` does not imply
+that `(U subset-of V)` is also true.
+
+* `(U subset-of E) <=!=> (T subset-of V)`
+
+<!-- ======================================================================= -->
+## related
 
 Two graphs `S := (T,U)` and `G := (V,E)` are said to be **related** with
 each other, if one is a subgraph of the other.

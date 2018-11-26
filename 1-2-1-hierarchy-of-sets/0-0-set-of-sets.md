@@ -168,7 +168,7 @@ Set V is a **strict/proper subset of** set W,
 if V is a subset of W, and if W is no subset of V.
 
 * `(V strict-subset-of W) := (V subset-of W) and (V != W)`
-* `(V strict-subset-of W) -> (V subset-of W) and (W no-subset-of V)`
+* `(V strict-subset-of W) := (V subset-of W) and (W no-subset-of V)`
 * `(V strict-subset-of W) -> (#V < #W)`
 
 Note that any set (including `{}`) is a subset to itself.
@@ -198,12 +198,13 @@ if none is a subset of the other.
 * `(V unrelated-to W) <-> (W unrelated-to V)`
 
 **CLARIFICATION**
-Set V is **strictly/properly related to** set W,
-if both sets are related and distinct to each other.
+Set V is **strictly/properly related to** set W, if both sets are related
+and distinct to each other. Put differently, one (and only one) set must
+be a subset of the other.
 
 * `(V strictly-related-to W) := (V related-to W) and (V != W)`
+* `(V strictly-related-to W) := (V subset-of W) ex-or (W subset-of V)`
 * `(V strictly-related-to W) <-> (W strictly-related-to V)`
-* `(V strictly-related-to W) -> ((#V < #W) ex-or (#V > #W))`
 
 Note that the definition of the "related-to" terms is intended to shift
 ones focus away from the elements the sets contain. That is, the focus
@@ -214,8 +215,7 @@ is shifted towards the relationship between two sets.
 
 * The empty set is disjoint and related to any set.
 * A non-empty set is coupled with and related to itself.
-* Two distinct non-empty sets may be coupled with each other.
-* Two distinct non-empty and coupled sets may overlap each other.
+* Two distinct coupled non-empty sets may overlap each other.
 
 ```
      \ set-2 |          |          |
