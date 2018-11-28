@@ -38,6 +38,49 @@ from a graph `G := (V,E)` by removing at least one vertex and/or edge. (Note
 that `S` may be referred to as a "strict/proper induced subtree").
 
 <!-- ======================================================================= -->
+## remarks
+
+A (simple) **subtree** `S := (T,U)` of tree `G := (N,E)` is formed
+by removing nodes and/or edges such that `S` is a tree.
+
+* `(S subtree-of G) -> (T subset-of N) and (U subset-of E)`
+* `(S subtree-of G) -> (S subgraph-of G)`
+* `(U intersects E) -> (T intersects N)`
+* `(S subtree-of G) -> (#T <= #V) and (#U <= #E)`
+
+A **strict/proper subtree** `S := (T,U)` of tree `G := (N,E)` is formed
+by removing at least one node and/or edge such that `S` is a tree.
+
+* `(S proper-subtree-of G) -> (S proper-subgraph-of G)`
+* `(S proper-subtree-of G) -> (#T < #N) and/or (#U < #E)`
+
+**CLARIFICATION**
+A tree `T := (N,E)` is formed by adding child nodes to parent nodes. As such,
+a tree has one and only one edge in between a child and its parent. And because
+a tree has by definition one and only one root node, any tree has `(#N-1)`
+edges and `(#E+1)` nodes. Hence, the number of elements in both sets correspond
+with each other.
+
+* `isTree(T) -> (#N == #E+1) and (#E == #N-1)`, if `T := (N,E)` and `(#N > 1)`
+* put differently, `(#E < #N)` is true for any tree
+
+**CLARIFICATION**
+If both trees have the same root node (i.e. `(RN(S) == RN(T))`), then a subtree
+`S := (T,U)` of tree `T := (N,E)` can be formed by iteratively removing leaf
+nodes and their incident edges.
+
+Note that the removal of a leaf node and its incident edge will always yield
+a subtree. In contrary to that, the removal of a parent node and its incident
+edges does not necessarily yield a tree since the result will be a forest (i.e.
+a disconnected graph) if the parent node is itself a child, or if the root has
+more than one child.
+
+**CLARIFICATION**
+Any subtree `S := (T,U)` of tree `T := (N,E)` can be formed by successively
+removing the root and/or leaf nodes. Obviously, the root can only be removed
+as soon as its non-relevant child nodes have already been removed.
+
+<!-- ======================================================================= -->
 ## general remarks
 
 () As can be seen by the following example, not even the super-graph of an

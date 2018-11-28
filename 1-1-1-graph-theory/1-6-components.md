@@ -4,7 +4,7 @@
 
 A **(connected) component** `c := G[T] := (T,U)` of a graph `G := (V,E)`
 is an induced subgraph such that each vertex `(x in T)` is connected with
-all other vertices `(y in T)` in the graph's underlying undirected graph
+every other vertex `(y in T)` in the graph's underlying undirected graph
 `UG := UG(G) := (V,A)`. That is, `UG` contains an undirected path `p` for
 all pairs of vertices `(x,y in T)` - i.e. `(p(x,y) in P[UG])`.
 
@@ -13,19 +13,19 @@ longest path in it. That is, `diameter(c) := max({ #p | (p in P[c]) })`.
 Note that the diameter of a cyclic component is undefined/infinite.
 
 A **maximal (connected) component** `c := (T,U)` is a component of a graph
-`G := (V,E)` such that no vertex `(v in V\T)` can be added to its set of
-vertices `T` while maintaining its connectivity. That is, there is no vertex
-`(v in V\T)` such that `v` is connected to any vertex in `T`. Consequently,
-no other induced subgraph `G[T + {v}]` is a component of `G`.
+`G := (V,E)` such that no vertex `(y in V\T)` can be added to its set of
+vertices `T` while maintaining its connectivity. That is, no vertex
+`(y in V\T)` exists that is connected to some `(y in T)`. Consequently,
+the induced subgraphs `G[T + {y}]` are no components in `G`.
 
-A component of the form `c := ({v},{})` will be referred to as a (maximal
-connected) **trivial component**. That is, each isolated vertex represents
-its own maximal component.
+A maximal component of the form `c := ({v},{})` will be referred to as a
+(maximal) **trivial component**. Because of that, each disconnected vertex
+represents its own maximal component.
 
-Any component `c := (T,U)` can be understood as being **connected**.
-Furthermore, a component may be referred to as **strongly connected** (i.e.
-a strongly connected component), if all pairs of vertices `(x,y in U)` are
-connected in both directions - i.e. `(xPy and yPx)`. (Because of that, any
+Any component `c := (T,U)` in `G := (V,E)` is said to be **connected**. In
+addition to that, a component in `G` is said to be **strongly connected** (i.e.
+a strongly connected component), if all pairs of vertices `(x,y in U)` in it
+are connected in both directions - i.e. `(xPy and yPx)`. (Because of that, any
 component in an undirected graph is strongly connected). In contrary to that,
 a component is said to be **simply/weakly connected**, if a pair of vertices
 `(x,y in U)` exists such that `xPy`, but not `yPx` - i.e. `(xPy ex-or yPx)`
@@ -36,10 +36,10 @@ Note that ...
 
 * The term "component" will in general refer to a maximal component.
 * Each vertex in a graph belongs to exactly one maximal component.
-* (i.e. the (maximal) components in a graph are **disjoint**)
+* i.e. the (maximal) components in a graph are **disjoint**
 * Components in an oriented, acyclic graph are weakly connected.
 * Components in an oriented, cyclic graph may be strongly connected.
-* (e.g. a cycle graph is strongly connected)
+* e.g. a cycle graph is strongly connected
 
 <!-- ======================================================================= -->
 ## the set of (maximal) components
@@ -61,13 +61,13 @@ Note that, similar to `P(G)`, the set of components `C` of a given graph
 ## connected graphs
 
 Depending on the number of components in a graph's set of components `C`,
-a non-empty graph `G` may be classified as:
+a non-empty graph `G` may be classified as being ...
 
-* connected, if `(#C == 1)` - i.e. `(C(G) == {c})`
-* i.e. a connected graph has no more than one maximal component
-* strongly connected, if `G` is connected and if `c` is strongly connected
-* weakly connected, if `G` is connected and if `c` is weakly connected
-* disconnected, if `(#C > 1)` - i.e. `(C[G] == { c1, ..., ck })`
+* **connected**, if `(#C == 1)` - i.e. `(C(G) == {c})`
+* i.e. a connected graph has one and only one maximal component
+* **strongly connected**, if `G` is connected and `c` is strongly connected
+* **weakly connected**, if `G` is connected and `c` is weakly connected
+* **disconnected**, if `(#C > 1)` - i.e. `(C[G] == { c1, ..., ck })`
 * i.e. a disconnected graph has more than one maximal component
 
 Note that a null-graph may be referred to as being connected. That is because
