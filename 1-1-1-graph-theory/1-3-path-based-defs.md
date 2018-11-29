@@ -42,7 +42,7 @@ graph/relation (i.e. no loops) may still have cycles.
 (a connected-to b)
 
 * `(a connected-to b)`, if `aPb` and/or `bPa`
-* `a` is connected-to `b` and/or `b` is connected-to `a`
+* `a` is connected-to `b`, and `b` is connected-to `a`
 * synonymous - related-to, comparable-to
 * note - connected-to is undirected
 

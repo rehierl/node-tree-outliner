@@ -7,9 +7,9 @@ if `vPx` and/or `xPv` is true for some other vertex `(x in V)`. Vertices `v`
 and `x` are therefore said to be **connected with** each other.
 
 Also, a vertex `(v in V)` may exist such that neither `vPx` nor `xPv` is true
-for another vertex `(x in V)`. That is, a graph may contain vertices that are
-no endpoint to any edge `(e in E)`. These kind of vertices will be referred
-to as being **isolated** or **disconnected**.
+for any other vertex `(x in V)`. That is, a graph may contain vertices that are
+no endpoint to any edge `(e in E)`. These kind of vertices will be referred to
+as being **isolated** or **disconnected**.
 
 Note that a graph which has no disconnected vertex is not necessarily connected
 since such a graph may have more than one maximal component. However, such a
@@ -20,10 +20,11 @@ or more vertices).
 ## remarks
 
 In general, if graphs `S := (T,U)` and `G := (V,E)` have an edge in common,
-then both graphs also share both of the endpoints of that edge. Because of
-that, two graphs that have intersecting sets of edges also have intersecting
+then both graphs must also share both of the endpoints of that edge. Because
+of that, two graphs that have intersecting sets of edges also have intersecting
 sets of vertices. However, two graphs that have intersecting sets of vertices,
-do not necessarily also have intersecting sets of edges.
+do not necessarily also have intersecting sets of edges since all of the shared
+vertices may be disconnected.
 
 * `(U intersects E) -> (T intersects V)`
 
@@ -63,7 +64,7 @@ A (simple) **subgraph** `S := (T,U)` is a graph formed from its super-graph
 * `(S subgraph-of G) -> (#T <= #V) and (#U <= #E)`
 
 Note that, if vertex `(v in V)` is removed from a graph, then all the edges
-`(e in V)`, to which `v` is an endpoint, must also be removed. That is because
+`(e in E)`, to which `v` is an endpoint, must also be removed. That is because
 a subgraph must still satisfy the definition of a graph in which the endpoints
 of its edges must also be vertices in its set of vertices. Hence, edges may be
 removed without further consequence, but the removal of a vertex may trigger
@@ -94,11 +95,13 @@ elements (i.e. `<` instead of `!=`) than the corresponding set in `G`. That is
 because `(S subgraph-of G)` requires any element in `S` to be an element in `G`.
 
 * `(S proper-subgraph-of G) -> (#T < #V) and/or (#U < #E)`
+* `(A and/or B) := A ex-or B ex-or (A and B)`
 
-Note that in the context of general graphs, a subgraph may still have the
-same amount of vertices and/or edges. In contrary to that, a proper subgraph
-may still have at most one set (i.e. vertices ex-or edges) that is equal to
-the corresponding set in its super-graph.
+Note that in the context of general graphs, a subgraph may still have the same
+amount of vertices and/or edges. In contrary to that, a proper subgraph may
+still have at most one set (i.e. vertices ex-or edges) that is equal to the
+corresponding set in its super-graph. Put differently, for a subgraph to be a
+proper subgraph, at least one of these sets are required to have fewer elements.
 
 <!-- ======================================================================= -->
 ## related
@@ -112,6 +115,7 @@ Two graphs `S` and `G` are said to be **unrelated** with each other,
 if neither of them is a subgraph of the other.
 
 * `(S unrelated-to G) := not (S related-to G)`
+* i.e. `(S no-subgraph-of G) and (G no-subgraph-of S)`
 
 Two graphs `S` and `G` are said to be **strictly/properly related**
 with each other, if both are related but not equal to each other.
