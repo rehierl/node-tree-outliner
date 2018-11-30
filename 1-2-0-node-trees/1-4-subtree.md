@@ -5,7 +5,7 @@
 * (/see/ "subgraph" in "graph theory" /)
 
 <!-- ======================================================================= -->
-## subtree
+## subtrees of a graph
 
 A **(simple) subtree** `S := (T,U)` is a subgraph of a graph `G := (V,E)`
 such that `S` has the characteristics of a tree (i.e. `isTree(S)` is true).
@@ -87,7 +87,7 @@ removing at least one node and/or edge such that `S` is a tree.
 
 * `(S proper-subtree-of G) -> (S proper-subgraph-of G)`
 * `(S proper-subtree-of G) -> (S subtree-of G) and (S != G)`
-* `(S proper-subtree-of G) -> (#T < #N) and/or (#U < #E)`
+* `(S proper-subtree-of G) -> (#T < #N) and (#U < #E)`, if `isTree(G)`
 
 <!-- ======================================================================= -->
 ## remarks

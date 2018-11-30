@@ -97,9 +97,10 @@ edges (i.e. `(#E == #N-1)`, i.e. `(#E < #N)`).
 7. (#U == #E-X)           (#T == #N-Y)
 ```
 
-Consequently, if a node is removed from a tree, then the resulting subtree
-is guaranteed to also have fewer edges. Likewise, if an edge is removed from
-a tree, then the resulting subtree is also guaranteed to have fewer nodes.
+Consequently, if a node is removed from a tree, then the resulting proper
+subtree is guaranteed to also have fewer edges. Likewise, if an edge is
+removed from a tree, then the resulting proper subtree is also guaranteed
+to have fewer nodes.
 
 In addition to that, the number of elements removed from the set of a tree
 will result in the removal of the same amount of elements from the other set.

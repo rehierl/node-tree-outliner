@@ -111,3 +111,43 @@ is rather imprecise (i.e. how many elements exactly?).
 Note that two distinct sets which do not overlap each other, are either
 strictly related ex-or disjoint. As such, this either-or relationship
 is fundamental to partial orders and node trees.
+
+<!-- ======================================================================= -->
+## remarks
+
+Any two sets in a multiset of sets are:
+(1) equal, (2) disjoint, (3) related, or (4) overlap each other.
+
+```
+|-A-----|
+|   |-B-|---|
+| 1 | 2 | 3 |
+|   |---|---|
+|-------|
+```
+
+The possibilities for subsets 1, 2 and 3 (being empty or non-empty) in sets
+A and B, and therefore the relationships between sets A and B are as follows:
+
+```
+1 is empty        | 1 is non-empty |
+==================|================|===
+1: 000 - DI,RE,EQ |                | sets E and/or F
+2: 001 - DI,RE    | 5: 100 - DI,RE | are empty
+------------------|----------------|---
+3: 010 - EQ,RE    | 6: 101 - DI    | neither E nor F
+4: 011 - RE       | 7: 110 - RE    | is empty
+                  | 8: 111 - OV    |
+```
+
+* 001 := subsets 1 and 2 are both empty, subset 3 is not
+* i.e. both sets are empty in 1:, only A in 2: and only B in 5:
+* equal (EQ), disjoint (DI), related (RE), overlapping (OV)
+
+The above listing (1 to 4) of the different types of relationships is complete.
+That is, there is no other type of relationship possible between two sets.
+In addition to that, and since cases (1:, 2:, 3:, 5: and 8:) are ambiguous
+(i.e. these cases will in general not be be allowed), exactly two types of
+relationships will remain (i.e. DI and RE). Consequently, and under these
+requirements, two distinct sets in a set of sets are either disjoint ex-or
+(properly) related (i.e. DI ex-or RE).
