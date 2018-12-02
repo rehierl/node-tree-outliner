@@ -340,3 +340,6 @@ Note that, for any two distinct coupled sets in a strict setup, it can be
 stated that one set is located inside ex-or outside of the other. Consequently,
 two such sets in a strict setup are distinctively ordered. That is, one set is
 super-or sub-ordinate to the other (aka. more or less significant than).
+
+**TODO** - lookup HTML's "well formed" rule
+- then define "a well formed setup"
