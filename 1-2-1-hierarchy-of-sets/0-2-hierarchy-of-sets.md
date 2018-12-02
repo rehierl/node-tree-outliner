@@ -2,6 +2,11 @@
 <!-- ======================================================================= -->
 # (Simple) Hierarchy/Forest of sets
 
+* (/see/ "core definitions" in "node trees" /)
+
+<!-- ======================================================================= -->
+## example
+
 ```
 |-A---------------------| |-E-|
 | |-B-----|   |-C-----| | | 7 |
@@ -21,8 +26,6 @@
 
 <!-- ======================================================================= -->
 ## core definitions
-
-* (/see/ "core definitions" in "node trees" /)
 
 In regards to a strict setup, the following references may be used:
 

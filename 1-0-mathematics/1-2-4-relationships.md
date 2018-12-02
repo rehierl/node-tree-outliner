@@ -135,19 +135,28 @@ A and B, and therefore the relationships between sets A and B are as follows:
 1: 000 - DI,RE,EQ |                | sets E and/or F
 2: 001 - DI,RE    | 5: 100 - DI,RE | are empty
 ------------------|----------------|---
-3: 010 - EQ,RE    | 6: 101 - DI    | neither E nor F
+3: 010 - RE,EQ    | 6: 101 - DI    | neither E nor F
 4: 011 - RE       | 7: 110 - RE    | is empty
                   | 8: 111 - OV    |
 ```
 
-* 001 := subsets 1 and 2 are both empty, subset 3 is not
-* i.e. both sets are empty in 1:, only A in 2: and only B in 5:
-* equal (EQ), disjoint (DI), related (RE), overlapping (OV)
+* XYZ := X represents subset 1, Y subset 2 and Z subset 3
+* (X in {0,1}), where 0 := subset 1 is empty, 1 := subset 1 is non-empty
+* e.g. in 001 subsets 1 and 2 are empty and subset 3 is not
+* e.g. both sets are empty in case (1), only A in (2) and only B in (5)
 
-The above listing (1 to 4) of the different types of relationships is complete.
-That is, there is no other type of relationship possible between two sets.
-In addition to that, and since cases (1:, 2:, 3:, 5: and 8:) are ambiguous
-(i.e. these cases will in general not be be allowed), exactly two types of
-relationships will remain (i.e. DI and RE). Consequently, and under these
-requirements, two distinct sets in a set of sets are either disjoint ex-or
-(properly) related (i.e. DI ex-or RE).
+The following types of relationships can be distinguished depending on which
+subsets are empty: equal (EQ), disjoint (DI), related (RE), overlapping (OV).
+
+Note that this listing of the different types of relationships is complete.
+That is, there is no further type of relationship possible between two sets.
+
+As mentioned above, there is no strict orientation between both sets in cases
+1 and 3. In addition to that, cases 2 and 5 are ambiguous since an empty set
+is disjoint and related to any set. That is, there is no clear answer as to
+whether the empty set is inside or outside of a non-empty set. Furthermore,
+the definition behind case 8 (i.e. overlapping) is non-trivial and does also
+not include any strict orientation. Because of that, these cases will not be
+taken int account, which is why the focus will only be on cases 4, 6 and 7.
+That is, two distinct non-empty sets are then either disjoint ex-or (properly)
+related (i.e. DI ex-or RE).

@@ -2,6 +2,15 @@
 <!-- ======================================================================= -->
 # TODO - hierarchy of trees
 
+disjoint == incomparable in order theory
+- complement graph of a tree
+- issue: disjoint has no orientation
+- i.e. disjoint will drop information
+- siblings are disjoint and incomparable
+
+((A + B) in Set) is a must be -
+i.e. the set must be closed under the union operator
+
 a set of trees is not necessarily a forest -
 i.e. distinct trees in such a set may be coupled with each other
 
