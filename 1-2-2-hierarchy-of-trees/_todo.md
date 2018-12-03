@@ -2,11 +2,13 @@
 <!-- ======================================================================= -->
 # TODO - hierarchy of trees
 
-disjoint == incomparable in order theory
-- complement graph of a tree
-- issue: disjoint has no orientation
-- i.e. disjoint will drop information
-- siblings are disjoint and incomparable
+**TODO** -
+disjoint eq. incomparable in order theory? -
+complement graph of a tree -
+issue: disjoint has no orientation -
+i.e. disjoint will drop information -
+siblings are disjoint and incomparable -
 
-**TODO** - lookup HTML's "well formed" rule
-- then define "a well formed setup"
+**TODO** -
+lookup HTML's "well formed" rule -
+then define "a well formed setup" -

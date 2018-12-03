@@ -2,17 +2,13 @@
 <!-- ======================================================================= -->
 # TODO - hierarchy of sets
 
-**TODO** - lookup HTML's "well formed" rule
-- then define "a well formed setup"
-
 **TODO** -
-needs to be fleshed out -
 common properties -
 contains and/or embedded -
 "tree unordered" (a summary) -
 
 <!-- ======================================================================= -->
-# TODO - set of sets
+## TODO - set of sets
 
 **TODO** -
 extend disjoint/coupled definitions for (N > 2)?
@@ -24,6 +20,13 @@ is common to two or more sets must be an element of all those sets.
 Note that two or more sets are disjoint from one another, if any two distinct
 sets are disjoint. Put differently, there are no two sets within such a set of
 sets that have even one element in common.
+
+<!-- ======================================================================= -->
+## TODO - hierarchy of sets
+
+**TODO** -
+lookup HTML's "well formed" rule -
+use to define "a well formed setup"? -
 
 <!-- ======================================================================= -->
 ## TODO - hierarchy of sets
