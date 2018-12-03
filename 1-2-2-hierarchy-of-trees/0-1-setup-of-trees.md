@@ -205,5 +205,10 @@ the set of nodes of the other tree. Consequently, two such trees in a strict
 setup are distinctively ordered. That is, one tree is super- or sub-ordinate
 to the other (aka. more or less significant than).
 
-**TODO** - lookup HTML's "well formed" rule
-- then define "a well formed setup"
+Note that the union of any two trees in a strict setup is either a disjoint
+union of two trees, or a tree in the setup. If it is a tree in the setup,
+then the resulting tree is equal to the larger tree.
+
+Note that the intersection between any two trees in a strict setup is either
+empty, or a tree in the setup. If it is tree set in the setup, then the
+resulting tree is equal to the smaller tree.

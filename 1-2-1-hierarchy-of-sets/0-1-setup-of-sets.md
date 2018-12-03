@@ -341,5 +341,10 @@ stated that one set is located inside ex-or outside of the other. Consequently,
 two such sets in a strict setup are distinctively ordered. That is, one set is
 super-or sub-ordinate to the other (aka. more or less significant than).
 
-**TODO** - lookup HTML's "well formed" rule
-- then define "a well formed setup"
+Note that the union of any two sets in a strict setup is either a disjoint
+union of two sets, or a set in the setup. If it is a set in the setup, then
+the resulting set is equal to the larger set.
+
+Note that the intersection between any two sets in a strict setup is either
+empty, or a set in the setup. If it is a set in the setup, then the resulting
+set is equal to the smaller set.

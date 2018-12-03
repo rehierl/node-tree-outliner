@@ -2,6 +2,9 @@
 <!-- ======================================================================= -->
 # TODO - hierarchy of sets
 
+**TODO** - lookup HTML's "well formed" rule
+- then define "a well formed setup"
+
 **TODO** -
 needs to be fleshed out -
 common properties -

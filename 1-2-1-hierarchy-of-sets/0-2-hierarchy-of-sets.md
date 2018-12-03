@@ -27,37 +27,37 @@
 <!-- ======================================================================= -->
 ## core definitions
 
-In regards to a strict setup, the following references may be used:
+In regards to a strict setup, the following terms may be used:
 
-* All **strict subsets** of a set
+* The **strict subsets** of a set
   are said to be the set's **inner** sets.
-* All sets to which a set is an inner set
+* The sets to which a set is an inner set
   are said to be the set's **outer** sets.
 
-Not that, if the *simple subset* operator would have been used in the above
+Note that, if the *simple subset* operator would have been used in the above
 two definitions, then any set would be an inner and an outer set to itself
 (i.e. loops). However, since the *proper subset* operator was used instead,
-no set is an inner and an outer set to itself (i.e. no loops).
+no set is an inner and/or an outer set to itself (i.e. no loops).
 
 Note that two disjoint sets are not understood to be outside of each other, not
-even if both sets have the same parent set (i.e. siblings). That is because
-neither of them is an inner set of the other. Hence, "outside" and "not inside"
-are not equivalent!
+even if both sets have the same parent (i.e. siblings). That is because neither
+of them is an inner set of the other. Hence, "outside" and "not inside" are not
+equivalent!
 
-* Any outer set of set `s` is said to be an **ancestor** set to `s`
+* Any outer set of set `s` is said to be an **ancestor** set of `s`
   and as such **super-ordinate** to, or **more significant** than `s`.
-* Any inner set of set `s` is said to be a **descendant** set to `s`
+* Any inner set of set `s` is said to be a **descendant** set of `s`
   and as such **sub-ordinate** to, or **less significant** than `s`.
 
-Note that no set is understood to be an ancestor and/or a descendant set to
-itself (i.e. no loops). Likewise, disjoint sets are neither ancestors nor
-descendants to each other.
+Note that a set is no ancestor and no descendant to itself (i.e. no loops,
+no cycles). Likewise, disjoint sets are neither ancestors nor descendants
+to each other.
 
 Note that the empty set `{}` is a strict subset to any non-empty set. Because
-of that, any non-empty set is an ancestor set to the empty set. The empty set
-is therefore the only set that would have disjoint ancestors. Consequently, a
-strict setup must not contain the empty set. From this point forward, all sets
-are expected to be non-empty.
+of that, any non-empty set is an ancestor to it. The empty set is therefore the
+only set that has disjoint ancestors. Consequently, a strict setup must not
+contain the empty set. From this point forward, all sets are therefore expected
+to be non-empty.
 
 * A set that has no ancestor
   (other than the universal set),
@@ -68,33 +68,24 @@ are expected to be non-empty.
   is said to be the **root (set) of** set `s`.
 * Set `s` is said to be a **child** set of `t`,
   if `t` is the parent of `s`.
-* Two sets which have the same parent
+* Two sets that have the same parent
   are said to be **siblings** to each other.
 * A set is said to be a **leaf**,
   if it has no descendant.
 
 Note that none of the ancestors of a descendant are disjoint from one another.
 They always have all the elements of the descendant in common. Consequently,
-a strict setup does not allow its sets to have more than one parent. That is,
-each non-root set always has exactly one least significant ancestor and thus
-exactly one parent. Likewise, each non-root set always has one and only one
-most significant ancestor (i.e. its root set).
+a strict setup does not allow its sets to have more than one parent. That is
+because each non-root set has exactly one most significant (i.e. its root)
+and exactly one least significant (i.e. its parent) ancestor.
 
 * root set -> ... -> parent set -> child set -> ... -> leaf set
 
-Note that a set is not a parent to itself (i.e. no loops). That is because
-a set is not an ancestor to itself. Consequently, each set within a strict
-setup either has no parent at all (e.g. a root) ex-or exactly one parent.
-
 Note that an ancestor always has more elements than any of its descendants.
-Conversely, a descendant always has fewer elements than any of its ancestors.
-That is a direct consequence of the strict relationship between an ancestor
-and descendants.
-
-Note that a set can not be an ancestor to itself (i.e. no cycles). That is,
-because a set can not be an outer set to itself since no set is a proper subset
-to itself. Likewise, a set can not be a descendant to itself. That is because,
-for the same reason, a set can not be an inner set to itself.
+Likewise, a descendant always has fewer elements than any of its ancestors.
+That is a consequence of the strict relationship between an ancestor and its
+descendants. Consequently, each set in a strict setup either has no parent
+at all (e.g. a root) ex-or exactly one parent.
 
 Note that a non-empty strict setup always has one or more root sets. That is,
 because (1) a strict setup that only has a single set has that set as its only
@@ -105,26 +96,26 @@ more existing root sets into non-root sets (in case these are descendant to the
 new set), or (2.3) add the new set as a descendant set to a pre-existing root.
 
 That is, if a new set is added to a strict setup, the number of root sets
-is increased by one (`#RS' = #RS+1`, cases 1 and 2.1), remains unchanged
-(`#RS' = #RS`, cases 2.2 and 2.3) or is decreased by a certain amount
-(`#RS' = #RS-N` for `N in [0,#RS-1]`, case 2.2).
+is increased by one (`#RS° = #RS+1`, cases 1 and 2.1), remains unchanged
+(`#RS° = #RS`, cases 2.2 and 2.3) or is decreased by a certain amount
+(`#RS° = #RS-N` for `N in [0,#RS-1]`, case 2.2).
 
 **SUMMARY**
 A strict setup has the following properties:
 
 * Any set is a strict subset to all of its ancestors.
 * The ancestors of a set are strictly related to each other.
-* A set either has one or more ancestors, ex-or none at all.
-* A set either has a parent, ex-or the set is a root.
-* A strict setup has no loops and no cycles.
-* A non-empty strict setup always has one or more root sets.
+* A set either has ancestors ex-or none at all.
+* A set either has a parent ex-or the set is a root.
 * A set that has a parent also has a root set.
+* A strict setup has no loops and no cycles.
+* A non-empty strict setup has at least one root.
 
 <!-- ======================================================================= -->
 ## remarks
 
 **CLARIFICATION**
-The sets of ancestor/descendant sets may be defined as follows:
+The sets of ancestor and descendant sets may be defined as follows:
 
 * where `h` represents the corresponding hierarchy
 * `A(s), A(s,h) := { a | (s strict-subset-of a) for any (a in P) }`
@@ -142,7 +133,7 @@ Note that ...
 * i.e. each set is either a leaf ex-or a parent
 
 **CLARIFICATION**
-The following definitions may be used to clarify statements:
+The following definitions may be used for clarification purposes:
 
 * `(a in AS)` - the set of all ancestor sets
 * `(d in DS)` - the set of all descendant sets
@@ -198,13 +189,12 @@ Examples:
 ## (Simple) Hierarchy/Forest of sets
 
 **CLARIFICATION**
-Any strict setup of sets represents a forest of directed unordered trees.
-Based on a strict setup, the following relation can be defined:
+Any strict setup `S := (U,P)` corresponds with a forest of trees.
 
-* `R := (P,G)` where `(G subset-of P×P)`
-* `P` is the hierarchy's set of sets
-* `G` is the graph (aka. set of edges)
-* `e := (p1,p2)` such that `(e in G)` and `(p1 parent-of p2)`
+* `G := (P,E)` where `(E subset-of P×P)`
+* `P` is the setup's set of sets
+* `E` is the setup's set of edges
+* `e := (p1,p2)` such that `(e in E)` and `(p1 parent-of p2)`
 
 **CLARIFICATION**
 A setup is said to be **a (simple) hierarchy (of sets)**,
@@ -224,7 +214,7 @@ A simple hierarchy has the following properties:
 * Each set either has no ex-or one parent.
 * A hierarchy always has one or more leafs.
 * Ancestors have more elements than their descendants.
-* In a hierarchy, each set has a distinct rooted path (i.e. /root/to/set).
+* In a hierarchy, each set has a unique rooted path (i.e. /root/to/set).
 
 **CLARIFICATION**
 A setup is said to be **a (simple) forest (of hierarchies)**
@@ -240,17 +230,17 @@ In contrary to that, not every strict setup is also a hierarchy.
 * a hierarchy => a forest of hierarchies
 
 Note that, in contrary to a hierarchy, a forest may be empty.
-That is, a forest is not required to have a root.
+That is, a forest is not required to even have a root.
 
 Note that a forest is not strictly "a set of sets of sets" (i.e. "a set of
-hierarchies"). A forest is like a hierarchy, one set of "flat" sets. Because
+hierarchies"). A forest is like a hierarchy, one "flat" set of sets. Because
 of that, any operation defined on a set of sets (e.g. union, subset, etc.)
 can be used in the context of forests.
 
 Note that any two hierarchies in a forest of N hierarchies are disjoint. That
 is because the forest would otherwise either have less than N hierarchies, or
-it would not even be a strict setup. A forest is therefore a set of disjoint
-hierarchies.
+it would not even be a strict setup. A forest therefore corresponds with a set
+of disjoint hierarchies.
 
 **CLARIFICATION**
 The theoretical **set of all possible hierarchies (H)** and the theoretical
@@ -259,8 +249,9 @@ The theoretical **set of all possible hierarchies (H)** and the theoretical
 * `H := { h | "h is a hierarchy" }`
 * `F := { f | "f is a forest of hierarchies" }`
 
-Because of that `(h in H)` states that `h` must be a hierarchy.
-Likewise, `(f in F)` states that `f` must be a forest of hierarchies.
+Because of that, the expression `(h in H)` states that `h` is expected to be a
+hierarchy. Likewise, `(f in F)` states that `f` is expected to be a forest of
+hierarchies.
 
 * `(H strict-subset-of F)`
 
@@ -269,24 +260,31 @@ Note that an empty setup is a forest, but not a hierarchy.
 <!-- ======================================================================= -->
 ## remarks
 
+Note that the definition of a hierarchy does not cover the process of forming
+the sets it contains. It merely describes how these need to be related with
+each other. That is, the subsets of the hierarchy's root may be formed in any
+number of different ways. Hence, further aspects need to be taken into account
+in order to choose one method over the other.
+
 **CLARIFICATION**
-The root set (r in P) of a hierarchy `H := (V,P)` is equal to V. Because
+The root set `(r in P)` of a hierarchy `H := (V,P)` is equal to `V`. Because
 of that, a hierarchy's root set is the largest set (i.e. in terms of number
-of elements) in P.
+of elements) in `P`.
 
-That is because (1) V is the union of all sets in P (i.e. V := E(P)), and
-(2) any other set (s in P) is a strict subset to the root set (r in P).
+That is because (1) `V` is the union of all sets in `P` (i.e. `V := E(P)`),
+and (2) any other set `(s in P)` is a strict subset to the root (since the
+setup would otherwise have more than one root).
 
 **CLARIFICATION**
-Two hierarchy instances are disjoint, if their root sets are disjoint.
-(The focus here is on two hierarchy entities, i.e. two separate setups).
+Two hierarchy instances `H1` and `H2` are disjoint, if their roots are
+disjoint. (The focus here is on two entities, i.e. two separate setups).
 
-Note that, if root set `r1` is disjoint to `r2`,
+Note that, if root `r1` of `H1` is disjoint to `r2` of `H2`,
 then any subset `s1` of `r1` is disjoint to any subset `s2` of `r2`.
 
 **CLARIFICATION**
 Any subset of a hierarchy `H := (V,P)` (i.e. more accurately any subset
-of `P`), in general represents a forest of hierarchies.
+of `P`), corresponds with a forest of hierarchies.
 
-Note however that, under certain circumstances (i.e. the hierarchy's
-root set is included), the subset will itself be a hierarchy.
+Note that the subset of a hierarchy will itself be a hierarchy,
+if the hierarchy's root is included.
